@@ -59,6 +59,8 @@ class Quadrature
 private:
     /// The type of an element of an index of the quadrature coefficients.
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
+    /// The type of an element of an index step of the quadrature coefficients.
+    using IdxStepQuadrature = typename IdxRangeQuadrature::discrete_vector_type;
 
     using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
 
@@ -162,10 +164,6 @@ public:
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
-        static_assert(
-                std::is_same_v<ExecutionSpace, Kokkos::DefaultExecutionSpace>,
-                "Kokkos::TeamPolicy only works with the default execution space. Please use "
-                "DefaultExecutionSpace to call this batched operator.");
         using ExpectedBatchDims = ddc::type_seq_remove_t<
                 ddc::to_type_seq_t<IdxRangeTotal>,
                 ddc::to_type_seq_t<IdxRangeQuadrature>>;
@@ -198,51 +196,23 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
-        Kokkos::parallel_for(
-                Kokkos::TeamPolicy<>(exec_space, batch_idx_range.size(), Kokkos::AUTO),
-                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int idx = team.league_rank();
-                    IdxBatch ib = to_discrete_element(idx, batch_idx_range);
-
+        ddc::parallel_for_each_team(
+                exec_space,
+                batch_idx_range,
+                KOKKOS_LAMBDA(
+                        ddc::TeamPolicyMember<ExecutionSpace> const& team,
+                        IdxBatch const ib) {
                     // Sum over quadrature dimensions
                     ElementDataType teamSum(0);
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
                             [&](int const& thread_index, ElementDataType& sum) {
-                                IdxQuadrature iq
-                                        = to_discrete_element(thread_index, quad_idx_range);
-                                IdxTotal it(ib, iq);
-                                sum += coeff_proxy(iq) * integrated_function(it);
+                                IdxStepQuadrature iq(thread_index);
+                                sum += coeff_proxy(iq) * integrated_function[ib](iq);
                             },
                             teamSum);
                     result(ib) = teamSum;
                 });
-    }
-
-private:
-    /**
-     * A function which converts an integer into an index found in an index range
-     * starting from the front. This is useful for iterating over an index range using Kokkos
-     * loops.
-     *
-     * @param[in] idx The index of the requested element.
-     * @param[in] idx_range The index range being iterated over.
-     *
-     * @return The vector displacement from the front of the index range
-     */
-    template <class HeadDim, class... Grid1D>
-    KOKKOS_FUNCTION static Idx<HeadDim, Grid1D...> to_discrete_element(
-            int idx,
-            IdxRange<HeadDim, Grid1D...> idx_range)
-    {
-        IdxRange<Grid1D...> subidx_range(idx_range);
-        Idx<HeadDim> head_idx(ddc::select<HeadDim>(idx_range).front() + idx / subidx_range.size());
-        if constexpr (sizeof...(Grid1D) == 0) {
-            return head_idx;
-        } else {
-            Idx<Grid1D...> tail_idx = to_discrete_element(idx % subidx_range.size(), subidx_range);
-            return Idx<HeadDim, Grid1D...>(head_idx, tail_idx);
-        }
     }
 };
 
