@@ -207,8 +207,9 @@ public:
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
                             [&](int const& thread_index, ElementDataType& sum) {
-                                IdxStepQuadrature iq(thread_index);
-                                IdxTotal it(ib, quad_idx_range.front() + iq);
+                                IdxQuadrature iq = ddcHelper::
+                                        get_idx_from_linear_index(quad_idx_range, thread_index);
+                                IdxTotal it(ib, iq);
                                 sum += coeff_proxy(iq) * integrated_function(it);
                             },
                             teamSum);
