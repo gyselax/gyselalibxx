@@ -153,7 +153,8 @@ private:
 
     // Use a conjugate gradient (CG) solver.
     using SolverCG = gko::solver::Cg<>;
-
+    // Use a Jacobi preconditioner.
+    using PreconditionerJ = gko::preconditioner::Jacobi<>;
     std::unique_ptr<SolverCG> m_solver;
 
     // Vector containing the signs of the derivatives along the parallel direction of the interfaces.
@@ -193,6 +194,8 @@ public:
                                   gko::stop::ResidualNorm<>::build()
                                           .with_reduction_factor(reduction_factor)
                                           .on(exec))
+                          .with_preconditioner(
+                                  PreconditionerJ::build().with_max_block_size(8u).on(exec))
                           .on(exec);
         // Create solver
         m_solver = solver_factory->generate(m_matrix);
