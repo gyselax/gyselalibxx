@@ -208,7 +208,8 @@ public:
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
                             [&](int const& thread_index, ElementDataType& sum) {
                                 IdxStepQuadrature iq(thread_index);
-                                sum += coeff_proxy(iq) * integrated_function[ib](iq);
+                                IdxTotal it(ib, quad_idx_range.front() + iq);
+                                sum += coeff_proxy(iq) * integrated_function(it);
                             },
                             teamSum);
                     result(ib) = teamSum;
