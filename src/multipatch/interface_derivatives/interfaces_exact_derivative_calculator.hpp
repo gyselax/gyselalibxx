@@ -3,10 +3,10 @@
 #pragma once
 
 #include <typeinfo>
+#include <utility>
+#include <vector>
 
 #include <ddc/ddc.hpp>
-
-#include <ginkgo/ginkgo.hpp>
 
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
@@ -15,6 +15,7 @@
 #include "edge_transformation.hpp"
 #include "interface.hpp"
 #include "interface_derivative_coefficients_collection.hpp"
+#include "matrix_dense.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
@@ -76,8 +77,6 @@ class InterfacesExactDerivativeCalculator<
             Grid1D,
             ddc::TypeSeq<Patches...>,
             DerivCoeffCollection>;
-
-    using Matrix = gko::matrix::Dense<double>;
 
 private:
     template <std::size_t I>
@@ -145,17 +144,11 @@ private:
     using base_type::m_idx_ranges;
 
     // Matrix (I-M) of the documentation.
-    std::shared_ptr<Matrix> m_matrix;
+    Matrix_Dense m_matrix;
     // Vector C of the documentation.
-    std::shared_ptr<Matrix> m_vector;
+    std::vector<double> m_vector;
     // Vector S of the documentation.
-    std::shared_ptr<Matrix> m_interface_derivatives;
-
-    // Use a conjugate gradient (CG) solver.
-    using SolverCG = gko::solver::Cg<>;
-    // Use a Jacobi preconditioner.
-    using PreconditionerJ = gko::preconditioner::Jacobi<>;
-    std::unique_ptr<SolverCG> m_solver;
+    std::vector<double> m_interface_derivatives;
 
     // Vector containing the signs of the derivatives along the parallel direction of the interfaces.
     std::array<int, ddc::type_seq_size_v<typename base_type::Grid1DSeq>> m_vector_par_signs;
@@ -164,46 +157,26 @@ public:
     /**
      * @brief Instantiate InterfacesExactDerivativeCalculator. 
      * 
-     * It creates a dense Ginkgo matrix, a vector for the rhs and a vector for the solution. 
-     * The matrix is initialised with the derivatives calculator collection given in input. 
+     * It creates a dense matrix, a vector for the rhs and a vector for the solution.
+     * The matrix is initialised with the derivatives calculator collection given in input
+     * and factorised with a LU decomposition.
      * 
      * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
      * @param deriv_coeffs_collect SingleInterfaceDerivCoeffCollection containing all the 
      *          interface derivative calculator for each interface in the given Grid1D direction. 
-     * @param reduction_factor Reduction factor for a Ginkgo dense matrix with a conjugate gradient solver 
-     *          and a Jacobi preconditioner. 
      */
     InterfacesExactDerivativeCalculator(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivCoeffCollection const& deriv_coeffs_collect,
-            double reduction_factor = 1e-6)
+            DerivCoeffCollection const& deriv_coeffs_collect)
         : base_type(idx_ranges, deriv_coeffs_collect)
+        , m_matrix(base_type::n_inner_interfaces)
+        , m_vector(base_type::n_inner_interfaces)
+        , m_interface_derivatives(base_type::n_inner_interfaces)
     {
-        const auto exec = gko::ReferenceExecutor::create();
-        m_matrix = gko::share(Matrix::create(exec, gko::dim<2>(base_type::n_inner_interfaces)));
-
         set_matrix(std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
 
-        // Define a solver.
-        std::unique_ptr solver_factory
-                = SolverCG::build()
-                          .with_criteria(
-                                  gko::stop::Iteration::build()
-                                          .with_max_iters(base_type::n_inner_interfaces)
-                                          .on(exec),
-                                  gko::stop::ResidualNorm<>::build()
-                                          .with_reduction_factor(reduction_factor)
-                                          .on(exec))
-                          .with_preconditioner(
-                                  PreconditionerJ::build().with_max_block_size(8u).on(exec))
-                          .on(exec);
-        // Create solver
-        m_solver = solver_factory->generate(m_matrix);
-
-        // Create vectors for rhs and solution
-        m_vector = Matrix::create(exec, gko::dim<2>(base_type::n_inner_interfaces, 1));
-        m_interface_derivatives
-                = Matrix::create(exec, gko::dim<2>(base_type::n_inner_interfaces, 1));
+        // Factorise the matrix to prepare the resolutions of the systems (I-M)S = C.
+        m_matrix.factorise();
 
         set_sign_vector(std::make_integer_sequence<
                         std::size_t,
@@ -246,8 +219,10 @@ public:
                 functions_and_derivs,
                 std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
 
-        // Update m_interface_derivatives.
-        m_solver->apply(m_vector, m_interface_derivatives);
+        // Update m_interface_derivatives by solving the matrix system (I-M)S = C.
+        m_interface_derivatives = m_vector;
+        m_matrix.solve_inplace(
+                DSpan1D(m_interface_derivatives.data(), m_interface_derivatives.size()));
 
         // Update derivatives.
         update_derivatives(
@@ -333,16 +308,16 @@ private:
 
         for (int dofs : {-1, 0, 1}) {
             if (0 <= I + dofs && I + dofs < base_type::n_inner_interfaces) {
-                m_matrix->at(I, I + dofs) = coefs[dofs + 1];
+                m_matrix.set_element(I, I + dofs, coefs[dofs + 1]);
             }
         }
 
         // Add coefficients for the periodic case.
         if constexpr (base_type::is_periodic && I == 0) {
-            m_matrix->at(I, base_type::n_inner_interfaces - 1) = coefs[0];
+            m_matrix.set_element(I, base_type::n_inner_interfaces - 1, coefs[0]);
         }
         if constexpr (base_type::is_periodic && I == base_type::n_inner_interfaces - 1) {
-            m_matrix->at(I, 0) = coefs[2];
+            m_matrix.set_element(I, 0, coefs[2]);
         }
     }
 
@@ -441,7 +416,7 @@ private:
                     [ddc::type_seq_rank_v<grid_perp1<I>, typename base_type::Grid1DSeq>];
         }
 
-        m_vector->get_values()[I] = sign_sum * lin_comb_funct;
+        m_vector[I] = sign_sum * lin_comb_funct;
 
         // Add the boundary derivatives for global Hermite boundary conditions. ------------------
         constexpr bool is_lower_bound_deriv_dependent
@@ -490,13 +465,11 @@ private:
                                                  .get_coeff_deriv_patch_2();
 
             if constexpr (is_lower_bound_deriv_dependent) {
-                m_vector->get_values()[I] += patch_order_matches_interfaces<I>
-                                                     ? coeff_deriv_1 * deriv_bound_1
-                                                     : coeff_deriv_2 * deriv_bound_2;
+                m_vector[I] += patch_order_matches_interfaces<I> ? coeff_deriv_1 * deriv_bound_1
+                                                                 : coeff_deriv_2 * deriv_bound_2;
             } else {
-                m_vector->get_values()[I] += patch_order_matches_interfaces<I>
-                                                     ? coeff_deriv_2 * deriv_bound_2
-                                                     : coeff_deriv_1 * deriv_bound_1;
+                m_vector[I] += patch_order_matches_interfaces<I> ? coeff_deriv_2 * deriv_bound_2
+                                                                 : coeff_deriv_1 * deriv_bound_1;
             }
         }
     }
@@ -551,9 +524,9 @@ private:
         if constexpr (is_first_deriv) {
             // Update the first derivatives.
             functions_and_derivs.template get<patch1<I>>()(idx_interface_deriv_1)
-                    = m_interface_derivatives->get_values()[I] * sign_1;
+                    = m_interface_derivatives[I] * sign_1;
             functions_and_derivs.template get<patch2<I>>()(idx_interface_deriv_2)
-                    = m_interface_derivatives->get_values()[I] * sign_2;
+                    = m_interface_derivatives[I] * sign_2;
         } else {
             // The slice indices has to be a point at a corner, i.e. index range boundaries.
             IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
@@ -570,9 +543,9 @@ private:
 
             // Update the cross-derivative.
             functions_and_derivs.template get<patch1<I>>()(idx_cross_deriv_1)
-                    = m_interface_derivatives->get_values()[I] * sign_1;
+                    = m_interface_derivatives[I] * sign_1;
             functions_and_derivs.template get<patch2<I>>()(idx_cross_deriv_2)
-                    = m_interface_derivatives->get_values()[I] * sign_2;
+                    = m_interface_derivatives[I] * sign_2;
         }
     }
 
