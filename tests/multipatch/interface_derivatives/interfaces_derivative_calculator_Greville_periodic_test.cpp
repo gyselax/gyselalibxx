@@ -16,17 +16,19 @@
 #include "interface_derivatives_test_utils.hpp"
 #include "interfaces_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
+#include "interfaces_exact_derivative_calculator.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field_mem.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "orthogonal_coord_transforms.hpp"
+#include "test_utils.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
 
 /*
-    Test InterfacesDerivativeCalculator on the following geometry:
+    Test InterfacesDerivativeCalculator or InterfacesExactDerivativeCalculator on the following geometry:
 
         |  1  |  2  |  3  |  1 ...
         -------------------
@@ -133,6 +135,39 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>,
         ddc::ConstantExtrapolationRule<Yg>>;
 
+template <
+        bool is_approximation,
+        class Connectivity,
+        class Grid1D,
+        class PatchSeq,
+        ddc::SplineBuilderClosure SBC,
+        class InterfaceCollection>
+using InterfacesDerivativeCalculatorType = std::conditional_t<
+        is_approximation,
+        InterfacesDerivativeCalculator<Connectivity, Grid1D, PatchSeq, InterfaceCollection>,
+        InterfacesExactDerivativeCalculator<
+                Connectivity,
+                Grid1D,
+                PatchSeq,
+                SBC,
+                SBC,
+                InterfaceCollection>>;
+
+template <bool is_approximation, class InterfaceType, class IdxRange1, class IdxRange2>
+InterfaceDerivCoeffs<InterfaceType> build_interface(
+        IdxRange1 idx_range_1,
+        IdxRange2 idx_range_2,
+        std::size_t nb_chosen_cells,
+        ddc::SplineBuilderClosure BC1,
+        ddc::SplineBuilderClosure BC2)
+{
+    if constexpr (is_approximation) {
+        return InterfaceDerivCoeffs<InterfaceType>(idx_range_1, idx_range_2, nb_chosen_cells);
+    } else {
+        return InterfaceDerivCoeffs<InterfaceType>(idx_range_1, idx_range_2, BC1, BC2);
+    }
+}
+
 template <std::size_t I>
 struct CoordTransformGroup
 {
@@ -155,8 +190,11 @@ struct CoordTransformGroup
     }
 };
 
+template <class is_approximation_literal>
 struct InterfacesDerivativeCalculatorGrevillePeriodicTest : public ::testing::Test
 {
+    static constexpr bool is_approximation = is_approximation_literal::value;
+
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // We define only the patch of the first row or column as the patches are sharing data.
     // patches 1 | 4 | 7  dim X ------------------
@@ -366,11 +404,15 @@ public:
     }
 };
 
+using is_approximation = std::tuple<std::true_type, std::false_type>;
+using TestTypes = tuple_to_types_t<is_approximation>;
+TYPED_TEST_SUITE(InterfacesDerivativeCalculatorGrevillePeriodicTest, TestTypes);
+
 } // end namespace
 
 
 
-TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
+TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
     std::tuple coord_transforms {
             CoordTransformGroup<1>(),
@@ -384,45 +426,78 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             CoordTransformGroup<9>()};
 
     // Instantiate the derivatives calculators ---------------------------------------------------
-    constexpr std::size_t nb_chosen_cells = 9;
-
     // InterfaceDerivCoeffs for interfaces along y (periodic).
     InterfaceDerivCoeffs<Interface_1_2> const
-            deriv_coeffs_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
+            deriv_coeffs_1_2(TestFixture::idx_range_xy1, TestFixture::idx_range_xy2);
     InterfaceDerivCoeffs<Interface_2_3> const
-            deriv_coeffs_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
+            deriv_coeffs_2_3(TestFixture::idx_range_xy2, TestFixture::idx_range_xy3);
     InterfaceDerivCoeffs<Interface_3_1> const
-            deriv_coeffs_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
+            deriv_coeffs_3_1(TestFixture::idx_range_xy3, TestFixture::idx_range_xy1);
 
     InterfaceDerivCoeffs<Interface_4_5> const
-            deriv_coeffs_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
+            deriv_coeffs_4_5(TestFixture::idx_range_xy4, TestFixture::idx_range_xy5);
     InterfaceDerivCoeffs<Interface_5_6> const
-            deriv_coeffs_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
+            deriv_coeffs_5_6(TestFixture::idx_range_xy5, TestFixture::idx_range_xy6);
     InterfaceDerivCoeffs<Interface_6_4> const
-            deriv_coeffs_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
+            deriv_coeffs_6_4(TestFixture::idx_range_xy6, TestFixture::idx_range_xy4);
 
     InterfaceDerivCoeffs<Interface_7_8> const
-            deriv_coeffs_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
+            deriv_coeffs_7_8(TestFixture::idx_range_xy7, TestFixture::idx_range_xy8);
     InterfaceDerivCoeffs<Interface_8_9> const
-            deriv_coeffs_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
+            deriv_coeffs_8_9(TestFixture::idx_range_xy8, TestFixture::idx_range_xy9);
     InterfaceDerivCoeffs<Interface_9_7> const
-            deriv_coeffs_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
+            deriv_coeffs_9_7(TestFixture::idx_range_xy9, TestFixture::idx_range_xy7);
 
     // InterfaceDerivCoeffs for interfaces along x.
-    InterfaceDerivCoeffs<Interface_1_4> const
-            deriv_coeffs_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_4_7> const
-            deriv_coeffs_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
+    constexpr std::size_t nb_chosen_cells = 9;
 
-    InterfaceDerivCoeffs<Interface_2_5> const
-            deriv_coeffs_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_5_8> const
-            deriv_coeffs_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
+    constexpr bool is_approximation = TestFixture::is_approximation;
 
-    InterfaceDerivCoeffs<Interface_3_6> const
-            deriv_coeffs_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
-    InterfaceDerivCoeffs<Interface_6_9> const
-            deriv_coeffs_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
+    // InterfaceDerivCoeffs for interfaces along x.
+    InterfaceDerivCoeffs<Interface_1_4> const deriv_coeffs_1_4
+            = build_interface<is_approximation, Interface_1_4>(
+                    TestFixture::idx_range_xy1,
+                    TestFixture::idx_range_xy4,
+                    nb_chosen_cells,
+                    ddc::SplineBuilderClosure::GREVILLE,
+                    ddc::SplineBuilderClosure::HERMITE);
+    InterfaceDerivCoeffs<Interface_4_7> const deriv_coeffs_4_7
+            = build_interface<is_approximation, Interface_4_7>(
+                    TestFixture::idx_range_xy4,
+                    TestFixture::idx_range_xy7,
+                    nb_chosen_cells,
+                    ddc::SplineBuilderClosure::HERMITE,
+                    ddc::SplineBuilderClosure::GREVILLE);
+
+    InterfaceDerivCoeffs<Interface_2_5> const deriv_coeffs_2_5
+            = build_interface<is_approximation, Interface_2_5>(
+                    TestFixture::idx_range_xy2,
+                    TestFixture::idx_range_xy5,
+                    nb_chosen_cells,
+                    ddc::SplineBuilderClosure::GREVILLE,
+                    ddc::SplineBuilderClosure::HERMITE);
+    InterfaceDerivCoeffs<Interface_5_8> const deriv_coeffs_5_8
+            = build_interface<is_approximation, Interface_5_8>(
+                    TestFixture::idx_range_xy5,
+                    TestFixture::idx_range_xy8,
+                    nb_chosen_cells,
+                    ddc::SplineBuilderClosure::HERMITE,
+                    ddc::SplineBuilderClosure::GREVILLE);
+
+    InterfaceDerivCoeffs<Interface_3_6> const deriv_coeffs_3_6
+            = build_interface<is_approximation, Interface_3_6>(
+                    TestFixture::idx_range_xy3,
+                    TestFixture::idx_range_xy6,
+                    nb_chosen_cells,
+                    ddc::SplineBuilderClosure::GREVILLE,
+                    ddc::SplineBuilderClosure::HERMITE);
+    InterfaceDerivCoeffs<Interface_6_9> const deriv_coeffs_6_9
+            = build_interface<is_approximation, Interface_6_9>(
+                    TestFixture::idx_range_xy6,
+                    TestFixture::idx_range_xy9,
+                    nb_chosen_cells,
+                    ddc::SplineBuilderClosure::HERMITE,
+                    ddc::SplineBuilderClosure::GREVILLE);
 
     // Collect the derivative calculators --------------------------------------------------------
     InterfaceDerivCoeffsCollection
@@ -448,15 +523,15 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             Patch8,
             Patch9>
             idx_ranges(
-                    idx_range_xy1,
-                    idx_range_xy2,
-                    idx_range_xy3,
-                    idx_range_xy4,
-                    idx_range_xy5,
-                    idx_range_xy6,
-                    idx_range_xy7,
-                    idx_range_xy8,
-                    idx_range_xy9);
+                    TestFixture::idx_range_xy1,
+                    TestFixture::idx_range_xy2,
+                    TestFixture::idx_range_xy3,
+                    TestFixture::idx_range_xy4,
+                    TestFixture::idx_range_xy5,
+                    TestFixture::idx_range_xy6,
+                    TestFixture::idx_range_xy7,
+                    TestFixture::idx_range_xy8,
+                    TestFixture::idx_range_xy9);
 
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3> idx_ranges_123(idx_ranges);
     MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6> idx_ranges_456(idx_ranges);
@@ -467,47 +542,59 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     MultipatchType<IdxRangeOnPatch, Patch2, Patch5, Patch8> idx_ranges_258(idx_ranges);
     MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9> idx_ranges_369(idx_ranges);
 
-    // Instantiate the derivative calculators ----------------------------------------------------
-    InterfacesDerivativeCalculator<
+    // Instantiate the derivatives calculators ---------------------------------------------------
+    InterfacesDerivativeCalculatorType<
+            is_approximation,
             Connectivity,
             GridX<1>,
             ddc::TypeSeq<Patch1, Patch2, Patch3>,
+            ddc::SplineBuilderClosure::PERIODIC,
             InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
             deriv_calculator_123(idx_ranges_123, deriv_coeffs_collect_123);
 
-    InterfacesDerivativeCalculator<
+    InterfacesDerivativeCalculatorType<
+            is_approximation,
             Connectivity,
             GridX<4>,
             ddc::TypeSeq<Patch4, Patch5, Patch6>,
+            ddc::SplineBuilderClosure::PERIODIC,
             InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
             deriv_calculator_456(idx_ranges_456, deriv_coeffs_collect_456);
 
-    InterfacesDerivativeCalculator<
+    InterfacesDerivativeCalculatorType<
+            is_approximation,
             Connectivity,
             GridX<7>,
             ddc::TypeSeq<Patch7, Patch8, Patch9>,
+            ddc::SplineBuilderClosure::PERIODIC,
             InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
             deriv_calculator_789(idx_ranges_789, deriv_coeffs_collect_789);
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
-    InterfacesDerivativeCalculator<
+    InterfacesDerivativeCalculatorType<
+            is_approximation,
             Connectivity,
             GridY<1>,
             ddc::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
+            ddc::SplineBuilderClosure::GREVILLE,
             InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
             deriv_calculator_147(idx_ranges_147, deriv_coeffs_collect_147);
 
-    InterfacesDerivativeCalculator<
+    InterfacesDerivativeCalculatorType<
+            is_approximation,
             Connectivity,
             GridY<2>,
             ddc::TypeSeq<Patch2, Patch5, Patch8>,
+            ddc::SplineBuilderClosure::GREVILLE,
             InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
             deriv_calculator_258(idx_ranges_258, deriv_coeffs_collect_258);
 
-    InterfacesDerivativeCalculator<
+    InterfacesDerivativeCalculatorType<
+            is_approximation,
             Connectivity,
             GridY<3>,
             ddc::TypeSeq<Patch3, Patch6, Patch9>,
+            ddc::SplineBuilderClosure::GREVILLE,
             InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
             deriv_calculator_369(idx_ranges_369, deriv_coeffs_collect_369);
 
@@ -538,7 +625,7 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             functions_and_derivs(functions_and_derivs_alloc);
 
     // Instantiate the field of global function values. No derivatives needed.
-    host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
+    host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(TestFixture::idx_range_xy_g);
     host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
 
     // Initialise the data =======================================================================
@@ -563,18 +650,18 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
     // Build global spline representation ---
-    SplineRThetagBuilder builder_g(idx_range_xy_g);
+    SplineRThetagBuilder builder_g(TestFixture::idx_range_xy_g);
 
     host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-            builder_g.batched_spline_domain(idx_range_xy_g));
+            builder_g.batched_spline_domain(TestFixture::idx_range_xy_g));
     host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
             = get_field(function_g_coef_alloc);
 
     builder_g(function_g_coef, get_const_field(function_g));
 
     // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(yg_max);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(TestFixture::yg_min);
+    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(TestFixture::yg_max);
     ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
     SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
@@ -582,24 +669,28 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
     using PatchSeqLowerBound = ddc::TypeSeq<Patch7, Patch8, Patch9>;
     using PatchSeqUpperBound = ddc::TypeSeq<Patch1, Patch2, Patch3>;
 
+    const double TOL_deriv = is_approximation ? 1e-4 : 1e-11;
+    const double TOL_cross_deriv = is_approximation ? 1e-4 : 1e-10;
+    const double TOL_spline = is_approximation ? 1e-7 : 1e-12;
+
     check_all_x_derivatives(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
             coord_transforms,
-            1e-4);
+            TOL_deriv);
     check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
             coord_transforms,
-            1e-4);
+            TOL_deriv);
     check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
             coord_transforms,
-            1e-4);
+            TOL_cross_deriv);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
@@ -607,5 +698,5 @@ TEST_F(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGr
             evaluator_g,
             get_const_field(function_g_coef),
             coord_transforms,
-            1e-7);
+            TOL_spline);
 }
