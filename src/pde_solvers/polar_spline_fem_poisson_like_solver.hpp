@@ -449,13 +449,10 @@ public:
         // Get initial guess
         DField<IdxRangeBatchedBSPolar> x_init = get_field(m_x_init_alloc);
 
-        const int n_batch = idx_range_batch.size();
-
         DConstField<IdxRangeQuadratureRTheta> int_volume = get_const_field(m_int_volume_alloc);
 
         IdxRangeBSPolar idx_range_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-        const int n_singular = idx_range_singular.size();
 
         IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
 
@@ -466,17 +463,15 @@ public:
 
         // Fill b for the basis functions around the O-point
         // Multi-level parallelism is needed as idx_range_singular.size() ~= 3 but b is on GPU
-        Kokkos::parallel_for(
-                Kokkos::TeamPolicy<>(
-                        Kokkos::DefaultExecutionSpace(),
-                        n_batch * n_singular,
-                        Kokkos::AUTO),
-                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    IdxBatch const batch_idx = ddcHelper::get_idx_from_linear_index(
-                            idx_range_batch,
-                            team.league_rank() / n_singular);
-                    IdxBSPolar const idx = idx_range_singular.front()
-                                           + IdxStepBSPolar(team.league_rank() % n_singular);
+        IdxRangeBatchedBSPolar batched_idx_range_singular(idx_range_batch, idx_range_singular);
+        ddc::parallel_for_each_team(
+                Kokkos::DefaultExecutionSpace(),
+                batched_idx_range_singular,
+                KOKKOS_LAMBDA(
+                        ddc::TeamPolicyMember<Kokkos::DefaultExecutionSpace> const& team,
+                        IdxBatchedBSPolar const idx_full) {
+                    IdxBatch const batch_idx(idx_full);
+                    IdxBSPolar const idx(idx_full);
                     double teamSum = 0;
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadMDRange(
