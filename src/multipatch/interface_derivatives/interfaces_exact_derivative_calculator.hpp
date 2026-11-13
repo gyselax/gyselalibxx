@@ -117,6 +117,7 @@ private:
     template <std::size_t I>
     static constexpr Extremity extremity_2 = base_type::template extremity_2<I>;
 
+    using base_type::n_inner_interfaces;
     using base_type::to_sign;
 
 public:
@@ -169,17 +170,16 @@ public:
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
             DerivCoeffCollection const& deriv_coeffs_collect)
         : base_type(idx_ranges, deriv_coeffs_collect)
-        , m_matrix(base_type::n_inner_interfaces)
-        , m_vector(base_type::n_inner_interfaces)
-        , m_interface_derivatives(base_type::n_inner_interfaces)
+        , m_matrix(n_inner_interfaces)
+        , m_vector(n_inner_interfaces)
+        , m_interface_derivatives(n_inner_interfaces)
     {
-        set_matrix(std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
+        set_matrix(std::make_index_sequence<n_inner_interfaces> {});
 
         // Factorise the matrix to prepare the resolutions of the systems (I-M)S = C.
         m_matrix.factorise();
 
-        set_sign_vector(std::make_integer_sequence<
-                        std::size_t,
+        set_sign_vector(std::make_index_sequence<
                         ddc::type_seq_size_v<typename base_type::Grid1DSeq> - 1> {});
     }
 
@@ -217,7 +217,7 @@ public:
                 deriv_order,
                 idx_par,
                 functions_and_derivs,
-                std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
+                std::make_index_sequence<n_inner_interfaces> {});
 
         // Update m_interface_derivatives by solving the matrix system (I-M)S = C.
         m_interface_derivatives = m_vector;
@@ -229,7 +229,7 @@ public:
                 deriv_order,
                 functions_and_derivs,
                 idx_par,
-                std::make_integer_sequence<std::size_t, base_type::n_inner_interfaces> {});
+                std::make_index_sequence<n_inner_interfaces> {});
     }
 
     /**
@@ -307,16 +307,16 @@ private:
         const double coefs[] = {-coeff_left, 1, -coeff_right};
 
         for (int dofs : {-1, 0, 1}) {
-            if (0 <= I + dofs && I + dofs < base_type::n_inner_interfaces) {
+            if (0 <= I + dofs && I + dofs < n_inner_interfaces) {
                 m_matrix.set_element(I, I + dofs, coefs[dofs + 1]);
             }
         }
 
         // Add coefficients for the periodic case.
         if constexpr (base_type::is_periodic && I == 0) {
-            m_matrix.set_element(I, base_type::n_inner_interfaces - 1, coefs[0]);
+            m_matrix.set_element(I, n_inner_interfaces - 1, coefs[0]);
         }
-        if constexpr (base_type::is_periodic && I == base_type::n_inner_interfaces - 1) {
+        if constexpr (base_type::is_periodic && I == n_inner_interfaces - 1) {
             m_matrix.set_element(I, 0, coefs[2]);
         }
     }
@@ -422,8 +422,7 @@ private:
         constexpr bool is_lower_bound_deriv_dependent
                 = (LowerBound == ddc::SplineBuilderClosure::HERMITE && I == 0);
         constexpr bool is_upper_bound_deriv_dependent
-                = (UpperBound == ddc::SplineBuilderClosure::HERMITE
-                   && I == base_type::n_inner_interfaces - 1);
+                = (UpperBound == ddc::SplineBuilderClosure::HERMITE && I == n_inner_interfaces - 1);
 
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
             DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
