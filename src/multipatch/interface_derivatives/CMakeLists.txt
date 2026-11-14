@@ -7,6 +7,7 @@ target_sources("multipatch_interface_derivatives"
     INTERFACE
         FILE_SET HEADERS
             FILES
+                derivative_calculator_collection.hpp
                 derivative_calculator_common.hpp
                 interfaces_derivative_calculator.hpp
                 interface_derivative_coefficients.hpp
