@@ -111,7 +111,8 @@ public:
      */
     KOKKOS_INLINE_FUNCTION int operator()(Coord<DimRes1, DimRes2> const coord) const
     {
-        Coord<DimArg1, DimArg2> coord_log;
+        double const nan = Kokkos::Experimental::quiet_NaN_v<double>;
+        Coord<DimArg1, DimArg2> coord_log(nan, nan);
         return find_patch(coord_log, coord);
     }
 
@@ -149,7 +150,11 @@ private:
             return outside_domain;
         } else {
             using P = ddc::type_seq_element_t<I, patch_seq>;
-            if (is_in_patch<P>(coord_log, coord)) {
+            // Each patch starts from the same initial guess (not from the end point of a
+            // failed Newton on the previous patch).
+            Coord<DimArg1, DimArg2> guess = coord_log;
+            if (is_in_patch<P>(guess, coord)) {
+                coord_log = guess;
                 return static_cast<int>(I);
             }
             return find_patch<I + 1>(coord_log, coord);
@@ -173,6 +178,15 @@ private:
         Coord<DimArg2> dim2_min = ddc::discrete_space<typename P::BSplines2>().rmin();
         Coord<DimArg2> dim2_max = ddc::discrete_space<typename P::BSplines2>().rmax();
 
+        // If the coordinate is not initialised, initialise at the centre of the patch.
+        if (Kokkos::isnan(ddc::get<DimArg1>(logical_coord))
+            || Kokkos::isnan(ddc::get<DimArg2>(logical_coord))) {
+            Coord<DimArg1, DimArg2> guess(0.5 * (dim1_min + dim1_max), 0.5 * (dim2_min + dim2_max));
+            dichotomy<P>(guess, physical_coord, dim1_min, dim1_max, dim2_min, dim2_max);
+            logical_coord = guess;
+        }
+
+        // If the coordinate is outside the patch, replace inside.
         replace_inside<P>(logical_coord, dim1_min, dim1_max, dim2_min, dim2_max);
         Coord<DimRes1, DimRes2> computed_physical_coord
                 = m_coord_transformations.template get<P>()(logical_coord);
@@ -197,6 +211,8 @@ private:
 
             computed_physical_coord = m_coord_transformations.template get<P>()(logical_coord);
         }
+        std::cout << "logical_coord=" << logical_coord
+                  << "  computed_physical_coord=" << computed_physical_coord << std::endl;
         return (norm_inf(computed_physical_coord - physical_coord) <= m_TOL);
     }
 
@@ -228,6 +244,79 @@ private:
             coord2_log = dim2_periodic ? coord2_log + (dim2_max - dim2_min) : dim2_min;
         }
         coord_log = Coord<DimArg1, DimArg2>(coord1_log, coord2_log);
+    }
+
+    template <class P>
+    bool dichotomy(
+            Coord<DimArg1, DimArg2>& log_coord,
+            Coord<DimRes1, DimRes2> const& coord,
+            Coord<DimArg1> dim1_min,
+            Coord<DimArg1> dim1_max,
+            Coord<DimArg2> dim2_min,
+            Coord<DimArg2> dim2_max,
+            std::size_t counter = 0,
+            double eps = 1e-4) const
+    {
+        if (!is_in_box<P>(coord, dim1_min, dim1_max, dim2_min, dim2_max)) {
+            return false;
+        }
+
+        Coord<DimArg1> const dim1_mid = 0.5 * (dim1_min + dim1_max);
+        Coord<DimArg2> const dim2_mid = 0.5 * (dim2_min + dim2_max);
+
+        if ((abs(dim1_max - dim1_min) < eps) && (abs(dim2_max - dim2_min) < eps)) {
+            log_coord = Coord<DimArg1, DimArg2>(dim1_mid, dim2_mid);
+            return true;
+        }
+        if (counter > 27) {
+            return false;
+        }
+        if (dichotomy<P>(log_coord, coord, dim1_min, dim1_mid, dim2_min, dim2_mid, counter + 1)) {
+            return true;
+        }
+        if (dichotomy<P>(log_coord, coord, dim1_mid, dim1_max, dim2_min, dim2_mid, counter + 1)) {
+            return true;
+        }
+        if (dichotomy<P>(log_coord, coord, dim1_min, dim1_mid, dim2_mid, dim2_max, counter + 1)) {
+            return true;
+        }
+        if (dichotomy<P>(log_coord, coord, dim1_mid, dim1_max, dim2_mid, dim2_max, counter + 1)) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    template <class P>
+    bool is_in_box(
+            Coord<DimRes1, DimRes2> const& coord,
+            Coord<DimArg1> dim1_min,
+            Coord<DimArg1> dim1_max,
+            Coord<DimArg2> dim2_min,
+            Coord<DimArg2> dim2_max) const
+    {
+        Coord<DimRes1, DimRes2> corner_min_min = m_coord_transformations.template get<P>()(
+                Coord<DimArg1, DimArg2>(dim1_min, dim2_min));
+        double xmin = ddc::get<DimRes1>(corner_min_min);
+        double xmax = xmin;
+        double ymin = ddc::get<DimRes2>(corner_min_min);
+        double ymax = ymin;
+        for (double dim1 : std::vector<double> {dim1_min, dim1_max}) {
+            for (double dim2 : std::vector<double> {dim2_min, dim2_max}) {
+                Coord<DimArg1, DimArg2> coord_log(dim1, dim2);
+                Coord<DimRes1, DimRes2> coord_xy
+                        = m_coord_transformations.template get<P>()(coord_log);
+                xmin = Kokkos::min(xmin, ddc::get<DimRes1>(coord_xy));
+                xmax = Kokkos::max(xmax, ddc::get<DimRes1>(coord_xy));
+                ymin = Kokkos::min(ymin, ddc::get<DimRes2>(coord_xy));
+                ymax = Kokkos::max(ymax, ddc::get<DimRes2>(coord_xy));
+            }
+        }
+        double x = ddc::get<DimRes1>(coord);
+        double y = ddc::get<DimRes2>(coord);
+
+        return ((xmin <= x) && (x <= xmax) && (ymin <= y) && (y <= ymax));
     }
 };
 
