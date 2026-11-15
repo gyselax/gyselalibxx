@@ -13,6 +13,7 @@ target_sources("multipatch_connectivity"
                 interface.hpp
                 matching_idx_slice.hpp
                 onion_patch_locator.hpp
+                patch_locator_newton.hpp
                 patch.hpp
                 utils_patch_locators.hpp
 )
@@ -21,6 +22,7 @@ target_link_libraries("multipatch_connectivity" INTERFACE
     DDC::core
     gyselalibxx::coord_transformations
     gyselalibxx::data_types
+    gyselalibxx::math_tools
     gyselalibxx::multipatch_data_types
     gyselalibxx::utils
 )

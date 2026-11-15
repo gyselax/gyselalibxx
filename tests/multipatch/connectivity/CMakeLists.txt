@@ -10,6 +10,7 @@ add_executable("unit_tests_connectivity"
         matching_idx_slice_uniform_grids.cpp
         matching_idx_slice_non_uniform_grids.cpp
         multipatch_connectivity.cpp
+        patch_locator_newton_2patches.cpp
         patch_locator_onion_shape_2patches.cpp
         ../../main.cpp
 )
