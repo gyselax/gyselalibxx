@@ -10,6 +10,29 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "tensor_common.hpp"
+#include "vector_field.hpp"
+
+namespace detail {
+
+/**
+ * @brief A trait helping deduce the data type used in Quadrature
+ */
+template <class ElementDataType, class = void>
+struct QuadratureDataType
+{
+    static_assert(std::is_floating_point_v<ElementDataType>);
+    using data_type = ElementDataType;
+};
+
+template <class ElementDataType>
+struct QuadratureDataType<ElementDataType, std::enable_if_t<is_tensor_type_v<ElementDataType>>>
+{
+    static_assert(ElementDataType::rank() == 1);
+    using data_type = typename ElementDataType::element_type;
+};
+
+} // namespace detail
 
 /**
  * @brief A class providing an operator for integrating functions defined on known grid points.
@@ -19,20 +42,25 @@
  *                      IdxRangeQuadrature combined with any batch dimensions. If there are no
  *                      batch dimensions then this argument does not need to be provided as by
  *                      default it is equal to the IdxRangeQuadrature.
+ * @tparam ElementDataType The data type of an element of the function being integrated.
  * @tparam MemorySpace The memory space (cpu/gpu) where the quadrature coefficients are saved.
  */
 template <
         class IdxRangeQuadrature,
         class IdxRangeTotal = IdxRangeQuadrature,
-        class DataType = double,
+        class ElementDataType = double,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
+    using DataType = typename detail::QuadratureDataType<ElementDataType>::data_type;
+
     static_assert(std::is_floating_point_v<DataType>);
 
 private:
     /// The type of an element of an index of the quadrature coefficients.
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
+    /// The type of an element of an index step of the quadrature coefficients.
+    using IdxStepQuadrature = typename IdxRangeQuadrature::discrete_vector_type;
 
     using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
 
@@ -54,13 +82,15 @@ public:
      * @param[in] integrated_function
      *        A function taking an index of a position in the index range over which the quadrature is
      *        calculated and returning the value of the function to be integrated at that point.
-     *        It should be noted that a Field fulfils these criteria and can be passed as the function to be integrated.
+     *        It should be noted that a Field or VectorField may fulfil these criteria and can be
+     *        therefore be passed as the function to be integrated.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      *
      * @returns The integral of the function over the domain.
      */
     template <class ExecutionSpace, class IntegratorFunction>
-    DataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
+    ElementDataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function)
+            const
     {
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
@@ -86,8 +116,8 @@ public:
         if constexpr (std::is_same_v<ExecutionSpace, Kokkos::DefaultHostExecutionSpace>) {
             return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
-                    0.0,
-                    ddc::reducer::sum<DataType>(),
+                    ElementDataType(0.0),
+                    ddc::reducer::sum<ElementDataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -97,8 +127,8 @@ public:
                     location.function_name(),
                     exec_space,
                     get_idx_range(coeff_proxy),
-                    0.0,
-                    ddc::reducer::sum<DataType>(),
+                    ElementDataType(0.0),
+                    ddc::reducer::sum<ElementDataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -117,27 +147,28 @@ public:
      *        A function taking an index of a position in the index range over which the quadrature is
      *        calculated (including the batch index range) and returning the value of the function to
      *        be integrated at that point.
-     *        Please note that a Field fulfils the described criteria.
+     *        It should be noted that a Field or VectorField may fulfil these criteria and can be
+     *        therefore be passed as the function to be integrated.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      */
-    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
+    template <class ExecutionSpace, class ResultField, class IntegratorFunction>
     void operator()(
             ExecutionSpace exec_space,
-            Field<DataType, BatchIdxRange, MemorySpace, Layout> const result,
+            ResultField const result,
             IntegratorFunction integrated_function) const
+            requires(std::is_floating_point_v<
+                     ElementDataType>) //TOD: Remove requires when #322 is fixed
     {
+        using IdxRangeBatch = ResultField::discrete_domain_type;
+        static_assert(std::is_same_v<typename ResultField::element_type, ElementDataType>);
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
-        static_assert(
-                std::is_same_v<ExecutionSpace, Kokkos::DefaultExecutionSpace>,
-                "Kokkos::TeamPolicy only works with the default execution space. Please use "
-                "DefaultExecutionSpace to call this batched operator.");
         using ExpectedBatchDims = ddc::type_seq_remove_t<
                 ddc::to_type_seq_t<IdxRangeTotal>,
                 ddc::to_type_seq_t<IdxRangeQuadrature>>;
         static_assert(
-                ddc::type_seq_same_v<ddc::to_type_seq_t<BatchIdxRange>, ExpectedBatchDims>,
+                ddc::type_seq_same_v<ddc::to_type_seq_t<IdxRangeBatch>, ExpectedBatchDims>,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
 
@@ -152,7 +183,7 @@ public:
 
         // Get useful index types
         using IdxTotal = typename IdxRangeTotal::discrete_element_type;
-        using IdxBatch = typename BatchIdxRange::discrete_element_type;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
         static_assert(
                 std::is_invocable_v<IntegratorFunction, IdxTotal>,
@@ -161,23 +192,23 @@ public:
 
         // Get index ranges
         IdxRangeQuadrature quad_idx_range(get_idx_range(m_coefficients));
-        BatchIdxRange batch_idx_range(get_idx_range(result));
+        IdxRangeBatch batch_idx_range(get_idx_range(result));
 
         QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
-        Kokkos::parallel_for(
-                Kokkos::TeamPolicy<>(exec_space, batch_idx_range.size(), Kokkos::AUTO),
-                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int idx = team.league_rank();
-                    IdxBatch ib = to_discrete_element(idx, batch_idx_range);
-
+        ddc::parallel_for_each_team(
+                exec_space,
+                batch_idx_range,
+                KOKKOS_LAMBDA(
+                        ddc::TeamPolicyMember<ExecutionSpace> const& team,
+                        IdxBatch const ib) {
                     // Sum over quadrature dimensions
-                    DataType teamSum = 0;
+                    ElementDataType teamSum(0);
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
-                            [&](int const& thread_index, DataType& sum) {
-                                IdxQuadrature iq
-                                        = to_discrete_element(thread_index, quad_idx_range);
+                            [&](int const& thread_index, ElementDataType& sum) {
+                                IdxQuadrature iq = ddcHelper::
+                                        get_idx_from_linear_index(quad_idx_range, thread_index);
                                 IdxTotal it(ib, iq);
                                 sum += coeff_proxy(iq) * integrated_function(it);
                             },
@@ -185,45 +216,24 @@ public:
                     result(ib) = teamSum;
                 });
     }
-
-private:
-    /**
-     * A function which converts an integer into an index found in an index range
-     * starting from the front. This is useful for iterating over an index range using Kokkos
-     * loops.
-     *
-     * @param[in] idx The index of the requested element.
-     * @param[in] idx_range The index range being iterated over.
-     *
-     * @return The vector displacement from the front of the index range
-     */
-    template <class HeadDim, class... Grid1D>
-    KOKKOS_FUNCTION static Idx<HeadDim, Grid1D...> to_discrete_element(
-            int idx,
-            IdxRange<HeadDim, Grid1D...> idx_range)
-    {
-        IdxRange<Grid1D...> subidx_range(idx_range);
-        Idx<HeadDim> head_idx(ddc::select<HeadDim>(idx_range).front() + idx / subidx_range.size());
-        if constexpr (sizeof...(Grid1D) == 0) {
-            return head_idx;
-        } else {
-            Idx<Grid1D...> tail_idx = to_discrete_element(idx % subidx_range.size(), subidx_range);
-            return Idx<HeadDim, Grid1D...>(head_idx, tail_idx);
-        }
-    }
 };
+
+// Auto-deduce template parameters
+template <class DataType, class IdxRangeQuadrature, class MemorySpace>
+Quadrature(ConstField<DataType, IdxRangeQuadrature, MemorySpace>)
+        -> Quadrature<IdxRangeQuadrature, IdxRangeQuadrature, DataType, MemorySpace>;
 
 namespace detail {
 template <
         class NewMemorySpace,
         class IdxRangeQuadrature,
         class IdxRangeTotal,
-        class DataType,
+        class ElementDataType,
         class MemorySpace>
 struct OnMemorySpace<
         NewMemorySpace,
-        Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace>>
+        Quadrature<IdxRangeQuadrature, IdxRangeTotal, ElementDataType, MemorySpace>>
 {
-    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, NewMemorySpace>;
+    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, ElementDataType, NewMemorySpace>;
 };
 } // namespace detail
