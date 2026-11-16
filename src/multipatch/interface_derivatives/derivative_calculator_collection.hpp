@@ -87,8 +87,9 @@ public:
             derivative_calculator_seq>;
 
     template <std::size_t IOp>
-    using index_type = typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::
-            template idx_deriv<derivative_calculator_type<IOp>>;
+    using index_type =
+            typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::template idx_deriv<
+                    derivative_calculator_type<IOp>>;
 
 private:
     std::tuple<DerivativeCalculators&...> m_deriv_calculator_collection;
