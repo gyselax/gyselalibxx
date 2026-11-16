@@ -9,6 +9,7 @@ target_sources("multipatch_interface_derivatives"
             FILES
                 derivative_calculator_common.hpp
                 interfaces_derivative_calculator.hpp
+                interfaces_exact_derivative_calculator.hpp
                 interface_derivative_coefficients.hpp
                 interface_derivative_coefficients_collection.hpp
 )
@@ -16,6 +17,7 @@ target_sources("multipatch_interface_derivatives"
 target_link_libraries("multipatch_interface_derivatives" INTERFACE
     DDC::core
     gyselalibxx::interpolation_interface_derivatives
+    gyselalibxx::matrix_tools
     gyselalibxx::multipatch_data_types
     gyselalibxx::multipatch_connectivity
     gyselalibxx::utils
