@@ -721,6 +721,7 @@
     <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1a3717029384e4c1ec41a06ceda1fd5f45" kind="function"><name>get_approximated_deriv</name></member>
     <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1afbe9020da66505979975d71c10b8fabd" kind="function"><name>set_slice_indexes</name></member>
     <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1af8023bdc3fe078155f5f28ad3540f647" kind="function"><name>get_idx_interface</name></member>
+    <member refid="classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1_1af329f1d6e5f72b21214f30fb8b5e6277" kind="function"><name>to_sign</name></member>
   </compound>
   <compound refid="classDerivField" kind="class"><name>DerivField</name>
   </compound>
@@ -1903,13 +1904,13 @@
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1aaccb479f9710339fc9f7d3c89c890f8d" kind="typedef"><name>grid_par2</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a90309250aa1076371a757baa421e5822" kind="typedef"><name>deriv_par1</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1ab3943203cb0b6c088532e366c52200cd" kind="typedef"><name>deriv_par2</name></member>
-    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a2fe76ebbecbd2a38a0b23832ab5c2890" kind="typedef"><name>patch_first</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1abcc126b2dfacfe48e1c9eaa4af422b52" kind="typedef"><name>grid_direction</name></member>
-    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a7a0992324a63eb151d6450a76b561690" kind="typedef"><name>patch_direction</name></member>
-    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a76caafc8bf24e5542d6210528153fcba" kind="typedef"><name>deriv_perp_dim</name></member>
-    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1aa8d4b5f593e85b522fcd06e07aeb1cfd" kind="typedef"><name>deriv_par_dim</name></member>
-    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a37bea123441da88e474840068e474cec" kind="typedef"><name>idx_deriv_perp</name></member>
-    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a65022dccd659123fcc8c27f7f3bf0de0" kind="typedef"><name>idx_cross_deriv</name></member>
+    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a795e682b8ca9b18d6b32107b584091fa" kind="typedef"><name>patch_first</name></member>
+    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a9e7f858fb88b2c6cb82ebdcdf4861f8a" kind="typedef"><name>patch_direction</name></member>
+    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a870af63118467ac23878728628f8e12c" kind="typedef"><name>deriv_perp_dim</name></member>
+    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1ad1dccfb00abfa266bf346bae14c87127" kind="typedef"><name>deriv_par_dim</name></member>
+    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a8e0e3f86bb784cec5c4d19a13d59fb80" kind="typedef"><name>idx_deriv_perp</name></member>
+    <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1ae6beeca0f33b11493484287831890667" kind="typedef"><name>idx_cross_deriv</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a649ba6d914a6f28917fb2511482087f7" kind="function"><name>InterfacesDerivativeCalculator</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a07ef42a066169673dba75c2484a42b31" kind="function"><name>operator()</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a61133666d53a25eebae3e4a5b73ede8c" kind="function"><name>operator()</name></member>
@@ -1917,6 +1918,53 @@
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1acb7c68a46605128c30c91979d3245789" kind="function"><name>update_derivatives_at_interface</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1ab8445bc57b71dfab23c4a1462cb91818" kind="function"><name>get_signs</name></member>
     <member refid="classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad_1a0550ffe25e7768e2d33694cfb88eb8b1" kind="variable"><name>m_idx_ranges</name></member>
+  </compound>
+  <compound refid="classInterfacesExactDerivativeCalculator" kind="class"><name>InterfacesExactDerivativeCalculator</name>
+  </compound>
+  <compound refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8" kind="class"><name>InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;</name>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ab1f9a9082d6eb98a5a9c6920d34ba513" kind="typedef"><name>base_type</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1afbfa1399a7e3a4dbc59f42ce06ca2c63" kind="typedef"><name>stored_interface</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a526ac9e0b2457fbe0045255a5fc46e2b" kind="typedef"><name>patch1</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ac496ae3501ec1425012d781f4d6d8b85" kind="typedef"><name>patch2</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ab8e39bf807a7c6d0594a98632df55ea0" kind="typedef"><name>grid_perp1</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ac750dc44a12e0ce07464004be5d3baf9" kind="typedef"><name>grid_perp2</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1aaec6040aa545448b477ed6f9bf3cf973" kind="typedef"><name>grid_par1</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ad1e9c4a9efe5b1973a7ec08a12fbae4c" kind="typedef"><name>grid_par2</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1af04a5044fa1b02b9c9a3081e92cc08e9" kind="typedef"><name>deriv_perp1</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1aa4b77170432317df82de6e412ac748d6" kind="typedef"><name>deriv_perp2</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1abc682062ac83af9b8aa903e248d4d731" kind="typedef"><name>deriv_par1</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a8bfe874645432b66ad6f37f62134c3ed" kind="typedef"><name>deriv_par2</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a735d52a730bfda3a59f23f26291d62a3" kind="typedef"><name>grid_direction</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a795e682b8ca9b18d6b32107b584091fa" kind="typedef"><name>patch_first</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a9e7f858fb88b2c6cb82ebdcdf4861f8a" kind="typedef"><name>patch_direction</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a870af63118467ac23878728628f8e12c" kind="typedef"><name>deriv_perp_dim</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ad1dccfb00abfa266bf346bae14c87127" kind="typedef"><name>deriv_par_dim</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a8e0e3f86bb784cec5c4d19a13d59fb80" kind="typedef"><name>idx_deriv_perp</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ae6beeca0f33b11493484287831890667" kind="typedef"><name>idx_cross_deriv</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a2b062a7db6c82310951ce7498a7e5b64" kind="variable"><name>patch_order_matches_interfaces</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ab1aa666a3e89ed7c6d31ebfad43a22d8" kind="variable"><name>extremity_1</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ae197d880aae64cc25bfceb396b99e1b2" kind="variable"><name>extremity_2</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a4eb8fc7841cf6720f461e7daf18d6957" kind="variable"><name>n_inner_interfaces</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ab1b36b03bb596c16331ab9a093dc93ea" kind="variable"><name>m_matrix</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a0e08df1110b93721e7b86411a27f14fa" kind="variable"><name>m_vector</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a63a586c9d8ec31bf1de33743d70d8c84" kind="variable"><name>m_interface_derivatives</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1aa81b97967d2343b861aca805f0a926ba" kind="variable"><name>m_vector_par_signs</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1ade70e84f6d030c909bae8e002c966fa9" kind="variable"><name>m_deriv_coeffs_collect</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a0550ffe25e7768e2d33694cfb88eb8b1" kind="variable"><name>m_idx_ranges</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1afae7b659cb85658ec0ce6a3acf668680" kind="function"><name>InterfacesExactDerivativeCalculator</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a246ba8d1db200f74e3aae58ef09113fc" kind="function"><name>operator()</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a8aaa01389679035289ddbb0b8600cd53" kind="function"><name>operator()</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1affaa0a52fcb7078b377a0b0b4ccc2cff" kind="function"><name>set_matrix</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a8b1fa9389b8b1bac0f5e55c72d81883f" kind="function"><name>set_line_matrix</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a5ffb628fbf1a66fce91f274198da040e" kind="function"><name>set_sign_vector</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a48db8893c4e67df66fcae3fb726ee28e" kind="function"><name>set_sign_vector_line</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a2b994b1714b4c3bfca24d90725fe8f25" kind="function"><name>set_vector</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a38265f896981c7b39e78ae349d1c0947" kind="function"><name>set_line_vector</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1aa809f4b31b9c4610e0f504532eb99691" kind="function"><name>update_derivatives</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a96b6dd7bde006dcb5ef3f6aba4e5576a" kind="function"><name>update_derivatives_at_interface</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a585d89508e39cee69c1866bfaae00876" kind="function"><name>get_sign_derivs</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1a585d89508e39cee69c1866bfaae00876" kind="function"><name>get_sign_derivs</name></member>
+    <member refid="classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8_1af329f1d6e5f72b21214f30fb8b5e6277" kind="function"><name>to_sign</name></member>
   </compound>
   <compound refid="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis" kind="struct"><name>PolarBSplines::Impl::IntermediateBernsteinBasis</name>
   </compound>
@@ -3129,12 +3177,12 @@
   <compound refid="classQuadrature" kind="class"><name>Quadrature</name>
     <member refid="classQuadrature_1a50fd65331c1075f861f7d2c508896ee6" kind="typedef"><name>DataType</name></member>
     <member refid="classQuadrature_1a178091a3ed9953e170b667ec1924abf1" kind="typedef"><name>IdxQuadrature</name></member>
+    <member refid="classQuadrature_1abc2810f9a19355725720e4b61facc565" kind="typedef"><name>IdxStepQuadrature</name></member>
     <member refid="classQuadrature_1acdc6b760446cd7dadce2654b1f0c84c9" kind="typedef"><name>QuadConstField</name></member>
     <member refid="classQuadrature_1aac0c6b55aa4bb500c8a47150be748c2b" kind="variable"><name>m_coefficients</name></member>
     <member refid="classQuadrature_1a5f4d1f46d9cf60375848b5a276608b0d" kind="function"><name>Quadrature</name></member>
     <member refid="classQuadrature_1a664becaf9fa806724565d0ea116d68f3" kind="function"><name>operator()</name></member>
     <member refid="classQuadrature_1a235f2529cea72a400992dd3a907b9560" kind="function"><name>operator()</name></member>
-    <member refid="classQuadrature_1a740510149e5bea8f8e4b4e0a9dd9620e" kind="function"><name>to_discrete_element</name></member>
   </compound>
   <compound refid="structR" kind="struct"><name>R</name>
     <member refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kind="typedef"><name>Dual</name></member>
@@ -5021,6 +5069,8 @@
     <member refid="interface__derivative__coefficients__collection_8hpp_1ac800e91282df73a8c948f498a1a3a4a8" kind="function"><name>InterfaceDerivCoeffsCollection</name></member>
   </compound>
   <compound refid="interfaces__derivative__calculator_8hpp" kind="file"><name>interfaces_derivative_calculator.hpp</name>
+  </compound>
+  <compound refid="interfaces__exact__derivative__calculator_8hpp" kind="file"><name>interfaces_exact_derivative_calculator.hpp</name>
   </compound>
   <compound refid="constant__extrapolation__rules__onion_8hpp" kind="file"><name>constant_extrapolation_rules_onion.hpp</name>
   </compound>

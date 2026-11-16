@@ -18,7 +18,7 @@ _Abstract class to hold the interface derivative coefficient collection and the 
 
 
 
-Inherited by the following classes: [InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md)
+Inherited by the following classes: [InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md),  [InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md)
 
 
 
@@ -139,6 +139,11 @@ Inherited by the following classes: [InterfacesDerivativeCalculator&lt; Connecti
 |  void | [**set\_slice\_indexes**](#function-set_slice_indexes) (int & value\_idx\_to\_slice, Idx&lt; [**grid\_par1**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-grid_par1)&lt; I &gt; &gt; & idx\_to\_slice\_1, Idx&lt; [**grid\_par2**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-grid_par2)&lt; I &gt; &gt; & idx\_to\_slice\_2) <br>_Get the indices on Patch1 and Patch2 of the given interface. The index on Patch1 corresponds to the value given in input (if the interface is well oriented, otherwise it is Patch2). The index on Patch2 is the equivalent index of the one on Patch1. It also updates the value given in input with the value of the index on Patch2 for the next interface (if the next interface is well oriented, otherwise it is Patch1)._  |
 
 
+## Protected Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  int | [**to\_sign**](#function-to_sign) (bool agree) <br>_Transform a boolean into a integer. If true, the sign is positive. If false, the sign is negative._  |
 
 
 ## Detailed Description
@@ -818,6 +823,24 @@ Example for well oriented interfaces:
 
 
         
+
+<hr>
+## Protected Static Functions Documentation
+
+
+
+
+### function to\_sign 
+
+_Transform a boolean into a integer. If true, the sign is positive. If false, the sign is negative._ 
+```C++
+static inline int DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::to_sign (
+    bool agree
+) 
+```
+
+
+
 
 <hr>
 

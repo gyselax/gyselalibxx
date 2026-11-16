@@ -312,6 +312,11 @@ protected:
         Extremity extremity_test = is_on_interface ? Extremity::FRONT : Extremity::BACK;
         return (extremity == extremity_test) ? idx_range_slice.front() : idx_range_slice.back();
     }
+
+    static constexpr int to_sign(bool agree)
+    {
+        return agree - !agree;
+    }
 };
 ```
 

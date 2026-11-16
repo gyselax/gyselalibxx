@@ -71,17 +71,17 @@ private:
     using deriv_par2 = typename base_type::template deriv_par2<I>;
 
 public:
-    using patch_first = typename base_type::patch_first;
+    using typename base_type::patch_first;
 
     using grid_direction = Grid1D;
 
-    using patch_direction = typename base_type::patch_direction;
+    using typename base_type::patch_direction;
 
-    using deriv_perp_dim = typename base_type::deriv_perp_dim;
-    using deriv_par_dim = typename base_type::deriv_par_dim;
+    using typename base_type::deriv_perp_dim;
+    using typename base_type::deriv_par_dim;
 
-    using idx_deriv_perp = typename base_type::idx_deriv_perp;
-    using idx_cross_deriv = typename base_type::idx_cross_deriv;
+    using typename base_type::idx_deriv_perp;
+    using typename base_type::idx_cross_deriv;
 
 private:
     using base_type::m_idx_ranges;
@@ -236,8 +236,8 @@ private:
                                        || ((base_type::template extremity_2<I> == Extremity::FRONT)
                                            && !are_same_direction_par);
 
-        constexpr int sign_1 = !change_sign_1 - change_sign_1;
-        constexpr int sign_2 = !change_sign_2 - change_sign_2;
+        constexpr int sign_1 = base_type::to_sign(!change_sign_1);
+        constexpr int sign_2 = base_type::to_sign(!change_sign_2);
         return std::array<const int, 2> {sign_1, sign_2};
     }
 };

@@ -297,6 +297,8 @@
 * [**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md)
 * [**InterfacesDerivativeCalculator**](classInterfacesDerivativeCalculator.md)
 * [**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md)
+* [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md)
+* [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md)
 * [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md)

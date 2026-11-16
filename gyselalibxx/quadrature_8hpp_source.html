@@ -624,6 +624,7 @@ class Quadrature
 
 private:
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
+    using IdxStepQuadrature = typename IdxRangeQuadrature::discrete_vector_type;
 
     using QuadConstField = ConstField&lt;DataType, IdxRangeQuadrature, MemorySpace&gt;;
 
@@ -692,10 +693,6 @@ public:
         static_assert(
                 Kokkos::SpaceAccessibility&lt;ExecutionSpace, MemorySpace&gt;::accessible,
                 "Execution space is not compatible with memory space where coefficients are found");
-        static_assert(
-                std::is_same_v&lt;ExecutionSpace, Kokkos::DefaultExecutionSpace&gt;,
-                "Kokkos::TeamPolicy only works with the default execution space. Please use "
-                "DefaultExecutionSpace to call this batched operator.");
         using ExpectedBatchDims = ddc::type_seq_remove_t&lt;
                 ddc::to_type_seq_t&lt;IdxRangeTotal&gt;,
                 ddc::to_type_seq_t&lt;IdxRangeQuadrature&gt;&gt;;
@@ -728,41 +725,25 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
         // Loop over batch dimensions
-        Kokkos::parallel_for(
-                Kokkos::TeamPolicy&lt;&gt;(exec_space, batch_idx_range.size(), Kokkos::AUTO),
-                KOKKOS_LAMBDA(const Kokkos::TeamPolicy&lt;&gt;::member_type&amp; team) {
-                    const int idx = team.league_rank();
-                    IdxBatch ib = to_discrete_element(idx, batch_idx_range);
-
+        ddc::parallel_for_each_team(
+                exec_space,
+                batch_idx_range,
+                KOKKOS_LAMBDA(
+                        ddc::TeamPolicyMember&lt;ExecutionSpace&gt; const&amp; team,
+                        IdxBatch const ib) {
                     // Sum over quadrature dimensions
                     ElementDataType teamSum(0);
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
                             [&amp;](int const&amp; thread_index, ElementDataType&amp; sum) {
-                                IdxQuadrature iq
-                                        = to_discrete_element(thread_index, quad_idx_range);
+                                IdxQuadrature iq = ddcHelper::
+                                        get_idx_from_linear_index(quad_idx_range, thread_index);
                                 IdxTotal it(ib, iq);
                                 sum += coeff_proxy(iq) * integrated_function(it);
                             },
                             teamSum);
                     result(ib) = teamSum;
                 });
-    }
-
-private:
-    template &lt;class HeadDim, class... Grid1D&gt;
-    KOKKOS_FUNCTION static Idx&lt;HeadDim, Grid1D...&gt; to_discrete_element(
-            int idx,
-            IdxRange&lt;HeadDim, Grid1D...&gt; idx_range)
-    {
-        IdxRange&lt;Grid1D...&gt; subidx_range(idx_range);
-        Idx&lt;HeadDim&gt; head_idx(ddc::select&lt;HeadDim&gt;(idx_range).front() + idx / subidx_range.size());
-        if constexpr (sizeof...(Grid1D) == 0) {
-            return head_idx;
-        } else {
-            Idx&lt;Grid1D...&gt; tail_idx = to_discrete_element(idx % subidx_range.size(), subidx_range);
-            return Idx&lt;HeadDim, Grid1D...&gt;(head_idx, tail_idx);
-        }
     }
 };
 

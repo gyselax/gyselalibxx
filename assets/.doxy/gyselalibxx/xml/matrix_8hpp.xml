@@ -69,9 +69,9 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -97,8 +97,10 @@
         <link refid="matrix__dense_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_pds_tridiag.hpp</label>
         <link refid="matrix__pds__tridiag_8hpp_source"/>
       </node>
@@ -106,7 +108,11 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_periodic_banded.hpp</label>
         <link refid="matrix__periodic__banded_8hpp_source"/>
       </node>
-      <node id="9">
+      <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_exact_derivative_calculator.hpp</label>
+        <link refid="interfaces__exact__derivative__calculator_8hpp_source"/>
+      </node>
+      <node id="10">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>

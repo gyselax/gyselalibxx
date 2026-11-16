@@ -598,8 +598,9 @@ the boundary cells.</p>
 <li><a href="#relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</a>: It documents the <code>InterfaceDerivCoeffs</code> operator.</li>
 <li><a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the <code>InterfaceDerivCoeffs</code> operator?</a>: It documents how to use the operator in the code.</li>
 <li><a href="#formulae">Formulae</a>: It details the formulae applies in the operator.</li>
-<li><a href="#relation-between-the-interface-derivatives-along-one-direction">Relation between the interface derivatives along one direction</a>: It documents the <code>InterfacesDerivativeCalculator</code> operator.</li>
-<li><a href="#how-to-use-the-interfacesderivativecalculator-operator">How to use the <code>InterfacesDerivativeCalculator</code> operator?</a>: It documents how to use the operator in the code.</li>
+<li><a href="#relation-between-the-interface-derivatives-along-one-direction">Relation between the interface derivatives along one direction</a>: It documents the <code>InterfacesDerivativeCalculator</code> and <code>InterfacesExactDerivativeCalculator</code> operators.</li>
+<li><a href="#how-to-use-the-interfacesderivativecalculator-operator">How to use the <code>InterfacesDerivativeCalculator</code> operator?</a>: It documents how to use <code>InterfacesDerivativeCalculator</code> in the code.</li>
+<li><a href="#how-to-use-the-interfacesexactderivativecalculator-operator">How to use the <code>InterfacesExactDerivativeCalculator</code> operator?</a>: It documents how to use <code>InterfacesExactDerivativeCalculator</code> in the code.</li>
 </ul>
 <h2 id="relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</h2>
 <p>We consider an interface between two patches.
@@ -687,7 +688,7 @@ the default template parameter can be used to avoid applying the treatment on in
 <li><code>deriv_coeffs.get_coeff_deriv_patch_2()</code> returns the coefficient <span class="arithmatex">\(a^i_{N^L,N^R}\)</span>;</li>
 <li><code>deriv_coeffs.get_approx_deriv(function_1, function_2)</code> returns the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>
  (or <span class="arithmatex">\(c^i_{N^L_{reduc},N^R_{reduc}}\)</span> for approximation).</li>
-<li><code>derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)</code> is similar to <code>derivatives_calculator.get_function_coefficients(function_1, function_2)</code> but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.</li>
+<li><code>derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)</code> is similar to <code>derivatives_calculator.get_function_coefficients(function_1, function_2)</code> but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface disagree.</li>
 </ul>
 <p>If we want to apply the exact formula, we need to sum these coefficients,</p>
 <pre><code class="language-cpp">double const coeff_deriv_left = deriv_coeffs.get_coeff_deriv_patch_1(); // coeff b
@@ -1115,7 +1116,7 @@ InterfaceDerivCoeffsCollection deriv_coeffs_collect (deriv_coeffs_1, deriv_coeff
 It solves the matrix system to get the solution vector <em>S</em>.
 It fills in the derivatives in the <code>functions_and_derivs</code> collection with the computed derivatives at the right place.</p>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> The derivatives in <code>functions_and_derivs</code> are overwritten during the last step.</p>
-<h4 id="a-2d-case-operator">A 2D case operator</h4>
+<h4 id="tutorial-on-a-2d-case-operator">Tutorial on a 2D case operator</h4>
 <p>This operator is implemented for 2D patches.
 For 2D local splines with Hermite boundary conditions, we need the first derivatives along the first dimension,
 first derivatives along the second dimension, and the cross-derivatives.</p>
@@ -1124,7 +1125,7 @@ first derivatives along the second dimension, and the cross-derivatives.</p>
 <p>This geometry is composed of 9 patches forming periodic strips in the <em>x</em> direction.
 We use additional interpolation points as closure condition for the equivalent global splines in
 the <em>y</em> direction (i.e. <code>ddc::BoundCond::GREVILLE</code>).</p>
-<p>So, we start by defining the <code>InterfacesDerivativeCalculator</code> matrices for each periodic directions
+<p>So, we start by defining the <code>InterfacesDerivativeCalculator</code> matrices for each periodic direction
 <span class="arithmatex">\(\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}\)</span> (<code>GridX1</code>, <code>GridX4</code> and <code>GridX7</code>).</p>
 <pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridX1, 
         ddc::TypeSeq&lt;Patch1, Patch2, Patch3&gt;,
@@ -1137,7 +1138,7 @@ InterfacesDerivativeCalculator&lt;Connectivity, GridX4,
         deriv_calculator_456(idx_ranges_456, deriv_coeffs_collect_456);
 // ...
 </code></pre>
-<p>We also define <code>InterfacesDerivativeCalculator</code> matrices for each non-periodic directions
+<p>We also define <code>InterfacesDerivativeCalculator</code> matrices for each non-periodic direction
 <span class="arithmatex">\(\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}\)</span> (<code>GridY1</code>, <code>GridY2</code> and <code>GridY3</code>).</p>
 <pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridY1, 
         ddc::TypeSeq&lt;Patch1, Patch4, Patch7&gt;,
@@ -1181,6 +1182,71 @@ all the data to build local spline representations is available.</p>
 The cross-derivatives are computed from the first derivatives.
 So, <code>operator()</code> has to be called on the first derivatives before being called on the cross-derivatives.
 It is recommended to compute the first derivatives on <em>every</em> group of patches before computing the cross-derivatives.</p>
+<h3 id="how-to-use-the-interfacesexactderivativecalculator-operator">How to use the InterfacesExactDerivativeCalculator operator?</h3>
+<p><code>InterfacesExactDerivativeCalculator</code> computes the interface derivatives using the exact formulation.</p>
+<p>As for <code>InterfacesDerivativeCalculator</code>, we start with instantiating a <code>InterfaceDerivCoeffs</code>
+(see <a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the InterfaceDerivCoeffs operator?</a>).
+We store a constant reference of all the derivative calculator in a <code>InterfaceDerivCoeffsCollection</code>.</p>
+<pre><code class="language-cpp">InterfaceDerivCoeffs&lt;Interface_1&gt; derivative_calculator_1(...);
+InterfaceDerivCoeffs&lt;Interface_2&gt; derivative_calculator_2(...);
+...
+
+InterfaceDerivCoeffsCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
+</code></pre>
+<p>We can then instantiate <code>InterfacesExactDerivativeCalculator</code> with the tuple of derivative calculators.</p>
+<pre><code class="language-cpp">InterfacesExactDerivativeCalculator&lt;
+        Connectivity,                               // MultipatchConnectivity class
+        Grid1D,                                     // the given direction.
+        ddc::TypeSeq&lt;Patch1, Patch2, ...&gt;   // list of patches containing all the needed ones
+        BoundCondGlobalLower,                       // boundary condition for the equivalent global spline
+        BoundCondGlobalUpper,                       // boundary condition for the equivalent global spline
+        InterfaceDerivCoeffsCollection&lt;Interface_1, Interface_2, ...&gt;&gt;
+        matrix(idx_ranges, derivative_calculators);
+</code></pre>
+<p>with <code>idx_ranges</code> a <code>MultipatchType&lt;IdxRangeonPatch, Patch1, Patch2, ...&gt;</code> object.</p>
+<p>During the instantiation, <code>InterfacesExactDerivativeCalculator</code> will allocate memory for the matrix <span class="arithmatex">\((\mathbb{I} - M)\)</span>,
+for the right hand side vector <em>C</em> and for the solution vector <em>S</em>.
+It also computes the matrix and stores it.</p>
+<p>During the call to <code>operator()</code>, it computes the right hand side vector <em>C</em>,
+solves the matrix system to get the solution vector <em>S</em>,
+and fills in the derivatives in the <code>functions_and_derivs</code> collection with the computed derivatives at the right place.</p>
+<h4 id="tutorial-on-a-2d-case-operator_1">Tutorial on a 2D case operator</h4>
+<p>Using the same geometry as in the 2D case of the previous section,
+we define the <code>InterfacesExactDerivativeCalculator</code> matrices for each periodic direction
+<span class="arithmatex">\(\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}\)</span> (<code>GridX1</code>, <code>GridX4</code> and <code>GridX7</code>).</p>
+<pre><code class="language-cpp">InterfacesExactDerivativeCalculator&lt;Connectivity, GridX1, 
+        ddc::TypeSeq&lt;Patch1, Patch2, Patch3&gt;, 
+        ddc::BoundCond::PERIODIC, 
+        ddc::BoundCond::PERIODIC,
+        InterfaceDerivCoeffsCollection&lt;Interface_1_2, Interface_2_3, Interface_3_1&gt;&gt;
+        matrix_123(idx_ranges_123, derivative_calculators_123);
+
+InterfacesExactDerivativeCalculator&lt;Connectivity, GridX4, 
+        ddc::TypeSeq&lt;Patch4, Patch5, Patch6&gt;,
+        ddc::BoundCond::PERIODIC, 
+        ddc::BoundCond::PERIODIC,
+        InterfaceDerivCoeffsCollection&lt;Interface_4_5, Interface_5_6, Interface_6_4&gt;&gt;
+        matrix_456(idx_ranges_456, derivative_calculators_456);
+// ...
+</code></pre>
+<p>We also define <code>InterfacesExactDerivativeCalculator</code> matrices for each non-periodic direction
+<span class="arithmatex">\(\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}\)</span> (<code>GridY1</code>, <code>GridY2</code> and <code>GridY3</code>).</p>
+<pre><code class="language-cpp">InterfacesExactDerivativeCalculator&lt;Connectivity, GridY1, 
+        ddc::TypeSeq&lt;Patch1, Patch4, Patch7&gt;,
+        ddc::BoundCond::GREVILLE, 
+        ddc::BoundCond::GREVILLE,
+        InterfaceDerivCoeffsCollection&lt;Interface_1_4, Interface_4_7&gt;&gt;
+        matrix_147(idx_ranges_147, derivative_calculators_147);
+
+InterfacesExactDerivativeCalculator&lt;Connectivity, GridY2, 
+        ddc::TypeSeq&lt;Patch2, Patch5, Patch8&gt;,
+        ddc::BoundCond::GREVILLE, 
+        ddc::BoundCond::GREVILLE,
+        InterfaceDerivCoeffsCollection&lt;Interface_2_5, Interface_5_8&gt;&gt;
+        matrix_258(idx_ranges_258, derivative_calculators_258);
+// ...
+</code></pre>
+<p>The call to the operators is identical as for <code>InterfacesDerivativeCalculator</code>.</p>
 <h2 id="references">References</h2>
 <div class="footnote">
 <hr>

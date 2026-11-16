@@ -275,6 +275,7 @@ Here is a list of all files with brief descriptions:
             * **file** [**interface\_derivative\_coefficients.hpp**](interface__derivative__coefficients_8hpp.md)     
             * **file** [**interface\_derivative\_coefficients\_collection.hpp**](interface__derivative__coefficients__collection_8hpp.md)     
             * **file** [**interfaces\_derivative\_calculator.hpp**](interfaces__derivative__calculator_8hpp.md)     
+            * **file** [**interfaces\_exact\_derivative\_calculator.hpp**](interfaces__exact__derivative__calculator_8hpp.md)     
         * **dir** [**spline**](dir_729d943c83b6b5573a69e28a4db4673a.md)     
             * **file** [**constant\_extrapolation\_rules\_onion.hpp**](constant__extrapolation__rules__onion_8hpp.md)     
             * **file** [**multipatch\_spline\_evaluator\_2d.hpp**](multipatch__spline__evaluator__2d_8hpp.md)     

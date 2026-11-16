@@ -35,13 +35,13 @@ Inherits the following classes: [DerivativeCalculatorCommon&lt; Connectivity, Gr
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename [**base\_type::deriv\_par\_dim**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-deriv_par_dim) | [**deriv\_par\_dim**](#typedef-deriv_par_dim)  <br>_Derivative dimension of the direction patch parallel to the mesh line._  |
-| typedef typename [**base\_type::deriv\_perp\_dim**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-deriv_perp_dim) | [**deriv\_perp\_dim**](#typedef-deriv_perp_dim)  <br>_Derivative dimension of the direction patch perpendicular to the mesh line._  |
+| typedef ddc::Deriv&lt; std::conditional\_t&lt; std::is\_same\_v&lt; typename patch\_direction::Grid1, [**grid\_direction**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-grid_direction) &gt;, typename patch\_direction::Dim2, typename patch\_direction::Dim1 &gt; &gt; | [**deriv\_par\_dim**](#typedef-deriv_par_dim)  <br>_Derivative dimension of the direction patch parallel to the mesh line._  |
+| typedef ddc::Deriv&lt; typename Grid1D::continuous\_dimension\_type &gt; | [**deriv\_perp\_dim**](#typedef-deriv_perp_dim)  <br>_Derivative dimension of the direction patch perpendicular to the mesh line._  |
 | typedef Grid1D | [**grid\_direction**](#typedef-grid_direction)  <br>_Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed._  |
-| typedef typename [**base\_type::idx\_cross\_deriv**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-idx_cross_deriv) | [**idx\_cross\_deriv**](#typedef-idx_cross_deriv)  <br>_Index on the two derivative dimensions of_ [_**patch\_direction**_](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-patch_direction) _._ |
-| typedef typename [**base\_type::idx\_deriv\_perp**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-idx_deriv_perp) | [**idx\_deriv\_perp**](#typedef-idx_deriv_perp)  <br>_Index on the derivative dimension perpendicular to the mesh line._  |
-| typedef typename [**base\_type::patch\_direction**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-patch_direction) | [**patch\_direction**](#typedef-patch_direction)  <br>[_**Patch**_](structPatch.md) _of the given direction grid._ |
-| typedef typename [**base\_type::patch\_first**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#typedef-patch_first) | [**patch\_first**](#typedef-patch_first)  <br>_First patch of the collection of patches in the direction of the given Grid1D._  |
+| typedef Idx&lt; [**deriv\_perp\_dim**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-deriv_perp_dim), [**deriv\_par\_dim**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-deriv_par_dim) &gt; | [**idx\_cross\_deriv**](#typedef-idx_cross_deriv)  <br>_Index on the two derivative dimensions of_ [_**patch\_direction**_](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-patch_direction) _._ |
+| typedef Idx&lt; [**deriv\_perp\_dim**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-deriv_perp_dim) &gt; | [**idx\_deriv\_perp**](#typedef-idx_deriv_perp)  <br>_Index on the derivative dimension perpendicular to the mesh line._  |
+| typedef find\_patch\_t&lt; Grid1D, all\_patches &gt; | [**patch\_direction**](#typedef-patch_direction)  <br>[_**Patch**_](structPatch.md) _of the given direction grid._ |
+| typedef PatchFirst | [**patch\_first**](#typedef-patch_first)  <br>_First patch of the collection of patches in the direction of the given Grid1D._  |
 
 
 ## Public Types inherited from DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >
@@ -217,6 +217,13 @@ See [DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patch
 
 
 
+## Protected Static Functions inherited from DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >
+
+See [DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md)
+
+| Type | Name |
+| ---: | :--- |
+|  int | [**to\_sign**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md#function-to_sign) (bool agree) <br>_Transform a boolean into a integer. If true, the sign is positive. If false, the sign is negative._  |
 
 
 ## Detailed Description
@@ -225,7 +232,7 @@ See [DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patch
 This operator is implemented for conforming equivalent global meshes.
 
 
-When we call the operator .solve\_deriv() or .solve\_cross\_deriv(), the operator loops over the interface to compute the vector C\_trunc to determine all the interface derivatives and update the [**DerivField**](classDerivField.md) given in input.
+When we call operator(), the operator loops over the interface to compute the vector C\_trunc to determine all the interface derivatives and update the [**DerivField**](classDerivField.md) given in input.
 
 
 The vector C\_trunc is given by the coefficients (see README), 
@@ -264,7 +271,10 @@ with
 
 _Derivative dimension of the direction patch parallel to the mesh line._ 
 ```C++
-using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::deriv_par_dim =  typename base_type::deriv_par_dim;
+using DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::deriv_par_dim =  ddc::Deriv<std::conditional_t<
+            std::is_same_v<typename patch_direction::Grid1, grid_direction>,
+            typename patch_direction::Dim2,
+            typename patch_direction::Dim1>>;
 ```
 
 
@@ -278,7 +288,7 @@ using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patche
 
 _Derivative dimension of the direction patch perpendicular to the mesh line._ 
 ```C++
-using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::deriv_perp_dim =  typename base_type::deriv_perp_dim;
+using DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::deriv_perp_dim =  ddc::Deriv<typename Grid1D::continuous_dimension_type>;
 ```
 
 
@@ -306,7 +316,7 @@ using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patche
 
 _Index on the two derivative dimensions of_ [_**patch\_direction**_](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md#typedef-patch_direction) _._
 ```C++
-using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::idx_cross_deriv =  typename base_type::idx_cross_deriv;
+using DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::idx_cross_deriv =  Idx<deriv_perp_dim, deriv_par_dim>;
 ```
 
 
@@ -320,7 +330,7 @@ using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patche
 
 _Index on the derivative dimension perpendicular to the mesh line._ 
 ```C++
-using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::idx_deriv_perp =  typename base_type::idx_deriv_perp;
+using DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::idx_deriv_perp =  Idx<deriv_perp_dim>;
 ```
 
 
@@ -334,7 +344,7 @@ using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patche
 
 [_**Patch**_](structPatch.md) _of the given direction grid._
 ```C++
-using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::patch_direction =  typename base_type::patch_direction;
+using DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::patch_direction =  find_patch_t<Grid1D, all_patches>;
 ```
 
 
@@ -348,7 +358,7 @@ using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patche
 
 _First patch of the collection of patches in the direction of the given Grid1D._ 
 ```C++
-using InterfacesDerivativeCalculator< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::patch_first =  typename base_type::patch_first;
+using DerivativeCalculatorCommon< Connectivity, Grid1D, ddc::TypeSeq< Patches... >, DerivCoeffCollection >::patch_first =  PatchFirst;
 ```
 
 
