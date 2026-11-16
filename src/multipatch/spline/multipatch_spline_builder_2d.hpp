@@ -110,9 +110,6 @@ class MultipatchSplineBuilder2D<
 
     template <class P>
     using DerivFieldOnPatch = DerivField<
-            // std::remove_const<typename DerivConstFieldOnPatch<P>::element_type>,
-            // typename DerivConstFieldOnPatch<P>::idx_range_type,
-            // typename DerivConstFieldOnPatch<P>::memory_space>;
             double,
             IdxRange<
                     ddc::Deriv<typename P::Dim1>,
@@ -172,6 +169,5 @@ private:
     void set_interface_derivatives(MultipatchDerivField functions_and_derivs)
     {
         m_deriv_calculator_collect.template apply<IOp>(functions_and_derivs);
-        // std::get<IOp>(m_deriv_calculator_collect)(std::get<IOp>(m_indices), functions_and_derivs);
     };
 };
