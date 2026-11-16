@@ -99,7 +99,6 @@ void test_patch_index(
             coords.extent(0),
             KOKKOS_LAMBDA(int const i, std::size_t& attempt) {
                 int patch_idx = patch_locator(coords(i));
-                std::cout << patches(i) << "  " << patch_idx << "  " << coords(i) << std::endl;
                 if (patch_idx != patches(i)) {
                     attempt++;
                 }

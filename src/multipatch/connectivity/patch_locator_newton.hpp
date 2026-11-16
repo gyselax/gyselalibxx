@@ -346,7 +346,7 @@ private:
     KOKKOS_INLINE_FUNCTION bool is_in_patch(CoordArg& logical_coord, CoordRes const& physical_coord)
             const
     {
-        // Quick check to elimate patch if it is not inside the smallest box containing the patch.
+        // Quick check to eliminate patch if it is not inside the smallest box containing the patch.
         if (!is_in_box<P>(physical_coord)) {
             return false;
         }
