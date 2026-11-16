@@ -133,6 +133,31 @@ void test_transformation_inversion(
     EXPECT_EQ(failed_attempt, 0);
 }
 
+template <class PatchLocator, class Mapping>
+void test_transformation_inversion_with_init(
+        PatchLocator const& patch_locator,
+        Kokkos::View<Coord<R, Theta>*> coords_log,
+        Mapping const& mapping)
+{
+    std::size_t failed_attempt = 0;
+    Kokkos::parallel_reduce(
+            coords_log.extent(0),
+            KOKKOS_LAMBDA(int const i, std::size_t& attempt) {
+                Coord<X, Y> coord = mapping(coords_log(i));
+                Coord<R, Theta> coord_log = coords_log(i) + Coord<R, Theta>(0.3, -0.2);
+                int patch_idx = patch_locator.template find<Patch1>(coord_log, coord);
+                double err_r = ddc::get<R>(coord_log - coords_log(i));
+                double delta_theta = Kokkos::
+                        fmod(Kokkos::fabs(ddc::get<Theta>(coord_log - coords_log(i))), 2 * M_PI);
+                double err_theta = Kokkos::fmin(delta_theta, 2 * M_PI - delta_theta);
+                if ((patch_idx >= 0) && ((err_r > 1e-12) || (err_theta > 1e-11))) {
+                    attempt++;
+                }
+            },
+            failed_attempt);
+    EXPECT_EQ(failed_attempt, 0);
+}
+
 } // namespace
 
 
@@ -332,4 +357,32 @@ TEST_F(PatchLocatorNewton2PatchesTest, DeviceCzarnyInversionTest)
     Kokkos::deep_copy(coords_log, coords_log_host);
 
     test_transformation_inversion(patch_locator, coords_log, mapping_1);
+}
+
+TEST_F(PatchLocatorNewton2PatchesTest, DeviceCzarnyInversionWithInitTest)
+{
+    using PatchLocator = PatchLocatorNewton<MPCzarnyMapping>;
+
+    CzarnyOnPatch<Patch1> mapping_1(0.3, 1.4);
+    CzarnyOnPatch<Patch2> mapping_2(0.3, 1.4);
+    MPCzarnyMapping mappings(mapping_1, mapping_2);
+
+    PatchLocator patch_locator(mappings);
+
+    int constexpr n_elements = 7;
+    Kokkos::View<Coord<R, Theta>*> coords_log("coords_logical", n_elements);
+    Kokkos::View<Coord<R, Theta>*, Kokkos::DefaultHostExecutionSpace>
+            coords_log_host("coords_logical_host", n_elements);
+
+    coords_log_host(0) = Coord<R, Theta>(0.2, 0);
+    coords_log_host(1) = Coord<R, Theta>(1.0, M_PI);
+    coords_log_host(2) = Coord<R, Theta>(1.5, 2 * M_PI);
+    coords_log_host(3) = Coord<R, Theta>(0, 0.5 * M_PI);
+    coords_log_host(4) = Coord<R, Theta>(0.99, M_PI / 4);
+    coords_log_host(5) = Coord<R, Theta>(1.0001, M_PI / 2);
+    coords_log_host(6) = Coord<R, Theta>(1.49, M_PI * 3 / 2);
+
+    Kokkos::deep_copy(coords_log, coords_log_host);
+
+    test_transformation_inversion_with_init(patch_locator, coords_log, mapping_1);
 }
