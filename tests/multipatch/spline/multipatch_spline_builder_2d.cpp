@@ -591,27 +591,64 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
 
     // Collect the derivative calculators.
     // TODO: how to avoid copying several times the same operator? -> DerivativeCalculatorCollection?
+    // DerivativeCalculatorCollection deriv_calculator_collect(
+    //         std::
+    //                 tie(deriv_calculator_123,
+    //                     deriv_calculator_456,
+    //                     deriv_calculator_789,
+    //                     deriv_calculator_147,
+    //                     deriv_calculator_258,
+    //                     deriv_calculator_369,
+    //                     deriv_calculator_123,
+    //                     deriv_calculator_258,
+    //                     deriv_calculator_369),
+    //         std::
+    //                 tuple(Idx<ddc::Deriv<X<1>>>(1),
+    //                       Idx<ddc::Deriv<X<4>>>(1),
+    //                       Idx<ddc::Deriv<X<7>>>(1),
+    //                       Idx<ddc::Deriv<Y<1>>>(1),
+    //                       Idx<ddc::Deriv<Y<2>>>(1),
+    //                       Idx<ddc::Deriv<Y<3>>>(1),
+    //                       Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1, 1),
+    //                       Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>(1, 1),
+    //                       Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>(1, 1)));
+
+    // DerivativeCalculatorCollection deriv_calculator_collect = make_derivative_calculator_collection<
+    //         DirectionDeriv<GridX<1>, X<1>>,
+    //         DirectionDeriv<GridX<4>, X<4>>,
+    //         DirectionDeriv<GridX<7>, X<7>>,
+    //         DirectionDeriv<GridY<1>, Y<1>>,
+    //         DirectionDeriv<GridY<2>, Y<2>>,
+    //         DirectionDeriv<GridY<3>, Y<3>>,
+    //         DirectionDeriv<GridY<1>, X<1>, Y<1>>,
+    //         DirectionDeriv<GridY<2>, X<2>, Y<2>>,
+    //         DirectionDeriv<GridY<3>, X<3>, Y<3>>>(
+    //         deriv_calculator_123,
+    //         deriv_calculator_456,
+    //         deriv_calculator_789,
+    //         deriv_calculator_147,
+    //         deriv_calculator_258,
+    //         deriv_calculator_369);
+
+    using DerivsToCompute = DerivList<
+            DerivPerp<GridX<1>>,
+            DerivPerp<GridX<4>>,
+            DerivPerp<GridX<7>>,
+            DerivPerp<GridY<1>>,
+            DerivPerp<GridY<2>>,
+            DerivPerp<GridY<3>>,
+            CrossDeriv<GridY<1>>,
+            CrossDeriv<GridY<2>>,
+            CrossDeriv<GridY<3>>>;
+
     DerivativeCalculatorCollection deriv_calculator_collect(
-            std::
-                    tie(deriv_calculator_123,
-                        deriv_calculator_456,
-                        deriv_calculator_789,
-                        deriv_calculator_147,
-                        deriv_calculator_258,
-                        deriv_calculator_369,
-                        deriv_calculator_123,
-                        deriv_calculator_258,
-                        deriv_calculator_369),
-            std::
-                    tuple(Idx<ddc::Deriv<X<1>>>(1),
-                          Idx<ddc::Deriv<X<4>>>(1),
-                          Idx<ddc::Deriv<X<7>>>(1),
-                          Idx<ddc::Deriv<Y<1>>>(1),
-                          Idx<ddc::Deriv<Y<2>>>(1),
-                          Idx<ddc::Deriv<Y<3>>>(1),
-                          Idx<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>(1, 1),
-                          Idx<ddc::Deriv<X<2>>, ddc::Deriv<Y<2>>>(1, 1),
-                          Idx<ddc::Deriv<X<3>>, ddc::Deriv<Y<3>>>(1, 1)));
+            DerivsToCompute {},
+            deriv_calculator_123,
+            deriv_calculator_456,
+            deriv_calculator_789,
+            deriv_calculator_147,
+            deriv_calculator_258,
+            deriv_calculator_369);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<

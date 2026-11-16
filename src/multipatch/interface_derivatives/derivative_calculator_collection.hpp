@@ -6,6 +6,27 @@
 
 #include "derivative_calculator_common.hpp"
 
+template <class Grid1D>
+struct DerivPerp
+{
+    using grid_direction = Grid1D;
+    template <class Calculator>
+    using idx_deriv = typename Calculator::idx_deriv_perp;
+};
+
+template <class Grid1D>
+struct CrossDeriv
+{
+    using grid_direction = Grid1D;
+    template <class Calculator>
+    using idx_deriv = typename Calculator::idx_cross_deriv;
+};
+
+template <class... DirectionDerivs>
+struct DerivList
+{
+};
+
 
 template <class T>
 inline constexpr bool enable_derivative_calculator_collection = false;
@@ -15,82 +36,83 @@ inline constexpr bool is_derivative_calculator_collection_v
         = enable_derivative_calculator_collection<std::remove_const_t<std::remove_reference_t<T>>>;
 
 
-template <class DerivativeCalculatorSeq, class IndiceSeq>
+template <class DerivListType, class... DerivativeCalculator>
 class DerivativeCalculatorCollection;
 
-template <class... DerivativeCalculators, class... Indices>
-class DerivativeCalculatorCollection<
-        ddc::TypeSeq<DerivativeCalculators...>,
-        ddc::TypeSeq<Indices...>>
+template <class... DirectionDerivs, class... DerivativeCalculators>
+class DerivativeCalculatorCollection<DerivList<DirectionDerivs...>, DerivativeCalculators...>
 {
     static_assert(
-            sizeof...(DerivativeCalculators) == sizeof...(Indices),
-            "Please provide as many indices as derivative calculators.");
+            sizeof...(DerivativeCalculators) <= sizeof...(DirectionDerivs),
+            "Please provide enough indices for the derivative calculators.");
 
-
-public:
-    template <std::size_t IOp>
-    using derivative_calculator_type
-            = ddc::type_seq_element_t<IOp, ddc::TypeSeq<DerivativeCalculators...>>;
-
-    template <std::size_t IOp>
-    using index_type = ddc::type_seq_element_t<IOp, ddc::TypeSeq<Indices...>>;
-
-    static constexpr std::size_t size = sizeof...(Indices);
-
-private:
     static_assert(
             ((is_deriv_calculator_v<DerivativeCalculators>)&&...),
             "Please provide derivative calculators.");
 
-    static_assert((ddc::is_discrete_element_v<Indices> && ...), "Please provide Idx types.");
+    template <class Grid1D>
+    static constexpr std::size_t number_of_calculators_on
+            = (std::size_t(0) + ...
+               + std::is_same_v<Grid1D, typename DerivativeCalculators::grid_direction>);
+    static_assert(
+            ((number_of_calculators_on<typename DerivativeCalculators::grid_direction> == 1)
+             && ...),
+            "Two derivative calculators share the same grid_direction.");
 
-    using IndexSeq = ddc::TypeSeq<Indices...>;
+    using grid_calculator_seq = ddc::TypeSeq<typename DerivativeCalculators::grid_direction...>;
 
-    template <std::size_t IOp>
-    struct index_matches_calculator
-    {
-        using patch_test = typename derivative_calculator_type<IOp>::patch_direction;
-        using idx_admissible_seq = ddc::TypeSeq<
-                typename derivative_calculator_type<IOp>::idx_deriv_perp,
-                Idx<ddc::Deriv<typename patch_test::Dim1>, ddc::Deriv<typename patch_test::Dim2>>,
-                Idx<ddc::Deriv<typename patch_test::Dim2>, ddc::Deriv<typename patch_test::Dim1>>>;
-
-        static constexpr bool value
-                = (ddc::type_seq_contains_v<ddc::TypeSeq<index_type<IOp>>, idx_admissible_seq>);
-    };
 
     static_assert(
-            (index_matches_calculator<ddc::type_seq_rank_v<Indices, IndexSeq>>::value && ...),
-            "One of the indice types do not match with the operator.");
+            (ddc::type_seq_contains_v<
+                     ddc::TypeSeq<typename DirectionDerivs::grid_direction>,
+                     grid_calculator_seq> && ...),
+            "No derivative calculator found for one of the DirectionDeriv grid_direction.");
+
+
+public:
+    using direction_deriv_list = DerivList<DirectionDerivs...>;
+
+    using direction_deriv_seq = ddc::TypeSeq<DirectionDerivs...>;
+    static constexpr std::size_t size = sizeof...(DirectionDerivs);
+
+    using derivative_calculator_seq = ddc::TypeSeq<DerivativeCalculators...>;
+
+    template <std::size_t IOp>
+    using grid_direction =
+            typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::grid_direction;
+
+    template <std::size_t IOp>
+    using derivative_calculator_type = ddc::type_seq_element_t<
+            ddc::type_seq_rank_v<grid_direction<IOp>, grid_calculator_seq>,
+            derivative_calculator_seq>;
+
+    template <std::size_t IOp>
+    using index_type = typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::
+            template idx_deriv<derivative_calculator_type<IOp>>;
 
 private:
     std::tuple<DerivativeCalculators&...> m_deriv_calculator_collection;
 
-    std::tuple<Indices...> m_indice_collection;
-
 public:
     DerivativeCalculatorCollection(
-            std::tuple<DerivativeCalculators&...> deriv_calculators,
-            std::tuple<Indices...> indices)
-        : m_deriv_calculator_collection(deriv_calculators)
-        , m_indice_collection(indices)
+            DerivList<DirectionDerivs...>,
+            DerivativeCalculators&... deriv_calculators)
+        : m_deriv_calculator_collection(deriv_calculators...)
     {
     }
 
     template <std::size_t IOp>
-    index_type<IOp>& get_index() const
+    index_type<IOp> get_index() const
     {
         static_assert((IOp < size), "Index outside of the range.");
-        return std::get<IOp>(m_indice_collection);
+        return order_one<index_type<IOp>>::value;
     }
-
 
     template <std::size_t IOp>
     derivative_calculator_type<IOp>& get()
     {
         static_assert((IOp < size), "Index outside of the range.");
-        return std::get<IOp>(m_deriv_calculator_collection);
+        return std::get<derivative_calculator_type<IOp>&>(m_deriv_calculator_collection);
     }
 
     template <std::size_t IOp, class FieldType>
@@ -98,12 +120,37 @@ public:
     {
         this->get<IOp>()(this->get_index<IOp>(), field);
     }
+
+private:
+    template <class IdxDeriv>
+    struct order_one;
+
+    template <class... DerivDims>
+    struct order_one<Idx<DerivDims...>>
+    {
+        static constexpr Idx<DerivDims...> value = Idx<DerivDims...>(Idx<DerivDims>(1)...);
+    };
 };
 
+template <class... DirectionDerivs, class... DerivativeCalculators>
+DerivativeCalculatorCollection(DerivList<DirectionDerivs...>, DerivativeCalculators&...)
+        -> DerivativeCalculatorCollection<DerivList<DirectionDerivs...>, DerivativeCalculators...>;
 
-// To help the template deduction.
-template <class... DerivativeCalculators, class... Indices>
-DerivativeCalculatorCollection(std::tuple<DerivativeCalculators&...>, std::tuple<Indices...>)
-        -> DerivativeCalculatorCollection<
-                ddc::TypeSeq<DerivativeCalculators...>,
-                ddc::TypeSeq<Indices...>>;
+
+// /**
+//  * @brief Helper to build a DerivativeCalculatorCollection.
+//  * The DirectionDerivs are given explicitly, the DerivativeCalculators are deduced.
+//  * (CTAD cannot be used as it does not work with partially specified template arguments.)
+//  *
+//  * Usage: make_derivative_calculator_collection<DirectionDeriv<...>, ...>(calc_1, calc_2, ...);
+//  */
+// template <class... DirectionDerivs, class... DerivativeCalculators>
+// DerivativeCalculatorCollection<
+//         ddc::TypeSeq<DirectionDerivs...>,
+//         ddc::TypeSeq<DerivativeCalculators...>>
+// make_derivative_calculator_collection(DerivativeCalculators&... deriv_calculators)
+// {
+//     return DerivativeCalculatorCollection<
+//             ddc::TypeSeq<DirectionDerivs...>,
+//             ddc::TypeSeq<DerivativeCalculators...>>(std::tie(deriv_calculators...));
+// }

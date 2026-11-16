@@ -121,6 +121,17 @@ protected:
             Grid1D,
             interface_sorted_collection>;
 
+    // template <class Grid1DSeq>
+    // struct PatchSeq;
+
+    // template <class... Grids>
+    // struct PatchSeq<ddc::TypeSeq<Grids...>>
+    // {
+    //     using type = ddc::TypeSeq<find_patch_t<Grids, all_patches>...>;
+    // };
+
+    // using patch_seq_type = PatchSeq<Grid1DSeq>::type;
+
     static_assert(
             ddc::type_seq_size_v<Grid1DSeq> == n_inner_interfaces + !is_periodic,
             "The number of 1D grids and inner interfaces should match.");
