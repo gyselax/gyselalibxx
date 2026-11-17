@@ -51,15 +51,19 @@ inline constexpr bool is_derivative_calculator_collection_v
         = enable_derivative_calculator_collection<std::remove_const_t<std::remove_reference_t<T>>>;
 
 
-/**
- * @brief Collection of derivative calculators.
- * @tparam DerivListType Sorted list of type DerivList collecting ordered DerivPerp and/or CrossDeriv.
- *      Their order acts as an indication on the algorithm to follow to compute all the derivatives. 
- * @tparam DerivativeCalculator Derivative calculators (non sorted).
- */
 template <class DerivListType, class... DerivativeCalculator>
 class DerivativeCalculatorCollection;
 
+/**
+ * @brief Collection of derivative calculators.
+ * 
+ * The DirectionDerivs can be seen as steps of the algorithm determining all 
+ * the derivatives at the patch interfaces. 
+ * 
+ * @tparam DirectionDerivs Sorted DerivPerp and/or CrossDeriv.
+ *      Their order acts as an indication on the algorithm to follow to compute all the derivatives. 
+ * @tparam DerivativeCalculator Derivative calculators (non sorted).
+ */
 template <class... DirectionDerivs, class... DerivativeCalculators>
 class DerivativeCalculatorCollection<DerivList<DirectionDerivs...>, DerivativeCalculators...>
 {
@@ -94,6 +98,8 @@ public:
 
     /// @brief Type sequence of DerivPerp and/or CrossDeriv.
     using direction_deriv_seq = ddc::TypeSeq<DirectionDerivs...>;
+
+    /// @brief Number of steps in the algorithm (i.e. of given derivative indices).
     static constexpr std::size_t size = sizeof...(DirectionDerivs);
 
     /// @brief Type sequence of derivative calculators.
