@@ -4,6 +4,7 @@
 
 #include "ddc_aliases.hpp"
 #include "geometry_descriptors.hpp"
+#include "patch.hpp"
 
 
 /**
@@ -20,7 +21,7 @@
  * @tparam Grid1D Grid on the complementary dimension of the edge.     
  * @tparam extremity_val The BACK or FRONT value.
 */
-template <class Patch, class Grid1D, Extremity extremity_val>
+template <concepts::Patch Patch, class Grid1D, Extremity extremity_val>
 struct Edge
 {
     /// @brief Patch where the edge is defined.
@@ -36,7 +37,6 @@ struct Edge
     static constexpr Extremity extremity = extremity_val;
 };
 
-
 /**
  * @brief Define an edge for the outside index range.
  * OutsideEdge is a pseudo-edge outside the index range
@@ -46,3 +46,40 @@ struct Edge
 struct OutsideEdge
 {
 };
+
+
+template <class EdgeType>
+struct is_edge : std::false_type
+{
+};
+
+template <concepts::Patch Patch, class Grid1D, Extremity extremity_val>
+struct is_edge<Edge<Patch, Grid1D, extremity_val>> : std::true_type
+{
+};
+
+template <>
+struct is_edge<OutsideEdge> : std::true_type
+{
+};
+
+template <class EdgeType>
+bool constexpr is_edge_v = is_edge<EdgeType>::value;
+
+template <class EdgeType>
+constexpr int get_edge_patch_id()
+{
+    if constexpr (std::is_same_v<EdgeType, OutsideEdge>) {
+        return -1;
+    } else {
+        return EdgeType::associated_patch::id;
+    }
+}
+
+namespace concepts {
+template <class EdgeType>
+concept Edge = requires
+{
+    is_edge_v<EdgeType>;
+};
+}; // namespace concepts
