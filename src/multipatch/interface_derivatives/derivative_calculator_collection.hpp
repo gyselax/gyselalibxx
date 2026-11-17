@@ -6,22 +6,37 @@
 
 #include "derivative_calculator_common.hpp"
 
+/**
+ * @brief Tag to indicate to compute a perpendicular derivative with 
+ * a derivative calculator.
+ */
 template <class Grid1D>
 struct DerivPerp
 {
+    /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
     using grid_direction = Grid1D;
+    /// @brief Index of the perpendicular derivative.
     template <class Calculator>
     using idx_deriv = typename Calculator::idx_deriv_perp;
 };
 
+/**
+ * @brief Tag to indicate to compute a cross-derivative with 
+ * a derivative calculator.
+ */
 template <class Grid1D>
 struct CrossDeriv
 {
+    /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
     using grid_direction = Grid1D;
+    /// @brief Index of the cross-derivative.
     template <class Calculator>
     using idx_deriv = typename Calculator::idx_cross_deriv;
 };
 
+/**
+ * @brief Sorted list of DerivPerp and/or CrossDeriv.
+ */
 template <class... DirectionDerivs>
 struct DerivList
 {
@@ -36,6 +51,12 @@ inline constexpr bool is_derivative_calculator_collection_v
         = enable_derivative_calculator_collection<std::remove_const_t<std::remove_reference_t<T>>>;
 
 
+/**
+ * @brief Collection of derivative calculators.
+ * @tparam DerivListType Sorted list of type DerivList collecting ordered DerivPerp and/or CrossDeriv.
+ *      Their order acts as an indication on the algorithm to follow to compute all the derivatives. 
+ * @tparam DerivativeCalculator Derivative calculators (non sorted).
+ */
 template <class DerivListType, class... DerivativeCalculator>
 class DerivativeCalculatorCollection;
 
@@ -61,31 +82,35 @@ class DerivativeCalculatorCollection<DerivList<DirectionDerivs...>, DerivativeCa
 
     using grid_calculator_seq = ddc::TypeSeq<typename DerivativeCalculators::grid_direction...>;
 
-
     static_assert(
             (ddc::type_seq_contains_v<
                      ddc::TypeSeq<typename DirectionDerivs::grid_direction>,
                      grid_calculator_seq> && ...),
             "No derivative calculator found for one of the DirectionDeriv grid_direction.");
 
-
 public:
+    /// @brief Sorted list of DerivPerp and/or CrossDeriv.
     using direction_deriv_list = DerivList<DirectionDerivs...>;
 
+    /// @brief Type sequence of DerivPerp and/or CrossDeriv.
     using direction_deriv_seq = ddc::TypeSeq<DirectionDerivs...>;
     static constexpr std::size_t size = sizeof...(DirectionDerivs);
 
+    /// @brief Type sequence of derivative calculators.
     using derivative_calculator_seq = ddc::TypeSeq<DerivativeCalculators...>;
 
+    /// @brief 1D grid indicating the direction to follow at the step IOpth.
     template <std::size_t IOp>
     using grid_direction =
             typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::grid_direction;
 
+    /// @brief Derivative calculator to use at the step IOpth.
     template <std::size_t IOp>
     using derivative_calculator_type = ddc::type_seq_element_t<
             ddc::type_seq_rank_v<grid_direction<IOp>, grid_calculator_seq>,
             derivative_calculator_seq>;
 
+    /// @brief Derivative index to apply at the step IOpth.
     template <std::size_t IOp>
     using index_type =
             typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::template idx_deriv<
@@ -95,6 +120,11 @@ private:
     std::tuple<DerivativeCalculators&...> m_deriv_calculator_collection;
 
 public:
+    /**
+     * @brief Collect the derivative calculators and the DerivPerp and/or CrossDeriv
+     * tags.
+     * @param deriv_calculators Derivative calculators (non sorted).
+     */
     DerivativeCalculatorCollection(
             DerivList<DirectionDerivs...>,
             DerivativeCalculators&... deriv_calculators)
@@ -102,13 +132,20 @@ public:
     {
     }
 
+    /**
+     * @brief Get the derivative index at the step IOpth of the algorithm. 
+     */
     template <std::size_t IOp>
-    index_type<IOp> get_index() const
+    static index_type<IOp> get_index()
     {
         static_assert((IOp < size), "Index outside of the range.");
         return order_one<index_type<IOp>>::value;
     }
 
+    /**
+     * @brief Get a reference to the derivative calculator needed
+     * at the step IOpth of the algorithm. 
+     */
     template <std::size_t IOp>
     derivative_calculator_type<IOp>& get()
     {
@@ -116,8 +153,13 @@ public:
         return std::get<derivative_calculator_type<IOp>&>(m_deriv_calculator_collection);
     }
 
-    template <std::size_t IOp, class FieldType>
-    void apply(FieldType field)
+    /**
+     * @brief Apply the correct derivative calculator 
+     * to set the correct derivatives of the given MultipatchDerivField
+     * at the step IOpth of the algorithm. 
+     */
+    template <std::size_t IOp, class MultipatchDerivFieldType>
+    void apply(MultipatchDerivFieldType field)
     {
         this->get<IOp>()(this->get_index<IOp>(), field);
     }
@@ -133,25 +175,7 @@ private:
     };
 };
 
+// To help template deduction
 template <class... DirectionDerivs, class... DerivativeCalculators>
 DerivativeCalculatorCollection(DerivList<DirectionDerivs...>, DerivativeCalculators&...)
         -> DerivativeCalculatorCollection<DerivList<DirectionDerivs...>, DerivativeCalculators...>;
-
-
-// /**
-//  * @brief Helper to build a DerivativeCalculatorCollection.
-//  * The DirectionDerivs are given explicitly, the DerivativeCalculators are deduced.
-//  * (CTAD cannot be used as it does not work with partially specified template arguments.)
-//  *
-//  * Usage: make_derivative_calculator_collection<DirectionDeriv<...>, ...>(calc_1, calc_2, ...);
-//  */
-// template <class... DirectionDerivs, class... DerivativeCalculators>
-// DerivativeCalculatorCollection<
-//         ddc::TypeSeq<DirectionDerivs...>,
-//         ddc::TypeSeq<DerivativeCalculators...>>
-// make_derivative_calculator_collection(DerivativeCalculators&... deriv_calculators)
-// {
-//     return DerivativeCalculatorCollection<
-//             ddc::TypeSeq<DirectionDerivs...>,
-//             ddc::TypeSeq<DerivativeCalculators...>>(std::tie(deriv_calculators...));
-// }
