@@ -19,9 +19,6 @@
 #include "types.hpp"
 #include "view.hpp"
 
-template <class Connectivity, class Grid1D, class PatchSeq>
-class DerivativeCalculatorCommon;
-
 /**
   * @brief Abstract class to hold the interface derivative coefficients
   * and the index ranges.
@@ -29,10 +26,9 @@ class DerivativeCalculatorCommon;
   *
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
-  * @tparam Patches List of patches containing all the involved patches in the given direction.
   */
-template <class Connectivity, class Grid1D, class... Patches>
-class DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
+template <class Connectivity, class Grid1D>
+class DerivativeCalculatorCommon
 {
     /*
         All the interfaces given as input to the MultipatchConnectivity class.
@@ -48,6 +44,9 @@ protected:
 private:
     // All the patches of the geometry.
     using all_patches = typename Connectivity::all_patches;
+
+    using relevant_patches =
+            typename Connectivity::template get_all_patches_along_direction_t<Grid1D>;
 
     static constexpr std::size_t number_of_interfaces
             = ddc::type_seq_size_v<interface_sorted_collection>;
@@ -108,19 +107,6 @@ protected:
     static_assert(
             ddc::type_seq_size_v<Grid1DSeq> == n_inner_interfaces + !is_periodic,
             "The number of 1D grids and inner interfaces should match.");
-
-    static_assert(
-            ddc::type_seq_size_v<Grid1DSeq> <= sizeof...(Patches),
-            "The number of given patches is insufficient.");
-
-    static_assert(
-            ddc::type_seq_contains_v<
-                    Grid1DSeq,
-                    ddc::type_seq_merge_t<
-                            ddc::TypeSeq<typename Patches::Grid1...>,
-                            ddc::TypeSeq<typename Patches::Grid2...>>>,
-            "A patch is missing in the given patch list. The list has to contain all the patches "
-            "in the given Grid1D direction.");
 
 protected:
     /// @brief Tag the interface with the correct patch order.
@@ -263,9 +249,15 @@ public:
     /// @brief Index on the two derivative dimensions of patch_direction.
     using idx_cross_deriv = Idx<deriv_perp_dim, deriv_par_dim>;
 
+    using MultipatchIdxRange = MultipatchTypeFromSeq<IdxRangeOnPatch, relevant_patches>;
+    using MultipatchDerivField_host
+            = MultipatchFieldFromSeq<DerivFieldOnPatch_host, relevant_patches>;
+    using MultipatchDerivConstField_host
+            = MultipatchFieldFromSeq<DerivConstFieldOnPatch_host, relevant_patches>;
+
 protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.
-    MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
+    MultipatchIdxRange const& m_idx_ranges;
 
 private:
     /// @brief References to the InterfaceDerivCoeffs of each inner interface (sorted as inner_interface_collection).
@@ -283,7 +275,7 @@ public:
      */
     template <class... DerivCoeffs>
     explicit DerivativeCalculatorCommon(
-            MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
+            MultipatchIdxRange const& idx_ranges,
             DerivCoeffs const&... deriv_coeffs)
         : m_idx_ranges(idx_ranges)
         , m_deriv_coeffs(sort_deriv_coeffs(
@@ -320,13 +312,13 @@ protected:
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs)
     {
         // Use the function values to compute the first derivatives.
-        DField<typename patch1<I>::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_1
-                = functions_and_derivs.template get<patch1<I>>().get_values_field();
-        DField<typename patch2<I>::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_2
-                = functions_and_derivs.template get<patch2<I>>().get_values_field();
+        DConstField<typename patch1<I>::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride>
+                function_1 = functions_and_derivs.template get<patch1<I>>().get_values_field();
+        DConstField<typename patch2<I>::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride>
+                function_2 = functions_and_derivs.template get<patch2<I>>().get_values_field();
 
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv = get_deriv_coeffs<I>().get_approx_deriv(
@@ -353,7 +345,7 @@ protected:
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs)
     {
         IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
@@ -369,9 +361,9 @@ protected:
         Idx<deriv_par2<I>, grid_par2<I>>
                 idx_to_slice_deriv_2(Idx<deriv_par2<I>>(1), idx_to_slice_2);
 
-        DField<IdxRange<grid_perp1<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
+        DConstField<IdxRange<grid_perp1<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1
                 = functions_and_derivs.template get<patch1<I>>()[idx_to_slice_deriv_1];
-        DField<IdxRange<grid_perp2<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
+        DConstField<IdxRange<grid_perp2<I>>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
                 = functions_and_derivs.template get<patch2<I>>()[idx_to_slice_deriv_2];
 
         // Compute the coefficient c_I for the interface I.

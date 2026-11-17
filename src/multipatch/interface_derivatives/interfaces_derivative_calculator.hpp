@@ -18,9 +18,6 @@
 #include "types.hpp"
 #include "view.hpp"
 
-template <class Connectivity, class Grid1D, class PatchSeq>
-class InterfacesDerivativeCalculator;
-
 /**
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces with an approximation formula.
@@ -42,13 +39,11 @@ class InterfacesDerivativeCalculator;
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
-  * @tparam Patches List of patches containing all the involved patches in the given direction.
   */
-template <class Connectivity, class Grid1D, class... Patches>
-class InterfacesDerivativeCalculator<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
-    : public DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
+template <class Connectivity, class Grid1D>
+class InterfacesDerivativeCalculator : public DerivativeCalculatorCommon<Connectivity, Grid1D>
 {
-    using base_type = DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>;
+    using base_type = DerivativeCalculatorCommon<Connectivity, Grid1D>;
 
 private:
     template <std::size_t I>
@@ -93,6 +88,8 @@ public:
 
 private:
     using base_type::m_idx_ranges;
+    using typename base_type::MultipatchDerivField_host;
+    using typename base_type::MultipatchIdxRange;
 
 public:
     /**
@@ -106,7 +103,7 @@ public:
      */
     template <class... DerivCoeffs>
     explicit InterfacesDerivativeCalculator(
-            MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
+            MultipatchIdxRange const& idx_ranges,
             DerivCoeffs const&... deriv_coeffs)
         : base_type(idx_ranges, deriv_coeffs...)
     {
@@ -131,7 +128,7 @@ public:
     template <class IdxDeriv, class IdxPar>
     void operator()(
             IdxDeriv const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             IdxPar const& idx_par)
     {
         // Check the input types.
@@ -167,9 +164,7 @@ public:
      * @warning The global mesh is supposed to be conforming. 
      */
     template <class IdxDeriv>
-    void operator()(
-            IdxDeriv const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+    void operator()(IdxDeriv const& deriv_order, MultipatchDerivField_host functions_and_derivs)
     {
         static_assert(
                 (std::is_same_v<IdxDeriv, idx_deriv_perp>)
@@ -206,7 +201,7 @@ private:
     template <typename IdxDerivs, class GridPar1D, std::size_t... I>
     void update_derivatives(
             IdxDerivs const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             Idx<GridPar1D> const& idx_to_slice,
             std::integer_sequence<std::size_t, I...>)
     {
@@ -230,7 +225,7 @@ private:
     template <std::size_t I, typename IdxDerivs>
     void update_derivatives_at_interface(
             IdxDerivs const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             int& value_previous_idx_to_slice)
     {
         constexpr bool is_first_deriv = std::is_same_v<IdxDerivs, idx_deriv_perp>;
@@ -240,9 +235,11 @@ private:
         base_type::template set_slice_indexes<
                 I>(value_previous_idx_to_slice, idx_to_slice_1, idx_to_slice_2);
 
-        double const reconstructed_deriv = base_type::template get_approximated_deriv<
-                I,
-                is_first_deriv>(idx_to_slice_1, idx_to_slice_2, functions_and_derivs);
+        double const reconstructed_deriv
+                = base_type::template get_approximated_deriv<I, is_first_deriv>(
+                        idx_to_slice_1,
+                        idx_to_slice_2,
+                        get_const_field(functions_and_derivs));
 
         // Get the correct indices for the slices.
         Idx<grid_perp1<I>> idx_perp_1 = this->template get_idx_interface<true, I, patch1<I>>();
