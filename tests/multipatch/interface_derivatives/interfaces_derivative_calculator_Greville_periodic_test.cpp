@@ -530,7 +530,11 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             GridX<1>,
             ddc::TypeSeq<Patch1, Patch2, Patch3>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_123(idx_ranges_123, deriv_coeffs_1_2, deriv_coeffs_2_3, deriv_coeffs_3_1);
+            deriv_calculator_123(
+                    idx_ranges_123,
+                    deriv_coeffs_1_2,
+                    deriv_coeffs_2_3,
+                    deriv_coeffs_3_1);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
@@ -538,7 +542,11 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             GridX<4>,
             ddc::TypeSeq<Patch4, Patch5, Patch6>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_456(idx_ranges_456, deriv_coeffs_4_5, deriv_coeffs_5_6, deriv_coeffs_6_4);
+            deriv_calculator_456(
+                    idx_ranges_456,
+                    deriv_coeffs_4_5,
+                    deriv_coeffs_5_6,
+                    deriv_coeffs_6_4);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
@@ -546,7 +554,11 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             GridX<7>,
             ddc::TypeSeq<Patch7, Patch8, Patch9>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_789(idx_ranges_789, deriv_coeffs_7_8, deriv_coeffs_8_9, deriv_coeffs_9_7);
+            deriv_calculator_789(
+                    idx_ranges_789,
+                    deriv_coeffs_7_8,
+                    deriv_coeffs_8_9,
+                    deriv_coeffs_9_7);
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
     InterfacesDerivativeCalculatorType<

@@ -446,9 +446,7 @@ struct InterfacesDerivativeCalculatorHermiteFixture<
 
     using InterfacesDerivativeCalculatorType = std::conditional_t<
             is_approximation,
-            InterfacesDerivativeCalculator<
-                    typename PatchLayout::Connectivity,
-                    Grid1AlongXg>,
+            InterfacesDerivativeCalculator<typename PatchLayout::Connectivity, Grid1AlongXg>,
             InterfacesExactDerivativeCalculator<
                     typename PatchLayout::Connectivity,
                     Grid1AlongXg,
