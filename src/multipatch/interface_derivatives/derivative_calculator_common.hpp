@@ -2,7 +2,9 @@
 
 #pragma once
 
+#include <tuple>
 #include <typeinfo>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
@@ -11,32 +13,26 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
-template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class PatchSeq>
 class DerivativeCalculatorCommon;
 
 /**
-  * @brief Abstract class to hold the interface derivative coefficient collection
+  * @brief Abstract class to hold the interface derivative coefficients
   * and the index ranges.
   * This is the superclass for interface derivative calculators defined in this folder.
-  * 
+  *
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
-  * @tparam Patches List of patches containing all the involved patches in the given direction. 
-  * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
-  * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
+  * @tparam Patches List of patches containing all the involved patches in the given direction.
   */
-template <class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection>
-class DerivativeCalculatorCommon<
-        Connectivity,
-        Grid1D,
-        ddc::TypeSeq<Patches...>,
-        DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class... Patches>
+class DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
 {
     /*
         All the interfaces given as input to the MultipatchConnectivity class.
@@ -52,10 +48,6 @@ protected:
 private:
     // All the patches of the geometry.
     using all_patches = typename Connectivity::all_patches;
-
-    static_assert(
-            is_interface_derivative_coefficients_collection_v<DerivCoeffCollection>,
-            "Please provide a InterfaceDerivCoeffsCollection type.");
 
     static constexpr std::size_t number_of_interfaces
             = ddc::type_seq_size_v<interface_sorted_collection>;
@@ -212,6 +204,42 @@ protected:
     using idx_deriv_perp2
             = Idx<deriv_perp2<I>, typename patch2<I>::Grid1, typename patch2<I>::Grid2>;
 
+private:
+    template <class IndexSeq>
+    struct DerivCoeffsTypes;
+
+    template <std::size_t... I>
+    struct DerivCoeffsTypes<std::index_sequence<I...>>
+    {
+        using type = std::tuple<InterfaceDerivCoeffs<stored_interface<I>> const&...>;
+    };
+
+    /// A tuple of references to the InterfaceDerivCoeffs, sorted in the order of inner_interface_collection.
+    using deriv_coeffs_tuple =
+            typename DerivCoeffsTypes<std::make_index_sequence<n_inner_interfaces>>::type;
+
+    /**
+     * Sort the given InterfaceDerivCoeffs (provided in any order) into the order
+     * of inner_interface_collection.
+     */
+    template <std::size_t... I, class... DerivCoeffs>
+    static deriv_coeffs_tuple sort_deriv_coeffs(
+            std::index_sequence<I...>,
+            std::tuple<DerivCoeffs const&...> unsorted_deriv_coeffs)
+    {
+        using deriv_coeffs_type_seq = ddc::TypeSeq<InterfaceDerivCoeffs<stored_interface<I>>...>;
+        static_assert(
+                sizeof...(DerivCoeffs) == n_inner_interfaces,
+                "Please provide exactly one InterfaceDerivCoeffs for each inner interface in "
+                "the given Grid1D direction.");
+        static_assert(
+                (ddc::in_tags_v<DerivCoeffs, deriv_coeffs_type_seq> && ...),
+                "Please only provide InterfaceDerivCoeffs defined on the inner interfaces in "
+                "the given Grid1D direction.");
+        return deriv_coeffs_tuple(std::get<InterfaceDerivCoeffs<stored_interface<I>> const&>(
+                unsorted_deriv_coeffs)...);
+    }
+
 public:
     /// @brief First patch of the collection of patches in the direction of the given Grid1D.
     using patch_first = PatchFirst;
@@ -239,26 +267,43 @@ protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    /// @brief InterfaceDerivCoeffsCollection to collect all the needed InterfaceDerivCoeffs.
-    DerivCoeffCollection const& m_deriv_coeffs_collect;
+private:
+    /// @brief References to the InterfaceDerivCoeffs of each inner interface (sorted as inner_interface_collection).
+    deriv_coeffs_tuple m_deriv_coeffs;
 
 public:
     /**
-     * @brief Instantiate DerivativeCalculatorCommon. 
-     *  
-     * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
-     * @param deriv_coeffs_collect InterfaceDerivCoeffsCollection containing all the 
-     *          interface derivative calculator for each interface in the given Grid1D direction. 
+     * @brief Instantiate DerivativeCalculatorCommon.
+     *
+     * The InterfaceDerivCoeffs are stored by reference. They must outlive this object.
+     *
+     * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches.
+     * @param deriv_coeffs The InterfaceDerivCoeffs for each inner interface in the given Grid1D direction
+     *          (i.e. excluding interfaces with an OutsideEdge). They can be given in any order.
      */
-    DerivativeCalculatorCommon(
+    template <class... DerivCoeffs>
+    explicit DerivativeCalculatorCommon(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivCoeffCollection const& deriv_coeffs_collect)
+            DerivCoeffs const&... deriv_coeffs)
         : m_idx_ranges(idx_ranges)
-        , m_deriv_coeffs_collect(deriv_coeffs_collect)
+        , m_deriv_coeffs(sort_deriv_coeffs(
+                  std::make_index_sequence<n_inner_interfaces> {},
+                  std::forward_as_tuple(deriv_coeffs...)))
     {
     }
 
 protected:
+    /**
+     * @brief Get the InterfaceDerivCoeffs defined on the I-th inner interface.
+     * @tparam I Index of the interface in inner_interface_collection.
+     * @return A constant reference to the InterfaceDerivCoeffs.
+     */
+    template <std::size_t I>
+    InterfaceDerivCoeffs<stored_interface<I>> const& get_deriv_coeffs() const
+    {
+        return std::get<I>(m_deriv_coeffs);
+    }
+
     /**
      * @brief Compute the approximated derivative (or coefficient "c") at the interface along the mesh line
      * indexed at the given indices. 
@@ -284,10 +329,9 @@ protected:
                 = functions_and_derivs.template get<patch2<I>>().get_values_field();
 
         // Compute the coefficient c_I for the interface I.
-        double const interface_deriv
-                = m_deriv_coeffs_collect.template get<stored_interface<I>>().get_approx_deriv(
-                        get_const_field(function_1[idx_to_slice_1]),
-                        get_const_field(function_2[idx_to_slice_2]));
+        double const interface_deriv = get_deriv_coeffs<I>().get_approx_deriv(
+                get_const_field(function_1[idx_to_slice_1]),
+                get_const_field(function_2[idx_to_slice_2]));
         return interface_deriv;
     }
 
@@ -331,10 +375,9 @@ protected:
                 = functions_and_derivs.template get<patch2<I>>()[idx_to_slice_deriv_2];
 
         // Compute the coefficient c_I for the interface I.
-        double const corner_derivative
-                = m_deriv_coeffs_collect.template get<stored_interface<I>>().get_approx_cross_deriv(
-                        get_const_field(derivs_1),
-                        get_const_field(derivs_2));
+        double const corner_derivative = get_deriv_coeffs<I>().get_approx_cross_deriv(
+                get_const_field(derivs_1),
+                get_const_field(derivs_2));
         return corner_derivative;
     }
 
