@@ -64,7 +64,7 @@ class InterfacesDerivativeCalculator<
     : public DerivativeCalculatorCommon<
               Connectivity,
               Grid1D,
-                ddc::TypeSeq<Patches...>,
+              ddc::TypeSeq<Patches...>,
               DerivCoeffCollection>
 {
     using base_type = DerivativeCalculatorCommon<

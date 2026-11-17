@@ -316,7 +316,7 @@ protected:
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchField<DerivFieldOnPatch_host, Patches...>  functions_and_derivs)
+            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
         IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
