@@ -41,6 +41,7 @@ class MultipatchType;
 template <class... Patches, class... InternalTypes>
 class MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
 {
+    static_assert(sizeof...(Patches) > 0);
     static_assert(
             sizeof...(Patches) == sizeof...(InternalTypes),
             "There must be one internal type per patch");
