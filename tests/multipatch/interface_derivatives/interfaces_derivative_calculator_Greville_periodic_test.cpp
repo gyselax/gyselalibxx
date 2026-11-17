@@ -413,7 +413,9 @@ TYPED_TEST_SUITE(InterfacesDerivativeCalculatorGrevillePeriodicTest, TestTypes);
 
 
 
-TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC_And_DerivativeCalculatorCollection)
+TYPED_TEST(
+        InterfacesDerivativeCalculatorGrevillePeriodicTest,
+        CheckForPeriodicAndGrevilleBC_And_DerivativeCalculatorCollection)
 {
     std::tuple coord_transforms {
             CoordTransformGroup<1>(),
