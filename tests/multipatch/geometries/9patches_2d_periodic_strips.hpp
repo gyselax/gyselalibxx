@@ -52,9 +52,9 @@ using PatchOrdering
 
 
 // INTERFACES ------------------------------------------------------------------------------------
-using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+using NorthInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+using NorthInterface2 = Interface<OutsideEdge, NorthEdge<2>, true>;
+using NorthInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
 using Interface_1_4 = Interface<SouthEdge<1>, NorthEdge<4>, true>;
 using Interface_2_5 = Interface<SouthEdge<2>, NorthEdge<5>, true>;

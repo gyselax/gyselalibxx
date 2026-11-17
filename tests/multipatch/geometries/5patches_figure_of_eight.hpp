@@ -158,18 +158,18 @@ using WestEdge = Edge<PatchType<PatchIdx>, GridX<PatchIdx>, FRONT>;
 
 
 // INTERFACES ------------------------------------------------------------------------------------
-using Patch3InterfaceNorth = Interface<NorthEdge<3>, SouthEdge<1>, true>;
+using Patch3InterfaceNorth = Interface<SouthEdge<1>, NorthEdge<3>, true>;
 using Patch3InterfaceSouth = Interface<SouthEdge<3>, NorthEdge<5>, true>;
 using Patch3InterfaceEast = Interface<EastEdge<3>, WestEdge<4>, true>;
-using Patch3InterfaceWest = Interface<WestEdge<3>, EastEdge<2>, true>;
+using Patch3InterfaceWest = Interface<EastEdge<2>, WestEdge<3>, true>;
 
-using LoopInterface_2_1 = Interface<NorthEdge<2>, WestEdge<1>, false>;
+using LoopInterface_2_1 = Interface<WestEdge<1>, NorthEdge<2>, false>;
 using LoopInterface_1_4 = Interface<EastEdge<1>, NorthEdge<4>, true>;
 using LoopInterface_4_5 = Interface<SouthEdge<4>, EastEdge<5>, false>;
-using LoopInterface_5_2 = Interface<WestEdge<5>, SouthEdge<2>, true>;
+using LoopInterface_5_2 = Interface<SouthEdge<2>, WestEdge<5>, true>;
 
-using EightInterface_2_1 = Interface<WestEdge<2>, NorthEdge<1>, false>;
-using EightInterface_5_4 = Interface<SouthEdge<5>, EastEdge<4>, false>;
+using EightInterface_2_1 = Interface<NorthEdge<1>, WestEdge<2>, false>;
+using EightInterface_5_4 = Interface<EastEdge<4>, SouthEdge<5>, false>;
 
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
