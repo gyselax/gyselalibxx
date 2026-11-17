@@ -30,6 +30,21 @@ template <
         class DerivCoeffCollection>
 class InterfacesExactDerivativeCalculator;
 
+template <
+        class Connectivity,
+        class Grid1D,
+        class PatchSeq,
+        ddc::SplineBuilderClosure LowerBound,
+        ddc::SplineBuilderClosure UpperBound,
+        class DerivCoeffCollection>
+inline constexpr bool enable_deriv_calculator<InterfacesExactDerivativeCalculator<
+        Connectivity,
+        Grid1D,
+        PatchSeq,
+        LowerBound,
+        UpperBound,
+        DerivCoeffCollection>> = true;
+
 /**
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces.  
