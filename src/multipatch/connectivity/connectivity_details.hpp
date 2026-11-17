@@ -12,17 +12,24 @@
 #include "type_seq_tools.hpp"
 
 namespace connectivity_details {
+
+template <concepts::Edge Edge, concepts::Edge OEdge, bool Orientations>
+using Interface = std::conditional_t<
+        (get_edge_patch_id<Edge>() < get_edge_patch_id<OEdge>()),
+        ::Interface<Edge, OEdge, Orientations>,
+        ::Interface<OEdge, Edge, Orientations>>;
+
 /**
  * @brief A class which finds all interfaces connected to a given patch.
  *
  * @tparam Patch The patch whose connections are being searched for.
  * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
  */
-template <class Patch, class InterfaceTypeSeq>
+template <concepts::Patch Patch, class InterfaceTypeSeq>
 struct PatchConnection;
 
 /// Specialisation of PatchConnection for an empty interface list.
-template <class Patch>
+template <concepts::Patch Patch>
 struct PatchConnection<Patch, ddc::TypeSeq<>>
 {
     /// The type found by the class.
@@ -30,7 +37,7 @@ struct PatchConnection<Patch, ddc::TypeSeq<>>
 };
 
 /// Specialisation of PatchConnection for an interface list with one element.
-template <class Patch, class InterfaceType>
+template <concepts::Patch Patch, class InterfaceType>
 struct PatchConnection<Patch, ddc::TypeSeq<InterfaceType>>
 {
     /// The type found by the class.
@@ -41,7 +48,7 @@ struct PatchConnection<Patch, ddc::TypeSeq<InterfaceType>>
 };
 
 /// Specialisation of PatchConnection to iterate recursively over the interface type sequence.
-template <class Patch, class InterfaceType1, class... RemainingInterfaceTypes>
+template <concepts::Patch Patch, class InterfaceType1, class... RemainingInterfaceTypes>
 struct PatchConnection<Patch, ddc::TypeSeq<InterfaceType1, RemainingInterfaceTypes...>>
 {
     /// The type found by the class.
@@ -59,7 +66,7 @@ template <class TypeSeq>
 struct StripOutsideEdges;
 
 /// Specialisation of StripOutsideEdges for the case with one edge in the list.
-template <class EdgeType>
+template <concepts::Edge EdgeType>
 struct StripOutsideEdges<ddc::TypeSeq<EdgeType>>
 {
     /// The type found by the class.
@@ -70,7 +77,7 @@ struct StripOutsideEdges<ddc::TypeSeq<EdgeType>>
 };
 
 /// Specialisation of StripOutsideEdges to iterate recursively over the edge type sequence.
-template <class EdgeType1, class... RemainingEdgeTypes>
+template <concepts::Edge EdgeType1, class... RemainingEdgeTypes>
 struct StripOutsideEdges<ddc::TypeSeq<EdgeType1, RemainingEdgeTypes...>>
 {
     /// The type found by the class.
@@ -110,7 +117,7 @@ struct ExtractPatches<ddc::TypeSeq<>>
 };
 
 /// Specialisation of ExtractPatches to iterate recursively over the edge type sequence.
-template <class EdgeType1, class... EdgeTypes>
+template <concepts::Edge EdgeType1, concepts::Edge... EdgeTypes>
 struct ExtractPatches<ddc::TypeSeq<EdgeType1, EdgeTypes...>>
 {
     /// The type found by the class.
@@ -124,11 +131,11 @@ struct ExtractPatches<ddc::TypeSeq<EdgeType1, EdgeTypes...>>
  * @tparam The identifying grid.
  * @tparam A DDC type sequence containing all possible patches.
  */
-template <class Grid1D, class PatchTypeSeq>
+template <ddc::concepts::discrete_dimension Grid1D, ddc::concepts::type_seq PatchTypeSeq>
 struct FindPatch;
 
 /// Specialisation of FindPatch for an empty patch list.
-template <class Grid1D>
+template <ddc::concepts::discrete_dimension Grid1D>
 struct FindPatch<Grid1D, ddc::TypeSeq<>>
 {
     // This class should not be reached in the recursion. Raise a readable error (based on the
@@ -175,7 +182,10 @@ struct FindPatch<
 };
 
 /// Specialisation of FindPatch to iterate recursively over the patch type sequence.
-template <class Grid1D, class Patch1, class... RemainingPatchTypes>
+template <
+        ddc::concepts::discrete_dimension Grid1D,
+        concepts::Patch Patch1,
+        concepts::Patch... RemainingPatchTypes>
 struct FindPatch<Grid1D, ddc::TypeSeq<Patch1, RemainingPatchTypes...>>
 {
     // Should instantiate specialisations above instead of this specialisation
@@ -190,11 +200,11 @@ struct FindPatch<Grid1D, ddc::TypeSeq<Patch1, RemainingPatchTypes...>>
  * @tparam The edge being located.
  * @tparam A DDC type sequence of possible interfaces.
  */
-template <class Edge, class InterfaceTypeSeq>
+template <concepts::Edge Edge, class InterfaceTypeSeq>
 struct FindInterface;
 
 /// Specialisation of FindInterface for an empty interface list.
-template <class Edge>
+template <concepts::Edge Edge>
 struct FindInterface<Edge, ddc::TypeSeq<>>
 {
     // This class should not be reached in the recursion. Raise a readable error (based on the
@@ -203,7 +213,7 @@ struct FindInterface<Edge, ddc::TypeSeq<>>
 };
 
 /// Specialisation of FindInterface to iterate recursively over the interface type sequence.
-template <class Edge, class Interface1, class... RemainingInterfaceTypes>
+template <concepts::Edge Edge, class Interface1, class... RemainingInterfaceTypes>
 struct FindInterface<Edge, ddc::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 {
     // Should instantiate specialisations below instead of this specialisation
@@ -214,20 +224,28 @@ struct FindInterface<Edge, ddc::TypeSeq<Interface1, RemainingInterfaceTypes...>>
 };
 
 /// Specialisation of FindInterface for the case where Edge1 from the first interface matches Edge.
-template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
+template <
+        concepts::Edge Edge,
+        concepts::Edge OEdge,
+        bool Orientations,
+        class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
-        ddc::TypeSeq<Interface<Edge, OEdge, Orientations>, RemainingInterfaceTypes...>>
+        ddc::TypeSeq<::Interface<Edge, OEdge, Orientations>, RemainingInterfaceTypes...>>
 {
     /// The type found by the class.
     using type = Interface<Edge, OEdge, Orientations>;
 };
 
 /// Specialisation of FindInterface for the case where Edge1 from the second interface matches Edge.
-template <class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes>
+template <
+        concepts::Edge Edge,
+        concepts::Edge OEdge,
+        bool Orientations,
+        class... RemainingInterfaceTypes>
 struct FindInterface<
         Edge,
-        ddc::TypeSeq<Interface<OEdge, Edge, Orientations>, RemainingInterfaceTypes...>>
+        ddc::TypeSeq<::Interface<OEdge, Edge, Orientations>, RemainingInterfaceTypes...>>
 {
     /// The type found by the class.
     using type = Interface<OEdge, Edge, Orientations>;
@@ -238,27 +256,27 @@ struct FindInterface<
  * @tparam InterfaceType The interface being modified.
  * @tparam FirstEdge The edge which should be first in the interface.
  */
-template <class InterfaceType, class FirstEdge>
+template <class InterfaceType, concepts::Edge FirstEdge>
 struct EnforceFirstInterfaceEdge;
 
 /// Specialisation of EnforceFirstInterfaceEdge for an interface which is already correctly arranged.
-template <class FirstEdge, class Edge2, bool Orientations>
-struct EnforceFirstInterfaceEdge<Interface<FirstEdge, Edge2, Orientations>, FirstEdge>
+template <concepts::Edge FirstEdge, concepts::Edge Edge2, bool Orientations>
+struct EnforceFirstInterfaceEdge<::Interface<FirstEdge, Edge2, Orientations>, FirstEdge>
 {
     /// The interface type
     using type = Interface<FirstEdge, Edge2, Orientations>;
 };
 
 /// Specialisation of EnforceFirstInterfaceEdge for an interface which needs rearranging.
-template <class FirstEdge, class Edge2, bool Orientations>
-struct EnforceFirstInterfaceEdge<Interface<Edge2, FirstEdge, Orientations>, FirstEdge>
+template <concepts::Edge FirstEdge, concepts::Edge Edge2, bool Orientations>
+struct EnforceFirstInterfaceEdge<::Interface<Edge2, FirstEdge, Orientations>, FirstEdge>
 {
     /// The interface type
     using type = Interface<FirstEdge, Edge2, Orientations>;
 };
 
 /// A tool to flip the edges in an interface to ensure that the correct edge comes first.
-template <class InterfaceType, class FirstEdge>
+template <class InterfaceType, concepts::Edge FirstEdge>
 using enforce_first_interface_edge_t =
         typename EnforceFirstInterfaceEdge<InterfaceType, FirstEdge>::type;
 
@@ -266,11 +284,11 @@ using enforce_first_interface_edge_t =
  * @brief A class to get the opposite edge of a grid line from one of the edges.
  * @tparam EdgeType The start edge connected to a grid line.
  */
-template <class EdgeType>
+template <concepts::Edge EdgeType>
 struct SwapExtremity;
 
 /// Specialisation of SwapExtremity for an edge at the front end of a grid line.
-template <class Patch, class Grid1D>
+template <concepts::Patch Patch, ddc::concepts::discrete_dimension Grid1D>
 struct SwapExtremity<Edge<Patch, Grid1D, FRONT>>
 {
     /// The type found by the class.
@@ -278,7 +296,7 @@ struct SwapExtremity<Edge<Patch, Grid1D, FRONT>>
 };
 
 /// Specialisation of SwapExtremity for an edge at the back end of a grid line.
-template <class Patch, class Grid1D>
+template <concepts::Patch Patch, ddc::concepts::discrete_dimension Grid1D>
 struct SwapExtremity<Edge<Patch, Grid1D, BACK>>
 {
     /// The type found by the class.
@@ -498,7 +516,7 @@ struct CollectGridsAlongDim<StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids,
  *                  grids are collected).
  * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
  */
-template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
+template <class StartPatch, ddc::concepts::discrete_dimension Grid1D, class InterfaceTypeSeq>
 struct CollectAllGridsOnDim
 {
 private:
@@ -537,7 +555,7 @@ public:
  *                  grids are collected).
  * @tparam InterfaceTypeSeq A DDC type sequence containing all the possible Interfaces.
  */
-template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
+template <class StartPatch, ddc::concepts::discrete_dimension Grid1D, class InterfaceTypeSeq>
 struct CollectAllInterfacesOnDim
 {
     /**
@@ -653,30 +671,36 @@ using strip_outside_edges_t =
         typename connectivity_details::StripOutsideEdges<ddc::TypeSeq<EdgeType...>>::type;
 
 /// A tool to find all the patches used by the various edges.
-template <class EdgeTypeSeq>
+template <concepts::Edge EdgeTypeSeq>
 using extract_patches_t = typename connectivity_details::ExtractPatches<EdgeTypeSeq>::type;
 
 /// A tool to find all interfaces directly connected to the start patch.
-template <class StartPatch, class InterfaceTypeSeq>
+template <concepts::Patch StartPatch, class InterfaceTypeSeq>
 using interfaces_of_patch_t =
         typename connectivity_details::PatchConnection<StartPatch, InterfaceTypeSeq>::type;
 
 /// A tool to find a patch which contains the specified grid.
-template <class Grid1D, class PatchTypeSeq>
+template <ddc::concepts::discrete_dimension Grid1D, ddc::concepts::type_seq PatchTypeSeq>
 using find_patch_t = typename connectivity_details::FindPatch<Grid1D, PatchTypeSeq>::type;
 
 /// A tool to find the interface which contains a specified edge.
-template <class EdgeType, class InterfaceTypeSeq>
+template <concepts::Edge EdgeType, class InterfaceTypeSeq>
 using find_associated_interface_t =
         typename connectivity_details::FindInterface<EdgeType, InterfaceTypeSeq>::type;
 
 /// A tool to collect all grids along a given line including the specified grid.
-template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
+template <
+        concepts::Patch StartPatch,
+        ddc::concepts::discrete_dimension Grid1D,
+        class InterfaceTypeSeq>
 using collect_grids_on_dim_t = typename connectivity_details::
         CollectAllGridsOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
 
 /// A tool to collect all interfaces along a given line including the specified grid.
-template <class StartPatch, class Grid1D, class InterfaceTypeSeq>
+template <
+        concepts::Patch StartPatch,
+        ddc::concepts::discrete_dimension Grid1D,
+        class InterfaceTypeSeq>
 using collect_interfaces_on_dim_t = typename connectivity_details::
         CollectAllInterfacesOnDim<StartPatch, Grid1D, InterfaceTypeSeq>::type;
 
