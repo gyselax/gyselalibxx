@@ -118,38 +118,34 @@ struct BSplinesY
 
 
 // PATCHES ---------------------------------------------------------------------------------------
+template <int PatchIdx>
+using PatchType
+        = Patch<PatchIdx,
+                GridX<PatchIdx>,
+                GridY<PatchIdx>,
+                BSplinesX<PatchIdx>,
+                BSplinesY<PatchIdx>>;
+
 /// @brief First patch.
-using Patch1 = Patch<GridX<1>, GridY<1>, BSplinesX<1>, BSplinesY<1>>;
+using Patch1 = PatchType<1>;
 
 /// @brief Second patch.
-using Patch2 = Patch<GridX<2>, GridY<2>, BSplinesX<2>, BSplinesY<2>>;
-
-#ifndef EXTEND_GEOMETRY
-/// @brief Sorted list of patches.
-using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
+using Patch2 = PatchType<2>;
 
 
 // EDGES -----------------------------------------------------------------------------------------
 template <int PatchIdx>
-using NorthEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridY<PatchIdx>,
-               BACK>;
+using NorthEdge = Edge<PatchType<PatchIdx>, GridY<PatchIdx>, BACK>;
 template <int PatchIdx>
-using SouthEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridY<PatchIdx>,
-               FRONT>;
+using SouthEdge = Edge<PatchType<PatchIdx>, GridY<PatchIdx>, FRONT>;
 template <int PatchIdx>
-using EastEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridX<PatchIdx>,
-               BACK>;
+using EastEdge = Edge<PatchType<PatchIdx>, GridX<PatchIdx>, BACK>;
 template <int PatchIdx>
-using WestEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridX<PatchIdx>,
-               FRONT>;
+using WestEdge = Edge<PatchType<PatchIdx>, GridX<PatchIdx>, FRONT>;
+
+#ifndef EXTEND_GEOMETRY
+/// @brief Sorted list of patches.
+using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
 
 
 // INTERFACES ------------------------------------------------------------------------------------

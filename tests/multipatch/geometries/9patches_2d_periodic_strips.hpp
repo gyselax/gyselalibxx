@@ -25,53 +25,30 @@
 namespace GEOM_NAMESPACE_NAME {
 // PATCHES ---------------------------------------------------------------------------------------
 /// @brief Fourth patch.
-using Patch3 = Patch<GridX<3>, GridY<3>, BSplinesX<3>, BSplinesY<3>>;
+using Patch3 = PatchType<3>;
 
 /// @brief Fourth patch.
-using Patch4 = Patch<GridX<4>, GridY<4>, BSplinesX<4>, BSplinesY<4>>;
+using Patch4 = PatchType<4>;
 
 /// @brief Fifth patch.
-using Patch5 = Patch<GridX<5>, GridY<5>, BSplinesX<5>, BSplinesY<5>>;
+using Patch5 = PatchType<5>;
 
 /// @brief Sixth patch.
-using Patch6 = Patch<GridX<6>, GridY<6>, BSplinesX<6>, BSplinesY<6>>;
+using Patch6 = PatchType<6>;
 
 /// @brief Seventh patch.
-using Patch7 = Patch<GridX<7>, GridY<7>, BSplinesX<7>, BSplinesY<7>>;
+using Patch7 = PatchType<7>;
 
 /// @brief Eighth patch.
-using Patch8 = Patch<GridX<8>, GridY<8>, BSplinesX<8>, BSplinesY<8>>;
+using Patch8 = PatchType<8>;
 
 /// @brief Ninth patch.
-using Patch9 = Patch<GridX<9>, GridY<9>, BSplinesX<9>, BSplinesY<9>>;
+using Patch9 = PatchType<9>;
 
 
 /// @brief Sorted list of patches.
 using PatchOrdering
         = ddc::TypeSeq<Patch1, Patch2, Patch3, Patch4, Patch5, Patch6, Patch7, Patch8, Patch9>;
-
-
-// EDGES -----------------------------------------------------------------------------------------
-template <int PatchIdx>
-using NorthEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridY<PatchIdx>,
-               BACK>;
-template <int PatchIdx>
-using SouthEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridY<PatchIdx>,
-               FRONT>;
-template <int PatchIdx>
-using EastEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridX<PatchIdx>,
-               BACK>;
-template <int PatchIdx>
-using WestEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridX<PatchIdx>,
-               FRONT>;
 
 
 // INTERFACES ------------------------------------------------------------------------------------
