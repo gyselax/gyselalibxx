@@ -19,7 +19,7 @@ The following sections describe the structures and methods implemented:
 
 ## Patch
 
-The tag Patch refers to a single 2D patch geometry. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as:
+The tag Patch refers to a single 2D patch geometry. Each patch is given a unique unsigned integer identifier (`id`) as its first template parameter. This identifier gives a compile-time ordering of the patches. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as:
 
 - Grids (or points sequence along one dimension) on both dimensions (`Grid1` and `Grid2`);  
 - Associated continuous dimensions (`Dim1` and `Dim2`);  
