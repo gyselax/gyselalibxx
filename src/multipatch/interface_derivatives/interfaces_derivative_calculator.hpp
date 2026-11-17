@@ -12,13 +12,13 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
-template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class PatchSeq>
 class InterfacesDerivativeCalculator;
 
 /**
@@ -42,27 +42,13 @@ class InterfacesDerivativeCalculator;
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
-  * @tparam Patches List of patches containing all the involved patches in the given direction. 
-  * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
-  * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
+  * @tparam Patches List of patches containing all the involved patches in the given direction.
   */
-template <class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection>
-class InterfacesDerivativeCalculator<
-        Connectivity,
-        Grid1D,
-        ddc::TypeSeq<Patches...>,
-        DerivCoeffCollection>
-    : public DerivativeCalculatorCommon<
-              Connectivity,
-              Grid1D,
-              ddc::TypeSeq<Patches...>,
-              DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class... Patches>
+class InterfacesDerivativeCalculator<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
+    : public DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
 {
-    using base_type = DerivativeCalculatorCommon<
-            Connectivity,
-            Grid1D,
-            ddc::TypeSeq<Patches...>,
-            DerivCoeffCollection>;
+    using base_type = DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>;
 
 private:
     template <std::size_t I>
@@ -112,14 +98,17 @@ public:
     /**
      * @brief Instantiate InterfacesDerivativeCalculator. 
      *  
-     * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
-     * @param deriv_coeffs_collect InterfaceDerivCoeffsCollection containing all the 
-     *          interface derivative calculator for each interface in the given Grid1D direction. 
+     * The InterfaceDerivCoeffs are stored by reference. They must outlive this object.
+     *
+     * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches.
+     * @param deriv_coeffs The InterfaceDerivCoeffs for each inner interface in the given Grid1D direction
+     *          (i.e. excluding interfaces with an OutsideEdge). They can be given in any order.
      */
-    InterfacesDerivativeCalculator(
+    template <class... DerivCoeffs>
+    explicit InterfacesDerivativeCalculator(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivCoeffCollection const& deriv_coeffs_collect)
-        : base_type(idx_ranges, deriv_coeffs_collect)
+            DerivCoeffs const&... deriv_coeffs)
+        : base_type(idx_ranges, deriv_coeffs...)
     {
     }
 

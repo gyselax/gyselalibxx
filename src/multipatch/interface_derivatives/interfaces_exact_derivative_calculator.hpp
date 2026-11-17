@@ -14,7 +14,7 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "matrix_dense.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
@@ -26,8 +26,7 @@ template <
         class Grid1D,
         class PatchSeq,
         ddc::SplineBuilderClosure LowerBound,
-        ddc::SplineBuilderClosure UpperBound,
-        class DerivCoeffCollection>
+        ddc::SplineBuilderClosure UpperBound>
 class InterfacesExactDerivativeCalculator;
 
 /**
@@ -48,35 +47,22 @@ class InterfacesExactDerivativeCalculator;
   * @tparam Grid1D A given direction.
   * @tparam Patches List of patches containing all the involved patches in the given direction. 
   * @tparam LowerBound Lower/left boundary condition of the first local spline along the given direction. 
-  * @tparam UpperBound Upper/right boundary condition of the last local spline along the given direction. 
-  * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
-  * that stores the SingleInterfaceDerivativesCalculator needed to compute the interface derivatives. 
+  * @tparam UpperBound Upper/right boundary condition of the last local spline along the given direction.
   */
 template <
         class Connectivity,
         class Grid1D,
         class... Patches,
         ddc::SplineBuilderClosure LowerBound,
-        ddc::SplineBuilderClosure UpperBound,
-        class DerivCoeffCollection>
+        ddc::SplineBuilderClosure UpperBound>
 class InterfacesExactDerivativeCalculator<
         Connectivity,
         Grid1D,
         ddc::TypeSeq<Patches...>,
         LowerBound,
-        UpperBound,
-        DerivCoeffCollection>
-    : public DerivativeCalculatorCommon<
-              Connectivity,
-              Grid1D,
-              ddc::TypeSeq<Patches...>,
-              DerivCoeffCollection>
+        UpperBound> : public DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>
 {
-    using base_type = DerivativeCalculatorCommon<
-            Connectivity,
-            Grid1D,
-            ddc::TypeSeq<Patches...>,
-            DerivCoeffCollection>;
+    using base_type = DerivativeCalculatorCommon<Connectivity, Grid1D, ddc::TypeSeq<Patches...>>;
 
 private:
     template <std::size_t I>
@@ -141,7 +127,6 @@ public:
     using typename base_type::idx_cross_deriv;
 
 private:
-    using base_type::m_deriv_coeffs_collect;
     using base_type::m_idx_ranges;
 
     // Matrix (I-M) of the documentation.
@@ -159,17 +144,19 @@ public:
      * @brief Instantiate InterfacesExactDerivativeCalculator. 
      * 
      * It creates a dense matrix, a vector for the rhs and a vector for the solution.
-     * The matrix is initialised with the derivatives calculator collection given in input
+     * The matrix is initialised with the InterfaceDerivCoeffs given in input
      * and factorised with a LU decomposition.
-     * 
-     * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
-     * @param deriv_coeffs_collect SingleInterfaceDerivCoeffCollection containing all the 
-     *          interface derivative calculator for each interface in the given Grid1D direction. 
+     * The InterfaceDerivCoeffs are stored by reference. They must outlive this object.
+     *
+     * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches.
+     * @param deriv_coeffs The InterfaceDerivCoeffs for each inner interface in the given Grid1D direction
+     *          (i.e. excluding interfaces with an OutsideEdge). They can be given in any order.
      */
-    InterfacesExactDerivativeCalculator(
+    template <class... DerivCoeffs>
+    explicit InterfacesExactDerivativeCalculator(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivCoeffCollection const& deriv_coeffs_collect)
-        : base_type(idx_ranges, deriv_coeffs_collect)
+            DerivCoeffs const&... deriv_coeffs)
+        : base_type(idx_ranges, deriv_coeffs...)
         , m_matrix(n_inner_interfaces)
         , m_vector(n_inner_interfaces)
         , m_interface_derivatives(n_inner_interfaces)
@@ -296,10 +283,10 @@ private:
     template <std::size_t I>
     void set_line_matrix()
     {
-        double const coeff_deriv_patch1 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                  .get_coeff_deriv_patch_1();
-        double const coeff_deriv_patch2 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                  .get_coeff_deriv_patch_2();
+        double const coeff_deriv_patch1
+                = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_1();
+        double const coeff_deriv_patch2
+                = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_2();
         const double coeff_left
                 = patch_order_matches_interfaces<I> ? coeff_deriv_patch1 : coeff_deriv_patch2;
         const double coeff_right
@@ -458,10 +445,10 @@ private:
                 deriv_bound_2 = function_and_derivs_2(idx_cross_deriv_2) * sign_2;
             }
 
-            const double coeff_deriv_1 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                 .get_coeff_deriv_patch_1();
-            const double coeff_deriv_2 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                 .get_coeff_deriv_patch_2();
+            const double coeff_deriv_1
+                    = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_1();
+            const double coeff_deriv_2
+                    = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_2();
 
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector[I] += patch_order_matches_interfaces<I> ? coeff_deriv_1 * deriv_bound_1
