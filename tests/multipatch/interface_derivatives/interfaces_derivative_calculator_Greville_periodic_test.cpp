@@ -142,8 +142,8 @@ template <
         ddc::SplineBuilderClosure SBC>
 using InterfacesDerivativeCalculatorType = std::conditional_t<
         is_approximation,
-        InterfacesDerivativeCalculator<Connectivity, Grid1D, PatchSeq>,
-        InterfacesExactDerivativeCalculator<Connectivity, Grid1D, PatchSeq, SBC, SBC>>;
+        InterfacesDerivativeCalculator<Connectivity, Grid1D>,
+        InterfacesExactDerivativeCalculator<Connectivity, Grid1D, SBC, SBC>>;
 
 template <bool is_approximation, class InterfaceType, class IdxRange1, class IdxRange2>
 InterfaceDerivCoeffs<InterfaceType> build_interface(

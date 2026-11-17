@@ -448,12 +448,10 @@ struct InterfacesDerivativeCalculatorHermiteFixture<
             is_approximation,
             InterfacesDerivativeCalculator<
                     typename PatchLayout::Connectivity,
-                    Grid1AlongXg,
-                    ddc::TypeSeq<Patch1, Patch2, Patch3>>,
+                    Grid1AlongXg>,
             InterfacesExactDerivativeCalculator<
                     typename PatchLayout::Connectivity,
                     Grid1AlongXg,
-                    ddc::TypeSeq<Patch1, Patch2, Patch3>,
                     ddc::SplineBuilderClosure::HERMITE,
                     ddc::SplineBuilderClosure::HERMITE>>;
 
