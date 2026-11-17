@@ -138,26 +138,38 @@ struct FindPatch<Grid1D, ddc::TypeSeq<>>
  * Specialisation of FindPatch for the case where Grid1 from first patch in type sequence
  * matches QueryGrid1D
  */
-template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
+template <
+        class QueryGrid1D,
+        std::size_t PatchId,
+        class OGrid,
+        class BSpl1,
+        class BSpl2,
+        class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
     /// The type found by the class.
-    using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
+    using type = Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>;
 };
 
 /**
  * Specialisation of FindPatch for the case where Grid2 from first patch in type sequence
  * matches QueryGrid1D
  */
-template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
+template <
+        class QueryGrid1D,
+        std::size_t PatchId,
+        class OGrid,
+        class BSpl1,
+        class BSpl2,
+        class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
     /// The type found by the class.
-    using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
+    using type = Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
 /// Specialisation of FindPatch to iterate recursively over the patch type sequence.
