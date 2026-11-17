@@ -150,6 +150,34 @@ public:
     }
 };
 
+/**
+ * @brief A helper to build a multipatch class from a type template and a TypeSeq of patches.
+ *
+ * @tparam MultipatchClass The detail:: multipatch class template (e.g. detail::MultipatchType).
+ * @tparam T The type template which gives the type of the object stored on a patch.
+ * @tparam PatchSeq A ddc::TypeSeq of the patches.
+ */
+template <
+        template <class, class>
+        class MultipatchClass,
+        template <typename P>
+        typename T,
+        class PatchSeq>
+struct MultipatchFromPatchSeq;
+
+/// @brief Specialisation of MultipatchFromPatchSeq to unpack the patches.
+template <
+        template <class, class>
+        class MultipatchClass,
+        template <typename P>
+        typename T,
+        class... Patches>
+struct MultipatchFromPatchSeq<MultipatchClass, T, ddc::TypeSeq<Patches...>>
+{
+    /// The multipatch class defined on the patches.
+    using type = MultipatchClass<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+};
+
 } // namespace detail
 
 template <class TypeSeqPatches, class TypeSeqInternalTypes>
@@ -170,3 +198,17 @@ inline constexpr bool
 template <template <typename P> typename T, class... Patches>
 using MultipatchType
         = detail::MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+
+/**
+ * @brief A class to store several objects that are of a type which is templated by the patch.
+ *
+ * This alias is equivalent to MultipatchType but takes the patches as a ddc::TypeSeq.
+ * I.e. `MultipatchTypeFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
+ * `MultipatchType<T, Patches...>`.
+ *
+ * @tparam T The type of the objects that are stored on the given patches.
+ * @tparam PatchSeq A ddc::TypeSeq of the patches of the objects.
+ */
+template <template <typename P> typename T, class PatchSeq>
+using MultipatchTypeFromSeq =
+        typename detail::MultipatchFromPatchSeq<detail::MultipatchType, T, PatchSeq>::type;
