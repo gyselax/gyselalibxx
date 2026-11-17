@@ -299,6 +299,20 @@ using DerivFieldOnPatch = DerivField<
                 ddc::Deriv<typename Patch::Dim2>,
                 typename Patch::Grid2>>;
 
+/**
+ * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives
+ * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid
+ * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).
+ */
+template <class Patch>
+using DerivConstFieldOnPatch = DerivConstField<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Dim1>,
+                typename Patch::Grid1,
+                ddc::Deriv<typename Patch::Dim2>,
+                typename Patch::Grid2>>;
+
 
 // --- ON HOST ---
 /**
@@ -318,3 +332,12 @@ using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
  */
 template <class Patch>
 using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
+
+/**
+ * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives
+ * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid
+ * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).
+ * Defined on host.
+ */
+template <class Patch>
+using DerivConstFieldOnPatch_host = host_t<DerivConstFieldOnPatch<Patch>>;

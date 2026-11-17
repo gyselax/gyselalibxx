@@ -234,7 +234,7 @@ inline constexpr bool enable_multipatch_field<
  * @tparam Patches The patches of the objects in the same order of the patches
  *                 that the given objects are defined on.
  */
-template <template <typename P> typename T, class... Patches>
+template <template <typename P> typename T, concepts::Patch... Patches>
 using MultipatchField
         = detail::MultipatchField<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 
@@ -248,7 +248,7 @@ using MultipatchField
  * @tparam T The type of the fields/derivative fields/vector fields that are stored on the given patches.
  * @tparam PatchSeq A ddc::TypeSeq of the patches of the objects.
  */
-template <template <typename P> typename T, class PatchSeq>
+template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
 using MultipatchFieldFromSeq =
         typename detail::MultipatchFromPatchSeq<detail::MultipatchField, T, PatchSeq>::type;
 
