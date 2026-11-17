@@ -35,6 +35,7 @@ class DerivativeCalculatorCommon;
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
+  * @tparam Patches List of patches containing all the involved patches in the given direction. 
   * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
   * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
   */
