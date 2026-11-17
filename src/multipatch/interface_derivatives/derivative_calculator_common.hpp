@@ -17,8 +17,16 @@
 #include "types.hpp"
 #include "view.hpp"
 
-template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
-class DerivativeCalculatorCommon;
+
+template <class T>
+inline constexpr bool enable_deriv_calculator = false;
+
+template <class T>
+inline constexpr bool is_deriv_calculator_v
+        = enable_deriv_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
+
+// template <class Connectivity, class Grid1D, class DerivCoeffCollection>
+// class DerivativeCalculatorCommon;
 
 /**
   * @brief Abstract class to hold the interface derivative coefficient collection
@@ -27,16 +35,15 @@ class DerivativeCalculatorCommon;
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
-  * @tparam Patches List of patches containing all the involved patches in the given direction. 
   * @tparam DerivCoeffCollection A InterfaceDerivCoeffsCollection
   * that stores the InterfaceDerivCoeffs needed to compute the interface derivatives. 
   */
-template <class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection>
-class DerivativeCalculatorCommon<
-        Connectivity,
-        Grid1D,
-        ddc::TypeSeq<Patches...>,
-        DerivCoeffCollection>
+template <class Connectivity, class Grid1D, class DerivCoeffCollection>
+class DerivativeCalculatorCommon
+// <
+//         Connectivity,
+//         Grid1D,
+//         DerivCoeffCollection>
 {
     /*
         All the interfaces given as input to the MultipatchConnectivity class.
@@ -113,22 +120,33 @@ protected:
             Grid1D,
             interface_sorted_collection>;
 
+    template <class Grid1DSeq>
+    struct PatchSeq;
+
+    template <class... Grids>
+    struct PatchSeq<ddc::TypeSeq<Grids...>>
+    {
+        using type = ddc::TypeSeq<find_patch_t<Grids, all_patches>...>;
+    };
+
+    using patch_seq_type = PatchSeq<Grid1DSeq>::type;
+
     static_assert(
             ddc::type_seq_size_v<Grid1DSeq> == n_inner_interfaces + !is_periodic,
             "The number of 1D grids and inner interfaces should match.");
 
-    static_assert(
-            ddc::type_seq_size_v<Grid1DSeq> <= sizeof...(Patches),
-            "The number of given patches is insufficient.");
+    // static_assert(
+    //         ddc::type_seq_size_v<Grid1DSeq> <= sizeof...(Patches),
+    //         "The number of given patches is insufficient.");
 
-    static_assert(
-            ddc::type_seq_contains_v<
-                    Grid1DSeq,
-                    ddc::type_seq_merge_t<
-                            ddc::TypeSeq<typename Patches::Grid1...>,
-                            ddc::TypeSeq<typename Patches::Grid2...>>>,
-            "A patch is missing in the given patch list. The list has to contain all the patches "
-            "in the given Grid1D direction.");
+    // static_assert(
+    //         ddc::type_seq_contains_v<
+    //                 Grid1DSeq,
+    //                 ddc::type_seq_merge_t<
+    //                         ddc::TypeSeq<typename Patches::Grid1...>,
+    //                         ddc::TypeSeq<typename Patches::Grid2...>>>,
+    //         "A patch is missing in the given patch list. The list has to contain all the patches "
+    //         "in the given Grid1D direction.");
 
 protected:
     /// @brief Tag the interface with the correct patch order.
@@ -236,8 +254,33 @@ public:
     using idx_cross_deriv = Idx<deriv_perp_dim, deriv_par_dim>;
 
 protected:
+    template <template <typename P> class TypeOnPatch, class PatchSeq>
+    struct ToMultipatchType;
+
+    template <template <typename P> class TypeOnPatch, class... Patches>
+    struct ToMultipatchType<TypeOnPatch, ddc::TypeSeq<Patches...>>
+    {
+        using type = MultipatchType<TypeOnPatch, Patches...>;
+    };
+
+    template <template <typename P> class TypeOnPatch, class PatchSeq>
+    using MPType = typename ToMultipatchType<TypeOnPatch, PatchSeq>::type;
+
+    template <template <typename P> class TypeOnPatch, class PatchSeq>
+    struct ToMultipatchField;
+
+    template <template <typename P> class TypeOnPatch, class... Patches>
+    struct ToMultipatchField<TypeOnPatch, ddc::TypeSeq<Patches...>>
+    {
+        using type = MultipatchField<TypeOnPatch, Patches...>;
+    };
+
+    template <template <typename P> class TypeOnPatch, class PatchSeq>
+    using MPField = typename ToMultipatchField<TypeOnPatch, PatchSeq>::type;
+
+protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.
-    MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
+    MPType<IdxRangeOnPatch, patch_seq_type> const m_idx_ranges;
 
     /// @brief InterfaceDerivCoeffsCollection to collect all the needed InterfaceDerivCoeffs.
     DerivCoeffCollection const& m_deriv_coeffs_collect;
@@ -251,7 +294,7 @@ public:
      *          interface derivative calculator for each interface in the given Grid1D direction. 
      */
     DerivativeCalculatorCommon(
-            MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
+            MPType<IdxRangeOnPatch, patch_seq_type> const& idx_ranges,
             DerivCoeffCollection const& deriv_coeffs_collect)
         : m_idx_ranges(idx_ranges)
         , m_deriv_coeffs_collect(deriv_coeffs_collect)
@@ -275,7 +318,7 @@ protected:
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+            MPField<DerivFieldOnPatch_host, patch_seq_type> functions_and_derivs)
     {
         // Use the function values to compute the first derivatives.
         DField<typename patch1<I>::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_1
@@ -309,7 +352,7 @@ protected:
     double const get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+            MPField<DerivFieldOnPatch_host, patch_seq_type> functions_and_derivs)
     {
         IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
