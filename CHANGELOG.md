@@ -84,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
+- Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
 
 ### Deprecated
 
