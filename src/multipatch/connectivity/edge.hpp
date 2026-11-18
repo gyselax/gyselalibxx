@@ -48,24 +48,42 @@ struct OutsideEdge
 };
 
 
+/**
+ * @brief A type trait to check if a type is an edge (an Edge or an OutsideEdge).
+ * @tparam EdgeType The type being checked.
+ */
 template <class EdgeType>
 struct is_edge : std::false_type
 {
 };
 
+/// @brief Specialisation of is_edge for an Edge of a patch.
 template <concepts::Patch Patch, class Grid1D, Extremity extremity_val>
 struct is_edge<Edge<Patch, Grid1D, extremity_val>> : std::true_type
 {
 };
 
+/// @brief Specialisation of is_edge for the OutsideEdge.
 template <>
 struct is_edge<OutsideEdge> : std::true_type
 {
 };
 
+/**
+ * @brief A boolean indicating if a type is an edge (an Edge or an OutsideEdge).
+ * @tparam EdgeType The type being checked.
+ */
 template <class EdgeType>
 bool constexpr is_edge_v = is_edge<EdgeType>::value;
 
+/**
+ * @brief Get the id of the patch on which an edge is defined.
+ *
+ * This can be used to obtain a compile-time ordering of the edges.
+ *
+ * @tparam EdgeType The edge (an Edge or an OutsideEdge).
+ * @return The id of the patch associated with the edge, or -1 for an OutsideEdge.
+ */
 template <class EdgeType>
 constexpr int get_edge_patch_id()
 {
@@ -77,9 +95,10 @@ constexpr int get_edge_patch_id()
 }
 
 namespace concepts {
+/**
+ * @brief A concept describing an edge (an Edge or an OutsideEdge).
+ * @tparam EdgeType The type being checked.
+ */
 template <class EdgeType>
-concept Edge = requires
-{
-    is_edge_v<EdgeType>;
-};
+concept Edge = is_edge_v<EdgeType>;
 }; // namespace concepts
