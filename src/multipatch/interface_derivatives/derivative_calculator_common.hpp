@@ -326,9 +326,9 @@ protected:
                 function_2 = functions_and_derivs.template get<patch2<I>>().get_values_field();
 
         // Compute the coefficient c_I for the interface I.
-        double const interface_deriv = get_deriv_coeffs<I>().get_approx_deriv(
-                function_1[idx_to_slice_1],
-                function_2[idx_to_slice_2]);
+        double const interface_deriv
+                = get_deriv_coeffs<I>()
+                          .get_approx_deriv(function_1[idx_to_slice_1], function_2[idx_to_slice_2]);
         return interface_deriv;
     }
 
@@ -372,9 +372,8 @@ protected:
                 = functions_and_derivs.template get<patch2<I>>()[idx_to_slice_deriv_2];
 
         // Compute the coefficient c_I for the interface I.
-        double const corner_derivative = get_deriv_coeffs<I>().get_approx_cross_deriv(
-                derivs_1,
-                derivs_2);
+        double const corner_derivative
+                = get_deriv_coeffs<I>().get_approx_cross_deriv(derivs_1, derivs_2);
         return corner_derivative;
     }
 
