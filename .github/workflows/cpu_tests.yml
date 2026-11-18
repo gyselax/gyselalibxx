@@ -119,8 +119,10 @@ jobs:
             compiler:
               name: 'clang'
           - backend: 'openmp'
+            arch: 'xeon'
             toolchain: 'ci_coverage_toolchain'
           - backend: 'openmp'
+            arch: 'xeon'
             toolchain: 'debug_toolchain'
       fail-fast: false
     container:
@@ -142,12 +144,12 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
         with:
-          environment_command: '. /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}'
-          toolchain: toolchains/common_toolchains/${{ matrix.toolchain }}.cmake
+          environment_command: '. spack-stack/activate.sh --platform persee --arch ${{ matrix.arch }} --project gyselalibxx'
+          toolchain: spack-stack/platforms/common/${{ matrix.toolchain }}.cmake
       - name: Check header file counts
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         run: |
-          . /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}
+          . spack-stack/activate.sh --platform persee --arch ${{ matrix.arch }} --project gyselalibxx
           cmake --install build --prefix opt
           install_tree_count=$(find opt -name "*.hpp" | wc -l)
           src_tree_count=$(find src -name "*.hpp" | wc -l)
@@ -166,7 +168,7 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/run_tests
         with:
-          environment_command: '. /ci/spack/share/spack/setup-env.sh && spack env activate gyselalibxx-${{ matrix.backend }}'
+          environment_command: '. spack-stack/activate.sh --platform persee --arch ${{ matrix.arch }} --project gyselalibxx'
       - name: Check Test Coverage
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
         run: |

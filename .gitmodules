@@ -1,0 +1,3 @@
+[submodule "spack-stack"]
+	path = spack-stack
+	url = https://github.com/gyselax/spack-stack.git
