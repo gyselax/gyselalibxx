@@ -12,7 +12,6 @@
 #include "derivative_field_mem.hpp"
 #include "interface.hpp"
 #include "interface_derivative_coefficients.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "interfaces_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
@@ -135,23 +134,11 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>,
         ddc::ConstantExtrapolationRule<Yg>>;
 
-template <
-        bool is_approximation,
-        class Connectivity,
-        class Grid1D,
-        class PatchSeq,
-        ddc::SplineBuilderClosure SBC,
-        class InterfaceCollection>
+template <bool is_approximation, class Connectivity, class Grid1D, ddc::SplineBuilderClosure SBC>
 using InterfacesDerivativeCalculatorType = std::conditional_t<
         is_approximation,
-        InterfacesDerivativeCalculator<Connectivity, Grid1D, PatchSeq, InterfaceCollection>,
-        InterfacesExactDerivativeCalculator<
-                Connectivity,
-                Grid1D,
-                PatchSeq,
-                SBC,
-                SBC,
-                InterfaceCollection>>;
+        InterfacesDerivativeCalculator<Connectivity, Grid1D>,
+        InterfacesExactDerivativeCalculator<Connectivity, Grid1D, SBC, SBC>>;
 
 template <bool is_approximation, class InterfaceType, class IdxRange1, class IdxRange2>
 InterfaceDerivCoeffs<InterfaceType> build_interface(
@@ -499,17 +486,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
                     ddc::SplineBuilderClosure::HERMITE,
                     ddc::SplineBuilderClosure::GREVILLE);
 
-    // Collect the derivative calculators --------------------------------------------------------
-    InterfaceDerivCoeffsCollection
-            deriv_coeffs_collect_123(deriv_coeffs_1_2, deriv_coeffs_2_3, deriv_coeffs_3_1);
-    InterfaceDerivCoeffsCollection
-            deriv_coeffs_collect_456(deriv_coeffs_4_5, deriv_coeffs_5_6, deriv_coeffs_6_4);
-    InterfaceDerivCoeffsCollection
-            deriv_coeffs_collect_789(deriv_coeffs_7_8, deriv_coeffs_8_9, deriv_coeffs_9_7);
-    InterfaceDerivCoeffsCollection deriv_coeffs_collect_147(deriv_coeffs_1_4, deriv_coeffs_4_7);
-    InterfaceDerivCoeffsCollection deriv_coeffs_collect_258(deriv_coeffs_2_5, deriv_coeffs_5_8);
-    InterfaceDerivCoeffsCollection deriv_coeffs_collect_369(deriv_coeffs_3_6, deriv_coeffs_6_9);
-
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<
             IdxRangeOnPatch,
@@ -547,56 +523,56 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridX<1>,
-            ddc::TypeSeq<Patch1, Patch2, Patch3>,
-            ddc::SplineBuilderClosure::PERIODIC,
-            InterfaceDerivCoeffsCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
-            deriv_calculator_123(idx_ranges_123, deriv_coeffs_collect_123);
+            ddc::SplineBuilderClosure::PERIODIC>
+            deriv_calculator_123(
+                    idx_ranges_123,
+                    deriv_coeffs_1_2,
+                    deriv_coeffs_2_3,
+                    deriv_coeffs_3_1);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<4>,
-            ddc::TypeSeq<Patch4, Patch5, Patch6>,
-            ddc::SplineBuilderClosure::PERIODIC,
-            InterfaceDerivCoeffsCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
-            deriv_calculator_456(idx_ranges_456, deriv_coeffs_collect_456);
+            ddc::SplineBuilderClosure::PERIODIC>
+            deriv_calculator_456(
+                    idx_ranges_456,
+                    deriv_coeffs_4_5,
+                    deriv_coeffs_5_6,
+                    deriv_coeffs_6_4);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<7>,
-            ddc::TypeSeq<Patch7, Patch8, Patch9>,
-            ddc::SplineBuilderClosure::PERIODIC,
-            InterfaceDerivCoeffsCollection<Interface_7_8, Interface_8_9, Interface_9_7>>
-            deriv_calculator_789(idx_ranges_789, deriv_coeffs_collect_789);
+            ddc::SplineBuilderClosure::PERIODIC>
+            deriv_calculator_789(
+                    idx_ranges_789,
+                    deriv_coeffs_7_8,
+                    deriv_coeffs_8_9,
+                    deriv_coeffs_9_7);
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridY<1>,
-            ddc::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
-            ddc::SplineBuilderClosure::GREVILLE,
-            InterfaceDerivCoeffsCollection<Interface_1_4, Interface_4_7>>
-            deriv_calculator_147(idx_ranges_147, deriv_coeffs_collect_147);
+            ddc::SplineBuilderClosure::GREVILLE>
+            deriv_calculator_147(idx_ranges_147, deriv_coeffs_1_4, deriv_coeffs_4_7);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridY<2>,
-            ddc::TypeSeq<Patch2, Patch5, Patch8>,
-            ddc::SplineBuilderClosure::GREVILLE,
-            InterfaceDerivCoeffsCollection<Interface_2_5, Interface_5_8>>
-            deriv_calculator_258(idx_ranges_258, deriv_coeffs_collect_258);
+            ddc::SplineBuilderClosure::GREVILLE>
+            deriv_calculator_258(idx_ranges_258, deriv_coeffs_2_5, deriv_coeffs_5_8);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridY<3>,
-            ddc::TypeSeq<Patch3, Patch6, Patch9>,
-            ddc::SplineBuilderClosure::GREVILLE,
-            InterfaceDerivCoeffsCollection<Interface_3_6, Interface_6_9>>
-            deriv_calculator_369(idx_ranges_369, deriv_coeffs_collect_369);
+            ddc::SplineBuilderClosure::GREVILLE>
+            deriv_calculator_369(idx_ranges_369, deriv_coeffs_3_6, deriv_coeffs_6_9);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<

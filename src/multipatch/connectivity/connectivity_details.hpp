@@ -672,6 +672,22 @@ struct PatchIdsAreUnique<ddc::TypeSeq<Patches...>>
     }();
 };
 
+/**
+ * @brief A class to locate the patches which contain the specified grids.
+ * @tparam GridTypeSeq A DDC type sequence of the identifying grids.
+ * @tparam PatchTypeSeq A DDC type sequence containing all possible patches.
+ */
+template <ddc::concepts::type_seq GridTypeSeq, ddc::concepts::type_seq PatchTypeSeq>
+struct FindPatches;
+
+/// Specialisation of FindPatches to unpack the grids.
+template <ddc::concepts::discrete_dimension... Grids, ddc::concepts::type_seq PatchTypeSeq>
+struct FindPatches<ddc::TypeSeq<Grids...>, PatchTypeSeq>
+{
+    /// The type found by the class.
+    using type = ddc::TypeSeq<typename FindPatch<Grids, PatchTypeSeq>::type...>;
+};
+
 } // end namespace connectivity_details
 
 /// A tool to check that all the patches in a type sequence have different ids.
@@ -700,6 +716,10 @@ using interfaces_of_patch_t =
 /// A tool to find a patch which contains the specified grid.
 template <ddc::concepts::discrete_dimension Grid1D, ddc::concepts::type_seq PatchTypeSeq>
 using find_patch_t = typename connectivity_details::FindPatch<Grid1D, PatchTypeSeq>::type;
+
+/// A tool to find the patches which contain the specified grids (in the same order as the grids).
+template <ddc::concepts::type_seq GridTypeSeq, ddc::concepts::type_seq PatchTypeSeq>
+using find_patches_t = typename connectivity_details::FindPatches<GridTypeSeq, PatchTypeSeq>::type;
 
 /// A tool to find the interface which contains a specified edge.
 template <concepts::Edge EdgeType, ddc::concepts::type_seq InterfaceTypeSeq>

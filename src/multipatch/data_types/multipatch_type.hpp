@@ -3,6 +3,7 @@
 #pragma once
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "patch.hpp"
 #include "types.hpp"
 
 template <class T>
@@ -38,9 +39,10 @@ class MultipatchType;
  * @warning The objects have to be defined on different patches. Otherwise retrieving
  *          them by their patch is ill-defined.
  */
-template <class... Patches, class... InternalTypes>
+template <concepts::Patch... Patches, class... InternalTypes>
 class MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
 {
+    static_assert(sizeof...(Patches) > 0);
     static_assert(
             sizeof...(Patches) == sizeof...(InternalTypes),
             "There must be one internal type per patch");
@@ -122,7 +124,7 @@ public:
      * @tparam Patch The patch of the object to be returned.
      * @return The object on the given patch.
      */
-    template <class Patch>
+    template <concepts::Patch Patch>
     KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
             requires(!has_data_access_methods_v<TypeOnPatch<Patch>>)
     {
@@ -149,6 +151,34 @@ public:
     }
 };
 
+/**
+ * @brief A helper to build a multipatch class from a type template and a TypeSeq of patches.
+ *
+ * @tparam MultipatchClass The detail:: multipatch class template (e.g. detail::MultipatchType).
+ * @tparam T The type template which gives the type of the object stored on a patch.
+ * @tparam PatchSeq A ddc::TypeSeq of the patches.
+ */
+template <
+        template <class, class>
+        class MultipatchClass,
+        template <typename P>
+        typename T,
+        class PatchSeq>
+struct MultipatchFromPatchSeq;
+
+/// @brief Specialisation of MultipatchFromPatchSeq to unpack the patches.
+template <
+        template <class, class>
+        class MultipatchClass,
+        template <typename P>
+        typename T,
+        class... Patches>
+struct MultipatchFromPatchSeq<MultipatchClass, T, ddc::TypeSeq<Patches...>>
+{
+    /// The multipatch class defined on the patches.
+    using type = MultipatchClass<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+};
+
 } // namespace detail
 
 template <class TypeSeqPatches, class TypeSeqInternalTypes>
@@ -166,6 +196,20 @@ inline constexpr bool
  * @tparam Patches The patches of the objects in the same order of the patches
  *                 that the given objects are defined on.
  */
-template <template <typename P> typename T, class... Patches>
+template <template <typename P> typename T, concepts::Patch... Patches>
 using MultipatchType
         = detail::MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+
+/**
+ * @brief A class to store several objects that are of a type which is templated by the patch.
+ *
+ * This alias is equivalent to MultipatchType but takes the patches as a ddc::TypeSeq.
+ * I.e. `MultipatchTypeFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
+ * `MultipatchType<T, Patches...>`.
+ *
+ * @tparam T The type of the objects that are stored on the given patches.
+ * @tparam PatchSeq A ddc::TypeSeq of the patches of the objects.
+ */
+template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
+using MultipatchTypeFromSeq =
+        typename detail::MultipatchFromPatchSeq<detail::MultipatchType, T, PatchSeq>::type;

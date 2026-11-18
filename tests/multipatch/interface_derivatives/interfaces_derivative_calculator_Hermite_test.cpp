@@ -12,7 +12,6 @@
 #include "derivative_field_mem.hpp"
 #include "interface.hpp"
 #include "interface_derivative_coefficients.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "interfaces_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
@@ -447,22 +446,12 @@ struct InterfacesDerivativeCalculatorHermiteFixture<
 
     using InterfacesDerivativeCalculatorType = std::conditional_t<
             is_approximation,
-            InterfacesDerivativeCalculator<
-                    typename PatchLayout::Connectivity,
-                    Grid1AlongXg,
-                    ddc::TypeSeq<Patch1, Patch2, Patch3>,
-                    InterfaceDerivCoeffsCollection<
-                            typename PatchLayout::Interface_2_3,
-                            typename PatchLayout::Interface_1_2>>,
+            InterfacesDerivativeCalculator<typename PatchLayout::Connectivity, Grid1AlongXg>,
             InterfacesExactDerivativeCalculator<
                     typename PatchLayout::Connectivity,
                     Grid1AlongXg,
-                    ddc::TypeSeq<Patch1, Patch2, Patch3>,
                     ddc::SplineBuilderClosure::HERMITE,
-                    ddc::SplineBuilderClosure::HERMITE,
-                    InterfaceDerivCoeffsCollection<
-                            typename PatchLayout::Interface_2_3,
-                            typename PatchLayout::Interface_1_2>>>;
+                    ddc::SplineBuilderClosure::HERMITE>>;
 
     typename PatchLayout::CoordTransform1 coord_transform_1;
     typename PatchLayout::CoordTransform2 coord_transform_2;
@@ -629,17 +618,14 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     InterfaceDerivCoeffs<Interface_2_3> const
             deriv_coeffs_2_3(this->idx_range_xy2, this->idx_range_xy3);
 
-    // Collect the derivative calculators --------------------------------------------------------
-    // We do not follow the physical order to test the operator.
-    InterfaceDerivCoeffsCollection deriv_coeffs_collect(deriv_coeffs_2_3, deriv_coeffs_1_2);
-
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
             idx_ranges(this->idx_range_xy1, this->idx_range_xy2, this->idx_range_xy3);
 
     // Instantiate the derivative calculators ----------------------------------------------------
+    // We do not follow the physical order of the interfaces to test the operator.
     typename TestFixture::InterfacesDerivativeCalculatorType
-            deriv_calculator(idx_ranges, deriv_coeffs_collect);
+            deriv_calculator(idx_ranges, deriv_coeffs_2_3, deriv_coeffs_1_2);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
