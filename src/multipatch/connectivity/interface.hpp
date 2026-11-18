@@ -21,7 +21,7 @@ struct Interface
 {
     static_assert(
             get_edge_patch_id<Edge1Type>() < get_edge_patch_id<Edge2Type>(),
-            "Sort edges by patch to avoid duplicate interface definitions");
+            "Sort edges by patch id to avoid duplicate interface definitions");
     static_assert(
             !std::is_same_v<Edge1Type, OutsideEdge> || !std::is_same_v<Edge2Type, OutsideEdge>,
             "At least one edge should belong to a patch.");
