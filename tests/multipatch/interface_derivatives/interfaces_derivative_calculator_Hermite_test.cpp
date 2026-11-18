@@ -162,9 +162,9 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>>;
 
 // INTERFACES ------------------------------------------------------------------------------------
-using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+using NorthInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+using NorthInterface2 = Interface<OutsideEdge, NorthEdge<2>, true>;
+using NorthInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
 using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
 using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
@@ -276,7 +276,7 @@ struct RevPatch1
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
     using OutsideInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = ReversePatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -301,7 +301,7 @@ struct RevPatch2
     using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = ReversePatchTransform<2>;
@@ -323,10 +323,10 @@ struct RevPatch2
 struct RevPatch3
 {
     using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-    using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
+    using Interface_2_3 = Interface<EastEdge<2>, EastEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -354,7 +354,7 @@ struct ChangeBound1
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
     using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = ChangeBound1Transform;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -382,7 +382,7 @@ struct ChangeBound3
     using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
