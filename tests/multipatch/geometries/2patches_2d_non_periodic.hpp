@@ -119,12 +119,15 @@ struct BSplinesY
 
 // PATCHES ---------------------------------------------------------------------------------------
 template <int PatchIdx>
-using PatchType
-        = Patch<PatchIdx,
-                GridX<PatchIdx>,
-                GridY<PatchIdx>,
-                BSplinesX<PatchIdx>,
-                BSplinesY<PatchIdx>>;
+class PatchType
+    : public Patch<
+              PatchIdx,
+              GridX<PatchIdx>,
+              GridY<PatchIdx>,
+              BSplinesX<PatchIdx>,
+              BSplinesY<PatchIdx>>
+{
+};
 
 /// @brief First patch.
 using Patch1 = PatchType<1>;

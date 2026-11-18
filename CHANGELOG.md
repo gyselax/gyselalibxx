@@ -87,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Don't assume that elements of a `MultipatchType` have different types.
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
 - Edges in an `Interface` must be ordered by the associated `Patch::id`.
+- Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
 
 ### Deprecated
 
