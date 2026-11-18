@@ -604,6 +604,10 @@
 <td style="text-align: left;"><a href="#typedef-get_all_interfaces_along_direction_t"><strong>get_all_interfaces_along_direction_t</strong></a>  <br><em>A tool to find all interfaces along a line which passes through the requested grid.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef find_patches_t&lt; collect_grids_on_dim_t&lt; find_patch_t&lt; Grid1D, <a href="classMultipatchConnectivity.html#typedef-all_patches"><strong>all_patches</strong></a> &gt;, Grid1D, <a href="classMultipatchConnectivity.html#typedef-interface_collection"><strong>interface_collection</strong></a> &gt;, <a href="classMultipatchConnectivity.html#typedef-all_patches"><strong>all_patches</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-get_all_patches_along_direction_t"><strong>get_all_patches_along_direction_t</strong></a>  <br><em>A tool to find all patches along a line which passes through the requested grid. The patches are sorted in the order in which they are encountered along the line.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef to_tuple_t&lt; <a href="classMultipatchConnectivity.html#typedef-get_type_seq_connections_t"><strong>get_type_seq_connections_t</strong></a>&lt; QueryPatch &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-get_connections_t"><strong>get_connections_t</strong></a>  <br><em>A tool to find a tuple of all interfaces of a patch.</em></td>
 </tr>
@@ -671,6 +675,18 @@
             find_patch_t&lt;Grid1D, all_patches&gt;,
             Grid1D,
             interface_collection&gt;;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Grid1D</code> The grid indicating the direction of interest. </li>
+</ul>
+<hr>
+
+<h3 id="typedef-get_all_patches_along_direction_t">typedef get_all_patches_along_direction_t</h3>
+<p><em>A tool to find all patches along a line which passes through the requested grid. The patches are sorted in the order in which they are encountered along the line.</em> </p>
+<pre><code class="language-C++">using MultipatchConnectivity&lt; Interfaces &gt;::get_all_patches_along_direction_t =  find_patches_t&lt;
+            collect_grids_on_dim_t&lt;find_patch_t&lt;Grid1D, all_patches&gt;, Grid1D, interface_collection&gt;,
+            all_patches&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>

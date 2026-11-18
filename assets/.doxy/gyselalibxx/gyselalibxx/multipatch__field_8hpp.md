@@ -39,6 +39,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef detail::MultipatchField&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchField**](#typedef-multipatchfield)  <br>_A class to store field objects on patches._  |
+| typedef typename detail::MultipatchFromPatchSeq&lt; detail::MultipatchField, T, PatchSeq &gt;::type | [**MultipatchFieldFromSeq**](#typedef-multipatchfieldfromseq)  <br>_A class to store field objects on patches._  |
 
 
 
@@ -117,6 +118,36 @@ See detail::MultipatchField for more details. This alias creates the type T&lt;P
 
 * `T` The type of the fields/derivative fields/vector fields that are stored on the given patches. 
 * `Patches` The patches of the objects in the same order of the patches that the given objects are defined on. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### typedef MultipatchFieldFromSeq 
+
+_A class to store field objects on patches._ 
+```C++
+using MultipatchFieldFromSeq = 
+        typename detail::MultipatchFromPatchSeq<detail::MultipatchField, T, PatchSeq>::type;
+```
+
+
+
+This alias is equivalent to MultipatchField but takes the patches as a ddc::TypeSeq. I.e. `MultipatchFieldFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as `MultipatchField<T, Patches...>`.
+
+
+
+
+**Template parameters:**
+
+
+* `T` The type of the fields/derivative fields/vector fields that are stored on the given patches. 
+* `PatchSeq` A ddc::TypeSeq of the patches of the objects. 
 
 
 

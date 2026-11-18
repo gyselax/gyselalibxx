@@ -273,7 +273,6 @@ Here is a list of all files with brief descriptions:
         * **dir** [**interface\_derivatives**](dir_d1bd52a3e76a422151eefdcc4e15c189.md)     
             * **file** [**derivative\_calculator\_common.hpp**](derivative__calculator__common_8hpp.md)     
             * **file** [**interface\_derivative\_coefficients.hpp**](interface__derivative__coefficients_8hpp.md)     
-            * **file** [**interface\_derivative\_coefficients\_collection.hpp**](interface__derivative__coefficients__collection_8hpp.md)     
             * **file** [**interfaces\_derivative\_calculator.hpp**](interfaces__derivative__calculator_8hpp.md)     
             * **file** [**interfaces\_exact\_derivative\_calculator.hpp**](interfaces__exact__derivative__calculator_8hpp.md)     
         * **dir** [**spline**](dir_729d943c83b6b5573a69e28a4db4673a.md)     

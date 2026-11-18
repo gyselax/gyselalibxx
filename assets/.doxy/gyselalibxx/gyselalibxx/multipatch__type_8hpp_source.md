@@ -13,6 +13,7 @@
 #pragma once
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "patch.hpp"
 #include "types.hpp"
 
 template <class T>
@@ -27,9 +28,10 @@ namespace detail {
 template <class TypeSeqPatches, class TypeSeqInternalTypes>
 class MultipatchType;
 
-template <class... Patches, class... InternalTypes>
+template <concepts::Patch... Patches, class... InternalTypes>
 class MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<InternalTypes...>>
 {
+    static_assert(sizeof...(Patches) > 0);
     static_assert(
             sizeof...(Patches) == sizeof...(InternalTypes),
             "There must be one internal type per patch");
@@ -73,7 +75,7 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchType() noexcept = default;
 
-    template <class Patch>
+    template <concepts::Patch Patch>
     KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
             requires(!has_data_access_methods_v<TypeOnPatch<Patch>>)
     {
@@ -91,15 +93,38 @@ public:
     }
 };
 
+template <
+        template <class, class>
+        class MultipatchClass,
+        template <typename P>
+        typename T,
+        class PatchSeq>
+struct MultipatchFromPatchSeq;
+
+template <
+        template <class, class>
+        class MultipatchClass,
+        template <typename P>
+        typename T,
+        class... Patches>
+struct MultipatchFromPatchSeq<MultipatchClass, T, ddc::TypeSeq<Patches...>>
+{
+    using type = MultipatchClass<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+};
+
 } // namespace detail
 
 template <class TypeSeqPatches, class TypeSeqInternalTypes>
 inline constexpr bool
         enable_multipatch_type<detail::MultipatchType<TypeSeqPatches, TypeSeqInternalTypes>> = true;
 
-template <template <typename P> typename T, class... Patches>
+template <template <typename P> typename T, concepts::Patch... Patches>
 using MultipatchType
         = detail::MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+
+template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
+using MultipatchTypeFromSeq =
+        typename detail::MultipatchFromPatchSeq<detail::MultipatchType, T, PatchSeq>::type;
 ```
 
 

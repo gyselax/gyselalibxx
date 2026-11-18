@@ -73,7 +73,6 @@
 * **inverse** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **ipow** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **inf\_norm** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
-* **InterfaceDerivCoeffsCollection** ([**interface\_derivative\_coefficients\_collection.hpp**](interface__derivative__coefficients__collection_8hpp.md))
 * **ielec** ([**species\_info.hpp**](species__info_8hpp.md))
 * **init\_all\_species** ([**species\_init.cpp**](species__init_8cpp.md), [**species\_init.hpp**](species__init_8hpp.md))
 * **init\_kinetic\_species** ([**species\_init.cpp**](species__init_8cpp.md), [**species\_init.hpp**](species__init_8hpp.md))

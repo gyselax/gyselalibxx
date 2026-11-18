@@ -24,17 +24,17 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>derivative_field.hpp</label>
         <link refid="derivative__field_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>derivative_field_common.hpp</label>
         <link refid="derivative__field__common_8hpp_source"/>
         <childnode refid="17" relation="include">
@@ -50,7 +50,7 @@
         <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>derivative_field_mem.hpp</label>
         <link refid="derivative__field__mem_8hpp_source"/>
         <childnode refid="5" relation="include">
@@ -59,9 +59,9 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
-        </childnode>
         <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
       <node id="35">
@@ -224,7 +224,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="40">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
         <childnode refid="11" relation="include">
@@ -241,7 +241,7 @@
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
       </node>
       <node id="45">
@@ -261,8 +261,10 @@
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>types.hpp</label>
         <link refid="types_8hpp_source"/>
         <childnode refid="15" relation="include">
@@ -271,9 +273,9 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>

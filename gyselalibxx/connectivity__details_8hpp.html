@@ -701,6 +701,10 @@
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4.html"><strong>FindPatches&lt; ddc::TypeSeq&lt; Grids... &gt;, PatchTypeSeq &gt;</strong></a> &lt;Grids, PatchTypeSeq&gt;<br><em>Specialisation of</em> <a href="structconnectivity__details_1_1FindPatches.html"><em><strong>FindPatches</strong></em></a> <em>to unpack the grids.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.html"><strong>FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</strong></a> &lt;QueryGrid1D, IdxRangeHead, IdxRangeTypes&gt;<br><em>Specialisation of</em> <a href="structconnectivity__details_1_1FindRelevantIdxRangeType.html"><em><strong>FindRelevantIdxRangeType</strong></em></a> <em>to iterate recursively over the possible index range types.</em></td>
 </tr>
 <tr>
@@ -783,6 +787,10 @@
 <td style="text-align: left;"><a href="#typedef-find_patch_t"><strong>find_patch_t</strong></a>  <br><em>A tool to find a patch which contains the specified grid.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1FindPatches.html"><strong>connectivity_details::FindPatches</strong></a>&lt; GridTypeSeq, PatchTypeSeq &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-find_patches_t"><strong>find_patches_t</strong></a>  <br><em>A tool to find the patches which contain the specified grids (in the same order as the grids).</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ddc::type_seq_element_t&lt; 0, typename <a href="structconnectivity__details_1_1FindRelevantIdxRangeType.html"><strong>connectivity_details::FindRelevantIdxRangeType</strong></a>&lt; QueryGrid1D, IdxRangeTuple &gt;::type &gt;</td>
 <td style="text-align: left;"><a href="#typedef-find_relevant_idx_range_t"><strong>find_relevant_idx_range_t</strong></a>  <br><em>A tool to find the first multi-D index range which contains a specific grid.</em></td>
 </tr>
@@ -858,6 +866,12 @@
 <h3 id="typedef-find_patch_t">typedef find_patch_t</h3>
 <p><em>A tool to find a patch which contains the specified grid.</em> </p>
 <pre><code class="language-C++">using find_patch_t =  typename connectivity_details::FindPatch&lt;Grid1D, PatchTypeSeq&gt;::type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-find_patches_t">typedef find_patches_t</h3>
+<p><em>A tool to find the patches which contain the specified grids (in the same order as the grids).</em> </p>
+<pre><code class="language-C++">using find_patches_t =  typename connectivity_details::FindPatches&lt;GridTypeSeq, PatchTypeSeq&gt;::type;
 </code></pre>
 <hr>
 

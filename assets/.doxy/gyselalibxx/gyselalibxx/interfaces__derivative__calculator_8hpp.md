@@ -18,7 +18,7 @@
 * `#include "edge.hpp"`
 * `#include "edge_transformation.hpp"`
 * `#include "interface.hpp"`
-* `#include "interface_derivative_coefficients_collection.hpp"`
+* `#include "interface_derivative_coefficients.hpp"`
 * `#include "multipatch_field.hpp"`
 * `#include "multipatch_type.hpp"`
 * `#include "types.hpp"`
@@ -42,7 +42,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md) &lt;class Connectivity, class Grid1D, Patches, class DerivCoeffCollection&gt;<br>_Class to compute the interface derivatives along a given direction on all the interfaces with an approximation formula._  |
+| class | [**InterfacesDerivativeCalculator**](classInterfacesDerivativeCalculator.md) &lt;class Connectivity, class Grid1D&gt;<br>_Class to compute the interface derivatives along a given direction on all the interfaces with an approximation formula._  |
 
 
 

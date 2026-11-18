@@ -63,6 +63,7 @@
 | struct | [**FindPatch&lt; Grid1D, ddc::TypeSeq&lt;&gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_4_01_4.md) &lt;Grid1D&gt;<br>_Specialisation of_ [_**FindPatch**_](structconnectivity__details_1_1FindPatch.md) _for an empty patch list._ |
 | struct | [**FindPatchImpl&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt;, false &gt;**](structconnectivity__details_1_1FindPatchImpl_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01Rema719fedd1c49728e1b817d795613a178c.md) &lt;class Grid1D, class Patch1, RemainingPatchTypes&gt;<br>_Specialisation of_ [_**FindPatchImpl**_](structconnectivity__details_1_1FindPatchImpl.md) _to iterate recursively over the patch type sequence._ |
 | struct | [**FindPatchImpl&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt;, true &gt;**](structconnectivity__details_1_1FindPatchImpl_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01Remaf6552449b60d10fbdc68783fc4df2a48.md) &lt;class Grid1D, class Patch1, RemainingPatchTypes&gt;<br>_Specialisation of_ [_**FindPatchImpl**_](structconnectivity__details_1_1FindPatchImpl.md) _for the case where the first patch contains the grid._ |
+| struct | [**FindPatches&lt; ddc::TypeSeq&lt; Grids... &gt;, PatchTypeSeq &gt;**](structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4.md) &lt;Grids, PatchTypeSeq&gt;<br>_Specialisation of_ [_**FindPatches**_](structconnectivity__details_1_1FindPatches.md) _to unpack the grids._ |
 | struct | [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.md) &lt;QueryGrid1D, IdxRangeHead, IdxRangeTypes&gt;<br>_Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _to iterate recursively over the possible index range types._ |
 | struct | [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.md) &lt;QueryGrid1D&gt;<br>_Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _for an empty list of index range types._ |
 | struct | [**PatchConnection&lt; Patch, ddc::TypeSeq&lt; InterfaceType &gt; &gt;**](structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_01InterfaceType_01_4_01_4.md) &lt;Patch, class InterfaceType&gt;<br>_Specialisation of_ [_**PatchConnection**_](structconnectivity__details_1_1PatchConnection.md) _for an interface list with one element._ |
@@ -87,6 +88,7 @@
 | typedef typename [**connectivity\_details::ExtractPatches**](structconnectivity__details_1_1ExtractPatches.md)&lt; EdgeTypeSeq &gt;::type | [**extract\_patches\_t**](#typedef-extract_patches_t)  <br>_A tool to find all the patches used by the various edges._  |
 | typedef typename [**connectivity\_details::FindInterface**](structconnectivity__details_1_1FindInterface.md)&lt; EdgeType, InterfaceTypeSeq &gt;::type | [**find\_associated\_interface\_t**](#typedef-find_associated_interface_t)  <br>_A tool to find the interface which contains a specified edge._  |
 | typedef typename [**connectivity\_details::FindPatch**](structconnectivity__details_1_1FindPatch.md)&lt; Grid1D, PatchTypeSeq &gt;::type | [**find\_patch\_t**](#typedef-find_patch_t)  <br>_A tool to find a patch which contains the specified grid._  |
+| typedef typename [**connectivity\_details::FindPatches**](structconnectivity__details_1_1FindPatches.md)&lt; GridTypeSeq, PatchTypeSeq &gt;::type | [**find\_patches\_t**](#typedef-find_patches_t)  <br>_A tool to find the patches which contain the specified grids (in the same order as the grids)._  |
 | typedef ddc::type\_seq\_element\_t&lt; 0, typename [**connectivity\_details::FindRelevantIdxRangeType**](structconnectivity__details_1_1FindRelevantIdxRangeType.md)&lt; QueryGrid1D, IdxRangeTuple &gt;::type &gt; | [**find\_relevant\_idx\_range\_t**](#typedef-find_relevant_idx_range_t)  <br>_A tool to find the first multi-D index range which contains a specific grid._  |
 | typedef typename [**connectivity\_details::PatchConnection**](structconnectivity__details_1_1PatchConnection.md)&lt; StartPatch, InterfaceTypeSeq &gt;::type | [**interfaces\_of\_patch\_t**](#typedef-interfaces_of_patch_t)  <br>_A tool to find all interfaces directly connected to the start patch._  |
 | typedef typename [**connectivity\_details::StripOutsideEdges**](structconnectivity__details_1_1StripOutsideEdges.md)&lt; ddc::TypeSeq&lt; EdgeType... &gt; &gt;::type | [**strip\_outside\_edges\_t**](#typedef-strip_outside_edges_t)  <br>_A tool to find all edges which are not_ [_**OutsideEdge**_](structOutsideEdge.md) _types._ |
@@ -240,6 +242,20 @@ using find_associated_interface_t =
 _A tool to find a patch which contains the specified grid._ 
 ```C++
 using find_patch_t =  typename connectivity_details::FindPatch<Grid1D, PatchTypeSeq>::type;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef find\_patches\_t 
+
+_A tool to find the patches which contain the specified grids (in the same order as the grids)._ 
+```C++
+using find_patches_t =  typename connectivity_details::FindPatches<GridTypeSeq, PatchTypeSeq>::type;
 ```
 
 

@@ -592,32 +592,16 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
-template &lt;class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection&gt;
-class InterfacesDerivativeCalculator;
-
-template &lt;class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection&gt;
-class InterfacesDerivativeCalculator&lt;
-        Connectivity,
-        Grid1D,
-        ddc::TypeSeq&lt;Patches...&gt;,
-        DerivCoeffCollection&gt;
-    : public DerivativeCalculatorCommon&lt;
-              Connectivity,
-              Grid1D,
-              ddc::TypeSeq&lt;Patches...&gt;,
-              DerivCoeffCollection&gt;
+template &lt;class Connectivity, class Grid1D&gt;
+class InterfacesDerivativeCalculator : public DerivativeCalculatorCommon&lt;Connectivity, Grid1D&gt;
 {
-    using base_type = DerivativeCalculatorCommon&lt;
-            Connectivity,
-            Grid1D,
-            ddc::TypeSeq&lt;Patches...&gt;,
-            DerivCoeffCollection&gt;;
+    using base_type = DerivativeCalculatorCommon&lt;Connectivity, Grid1D&gt;;
 
 private:
     template &lt;std::size_t I&gt;
@@ -655,19 +639,22 @@ public:
 
 private:
     using base_type::m_idx_ranges;
+    using typename base_type::MultipatchDerivField_host;
+    using typename base_type::MultipatchIdxRange;
 
 public:
-    InterfacesDerivativeCalculator(
-            MultipatchType&lt;IdxRangeOnPatch, Patches...&gt; const&amp; idx_ranges,
-            DerivCoeffCollection const&amp; deriv_coeffs_collect)
-        : base_type(idx_ranges, deriv_coeffs_collect)
+    template &lt;class... DerivCoeffs&gt;
+    explicit InterfacesDerivativeCalculator(
+            MultipatchIdxRange const&amp; idx_ranges,
+            DerivCoeffs const&amp;... deriv_coeffs)
+        : base_type(idx_ranges, deriv_coeffs...)
     {
     }
 
     template &lt;class IdxDeriv, class IdxPar&gt;
     void operator()(
             IdxDeriv const&amp; deriv_order,
-            MultipatchField&lt;DerivFieldOnPatch_host, Patches...&gt; functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             IdxPar const&amp; idx_par)
     {
         // Check the input types.
@@ -686,9 +673,7 @@ public:
     }
 
     template &lt;class IdxDeriv&gt;
-    void operator()(
-            IdxDeriv const&amp; deriv_order,
-            MultipatchField&lt;DerivFieldOnPatch_host, Patches...&gt; functions_and_derivs)
+    void operator()(IdxDeriv const&amp; deriv_order, MultipatchDerivField_host functions_and_derivs)
     {
         static_assert(
                 (std::is_same_v&lt;IdxDeriv, idx_deriv_perp&gt;)
@@ -724,7 +709,7 @@ private:
     template &lt;typename IdxDerivs, class GridPar1D, std::size_t... I&gt;
     void update_derivatives(
             IdxDerivs const&amp; deriv_order,
-            MultipatchField&lt;DerivFieldOnPatch_host, Patches...&gt; functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             Idx&lt;GridPar1D&gt; const&amp; idx_to_slice,
             std::integer_sequence&lt;std::size_t, I...&gt;)
     {
@@ -747,7 +732,7 @@ private:
     template &lt;std::size_t I, typename IdxDerivs&gt;
     void update_derivatives_at_interface(
             IdxDerivs const&amp; deriv_order,
-            MultipatchField&lt;DerivFieldOnPatch_host, Patches...&gt; functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             int&amp; value_previous_idx_to_slice)
     {
         constexpr bool is_first_deriv = std::is_same_v&lt;IdxDerivs, idx_deriv_perp&gt;;
@@ -757,9 +742,11 @@ private:
         base_type::template set_slice_indexes&lt;
                 I&gt;(value_previous_idx_to_slice, idx_to_slice_1, idx_to_slice_2);
 
-        double const reconstructed_deriv = base_type::template get_approximated_deriv&lt;
-                I,
-                is_first_deriv&gt;(idx_to_slice_1, idx_to_slice_2, functions_and_derivs);
+        double const reconstructed_deriv
+                = base_type::template get_approximated_deriv&lt;I, is_first_deriv&gt;(
+                        idx_to_slice_1,
+                        idx_to_slice_2,
+                        get_const_field(functions_and_derivs));
 
         // Get the correct indices for the slices.
         Idx&lt;grid_perp1&lt;I&gt;&gt; idx_perp_1 = this-&gt;template get_idx_interface&lt;true, I, patch1&lt;I&gt;&gt;();

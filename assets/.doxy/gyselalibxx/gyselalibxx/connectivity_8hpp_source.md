@@ -49,6 +49,11 @@ public:
             get_type_seq_connections_t<QueryPatch2>>;
 
     template <class Grid1D>
+    using get_all_patches_along_direction_t = find_patches_t<
+            collect_grids_on_dim_t<find_patch_t<Grid1D, all_patches>, Grid1D, interface_collection>,
+            all_patches>;
+
+    template <class Grid1D>
     using get_all_interfaces_along_direction_t = collect_interfaces_on_dim_t<
             find_patch_t<Grid1D, all_patches>,
             Grid1D,

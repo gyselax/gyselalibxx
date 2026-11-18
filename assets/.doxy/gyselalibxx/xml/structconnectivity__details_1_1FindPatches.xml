@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1FindPatches" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::FindPatches</compoundname>
+    <templateparamlist>
+      <param>
+        <type>ddc::concepts::type_seq</type>
+        <declname>GridTypeSeq</declname>
+        <defname>GridTypeSeq</defname>
+      </param>
+      <param>
+        <type>ddc::concepts::type_seq</type>
+        <declname>PatchTypeSeq</declname>
+        <defname>PatchTypeSeq</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to locate the patches which contain the specified grids. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>GridTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DDC type sequence of the identifying grids. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PatchTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DDC type sequence containing all possible patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="681" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="681" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -10,14 +10,16 @@
 
 
 
+* `#include <tuple>`
 * `#include <typeinfo>`
+* `#include <utility>`
 * `#include <ddc/ddc.hpp>`
 * `#include "connectivity_details.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "edge.hpp"`
 * `#include "edge_transformation.hpp"`
 * `#include "interface.hpp"`
-* `#include "interface_derivative_coefficients_collection.hpp"`
+* `#include "interface_derivative_coefficients.hpp"`
 * `#include "multipatch_field.hpp"`
 * `#include "multipatch_type.hpp"`
 * `#include "types.hpp"`
@@ -41,7 +43,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md) &lt;class Connectivity, class Grid1D, Patches, class DerivCoeffCollection&gt;<br>_Abstract class to hold the interface derivative coefficient collection and the index ranges. This is the superclass for interface derivative calculators defined in this folder._  |
+| class | [**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md) &lt;class Connectivity, class Grid1D&gt;<br>_Abstract class to hold the interface derivative coefficients and the index ranges. This is the superclass for interface derivative calculators defined in this folder._  |
 
 
 

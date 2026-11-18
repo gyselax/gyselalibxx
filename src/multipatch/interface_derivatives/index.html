@@ -1089,21 +1089,16 @@ C_{trunc} =
 <h3 id="how-to-use-the-interfacesderivativecalculator-operator">How to use the InterfacesDerivativeCalculator operator?</h3>
 <p><code>InterfacesDerivativeCalculator</code> computes the interface derivatives using the approximation.</p>
 <p>First, for each interface in the geometry, we instantiate a <code>InterfaceDerivCoeffs</code>
-(see <a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the InterfaceDerivCoeffs operator?</a>).
-We store a constant reference to all the derivative calculators in a <code>InterfaceDerivCoeffsCollection</code>.</p>
+(see <a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the InterfaceDerivCoeffs operator?</a>).</p>
 <pre><code class="language-cpp">InterfaceDerivCoeffs&lt;Interface_1&gt; deriv_coeffs_1(...);
 InterfaceDerivCoeffs&lt;Interface_2&gt; deriv_coeffs_2(...);
 ...
-
-InterfaceDerivCoeffsCollection deriv_coeffs_collect (deriv_coeffs_1, deriv_coeffs_2, ...);
 </code></pre>
-<p>We can then instantiate <code>InterfacesDerivativeCalculator</code> with the tuple of derivative calculators.</p>
+<p>We can then instantiate <code>InterfacesDerivativeCalculator</code> with the derivative calculators.</p>
 <pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;
         Connectivity,                               // MultipatchConnectivity class
-        Grid1D,                                     // the given direction.
-        ddc::TypeSeq&lt;Patch1, Patch2, ...&gt;   // list of patches containing all the needed ones
-        InterfaceDerivCoeffsCollection&lt;Interface_1, Interface_2, ...&gt;&gt;
-        deriv_calculator(idx_ranges, deriv_coeffs_collect);
+        Grid1D&gt;                                     // the given direction.
+        deriv_calculator(idx_ranges, deriv_coeffs_1, deriv_coeffs_2, ...);
 </code></pre>
 <p>with <code>idx_ranges</code> a <code>MultipatchType&lt;IdxRangeonPatch, Patch1, Patch2, ...&gt;</code> object.</p>
 <p>If we want to solve the system for a given function, we then use the operator <code>operator()</code>.</p>
@@ -1127,28 +1122,20 @@ We use additional interpolation points as closure condition for the equivalent g
 the <em>y</em> direction (i.e. <code>ddc::BoundCond::GREVILLE</code>).</p>
 <p>So, we start by defining the <code>InterfacesDerivativeCalculator</code> matrices for each periodic direction
 <span class="arithmatex">\(\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}\)</span> (<code>GridX1</code>, <code>GridX4</code> and <code>GridX7</code>).</p>
-<pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridX1, 
-        ddc::TypeSeq&lt;Patch1, Patch2, Patch3&gt;,
-        InterfaceDerivCoeffsCollection&lt;Interface_1_2, Interface_2_3, Interface_3_1&gt;&gt;
-        deriv_calculator_123(idx_ranges_123, deriv_coeffs_collect_123);
+<pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridX1&gt;
+        deriv_calculator_123(idx_ranges_123, deriv_coeffs_1, deriv_coeffs_2, deriv_coeffs_3);
 
-InterfacesDerivativeCalculator&lt;Connectivity, GridX4, 
-        ddc::TypeSeq&lt;Patch4, Patch5, Patch6&gt;,
-        InterfaceDerivCoeffsCollection&lt;Interface_4_5, Interface_5_6, Interface_6_4&gt;&gt;
-        deriv_calculator_456(idx_ranges_456, deriv_coeffs_collect_456);
+InterfacesDerivativeCalculator&lt;Connectivity, GridX4&gt;
+        deriv_calculator_456(idx_ranges_456, deriv_coeffs_4, deriv_coeffs_5, deriv_coeffs_6);
 // ...
 </code></pre>
 <p>We also define <code>InterfacesDerivativeCalculator</code> matrices for each non-periodic direction
 <span class="arithmatex">\(\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}\)</span> (<code>GridY1</code>, <code>GridY2</code> and <code>GridY3</code>).</p>
-<pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridY1, 
-        ddc::TypeSeq&lt;Patch1, Patch4, Patch7&gt;,
-        InterfaceDerivCoeffsCollection&lt;Interface_1_4, Interface_4_7&gt;&gt;
-        deriv_calculator_147(idx_ranges_147, deriv_coeffs_collect_147);
+<pre><code class="language-cpp">InterfacesDerivativeCalculator&lt;Connectivity, GridY1&gt;
+        deriv_calculator_147(idx_ranges_147, deriv_coeffs_1_4, deriv_coeffs_4_7);
 
-InterfacesDerivativeCalculator&lt;Connectivity, GridY2, 
-        ddc::TypeSeq&lt;Patch2, Patch5, Patch8&gt;,
-        InterfaceDerivCoeffsCollection&lt;Interface_2_5, Interface_5_8&gt;&gt;
-        deriv_calculator_258(idx_ranges_258, deriv_coeffs_collect_258);
+InterfacesDerivativeCalculator&lt;Connectivity, GridY2&gt;
+        deriv_calculator_258(idx_ranges_258, deriv_coeffs_2_5, deriv_coeffs_5_8);
 // ...
 </code></pre>
 <blockquote>
@@ -1185,23 +1172,18 @@ It is recommended to compute the first derivatives on <em>every</em> group of pa
 <h3 id="how-to-use-the-interfacesexactderivativecalculator-operator">How to use the InterfacesExactDerivativeCalculator operator?</h3>
 <p><code>InterfacesExactDerivativeCalculator</code> computes the interface derivatives using the exact formulation.</p>
 <p>As for <code>InterfacesDerivativeCalculator</code>, we start with instantiating a <code>InterfaceDerivCoeffs</code>
-(see <a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the InterfaceDerivCoeffs operator?</a>).
-We store a constant reference of all the derivative calculator in a <code>InterfaceDerivCoeffsCollection</code>.</p>
+(see <a href="#how-to-use-the-interfacederivcoeffs-operator">How to use the InterfaceDerivCoeffs operator?</a>).</p>
 <pre><code class="language-cpp">InterfaceDerivCoeffs&lt;Interface_1&gt; derivative_calculator_1(...);
 InterfaceDerivCoeffs&lt;Interface_2&gt; derivative_calculator_2(...);
 ...
-
-InterfaceDerivCoeffsCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 </code></pre>
 <p>We can then instantiate <code>InterfacesExactDerivativeCalculator</code> with the tuple of derivative calculators.</p>
 <pre><code class="language-cpp">InterfacesExactDerivativeCalculator&lt;
         Connectivity,                               // MultipatchConnectivity class
         Grid1D,                                     // the given direction.
-        ddc::TypeSeq&lt;Patch1, Patch2, ...&gt;   // list of patches containing all the needed ones
         BoundCondGlobalLower,                       // boundary condition for the equivalent global spline
-        BoundCondGlobalUpper,                       // boundary condition for the equivalent global spline
-        InterfaceDerivCoeffsCollection&lt;Interface_1, Interface_2, ...&gt;&gt;
-        matrix(idx_ranges, derivative_calculators);
+        BoundCondGlobalUpper&gt;                       // boundary condition for the equivalent global spline
+        matrix(idx_ranges, derivative_calculator_1, derivative_calculator_2, ...);
 </code></pre>
 <p>with <code>idx_ranges</code> a <code>MultipatchType&lt;IdxRangeonPatch, Patch1, Patch2, ...&gt;</code> object.</p>
 <p>During the instantiation, <code>InterfacesExactDerivativeCalculator</code> will allocate memory for the matrix <span class="arithmatex">\((\mathbb{I} - M)\)</span>,
@@ -1215,35 +1197,27 @@ and fills in the derivatives in the <code>functions_and_derivs</code> collection
 we define the <code>InterfacesExactDerivativeCalculator</code> matrices for each periodic direction
 <span class="arithmatex">\(\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}\)</span> (<code>GridX1</code>, <code>GridX4</code> and <code>GridX7</code>).</p>
 <pre><code class="language-cpp">InterfacesExactDerivativeCalculator&lt;Connectivity, GridX1, 
-        ddc::TypeSeq&lt;Patch1, Patch2, Patch3&gt;, 
         ddc::BoundCond::PERIODIC, 
-        ddc::BoundCond::PERIODIC,
-        InterfaceDerivCoeffsCollection&lt;Interface_1_2, Interface_2_3, Interface_3_1&gt;&gt;
-        matrix_123(idx_ranges_123, derivative_calculators_123);
+        ddc::BoundCond::PERIODIC&gt;
+        matrix_123(idx_ranges_123, derivative_calculator_1, derivative_calculator_2, derivative_calculator_3);
 
 InterfacesExactDerivativeCalculator&lt;Connectivity, GridX4, 
-        ddc::TypeSeq&lt;Patch4, Patch5, Patch6&gt;,
         ddc::BoundCond::PERIODIC, 
-        ddc::BoundCond::PERIODIC,
-        InterfaceDerivCoeffsCollection&lt;Interface_4_5, Interface_5_6, Interface_6_4&gt;&gt;
-        matrix_456(idx_ranges_456, derivative_calculators_456);
+        ddc::BoundCond::PERIODIC&gt;
+        matrix_456(idx_ranges_456, derivative_calculator_4, derivative_calculator_5, derivative_calculator_6);
 // ...
 </code></pre>
 <p>We also define <code>InterfacesExactDerivativeCalculator</code> matrices for each non-periodic direction
 <span class="arithmatex">\(\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}\)</span> (<code>GridY1</code>, <code>GridY2</code> and <code>GridY3</code>).</p>
 <pre><code class="language-cpp">InterfacesExactDerivativeCalculator&lt;Connectivity, GridY1, 
-        ddc::TypeSeq&lt;Patch1, Patch4, Patch7&gt;,
         ddc::BoundCond::GREVILLE, 
-        ddc::BoundCond::GREVILLE,
-        InterfaceDerivCoeffsCollection&lt;Interface_1_4, Interface_4_7&gt;&gt;
-        matrix_147(idx_ranges_147, derivative_calculators_147);
+        ddc::BoundCond::GREVILLE&gt;
+        matrix_147(idx_ranges_147, derivative_calculator_1_4, derivative_calculator_4_7);
 
 InterfacesExactDerivativeCalculator&lt;Connectivity, GridY2, 
-        ddc::TypeSeq&lt;Patch2, Patch5, Patch8&gt;,
         ddc::BoundCond::GREVILLE, 
-        ddc::BoundCond::GREVILLE,
-        InterfaceDerivCoeffsCollection&lt;Interface_2_5, Interface_5_8&gt;&gt;
-        matrix_258(idx_ranges_258, derivative_calculators_258);
+        ddc::BoundCond::GREVILLE&gt;
+        matrix_258(idx_ranges_258, derivative_calculator_2_5, derivative_calculator_5_8);
 // ...
 </code></pre>
 <p>The call to the operators is identical as for <code>InterfacesDerivativeCalculator</code>.</p>

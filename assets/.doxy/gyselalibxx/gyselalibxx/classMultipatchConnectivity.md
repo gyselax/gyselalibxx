@@ -37,6 +37,7 @@ _A helper class which provides functionalities to recognise how different patche
 | typedef extract\_patches\_t&lt; [**inner\_edges**](classMultipatchConnectivity.md#typedef-inner_edges) &gt; | [**all\_patches**](#typedef-all_patches)  <br>_A type sequence of all the patches handled by this class._  |
 | typedef ddcHelper::type\_seq\_intersection\_t&lt; [**get\_type\_seq\_connections\_t**](classMultipatchConnectivity.md#typedef-get_type_seq_connections_t)&lt; QueryPatch1 &gt;, [**get\_type\_seq\_connections\_t**](classMultipatchConnectivity.md#typedef-get_type_seq_connections_t)&lt; QueryPatch2 &gt; &gt; | [**find\_connections\_t**](#typedef-find_connections_t)  <br>_A tool to find all interfaces linking 2 patches._  |
 | typedef collect\_interfaces\_on\_dim\_t&lt; find\_patch\_t&lt; Grid1D, [**all\_patches**](classMultipatchConnectivity.md#typedef-all_patches) &gt;, Grid1D, [**interface\_collection**](classMultipatchConnectivity.md#typedef-interface_collection) &gt; | [**get\_all\_interfaces\_along\_direction\_t**](#typedef-get_all_interfaces_along_direction_t)  <br>_A tool to find all interfaces along a line which passes through the requested grid._  |
+| typedef find\_patches\_t&lt; collect\_grids\_on\_dim\_t&lt; find\_patch\_t&lt; Grid1D, [**all\_patches**](classMultipatchConnectivity.md#typedef-all_patches) &gt;, Grid1D, [**interface\_collection**](classMultipatchConnectivity.md#typedef-interface_collection) &gt;, [**all\_patches**](classMultipatchConnectivity.md#typedef-all_patches) &gt; | [**get\_all\_patches\_along\_direction\_t**](#typedef-get_all_patches_along_direction_t)  <br>_A tool to find all patches along a line which passes through the requested grid. The patches are sorted in the order in which they are encountered along the line._  |
 | typedef to\_tuple\_t&lt; [**get\_type\_seq\_connections\_t**](classMultipatchConnectivity.md#typedef-get_type_seq_connections_t)&lt; QueryPatch &gt; &gt; | [**get\_connections\_t**](#typedef-get_connections_t)  <br>_A tool to find a tuple of all interfaces of a patch._  |
 | typedef interfaces\_of\_patch\_t&lt; QueryPatch, [**interface\_collection**](classMultipatchConnectivity.md#typedef-interface_collection) &gt; | [**get\_type\_seq\_connections\_t**](#typedef-get_type_seq_connections_t)  <br>_A tool to find a type sequence of all interfaces of a patch._  |
 | typedef strip\_outside\_edges\_t&lt; typename Interfaces::Edge1..., typename Interfaces::Edge2... &gt; | [**inner\_edges**](#typedef-inner_edges)  <br>_A type sequence of all the edges handled by this class except the OuterEdge types._  |
@@ -164,6 +165,33 @@ using MultipatchConnectivity< Interfaces >::get_all_interfaces_along_direction_t
             find_patch_t<Grid1D, all_patches>,
             Grid1D,
             interface_collection>;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `Grid1D` The grid indicating the direction of interest. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### typedef get\_all\_patches\_along\_direction\_t 
+
+_A tool to find all patches along a line which passes through the requested grid. The patches are sorted in the order in which they are encountered along the line._ 
+```C++
+using MultipatchConnectivity< Interfaces >::get_all_patches_along_direction_t =  find_patches_t<
+            collect_grids_on_dim_t<find_patch_t<Grid1D, all_patches>, Grid1D, interface_collection>,
+            all_patches>;
 ```
 
 

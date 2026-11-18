@@ -702,6 +702,14 @@
 <td style="text-align: left;"><a href="#typedef-dvectorfieldonpatch"><strong>DVectorFieldOnPatch</strong></a>  <br><em>A</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>of doubles defined on the</em><a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s 2D logical domain.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef DerivConstField&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-derivconstfieldonpatch"><strong>DerivConstFieldOnPatch</strong></a>  <br><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef host_t&lt; DerivConstFieldOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-derivconstfieldonpatch_host"><strong>DerivConstFieldOnPatch_host</strong></a>  <br><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt;, 1 &gt;</td>
 <td style="text-align: left;"><a href="#typedef-derivfieldmemonpatch"><strong>DerivFieldMemOnPatch</strong></a>  <br><em>A field memory with derivatives containing the function values on the 2D grid, the first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></td>
 </tr>
@@ -938,6 +946,24 @@
         double,
         typename Patch::IdxRange12,
         VectorIndexSet&lt;typename Patch::Dim1, typename Patch::Dim2&gt;&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivconstfieldonpatch">typedef DerivConstFieldOnPatch</h3>
+<p><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).</em></p>
+<pre><code class="language-C++">using DerivConstFieldOnPatch =  DerivConstField&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-derivconstfieldonpatch_host">typedef DerivConstFieldOnPatch_host</h3>
+<p><em>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host.</em></p>
+<pre><code class="language-C++">using DerivConstFieldOnPatch_host =  host_t&lt;DerivConstFieldOnPatch&lt;Patch&gt;&gt;;
 </code></pre>
 <hr>
 

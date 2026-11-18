@@ -619,6 +619,11 @@ public:
             get_type_seq_connections_t&lt;QueryPatch2&gt;&gt;;
 
     template &lt;class Grid1D&gt;
+    using get_all_patches_along_direction_t = find_patches_t&lt;
+            collect_grids_on_dim_t&lt;find_patch_t&lt;Grid1D, all_patches&gt;, Grid1D, interface_collection&gt;,
+            all_patches&gt;;
+
+    template &lt;class Grid1D&gt;
     using get_all_interfaces_along_direction_t = collect_interfaces_on_dim_t&lt;
             find_patch_t&lt;Grid1D, all_patches&gt;,
             Grid1D,

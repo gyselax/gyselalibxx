@@ -34,8 +34,8 @@
 
 ## e
 
-* **extremity\_1** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
-* **extremity\_2** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
+* **extremity\_1** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md), [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
+* **extremity\_2** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md), [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
 * **extremity** ([**Edge**](structEdge.md))
 
 
@@ -48,7 +48,7 @@
 ## i
 
 * **internal\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
-* **is\_periodic** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md))
+* **is\_periodic** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md))
 * **ipiv** ([**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Dense**](classMatrix__Dense.md))
 * **id** ([**Patch&lt; PatchId, grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md), [**tensor\_tools::VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md))
 * **is\_valid\_rhs\_function\_v** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
@@ -138,8 +138,8 @@
 * **m\_weights\_patch\_1\_alloc** ([**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md))
 * **m\_weights\_patch\_2** ([**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md))
 * **m\_weights\_patch\_2\_alloc** ([**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md))
-* **m\_deriv\_coeffs\_collect** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
-* **m\_idx\_ranges** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classInterfacesDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches992a465ddaf32ad2e1b39ede53a467ad.md), [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
+* **m\_deriv\_coeffs** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md))
+* **m\_idx\_ranges** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md), [**InterfacesDerivativeCalculator**](classInterfacesDerivativeCalculator.md), [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
 * **m\_Q** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
 * **m\_R1** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
 * **m\_R2** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
@@ -200,11 +200,10 @@
 * **m\_nb\_gyro\_points** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_comm** ([**IMPITranspose**](classIMPITranspose.md), [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md))
 * **m\_threshold** ([**InfNormResidual**](classInfNormResidual.md))
-* **m\_deriv\_coeffs\_collection** ([**InterfaceDerivCoeffsCollection**](classInterfaceDerivCoeffsCollection.md))
-* **m\_interface\_derivatives** ([**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
-* **m\_matrix** ([**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
-* **m\_vector** ([**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
-* **m\_vector\_par\_signs** ([**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
+* **m\_interface\_derivatives** ([**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
+* **m\_matrix** ([**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
+* **m\_vector** ([**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
+* **m\_vector\_par\_signs** ([**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
 * **m\_mode\_k** ([**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
 * **m\_amplitude** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))
 * **m\_density** ([**KineticSource**](classKineticSource.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md), [**KrookSourceConstant**](classKrookSourceConstant.md))
@@ -346,8 +345,8 @@
 * **n** ([**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md), [**Matrix**](classMatrix.md))
 * **n\_minus\_1** ([**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md))
 * **n\_minus\_2** ([**DerivReconstructionCoeffs**](classDerivReconstructionCoeffs.md))
-* **n\_inner\_interfaces** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
-* **number\_of\_interfaces** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md))
+* **n\_inner\_interfaces** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md), [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
+* **number\_of\_interfaces** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md))
 * **n\_distributed\_dimensions** ([**IMPILayout**](classIMPILayout.md))
 * **nb** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **n\_dims** ([**Patch&lt; PatchId, grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
@@ -365,7 +364,7 @@
 
 ## p
 
-* **patch\_order\_matches\_interfaces** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md), [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md))
+* **patch\_order\_matches\_interfaces** ([**DerivativeCalculatorCommon**](classDerivativeCalculatorCommon.md), [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md))
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
 * **PERIODIC** ([**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **patch\_id** ([**SplineBuilderCollection::Build\_BuilderType**](structSplineBuilderCollection_1_1Build__BuilderType.md))

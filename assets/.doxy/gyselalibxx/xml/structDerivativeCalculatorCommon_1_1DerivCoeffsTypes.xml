@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structDerivativeCalculatorCommon_1_1DerivCoeffsTypes" kind="struct" language="C++" prot="private">
+    <compoundname>DerivativeCalculatorCommon::DerivCoeffsTypes</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class IndexSeq</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="188" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="188" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -65,6 +65,8 @@
 | typedef VectorConstField&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt; | [**DVectorConstFieldOnPatch**](#typedef-dvectorconstfieldonpatch)  <br>_A ConstVectorField of doubles defined on the_ [_**Patch**_](structPatch.md) _'s 2D logical domain._ |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt; | [**DVectorFieldMemOnPatch**](#typedef-dvectorfieldmemonpatch)  <br>_A_ [_**VectorFieldMem**_](classVectorFieldMem.md) _of doubles defined on the_[_**Patch**_](structPatch.md) _'s 2D logical domain._ |
 | typedef [**VectorField**](classVectorField.md)&lt; double, typename Patch::IdxRange12, VectorIndexSet&lt; typename Patch::Dim1, typename Patch::Dim2 &gt; &gt; | [**DVectorFieldOnPatch**](#typedef-dvectorfieldonpatch)  <br>_A_ [_**VectorField**_](classVectorField.md) _of doubles defined on the_[_**Patch**_](structPatch.md) _'s 2D logical domain._ |
+| typedef DerivConstField&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt; &gt; | [**DerivConstFieldOnPatch**](#typedef-derivconstfieldonpatch)  <br>_A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y)._ |
+| typedef host\_t&lt; DerivConstFieldOnPatch&lt; [**Patch**](structPatch.md) &gt; &gt; | [**DerivConstFieldOnPatch\_host**](#typedef-derivconstfieldonpatch_host)  <br>_A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host._ |
 | typedef [**DerivFieldMem**](classDerivFieldMem.md)&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt;, 1 &gt; | [**DerivFieldMemOnPatch**](#typedef-derivfieldmemonpatch)  <br>_A field memory with derivatives containing the function values on the 2D grid, the first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y)._ |
 | typedef host\_t&lt; DerivFieldMemOnPatch&lt; [**Patch**](structPatch.md) &gt; &gt; | [**DerivFieldMemOnPatch\_host**](#typedef-derivfieldmemonpatch_host)  <br>_A field memory with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host._ |
 | typedef [**DerivField**](classDerivField.md)&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt; &gt; | [**DerivFieldOnPatch**](#typedef-derivfieldonpatch)  <br>_A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y)._ |
@@ -500,6 +502,40 @@ using DVectorFieldOnPatch =  VectorField<
         double,
         typename Patch::IdxRange12,
         VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DerivConstFieldOnPatch 
+
+_A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y)._
+```C++
+using DerivConstFieldOnPatch =  DerivConstField<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Dim1>,
+                typename Patch::Grid1,
+                ddc::Deriv<typename Patch::Dim2>,
+                typename Patch::Grid2>>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DerivConstFieldOnPatch\_host 
+
+_A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given_ [_**Patch**_](structPatch.md) _. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host._
+```C++
+using DerivConstFieldOnPatch_host =  host_t<DerivConstFieldOnPatch<Patch>>;
 ```
 
 

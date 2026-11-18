@@ -790,6 +790,15 @@ using DerivFieldOnPatch = DerivField&lt;
                 ddc::Deriv&lt;typename Patch::Dim2&gt;,
                 typename Patch::Grid2&gt;&gt;;
 
+template &lt;class Patch&gt;
+using DerivConstFieldOnPatch = DerivConstField&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;&gt;;
+
 
 // --- ON HOST ---
 template &lt;class Patch&gt;
@@ -797,6 +806,9 @@ using DerivFieldMemOnPatch_host = host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt;&gt
 
 template &lt;class Patch&gt;
 using DerivFieldOnPatch_host = host_t&lt;DerivFieldOnPatch&lt;Patch&gt;&gt;;
+
+template &lt;class Patch&gt;
+using DerivConstFieldOnPatch_host = host_t&lt;DerivConstFieldOnPatch&lt;Patch&gt;&gt;;
 </code></pre></div>
               
             </div>

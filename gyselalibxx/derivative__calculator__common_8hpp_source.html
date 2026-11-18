@@ -582,7 +582,9 @@
 
 #pragma once
 
+#include &lt;tuple&gt;
 #include &lt;typeinfo&gt;
+#include &lt;utility&gt;
 
 #include &lt;ddc/ddc.hpp&gt;
 
@@ -591,21 +593,14 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
-template &lt;class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection&gt;
-class DerivativeCalculatorCommon;
-
-template &lt;class Connectivity, class Grid1D, class... Patches, class DerivCoeffCollection&gt;
-class DerivativeCalculatorCommon&lt;
-        Connectivity,
-        Grid1D,
-        ddc::TypeSeq&lt;Patches...&gt;,
-        DerivCoeffCollection&gt;
+template &lt;class Connectivity, class Grid1D&gt;
+class DerivativeCalculatorCommon
 {
     /*
         All the interfaces given as input to the MultipatchConnectivity class.
@@ -621,9 +616,8 @@ private:
     // All the patches of the geometry.
     using all_patches = typename Connectivity::all_patches;
 
-    static_assert(
-            is_interface_derivative_coefficients_collection_v&lt;DerivCoeffCollection&gt;,
-            "Please provide a InterfaceDerivCoeffsCollection type.");
+    using relevant_patches =
+            typename Connectivity::template get_all_patches_along_direction_t&lt;Grid1D&gt;;
 
     static constexpr std::size_t number_of_interfaces
             = ddc::type_seq_size_v&lt;interface_sorted_collection&gt;;
@@ -680,19 +674,6 @@ protected:
     static_assert(
             ddc::type_seq_size_v&lt;Grid1DSeq&gt; == n_inner_interfaces + !is_periodic,
             "The number of 1D grids and inner interfaces should match.");
-
-    static_assert(
-            ddc::type_seq_size_v&lt;Grid1DSeq&gt; &lt;= sizeof...(Patches),
-            "The number of given patches is insufficient.");
-
-    static_assert(
-            ddc::type_seq_contains_v&lt;
-                    Grid1DSeq,
-                    ddc::type_seq_merge_t&lt;
-                            ddc::TypeSeq&lt;typename Patches::Grid1...&gt;,
-                            ddc::TypeSeq&lt;typename Patches::Grid2...&gt;&gt;&gt;,
-            "A patch is missing in the given patch list. The list has to contain all the patches "
-            "in the given Grid1D direction.");
 
 protected:
     template &lt;std::size_t I&gt;
@@ -757,6 +738,37 @@ protected:
     using idx_deriv_perp2
             = Idx&lt;deriv_perp2&lt;I&gt;, typename patch2&lt;I&gt;::Grid1, typename patch2&lt;I&gt;::Grid2&gt;;
 
+private:
+    template &lt;class IndexSeq&gt;
+    struct DerivCoeffsTypes;
+
+    template &lt;std::size_t... I&gt;
+    struct DerivCoeffsTypes&lt;std::index_sequence&lt;I...&gt;&gt;
+    {
+        using type = std::tuple&lt;InterfaceDerivCoeffs&lt;stored_interface&lt;I&gt;&gt; const&amp;...&gt;;
+    };
+
+    using deriv_coeffs_tuple =
+            typename DerivCoeffsTypes&lt;std::make_index_sequence&lt;n_inner_interfaces&gt;&gt;::type;
+
+    template &lt;std::size_t... I, class... DerivCoeffs&gt;
+    static deriv_coeffs_tuple sort_deriv_coeffs(
+            std::index_sequence&lt;I...&gt;,
+            std::tuple&lt;DerivCoeffs const&amp;...&gt; unsorted_deriv_coeffs)
+    {
+        using deriv_coeffs_type_seq = ddc::TypeSeq&lt;InterfaceDerivCoeffs&lt;stored_interface&lt;I&gt;&gt;...&gt;;
+        static_assert(
+                sizeof...(DerivCoeffs) == n_inner_interfaces,
+                "Please provide exactly one InterfaceDerivCoeffs for each inner interface in "
+                "the given Grid1D direction.");
+        static_assert(
+                (ddc::in_tags_v&lt;DerivCoeffs, deriv_coeffs_type_seq&gt; &amp;&amp; ...),
+                "Please only provide InterfaceDerivCoeffs defined on the inner interfaces in "
+                "the given Grid1D direction.");
+        return deriv_coeffs_tuple(std::get&lt;InterfaceDerivCoeffs&lt;stored_interface&lt;I&gt;&gt; const&amp;&gt;(
+                unsorted_deriv_coeffs)...);
+    }
+
 public:
     using patch_first = PatchFirst;
 
@@ -773,46 +785,63 @@ public:
     using idx_deriv_perp = Idx&lt;deriv_perp_dim&gt;;
     using idx_cross_deriv = Idx&lt;deriv_perp_dim, deriv_par_dim&gt;;
 
-protected:
-    MultipatchType&lt;IdxRangeOnPatch, Patches...&gt; const&amp; m_idx_ranges;
+    using MultipatchIdxRange = MultipatchTypeFromSeq&lt;IdxRangeOnPatch, relevant_patches&gt;;
 
-    DerivCoeffCollection const&amp; m_deriv_coeffs_collect;
+    using MultipatchDerivField_host
+            = MultipatchFieldFromSeq&lt;DerivFieldOnPatch_host, relevant_patches&gt;;
+
+    using MultipatchDerivConstField_host
+            = MultipatchFieldFromSeq&lt;DerivConstFieldOnPatch_host, relevant_patches&gt;;
+
+protected:
+    MultipatchIdxRange m_idx_ranges;
+
+private:
+    deriv_coeffs_tuple m_deriv_coeffs;
 
 public:
-    DerivativeCalculatorCommon(
-            MultipatchType&lt;IdxRangeOnPatch, Patches...&gt; const&amp; idx_ranges,
-            DerivCoeffCollection const&amp; deriv_coeffs_collect)
+    template &lt;class... DerivCoeffs&gt;
+    explicit DerivativeCalculatorCommon(
+            MultipatchIdxRange const&amp; idx_ranges,
+            DerivCoeffs const&amp;... deriv_coeffs)
         : m_idx_ranges(idx_ranges)
-        , m_deriv_coeffs_collect(deriv_coeffs_collect)
+        , m_deriv_coeffs(sort_deriv_coeffs(
+                  std::make_index_sequence&lt;n_inner_interfaces&gt; {},
+                  std::forward_as_tuple(deriv_coeffs...)))
     {
     }
 
 protected:
+    template &lt;std::size_t I&gt;
+    InterfaceDerivCoeffs&lt;stored_interface&lt;I&gt;&gt; const&amp; get_deriv_coeffs() const
+    {
+        return std::get&lt;I&gt;(m_deriv_coeffs);
+    }
+
     template &lt;std::size_t I, bool is_first_deriv, std::enable_if_t&lt;is_first_deriv, bool&gt; = true&gt;
-    double const get_approximated_deriv(
+    double get_approximated_deriv(
             Idx&lt;grid_par1&lt;I&gt;&gt; const&amp; idx_to_slice_1,
             Idx&lt;grid_par2&lt;I&gt;&gt; const&amp; idx_to_slice_2,
-            MultipatchField&lt;DerivFieldOnPatch_host, Patches...&gt; functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs) const
     {
         // Use the function values to compute the first derivatives.
-        DField&lt;typename patch1&lt;I&gt;::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride&gt; function_1
-                = functions_and_derivs.template get&lt;patch1&lt;I&gt;&gt;().get_values_field();
-        DField&lt;typename patch2&lt;I&gt;::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride&gt; function_2
-                = functions_and_derivs.template get&lt;patch2&lt;I&gt;&gt;().get_values_field();
+        DConstField&lt;typename patch1&lt;I&gt;::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride&gt;
+                function_1 = functions_and_derivs.template get&lt;patch1&lt;I&gt;&gt;().get_values_field();
+        DConstField&lt;typename patch2&lt;I&gt;::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride&gt;
+                function_2 = functions_and_derivs.template get&lt;patch2&lt;I&gt;&gt;().get_values_field();
 
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv
-                = m_deriv_coeffs_collect.template get&lt;stored_interface&lt;I&gt;&gt;().get_approx_deriv(
-                        get_const_field(function_1[idx_to_slice_1]),
-                        get_const_field(function_2[idx_to_slice_2]));
+                = get_deriv_coeffs&lt;I&gt;()
+                          .get_approx_deriv(function_1[idx_to_slice_1], function_2[idx_to_slice_2]);
         return interface_deriv;
     }
 
     template &lt;std::size_t I, bool is_first_deriv, std::enable_if_t&lt;!is_first_deriv, bool&gt; = true&gt;
-    double const get_approximated_deriv(
+    double get_approximated_deriv(
             Idx&lt;grid_par1&lt;I&gt;&gt; const&amp; idx_to_slice_1,
             Idx&lt;grid_par2&lt;I&gt;&gt; const&amp; idx_to_slice_2,
-            MultipatchField&lt;DerivFieldOnPatch_host, Patches...&gt; functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs) const
     {
         IdxRange&lt;grid_par1&lt;I&gt;&gt; idx_range_par_1(m_idx_ranges.template get&lt;patch1&lt;I&gt;&gt;());
         IdxRange&lt;grid_par2&lt;I&gt;&gt; idx_range_par_2(m_idx_ranges.template get&lt;patch2&lt;I&gt;&gt;());
@@ -828,16 +857,14 @@ protected:
         Idx&lt;deriv_par2&lt;I&gt;, grid_par2&lt;I&gt;&gt;
                 idx_to_slice_deriv_2(Idx&lt;deriv_par2&lt;I&gt;&gt;(1), idx_to_slice_2);
 
-        DField&lt;IdxRange&lt;grid_perp1&lt;I&gt;&gt;, Kokkos::HostSpace, Kokkos::layout_stride&gt; derivs_1
+        DConstField&lt;IdxRange&lt;grid_perp1&lt;I&gt;&gt;, Kokkos::HostSpace, Kokkos::layout_stride&gt; derivs_1
                 = functions_and_derivs.template get&lt;patch1&lt;I&gt;&gt;()[idx_to_slice_deriv_1];
-        DField&lt;IdxRange&lt;grid_perp2&lt;I&gt;&gt;, Kokkos::HostSpace, Kokkos::layout_stride&gt; derivs_2
+        DConstField&lt;IdxRange&lt;grid_perp2&lt;I&gt;&gt;, Kokkos::HostSpace, Kokkos::layout_stride&gt; derivs_2
                 = functions_and_derivs.template get&lt;patch2&lt;I&gt;&gt;()[idx_to_slice_deriv_2];
 
         // Compute the coefficient c_I for the interface I.
         double const corner_derivative
-                = m_deriv_coeffs_collect.template get&lt;stored_interface&lt;I&gt;&gt;().get_approx_cross_deriv(
-                        get_const_field(derivs_1),
-                        get_const_field(derivs_2));
+                = get_deriv_coeffs&lt;I&gt;().get_approx_cross_deriv(derivs_1, derivs_2);
         return corner_derivative;
     }
 
@@ -845,7 +872,7 @@ protected:
     void set_slice_indexes(
             int&amp; value_idx_to_slice,
             Idx&lt;grid_par1&lt;I&gt;&gt;&amp; idx_to_slice_1,
-            Idx&lt;grid_par2&lt;I&gt;&gt;&amp; idx_to_slice_2)
+            Idx&lt;grid_par2&lt;I&gt;&gt;&amp; idx_to_slice_2) const
     {
         // The Patch with the idx_to_slice value corresponding to the given value_idx_to_slice.
         using PatchIndexSlice
@@ -873,7 +900,7 @@ protected:
             std::size_t I,
             class Patch,
             bool is_patch1 = std::is_same_v&lt;Patch, patch1&lt;I&gt;&gt;&gt;
-    std::conditional_t&lt;is_patch1, Idx&lt;grid_perp1&lt;I&gt;&gt;, Idx&lt;grid_perp2&lt;I&gt;&gt;&gt; get_idx_interface()
+    std::conditional_t&lt;is_patch1, Idx&lt;grid_perp1&lt;I&gt;&gt;, Idx&lt;grid_perp2&lt;I&gt;&gt;&gt; get_idx_interface() const
     {
         using IdxRangePerp
                 = std::conditional_t&lt;is_patch1, IdxRange&lt;grid_perp1&lt;I&gt;&gt;, IdxRange&lt;grid_perp2&lt;I&gt;&gt;&gt;;

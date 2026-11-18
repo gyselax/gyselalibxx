@@ -610,6 +610,10 @@
 <td style="text-align: right;">typedef detail::MultipatchField&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-multipatchfield"><strong>MultipatchField</strong></a>  <br><em>A class to store field objects on patches.</em></td>
 </tr>
+<tr>
+<td style="text-align: right;">typedef typename detail::MultipatchFromPatchSeq&lt; detail::MultipatchField, T, PatchSeq &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-multipatchfieldfromseq"><strong>MultipatchFieldFromSeq</strong></a>  <br><em>A class to store field objects on patches.</em></td>
+</tr>
 </tbody>
 </table>
 <h2 id="public-attributes">Public Attributes</h2>
@@ -641,6 +645,19 @@
 <ul>
 <li><code>T</code> The type of the fields/derivative fields/vector fields that are stored on the given patches. </li>
 <li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on. </li>
+</ul>
+<hr>
+
+<h3 id="typedef-multipatchfieldfromseq">typedef MultipatchFieldFromSeq</h3>
+<p><em>A class to store field objects on patches.</em> </p>
+<pre><code class="language-C++">using MultipatchFieldFromSeq = 
+        typename detail::MultipatchFromPatchSeq&lt;detail::MultipatchField, T, PatchSeq&gt;::type;
+</code></pre>
+<p>This alias is equivalent to MultipatchField but takes the patches as a ddc::TypeSeq. I.e. <code>MultipatchFieldFromSeq&lt;T, ddc::TypeSeq&lt;Patches...&gt;&gt;</code> is the same type as <code>MultipatchField&lt;T, Patches...&gt;</code>.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>T</code> The type of the fields/derivative fields/vector fields that are stored on the given patches. </li>
+<li><code>PatchSeq</code> A ddc::TypeSeq of the patches of the objects. </li>
 </ul>
 <hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>

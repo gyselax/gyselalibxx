@@ -24,7 +24,7 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
+#include "interface_derivative_coefficients.hpp"
 #include "matrix_dense.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
@@ -34,37 +34,11 @@
 template <
         class Connectivity,
         class Grid1D,
-        class PatchSeq,
         ddc::SplineBuilderClosure LowerBound,
-        ddc::SplineBuilderClosure UpperBound,
-        class DerivCoeffCollection>
-class InterfacesExactDerivativeCalculator;
-
-template <
-        class Connectivity,
-        class Grid1D,
-        class... Patches,
-        ddc::SplineBuilderClosure LowerBound,
-        ddc::SplineBuilderClosure UpperBound,
-        class DerivCoeffCollection>
-class InterfacesExactDerivativeCalculator<
-        Connectivity,
-        Grid1D,
-        ddc::TypeSeq<Patches...>,
-        LowerBound,
-        UpperBound,
-        DerivCoeffCollection>
-    : public DerivativeCalculatorCommon<
-              Connectivity,
-              Grid1D,
-              ddc::TypeSeq<Patches...>,
-              DerivCoeffCollection>
+        ddc::SplineBuilderClosure UpperBound>
+class InterfacesExactDerivativeCalculator : public DerivativeCalculatorCommon<Connectivity, Grid1D>
 {
-    using base_type = DerivativeCalculatorCommon<
-            Connectivity,
-            Grid1D,
-            ddc::TypeSeq<Patches...>,
-            DerivCoeffCollection>;
+    using base_type = DerivativeCalculatorCommon<Connectivity, Grid1D>;
 
 private:
     template <std::size_t I>
@@ -122,8 +96,10 @@ public:
     using typename base_type::idx_cross_deriv;
 
 private:
-    using base_type::m_deriv_coeffs_collect;
     using base_type::m_idx_ranges;
+    using typename base_type::MultipatchDerivConstField_host;
+    using typename base_type::MultipatchDerivField_host;
+    using typename base_type::MultipatchIdxRange;
 
     // Matrix (I-M) of the documentation.
     Matrix_Dense m_matrix;
@@ -136,10 +112,11 @@ private:
     std::array<int, ddc::type_seq_size_v<typename base_type::Grid1DSeq>> m_vector_par_signs;
 
 public:
-    InterfacesExactDerivativeCalculator(
-            MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            DerivCoeffCollection const& deriv_coeffs_collect)
-        : base_type(idx_ranges, deriv_coeffs_collect)
+    template <class... DerivCoeffs>
+    explicit InterfacesExactDerivativeCalculator(
+            MultipatchIdxRange const& idx_ranges,
+            DerivCoeffs const&... deriv_coeffs)
+        : base_type(idx_ranges, deriv_coeffs...)
         , m_matrix(n_inner_interfaces)
         , m_vector(n_inner_interfaces)
         , m_interface_derivatives(n_inner_interfaces)
@@ -156,7 +133,7 @@ public:
     template <typename IdxDeriv, class IdxPar>
     void operator()(
             IdxDeriv const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             IdxPar const& idx_par)
     {
         // Check the input types.
@@ -170,7 +147,7 @@ public:
         set_vector(
                 deriv_order,
                 idx_par,
-                functions_and_derivs,
+                get_const_field(functions_and_derivs),
                 std::make_index_sequence<n_inner_interfaces> {});
 
         // Update m_interface_derivatives by solving the matrix system (I-M)S = C.
@@ -187,9 +164,7 @@ public:
     }
 
     template <class IdxDeriv>
-    void operator()(
-            IdxDeriv const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+    void operator()(IdxDeriv const& deriv_order, MultipatchDerivField_host functions_and_derivs)
     {
         static_assert(
                 (std::is_same_v<IdxDeriv, idx_deriv_perp>)
@@ -231,10 +206,10 @@ private:
     template <std::size_t I>
     void set_line_matrix()
     {
-        double const coeff_deriv_patch1 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                  .get_coeff_deriv_patch_1();
-        double const coeff_deriv_patch2 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                  .get_coeff_deriv_patch_2();
+        double const coeff_deriv_patch1
+                = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_1();
+        double const coeff_deriv_patch2
+                = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_2();
         const double coeff_left
                 = patch_order_matches_interfaces<I> ? coeff_deriv_patch1 : coeff_deriv_patch2;
         const double coeff_right
@@ -242,7 +217,7 @@ private:
         const double coefs[] = {-coeff_left, 1, -coeff_right};
 
         for (int dofs : {-1, 0, 1}) {
-            if (0 <= I + dofs && I + dofs < n_inner_interfaces) {
+            if (0 <= int(I) + dofs && I + dofs < n_inner_interfaces) {
                 m_matrix.set_element(I, I + dofs, coefs[dofs + 1]);
             }
         }
@@ -286,7 +261,7 @@ private:
     void set_vector(
             IdxDerivs const& deriv_order,
             Idx<GridPar1D> const& slice_idx,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivConstField_host functions_and_derivs,
             std::integer_sequence<std::size_t, I...>)
     {
         // Check we start the loop with the first patch.
@@ -308,7 +283,7 @@ private:
     void set_line_vector(
             IdxDerivs const& deriv_order,
             int& slice_previous_idx_value,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs)
     {
         constexpr bool is_first_deriv = std::is_same_v<IdxDerivs, idx_deriv_perp>;
 
@@ -318,9 +293,10 @@ private:
                 I>(slice_previous_idx_value, idx_to_slice_1, idx_to_slice_2);
 
         // Compute the coefficient c_I (= approximated derivative) for the interface I.
-        double lin_comb_funct = base_type::template get_approximated_deriv<
-                I,
-                is_first_deriv>(idx_to_slice_1, idx_to_slice_2, functions_and_derivs);
+        double lin_comb_funct = base_type::template get_approximated_deriv<I, is_first_deriv>(
+                idx_to_slice_1,
+                idx_to_slice_2,
+                get_const_field(functions_and_derivs));
 
         /*
             If the orientation of the interface is not correct, we change the sign of the sum.
@@ -348,9 +324,9 @@ private:
                 = (UpperBound == ddc::SplineBuilderClosure::HERMITE && I == n_inner_interfaces - 1);
 
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
-            DerivFieldOnPatch_host<patch1<I>> function_and_derivs_1
+            DerivConstFieldOnPatch_host<patch1<I>> function_and_derivs_1
                     = functions_and_derivs.template get<patch1<I>>();
-            DerivFieldOnPatch_host<patch2<I>> function_and_derivs_2
+            DerivConstFieldOnPatch_host<patch2<I>> function_and_derivs_2
                     = functions_and_derivs.template get<patch2<I>>();
 
             // Get the indices at the other bound of the interface.
@@ -381,10 +357,10 @@ private:
                 deriv_bound_2 = function_and_derivs_2(idx_cross_deriv_2) * sign_2;
             }
 
-            const double coeff_deriv_1 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                 .get_coeff_deriv_patch_1();
-            const double coeff_deriv_2 = m_deriv_coeffs_collect.template get<stored_interface<I>>()
-                                                 .get_coeff_deriv_patch_2();
+            const double coeff_deriv_1
+                    = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_1();
+            const double coeff_deriv_2
+                    = this->template get_deriv_coeffs<I>().get_coeff_deriv_patch_2();
 
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector[I] += patch_order_matches_interfaces<I> ? coeff_deriv_1 * deriv_bound_1
@@ -399,7 +375,7 @@ private:
     template <typename IdxDerivs, class GridPar1D, std::size_t... I>
     void update_derivatives(
             IdxDerivs const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             Idx<GridPar1D> const& slice_idx,
             std::integer_sequence<std::size_t, I...>)
     {
@@ -421,7 +397,7 @@ private:
     template <std::size_t I, typename IdxDerivs>
     void update_derivatives_at_interface(
             IdxDerivs const& deriv_order,
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+            MultipatchDerivField_host functions_and_derivs,
             int& slice_previous_idx_value)
     {
         constexpr bool is_first_deriv = std::is_same_v<IdxDerivs, idx_deriv_perp>;

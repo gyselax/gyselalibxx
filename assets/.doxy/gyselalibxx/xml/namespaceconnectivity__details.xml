@@ -51,6 +51,8 @@
     <innerclass refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b" prot="public">connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1PatchIdsAreUnique" prot="public">connectivity_details::PatchIdsAreUnique</innerclass>
     <innerclass refid="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4" prot="public">connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatches" prot="public">connectivity_details::FindPatches</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4" prot="public">connectivity_details::FindPatches&lt; ddc::TypeSeq&lt; Grids... &gt;, PatchTypeSeq &gt;</innerclass>
     <sectiondef kind="enum">
       <memberdef kind="enum" id="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" prot="public" static="no" strong="no">
         <type></type>

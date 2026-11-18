@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class InterfaceDerivCoeffsCollection - GyselalibX</title>
+    <title>Struct DerivativeCalculatorCommon::DerivCoeffsTypes&lt; std::index_sequence&lt; I... &gt; &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class InterfaceDerivCoeffsCollection";
-        var mkdocs_page_input_path = "gyselalibxx/classInterfaceDerivCoeffsCollection.md";
+        var mkdocs_page_name = "Struct DerivativeCalculatorCommon::DerivCoeffsTypes\u0026lt; std::index_sequence\u0026lt; I... \u0026gt; \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/structDerivativeCalculatorCommon_1_1DerivCoeffsTypes_3_01std_1_1index__sequence_3_01I_8_8_8_01_4_01_4.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class InterfaceDerivCoeffsCollection</li>
+      <li class="breadcrumb-item active">Struct DerivativeCalculatorCommon::DerivCoeffsTypes&lt; std::index_sequence&lt; I... &gt; &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classInterfaceDerivCoeffsCollection.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structDerivativeCalculatorCommon_1_1DerivCoeffsTypes_3_01std_1_1index__sequence_3_01I_8_8_8_01_4_01_4.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,14 +575,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-interfacederivcoeffscollection">Class InterfaceDerivCoeffsCollection</h1>
-<p><strong>template &lt;class... Interfaces&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a></p>
-<p><em>A class to store a collection of interface derivative calculators templated on the interfaces.</em> <a href="#detailed-description">More...</a></p>
-<ul>
-<li><code>#include &lt;interface_derivative_coefficients_collection.hpp&gt;</code></li>
-</ul>
-<h2 id="public-functions">Public Functions</h2>
+                <div><h1 id="struct-derivativecalculatorcommonderivcoeffstypes-stdindex_sequence-i">Struct DerivativeCalculatorCommon::DerivCoeffsTypes&lt; std::index_sequence&lt; I... &gt; &gt;</h1>
+<p><strong>template &lt;std::size_t... I&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structDerivativeCalculatorCommon_1_1DerivCoeffsTypes_3_01std_1_1index__sequence_3_01I_8_8_8_01_4_01_4.html"><strong>DerivCoeffsTypes&lt; std::index_sequence&lt; I... &gt; &gt;</strong></a></p>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -592,52 +588,19 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffscollection"><strong>InterfaceDerivCoeffsCollection</strong></a> (<a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>&lt; Interfaces &gt; const &amp;... deriv_coeffs) <br><em>Instantiate a</em> <a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>from a list of interface derivative calculators.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>&lt; <a href="structInterface.html"><strong>Interface</strong></a> &gt; const &amp;</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br><em>Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>class.</em></td>
+<td style="text-align: right;">typedef std::tuple&lt; <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>&lt; <a href="classDerivativeCalculatorCommon.html#typedef-stored_interface"><strong>stored_interface</strong></a>&lt; I &gt; &gt; const  &amp;... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br></td>
 </tr>
 </tbody>
 </table>
-<h2 id="detailed-description">Detailed Description</h2>
-<p>The class stores a constant reference of interface derivative calculators. It should not be use to copy the elements outside of the class but it should be use to access the operators of the stored interface derivative calculators.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>Interfaces</code> Types of interface that defined the interface derivative calculators.</li>
-</ul>
-<p><strong>Warning:</strong></p>
-<p>For each interface, only one interface derivative calculator should be defined.</p>
-<p><strong>See also:</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a>. </p>
-<h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-interfacederivcoeffscollection">function InterfaceDerivCoeffsCollection</h3>
-<p><em>Instantiate a</em> <a href="classInterfaceDerivCoeffsCollection.html"><em><strong>InterfaceDerivCoeffsCollection</strong></em></a> <em>from a list of interface derivative calculators.</em></p>
-<pre><code class="language-C++">inline explicit InterfaceDerivCoeffsCollection::InterfaceDerivCoeffsCollection (
-    InterfaceDerivCoeffs &lt; Interfaces &gt; const &amp;... deriv_coeffs
-) 
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-type">typedef type</h3>
+<pre><code class="language-C++">using DerivativeCalculatorCommon&lt; Connectivity, Grid1D &gt;::DerivCoeffsTypes&lt; std::index_sequence&lt; I... &gt; &gt;::type =  std::tuple&lt;InterfaceDerivCoeffs&lt;stored_interface&lt;I&gt;&gt; const&amp;...&gt;;
 </code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>deriv_coeffs</code> <a href="structInterface.html"><strong>Interface</strong></a> derivative calculators. </li>
-</ul>
-<hr>
-
-<h3 id="function-get">function get</h3>
-<p><em>Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the</em> <a href="classInterfaceDerivCoeffs.html"><em><strong>InterfaceDerivCoeffs</strong></em></a> <em>class.</em></p>
-<pre><code class="language-C++">template&lt;class Interface&gt;
-inline InterfaceDerivCoeffs &lt; Interface &gt; const &amp; InterfaceDerivCoeffsCollection::get () const
-</code></pre>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><a href="structInterface.html"><strong>Interface</strong></a> The interface where the required interface derivative calculator is defined.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>The required interface derivative calculator as a constant reference. </p>
 <hr>
 
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp</code></p></div>
               
             </div>
           </div><footer>

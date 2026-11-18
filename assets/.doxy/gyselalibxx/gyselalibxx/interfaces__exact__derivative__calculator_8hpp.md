@@ -20,7 +20,7 @@
 * `#include "edge.hpp"`
 * `#include "edge_transformation.hpp"`
 * `#include "interface.hpp"`
-* `#include "interface_derivative_coefficients_collection.hpp"`
+* `#include "interface_derivative_coefficients.hpp"`
 * `#include "matrix_dense.hpp"`
 * `#include "multipatch_field.hpp"`
 * `#include "multipatch_type.hpp"`
@@ -45,7 +45,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, LowerBound, UpperBound, DerivCoeffCollection &gt;**](classInterfacesExactDerivativeCalculator_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Pae6b06f6338a38fe5ad72a24e0da2bff8.md) &lt;class Connectivity, class Grid1D, Patches, LowerBound, UpperBound, class DerivCoeffCollection&gt;<br>_Class to compute the interface derivatives along a given direction on all the interfaces._  |
+| class | [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md) &lt;class Connectivity, class Grid1D, LowerBound, UpperBound&gt;<br>_Class to compute the interface derivatives along a given direction on all the interfaces._  |
 
 
 

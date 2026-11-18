@@ -1049,6 +1049,15 @@ struct PatchIdsAreUnique&lt;ddc::TypeSeq&lt;Patches...&gt;&gt;
     }();
 };
 
+template &lt;ddc::concepts::type_seq GridTypeSeq, ddc::concepts::type_seq PatchTypeSeq&gt;
+struct FindPatches;
+
+template &lt;ddc::concepts::discrete_dimension... Grids, ddc::concepts::type_seq PatchTypeSeq&gt;
+struct FindPatches&lt;ddc::TypeSeq&lt;Grids...&gt;, PatchTypeSeq&gt;
+{
+    using type = ddc::TypeSeq&lt;typename FindPatch&lt;Grids, PatchTypeSeq&gt;::type...&gt;;
+};
+
 } // end namespace connectivity_details
 
 template &lt;ddc::concepts::type_seq PatchTypeSeq&gt;
@@ -1071,6 +1080,9 @@ using interfaces_of_patch_t =
 
 template &lt;ddc::concepts::discrete_dimension Grid1D, ddc::concepts::type_seq PatchTypeSeq&gt;
 using find_patch_t = typename connectivity_details::FindPatch&lt;Grid1D, PatchTypeSeq&gt;::type;
+
+template &lt;ddc::concepts::type_seq GridTypeSeq, ddc::concepts::type_seq PatchTypeSeq&gt;
+using find_patches_t = typename connectivity_details::FindPatches&lt;GridTypeSeq, PatchTypeSeq&gt;::type;
 
 template &lt;concepts::Edge EdgeType, ddc::concepts::type_seq InterfaceTypeSeq&gt;
 using find_associated_interface_t =

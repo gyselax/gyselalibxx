@@ -581,6 +581,7 @@
 <ul>
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
+<li><code>#include "patch.hpp"</code></li>
 <li><code>#include "types.hpp"</code></li>
 </ul>
 <h2 id="public-types">Public Types</h2>
@@ -595,6 +596,10 @@
 <tr>
 <td style="text-align: right;">typedef detail::MultipatchType&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-multipatchtype"><strong>MultipatchType</strong></a>  <br><em>A class to store several objects that are of a type which is templated by the patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename detail::MultipatchFromPatchSeq&lt; detail::MultipatchType, T, PatchSeq &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-multipatchtypefromseq"><strong>MultipatchTypeFromSeq</strong></a>  <br><em>A class to store several objects that are of a type which is templated by the patch.</em></td>
 </tr>
 </tbody>
 </table>
@@ -627,6 +632,19 @@
 <ul>
 <li><code>T</code> The type of the objects that are stored on the given patches. </li>
 <li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on. </li>
+</ul>
+<hr>
+
+<h3 id="typedef-multipatchtypefromseq">typedef MultipatchTypeFromSeq</h3>
+<p><em>A class to store several objects that are of a type which is templated by the patch.</em> </p>
+<pre><code class="language-C++">using MultipatchTypeFromSeq = 
+        typename detail::MultipatchFromPatchSeq&lt;detail::MultipatchType, T, PatchSeq&gt;::type;
+</code></pre>
+<p>This alias is equivalent to MultipatchType but takes the patches as a ddc::TypeSeq. I.e. <code>MultipatchTypeFromSeq&lt;T, ddc::TypeSeq&lt;Patches...&gt;&gt;</code> is the same type as <code>MultipatchType&lt;T, Patches...&gt;</code>.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>T</code> The type of the objects that are stored on the given patches. </li>
+<li><code>PatchSeq</code> A ddc::TypeSeq of the patches of the objects. </li>
 </ul>
 <hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>

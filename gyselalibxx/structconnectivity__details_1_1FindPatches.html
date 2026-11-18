@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File interface_derivative_coefficients_collection.hpp - GyselalibX</title>
+    <title>Struct connectivity_details::FindPatches - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File interface_derivative_coefficients_collection.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/interface__derivative__coefficients__collection_8hpp.md";
+        var mkdocs_page_name = "Struct connectivity_details::FindPatches";
+        var mkdocs_page_input_path = "gyselalibxx/structconnectivity__details_1_1FindPatches.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File interface_derivative_coefficients_collection.hpp</li>
+      <li class="breadcrumb-item active">Struct connectivity_details::FindPatches</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/interface__derivative__coefficients__collection_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structconnectivity__details_1_1FindPatches.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,92 +575,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-interface_derivative_coefficients_collectionhpp">File interface_derivative_coefficients_collection.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_d1bd52a3e76a422151eefdcc4e15c189.html"><strong>interface_derivatives</strong></a> <strong>&gt;</strong> <a href="interface__derivative__coefficients__collection_8hpp.html"><strong>interface_derivative_coefficients_collection.hpp</strong></a></p>
-<p><a href="interface__derivative__coefficients__collection_8hpp_source.html">Go to the source code of this file</a></p>
+                <div><h1 id="struct-connectivity_detailsfindpatches">Struct connectivity_details::FindPatches</h1>
+<p><strong>template &lt;ddc::concepts::type_seq GridTypeSeq, ddc::concepts::type_seq PatchTypeSeq&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceconnectivity__details.html"><strong>connectivity_details</strong></a> <strong>&gt;</strong> <a href="structconnectivity__details_1_1FindPatches.html"><strong>FindPatches</strong></a></p>
+<p><em>A class to locate the patches which contain the specified grids.</em> <a href="#detailed-description">More...</a></p>
+<h2 id="detailed-description">Detailed Description</h2>
+<p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include "interface_derivative_coefficients.hpp"</code></li>
+<li><code>GridTypeSeq</code> A DDC type sequence of the identifying grids. </li>
+<li><code>PatchTypeSeq</code> A DDC type sequence containing all possible patches. </li>
 </ul>
-<h2 id="classes">Classes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classInterfaceDerivCoeffsCollection.html"><strong>InterfaceDerivCoeffsCollection</strong></a> &lt;Interfaces&gt;<br><em>A class to store a collection of interface derivative calculators templated on the interfaces.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-attributes">Public Attributes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a href="#variable-enable_interface_derivative_coefficients_collection"><strong>enable_interface_derivative_coefficients_collection</strong></a>   = <code>false</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a href="#variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype"><strong>enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">bool</td>
-<td style="text-align: left;"><a href="#variable-is_interface_derivative_coefficients_collection_v"><strong>is_interface_derivative_coefficients_collection_v</strong></a>   = <code>/* multi line expression */</code><br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-functions">Public Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-interfacederivcoeffscollection"><strong>InterfaceDerivCoeffsCollection</strong></a> (DerivCalculatorType const &amp;... deriv_coeffs) <br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-enable_interface_derivative_coefficients_collection">variable enable_interface_derivative_coefficients_collection</h3>
-<pre><code class="language-C++">bool enable_interface_derivative_coefficients_collection;
-</code></pre>
 <hr>
-
-<h3 id="variable-enable_interface_derivative_coefficients_collection-interfacederivcoeffscollection-derivcalculatortype">variable enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;</h3>
-<pre><code class="language-C++">bool enable_interface_derivative_coefficients_collection&lt; InterfaceDerivCoeffsCollection&lt; DerivCalculatorType... &gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="variable-is_interface_derivative_coefficients_collection_v">variable is_interface_derivative_coefficients_collection_v</h3>
-<pre><code class="language-C++">bool is_interface_derivative_coefficients_collection_v;
-</code></pre>
-<hr>
-<h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-interfacederivcoeffscollection">function InterfaceDerivCoeffsCollection</h3>
-<pre><code class="language-C++">template&lt;class... DerivCalculatorType&gt;
-InterfaceDerivCoeffsCollection (
-    DerivCalculatorType const &amp;... deriv_coeffs
-) 
-</code></pre>
-<hr>
-
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</code></p></div>
               
             </div>
           </div><footer>

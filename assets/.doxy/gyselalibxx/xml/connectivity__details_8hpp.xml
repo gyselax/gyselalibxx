@@ -176,6 +176,7 @@
     <innerclass refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4" prot="public">connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b" prot="public">connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4" prot="public">connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4" prot="public">connectivity_details::FindPatches&lt; ddc::TypeSeq&lt; Grids... &gt;, PatchTypeSeq &gt;</innerclass>
     <innernamespace refid="namespaceconnectivity__details">connectivity_details</innernamespace>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="connectivity__details_8hpp_1a924956c5ab6975d2df5e9cf717ddf69e" prot="public" static="no">
@@ -242,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="684" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="684" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="700" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="700" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1a72a5a4e238dabeec69094915ca20b64a" prot="public" static="no">
         <templateparamlist>
@@ -264,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="688" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="688" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="704" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="704" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1ac0e27c4ce03299870b4db397def7d3ed" prot="public" static="no">
         <templateparamlist>
@@ -285,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="693" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="693" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="709" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="709" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1ada81085a19e12938b46dc3c897e52684" prot="public" static="no">
         <templateparamlist>
@@ -312,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="697" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="697" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="713" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="713" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1af60f84a4f37ef4ecf968d8cb0d99ba18" prot="public" static="no">
         <templateparamlist>
@@ -338,7 +339,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="702" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="702" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="718" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="718" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="connectivity__details_8hpp_1adeeb834a3773306ead3dd5dec5fe6f5c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>ddc::concepts::type_seq</type>
+            <declname>GridTypeSeq</declname>
+            <defname>GridTypeSeq</defname>
+          </param>
+          <param>
+            <type>ddc::concepts::type_seq</type>
+            <declname>PatchTypeSeq</declname>
+            <defname>PatchTypeSeq</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structconnectivity__details_1_1FindPatches" kindref="compound">connectivity_details::FindPatches</ref>&lt; GridTypeSeq, PatchTypeSeq &gt;::type</type>
+        <definition>using find_patches_t =  typename connectivity_details::FindPatches&lt;GridTypeSeq, PatchTypeSeq&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>find_patches_t</name>
+        <briefdescription>
+<para>A tool to find the patches which contain the specified grids (in the same order as the grids). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="722" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="722" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1ac8922f6f376d246c8254497c5402b842" prot="public" static="no">
         <templateparamlist>
@@ -365,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="706" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="706" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="726" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="726" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1a3be5672c2a928eed62d61ca5a8cce907" prot="public" static="no">
         <templateparamlist>
@@ -397,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="714" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="714" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="734" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="734" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1aef5bdc1f2a1cc43a1cee47df915c1f67" prot="public" static="no">
         <templateparamlist>
@@ -429,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="722" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="722" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="742" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="742" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1ac57bb1180561f7444e70a154d5d191ad" prot="public" static="no">
         <templateparamlist>
@@ -455,7 +482,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="727" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="727" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="747" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="747" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -479,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="679" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="680" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="695" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="696" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -958,51 +985,63 @@
 <codeline lineno="672"><highlight class="normal"><sp/><sp/><sp/><sp/>}();</highlight></codeline>
 <codeline lineno="673"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="674"><highlight class="normal"></highlight></codeline>
-<codeline lineno="675"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>end<sp/>namespace<sp/>connectivity_details</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="676"><highlight class="normal"></highlight></codeline>
-<codeline lineno="678"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
-<codeline lineno="679"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>patch_ids_are_unique_v</highlight></codeline>
-<codeline lineno="680"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="structconnectivity__details_1_1PatchIdsAreUnique" kindref="compound">connectivity_details::PatchIdsAreUnique&lt;PatchTypeSeq&gt;::value</ref>;</highlight></codeline>
-<codeline lineno="681"><highlight class="normal"></highlight></codeline>
-<codeline lineno="683"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>TypeSeq&gt;</highlight></codeline>
-<codeline lineno="684"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_tuple_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1ToTuple" kindref="compound">connectivity_details::ToTuple&lt;TypeSeq&gt;::type</ref>;</highlight></codeline>
-<codeline lineno="685"><highlight class="normal"></highlight></codeline>
-<codeline lineno="687"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref>...<sp/>EdgeType&gt;</highlight></codeline>
-<codeline lineno="688"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">strip_outside_edges_t<sp/>=</highlight></codeline>
-<codeline lineno="689"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1StripOutsideEdges" kindref="compound">connectivity_details::StripOutsideEdges</ref>&lt;ddc::TypeSeq&lt;EdgeType...&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="680"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">TypeSeq,<sp/>ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
+<codeline lineno="681" refid="structconnectivity__details_1_1FindPatches" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structconnectivity__details_1_1FindPatches" kindref="compound">FindPatches</ref>;</highlight></codeline>
+<codeline lineno="682"><highlight class="normal"></highlight></codeline>
+<codeline lineno="684"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::discrete_dimension...<sp/>Grids,<sp/>ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
+<codeline lineno="685" refid="structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structconnectivity__details_1_1FindPatches" kindref="compound">FindPatches</ref>&lt;ddc::TypeSeq&lt;Grids...&gt;,<sp/>PatchTypeSeq&gt;</highlight></codeline>
+<codeline lineno="686"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="688" refid="structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4_1adea51bdd3e4e9d5dd292c55dd1269a52" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structconnectivity__details_1_1FindPatches_3_01ddc_1_1TypeSeq_3_01Grids_8_8_8_01_4_00_01PatchTypeSeq_01_4_1adea51bdd3e4e9d5dd292c55dd1269a52" kindref="member">type</ref><sp/>=<sp/>ddc::TypeSeq&lt;typename<sp/>FindPatch&lt;Grids,<sp/>PatchTypeSeq&gt;::type...&gt;;</highlight></codeline>
+<codeline lineno="689"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="690"><highlight class="normal"></highlight></codeline>
-<codeline lineno="692"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>EdgeTypeSeq&gt;</highlight></codeline>
-<codeline lineno="693"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">extract_patches_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1ExtractPatches" kindref="compound">connectivity_details::ExtractPatches&lt;EdgeTypeSeq&gt;::type</ref>;</highlight></codeline>
-<codeline lineno="694"><highlight class="normal"></highlight></codeline>
-<codeline lineno="696"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Patch<sp/>StartPatch,<sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
-<codeline lineno="697"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">interfaces_of_patch_t<sp/>=</highlight></codeline>
-<codeline lineno="698"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1PatchConnection" kindref="compound">connectivity_details::PatchConnection&lt;StartPatch, InterfaceTypeSeq&gt;::type</ref>;</highlight></codeline>
-<codeline lineno="699"><highlight class="normal"></highlight></codeline>
-<codeline lineno="701"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::discrete_dimension<sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/>ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
-<codeline lineno="702"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_patch_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindPatch" kindref="compound">connectivity_details::FindPatch&lt;Grid1D, PatchTypeSeq&gt;::type</ref>;</highlight></codeline>
-<codeline lineno="703"><highlight class="normal"></highlight></codeline>
-<codeline lineno="705"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Edge<sp/>EdgeType,<sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
-<codeline lineno="706"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_associated_interface_t<sp/>=</highlight></codeline>
-<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindInterface" kindref="compound">connectivity_details::FindInterface&lt;EdgeType, InterfaceTypeSeq&gt;::type</ref>;</highlight></codeline>
-<codeline lineno="708"><highlight class="normal"></highlight></codeline>
-<codeline lineno="710"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="711"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref><sp/>StartPatch,</highlight></codeline>
-<codeline lineno="712"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::discrete_dimension<sp/>Grid1D,</highlight></codeline>
-<codeline lineno="713"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
-<codeline lineno="714"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">collect_grids_on_dim_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>connectivity_details::</highlight></codeline>
-<codeline lineno="715"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CollectAllGridsOnDim&lt;StartPatch,<sp/>Grid1D,<sp/>InterfaceTypeSeq&gt;::type;</highlight></codeline>
-<codeline lineno="716"><highlight class="normal"></highlight></codeline>
-<codeline lineno="718"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="719"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref><sp/>StartPatch,</highlight></codeline>
-<codeline lineno="720"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::discrete_dimension<sp/>Grid1D,</highlight></codeline>
-<codeline lineno="721"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
-<codeline lineno="722"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">collect_interfaces_on_dim_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>connectivity_details::</highlight></codeline>
-<codeline lineno="723"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CollectAllInterfacesOnDim&lt;StartPatch,<sp/>Grid1D,<sp/>InterfaceTypeSeq&gt;::type;</highlight></codeline>
-<codeline lineno="724"><highlight class="normal"></highlight></codeline>
-<codeline lineno="726"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::discrete_dimension<sp/>QueryGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeTuple&gt;</highlight></codeline>
-<codeline lineno="727"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_relevant_idx_range_t<sp/>=<sp/>ddc::type_seq_element_t&lt;</highlight></codeline>
-<codeline lineno="728"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,</highlight></codeline>
-<codeline lineno="729"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindRelevantIdxRangeType" kindref="compound">connectivity_details::FindRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeTuple&gt;::type</ref>&gt;;</highlight></codeline>
+<codeline lineno="691"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>end<sp/>namespace<sp/>connectivity_details</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="692"><highlight class="normal"></highlight></codeline>
+<codeline lineno="694"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
+<codeline lineno="695"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>patch_ids_are_unique_v</highlight></codeline>
+<codeline lineno="696"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="structconnectivity__details_1_1PatchIdsAreUnique" kindref="compound">connectivity_details::PatchIdsAreUnique&lt;PatchTypeSeq&gt;::value</ref>;</highlight></codeline>
+<codeline lineno="697"><highlight class="normal"></highlight></codeline>
+<codeline lineno="699"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>TypeSeq&gt;</highlight></codeline>
+<codeline lineno="700"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_tuple_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1ToTuple" kindref="compound">connectivity_details::ToTuple&lt;TypeSeq&gt;::type</ref>;</highlight></codeline>
+<codeline lineno="701"><highlight class="normal"></highlight></codeline>
+<codeline lineno="703"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref>...<sp/>EdgeType&gt;</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">strip_outside_edges_t<sp/>=</highlight></codeline>
+<codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1StripOutsideEdges" kindref="compound">connectivity_details::StripOutsideEdges</ref>&lt;ddc::TypeSeq&lt;EdgeType...&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="706"><highlight class="normal"></highlight></codeline>
+<codeline lineno="708"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>EdgeTypeSeq&gt;</highlight></codeline>
+<codeline lineno="709"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">extract_patches_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1ExtractPatches" kindref="compound">connectivity_details::ExtractPatches&lt;EdgeTypeSeq&gt;::type</ref>;</highlight></codeline>
+<codeline lineno="710"><highlight class="normal"></highlight></codeline>
+<codeline lineno="712"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Patch<sp/>StartPatch,<sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
+<codeline lineno="713"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">interfaces_of_patch_t<sp/>=</highlight></codeline>
+<codeline lineno="714"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1PatchConnection" kindref="compound">connectivity_details::PatchConnection&lt;StartPatch, InterfaceTypeSeq&gt;::type</ref>;</highlight></codeline>
+<codeline lineno="715"><highlight class="normal"></highlight></codeline>
+<codeline lineno="717"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::discrete_dimension<sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/>ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
+<codeline lineno="718"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_patch_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindPatch" kindref="compound">connectivity_details::FindPatch&lt;Grid1D, PatchTypeSeq&gt;::type</ref>;</highlight></codeline>
+<codeline lineno="719"><highlight class="normal"></highlight></codeline>
+<codeline lineno="721"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::type_seq<sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">TypeSeq,<sp/>ddc::concepts::type_seq<sp/>PatchTypeSeq&gt;</highlight></codeline>
+<codeline lineno="722"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_patches_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindPatches" kindref="compound">connectivity_details::FindPatches&lt;GridTypeSeq, PatchTypeSeq&gt;::type</ref>;</highlight></codeline>
+<codeline lineno="723"><highlight class="normal"></highlight></codeline>
+<codeline lineno="725"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;concepts::Edge<sp/>EdgeType,<sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
+<codeline lineno="726"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_associated_interface_t<sp/>=</highlight></codeline>
+<codeline lineno="727"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindInterface" kindref="compound">connectivity_details::FindInterface&lt;EdgeType, InterfaceTypeSeq&gt;::type</ref>;</highlight></codeline>
+<codeline lineno="728"><highlight class="normal"></highlight></codeline>
+<codeline lineno="730"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="731"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref><sp/>StartPatch,</highlight></codeline>
+<codeline lineno="732"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::discrete_dimension<sp/>Grid1D,</highlight></codeline>
+<codeline lineno="733"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
+<codeline lineno="734"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">collect_grids_on_dim_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>connectivity_details::</highlight></codeline>
+<codeline lineno="735"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CollectAllGridsOnDim&lt;StartPatch,<sp/>Grid1D,<sp/>InterfaceTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="736"><highlight class="normal"></highlight></codeline>
+<codeline lineno="738"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="739"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref><sp/>StartPatch,</highlight></codeline>
+<codeline lineno="740"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::discrete_dimension<sp/>Grid1D,</highlight></codeline>
+<codeline lineno="741"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::concepts::type_seq<sp/>InterfaceTypeSeq&gt;</highlight></codeline>
+<codeline lineno="742"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">collect_interfaces_on_dim_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>connectivity_details::</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CollectAllInterfacesOnDim&lt;StartPatch,<sp/>Grid1D,<sp/>InterfaceTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="744"><highlight class="normal"></highlight></codeline>
+<codeline lineno="746"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;ddc::concepts::discrete_dimension<sp/>QueryGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeTuple&gt;</highlight></codeline>
+<codeline lineno="747"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_relevant_idx_range_t<sp/>=<sp/>ddc::type_seq_element_t&lt;</highlight></codeline>
+<codeline lineno="748"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0,</highlight></codeline>
+<codeline lineno="749"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structconnectivity__details_1_1FindRelevantIdxRangeType" kindref="compound">connectivity_details::FindRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeTuple&gt;::type</ref>&gt;;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp"/>
   </compounddef>

@@ -376,12 +376,6 @@
       <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients.hpp</label>
         <link refid="interface__derivative__coefficients_8hpp_source"/>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interface_derivative_coefficients_collection.hpp</label>
-        <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
@@ -1293,6 +1287,31 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="290" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="290" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="types_8hpp_1af9e6966a606a7b3906c8f2dc5b5e5048" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>DerivConstField&lt; double, IdxRange&lt; ddc::Deriv&lt; typename Patch::Dim1 &gt;, typename Patch::Grid1, ddc::Deriv&lt; typename Patch::Dim2 &gt;, typename Patch::Grid2 &gt; &gt;</type>
+        <definition>using DerivConstFieldOnPatch =  DerivConstField&lt;
+        double,
+        IdxRange&lt;
+                ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                typename Patch::Grid1,
+                ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                typename Patch::Grid2&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivConstFieldOnPatch</name>
+        <briefdescription>
+<para>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given <ref refid="structPatch" kindref="compound">Patch</ref>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="304" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="304" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="types_8hpp_1a3fbf48017c16e2bb5b8b82c5fea676f5" prot="public" static="no">
         <templateparamlist>
           <param>
@@ -1310,7 +1329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="307" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="307" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="321" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="321" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="types_8hpp_1aeac6e715ea9cb9fd9194c09d68352efa" prot="public" static="no">
         <templateparamlist>
@@ -1329,7 +1348,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="316" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="316" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="330" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="types_8hpp_1a4f17abd7c92772f4f8c2653cc7728cb0" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>host_t&lt; DerivConstFieldOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using DerivConstFieldOnPatch_host =  host_t&lt;DerivConstFieldOnPatch&lt;Patch&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivConstFieldOnPatch_host</name>
+        <briefdescription>
+<para>A field with derivatives containing the function values on the 2D grid, and first derivatives on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid defined on the given <ref refid="structPatch" kindref="compound">Patch</ref>. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). Defined on host. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" line="339" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp" bodystart="339" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1549,13 +1587,25 @@
 <codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::Deriv&lt;typename<sp/>Patch::Dim2&gt;,</highlight></codeline>
 <codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Patch::Grid2&gt;&gt;;</highlight></codeline>
 <codeline lineno="301"><highlight class="normal"></highlight></codeline>
-<codeline lineno="302"><highlight class="normal"></highlight></codeline>
-<codeline lineno="303"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>ON<sp/>HOST<sp/>---</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="310"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
-<codeline lineno="311"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivFieldMemOnPatch_host<sp/>=<sp/>host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt;&gt;;</highlight></codeline>
-<codeline lineno="312"><highlight class="normal"></highlight></codeline>
-<codeline lineno="319"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
-<codeline lineno="320"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivFieldOnPatch_host<sp/>=<sp/>host_t&lt;DerivFieldOnPatch&lt;Patch&gt;&gt;;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivConstFieldOnPatch<sp/>=<sp/>DerivConstField&lt;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRange&lt;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::Deriv&lt;typename<sp/>Patch::Dim1&gt;,</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Patch::Grid1,</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::Deriv&lt;typename<sp/>Patch::Dim2&gt;,</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Patch::Grid2&gt;&gt;;</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>ON<sp/>HOST<sp/>---</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivFieldMemOnPatch_host<sp/>=<sp/>host_t&lt;DerivFieldMemOnPatch&lt;Patch&gt;&gt;;</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivFieldOnPatch_host<sp/>=<sp/>host_t&lt;DerivFieldOnPatch&lt;Patch&gt;&gt;;</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DerivConstFieldOnPatch_host<sp/>=<sp/>host_t&lt;DerivConstFieldOnPatch&lt;Patch&gt;&gt;;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp"/>
   </compounddef>

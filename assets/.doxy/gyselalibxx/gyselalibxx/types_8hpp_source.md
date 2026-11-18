@@ -220,6 +220,15 @@ using DerivFieldOnPatch = DerivField<
                 ddc::Deriv<typename Patch::Dim2>,
                 typename Patch::Grid2>>;
 
+template <class Patch>
+using DerivConstFieldOnPatch = DerivConstField<
+        double,
+        IdxRange<
+                ddc::Deriv<typename Patch::Dim1>,
+                typename Patch::Grid1,
+                ddc::Deriv<typename Patch::Dim2>,
+                typename Patch::Grid2>>;
+
 
 // --- ON HOST ---
 template <class Patch>
@@ -227,6 +236,9 @@ using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
 
 template <class Patch>
 using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
+
+template <class Patch>
+using DerivConstFieldOnPatch_host = host_t<DerivConstFieldOnPatch<Patch>>;
 ```
 
 

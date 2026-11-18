@@ -143,9 +143,13 @@ template <class TypeSeqPatches, class TypeSeqInternalTypes>
 inline constexpr bool enable_multipatch_field<
         detail::MultipatchField<TypeSeqPatches, TypeSeqInternalTypes>> = true;
 
-template <template <typename P> typename T, class... Patches>
+template <template <typename P> typename T, concepts::Patch... Patches>
 using MultipatchField
         = detail::MultipatchField<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+
+template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
+using MultipatchFieldFromSeq =
+        typename detail::MultipatchFromPatchSeq<detail::MultipatchField, T, PatchSeq>::type;
 
 template <class... VectorFieldType, class PatchTypeSeq>
 inline constexpr bool enable_vector_field<detail::MultipatchField<
