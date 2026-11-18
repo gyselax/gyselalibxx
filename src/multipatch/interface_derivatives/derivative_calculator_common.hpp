@@ -327,8 +327,8 @@ protected:
 
         // Compute the coefficient c_I for the interface I.
         double const interface_deriv = get_deriv_coeffs<I>().get_approx_deriv(
-                get_const_field(function_1[idx_to_slice_1]),
-                get_const_field(function_2[idx_to_slice_2]));
+                function_1[idx_to_slice_1],
+                function_2[idx_to_slice_2]);
         return interface_deriv;
     }
 
@@ -373,8 +373,8 @@ protected:
 
         // Compute the coefficient c_I for the interface I.
         double const corner_derivative = get_deriv_coeffs<I>().get_approx_cross_deriv(
-                get_const_field(derivs_1),
-                get_const_field(derivs_2));
+                derivs_1,
+                derivs_2);
         return corner_derivative;
     }
 
