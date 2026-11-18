@@ -314,7 +314,7 @@ protected:
      * @return The approximated derivative at the interface. 
      */
     template <std::size_t I, bool is_first_deriv, std::enable_if_t<is_first_deriv, bool> = true>
-    double const get_approximated_deriv(
+    double get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
             MultipatchDerivConstField_host functions_and_derivs)
@@ -347,7 +347,7 @@ protected:
      * @return The approximated cross-derivative at the interface. 
      */
     template <std::size_t I, bool is_first_deriv, std::enable_if_t<!is_first_deriv, bool> = true>
-    double const get_approximated_deriv(
+    double get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
             MultipatchDerivConstField_host functions_and_derivs)
