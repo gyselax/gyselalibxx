@@ -677,11 +677,11 @@ struct PatchIdsAreUnique<ddc::TypeSeq<Patches...>>
  * @tparam GridTypeSeq A DDC type sequence of the identifying grids.
  * @tparam PatchTypeSeq A DDC type sequence containing all possible patches.
  */
-template <class GridTypeSeq, class PatchTypeSeq>
+template <ddc::concepts::type_seq GridTypeSeq, ddc::concepts::type_seq PatchTypeSeq>
 struct FindPatches;
 
 /// Specialisation of FindPatches to unpack the grids.
-template <class... Grids, class PatchTypeSeq>
+template <ddc::concepts::discrete_dimension... Grids, ddc::concepts::type_seq PatchTypeSeq>
 struct FindPatches<ddc::TypeSeq<Grids...>, PatchTypeSeq>
 {
     /// The type found by the class.
