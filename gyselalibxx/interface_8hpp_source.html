@@ -590,6 +590,9 @@ template &lt;class Edge1Type, class Edge2Type, bool orientations_agree_bool&gt;
 struct Interface
 {
     static_assert(
+            get_edge_patch_id&lt;Edge1Type&gt;() &lt; get_edge_patch_id&lt;Edge2Type&gt;(),
+            "Sort edges by patch id to avoid duplicate interface definitions");
+    static_assert(
             !std::is_same_v&lt;Edge1Type, OutsideEdge&gt; || !std::is_same_v&lt;Edge2Type, OutsideEdge&gt;,
             "At least one edge should belong to a patch.");
 

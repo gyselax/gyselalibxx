@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::CollectAllInterfacesOnDim
 
-**template &lt;class StartPatch, class Grid1D, class InterfaceTypeSeq&gt;**
+**template &lt;concepts::Patch StartPatch, ddc::concepts::discrete\_dimension Grid1D, ddc::concepts::type\_seq InterfaceTypeSeq&gt;**
 
 
 

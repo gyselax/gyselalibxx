@@ -69,10 +69,7 @@ bool constexpr is_patch_v = is_patch<PatchType>::value;
 
 namespace concepts {
 template <class PatchType>
-concept Patch = requires
-{
-    is_patch_v<PatchType>;
-};
+concept Patch = is_patch_v<PatchType>;
 }; // namespace concepts
 ```
 

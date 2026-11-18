@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;
 
-**template &lt;class QueryGrid1D, class IdxRangeHead, class... IdxRangeTypes&gt;**
+**template &lt;ddc::concepts::discrete\_dimension QueryGrid1D, ddc::concepts::discrete\_domain IdxRangeHead, class... IdxRangeTypes&gt;**
 
 
 

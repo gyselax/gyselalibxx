@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::EnforceFirstInterfaceEdge
 
-**template &lt;class InterfaceType, class FirstEdge&gt;**
+**template &lt;class InterfaceType, concepts::Edge FirstEdge&gt;**
 
 
 

@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::PatchConnection
 
-**template &lt;class [**Patch**](structPatch.md), class InterfaceTypeSeq&gt;**
+**template &lt;concepts::Patch Patch, ddc::concepts::type\_seq InterfaceTypeSeq&gt;**
 
 
 

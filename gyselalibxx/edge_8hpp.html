@@ -582,7 +582,23 @@
 <li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "geometry_descriptors.hpp"</code></li>
+<li><code>#include "patch.hpp"</code></li>
 </ul>
+<h2 id="namespaces">Namespaces</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">namespace</td>
+<td style="text-align: left;"><a href="namespaceconcepts.html"><strong>concepts</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
 <h2 id="classes">Classes</h2>
 <table>
 <thead>
@@ -594,14 +610,81 @@
 <tbody>
 <tr>
 <td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structEdge.html"><strong>Edge</strong></a> &lt;class <a href="structPatch.html"><strong>Patch</strong></a>, class Grid1D, extremity_val&gt;<br><em>Define an edge of a given patch.</em></td>
+<td style="text-align: left;"><a href="structEdge.html"><strong>Edge</strong></a> &lt;Patch, class Grid1D, extremity_val&gt;<br><em>Define an edge of a given patch.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> <br><em>Define an edge for the outside index range.</em> <a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>is a pseudo-edge outside the index range used to define interfaces between patches and the outside index range.</em></td>
 </tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structis__edge.html"><strong>is_edge</strong></a> &lt;class EdgeType&gt;<br><em>A type trait to check if a type is an edge (an</em> <a href="structEdge.html"><em><strong>Edge</strong></em></a> <em>or an</em><a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>).</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4.html"><strong>is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</strong></a> &lt;Patch, class Grid1D, extremity_val&gt;<br><em>Specialisation of</em> <a href="structis__edge.html"><em><strong>is_edge</strong></em></a> <em>for an</em><a href="structEdge.html"><em><strong>Edge</strong></em></a> <em>of a patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structis__edge_3_01OutsideEdge_01_4.html"><strong>is_edge&lt; OutsideEdge &gt;</strong></a> &lt;&gt;<br><em>Specialisation of</em> <a href="structis__edge.html"><em><strong>is_edge</strong></em></a> <em>for the</em><a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>.</em></td>
+</tr>
 </tbody>
 </table>
+<h2 id="public-attributes">Public Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">bool constexpr</td>
+<td style="text-align: left;"><a href="#variable-is_edge_v"><strong>is_edge_v</strong></a>   = <code>[**is\_edge**](structis__edge.md)&amp;lt;EdgeType&amp;gt;::value</code><br><em>A boolean indicating if a type is an edge (an</em> <a href="structEdge.html"><em><strong>Edge</strong></em></a> <em>or an</em><a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>).</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">int</td>
+<td style="text-align: left;"><a href="#function-get_edge_patch_id"><strong>get_edge_patch_id</strong></a> () <br><em>Get the id of the patch on which an edge is defined.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-is_edge_v">variable is_edge_v</h3>
+<p><em>A boolean indicating if a type is an edge (an</em> <a href="structEdge.html"><em><strong>Edge</strong></em></a> <em>or an</em><a href="structOutsideEdge.html"><em><strong>OutsideEdge</strong></em></a> <em>).</em></p>
+<pre><code class="language-C++">bool constexpr is_edge_v;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>EdgeType</code> The type being checked. </li>
+</ul>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-get_edge_patch_id">function get_edge_patch_id</h3>
+<p><em>Get the id of the patch on which an edge is defined.</em> </p>
+<pre><code class="language-C++">template&lt;class EdgeType&gt;
+int get_edge_patch_id () 
+</code></pre>
+<p>This can be used to obtain a compile-time ordering of the edges.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>EdgeType</code> The edge (an <a href="structEdge.html"><strong>Edge</strong></a> or an <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a>). </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The id of the patch associated with the edge, or -1 for an <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a>. </p>
+<hr>
+
 <hr>
 <p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp</code></p></div>
               

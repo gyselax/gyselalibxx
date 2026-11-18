@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::SwapExtremity
 
-**template &lt;class EdgeType&gt;**
+**template &lt;concepts::Edge EdgeType&gt;**
 
 
 

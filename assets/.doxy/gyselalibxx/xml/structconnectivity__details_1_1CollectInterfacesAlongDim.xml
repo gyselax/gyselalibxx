@@ -4,10 +4,14 @@
     <compoundname>connectivity_details::CollectInterfacesAlongDim</compoundname>
     <templateparamlist>
       <param>
-        <type>class StartEdge</type>
+        <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+        <declname>StartEdge</declname>
+        <defname>StartEdge</defname>
       </param>
       <param>
-        <type>class InterfaceTypeSeq</type>
+        <type>ddc::concepts::type_seq</type>
+        <declname>InterfaceTypeSeq</declname>
+        <defname>InterfaceTypeSeq</defname>
       </param>
       <param>
         <type>InsertPosition</type>
@@ -19,7 +23,9 @@
         <defval>ddc::TypeSeq&lt;&gt;</defval>
       </param>
       <param>
-        <type>class MatchingEdge</type>
+        <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+        <declname>MatchingEdge</declname>
+        <defname>MatchingEdge</defname>
         <defval>equivalent_edge_t&lt;StartEdge, InterfaceTypeSeq&gt;</defval>
       </param>
       <param>
@@ -68,7 +74,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="353" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="353" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="375" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="375" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

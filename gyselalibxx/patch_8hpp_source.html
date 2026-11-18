@@ -639,10 +639,7 @@ bool constexpr is_patch_v = is_patch&lt;PatchType&gt;::value;
 
 namespace concepts {
 template &lt;class PatchType&gt;
-concept Patch = requires
-{
-    is_patch_v&lt;PatchType&gt;;
-};
+concept Patch = is_patch_v&lt;PatchType&gt;;
 }; // namespace concepts
 </code></pre></div>
               

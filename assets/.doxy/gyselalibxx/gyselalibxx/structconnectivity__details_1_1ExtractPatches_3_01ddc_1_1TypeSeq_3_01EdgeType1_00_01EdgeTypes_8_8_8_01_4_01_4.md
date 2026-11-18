@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::ExtractPatches&lt; ddc::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;
 
-**template &lt;class EdgeType1, class... EdgeTypes&gt;**
+**template &lt;concepts::Edge EdgeType1, concepts::Edge... EdgeTypes&gt;**
 
 
 

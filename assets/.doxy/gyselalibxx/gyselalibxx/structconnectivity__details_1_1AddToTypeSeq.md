@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::AddToTypeSeq
 
-**template &lt;class ToInsert, class TypeSeq, InsertPosition insert\_pos&gt;**
+**template &lt;class ToInsert, ddc::concepts::type\_seq TypeSeq, InsertPosition insert\_pos&gt;**
 
 
 

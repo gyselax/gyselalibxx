@@ -36,6 +36,7 @@
 
 ## i
 
+* **Interface** ([**connectivity\_details**](namespaceconnectivity__details.md))
 * **index\_identifiers\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 

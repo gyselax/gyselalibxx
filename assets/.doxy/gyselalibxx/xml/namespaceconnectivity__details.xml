@@ -22,11 +22,11 @@
     <innerclass refid="structconnectivity__details_1_1FindInterface" prot="public">connectivity_details::FindInterface</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;&gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface1_00_01Re9a613ed41c91d250bbda6f232579e462" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface1, RemainingInterfaceTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01Edgec6b87a48d5038cef222acdcb526280f3" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; Edge, OEdge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01Edg7548375c29d9adc73538674e82ae95ac" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;::Interface&lt; Edge, OEdge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01OEdcf579b47e460dc35ee239300e37577bd" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;::Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge" prot="public">connectivity_details::EnforceFirstInterfaceEdge</innerclass>
-    <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01FirstEdge_00_01Edge2_788676fcb3310ca4c1ec984ff0b4531b" prot="public">connectivity_details::EnforceFirstInterfaceEdge&lt; Interface&lt; FirstEdge, Edge2, Orientations &gt;, FirstEdge &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01Edge2_00_01FirstEdge_221a02b03250a49af1745b2263467420" prot="public">connectivity_details::EnforceFirstInterfaceEdge&lt; Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01FirstEdge_00_01Edge250b3559d62afd5e1fb475939efa70e42" prot="public">connectivity_details::EnforceFirstInterfaceEdge&lt;::Interface&lt; FirstEdge, Edge2, Orientations &gt;, FirstEdge &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01Edge2_00_01FirstEdged69ce672ec5713276e61b0743e3351f4" prot="public">connectivity_details::EnforceFirstInterfaceEdge&lt;::Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1SwapExtremity" prot="public">connectivity_details::SwapExtremity</innerclass>
     <innerclass refid="structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01FRONT_01_4_01_4" prot="public">connectivity_details::SwapExtremity&lt; Edge&lt; Patch, Grid1D, FRONT &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01BACK_01_4_01_4" prot="public">connectivity_details::SwapExtremity&lt; Edge&lt; Patch, Grid1D, BACK &gt; &gt;</innerclass>
@@ -76,17 +76,54 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="304" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="304" bodyend="304"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="326" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="326" bodyend="326"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="connectivity__details_8hpp_1a6ed2ecdd268db9319296e2a2a75e5e6f" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+            <declname>Edge</declname>
+            <defname>Edge</defname>
+          </param>
+          <param>
+            <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+            <declname>OEdge</declname>
+            <defname>OEdge</defname>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>Orientations</declname>
+            <defname>Orientations</defname>
+          </param>
+        </templateparamlist>
+        <type>std::conditional_t&lt;(get_edge_patch_id&lt; <ref refid="structEdge" kindref="compound">Edge</ref> &gt;()&lt; get_edge_patch_id&lt; OEdge &gt;()), ::Interface&lt; <ref refid="structEdge" kindref="compound">Edge</ref>, OEdge, Orientations &gt;, ::Interface&lt; OEdge, <ref refid="structEdge" kindref="compound">Edge</ref>, Orientations &gt; &gt;</type>
+        <definition>using connectivity_details::Interface =  std::conditional_t&lt;
+        (get_edge_patch_id&lt;Edge&gt;() &lt; get_edge_patch_id&lt;OEdge&gt;()),
+        ::Interface&lt;Edge, OEdge, Orientations&gt;,
+        ::Interface&lt;OEdge, Edge, Orientations&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>Interface</name>
+        <qualifiedname>connectivity_details::Interface</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Helper local to connectivity_details to ensure the <ref refid="structInterface" kindref="compound">Interface</ref> type from the global namespace is initialised with edges passed in the correct order. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="connectivity__details_8hpp_1ac709582fa1c75f78375e5afcc468bd86" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class InterfaceType</type>
           </param>
           <param>
-            <type>class FirstEdge</type>
+            <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+            <declname>FirstEdge</declname>
+            <defname>FirstEdge</defname>
           </param>
         </templateparamlist>
         <type>typename <ref refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge" kindref="compound">EnforceFirstInterfaceEdge</ref>&lt; InterfaceType, FirstEdge &gt;::type</type>
@@ -102,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="262" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="262" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="284" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="284" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

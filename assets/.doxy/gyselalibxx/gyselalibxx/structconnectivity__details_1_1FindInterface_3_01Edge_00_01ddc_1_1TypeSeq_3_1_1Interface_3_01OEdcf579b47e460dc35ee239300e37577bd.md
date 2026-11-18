@@ -1,12 +1,12 @@
 
 
-# Struct connectivity\_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;
+# Struct connectivity\_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;::Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;
 
-**template &lt;class [**Edge**](structEdge.md), class OEdge, bool Orientations, class... RemainingInterfaceTypes&gt;**
+**template &lt;concepts::Edge Edge, concepts::Edge OEdge, bool Orientations, class... RemainingInterfaceTypes&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**connectivity\_details**](namespaceconnectivity__details.md) **>** [**FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;**](structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db.md)
+[**ClassList**](annotated.md) **>** [**connectivity\_details**](namespaceconnectivity__details.md) **>** [**FindInterface&lt; Edge, ddc::TypeSeq&lt;::Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;**](structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01OEdcf579b47e460dc35ee239300e37577bd.md)
 
 
 
@@ -92,7 +92,7 @@ _Specialisation of_ [_**FindInterface**_](structconnectivity__details_1_1FindInt
 
 _The type found by the class._ 
 ```C++
-using connectivity_details::FindInterface< Edge, ddc::TypeSeq< Interface< OEdge, Edge, Orientations >, RemainingInterfaceTypes... > >::type =  Interface<OEdge, Edge, Orientations>;
+using connectivity_details::FindInterface< Edge, ddc::TypeSeq<::Interface< OEdge, Edge, Orientations >, RemainingInterfaceTypes... > >::type =  Interface<OEdge, Edge, Orientations>;
 ```
 
 

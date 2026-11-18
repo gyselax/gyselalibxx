@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::SelectRelevantIdxRangeType
 
-**template &lt;class QueryGrid1D, class IdxRangeType&gt;**
+**template &lt;ddc::concepts::discrete\_dimension QueryGrid1D, ddc::concepts::discrete\_domain IdxRangeType&gt;**
 
 
 

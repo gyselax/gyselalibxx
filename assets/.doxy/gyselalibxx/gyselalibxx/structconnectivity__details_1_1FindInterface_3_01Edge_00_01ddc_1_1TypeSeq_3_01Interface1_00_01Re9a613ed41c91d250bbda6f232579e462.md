@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface1, RemainingInterfaceTypes... &gt; &gt;
 
-**template &lt;class [**Edge**](structEdge.md), class Interface1, class... RemainingInterfaceTypes&gt;**
+**template &lt;concepts::Edge Edge, class Interface1, class... RemainingInterfaceTypes&gt;**
 
 
 

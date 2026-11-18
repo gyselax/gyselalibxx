@@ -240,9 +240,9 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
@@ -255,6 +255,8 @@
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -270,10 +272,10 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -281,7 +283,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="11">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -294,7 +296,7 @@
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="47">
@@ -342,7 +344,7 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>

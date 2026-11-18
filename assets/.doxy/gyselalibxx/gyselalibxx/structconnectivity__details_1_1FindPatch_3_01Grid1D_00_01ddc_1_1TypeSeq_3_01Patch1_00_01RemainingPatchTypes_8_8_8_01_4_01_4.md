@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;
 
-**template &lt;class Grid1D, class Patch1, class... RemainingPatchTypes&gt;**
+**template &lt;ddc::concepts::discrete\_dimension Grid1D, concepts::Patch Patch1, concepts::Patch... RemainingPatchTypes&gt;**
 
 
 

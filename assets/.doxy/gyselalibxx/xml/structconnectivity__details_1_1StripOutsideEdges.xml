@@ -4,7 +4,9 @@
     <compoundname>connectivity_details::StripOutsideEdges</compoundname>
     <templateparamlist>
       <param>
-        <type>class TypeSeq</type>
+        <type>ddc::concepts::type_seq</type>
+        <declname>TypeSeq</declname>
+        <defname>TypeSeq</defname>
       </param>
     </templateparamlist>
     <briefdescription>
@@ -22,7 +24,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="59" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="59" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="70" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

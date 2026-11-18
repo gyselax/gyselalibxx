@@ -5,7 +5,9 @@
     <includes refid="edge_8hpp" local="no">edge.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+        <type><ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref></type>
+        <declname>Patch</declname>
+        <defname>Patch</defname>
       </param>
       <param>
         <type>class Grid1D</type>
@@ -30,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structEdge_1a17c65ef78459378e78d6327af23bc017" prot="public" static="no">
         <type>Grid1D</type>
@@ -45,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="29" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structEdge_1afae81ff4f884eca1ef9b57ff1d4e225a" prot="public" static="no">
         <type>std::conditional_t&lt; std::is_same_v&lt; Grid1D, typename Patch::Grid1 &gt;, typename Patch::Grid2, typename Patch::Grid1 &gt;</type>
@@ -63,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="32" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -81,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="36" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="36" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="37" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="37" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -122,7 +124,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="25" bodyend="37"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="25" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="26" bodyend="38"/>
     <listofallmembers>
       <member refid="structEdge_1a01bafe4f74a4d717a45f57c4f7e023a9" prot="public" virt="non-virtual"><scope>Edge</scope><name>associated_patch</name></member>
       <member refid="structEdge_1ab30ccf4f66cb1a094ab1d771965a9154" prot="public" virt="non-virtual"><scope>Edge</scope><name>extremity</name></member>

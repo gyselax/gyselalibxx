@@ -2,7 +2,7 @@
 
 # Struct Edge
 
-**template &lt;class [**Patch**](structPatch.md), class Grid1D, Extremity extremity\_val&gt;**
+**template &lt;concepts::Patch Patch, class Grid1D, Extremity extremity\_val&gt;**
 
 
 

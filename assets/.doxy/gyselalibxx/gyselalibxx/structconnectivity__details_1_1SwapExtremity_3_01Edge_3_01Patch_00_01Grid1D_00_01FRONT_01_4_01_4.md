@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::SwapExtremity&lt; Edge&lt; Patch, Grid1D, FRONT &gt; &gt;
 
-**template &lt;class [**Patch**](structPatch.md), class Grid1D&gt;**
+**template &lt;concepts::Patch Patch, ddc::concepts::discrete\_dimension Grid1D&gt;**
 
 
 

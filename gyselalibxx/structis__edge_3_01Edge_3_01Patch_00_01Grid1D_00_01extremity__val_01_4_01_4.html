@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Struct connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt; - GyselalibX</title>
+    <title>Struct is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Struct connectivity_details::FindInterface\u0026lt; Edge, ddc::TypeSeq\u0026lt; Interface\u0026lt; OEdge, Edge, Orientations \u0026gt;, RemainingInterfaceTypes... \u0026gt; \u0026gt;";
-        var mkdocs_page_input_path = "gyselalibxx/structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db.md";
+        var mkdocs_page_name = "Struct is_edge\u0026lt; Edge\u0026lt; Patch, Grid1D, extremity_val \u0026gt; \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Struct connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</li>
+      <li class="breadcrumb-item active">Struct is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,37 +575,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="struct-connectivity_detailsfindinterface-edge-ddctypeseq-interface-oedge-edge-orientations-remaininginterfacetypes">Struct connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</h1>
-<p><strong>template &lt;class <a href="structEdge.html"><strong>Edge</strong></a>, class OEdge, bool Orientations, class... RemainingInterfaceTypes&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceconnectivity__details.html"><strong>connectivity_details</strong></a> <strong>&gt;</strong> <a href="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db.html"><strong>FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</strong></a></p>
-<p><em>Specialisation of</em> <a href="structconnectivity__details_1_1FindInterface.html"><em><strong>FindInterface</strong></em></a> <em>for the case where Edge1 from the second interface matches</em><a href="structEdge.html"><em><strong>Edge</strong></em></a> <em>.</em></p>
+                <div><h1 id="struct-is_edge-edge-patch-grid1d-extremity_val">Struct is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</h1>
+<p><strong>template &lt;concepts::Patch Patch, class Grid1D, Extremity extremity_val&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4.html"><strong>is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</strong></a></p>
+<p><em>Specialisation of</em> <a href="structis__edge.html"><em><strong>is_edge</strong></em></a> <em>for an</em><a href="structEdge.html"><em><strong>Edge</strong></em></a> <em>of a patch.</em></p>
 <ul>
-<li><code>#include &lt;connectivity_details.hpp&gt;</code></li>
+<li><code>#include &lt;edge.hpp&gt;</code></li>
 </ul>
-<h2 id="public-types">Public Types</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef <a href="structInterface.html"><strong>Interface</strong></a>&lt; OEdge, <a href="structEdge.html"><strong>Edge</strong></a>, Orientations &gt;</td>
-<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-type">typedef type</h3>
-<p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;::type =  Interface&lt;OEdge, Edge, Orientations&gt;;
-</code></pre>
+<p>Inherits the following classes: std::false_type,  std::true_type</p>
 <hr>
-
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp</code></p></div>
               
             </div>
           </div><footer>

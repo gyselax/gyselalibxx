@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::ExtractPatches
 
-**template &lt;class TypeSeq&gt;**
+**template &lt;ddc::concepts::type\_seq TypeSeq&gt;**
 
 
 

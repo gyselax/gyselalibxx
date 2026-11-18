@@ -5,10 +5,14 @@
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class StartEdge</type>
+        <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+        <declname>StartEdge</declname>
+        <defname>StartEdge</defname>
       </param>
       <param>
-        <type>class InterfaceTypeSeq</type>
+        <type>ddc::concepts::type_seq</type>
+        <declname>InterfaceTypeSeq</declname>
+        <defname>InterfaceTypeSeq</defname>
       </param>
       <param>
         <type>InsertPosition</type>
@@ -19,7 +23,9 @@
         <type>class FoundInterfaces</type>
       </param>
       <param>
-        <type>class MatchingEdge</type>
+        <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+        <declname>MatchingEdge</declname>
+        <defname>MatchingEdge</defname>
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
@@ -36,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="401" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="401" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="423" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="423" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -44,7 +50,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="392" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="399" bodyend="402"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="414" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="421" bodyend="424"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1CollectInterfacesAlongDim_3_01StartEdge_00_01InterfaceTypeSeq_00_36879d7a164b5ac728612e4a981c6d65_1ad52638706761847365f3eebd80c501d3" prot="public" virt="non-virtual"><scope>connectivity_details::CollectInterfacesAlongDim&lt; StartEdge, InterfaceTypeSeq, insert_pos, FoundInterfaces, MatchingEdge, true &gt;</scope><name>type</name></member>
     </listofallmembers>

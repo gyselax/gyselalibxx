@@ -4,7 +4,9 @@
     <compoundname>connectivity_details::ExtractPatches</compoundname>
     <templateparamlist>
       <param>
-        <type>class TypeSeq</type>
+        <type>ddc::concepts::type_seq</type>
+        <declname>TypeSeq</declname>
+        <defname>TypeSeq</defname>
       </param>
     </templateparamlist>
     <briefdescription>
@@ -22,7 +24,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="102" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="102" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="113" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="113" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

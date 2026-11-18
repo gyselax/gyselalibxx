@@ -5,10 +5,14 @@
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class QueryGrid1D</type>
+        <type>ddc::concepts::discrete_dimension</type>
+        <declname>QueryGrid1D</declname>
+        <defname>QueryGrid1D</defname>
       </param>
       <param>
-        <type>class IdxRangeHead</type>
+        <type>ddc::concepts::discrete_domain</type>
+        <declname>IdxRangeHead</declname>
+        <defname>IdxRangeHead</defname>
       </param>
       <param>
         <type>class...</type>
@@ -32,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="609" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="609" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="652" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="652" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -40,7 +44,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="606" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="607" bodyend="612"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="649" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="650" bodyend="655"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b_1a15225bbe033e5b0292fb24e301bfb300" prot="public" virt="non-virtual"><scope>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</scope><name>type</name></member>
     </listofallmembers>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
+    <includes refid="edge_8hpp" local="no">edge.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref></type>
+        <declname>Patch</declname>
+        <defname>Patch</defname>
+      </param>
+      <param>
+        <type>class Grid1D</type>
+      </param>
+      <param>
+        <type>Extremity</type>
+        <declname>extremity_val</declname>
+        <defname>extremity_val</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Specialisation of <ref refid="structis__edge" kindref="compound">is_edge</ref> for an <ref refid="structEdge" kindref="compound">Edge</ref> of a patch. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</label>
+        <link refid="structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
+        <label>std::true_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</label>
+        <link refid="structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
+        <label>std::true_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp" bodystart="63" bodyend="64"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

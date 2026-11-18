@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt;&gt; &gt;
 
-**template &lt;class Grid1D&gt;**
+**template &lt;ddc::concepts::discrete\_dimension Grid1D&gt;**
 
 
 

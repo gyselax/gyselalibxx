@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::CollectInterfacesAlongDim
 
-**template &lt;class StartEdge, class InterfaceTypeSeq, InsertPosition insert\_pos, class FoundInterfaces, class MatchingEdge, bool interface\_already\_found&gt;**
+**template &lt;concepts::Edge StartEdge, ddc::concepts::type\_seq InterfaceTypeSeq, InsertPosition insert\_pos, class FoundInterfaces, concepts::Edge MatchingEdge, bool interface\_already\_found&gt;**
 
 
 

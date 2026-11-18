@@ -8,10 +8,7 @@
       </param>
     </templateparamlist>
     <initializer>template&lt;class PatchType&gt;
-concept <ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref> =  requires
-{
-    is_patch_v&lt;PatchType&gt;;
-}    </initializer>
+concept <ref refid="conceptconcepts_1_1Patch" kindref="compound">concepts::Patch</ref> =  is_patch_v&lt;PatchType&gt;    </initializer>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

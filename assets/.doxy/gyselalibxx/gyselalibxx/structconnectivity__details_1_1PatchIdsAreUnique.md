@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::PatchIdsAreUnique
 
-**template &lt;class PatchTypeSeq&gt;**
+**template &lt;ddc::concepts::type\_seq PatchTypeSeq&gt;**
 
 
 

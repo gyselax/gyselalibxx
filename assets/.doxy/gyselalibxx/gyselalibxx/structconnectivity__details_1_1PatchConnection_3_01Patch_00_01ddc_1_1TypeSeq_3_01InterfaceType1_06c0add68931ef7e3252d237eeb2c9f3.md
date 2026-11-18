@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::PatchConnection&lt; Patch, ddc::TypeSeq&lt; InterfaceType1, RemainingInterfaceTypes... &gt; &gt;
 
-**template &lt;class [**Patch**](structPatch.md), class InterfaceType1, class... RemainingInterfaceTypes&gt;**
+**template &lt;concepts::Patch Patch, class InterfaceType1, class... RemainingInterfaceTypes&gt;**
 
 
 

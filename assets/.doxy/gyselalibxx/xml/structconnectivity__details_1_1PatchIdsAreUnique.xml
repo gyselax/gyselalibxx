@@ -4,7 +4,9 @@
     <compoundname>connectivity_details::PatchIdsAreUnique</compoundname>
     <templateparamlist>
       <param>
-        <type>class PatchTypeSeq</type>
+        <type>ddc::concepts::type_seq</type>
+        <declname>PatchTypeSeq</declname>
+        <defname>PatchTypeSeq</defname>
       </param>
     </templateparamlist>
     <briefdescription>
@@ -22,7 +24,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="619" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="619" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="662" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="662" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -5,7 +5,9 @@
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class <ref refid="structEdge" kindref="compound">Edge</ref></type>
+        <type><ref refid="conceptconcepts_1_1Edge" kindref="compound">concepts::Edge</ref></type>
+        <declname>Edge</declname>
+        <defname>Edge</defname>
       </param>
     </templateparamlist>
     <briefdescription>
@@ -13,7 +15,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="198" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="199" bodyend="203"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="212" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="213" bodyend="217"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

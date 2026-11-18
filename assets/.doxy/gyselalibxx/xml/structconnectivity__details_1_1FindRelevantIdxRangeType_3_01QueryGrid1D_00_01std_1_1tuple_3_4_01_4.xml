@@ -5,7 +5,9 @@
     <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class QueryGrid1D</type>
+        <type>ddc::concepts::discrete_dimension</type>
+        <declname>QueryGrid1D</declname>
+        <defname>QueryGrid1D</defname>
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
@@ -22,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="601" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="601" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="641" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="641" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -30,7 +32,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="598" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="599" bodyend="602"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="638" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="639" bodyend="642"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4_1ac03e6ad0a4cc36eefb5af6a0ff9935eb" prot="public" virt="non-virtual"><scope>connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;</scope><name>type</name></member>
     </listofallmembers>

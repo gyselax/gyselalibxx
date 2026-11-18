@@ -18,6 +18,7 @@
     <innerconcept refid="conceptconcepts_1_1LocalPartialDerivative">concepts::LocalPartialDerivative</innerconcept>
     <innerconcept refid="conceptconcepts_1_1LocalPartialDerivativeCreator">concepts::LocalPartialDerivativeCreator</innerconcept>
     <innerconcept refid="conceptconcepts_1_1CompatibleFunc">concepts::CompatibleFunc</innerconcept>
+    <innerconcept refid="conceptconcepts_1_1Edge">concepts::Edge</innerconcept>
     <innerconcept refid="conceptconcepts_1_1Patch">concepts::Patch</innerconcept>
     <innerconcept refid="conceptconcepts_1_1CoordOrIdx">concepts::CoordOrIdx</innerconcept>
     <briefdescription>

@@ -584,9 +584,10 @@
 
 #include "ddc_aliases.hpp"
 #include "geometry_descriptors.hpp"
+#include "patch.hpp"
 
 
-template &lt;class Patch, class Grid1D, Extremity extremity_val&gt;
+template &lt;concepts::Patch Patch, class Grid1D, Extremity extremity_val&gt;
 struct Edge
 {
     using associated_patch = Patch;
@@ -598,10 +599,43 @@ struct Edge
     static constexpr Extremity extremity = extremity_val;
 };
 
-
 struct OutsideEdge
 {
 };
+
+
+template &lt;class EdgeType&gt;
+struct is_edge : std::false_type
+{
+};
+
+template &lt;concepts::Patch Patch, class Grid1D, Extremity extremity_val&gt;
+struct is_edge&lt;Edge&lt;Patch, Grid1D, extremity_val&gt;&gt; : std::true_type
+{
+};
+
+template &lt;&gt;
+struct is_edge&lt;OutsideEdge&gt; : std::true_type
+{
+};
+
+template &lt;class EdgeType&gt;
+bool constexpr is_edge_v = is_edge&lt;EdgeType&gt;::value;
+
+template &lt;class EdgeType&gt;
+constexpr int get_edge_patch_id()
+{
+    if constexpr (std::is_same_v&lt;EdgeType, OutsideEdge&gt;) {
+        return -1;
+    } else {
+        return EdgeType::associated_patch::id;
+    }
+}
+
+namespace concepts {
+template &lt;class EdgeType&gt;
+concept Edge = is_edge_v&lt;EdgeType&gt;;
+}; // namespace concepts
 </code></pre></div>
               
             </div>

@@ -1269,11 +1269,11 @@
   </compound>
   <compound refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge" kind="struct"><name>connectivity_details::EnforceFirstInterfaceEdge</name>
   </compound>
-  <compound refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01Edge2_00_01FirstEdge_221a02b03250a49af1745b2263467420" kind="struct"><name>connectivity_details::EnforceFirstInterfaceEdge&lt; Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;</name>
-    <member refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01Edge2_00_01FirstEdge_221a02b03250a49af1745b2263467420_1a7b9517e569600da04149fd82a203fdb4" kind="typedef"><name>type</name></member>
+  <compound refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01Edge2_00_01FirstEdged69ce672ec5713276e61b0743e3351f4" kind="struct"><name>connectivity_details::EnforceFirstInterfaceEdge&lt;::Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;</name>
+    <member refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01Edge2_00_01FirstEdged69ce672ec5713276e61b0743e3351f4_1af1dff56fbcb6fa942b7c116ba1a8556a" kind="typedef"><name>type</name></member>
   </compound>
-  <compound refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01FirstEdge_00_01Edge2_788676fcb3310ca4c1ec984ff0b4531b" kind="struct"><name>connectivity_details::EnforceFirstInterfaceEdge&lt; Interface&lt; FirstEdge, Edge2, Orientations &gt;, FirstEdge &gt;</name>
-    <member refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01FirstEdge_00_01Edge2_788676fcb3310ca4c1ec984ff0b4531b_1a83a7cb1884c62494474e32842dc2ce9a" kind="typedef"><name>type</name></member>
+  <compound refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01FirstEdge_00_01Edge250b3559d62afd5e1fb475939efa70e42" kind="struct"><name>connectivity_details::EnforceFirstInterfaceEdge&lt;::Interface&lt; FirstEdge, Edge2, Orientations &gt;, FirstEdge &gt;</name>
+    <member refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01FirstEdge_00_01Edge250b3559d62afd5e1fb475939efa70e42_1a250f04fe71adf051571c6f26ce3d7e64" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classEuler" kind="class"><name>Euler</name>
     <member refid="classEuler_1a60855f791c3238fc3763713fe915b91a" kind="typedef"><name>ValFieldMem</name></member>
@@ -1414,11 +1414,11 @@
   <compound refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface1_00_01Re9a613ed41c91d250bbda6f232579e462" kind="struct"><name>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface1, RemainingInterfaceTypes... &gt; &gt;</name>
     <member refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface1_00_01Re9a613ed41c91d250bbda6f232579e462_1a54755bf37ee255bb82bad615696b866f" kind="typedef"><name>type</name></member>
   </compound>
-  <compound refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01Edgec6b87a48d5038cef222acdcb526280f3" kind="struct"><name>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; Edge, OEdge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</name>
-    <member refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01Edgec6b87a48d5038cef222acdcb526280f3_1ab1b5077c12efc5ea5bfbb4f67f673762" kind="typedef"><name>type</name></member>
+  <compound refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01Edg7548375c29d9adc73538674e82ae95ac" kind="struct"><name>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;::Interface&lt; Edge, OEdge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</name>
+    <member refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01Edg7548375c29d9adc73538674e82ae95ac_1a3b9dff440e9b9f7613b758e4fe924990" kind="typedef"><name>type</name></member>
   </compound>
-  <compound refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db" kind="struct"><name>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt; Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</name>
-    <member refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_01Interface_3_01OEdg3d308bc57d67757472826b2d155392db_1a5c4dc8f4b19d15b8ec153f5187d1e2cd" kind="typedef"><name>type</name></member>
+  <compound refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01OEdcf579b47e460dc35ee239300e37577bd" kind="struct"><name>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;::Interface&lt; OEdge, Edge, Orientations &gt;, RemainingInterfaceTypes... &gt; &gt;</name>
+    <member refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_1_1Interface_3_01OEdcf579b47e460dc35ee239300e37577bd_1acfa6d94fe59bd3ff2349ff2f73cc092d" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_4_01_4" kind="struct"><name>connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;&gt; &gt;</name>
   </compound>
@@ -2144,6 +2144,12 @@
   </compound>
   <compound refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" kind="struct"><name>tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</name>
     <member refid="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4_1ad1ff9c8b7d85ffec86b55bc4b2ef6c65" kind="variable"><name>value</name></member>
+  </compound>
+  <compound refid="structis__edge" kind="struct"><name>is_edge</name>
+  </compound>
+  <compound refid="structis__edge_3_01Edge_3_01Patch_00_01Grid1D_00_01extremity__val_01_4_01_4" kind="struct"><name>is_edge&lt; Edge&lt; Patch, Grid1D, extremity_val &gt; &gt;</name>
+  </compound>
+  <compound refid="structis__edge_3_01OutsideEdge_01_4" kind="struct"><name>is_edge&lt; OutsideEdge &gt;</name>
   </compound>
   <compound refid="structddcHelper_1_1is__non__uniform__interpolation__points" kind="struct"><name>ddcHelper::is_non_uniform_interpolation_points</name>
   </compound>
@@ -3896,6 +3902,8 @@
   </compound>
   <compound refid="conceptconcepts_1_1CoordOrIdx" kind="concept"><name>concepts::CoordOrIdx</name>
   </compound>
+  <compound refid="conceptconcepts_1_1Edge" kind="concept"><name>concepts::Edge</name>
+  </compound>
   <compound refid="conceptconcepts_1_1Interpolation" kind="concept"><name>concepts::Interpolation</name>
   </compound>
   <compound refid="conceptconcepts_1_1Interpolation1D" kind="concept"><name>concepts::Interpolation1D</name>
@@ -3953,6 +3961,7 @@
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" kind="enum"><name>InsertPosition</name></member>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35a3d5863da9349990220f6c23b9e22db56" kind="enumvalue"><name>FrontInsert</name></member>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35a081eac93edfc15b62e0a2301258f1b83" kind="enumvalue"><name>BackInsert</name></member>
+    <member refid="connectivity__details_8hpp_1a6ed2ecdd268db9319296e2a2a75e5e6f" kind="typedef"><name>Interface</name></member>
     <member refid="connectivity__details_8hpp_1ac709582fa1c75f78375e5afcc468bd86" kind="typedef"><name>enforce_first_interface_edge_t</name></member>
   </compound>
   <compound refid="namespaceddc" kind="namespace"><name>ddc</name>
@@ -4989,6 +4998,8 @@
     <member refid="connectivity__details_8hpp_1a1003b224d45522028f95a61007528ac0" kind="variable"><name>patch_ids_are_unique_v</name></member>
   </compound>
   <compound refid="edge_8hpp" kind="file"><name>edge.hpp</name>
+    <member refid="edge_8hpp_1a2dff2af50a9a8b54fee7e5886d65a409" kind="variable"><name>is_edge_v</name></member>
+    <member refid="edge_8hpp_1af7e59bb5699fbdddd86bac344933f3a9" kind="function"><name>get_edge_patch_id</name></member>
   </compound>
   <compound refid="edge__transformation_8hpp" kind="file"><name>edge_transformation.hpp</name>
     <member refid="edge__transformation_8hpp_1a793826fd1efb2347a49e1bb3f6caa786" kind="variable"><name>out_of_bounds_idx</name></member>

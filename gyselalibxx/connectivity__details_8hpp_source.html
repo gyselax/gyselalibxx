@@ -592,16 +592,23 @@
 #include "type_seq_tools.hpp"
 
 namespace connectivity_details {
-template &lt;class Patch, class InterfaceTypeSeq&gt;
+
+template &lt;concepts::Edge Edge, concepts::Edge OEdge, bool Orientations&gt;
+using Interface = std::conditional_t&lt;
+        (get_edge_patch_id&lt;Edge&gt;() &lt; get_edge_patch_id&lt;OEdge&gt;()),
+        ::Interface&lt;Edge, OEdge, Orientations&gt;,
+        ::Interface&lt;OEdge, Edge, Orientations&gt;&gt;;
+
+template &lt;concepts::Patch Patch, ddc::concepts::type_seq InterfaceTypeSeq&gt;
 struct PatchConnection;
 
-template &lt;class Patch&gt;
+template &lt;concepts::Patch Patch&gt;
 struct PatchConnection&lt;Patch, ddc::TypeSeq&lt;&gt;&gt;
 {
     using type = ddc::TypeSeq&lt;&gt;;
 };
 
-template &lt;class Patch, class InterfaceType&gt;
+template &lt;concepts::Patch Patch, class InterfaceType&gt;
 struct PatchConnection&lt;Patch, ddc::TypeSeq&lt;InterfaceType&gt;&gt;
 {
     using type = std::conditional_t&lt;
@@ -610,7 +617,7 @@ struct PatchConnection&lt;Patch, ddc::TypeSeq&lt;InterfaceType&gt;&gt;
             ddc::TypeSeq&lt;&gt;&gt;;
 };
 
-template &lt;class Patch, class InterfaceType1, class... RemainingInterfaceTypes&gt;
+template &lt;concepts::Patch Patch, class InterfaceType1, class... RemainingInterfaceTypes&gt;
 struct PatchConnection&lt;Patch, ddc::TypeSeq&lt;InterfaceType1, RemainingInterfaceTypes...&gt;&gt;
 {
     using type = ddc::type_seq_merge_t&lt;
@@ -618,10 +625,10 @@ struct PatchConnection&lt;Patch, ddc::TypeSeq&lt;InterfaceType1, RemainingInterf
             typename PatchConnection&lt;Patch, ddc::TypeSeq&lt;RemainingInterfaceTypes...&gt;&gt;::type&gt;;
 };
 
-template &lt;class TypeSeq&gt;
+template &lt;ddc::concepts::type_seq TypeSeq&gt;
 struct StripOutsideEdges;
 
-template &lt;class EdgeType&gt;
+template &lt;concepts::Edge EdgeType&gt;
 struct StripOutsideEdges&lt;ddc::TypeSeq&lt;EdgeType&gt;&gt;
 {
     using type = std::conditional_t&lt;
@@ -630,7 +637,7 @@ struct StripOutsideEdges&lt;ddc::TypeSeq&lt;EdgeType&gt;&gt;
             ddc::TypeSeq&lt;EdgeType&gt;&gt;;
 };
 
-template &lt;class EdgeType1, class... RemainingEdgeTypes&gt;
+template &lt;concepts::Edge EdgeType1, class... RemainingEdgeTypes&gt;
 struct StripOutsideEdges&lt;ddc::TypeSeq&lt;EdgeType1, RemainingEdgeTypes...&gt;&gt;
 {
     using type = ddc::type_seq_merge_t&lt;
@@ -638,7 +645,7 @@ struct StripOutsideEdges&lt;ddc::TypeSeq&lt;EdgeType1, RemainingEdgeTypes...&gt;
             typename StripOutsideEdges&lt;ddc::TypeSeq&lt;RemainingEdgeTypes...&gt;&gt;::type&gt;;
 };
 
-template &lt;class TypeSeq&gt;
+template &lt;ddc::concepts::type_seq TypeSeq&gt;
 struct ToTuple;
 
 template &lt;class... I&gt;
@@ -647,7 +654,7 @@ struct ToTuple&lt;ddc::TypeSeq&lt;I...&gt;&gt;
     using type = std::tuple&lt;I...&gt;;
 };
 
-template &lt;class TypeSeq&gt;
+template &lt;ddc::concepts::type_seq TypeSeq&gt;
 struct ExtractPatches;
 
 template &lt;&gt;
@@ -656,7 +663,7 @@ struct ExtractPatches&lt;ddc::TypeSeq&lt;&gt;&gt;
     using type = ddc::TypeSeq&lt;&gt;;
 };
 
-template &lt;class EdgeType1, class... EdgeTypes&gt;
+template &lt;concepts::Edge EdgeType1, concepts::Edge... EdgeTypes&gt;
 struct ExtractPatches&lt;ddc::TypeSeq&lt;EdgeType1, EdgeTypes...&gt;&gt;
 {
     using type = ddc::type_seq_merge_t&lt;
@@ -664,10 +671,10 @@ struct ExtractPatches&lt;ddc::TypeSeq&lt;EdgeType1, EdgeTypes...&gt;&gt;
             typename ExtractPatches&lt;ddc::TypeSeq&lt;EdgeTypes...&gt;&gt;::type&gt;;
 };
 
-template &lt;class Grid1D, class PatchTypeSeq&gt;
+template &lt;ddc::concepts::discrete_dimension Grid1D, ddc::concepts::type_seq PatchTypeSeq&gt;
 struct FindPatch;
 
-template &lt;class Grid1D&gt;
+template &lt;ddc::concepts::discrete_dimension Grid1D&gt;
 struct FindPatch&lt;Grid1D, ddc::TypeSeq&lt;&gt;&gt;
 {
     // This class should not be reached in the recursion. Raise a readable error (based on the
@@ -703,7 +710,10 @@ struct FindPatch&lt;
     using type = Patch&lt;PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2&gt;;
 };
 
-template &lt;class Grid1D, class Patch1, class... RemainingPatchTypes&gt;
+template &lt;
+        ddc::concepts::discrete_dimension Grid1D,
+        concepts::Patch Patch1,
+        concepts::Patch... RemainingPatchTypes&gt;
 struct FindPatch&lt;Grid1D, ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;&gt;
 {
     // Should instantiate specialisations above instead of this specialisation
@@ -712,10 +722,10 @@ struct FindPatch&lt;Grid1D, ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;&g
     using type = typename FindPatch&lt;Grid1D, ddc::TypeSeq&lt;RemainingPatchTypes...&gt;&gt;::type;
 };
 
-template &lt;class Edge, class InterfaceTypeSeq&gt;
+template &lt;concepts::Edge Edge, ddc::concepts::type_seq InterfaceTypeSeq&gt;
 struct FindInterface;
 
-template &lt;class Edge&gt;
+template &lt;concepts::Edge Edge&gt;
 struct FindInterface&lt;Edge, ddc::TypeSeq&lt;&gt;&gt;
 {
     // This class should not be reached in the recursion. Raise a readable error (based on the
@@ -723,7 +733,7 @@ struct FindInterface&lt;Edge, ddc::TypeSeq&lt;&gt;&gt;
     static_assert(!std::is_same_v&lt;Edge, Edge&gt;, "Edge not found in collection of interfaces.");
 };
 
-template &lt;class Edge, class Interface1, class... RemainingInterfaceTypes&gt;
+template &lt;concepts::Edge Edge, class Interface1, class... RemainingInterfaceTypes&gt;
 struct FindInterface&lt;Edge, ddc::TypeSeq&lt;Interface1, RemainingInterfaceTypes...&gt;&gt;
 {
     // Should instantiate specialisations below instead of this specialisation
@@ -732,51 +742,59 @@ struct FindInterface&lt;Edge, ddc::TypeSeq&lt;Interface1, RemainingInterfaceType
     using type = typename FindInterface&lt;Edge, ddc::TypeSeq&lt;RemainingInterfaceTypes...&gt;&gt;::type;
 };
 
-template &lt;class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes&gt;
+template &lt;
+        concepts::Edge Edge,
+        concepts::Edge OEdge,
+        bool Orientations,
+        class... RemainingInterfaceTypes&gt;
 struct FindInterface&lt;
         Edge,
-        ddc::TypeSeq&lt;Interface&lt;Edge, OEdge, Orientations&gt;, RemainingInterfaceTypes...&gt;&gt;
+        ddc::TypeSeq&lt;::Interface&lt;Edge, OEdge, Orientations&gt;, RemainingInterfaceTypes...&gt;&gt;
 {
     using type = Interface&lt;Edge, OEdge, Orientations&gt;;
 };
 
-template &lt;class Edge, class OEdge, bool Orientations, class... RemainingInterfaceTypes&gt;
+template &lt;
+        concepts::Edge Edge,
+        concepts::Edge OEdge,
+        bool Orientations,
+        class... RemainingInterfaceTypes&gt;
 struct FindInterface&lt;
         Edge,
-        ddc::TypeSeq&lt;Interface&lt;OEdge, Edge, Orientations&gt;, RemainingInterfaceTypes...&gt;&gt;
+        ddc::TypeSeq&lt;::Interface&lt;OEdge, Edge, Orientations&gt;, RemainingInterfaceTypes...&gt;&gt;
 {
     using type = Interface&lt;OEdge, Edge, Orientations&gt;;
 };
 
-template &lt;class InterfaceType, class FirstEdge&gt;
+template &lt;class InterfaceType, concepts::Edge FirstEdge&gt;
 struct EnforceFirstInterfaceEdge;
 
-template &lt;class FirstEdge, class Edge2, bool Orientations&gt;
-struct EnforceFirstInterfaceEdge&lt;Interface&lt;FirstEdge, Edge2, Orientations&gt;, FirstEdge&gt;
+template &lt;concepts::Edge FirstEdge, concepts::Edge Edge2, bool Orientations&gt;
+struct EnforceFirstInterfaceEdge&lt;::Interface&lt;FirstEdge, Edge2, Orientations&gt;, FirstEdge&gt;
 {
     using type = Interface&lt;FirstEdge, Edge2, Orientations&gt;;
 };
 
-template &lt;class FirstEdge, class Edge2, bool Orientations&gt;
-struct EnforceFirstInterfaceEdge&lt;Interface&lt;Edge2, FirstEdge, Orientations&gt;, FirstEdge&gt;
+template &lt;concepts::Edge FirstEdge, concepts::Edge Edge2, bool Orientations&gt;
+struct EnforceFirstInterfaceEdge&lt;::Interface&lt;Edge2, FirstEdge, Orientations&gt;, FirstEdge&gt;
 {
     using type = Interface&lt;FirstEdge, Edge2, Orientations&gt;;
 };
 
-template &lt;class InterfaceType, class FirstEdge&gt;
+template &lt;class InterfaceType, concepts::Edge FirstEdge&gt;
 using enforce_first_interface_edge_t =
         typename EnforceFirstInterfaceEdge&lt;InterfaceType, FirstEdge&gt;::type;
 
-template &lt;class EdgeType&gt;
+template &lt;concepts::Edge EdgeType&gt;
 struct SwapExtremity;
 
-template &lt;class Patch, class Grid1D&gt;
+template &lt;concepts::Patch Patch, ddc::concepts::discrete_dimension Grid1D&gt;
 struct SwapExtremity&lt;Edge&lt;Patch, Grid1D, FRONT&gt;&gt;
 {
     using type = Edge&lt;Patch, Grid1D, BACK&gt;;
 };
 
-template &lt;class Patch, class Grid1D&gt;
+template &lt;concepts::Patch Patch, ddc::concepts::discrete_dimension Grid1D&gt;
 struct SwapExtremity&lt;Edge&lt;Patch, Grid1D, BACK&gt;&gt;
 {
     using type = Edge&lt;Patch, Grid1D, FRONT&gt;;
@@ -784,34 +802,34 @@ struct SwapExtremity&lt;Edge&lt;Patch, Grid1D, BACK&gt;&gt;
 
 } // namespace connectivity_details
 
-template &lt;class StartEdge, class InterfaceTypeSeq&gt;
+template &lt;concepts::Edge StartEdge, ddc::concepts::type_seq InterfaceTypeSeq&gt;
 using equivalent_edge_t = typename connectivity_details::
         FindInterface&lt;StartEdge, InterfaceTypeSeq&gt;::type::template OtherEdge&lt;StartEdge&gt;;
 
 namespace connectivity_details {
 enum InsertPosition { FrontInsert, BackInsert };
 
-template &lt;class ToInsert, class TypeSeq, InsertPosition insert_pos&gt;
+template &lt;class ToInsert, ddc::concepts::type_seq TypeSeq, InsertPosition insert_pos&gt;
 struct AddToTypeSeq;
 
-template &lt;class ToInsert, class TypeSeq&gt;
+template &lt;class ToInsert, ddc::concepts::type_seq TypeSeq&gt;
 struct AddToTypeSeq&lt;ToInsert, TypeSeq, FrontInsert&gt;
 {
     using type = ddc::type_seq_merge_t&lt;TypeSeq, ddc::TypeSeq&lt;ToInsert&gt;&gt;;
 };
 
-template &lt;class ToInsert, class TypeSeq&gt;
+template &lt;class ToInsert, ddc::concepts::type_seq TypeSeq&gt;
 struct AddToTypeSeq&lt;ToInsert, TypeSeq, BackInsert&gt;
 {
     using type = ddc::type_seq_merge_t&lt;ddc::TypeSeq&lt;ToInsert&gt;, TypeSeq&gt;;
 };
 
 template &lt;
-        class StartEdge,
-        class InterfaceTypeSeq,
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
         InsertPosition insert_pos,
         class FoundInterfaces = ddc::TypeSeq&lt;&gt;,
-        class MatchingEdge = equivalent_edge_t&lt;StartEdge, InterfaceTypeSeq&gt;,
+        concepts::Edge MatchingEdge = equivalent_edge_t&lt;StartEdge, InterfaceTypeSeq&gt;,
         bool interface_already_found // Periodic case
         = ddc::in_tags_v&lt;
                 enforce_first_interface_edge_t&lt;
@@ -821,11 +839,11 @@ template &lt;
 struct CollectInterfacesAlongDim;
 
 template &lt;
-        class StartEdge,
-        class InterfaceTypeSeq,
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
         InsertPosition insert_pos,
         class FoundInterfaces,
-        class MatchingEdge&gt;
+        concepts::Edge MatchingEdge&gt;
 struct CollectInterfacesAlongDim&lt;
         StartEdge,
         InterfaceTypeSeq,
@@ -848,11 +866,11 @@ struct CollectInterfacesAlongDim&lt;
 };
 
 template &lt;
-        class StartEdge,
-        class InterfaceTypeSeq,
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
         InsertPosition insert_pos,
         class FoundInterfaces,
-        class MatchingEdge&gt;
+        concepts::Edge MatchingEdge&gt;
 struct CollectInterfacesAlongDim&lt;
         StartEdge,
         InterfaceTypeSeq,
@@ -864,7 +882,11 @@ struct CollectInterfacesAlongDim&lt;
     using type = FoundInterfaces;
 };
 
-template &lt;class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, class FoundInterfaces&gt;
+template &lt;
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
+        InsertPosition insert_pos,
+        class FoundInterfaces&gt;
 struct CollectInterfacesAlongDim&lt;
         StartEdge,
         InterfaceTypeSeq,
@@ -882,21 +904,21 @@ struct CollectInterfacesAlongDim&lt;
 };
 
 template &lt;
-        class StartEdge,
-        class InterfaceTypeSeq,
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
         InsertPosition insert_pos,
-        class FoundGrids = ddc::TypeSeq&lt;&gt;,
-        class MatchingEdge = equivalent_edge_t&lt;StartEdge, InterfaceTypeSeq&gt;,
+        ddc::concepts::type_seq FoundGrids = ddc::TypeSeq&lt;&gt;,
+        concepts::Edge MatchingEdge = equivalent_edge_t&lt;StartEdge, InterfaceTypeSeq&gt;,
         bool grid_already_found // Periodic case
         = ddc::in_tags_v&lt;typename StartEdge::perpendicular_grid, FoundGrids&gt;&gt;
 struct CollectGridsAlongDim;
 
 template &lt;
-        class StartEdge,
-        class InterfaceTypeSeq,
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
         InsertPosition insert_pos,
-        class FoundGrids,
-        class MatchingEdge&gt;
+        ddc::concepts::type_seq FoundGrids,
+        concepts::Edge MatchingEdge&gt;
 struct CollectGridsAlongDim&lt;
         StartEdge,
         InterfaceTypeSeq,
@@ -916,17 +938,21 @@ struct CollectGridsAlongDim&lt;
 };
 
 template &lt;
-        class StartEdge,
-        class InterfaceTypeSeq,
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
         InsertPosition insert_pos,
-        class FoundGrids,
-        class MatchingEdge&gt;
+        ddc::concepts::type_seq FoundGrids,
+        concepts::Edge MatchingEdge&gt;
 struct CollectGridsAlongDim&lt;StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, MatchingEdge, true&gt;
 {
     using type = FoundGrids;
 };
 
-template &lt;class StartEdge, class InterfaceTypeSeq, InsertPosition insert_pos, class FoundGrids&gt;
+template &lt;
+        concepts::Edge StartEdge,
+        ddc::concepts::type_seq InterfaceTypeSeq,
+        InsertPosition insert_pos,
+        ddc::concepts::type_seq FoundGrids&gt;
 struct CollectGridsAlongDim&lt;StartEdge, InterfaceTypeSeq, insert_pos, FoundGrids, OutsideEdge, false&gt;
 {
     using type =
@@ -934,7 +960,10 @@ struct CollectGridsAlongDim&lt;StartEdge, InterfaceTypeSeq, insert_pos, FoundGri
                     type;
 };
 
-template &lt;class StartPatch, class Grid1D, class InterfaceTypeSeq&gt;
+template &lt;
+        concepts::Patch StartPatch,
+        ddc::concepts::discrete_dimension Grid1D,
+        ddc::concepts::type_seq InterfaceTypeSeq&gt;
 struct CollectAllGridsOnDim
 {
 private:
@@ -957,7 +986,10 @@ public:
     using type = ddc::type_seq_merge_t&lt;BackwardTypeSeq, ForwardTypeSeq&gt;;
 };
 
-template &lt;class StartPatch, class Grid1D, class InterfaceTypeSeq&gt;
+template &lt;
+        concepts::Patch StartPatch,
+        ddc::concepts::discrete_dimension Grid1D,
+        ddc::concepts::type_seq InterfaceTypeSeq&gt;
 struct CollectAllInterfacesOnDim
 {
     using BackwardTypeSeq = typename CollectInterfacesAlongDim&lt;
@@ -974,10 +1006,14 @@ struct CollectAllInterfacesOnDim
                     BackwardTypeSeq&gt;::type&gt;;
 };
 
-template &lt;class QueryGrid1D, class IdxRangeType&gt;
+template &lt;
+        ddc::concepts::discrete_dimension QueryGrid1D,
+        ddc::concepts::discrete_domain IdxRangeType&gt;
 struct SelectRelevantIdxRangeType;
 
-template &lt;class QueryGrid1D, class... IdxRangeGrids&gt;
+template &lt;
+        ddc::concepts::discrete_dimension QueryGrid1D,
+        ddc::concepts::discrete_dimension... IdxRangeGrids&gt;
 struct SelectRelevantIdxRangeType&lt;QueryGrid1D, IdxRange&lt;IdxRangeGrids...&gt;&gt;
 {
     using type = std::conditional_t&lt;
@@ -986,16 +1022,19 @@ struct SelectRelevantIdxRangeType&lt;QueryGrid1D, IdxRange&lt;IdxRangeGrids...&g
             ddc::TypeSeq&lt;&gt;&gt;;
 };
 
-template &lt;class QueryGrid1D, class IdxRangeTuple&gt;
+template &lt;ddc::concepts::discrete_dimension QueryGrid1D, class IdxRangeTuple&gt;
 struct FindRelevantIdxRangeType;
 
-template &lt;class QueryGrid1D&gt;
+template &lt;ddc::concepts::discrete_dimension QueryGrid1D&gt;
 struct FindRelevantIdxRangeType&lt;QueryGrid1D, std::tuple&lt;&gt;&gt;
 {
     using type = ddc::TypeSeq&lt;&gt;;
 };
 
-template &lt;class QueryGrid1D, class IdxRangeHead, class... IdxRangeTypes&gt;
+template &lt;
+        ddc::concepts::discrete_dimension QueryGrid1D,
+        ddc::concepts::discrete_domain IdxRangeHead,
+        class... IdxRangeTypes&gt;
 struct FindRelevantIdxRangeType&lt;QueryGrid1D, std::tuple&lt;IdxRangeHead, IdxRangeTypes...&gt;&gt;
 {
     using type = ddc::type_seq_merge_t&lt;
@@ -1003,10 +1042,10 @@ struct FindRelevantIdxRangeType&lt;QueryGrid1D, std::tuple&lt;IdxRangeHead, IdxR
             typename FindRelevantIdxRangeType&lt;QueryGrid1D, std::tuple&lt;IdxRangeTypes...&gt;&gt;::type&gt;;
 };
 
-template &lt;class PatchTypeSeq&gt;
+template &lt;ddc::concepts::type_seq PatchTypeSeq&gt;
 struct PatchIdsAreUnique;
 
-template &lt;class... Patches&gt;
+template &lt;concepts::Patch... Patches&gt;
 struct PatchIdsAreUnique&lt;ddc::TypeSeq&lt;Patches...&gt;&gt;
 {
     static constexpr bool value = []() {
@@ -1024,40 +1063,46 @@ struct PatchIdsAreUnique&lt;ddc::TypeSeq&lt;Patches...&gt;&gt;
 
 } // end namespace connectivity_details
 
-template &lt;class PatchTypeSeq&gt;
+template &lt;ddc::concepts::type_seq PatchTypeSeq&gt;
 inline constexpr bool patch_ids_are_unique_v
         = connectivity_details::PatchIdsAreUnique&lt;PatchTypeSeq&gt;::value;
 
-template &lt;class TypeSeq&gt;
+template &lt;ddc::concepts::type_seq TypeSeq&gt;
 using to_tuple_t = typename connectivity_details::ToTuple&lt;TypeSeq&gt;::type;
 
-template &lt;class... EdgeType&gt;
+template &lt;concepts::Edge... EdgeType&gt;
 using strip_outside_edges_t =
         typename connectivity_details::StripOutsideEdges&lt;ddc::TypeSeq&lt;EdgeType...&gt;&gt;::type;
 
-template &lt;class EdgeTypeSeq&gt;
+template &lt;ddc::concepts::type_seq EdgeTypeSeq&gt;
 using extract_patches_t = typename connectivity_details::ExtractPatches&lt;EdgeTypeSeq&gt;::type;
 
-template &lt;class StartPatch, class InterfaceTypeSeq&gt;
+template &lt;concepts::Patch StartPatch, ddc::concepts::type_seq InterfaceTypeSeq&gt;
 using interfaces_of_patch_t =
         typename connectivity_details::PatchConnection&lt;StartPatch, InterfaceTypeSeq&gt;::type;
 
-template &lt;class Grid1D, class PatchTypeSeq&gt;
+template &lt;ddc::concepts::discrete_dimension Grid1D, ddc::concepts::type_seq PatchTypeSeq&gt;
 using find_patch_t = typename connectivity_details::FindPatch&lt;Grid1D, PatchTypeSeq&gt;::type;
 
-template &lt;class EdgeType, class InterfaceTypeSeq&gt;
+template &lt;concepts::Edge EdgeType, ddc::concepts::type_seq InterfaceTypeSeq&gt;
 using find_associated_interface_t =
         typename connectivity_details::FindInterface&lt;EdgeType, InterfaceTypeSeq&gt;::type;
 
-template &lt;class StartPatch, class Grid1D, class InterfaceTypeSeq&gt;
+template &lt;
+        concepts::Patch StartPatch,
+        ddc::concepts::discrete_dimension Grid1D,
+        ddc::concepts::type_seq InterfaceTypeSeq&gt;
 using collect_grids_on_dim_t = typename connectivity_details::
         CollectAllGridsOnDim&lt;StartPatch, Grid1D, InterfaceTypeSeq&gt;::type;
 
-template &lt;class StartPatch, class Grid1D, class InterfaceTypeSeq&gt;
+template &lt;
+        concepts::Patch StartPatch,
+        ddc::concepts::discrete_dimension Grid1D,
+        ddc::concepts::type_seq InterfaceTypeSeq&gt;
 using collect_interfaces_on_dim_t = typename connectivity_details::
         CollectAllInterfacesOnDim&lt;StartPatch, Grid1D, InterfaceTypeSeq&gt;::type;
 
-template &lt;class QueryGrid1D, class IdxRangeTuple&gt;
+template &lt;ddc::concepts::discrete_dimension QueryGrid1D, class IdxRangeTuple&gt;
 using find_relevant_idx_range_t = ddc::type_seq_element_t&lt;
         0,
         typename connectivity_details::FindRelevantIdxRangeType&lt;QueryGrid1D, IdxRangeTuple&gt;::type&gt;;

@@ -759,6 +759,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add <code>DerivativeCalculatorCommon</code> to avoid code duplication in operators in <code>src/multipatch/interface_derivatives</code>.</li>
 <li>Allow <code>Quadrature</code> to use a vector as the data type to integrate over multiple elements of a <code>VectorField</code> simultaneously.</li>
 <li>Add <code>InterfacesExactDerivativeMatrix</code> to compute all the coupled interface derivatives along a direction with the exact formula.</li>
+<li>Added a <code>concepts::Patch</code> concept.</li>
+<li>Added a <code>concepts::Edge</code> concept.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -802,6 +804,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Improve implementation of <code>DerivReconstructionCoeffs</code> to avoid unnecessary memory allocation and copies.</li>
 <li>Don't assume that elements of a <code>MultipatchType</code> have different types.</li>
 <li><code>Patch</code> takes a unique unsigned integer identifier as its first template parameter (accessible via <code>Patch::id</code>). <code>MultipatchConnectivity</code> checks that the ids of its patches are unique.</li>
+<li>Edges in an <code>Interface</code> must be ordered by the associated <code>Patch::id</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

@@ -19,6 +19,8 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp</label>
@@ -26,6 +28,14 @@
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>patch.hpp</label>
+        <link refid="patch_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -158,32 +168,35 @@
 <codeline lineno="20" refid="structInterface" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structInterface" kindref="compound">Interface</ref></highlight></codeline>
 <codeline lineno="21"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!std::is_same_v&lt;Edge1Type,<sp/>OutsideEdge&gt;<sp/>||<sp/>!std::is_same_v&lt;Edge2Type,<sp/>OutsideEdge&gt;,</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;At<sp/>least<sp/>one<sp/>edge<sp/>should<sp/>belong<sp/>to<sp/>a<sp/>patch.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref><sp/>=<sp/>Edge1Type;</highlight></codeline>
-<codeline lineno="29" refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref><sp/>=<sp/>Edge2Type;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structEdge" kindref="compound">Edge</ref>,</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">=<sp/>std::enable_if_t&lt;std::is_same_v&lt;Edge,<sp/>Edge1&gt;<sp/>||<sp/>std::is_same_v&lt;Edge,<sp/>Edge2&gt;&gt;&gt;</highlight></codeline>
-<codeline lineno="38" refid="structInterface_1add430c600a6a1181e4793a5a3b8beafd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterface_1add430c600a6a1181e4793a5a3b8beafd" kindref="member">OtherEdge</ref><sp/>=<sp/>std::conditional_t&lt;std::is_same_v&lt;Edge,<sp/>Edge1&gt;,<sp/><ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref>,<sp/><ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref>&gt;;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="46" refid="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" kindref="member">orientations_agree</ref><sp/>=<sp/>orientations_agree_bool;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
-<codeline lineno="54" refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" kindref="member">connected_to_patch</ref>()</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;Edge1,<sp/>OutsideEdge&gt;)<sp/>{</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::is_same_v&lt;typename<sp/>Edge2::associated_patch,<sp/>Patch&gt;;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;Edge2,<sp/>OutsideEdge&gt;)<sp/>{</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::is_same_v&lt;typename<sp/>Edge1::associated_patch,<sp/>Patch&gt;;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;typename<sp/>Edge1::associated_patch,<sp/>Patch&gt;)</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(std::is_same_v&lt;typename<sp/>Edge2::associated_patch,<sp/>Patch&gt;);</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="65"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_edge_patch_id&lt;Edge1Type&gt;()<sp/>&lt;<sp/>get_edge_patch_id&lt;Edge2Type&gt;(),</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Sort<sp/>edges<sp/>by<sp/>patch<sp/>id<sp/>to<sp/>avoid<sp/>duplicate<sp/>interface<sp/>definitions&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!std::is_same_v&lt;Edge1Type,<sp/>OutsideEdge&gt;<sp/>||<sp/>!std::is_same_v&lt;Edge2Type,<sp/>OutsideEdge&gt;,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;At<sp/>least<sp/>one<sp/>edge<sp/>should<sp/>belong<sp/>to<sp/>a<sp/>patch.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref><sp/>=<sp/>Edge1Type;</highlight></codeline>
+<codeline lineno="32" refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref><sp/>=<sp/>Edge2Type;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structEdge" kindref="compound">Edge</ref>,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">=<sp/>std::enable_if_t&lt;std::is_same_v&lt;Edge,<sp/>Edge1&gt;<sp/>||<sp/>std::is_same_v&lt;Edge,<sp/>Edge2&gt;&gt;&gt;</highlight></codeline>
+<codeline lineno="41" refid="structInterface_1add430c600a6a1181e4793a5a3b8beafd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterface_1add430c600a6a1181e4793a5a3b8beafd" kindref="member">OtherEdge</ref><sp/>=<sp/>std::conditional_t&lt;std::is_same_v&lt;Edge,<sp/>Edge1&gt;,<sp/><ref refid="structInterface_1a8f23b4f792c4cc36db73b8f7f49b4d7a" kindref="member">Edge2</ref>,<sp/><ref refid="structInterface_1a0eba2d684c513fce67db0f0f977d1315" kindref="member">Edge1</ref>&gt;;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structInterface_1af2dbae0b5ea4505116a20eeb5179e72d" kindref="member">orientations_agree</ref><sp/>=<sp/>orientations_agree_bool;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Patch&gt;</highlight></codeline>
+<codeline lineno="57" refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structInterface_1ae0bdd297037fb4c4415bc7f9a3ca9fff" kindref="member">connected_to_patch</ref>()</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;Edge1,<sp/>OutsideEdge&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::is_same_v&lt;typename<sp/>Edge2::associated_patch,<sp/>Patch&gt;;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;Edge2,<sp/>OutsideEdge&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::is_same_v&lt;typename<sp/>Edge1::associated_patch,<sp/>Patch&gt;;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(std::is_same_v&lt;typename<sp/>Edge1::associated_patch,<sp/>Patch&gt;)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(std::is_same_v&lt;typename<sp/>Edge2::associated_patch,<sp/>Patch&gt;);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/interface.hpp"/>
   </compounddef>

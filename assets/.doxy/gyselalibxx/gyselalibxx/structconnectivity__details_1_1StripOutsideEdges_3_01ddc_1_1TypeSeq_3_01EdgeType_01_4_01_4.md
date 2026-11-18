@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::StripOutsideEdges&lt; ddc::TypeSeq&lt; EdgeType &gt; &gt;
 
-**template &lt;class EdgeType&gt;**
+**template &lt;concepts::Edge EdgeType&gt;**
 
 
 

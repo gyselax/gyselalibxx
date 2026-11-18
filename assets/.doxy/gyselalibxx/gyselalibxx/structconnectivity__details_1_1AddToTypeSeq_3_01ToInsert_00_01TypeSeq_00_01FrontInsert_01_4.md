@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::AddToTypeSeq&lt; ToInsert, TypeSeq, FrontInsert &gt;
 
-**template &lt;class ToInsert, class TypeSeq&gt;**
+**template &lt;class ToInsert, ddc::concepts::type\_seq TypeSeq&gt;**
 
 
 

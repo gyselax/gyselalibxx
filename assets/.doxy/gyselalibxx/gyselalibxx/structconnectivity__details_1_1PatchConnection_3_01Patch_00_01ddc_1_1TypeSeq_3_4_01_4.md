@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::PatchConnection&lt; Patch, ddc::TypeSeq&lt;&gt; &gt;
 
-**template &lt;class [**Patch**](structPatch.md)&gt;**
+**template &lt;concepts::Patch Patch&gt;**
 
 
 

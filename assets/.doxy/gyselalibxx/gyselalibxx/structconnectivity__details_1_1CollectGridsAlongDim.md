@@ -2,7 +2,7 @@
 
 # Struct connectivity\_details::CollectGridsAlongDim
 
-**template &lt;class StartEdge, class InterfaceTypeSeq, InsertPosition insert\_pos, class FoundGrids, class MatchingEdge, bool grid\_already\_found&gt;**
+**template &lt;concepts::Edge StartEdge, ddc::concepts::type\_seq InterfaceTypeSeq, InsertPosition insert\_pos, ddc::concepts::type\_seq FoundGrids, concepts::Edge MatchingEdge, bool grid\_already\_found&gt;**
 
 
 

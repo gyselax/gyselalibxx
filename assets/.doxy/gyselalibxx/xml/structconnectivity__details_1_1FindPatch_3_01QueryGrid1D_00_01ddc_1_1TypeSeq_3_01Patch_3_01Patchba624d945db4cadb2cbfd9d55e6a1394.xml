@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="174" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="185" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="185" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -49,7 +49,7 @@
     <detaileddescription>
 <para>Specialisation of <ref refid="structconnectivity__details_1_1FindPatch" kindref="compound">FindPatch</ref> for the case where Grid2 from first patch in type sequence matches QueryGrid1D </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="169" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="172" bodyend="175"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="180" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="183" bodyend="186"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patchba624d945db4cadb2cbfd9d55e6a1394_1aa3bda80965ec2f5612d14c7bc4caed0b" prot="public" virt="non-virtual"><scope>connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</scope><name>type</name></member>
     </listofallmembers>
