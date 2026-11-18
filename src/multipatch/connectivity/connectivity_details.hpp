@@ -696,7 +696,7 @@ using strip_outside_edges_t =
         typename connectivity_details::StripOutsideEdges<ddc::TypeSeq<EdgeType...>>::type;
 
 /// A tool to find all the patches used by the various edges.
-template <concepts::Edge EdgeTypeSeq>
+template <ddc::concepts::type_seq EdgeTypeSeq>
 using extract_patches_t = typename connectivity_details::ExtractPatches<EdgeTypeSeq>::type;
 
 /// A tool to find all interfaces directly connected to the start patch.
