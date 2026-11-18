@@ -262,7 +262,7 @@ public:
 
 protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.
-    MultipatchIdxRange const& m_idx_ranges;
+    MultipatchIdxRange m_idx_ranges;
 
 private:
     /// @brief References to the InterfaceDerivCoeffs of each inner interface (sorted as inner_interface_collection).
