@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <array>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
@@ -138,26 +140,38 @@ struct FindPatch<Grid1D, ddc::TypeSeq<>>
  * Specialisation of FindPatch for the case where Grid1 from first patch in type sequence
  * matches QueryGrid1D
  */
-template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
+template <
+        class QueryGrid1D,
+        std::size_t PatchId,
+        class OGrid,
+        class BSpl1,
+        class BSpl2,
+        class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
     /// The type found by the class.
-    using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
+    using type = Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>;
 };
 
 /**
  * Specialisation of FindPatch for the case where Grid2 from first patch in type sequence
  * matches QueryGrid1D
  */
-template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
+template <
+        class QueryGrid1D,
+        std::size_t PatchId,
+        class OGrid,
+        class BSpl1,
+        class BSpl2,
+        class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
     /// The type found by the class.
-    using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
+    using type = Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
 /// Specialisation of FindPatch to iterate recursively over the patch type sequence.
@@ -597,7 +611,37 @@ struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeHead, IdxRangeTy
             typename FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeTypes...>>::type>;
 };
 
+/**
+ * @brief A class to check that all the patches in a type sequence have different ids.
+ * @tparam PatchTypeSeq A DDC type sequence of patches.
+ */
+template <class PatchTypeSeq>
+struct PatchIdsAreUnique;
+
+/// Specialisation of PatchIdsAreUnique to unpack the patches.
+template <class... Patches>
+struct PatchIdsAreUnique<ddc::TypeSeq<Patches...>>
+{
+    /// True if all the patch ids are different, false otherwise.
+    static constexpr bool value = []() {
+        std::array<std::size_t, sizeof...(Patches)> const ids {Patches::id...};
+        for (std::size_t i = 0; i < ids.size(); ++i) {
+            for (std::size_t j = i + 1; j < ids.size(); ++j) {
+                if (ids[i] == ids[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }();
+};
+
 } // end namespace connectivity_details
+
+/// A tool to check that all the patches in a type sequence have different ids.
+template <class PatchTypeSeq>
+inline constexpr bool patch_ids_are_unique_v
+        = connectivity_details::PatchIdsAreUnique<PatchTypeSeq>::value;
 
 /// A tool for converting a DDC type sequence to a tuple type.
 template <class TypeSeq>

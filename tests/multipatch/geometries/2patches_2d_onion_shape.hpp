@@ -142,10 +142,10 @@ struct BSplinesTheta
 
 // PATCHES ---------------------------------------------------------------------------------------
 /// @brief First patch.
-using Patch1 = Patch<GridR<1>, GridTheta<1>, BSplinesR<1>, BSplinesTheta<1>>;
+using Patch1 = Patch<1, GridR<1>, GridTheta<1>, BSplinesR<1>, BSplinesTheta<1>>;
 
 /// @brief Second patch.
-using Patch2 = Patch<GridR<2>, GridTheta<2>, BSplinesR<2>, BSplinesTheta<2>>;
+using Patch2 = Patch<2, GridR<2>, GridTheta<2>, BSplinesR<2>, BSplinesTheta<2>>;
 
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
