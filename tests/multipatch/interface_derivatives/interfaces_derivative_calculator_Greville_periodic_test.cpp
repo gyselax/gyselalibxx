@@ -138,7 +138,6 @@ template <
         bool is_approximation,
         class Connectivity,
         class Grid1D,
-        class PatchSeq,
         ddc::SplineBuilderClosure SBC>
 using InterfacesDerivativeCalculatorType = std::conditional_t<
         is_approximation,
@@ -528,7 +527,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridX<1>,
-            ddc::TypeSeq<Patch1, Patch2, Patch3>,
             ddc::SplineBuilderClosure::PERIODIC>
             deriv_calculator_123(
                     idx_ranges_123,
@@ -540,7 +538,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridX<4>,
-            ddc::TypeSeq<Patch4, Patch5, Patch6>,
             ddc::SplineBuilderClosure::PERIODIC>
             deriv_calculator_456(
                     idx_ranges_456,
@@ -552,7 +549,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridX<7>,
-            ddc::TypeSeq<Patch7, Patch8, Patch9>,
             ddc::SplineBuilderClosure::PERIODIC>
             deriv_calculator_789(
                     idx_ranges_789,
@@ -565,7 +561,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridY<1>,
-            ddc::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
             ddc::SplineBuilderClosure::GREVILLE>
             deriv_calculator_147(idx_ranges_147, deriv_coeffs_1_4, deriv_coeffs_4_7);
 
@@ -573,7 +568,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridY<2>,
-            ddc::TypeSeq<Patch2, Patch5, Patch8>,
             ddc::SplineBuilderClosure::GREVILLE>
             deriv_calculator_258(idx_ranges_258, deriv_coeffs_2_5, deriv_coeffs_5_8);
 
@@ -581,7 +575,6 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             is_approximation,
             Connectivity,
             GridY<3>,
-            ddc::TypeSeq<Patch3, Patch6, Patch9>,
             ddc::SplineBuilderClosure::GREVILLE>
             deriv_calculator_369(idx_ranges_369, deriv_coeffs_3_6, deriv_coeffs_6_9);
 
