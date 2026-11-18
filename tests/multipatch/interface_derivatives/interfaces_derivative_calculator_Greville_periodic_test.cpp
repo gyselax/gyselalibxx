@@ -134,11 +134,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>,
         ddc::ConstantExtrapolationRule<Yg>>;
 
-template <
-        bool is_approximation,
-        class Connectivity,
-        class Grid1D,
-        ddc::SplineBuilderClosure SBC>
+template <bool is_approximation, class Connectivity, class Grid1D, ddc::SplineBuilderClosure SBC>
 using InterfacesDerivativeCalculatorType = std::conditional_t<
         is_approximation,
         InterfacesDerivativeCalculator<Connectivity, Grid1D>,
