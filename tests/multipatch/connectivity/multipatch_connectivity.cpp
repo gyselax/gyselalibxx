@@ -183,7 +183,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
 
     using StartGridNonPeriodic = typename Patch2::Grid2;
 
-    auto idx_ranges_y
+    std::tuple idx_ranges_y
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridNonPeriodic>(
                     all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_y)> == 3);
@@ -193,7 +193,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
 
     using StartGridPeriodic = typename Patch2::Grid1;
 
-    auto idx_ranges_x
+    std::tuple idx_ranges_x
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridPeriodic>(
                     all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_x)> == 3);
@@ -211,14 +211,14 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDimSimple)
 
     using StartGridY = typename Patch2::Grid2;
 
-    auto idx_ranges_y
+    std::tuple idx_ranges_y
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridY>(all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_y)> == 1);
     EXPECT_EQ(std::get<0>(idx_ranges_y), ddc::select<GridY<2>>(idx_range_2));
 
     using StartGridX = typename Patch2::Grid1;
 
-    auto idx_ranges_x
+    std::tuple idx_ranges_x
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridX>(all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_x)> == 2);
     static_assert(std::is_same_v<
@@ -243,8 +243,9 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDim)
 
     using MiddleGridX = typename Patch3::Grid1;
 
-    auto figure_eight_grid = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(
-            all_idx_ranges);
+    std::tuple figure_eight_grid
+            = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(
+                    all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(figure_eight_grid)> == 6);
     EXPECT_EQ(std::get<IdxRange<GridX<3>>>(figure_eight_grid), ddc::select<GridX<3>>(idx_range_3));
     EXPECT_EQ(std::get<IdxRange<GridX<4>>>(figure_eight_grid), ddc::select<GridX<4>>(idx_range_4));
@@ -267,7 +268,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDimMultipatc
 
     using MiddleGridX = typename Patch3::Grid1;
 
-    auto figure_eight_grid
+    std::tuple figure_eight_grid
             = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(all_domains);
     static_assert(std::tuple_size_v<decltype(figure_eight_grid)> == 6);
     EXPECT_EQ(std::get<IdxRange<GridX<3>>>(figure_eight_grid), ddc::select<GridX<3>>(idx_range_3));
