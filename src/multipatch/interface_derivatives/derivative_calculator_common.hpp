@@ -317,7 +317,7 @@ protected:
     double get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchDerivConstField_host functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs) const
     {
         // Use the function values to compute the first derivatives.
         DConstField<typename patch1<I>::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride>
@@ -350,7 +350,7 @@ protected:
     double get_approximated_deriv(
             Idx<grid_par1<I>> const& idx_to_slice_1,
             Idx<grid_par2<I>> const& idx_to_slice_2,
-            MultipatchDerivConstField_host functions_and_derivs)
+            MultipatchDerivConstField_host functions_and_derivs) const
     {
         IdxRange<grid_par1<I>> idx_range_par_1(m_idx_ranges.template get<patch1<I>>());
         IdxRange<grid_par2<I>> idx_range_par_2(m_idx_ranges.template get<patch2<I>>());
@@ -404,7 +404,7 @@ protected:
     void set_slice_indexes(
             int& value_idx_to_slice,
             Idx<grid_par1<I>>& idx_to_slice_1,
-            Idx<grid_par2<I>>& idx_to_slice_2)
+            Idx<grid_par2<I>>& idx_to_slice_2) const
     {
         // The Patch with the idx_to_slice value corresponding to the given value_idx_to_slice.
         using PatchIndexSlice
@@ -439,7 +439,7 @@ protected:
             std::size_t I,
             class Patch,
             bool is_patch1 = std::is_same_v<Patch, patch1<I>>>
-    std::conditional_t<is_patch1, Idx<grid_perp1<I>>, Idx<grid_perp2<I>>> get_idx_interface()
+    std::conditional_t<is_patch1, Idx<grid_perp1<I>>, Idx<grid_perp2<I>>> get_idx_interface() const
     {
         using IdxRangePerp
                 = std::conditional_t<is_patch1, IdxRange<grid_perp1<I>>, IdxRange<grid_perp2<I>>>;
