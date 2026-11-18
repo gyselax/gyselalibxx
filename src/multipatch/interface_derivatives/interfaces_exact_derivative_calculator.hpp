@@ -280,7 +280,7 @@ private:
         const double coefs[] = {-coeff_left, 1, -coeff_right};
 
         for (int dofs : {-1, 0, 1}) {
-            if (0 <= I + dofs && I + dofs < n_inner_interfaces) {
+            if (0 <= int(I) + dofs && I + dofs < n_inner_interfaces) {
                 m_matrix.set_element(I, I + dofs, coefs[dofs + 1]);
             }
         }
