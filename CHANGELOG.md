@@ -41,6 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 - Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
 - Add `InterfacesExactDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the exact formula.
+- Added a `concepts::Patch` concept.
+- Added a `concepts::Edge` concept.
 
 ### Fixed
 
@@ -84,6 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
+- Edges in an `Interface` must be ordered by the associated `Patch::id`.
 
 ### Deprecated
 
