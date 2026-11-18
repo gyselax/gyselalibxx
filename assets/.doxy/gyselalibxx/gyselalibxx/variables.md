@@ -463,6 +463,7 @@
 
 * **PolarSplineMemRTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **PolarSplineRTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
+* **patch\_ids\_are\_unique\_v** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **pos** ([**gauss\_legendre\_integration.cpp**](gauss__legendre__integration_8cpp.md))
 
 

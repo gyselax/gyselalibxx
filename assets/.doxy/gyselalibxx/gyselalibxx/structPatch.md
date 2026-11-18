@@ -2,7 +2,7 @@
 
 # Struct Patch
 
-**template &lt;class... T&gt;**
+**template &lt;std::size\_t PatchId, class... T&gt;**
 
 
 
@@ -85,6 +85,7 @@ _Base tag for a patch._ [More...](#detailed-description)
 **Template parameters:**
 
 
+* `PatchId` A unique identifier for the patch. This provides a compile-time ordering of the patches. 
 * `T` Variadic template parameter allowing us to use [**Patch**](structPatch.md) struct for different numbers of dimensions. 
 
 

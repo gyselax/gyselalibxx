@@ -10,6 +10,7 @@
 
 
 
+* `#include <array>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
 * `#include "edge.hpp"`
@@ -60,13 +61,14 @@
 | struct | [**FindInterface&lt; Edge, ddc::TypeSeq&lt;&gt; &gt;**](structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_4_01_4.md) &lt;class [**Edge**](structEdge.md)&gt;<br>_Specialisation of_ [_**FindInterface**_](structconnectivity__details_1_1FindInterface.md) _for an empty interface list._ |
 | struct | [**FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01RemainingPatchTypes_8_8_8_01_4_01_4.md) &lt;class Grid1D, class Patch1, RemainingPatchTypes&gt;<br>_Specialisation of_ [_**FindPatch**_](structconnectivity__details_1_1FindPatch.md) _to iterate recursively over the patch type sequence._ |
 | struct | [**FindPatch&lt; Grid1D, ddc::TypeSeq&lt;&gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_4_01_4.md) &lt;class Grid1D&gt;<br>_Specialisation of_ [_**FindPatch**_](structconnectivity__details_1_1FindPatch.md) _for an empty patch list._ |
-| struct | [**FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb.md) &lt;class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, RemainingPatchTypes&gt;<br> |
-| struct | [**FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Querycbbead3cd1875a221db0168a1c63b042.md) &lt;class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, RemainingPatchTypes&gt;<br> |
+| struct | [**FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patchba624d945db4cadb2cbfd9d55e6a1394.md) &lt;class QueryGrid1D, PatchId, class OGrid, class BSpl1, class BSpl2, RemainingPatchTypes&gt;<br> |
+| struct | [**FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;**](structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67.md) &lt;class QueryGrid1D, PatchId, class OGrid, class BSpl1, class BSpl2, RemainingPatchTypes&gt;<br> |
 | struct | [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b.md) &lt;class QueryGrid1D, class IdxRangeHead, IdxRangeTypes&gt;<br>_Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _to iterate recursively over the possible index range types._ |
 | struct | [**FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;**](structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4.md) &lt;class QueryGrid1D&gt;<br>_Specialisation of_ [_**FindRelevantIdxRangeType**_](structconnectivity__details_1_1FindRelevantIdxRangeType.md) _for an empty list of index range types._ |
 | struct | [**PatchConnection&lt; Patch, ddc::TypeSeq&lt; InterfaceType &gt; &gt;**](structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_01InterfaceType_01_4_01_4.md) &lt;class [**Patch**](structPatch.md), class InterfaceType&gt;<br>_Specialisation of_ [_**PatchConnection**_](structconnectivity__details_1_1PatchConnection.md) _for an interface list with one element._ |
 | struct | [**PatchConnection&lt; Patch, ddc::TypeSeq&lt; InterfaceType1, RemainingInterfaceTypes... &gt; &gt;**](structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_01InterfaceType1_06c0add68931ef7e3252d237eeb2c9f3.md) &lt;class [**Patch**](structPatch.md), class InterfaceType1, RemainingInterfaceTypes&gt;<br>_Specialisation of_ [_**PatchConnection**_](structconnectivity__details_1_1PatchConnection.md) _to iterate recursively over the interface type sequence._ |
 | struct | [**PatchConnection&lt; Patch, ddc::TypeSeq&lt;&gt; &gt;**](structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_4_01_4.md) &lt;class [**Patch**](structPatch.md)&gt;<br>_Specialisation of_ [_**PatchConnection**_](structconnectivity__details_1_1PatchConnection.md) _for an empty interface list._ |
+| struct | [**PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;**](structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4.md) &lt;Patches&gt;<br>_Specialisation of_ [_**PatchIdsAreUnique**_](structconnectivity__details_1_1PatchIdsAreUnique.md) _to unpack the patches._ |
 | struct | [**SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;**](structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.md) &lt;class QueryGrid1D, IdxRangeGrids&gt;<br>_Specialisation of_ [_**SelectRelevantIdxRangeType**_](structconnectivity__details_1_1SelectRelevantIdxRangeType.md) _to get access to the grids in the index range._ |
 | struct | [**StripOutsideEdges&lt; ddc::TypeSeq&lt; EdgeType &gt; &gt;**](structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1TypeSeq_3_01EdgeType_01_4_01_4.md) &lt;class EdgeType&gt;<br>_Specialisation of_ [_**StripOutsideEdges**_](structconnectivity__details_1_1StripOutsideEdges.md) _for the case with one edge in the list._ |
 | struct | [**StripOutsideEdges&lt; ddc::TypeSeq&lt; EdgeType1, RemainingEdgeTypes... &gt; &gt;**](structconnectivity__details_1_1StripOutsideEdges_3_01ddc_1_1TypeSeq_3_01EdgeType1_00_01RemainingEdgeTypes_8_8_8_01_4_01_4.md) &lt;class EdgeType1, RemainingEdgeTypes&gt;<br>_Specialisation of_ [_**StripOutsideEdges**_](structconnectivity__details_1_1StripOutsideEdges.md) _to iterate recursively over the edge type sequence._ |
@@ -93,6 +95,11 @@
 
 
 
+## Public Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  bool | [**patch\_ids\_are\_unique\_v**](#variable-patch_ids_are_unique_v)   = `[**connectivity\_details::PatchIdsAreUnique**](structconnectivity__details_1_1PatchIdsAreUnique.md)&lt;PatchTypeSeq&gt;::value`<br>_A tool to check that all the patches in a type sequence have different ids._  |
 
 
 
@@ -293,6 +300,22 @@ using strip_outside_edges_t =
 _A tool for converting a DDC type sequence to a tuple type._ 
 ```C++
 using to_tuple_t =  typename connectivity_details::ToTuple<TypeSeq>::type;
+```
+
+
+
+
+<hr>
+## Public Attributes Documentation
+
+
+
+
+### variable patch\_ids\_are\_unique\_v 
+
+_A tool to check that all the patches in a type sequence have different ids._ 
+```C++
+bool patch_ids_are_unique_v;
 ```
 
 

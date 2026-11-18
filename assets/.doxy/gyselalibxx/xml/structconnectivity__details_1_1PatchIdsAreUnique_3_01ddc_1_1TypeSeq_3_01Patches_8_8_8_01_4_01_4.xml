@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;</compoundname>
+    <includes refid="connectivity__details_8hpp" local="no">connectivity_details.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>Patches</declname>
+        <defname>Patches</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4_1a483a7efebb5790927bdc14c802633418" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;::value</qualifiedname>
+        <initializer>= []() {
+        std::array&lt;std::size_t, sizeof...(Patches)&gt; const ids {Patches::id...};
+        for (std::size_t i = 0; i &lt; ids.size(); ++i) {
+            for (std::size_t j = i + 1; j &lt; ids.size(); ++j) {
+                if (ids[i] == ids[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }()</initializer>
+        <briefdescription>
+<para>True if all the patch ids are different, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="626" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="626" bodyend="636"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structconnectivity__details_1_1PatchIdsAreUnique" kindref="compound">PatchIdsAreUnique</ref> to unpack the patches. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="623" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="624" bodyend="637"/>
+    <listofallmembers>
+      <member refid="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4_1a483a7efebb5790927bdc14c802633418" prot="public" virt="non-virtual"><scope>connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

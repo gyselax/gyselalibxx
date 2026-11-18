@@ -16,8 +16,8 @@
     <innerclass refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1TypeSeq_3_01EdgeType1_00_01EdgeTypes_8_8_8_01_4_01_4" prot="public">connectivity_details::ExtractPatches&lt; ddc::TypeSeq&lt; EdgeType1, EdgeTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindPatch" prot="public">connectivity_details::FindPatch</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt;&gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Querycbbead3cd1875a221db0168a1c63b042" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
-    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patchba624d945db4cadb2cbfd9d55e6a1394" prot="public">connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01RemainingPatchTypes_8_8_8_01_4_01_4" prot="public">connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindInterface" prot="public">connectivity_details::FindInterface</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindInterface_3_01Edge_00_01ddc_1_1TypeSeq_3_4_01_4" prot="public">connectivity_details::FindInterface&lt; Edge, ddc::TypeSeq&lt;&gt; &gt;</innerclass>
@@ -48,6 +48,8 @@
     <innerclass refid="structconnectivity__details_1_1FindRelevantIdxRangeType" prot="public">connectivity_details::FindRelevantIdxRangeType</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_4_01_4" prot="public">connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt;&gt; &gt;</innerclass>
     <innerclass refid="structconnectivity__details_1_1FindRelevantIdxRangeType_3_01QueryGrid1D_00_01std_1_1tuple_3_01Id3b131c802b30082f4412eb4689d6d53b" prot="public">connectivity_details::FindRelevantIdxRangeType&lt; QueryGrid1D, std::tuple&lt; IdxRangeHead, IdxRangeTypes... &gt; &gt;</innerclass>
+    <innerclass refid="structconnectivity__details_1_1PatchIdsAreUnique" prot="public">connectivity_details::PatchIdsAreUnique</innerclass>
+    <innerclass refid="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4" prot="public">connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;</innerclass>
     <sectiondef kind="enum">
       <memberdef kind="enum" id="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" prot="public" static="no" strong="no">
         <type></type>
@@ -74,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="290" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="290" bodyend="290"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="304" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="304" bodyend="304"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="typedef">
@@ -100,13 +102,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="248" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="248" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="262" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="262" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="12" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="14" column="1"/>
   </compounddef>
 </doxygen>

@@ -1429,11 +1429,11 @@
   </compound>
   <compound refid="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_4_01_4" kind="struct"><name>connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt;&gt; &gt;</name>
   </compound>
-  <compound refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb" kind="struct"><name>connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</name>
-    <member refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb_1a9dbc96d670cc6cea2d2ac2cc25aaad52" kind="typedef"><name>type</name></member>
+  <compound refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patchba624d945db4cadb2cbfd9d55e6a1394" kind="struct"><name>connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</name>
+    <member refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patchba624d945db4cadb2cbfd9d55e6a1394_1aa3bda80965ec2f5612d14c7bc4caed0b" kind="typedef"><name>type</name></member>
   </compound>
-  <compound refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Querycbbead3cd1875a221db0168a1c63b042" kind="struct"><name>connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</name>
-    <member refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Querycbbead3cd1875a221db0168a1c63b042_1a961e6db282f60f67b478237c95a9a387" kind="typedef"><name>type</name></member>
+  <compound refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67" kind="struct"><name>connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</name>
+    <member refid="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67_1a19048c2faa3d32ef4b1fb58c91474071" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1FindRelevantIdxRangeType" kind="struct"><name>connectivity_details::FindRelevantIdxRangeType</name>
   </compound>
@@ -2157,7 +2157,7 @@
   </compound>
   <compound refid="structis__patch" kind="struct"><name>is_patch</name>
   </compound>
-  <compound refid="structis__patch_3_01Patch_3_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4" kind="struct"><name>is_patch&lt; Patch&lt; Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</name>
+  <compound refid="structis__patch_3_01Patch_3_01PatchId_00_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4" kind="struct"><name>is_patch&lt; Patch&lt; PatchId, Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;</name>
   </compound>
   <compound refid="structis__uniform__lagrange__basis" kind="struct"><name>is_uniform_lagrange_basis</name>
   </compound>
@@ -2847,29 +2847,30 @@
   </compound>
   <compound refid="structPatch" kind="struct"><name>Patch</name>
   </compound>
-  <compound refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4" kind="struct"><name>Patch&lt; grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;</name>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1abad4a55c8bc66356aeb75b17e6169325" kind="typedef"><name>Grid1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a10e13ba81718c97997111ded99c2276c" kind="typedef"><name>Grid2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ab143750fd3c7386b9dbfb894e7edb59c" kind="typedef"><name>Dim1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1aae5e0f9130d5fb84aec2a873716be531" kind="typedef"><name>Dim2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1abf58b838d30e05fa91d71feec6dde132" kind="typedef"><name>BSplines1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a79f96be697217aefd52077b6449f47b2" kind="typedef"><name>BSplines2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1af003e5287ebd73f5b10b2d4f5b96a036" kind="typedef"><name>Coord1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1aed38b340e11a628505083d8ccace02a2" kind="typedef"><name>Coord2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a94c9cc839f7a8bc54781f92e57808474" kind="typedef"><name>Coord12</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a5c42d5d066063a881abd5061ade08933" kind="typedef"><name>Idx1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a5def95a8bd6544c11128ed4a81215f0e" kind="typedef"><name>Idx2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1af0e9d89578e2d3b2a700bd496a69a596" kind="typedef"><name>Idx12</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1af6492b7437a05bffcae91ec488fb3ebc" kind="typedef"><name>IdxStep1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1af4933351800318b415a122d2a2ef07bd" kind="typedef"><name>IdxStep2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a7d0f81f6499b4284768beb4cffff271a" kind="typedef"><name>IdxStep12</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ad0a77fd592485eb2c2d931f0db1ac9e8" kind="typedef"><name>IdxRange1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ae6a2972346b2cd63c07ff4d77a5b5b33" kind="typedef"><name>IdxRange2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1abcf91678d4dd96d85521818178d54d66" kind="typedef"><name>IdxRange12</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ac165e7e0ef0a783518a55c822eeec67f" kind="typedef"><name>IdxRangeBS1</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a281638bbfde5f496544d54ce87a89461" kind="typedef"><name>IdxRangeBS2</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a4753baa1e93d836c5aaeb8ddbf9c58d2" kind="typedef"><name>IdxRangeBS12</name></member>
-    <member refid="structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a93b365cc045659654e44ba77b6ff51c3" kind="variable"><name>n_dims</name></member>
+  <compound refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4" kind="struct"><name>Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;</name>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a04dba580ce7e58224a5012af6de70565" kind="typedef"><name>Grid1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a3db1d071c0c92cacbc1145b29948672e" kind="typedef"><name>Grid2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ad371a5c4be4a53738a8e2ee2ff7460fb" kind="typedef"><name>Dim1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ac30d547e425f3a57ac9a4997cf71b1e5" kind="typedef"><name>Dim2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a820dfdbc92ecda1668d59032210ba59b" kind="typedef"><name>BSplines1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a1d8b5b3d80d488f0b6b3697b8372f7b6" kind="typedef"><name>BSplines2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a61f56f732a129ef440fc21146085df7c" kind="typedef"><name>Coord1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a4eb9e281a1772606b67fe6a8a7c2a7bb" kind="typedef"><name>Coord2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1aa00104a82f672d4d8fca7ce9ea2215d0" kind="typedef"><name>Coord12</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ae62fee90e46fb55f3c77f732b32f6d35" kind="typedef"><name>Idx1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a1b7ba82f058e0a392a12cdb10daba057" kind="typedef"><name>Idx2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ad7c65e5d94bb8f158fa349b371357d1b" kind="typedef"><name>Idx12</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a5b5e1c957ac53776f7fcc9535504c832" kind="typedef"><name>IdxStep1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a3c969dee0ef0b6e8af2818ba765196eb" kind="typedef"><name>IdxStep2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a61297af86bf8fbb28f76112fdd6b60fd" kind="typedef"><name>IdxStep12</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a85326333cb4eaa2cf466eee53392b847" kind="typedef"><name>IdxRange1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ad6bb5d44c90d391e5fdb2fb69e9fabe2" kind="typedef"><name>IdxRange2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a654e26d341b607058e6f36813cd9ad21" kind="typedef"><name>IdxRange12</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1ac070c47a564e6c81020b33a66f67d956" kind="typedef"><name>IdxRangeBS1</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a471e98674e87ef879029f37516370287" kind="typedef"><name>IdxRangeBS2</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a2b77a1e0c3a080cd36352a19612ff03e" kind="typedef"><name>IdxRangeBS12</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a6b3075c088518077343a8bf7db703ec8" kind="variable"><name>id</name></member>
+    <member refid="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4_1a39652dc0e23ea45492c1e4b7999bc210" kind="variable"><name>n_dims</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1PatchConnection" kind="struct"><name>connectivity_details::PatchConnection</name>
   </compound>
@@ -2881,6 +2882,11 @@
   </compound>
   <compound refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_4_01_4" kind="struct"><name>connectivity_details::PatchConnection&lt; Patch, ddc::TypeSeq&lt;&gt; &gt;</name>
     <member refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1TypeSeq_3_4_01_4_1abfc7a8a44870667edc88704316285ac7" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structconnectivity__details_1_1PatchIdsAreUnique" kind="struct"><name>connectivity_details::PatchIdsAreUnique</name>
+  </compound>
+  <compound refid="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4" kind="struct"><name>connectivity_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;</name>
+    <member refid="structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4_1a483a7efebb5790927bdc14c802633418" kind="variable"><name>value</name></member>
   </compound>
   <compound refid="structmetric__tensor__detail_1_1PlaceholderGrid" kind="struct"><name>metric_tensor_detail::PlaceholderGrid</name>
     <member refid="structmetric__tensor__detail_1_1PlaceholderGrid_1a5d88ea6e0b319ae9a4d3f8f242c8a54f" kind="typedef"><name>continuous_dimension_type</name></member>
@@ -3917,6 +3923,8 @@
   <compound refid="conceptconcepts_1_1MappingWithJacobian" kind="concept"><name>concepts::MappingWithJacobian</name>
   </compound>
   <compound refid="conceptconcepts_1_1MetricTensor" kind="concept"><name>concepts::MetricTensor</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1Patch" kind="concept"><name>concepts::Patch</name>
   </compound>
   <compound refid="concepthas__inv__jacobian__v" kind="concept"><name>has_inv_jacobian_v</name>
   </compound>
@@ -4978,6 +4986,7 @@
     <member refid="connectivity__details_8hpp_1a3be5672c2a928eed62d61ca5a8cce907" kind="typedef"><name>collect_grids_on_dim_t</name></member>
     <member refid="connectivity__details_8hpp_1aef5bdc1f2a1cc43a1cee47df915c1f67" kind="typedef"><name>collect_interfaces_on_dim_t</name></member>
     <member refid="connectivity__details_8hpp_1ac57bb1180561f7444e70a154d5d191ad" kind="typedef"><name>find_relevant_idx_range_t</name></member>
+    <member refid="connectivity__details_8hpp_1a1003b224d45522028f95a61007528ac0" kind="variable"><name>patch_ids_are_unique_v</name></member>
   </compound>
   <compound refid="edge_8hpp" kind="file"><name>edge.hpp</name>
   </compound>

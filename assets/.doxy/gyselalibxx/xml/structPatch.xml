@@ -4,6 +4,11 @@
     <compoundname>Patch</compoundname>
     <templateparamlist>
       <param>
+        <type>std::size_t</type>
+        <declname>PatchId</declname>
+        <defname>PatchId</defname>
+      </param>
+      <param>
         <type>class...</type>
         <declname>T</declname>
         <defname>T</defname>
@@ -15,6 +20,14 @@
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
+<parametername>PatchId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A unique identifier for the patch. This provides a compile-time ordering of the patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -24,7 +37,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" line="14" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" bodystart="14" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" bodystart="15" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

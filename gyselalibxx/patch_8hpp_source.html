@@ -579,18 +579,19 @@
 <p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_28b51abc9241105ab41b66c468e7d019.html"><strong>connectivity</strong></a> <strong>&gt;</strong> <a href="patch_8hpp.html"><strong>patch.hpp</strong></a></p>
 <p><a href="patch_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
-
 #pragma once
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "ddc_aliases.hpp"
 
-template &lt;class... T&gt;
+template &lt;std::size_t PatchId, class... T&gt;
 struct Patch;
 
-template &lt;class grid1, class grid2, class bsplines_dim1, class bsplines_dim2&gt;
-struct Patch&lt;grid1, grid2, bsplines_dim1, bsplines_dim2&gt;
+template &lt;std::size_t PatchId, class grid1, class grid2, class bsplines_dim1, class bsplines_dim2&gt;
+struct Patch&lt;PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2&gt;
 {
+    static constexpr std::size_t id = PatchId;
+
     static int constexpr n_dims = 2;
 
     using Grid1 = grid1;
@@ -628,13 +629,21 @@ struct is_patch : std::false_type
 {
 };
 
-template &lt;class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2&gt;
-struct is_patch&lt;Patch&lt;Grid1, Grid2, BsplinesDim1, BsplinesDim2&gt;&gt; : std::true_type
+template &lt;std::size_t PatchId, class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2&gt;
+struct is_patch&lt;Patch&lt;PatchId, Grid1, Grid2, BsplinesDim1, BsplinesDim2&gt;&gt; : std::true_type
 {
 };
 
 template &lt;class PatchType&gt;
 bool constexpr is_patch_v = is_patch&lt;PatchType&gt;::value;
+
+namespace concepts {
+template &lt;class PatchType&gt;
+concept Patch = requires
+{
+    is_patch_v&lt;PatchType&gt;;
+};
+}; // namespace concepts
 </code></pre></div>
               
             </div>

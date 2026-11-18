@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1PatchIdsAreUnique" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::PatchIdsAreUnique</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class PatchTypeSeq</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to check that all the patches in a type sequence have different ids. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PatchTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DDC type sequence of patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="619" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="619" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

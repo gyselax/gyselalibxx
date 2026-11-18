@@ -20,7 +20,7 @@
       <node id="26">
         <label>coord_transformation_tools.hpp</label>
         <link refid="coord__transformation__tools_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
@@ -40,7 +40,7 @@
         <link refid="deriv__details_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="43">
@@ -48,7 +48,7 @@
         <link refid="derivative__field_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
@@ -56,17 +56,17 @@
       <node id="44">
         <label>derivative_field_common.hpp</label>
         <link refid="derivative__field__common_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="45">
@@ -76,7 +76,7 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
@@ -100,7 +100,7 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
@@ -108,13 +108,13 @@
       <node id="29">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -126,13 +126,13 @@
       <node id="30">
         <label>tensor_common.hpp</label>
         <link refid="tensor__common_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
@@ -142,7 +142,7 @@
       <node id="31">
         <label>tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
@@ -152,9 +152,9 @@
         <link refid="vector__field_8hpp_source"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
@@ -168,7 +168,7 @@
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -180,9 +180,9 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
@@ -200,9 +200,9 @@
         <link refid="deriv__reconstruction__coeffs_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
@@ -232,59 +232,61 @@
       <node id="4">
         <label>connectivity_details.hpp</label>
         <link refid="connectivity__details_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>edge.hpp</label>
         <link refid="edge_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>edge_transformation.hpp</label>
-        <link refid="edge__transformation_8hpp_source"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="14">
+        <label>edge_transformation.hpp</label>
+        <link refid="edge__transformation_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="46">
@@ -292,7 +294,7 @@
         <link refid="multipatch__field_8hpp_source"/>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="47">
@@ -300,7 +302,7 @@
         <link refid="multipatch__type_8hpp_source"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
@@ -308,11 +310,11 @@
       <node id="42">
         <label>types.hpp</label>
         <link refid="types_8hpp_source"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
@@ -334,13 +336,13 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
@@ -358,9 +360,9 @@
         <link refid="interface__derivative__coefficients_8hpp_source"/>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
@@ -382,23 +384,23 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="6">
         <label>ddc_aliases.hpp</label>
         <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -408,21 +410,21 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>geometry_descriptors.hpp</label>
         <link refid="geometry__descriptors_8hpp_source"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
       <node id="33">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -437,7 +439,7 @@
       <node id="24">
         <label>algorithm</label>
       </node>
-      <node id="16">
+      <node id="5">
         <label>array</label>
       </node>
       <node id="17">
@@ -452,16 +454,16 @@
       <node id="3">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="7">
+      <node id="8">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>numeric</label>
       </node>
       <node id="34">
         <label>ostream</label>
       </node>
-      <node id="6">
+      <node id="7">
         <label>source_location</label>
       </node>
       <node id="28">

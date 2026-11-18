@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Struct connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt; - GyselalibX</title>
+    <title>Struct Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Struct connectivity_details::FindPatch\u0026lt; QueryGrid1D, ddc::TypeSeq\u0026lt; Patch\u0026lt; OGrid, QueryGrid1D, BSpl1, BSpl2 \u0026gt;, RemainingPatchTypes... \u0026gt; \u0026gt;";
-        var mkdocs_page_input_path = "gyselalibxx/structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb.md";
+        var mkdocs_page_name = "Struct Patch\u0026lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Struct connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</li>
+      <li class="breadcrumb-item active">Struct Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,12 +575,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="struct-connectivity_detailsfindpatch-querygrid1d-ddctypeseq-patch-ogrid-querygrid1d-bspl1-bspl2-remainingpatchtypes">Struct connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</h1>
-<p><strong>template &lt;class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceconnectivity__details.html"><strong>connectivity_details</strong></a> <strong>&gt;</strong> <a href="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01OGriddb5ce0145837c75e1ed261db118369eb.html"><strong>FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</strong></a></p>
-<p><a href="#detailed-description">More...</a></p>
+                <div><h1 id="struct-patch-patchid-grid1-grid2-bsplines_dim1-bsplines_dim2">Struct Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;</h1>
+<p><strong>template &lt;std::size_t PatchId, class grid1, class grid2, class bsplines_dim1, class bsplines_dim2&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html"><strong>Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;</strong></a></p>
+<p><em>Tag for a patch.</em> <a href="#detailed-description">More...</a></p>
 <ul>
-<li><code>#include &lt;connectivity_details.hpp&gt;</code></li>
+<li><code>#include &lt;patch.hpp&gt;</code></li>
 </ul>
 <h2 id="public-types">Public Types</h2>
 <table>
@@ -592,22 +592,260 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef <a href="structPatch.html"><strong>Patch</strong></a>&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
+<td style="text-align: right;">typedef bsplines_dim1</td>
+<td style="text-align: left;"><a href="#typedef-bsplines1"><strong>BSplines1</strong></a>  <br><em>B-splines defined along the first dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef bsplines_dim2</td>
+<td style="text-align: left;"><a href="#typedef-bsplines2"><strong>BSplines2</strong></a>  <br><em>B-splines defined along the second dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-dim1"><strong>Dim1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord1"><strong>Coord1</strong></a>  <br><em>Coordinate type on the first continuous dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-dim1"><strong>Dim1</strong></a>, <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-dim2"><strong>Dim2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord12"><strong>Coord12</strong></a>  <br><em>Coordinate type on the 2D continuous dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-dim2"><strong>Dim2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord2"><strong>Coord2</strong></a>  <br><em>Coordinate type on the second continuous dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename grid1::continuous_dimension_type</td>
+<td style="text-align: left;"><a href="#typedef-dim1"><strong>Dim1</strong></a>  <br><em>First continuous dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename grid2::continuous_dimension_type</td>
+<td style="text-align: left;"><a href="#typedef-dim2"><strong>Dim2</strong></a>  <br><em>Second continuous dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef grid1</td>
+<td style="text-align: left;"><a href="#typedef-grid1"><strong>Grid1</strong></a>  <br><em>Grid on the first logical dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef grid2</td>
+<td style="text-align: left;"><a href="#typedef-grid2"><strong>Grid2</strong></a>  <br><em>Grid on the second logical dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid1"><strong>Grid1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx1"><strong>Idx1</strong></a>  <br><em>1D index of a grid point along the first dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid1"><strong>Grid1</strong></a>, <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid2"><strong>Grid2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx12"><strong>Idx12</strong></a>  <br><em>2D index of a grid point along the first and second dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Idx&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid2"><strong>Grid2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idx2"><strong>Idx2</strong></a>  <br><em>1D index of a grid point along the second dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid1"><strong>Grid1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrange1"><strong>IdxRange1</strong></a>  <br><em>Index range of a grids over the first dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid1"><strong>Grid1</strong></a>, <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid2"><strong>Grid2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrange12"><strong>IdxRange12</strong></a>  <br><em>Index range of a grids over the first and second dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid2"><strong>Grid2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrange2"><strong>IdxRange2</strong></a>  <br><em>Index range of a grids over the second dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-bsplines1"><strong>BSplines1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebs1"><strong>IdxRangeBS1</strong></a>  <br><em>Index range of a grids over the first spline dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-bsplines1"><strong>BSplines1</strong></a>, <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-bsplines2"><strong>BSplines2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebs12"><strong>IdxRangeBS12</strong></a>  <br><em>Index range of a grids over the first and second spline dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-bsplines2"><strong>BSplines2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxrangebs2"><strong>IdxRangeBS2</strong></a>  <br><em>Index range of a grids over the second spline dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid1"><strong>Grid1</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstep1"><strong>IdxStep1</strong></a>  <br><em>1D index step between grid points along the first dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid1"><strong>Grid1</strong></a>, <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid2"><strong>Grid2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstep12"><strong>IdxStep12</strong></a>  <br><em>2D index step between grid points along the first and second dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxStep&lt; <a href="structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.html#typedef-grid2"><strong>Grid2</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-idxstep2"><strong>IdxStep2</strong></a>  <br><em>1D index step between grid points along the second dimension.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-attributes">Public Static Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">std::size_t</td>
+<td style="text-align: left;"><a href="#variable-id"><strong>id</strong></a>   = <code>PatchId</code><br><em>The unique identifier of the patch.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">int constexpr</td>
+<td style="text-align: left;"><a href="#variable-n_dims"><strong>n_dims</strong></a>   = <code>2</code><br><em>The number of dimensions of the patch.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>Specialisation of <a href="structconnectivity__details_1_1FindPatch.html"><strong>FindPatch</strong></a> for the case where Grid2 from first patch in type sequence matches QueryGrid1D </p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>PatchId</code> A unique identifier for the patch. This provides a compile-time ordering of the patches. </li>
+<li><code>grid1</code> Grid on the first logical dimension associated to the patch. </li>
+<li><code>grid2</code> Grid on the second logical dimension associated to the patch. </li>
+<li><code>bsplines_dim1</code> Bspline dimension defined on the first logical continuous dimension associated to the patch. </li>
+<li><code>bsplines_dim2</code> Bspline dimension defined on the second logical continuous dimension associated to the patch. </li>
+</ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-type">typedef type</h3>
-<p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; OGrid, QueryGrid1D, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;::type =  Patch&lt;OGrid, QueryGrid1D, BSpl1, BSpl2&gt;;
+<h3 id="typedef-bsplines1">typedef BSplines1</h3>
+<p><em>B-splines defined along the first dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::BSplines1 =  bsplines_dim1;
+</code></pre>
+<hr>
+
+<h3 id="typedef-bsplines2">typedef BSplines2</h3>
+<p><em>B-splines defined along the second dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::BSplines2 =  bsplines_dim2;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coord1">typedef Coord1</h3>
+<p><em>Coordinate type on the first continuous dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Coord1 =  Coord&lt;Dim1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coord12">typedef Coord12</h3>
+<p><em>Coordinate type on the 2D continuous dimensions.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Coord12 =  Coord&lt;Dim1, Dim2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coord2">typedef Coord2</h3>
+<p><em>Coordinate type on the second continuous dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Coord2 =  Coord&lt;Dim2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dim1">typedef Dim1</h3>
+<p><em>First continuous dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Dim1 =  typename grid1::continuous_dimension_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-dim2">typedef Dim2</h3>
+<p><em>Second continuous dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Dim2 =  typename grid2::continuous_dimension_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid1">typedef Grid1</h3>
+<p><em>Grid on the first logical dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Grid1 =  grid1;
+</code></pre>
+<hr>
+
+<h3 id="typedef-grid2">typedef Grid2</h3>
+<p><em>Grid on the second logical dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Grid2 =  grid2;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx1">typedef Idx1</h3>
+<p><em>1D index of a grid point along the first dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Idx1 =  Idx&lt;Grid1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx12">typedef Idx12</h3>
+<p><em>2D index of a grid point along the first and second dimensions.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Idx12 =  Idx&lt;Grid1, Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idx2">typedef Idx2</h3>
+<p><em>1D index of a grid point along the second dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::Idx2 =  Idx&lt;Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrange1">typedef IdxRange1</h3>
+<p><em>Index range of a grids over the first dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxRange1 =  IdxRange&lt;Grid1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrange12">typedef IdxRange12</h3>
+<p><em>Index range of a grids over the first and second dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxRange12 =  IdxRange&lt;Grid1, Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrange2">typedef IdxRange2</h3>
+<p><em>Index range of a grids over the second dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxRange2 =  IdxRange&lt;Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebs1">typedef IdxRangeBS1</h3>
+<p><em>Index range of a grids over the first spline dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxRangeBS1 =  IdxRange&lt;BSplines1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebs12">typedef IdxRangeBS12</h3>
+<p><em>Index range of a grids over the first and second spline dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxRangeBS12 =  IdxRange&lt;BSplines1, BSplines2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxrangebs2">typedef IdxRangeBS2</h3>
+<p><em>Index range of a grids over the second spline dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxRangeBS2 =  IdxRange&lt;BSplines2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstep1">typedef IdxStep1</h3>
+<p><em>1D index step between grid points along the first dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxStep1 =  IdxStep&lt;Grid1&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstep12">typedef IdxStep12</h3>
+<p><em>2D index step between grid points along the first and second dimensions.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxStep12 =  IdxStep&lt;Grid1, Grid2&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-idxstep2">typedef IdxStep2</h3>
+<p><em>1D index step between grid points along the second dimension.</em> </p>
+<pre><code class="language-C++">using Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::IdxStep2 =  IdxStep&lt;Grid2&gt;;
+</code></pre>
+<hr>
+<h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
+<h3 id="variable-id">variable id</h3>
+<p><em>The unique identifier of the patch.</em> </p>
+<pre><code class="language-C++">std::size_t Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::id;
+</code></pre>
+<hr>
+
+<h3 id="variable-n_dims">variable n_dims</h3>
+<p><em>The number of dimensions of the patch.</em> </p>
+<pre><code class="language-C++">int constexpr Patch&lt; PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2 &gt;::n_dims;
 </code></pre>
 <hr>
 
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp</code></p></div>
               
             </div>
           </div><footer>

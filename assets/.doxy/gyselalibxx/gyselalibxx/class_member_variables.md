@@ -50,10 +50,10 @@
 * **internal\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
 * **is\_periodic** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md))
 * **ipiv** ([**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Dense**](classMatrix__Dense.md))
+* **id** ([**Patch&lt; PatchId, grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md), [**tensor\_tools::VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md))
 * **is\_valid\_rhs\_function\_v** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IS\_CONTRAVARIANT** ([**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **IS\_COVARIANT** ([**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
-* **id** ([**tensor\_tools::VectorIndexIdMap**](structtensor__tools_1_1VectorIndexIdMap.md))
 
 
 ## k
@@ -350,7 +350,7 @@
 * **number\_of\_interfaces** ([**DerivativeCalculatorCommon&lt; Connectivity, Grid1D, ddc::TypeSeq&lt; Patches... &gt;, DerivCoeffCollection &gt;**](classDerivativeCalculatorCommon_3_01Connectivity_00_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patches_8_8c61bfd8d6bf22e3067edfaa41cd028f1.md))
 * **n\_distributed\_dimensions** ([**IMPILayout**](classIMPILayout.md))
 * **nb** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
-* **n\_dims** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
+* **n\_dims** ([**Patch&lt; PatchId, grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
 * **NDims** ([**VectorFieldCommon&lt; FieldType, ddc::TypeSeq&lt; DDims... &gt; &gt;**](classVectorFieldCommon_3_01FieldType_00_01ddc_1_1TypeSeq_3_01DDims_8_8_8_01_4_01_4.md))
 * **N\_BE\_MAX** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
 * **N\_BE\_MIN** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
@@ -415,9 +415,9 @@
 
 ## v
 
+* **value** ([**connectivity\_details::PatchIdsAreUnique&lt; ddc::TypeSeq&lt; Patches... &gt; &gt;**](structconnectivity__details_1_1PatchIdsAreUnique_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
 * **vals\_1** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
 * **vals\_2** ([**detail\_poisson::TensorBSplineStash**](structdetail__poisson_1_1TensorBSplineStash.md))
-* **value** ([**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
 
 
 ## w

@@ -602,6 +602,11 @@ public:
             ddc::type_seq_size_v&lt;inner_edges&gt; == 4 * ddc::type_seq_size_v&lt;all_patches&gt;,
             "Missing edges. There should be 4 edges for each patch.");
 
+    static_assert(
+            patch_ids_are_unique_v&lt;all_patches&gt;,
+            "Each patch must have a unique id. Two different patches have been defined with "
+            "the same id.");
+
     template &lt;class QueryPatch&gt;
     using get_type_seq_connections_t = interfaces_of_patch_t&lt;QueryPatch, interface_collection&gt;;
 

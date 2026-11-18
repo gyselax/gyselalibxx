@@ -9,18 +9,19 @@
 
 ```C++
 // SPDX-License-Identifier: MIT
-
 #pragma once
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
 
-template <class... T>
+template <std::size_t PatchId, class... T>
 struct Patch;
 
-template <class grid1, class grid2, class bsplines_dim1, class bsplines_dim2>
-struct Patch<grid1, grid2, bsplines_dim1, bsplines_dim2>
+template <std::size_t PatchId, class grid1, class grid2, class bsplines_dim1, class bsplines_dim2>
+struct Patch<PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2>
 {
+    static constexpr std::size_t id = PatchId;
+
     static int constexpr n_dims = 2;
 
     using Grid1 = grid1;
@@ -58,13 +59,21 @@ struct is_patch : std::false_type
 {
 };
 
-template <class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2>
-struct is_patch<Patch<Grid1, Grid2, BsplinesDim1, BsplinesDim2>> : std::true_type
+template <std::size_t PatchId, class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2>
+struct is_patch<Patch<PatchId, Grid1, Grid2, BsplinesDim1, BsplinesDim2>> : std::true_type
 {
 };
 
 template <class PatchType>
 bool constexpr is_patch_v = is_patch<PatchType>::value;
+
+namespace concepts {
+template <class PatchType>
+concept Patch = requires
+{
+    is_patch_v<PatchType>;
+};
+}; // namespace concepts
 ```
 
 

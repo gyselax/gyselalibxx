@@ -599,7 +599,7 @@
 <li><a href="#contents">Contents</a> - List of files in the folder.</li>
 </ul>
 <h2 id="patch">Patch</h2>
-<p>The tag Patch refers to a single 2D patch geometry. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as:</p>
+<p>The tag Patch refers to a single 2D patch geometry. Each patch is given a unique unsigned integer identifier (<code>id</code>) as its first template parameter. This identifier gives a compile-time ordering of the patches. The tag contains aliases (or shortcuts) to the DDC geometry elements, such as:</p>
 <ul>
 <li>Grids (or points sequence along one dimension) on both dimensions (<code>Grid1</code> and <code>Grid2</code>);  </li>
 <li>Associated continuous dimensions (<code>Dim1</code> and <code>Dim2</code>);  </li>

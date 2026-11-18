@@ -11,6 +11,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <array>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
@@ -103,20 +105,32 @@ struct FindPatch<Grid1D, ddc::TypeSeq<>>
     static_assert(!std::is_same_v<Grid1D, Grid1D>, "No patches found using dimension.");
 };
 
-template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
+template <
+        class QueryGrid1D,
+        std::size_t PatchId,
+        class OGrid,
+        class BSpl1,
+        class BSpl2,
+        class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::TypeSeq<Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
-    using type = Patch<QueryGrid1D, OGrid, BSpl1, BSpl2>;
+    using type = Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>;
 };
 
-template <class QueryGrid1D, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes>
+template <
+        class QueryGrid1D,
+        std::size_t PatchId,
+        class OGrid,
+        class BSpl1,
+        class BSpl2,
+        class... RemainingPatchTypes>
 struct FindPatch<
         QueryGrid1D,
-        ddc::TypeSeq<Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
+        ddc::TypeSeq<Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
 {
-    using type = Patch<OGrid, QueryGrid1D, BSpl1, BSpl2>;
+    using type = Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>;
 };
 
 template <class Grid1D, class Patch1, class... RemainingPatchTypes>
@@ -419,7 +433,30 @@ struct FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeHead, IdxRangeTy
             typename FindRelevantIdxRangeType<QueryGrid1D, std::tuple<IdxRangeTypes...>>::type>;
 };
 
+template <class PatchTypeSeq>
+struct PatchIdsAreUnique;
+
+template <class... Patches>
+struct PatchIdsAreUnique<ddc::TypeSeq<Patches...>>
+{
+    static constexpr bool value = []() {
+        std::array<std::size_t, sizeof...(Patches)> const ids {Patches::id...};
+        for (std::size_t i = 0; i < ids.size(); ++i) {
+            for (std::size_t j = i + 1; j < ids.size(); ++j) {
+                if (ids[i] == ids[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }();
+};
+
 } // end namespace connectivity_details
+
+template <class PatchTypeSeq>
+inline constexpr bool patch_ids_are_unique_v
+        = connectivity_details::PatchIdsAreUnique<PatchTypeSeq>::value;
 
 template <class TypeSeq>
 using to_tuple_t = typename connectivity_details::ToTuple<TypeSeq>::type;
