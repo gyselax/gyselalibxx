@@ -140,13 +140,13 @@ TEST(MultipatchConnectivityTest, GetAllInterfacesAlongDim)
                    Interface<OutsideEdge, SouthEdge<8>, true>>));
     static_assert((std::is_same_v<
                    ddc::type_seq_element_t<1, InterfaceTypeSeqY>,
-                   Interface<NorthEdge<8>, SouthEdge<5>, true>>));
+                   Interface<SouthEdge<5>, NorthEdge<8>, true>>));
     static_assert((std::is_same_v<
                    ddc::type_seq_element_t<2, InterfaceTypeSeqY>,
-                   Interface<NorthEdge<5>, SouthEdge<2>, true>>));
+                   Interface<SouthEdge<2>, NorthEdge<5>, true>>));
     static_assert((std::is_same_v<
                    ddc::type_seq_element_t<3, InterfaceTypeSeqY>,
-                   Interface<NorthEdge<2>, OutsideEdge, true>>));
+                   Interface<OutsideEdge, NorthEdge<2>, true>>));
 
     using StartGridPeriodic = typename Patch2::Grid1;
 
@@ -155,7 +155,7 @@ TEST(MultipatchConnectivityTest, GetAllInterfacesAlongDim)
     static_assert(ddc::type_seq_size_v<InterfaceTypeSeqX> == 3);
     static_assert((ddc::in_tags_v<Interface_1_2, InterfaceTypeSeqX>));
     static_assert((ddc::in_tags_v<Interface_2_3, InterfaceTypeSeqX>));
-    static_assert((ddc::in_tags_v<Interface<EastEdge<3>, WestEdge<1>, true>, InterfaceTypeSeqX>));
+    static_assert((ddc::in_tags_v<Interface<WestEdge<1>, EastEdge<3>, true>, InterfaceTypeSeqX>));
 }
 
 TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
@@ -183,7 +183,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
 
     using StartGridNonPeriodic = typename Patch2::Grid2;
 
-    auto idx_ranges_y
+    std::tuple idx_ranges_y
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridNonPeriodic>(
                     all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_y)> == 3);
@@ -193,7 +193,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDim)
 
     using StartGridPeriodic = typename Patch2::Grid1;
 
-    auto idx_ranges_x
+    std::tuple idx_ranges_x
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridPeriodic>(
                     all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_x)> == 3);
@@ -211,14 +211,14 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongDimSimple)
 
     using StartGridY = typename Patch2::Grid2;
 
-    auto idx_ranges_y
+    std::tuple idx_ranges_y
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridY>(all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_y)> == 1);
     EXPECT_EQ(std::get<0>(idx_ranges_y), ddc::select<GridY<2>>(idx_range_2));
 
     using StartGridX = typename Patch2::Grid1;
 
-    auto idx_ranges_x
+    std::tuple idx_ranges_x
             = Connectivity::template get_all_idx_ranges_along_direction<StartGridX>(all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(idx_ranges_x)> == 2);
     static_assert(std::is_same_v<
@@ -243,8 +243,9 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDim)
 
     using MiddleGridX = typename Patch3::Grid1;
 
-    auto figure_eight_grid = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(
-            all_idx_ranges);
+    std::tuple figure_eight_grid
+            = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(
+                    all_idx_ranges);
     static_assert(std::tuple_size_v<decltype(figure_eight_grid)> == 6);
     EXPECT_EQ(std::get<IdxRange<GridX<3>>>(figure_eight_grid), ddc::select<GridX<3>>(idx_range_3));
     EXPECT_EQ(std::get<IdxRange<GridX<4>>>(figure_eight_grid), ddc::select<GridX<4>>(idx_range_4));
@@ -267,7 +268,7 @@ TEST(MultipatchConnectivityTest, GetAllIndexRangesAlongFigureOfEightDimMultipatc
 
     using MiddleGridX = typename Patch3::Grid1;
 
-    auto figure_eight_grid
+    std::tuple figure_eight_grid
             = Connectivity::template get_all_idx_ranges_along_direction<MiddleGridX>(all_domains);
     static_assert(std::tuple_size_v<decltype(figure_eight_grid)> == 6);
     EXPECT_EQ(std::get<IdxRange<GridX<3>>>(figure_eight_grid), ddc::select<GridX<3>>(idx_range_3));
@@ -289,8 +290,8 @@ TEST(MultipatchConnectivityTest, GetAllInterfacesAlongFigureOfEightDim)
     static_assert(ddc::type_seq_size_v<InterfaceTypeSeq> == 6);
     static_assert((ddc::in_tags_v<Interface<EastEdge<3>, WestEdge<4>, true>, InterfaceTypeSeq>));
     static_assert((ddc::in_tags_v<Interface<EastEdge<4>, SouthEdge<5>, false>, InterfaceTypeSeq>));
-    static_assert((ddc::in_tags_v<Interface<NorthEdge<5>, SouthEdge<3>, true>, InterfaceTypeSeq>));
-    static_assert((ddc::in_tags_v<Interface<NorthEdge<3>, SouthEdge<1>, true>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<SouthEdge<3>, NorthEdge<5>, true>, InterfaceTypeSeq>));
+    static_assert((ddc::in_tags_v<Interface<SouthEdge<1>, NorthEdge<3>, true>, InterfaceTypeSeq>));
     static_assert((ddc::in_tags_v<Interface<NorthEdge<1>, WestEdge<2>, false>, InterfaceTypeSeq>));
     static_assert((ddc::in_tags_v<Interface<EastEdge<2>, WestEdge<3>, true>, InterfaceTypeSeq>));
 }
@@ -350,16 +351,16 @@ TEST(MultipatchConnectivityDetailsTest, CollectGridsOnDim)
     /* It is supposed to represent:
      * | 1 | 2 | 3 |
      */
-    using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-    using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-    using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+    using NorthInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+    using NorthInterface2 = Interface<OutsideEdge, NorthEdge<2>, true>;
+    using NorthInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
     using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
     using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
     using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 
     using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using EastInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using EastInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
