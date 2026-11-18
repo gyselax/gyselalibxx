@@ -249,9 +249,14 @@ public:
     /// @brief Index on the two derivative dimensions of patch_direction.
     using idx_cross_deriv = Idx<deriv_perp_dim, deriv_par_dim>;
 
+    /// @brief Type of the set of index ranges used in the operator.
     using MultipatchIdxRange = MultipatchTypeFromSeq<IdxRangeOnPatch, relevant_patches>;
+
+    /// @brief Type containing a DerivField per patch defined on CPU.
     using MultipatchDerivField_host
             = MultipatchFieldFromSeq<DerivFieldOnPatch_host, relevant_patches>;
+
+    /// @brief Type containing a DerivConstField per patch defined on CPU.
     using MultipatchDerivConstField_host
             = MultipatchFieldFromSeq<DerivConstFieldOnPatch_host, relevant_patches>;
 
