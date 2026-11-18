@@ -682,32 +682,19 @@ struct FindPatch&lt;Grid1D, ddc::TypeSeq&lt;&gt;&gt;
     static_assert(!std::is_same_v&lt;Grid1D, Grid1D&gt;, "No patches found using dimension.");
 };
 
-template &lt;
-        class QueryGrid1D,
-        std::size_t PatchId,
-        class OGrid,
-        class BSpl1,
-        class BSpl2,
-        class... RemainingPatchTypes&gt;
-struct FindPatch&lt;
-        QueryGrid1D,
-        ddc::TypeSeq&lt;Patch&lt;PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2&gt;, RemainingPatchTypes...&gt;&gt;
+template &lt;class Grid1D, class PatchTypeSeq, bool FirstPatchMatches&gt;
+struct FindPatchImpl;
+
+template &lt;class Grid1D, class Patch1, class... RemainingPatchTypes&gt;
+struct FindPatchImpl&lt;Grid1D, ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;, true&gt;
 {
-    using type = Patch&lt;PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2&gt;;
+    using type = Patch1;
 };
 
-template &lt;
-        class QueryGrid1D,
-        std::size_t PatchId,
-        class OGrid,
-        class BSpl1,
-        class BSpl2,
-        class... RemainingPatchTypes&gt;
-struct FindPatch&lt;
-        QueryGrid1D,
-        ddc::TypeSeq&lt;Patch&lt;PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2&gt;, RemainingPatchTypes...&gt;&gt;
+template &lt;class Grid1D, class Patch1, class... RemainingPatchTypes&gt;
+struct FindPatchImpl&lt;Grid1D, ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;, false&gt;
 {
-    using type = Patch&lt;PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2&gt;;
+    using type = typename FindPatch&lt;Grid1D, ddc::TypeSeq&lt;RemainingPatchTypes...&gt;&gt;::type;
 };
 
 template &lt;
@@ -716,10 +703,11 @@ template &lt;
         concepts::Patch... RemainingPatchTypes&gt;
 struct FindPatch&lt;Grid1D, ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;&gt;
 {
-    // Should instantiate specialisations above instead of this specialisation
-    static_assert(!std::is_same_v&lt;typename Patch1::Grid1, Grid1D&gt;);
-    static_assert(!std::is_same_v&lt;typename Patch1::Grid2, Grid1D&gt;);
-    using type = typename FindPatch&lt;Grid1D, ddc::TypeSeq&lt;RemainingPatchTypes...&gt;&gt;::type;
+    using type = typename FindPatchImpl&lt;
+            Grid1D,
+            ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;,
+            ddc::in_tags_v&lt;Grid1D, ddc::TypeSeq&lt;typename Patch1::Grid1, typename Patch1::Grid2&gt;&gt;&gt;::
+            type;
 };
 
 template &lt;concepts::Edge Edge, ddc::concepts::type_seq InterfaceTypeSeq&gt;

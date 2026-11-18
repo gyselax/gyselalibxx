@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structconnectivity__details_1_1FindPatchImpl" kind="struct" language="C++" prot="public">
+    <compoundname>connectivity_details::FindPatchImpl</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class Grid1D</type>
+      </param>
+      <param>
+        <type>class PatchTypeSeq</type>
+      </param>
+      <param>
+        <type>bool</type>
+        <declname>FirstPatchMatches</declname>
+        <defname>FirstPatchMatches</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Helper for <ref refid="structconnectivity__details_1_1FindPatch" kindref="compound">FindPatch</ref> which either returns the first patch in the type sequence (if it contains the grid) or continues the search over the remaining patches. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Grid1D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifying grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PatchTypeSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A DDC type sequence containing all remaining possible patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>FirstPatchMatches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates whether the first patch in PatchTypeSeq contains Grid1D. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="158" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="158" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

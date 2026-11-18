@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="586" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="586" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="579" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="579" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structconnectivity__details_1_1CollectAllInterfacesOnDim_1acaad3e1aa7ff017dd52d95ff16ebbbae" prot="public" static="no">
         <type>ddc::type_seq_merge_t&lt; <ref refid="structconnectivity__details_1_1CollectAllInterfacesOnDim_1a9b1d889735742ba5eb62c671e656d041" kindref="member">BackwardTypeSeq</ref>, typename <ref refid="structconnectivity__details_1_1CollectInterfacesAlongDim" kindref="compound">CollectInterfacesAlongDim</ref>&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; StartPatch, Grid1D, BACK &gt;, InterfaceTypeSeq, FrontInsert, <ref refid="structconnectivity__details_1_1CollectAllInterfacesOnDim_1a9b1d889735742ba5eb62c671e656d041" kindref="member">BackwardTypeSeq</ref> &gt;::type &gt;</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="591" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="591" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="584" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="584" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -94,7 +94,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="577" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="578" bodyend="599"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="570" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="571" bodyend="592"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1CollectAllInterfacesOnDim_1a9b1d889735742ba5eb62c671e656d041" prot="public" virt="non-virtual"><scope>connectivity_details::CollectAllInterfacesOnDim</scope><name>BackwardTypeSeq</name></member>
       <member refid="structconnectivity__details_1_1CollectAllInterfacesOnDim_1acaad3e1aa7ff017dd52d95ff16ebbbae" prot="public" virt="non-virtual"><scope>connectivity_details::CollectAllInterfacesOnDim</scope><name>type</name></member>

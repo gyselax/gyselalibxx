@@ -47,7 +47,7 @@
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="28">
@@ -101,7 +101,7 @@
       <node id="34">
         <label>tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
@@ -154,12 +154,12 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>i_interpolation_builder.hpp</label>
         <link refid="i__interpolation__builder_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
@@ -175,11 +175,11 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -194,7 +194,7 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="5" relation="include">
@@ -205,6 +205,10 @@
       <node id="13">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
@@ -267,7 +271,7 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
@@ -281,7 +285,7 @@
       <node id="21">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -338,7 +342,7 @@
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
@@ -357,7 +361,7 @@
       <node id="6">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>optional</label>
       </node>
       <node id="10">
@@ -366,7 +370,7 @@
       <node id="3">
         <label>tuple</label>
       </node>
-      <node id="18">
+      <node id="14">
         <label>type_traits</label>
       </node>
       <node id="4">

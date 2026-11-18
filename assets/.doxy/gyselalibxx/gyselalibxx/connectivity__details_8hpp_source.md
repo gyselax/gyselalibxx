@@ -112,32 +112,19 @@ struct FindPatch<Grid1D, ddc::TypeSeq<>>
     static_assert(!std::is_same_v<Grid1D, Grid1D>, "No patches found using dimension.");
 };
 
-template <
-        class QueryGrid1D,
-        std::size_t PatchId,
-        class OGrid,
-        class BSpl1,
-        class BSpl2,
-        class... RemainingPatchTypes>
-struct FindPatch<
-        QueryGrid1D,
-        ddc::TypeSeq<Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>, RemainingPatchTypes...>>
+template <class Grid1D, class PatchTypeSeq, bool FirstPatchMatches>
+struct FindPatchImpl;
+
+template <class Grid1D, class Patch1, class... RemainingPatchTypes>
+struct FindPatchImpl<Grid1D, ddc::TypeSeq<Patch1, RemainingPatchTypes...>, true>
 {
-    using type = Patch<PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2>;
+    using type = Patch1;
 };
 
-template <
-        class QueryGrid1D,
-        std::size_t PatchId,
-        class OGrid,
-        class BSpl1,
-        class BSpl2,
-        class... RemainingPatchTypes>
-struct FindPatch<
-        QueryGrid1D,
-        ddc::TypeSeq<Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>, RemainingPatchTypes...>>
+template <class Grid1D, class Patch1, class... RemainingPatchTypes>
+struct FindPatchImpl<Grid1D, ddc::TypeSeq<Patch1, RemainingPatchTypes...>, false>
 {
-    using type = Patch<PatchId, OGrid, QueryGrid1D, BSpl1, BSpl2>;
+    using type = typename FindPatch<Grid1D, ddc::TypeSeq<RemainingPatchTypes...>>::type;
 };
 
 template <
@@ -146,10 +133,11 @@ template <
         concepts::Patch... RemainingPatchTypes>
 struct FindPatch<Grid1D, ddc::TypeSeq<Patch1, RemainingPatchTypes...>>
 {
-    // Should instantiate specialisations above instead of this specialisation
-    static_assert(!std::is_same_v<typename Patch1::Grid1, Grid1D>);
-    static_assert(!std::is_same_v<typename Patch1::Grid2, Grid1D>);
-    using type = typename FindPatch<Grid1D, ddc::TypeSeq<RemainingPatchTypes...>>::type;
+    using type = typename FindPatchImpl<
+            Grid1D,
+            ddc::TypeSeq<Patch1, RemainingPatchTypes...>,
+            ddc::in_tags_v<Grid1D, ddc::TypeSeq<typename Patch1::Grid1, typename Patch1::Grid2>>>::
+            type;
 };
 
 template <concepts::Edge Edge, ddc::concepts::type_seq InterfaceTypeSeq>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Struct connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt; - GyselalibX</title>
+    <title>Struct connectivity_details::FindPatchImpl - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Struct connectivity_details::FindPatch\u0026lt; QueryGrid1D, ddc::TypeSeq\u0026lt; Patch\u0026lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 \u0026gt;, RemainingPatchTypes... \u0026gt; \u0026gt;";
-        var mkdocs_page_input_path = "gyselalibxx/structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67.md";
+        var mkdocs_page_name = "Struct connectivity_details::FindPatchImpl";
+        var mkdocs_page_input_path = "gyselalibxx/structconnectivity__details_1_1FindPatchImpl.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -565,9 +565,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Struct connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</li>
+      <li class="breadcrumb-item active">Struct connectivity_details::FindPatchImpl</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structconnectivity__details_1_1FindPatchImpl.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,37 +575,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="struct-connectivity_detailsfindpatch-querygrid1d-ddctypeseq-patch-patchid-querygrid1d-ogrid-bspl1-bspl2-remainingpatchtypes">Struct connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</h1>
-<p><strong>template &lt;class QueryGrid1D, std::size_t PatchId, class OGrid, class BSpl1, class BSpl2, class... RemainingPatchTypes&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceconnectivity__details.html"><strong>connectivity_details</strong></a> <strong>&gt;</strong> <a href="structconnectivity__details_1_1FindPatch_3_01QueryGrid1D_00_01ddc_1_1TypeSeq_3_01Patch_3_01Patch25efc32586ee939744293d0c53ed9d67.html"><strong>FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;</strong></a></p>
-<p><a href="#detailed-description">More...</a></p>
-<ul>
-<li><code>#include &lt;connectivity_details.hpp&gt;</code></li>
-</ul>
-<h2 id="public-types">Public Types</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef <a href="structPatch.html"><strong>Patch</strong></a>&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;</td>
-<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
-</tr>
-</tbody>
-</table>
+                <div><h1 id="struct-connectivity_detailsfindpatchimpl">Struct connectivity_details::FindPatchImpl</h1>
+<p><strong>template &lt;class Grid1D, class PatchTypeSeq, bool FirstPatchMatches&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceconnectivity__details.html"><strong>connectivity_details</strong></a> <strong>&gt;</strong> <a href="structconnectivity__details_1_1FindPatchImpl.html"><strong>FindPatchImpl</strong></a></p>
+<p><em>Helper for</em> <a href="structconnectivity__details_1_1FindPatch.html"><em><strong>FindPatch</strong></em></a> <em>which either returns the first patch in the type sequence (if it contains the grid) or continues the search over the remaining patches.</em><a href="#detailed-description">More...</a></p>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>Specialisation of <a href="structconnectivity__details_1_1FindPatch.html"><strong>FindPatch</strong></a> for the case where Grid1 from first patch in type sequence matches QueryGrid1D </p>
-<h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-type">typedef type</h3>
-<p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::FindPatch&lt; QueryGrid1D, ddc::TypeSeq&lt; Patch&lt; PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2 &gt;, RemainingPatchTypes... &gt; &gt;::type =  Patch&lt;PatchId, QueryGrid1D, OGrid, BSpl1, BSpl2&gt;;
-</code></pre>
-<hr>
-
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Grid1D</code> The identifying grid. </li>
+<li><code>PatchTypeSeq</code> A DDC type sequence containing all remaining possible patches. </li>
+<li><code>FirstPatchMatches</code> Indicates whether the first patch in PatchTypeSeq contains Grid1D. </li>
+</ul>
 <hr>
 <p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</code></p></div>
               

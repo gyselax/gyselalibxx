@@ -580,6 +580,9 @@
 <p><a href="patch_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+#include &lt;type_traits&gt;
+#include &lt;utility&gt;
+
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "ddc_aliases.hpp"
@@ -624,13 +627,15 @@ struct Patch&lt;PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2&gt;
     using IdxRangeBS12 = IdxRange&lt;BSplines1, BSplines2&gt;;
 };
 
-template &lt;class PatchType&gt;
-struct is_patch : std::false_type
-{
-};
+namespace detail {
+template &lt;std::size_t PatchId, class... T&gt;
+std::true_type is_patch_impl(Patch&lt;PatchId, T...&gt; const*);
 
-template &lt;std::size_t PatchId, class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2&gt;
-struct is_patch&lt;Patch&lt;PatchId, Grid1, Grid2, BsplinesDim1, BsplinesDim2&gt;&gt; : std::true_type
+std::false_type is_patch_impl(...);
+} // namespace detail
+
+template &lt;class PatchType&gt;
+struct is_patch : decltype(detail::is_patch_impl(std::declval&lt;std::add_pointer_t&lt;PatchType&gt;&gt;()))
 {
 };
 

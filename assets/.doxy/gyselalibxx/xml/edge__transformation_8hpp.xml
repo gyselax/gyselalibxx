@@ -39,10 +39,10 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -53,6 +53,10 @@
       <node id="14">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
@@ -108,6 +112,9 @@
       </node>
       <node id="5">
         <label>source_location</label>
+      </node>
+      <node id="15">
+        <label>type_traits</label>
       </node>
       <node id="11">
         <label>utility</label>

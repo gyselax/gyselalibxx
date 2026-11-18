@@ -10,6 +10,9 @@
 ```C++
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
@@ -54,13 +57,15 @@ struct Patch<PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2>
     using IdxRangeBS12 = IdxRange<BSplines1, BSplines2>;
 };
 
-template <class PatchType>
-struct is_patch : std::false_type
-{
-};
+namespace detail {
+template <std::size_t PatchId, class... T>
+std::true_type is_patch_impl(Patch<PatchId, T...> const*);
 
-template <std::size_t PatchId, class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2>
-struct is_patch<Patch<PatchId, Grid1, Grid2, BsplinesDim1, BsplinesDim2>> : std::true_type
+std::false_type is_patch_impl(...);
+} // namespace detail
+
+template <class PatchType>
+struct is_patch : decltype(detail::is_patch_impl(std::declval<std::add_pointer_t<PatchType>>()))
 {
 };
 

@@ -10,6 +10,8 @@
 
 
 
+* `#include <type_traits>`
+* `#include <utility>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
 
@@ -37,8 +39,7 @@
 | Type | Name |
 | ---: | :--- |
 | struct | [**Patch&lt; PatchId, grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01PatchId_00_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md) &lt;PatchId, class grid1, class grid2, class bsplines\_dim1, class bsplines\_dim2&gt;<br>_Tag for a patch._  |
-| struct | [**is\_patch**](structis__patch.md) &lt;class PatchType&gt;<br> |
-| struct | [**is\_patch&lt; Patch&lt; PatchId, Grid1, Grid2, BsplinesDim1, BsplinesDim2 &gt; &gt;**](structis__patch_3_01Patch_3_01PatchId_00_01Grid1_00_01Grid2_00_01BsplinesDim1_00_01BsplinesDim2_01_4_01_4.md) &lt;PatchId, class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2&gt;<br> |
+| struct | [**is\_patch**](structis__patch.md) &lt;class PatchType&gt;<br>_A type trait to determine whether a type is a_ [_**Patch**_](structPatch.md) _, i.e. either an instantiation of_[_**Patch**_](structPatch.md) _or a class deriving from such an instantiation._ |
 
 
 

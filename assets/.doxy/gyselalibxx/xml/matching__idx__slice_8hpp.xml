@@ -22,7 +22,7 @@
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>edge_transformation.hpp</label>
         <link refid="edge__transformation_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -35,10 +35,10 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="4" relation="include">
@@ -61,12 +61,16 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="15">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
@@ -125,6 +129,9 @@
       </node>
       <node id="3">
         <label>stdexcept</label>
+      </node>
+      <node id="16">
+        <label>type_traits</label>
       </node>
       <node id="12">
         <label>utility</label>

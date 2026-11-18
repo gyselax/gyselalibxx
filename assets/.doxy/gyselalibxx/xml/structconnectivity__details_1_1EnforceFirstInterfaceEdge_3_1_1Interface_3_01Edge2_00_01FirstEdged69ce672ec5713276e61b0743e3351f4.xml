@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="279" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="279" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="272" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="272" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -42,7 +42,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="276" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="277" bodyend="280"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" line="269" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp" bodystart="270" bodyend="273"/>
     <listofallmembers>
       <member refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_1_1Interface_3_01Edge2_00_01FirstEdged69ce672ec5713276e61b0743e3351f4_1af1dff56fbcb6fa942b7c116ba1a8556a" prot="public" virt="non-virtual"><scope>connectivity_details::EnforceFirstInterfaceEdge&lt;::Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;</scope><name>type</name></member>
     </listofallmembers>

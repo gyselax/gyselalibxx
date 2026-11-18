@@ -578,7 +578,7 @@
                 <div><h1 id="struct-connectivity_detailsfindpatch-grid1d-ddctypeseq-patch1-remainingpatchtypes">Struct connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;</h1>
 <p><strong>template &lt;ddc::concepts::discrete_dimension Grid1D, concepts::Patch Patch1, concepts::Patch... RemainingPatchTypes&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceconnectivity__details.html"><strong>connectivity_details</strong></a> <strong>&gt;</strong> <a href="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01RemainingPatchTypes_8_8_8_01_4_01_4.html"><strong>FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;</strong></a></p>
-<p><em>Specialisation of</em> <a href="structconnectivity__details_1_1FindPatch.html"><em><strong>FindPatch</strong></em></a> <em>to iterate recursively over the patch type sequence.</em></p>
+<p><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;connectivity_details.hpp&gt;</code></li>
 </ul>
@@ -592,15 +592,21 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1FindPatch.html"><strong>FindPatch</strong></a>&lt; Grid1D, ddc::TypeSeq&lt; RemainingPatchTypes... &gt; &gt;::type</td>
+<td style="text-align: right;">typedef typename <a href="structconnectivity__details_1_1FindPatchImpl.html"><strong>FindPatchImpl</strong></a>&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt;, ddc::in_tags_v&lt; Grid1D, ddc::TypeSeq&lt; typename Patch1::Grid1, typename Patch1::Grid2 &gt; &gt; &gt;:: <a href="structconnectivity__details_1_1FindPatch_3_01Grid1D_00_01ddc_1_1TypeSeq_3_01Patch1_00_01RemainingPatchTypes_8_8_8_01_4_01_4.html#typedef-type"><strong>type</strong></a></td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The type found by the class.</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>Specialisation of <a href="structconnectivity__details_1_1FindPatch.html"><strong>FindPatch</strong></a> which checks whether Grid1 or Grid2 of the first patch in the type sequence matches Grid1D, and otherwise iterates recursively over the patch type sequence. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-type">typedef type</h3>
 <p><em>The type found by the class.</em> </p>
-<pre><code class="language-C++">using connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;::type =  typename FindPatch&lt;Grid1D, ddc::TypeSeq&lt;RemainingPatchTypes...&gt;&gt;::type;
+<pre><code class="language-C++">using connectivity_details::FindPatch&lt; Grid1D, ddc::TypeSeq&lt; Patch1, RemainingPatchTypes... &gt; &gt;::type =  typename FindPatchImpl&lt;
+            Grid1D,
+            ddc::TypeSeq&lt;Patch1, RemainingPatchTypes...&gt;,
+            ddc::in_tags_v&lt;Grid1D, ddc::TypeSeq&lt;typename Patch1::Grid1, typename Patch1::Grid2&gt;&gt;&gt;::
+            type;
 </code></pre>
 <hr>
 

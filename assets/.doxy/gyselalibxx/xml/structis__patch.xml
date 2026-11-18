@@ -2,39 +2,28 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="structis__patch" kind="struct" language="C++" prot="public">
     <compoundname>is_patch</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <includes refid="patch_8hpp" local="no">patch.hpp</includes>
     <templateparamlist>
       <param>
         <type>class PatchType</type>
       </param>
     </templateparamlist>
     <briefdescription>
+<para>A type trait to determine whether a type is a <ref refid="structPatch" kindref="compound">Patch</ref>, i.e. either an instantiation of <ref refid="structPatch" kindref="compound">Patch</ref> or a class deriving from such an instantiation. </para>
     </briefdescription>
     <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PatchType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type being examined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="1">
-        <label>is_patch&lt; PatchType &gt;</label>
-        <link refid="structis__patch"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>std::false_type</label>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
-      <node id="1">
-        <label>is_patch&lt; PatchType &gt;</label>
-        <link refid="structis__patch"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>std::false_type</label>
-      </node>
-    </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" line="88" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" bodystart="89" bodyend="90"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" line="108" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/patch.hpp" bodystart="109" bodyend="110"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -633,6 +633,10 @@
       <node id="91">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="12" relation="include">

@@ -16,16 +16,16 @@
     <includes refid="types_8hpp" local="yes">types.hpp</includes>
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
     <incdepgraph>
-      <node id="27">
+      <node id="28">
         <label>coord_transformation_tools.hpp</label>
         <link refid="coord__transformation__tools_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -65,7 +65,7 @@
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="46">
@@ -99,7 +99,7 @@
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
@@ -109,7 +109,7 @@
         <link refid="tensor_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -127,7 +127,7 @@
         <link refid="tensor__common_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -141,7 +141,7 @@
       <node id="32">
         <label>tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
@@ -153,7 +153,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -181,7 +181,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
@@ -194,7 +194,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>deriv_reconstruction_coeffs.hpp</label>
         <link refid="deriv__reconstruction__coeffs_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -203,21 +203,21 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>math_tools.hpp</label>
-        <link refid="math__tools_8hpp_source"/>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+      </node>
+      <node id="25">
+        <label>math_tools.hpp</label>
+        <link refid="math__tools_8hpp_source"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
         <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
@@ -239,11 +239,11 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -258,23 +258,23 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="17">
         <label>edge_transformation.hpp</label>
         <link refid="edge__transformation_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="14">
         <label>interface.hpp</label>
         <link refid="interface_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -285,6 +285,10 @@
       <node id="11">
         <label>patch.hpp</label>
         <link refid="patch_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
@@ -315,7 +319,7 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
@@ -328,7 +332,7 @@
         <childnode refid="33" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="16">
         <label>derivative_calculator_common.hpp</label>
         <link refid="derivative__calculator__common_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -341,11 +345,11 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
@@ -356,24 +360,24 @@
         <childnode refid="34" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>interface_derivative_coefficients.hpp</label>
         <link refid="interface__derivative__coefficients_8hpp_source"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>interface_derivative_coefficients_collection.hpp</label>
         <link refid="interface__derivative__coefficients__collection_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -387,15 +391,15 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
@@ -409,9 +413,9 @@
       <node id="39">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="29" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -428,16 +432,16 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="19">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
         <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -448,7 +452,7 @@
         <label>geometry_descriptors.hpp</label>
         <link refid="geometry__descriptors_8hpp_source"/>
       </node>
-      <node id="13">
+      <node id="15">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
@@ -459,27 +463,27 @@
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="25">
+      <node id="26">
         <label>algorithm</label>
       </node>
       <node id="5">
         <label>array</label>
       </node>
-      <node id="18">
+      <node id="20">
         <label>cassert</label>
       </node>
-      <node id="19">
+      <node id="21">
         <label>cmath</label>
       </node>
-      <node id="28">
+      <node id="29">
         <label>concepts</label>
       </node>
       <node id="3">
@@ -488,7 +492,7 @@
       <node id="8">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="16">
+      <node id="18">
         <label>numeric</label>
       </node>
       <node id="35">
@@ -497,13 +501,13 @@
       <node id="7">
         <label>source_location</label>
       </node>
-      <node id="29">
+      <node id="12">
         <label>type_traits</label>
       </node>
       <node id="2">
         <label>typeinfo</label>
       </node>
-      <node id="20">
+      <node id="13">
         <label>utility</label>
       </node>
     </incdepgraph>

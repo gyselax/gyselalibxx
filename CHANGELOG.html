@@ -805,6 +805,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Don't assume that elements of a <code>MultipatchType</code> have different types.</li>
 <li><code>Patch</code> takes a unique unsigned integer identifier as its first template parameter (accessible via <code>Patch::id</code>). <code>MultipatchConnectivity</code> checks that the ids of its patches are unique.</li>
 <li>Edges in an <code>Interface</code> must be ordered by the associated <code>Patch::id</code>.</li>
+<li>Patches can be defined as subclasses of <code>Patch</code> (e.g. <code>struct Patch1 : Patch&lt;1, GridX, GridY, BSplinesX, BSplinesY&gt; {};</code>).</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>
