@@ -13,6 +13,10 @@
 
 namespace connectivity_details {
 
+/**
+ * Helper local to connectivity_details to ensure the Interface type from the
+ * global namespace is initialised with edges passed in the correct order.
+ */
 template <concepts::Edge Edge, concepts::Edge OEdge, bool Orientations>
 using Interface = std::conditional_t<
         (get_edge_patch_id<Edge>() < get_edge_patch_id<OEdge>()),
