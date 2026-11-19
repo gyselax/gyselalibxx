@@ -16,6 +16,40 @@
 #include "spline_builder_deriv_field_2d.hpp"
 #include "types.hpp"
 
+namespace detail {
+
+/// A tool to check if a builder is a ddc::SplineBuilder2D.
+template <class Builder>
+inline constexpr bool is_ddc_spline_builder_2d_v = false;
+
+/// Specialisation of is_ddc_spline_builder_2d_v for ddc::SplineBuilder2D.
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSpline1,
+        class BSpline2,
+        class InterpolationDDim1,
+        class InterpolationDDim2,
+        ddc::SplineBuilderClosure BcLower1,
+        ddc::SplineBuilderClosure BcUpper1,
+        ddc::SplineBuilderClosure BcLower2,
+        ddc::SplineBuilderClosure BcUpper2,
+        ddc::SplineSolver Solver>
+inline constexpr bool is_ddc_spline_builder_2d_v<ddc::SplineBuilder2D<
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        Solver>> = true;
+
+} // namespace detail
+
 /**
  * @brief A class to call all the builders of all the patches once.
  *
@@ -318,6 +352,9 @@ public:
      *      The values of the the cross-derivatives at the upper boundary in the first dimension
      *      and the upper boundary in the second dimension.
      *
+     * The derivatives are only used by builders which are ddc::SplineBuilder2D. They are ignored
+     * by any other builder.
+     *
      * @tparam MultipatchValues The type of the MultipatchField containing the function values.
      *          The index range of each field may contain batch dimensions.
      */
@@ -341,7 +378,7 @@ public:
                     is_multipatch_field_v<
                             MultipatchValues> && (!is_deriv_field_v<typename MultipatchValues::template TypeOnPatch<Patches>> && ...))
     {
-        ((get_builder<Patches>()(
+        (apply_builder<Patches>(
                  splines.template get<Patches>(),
                  get_const_field(values.template get<Patches>()),
                  get_deriv_value<Patches>(derivs_min1),
@@ -351,12 +388,15 @@ public:
                  get_deriv_value<Patches>(cross_derivs_min1_min2),
                  get_deriv_value<Patches>(cross_derivs_max1_min2),
                  get_deriv_value<Patches>(cross_derivs_min1_max2),
-                 get_deriv_value<Patches>(cross_derivs_max1_max2))),
+                 get_deriv_value<Patches>(cross_derivs_max1_max2)),
          ...);
     };
 
     /**
      * @brief Build the spline representation of each given function.
+     *
+     * The derivatives are only used by builders which are ddc::SplineBuilder2D. Any other
+     * builder only uses the function values.
      *
      * @param[out] splines MultipatchField of all the Fields pointing to the spline representations.
      * @param[in] functions_and_derivs MultipatchField of all the DerivFields pointing to the function values
@@ -388,24 +428,64 @@ public:
     };
 
 private:
+    template <
+            class Patch,
+            class SplineField,
+            class ValuesField,
+            class Derivs1,
+            class Derivs2,
+            class Derivs12>
+    void apply_builder(
+            SplineField spline,
+            ValuesField values,
+            std::optional<Derivs1> derivs_min1,
+            std::optional<Derivs1> derivs_max1,
+            std::optional<Derivs2> derivs_min2,
+            std::optional<Derivs2> derivs_max2,
+            std::optional<Derivs12> cross_derivs_min1_min2,
+            std::optional<Derivs12> cross_derivs_max1_min2,
+            std::optional<Derivs12> cross_derivs_min1_max2,
+            std::optional<Derivs12> cross_derivs_max1_max2) const
+    {
+        if constexpr (detail::is_ddc_spline_builder_2d_v<BuilderOnPatch<Patch>>) {
+            get_builder<Patch>()(
+                    spline,
+                    values,
+                    derivs_min1,
+                    derivs_max1,
+                    derivs_min2,
+                    derivs_max2,
+                    cross_derivs_min1_min2,
+                    cross_derivs_max1_min2,
+                    cross_derivs_min1_max2,
+                    cross_derivs_max1_max2);
+        } else {
+            get_builder<Patch>()(spline, values);
+        }
+    };
+
     template <class Patch>
     void apply_builder(
             SplineOnPatch<Patch, DerivConstFieldOnPatch<Patch>> spline,
             DerivConstFieldOnPatch<Patch> function_and_deriv) const
     {
         using Builder = BuilderOnPatch<Patch>;
-        using BasisSeq = ddc::to_type_seq_t<typename Traits<Patch>::coeff_idx_range_type>;
-        SplineBuilderDerivField2D<
-                exec_space,
-                ddc::type_seq_element_t<0, BasisSeq>,
-                ddc::type_seq_element_t<1, BasisSeq>,
-                typename Patch::Grid1,
-                typename Patch::Grid2,
-                Builder::builder_type1::s_sbc_xmin,
-                Builder::builder_type1::s_sbc_xmax,
-                Builder::builder_type2::s_sbc_xmin,
-                Builder::builder_type2::s_sbc_xmax>
-                builder_applier(get_builder<Patch>());
-        builder_applier(spline, function_and_deriv);
+        if constexpr (detail::is_ddc_spline_builder_2d_v<Builder>) {
+            using BasisSeq = ddc::to_type_seq_t<typename Traits<Patch>::coeff_idx_range_type>;
+            SplineBuilderDerivField2D<
+                    exec_space,
+                    ddc::type_seq_element_t<0, BasisSeq>,
+                    ddc::type_seq_element_t<1, BasisSeq>,
+                    typename Patch::Grid1,
+                    typename Patch::Grid2,
+                    Builder::builder_type1::s_sbc_xmin,
+                    Builder::builder_type1::s_sbc_xmax,
+                    Builder::builder_type2::s_sbc_xmin,
+                    Builder::builder_type2::s_sbc_xmax>
+                    builder_applier(get_builder<Patch>());
+            builder_applier(spline, function_and_deriv);
+        } else {
+            get_builder<Patch>()(spline, get_const_field(function_and_deriv.get_values_field()));
+        }
     };
 };
