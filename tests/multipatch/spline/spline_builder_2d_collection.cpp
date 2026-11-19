@@ -40,22 +40,8 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
 
 template <ddc::SplineBuilderClosure BC>
 using SplineBuilderCollectionXY = SplineBuilder2DCollection<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        BSplines2OnPatch,
-        Grid1OnPatch,
-        Grid2OnPatch,
-        BC,
-        BC,
-        BC,
-        BC,
-        BC,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstFieldOnPatch,
-        Patch1,
-        Patch2>;
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<SplineXYBuilder<1, BC>, SplineXYBuilder<2, BC>>>;
 
 class SplineBuilderCollection2DTest : public ::testing::Test
 {
