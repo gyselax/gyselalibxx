@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
 - Fix missing error when using `find_grid_t`.
-- Modify the default non uniformity value of `build_random_non_uniform_break_points()` from 1 to 0.9 to avoid having non uniform break points too close to each other.
+- Modify the default non uniformity value of `build_random_non_uniform_break_points()` from 1 to 0.9 to avoid having non-uniform break points too close to each other.
 
 ### Changed
 
