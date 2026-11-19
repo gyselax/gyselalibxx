@@ -95,7 +95,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/mesh_builder.hpp" line="10" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/mesh_builder.hpp" bodystart="10" bodyend="25"/>
       </memberdef>
-      <memberdef kind="function" id="mesh__builder_8hpp_1ac972cecf521b8746d413b4e4f394522d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="mesh__builder_8hpp_1aa8b027650f5e8240963213cc0c17b749" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Dim</type>
@@ -106,7 +106,7 @@
         </templateparamlist>
         <type>std::vector&lt; Coord&lt; Dim &gt; &gt;</type>
         <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; build_random_non_uniform_break_points</definition>
-        <argsstring>(Coord&lt; Dim &gt; min, Coord&lt; Dim &gt; max, IdxStep&lt; Grid1D &gt; n_cells, double const non_uniformity=1.)</argsstring>
+        <argsstring>(Coord&lt; Dim &gt; min, Coord&lt; Dim &gt; max, IdxStep&lt; Grid1D &gt; n_cells, double const non_uniformity=.9)</argsstring>
         <name>build_random_non_uniform_break_points</name>
         <param>
           <type>Coord&lt; Dim &gt;</type>
@@ -123,7 +123,7 @@
         <param>
           <type>double const</type>
           <declname>non_uniformity</declname>
-          <defval>1.</defval>
+          <defval>.9</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -170,7 +170,7 @@
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dim&gt;<sp/>min,</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;Dim&gt;<sp/>max,</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;Grid1D&gt;<sp/>n_cells,</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>non_uniformity<sp/>=<sp/>1.)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>non_uniformity<sp/>=<sp/>.9)</highlight></codeline>
 <codeline lineno="33"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;typename<sp/>Grid1D::continuous_dimension_type,<sp/>Dim&gt;);</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>

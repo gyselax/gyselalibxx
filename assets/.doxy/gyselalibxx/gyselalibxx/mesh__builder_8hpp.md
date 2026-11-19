@@ -55,7 +55,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  std::vector&lt; Coord&lt; Dim &gt; &gt; | [**build\_random\_non\_uniform\_break\_points**](#function-build_random_non_uniform_break_points) (Coord&lt; Dim &gt; min, Coord&lt; Dim &gt; max, IdxStep&lt; Grid1D &gt; n\_cells, double const non\_uniformity=1.) <br> |
+|  std::vector&lt; Coord&lt; Dim &gt; &gt; | [**build\_random\_non\_uniform\_break\_points**](#function-build_random_non_uniform_break_points) (Coord&lt; Dim &gt; min, Coord&lt; Dim &gt; max, IdxStep&lt; Grid1D &gt; n\_cells, double const non\_uniformity=.9) <br> |
 |  std::vector&lt; Coord&lt; Dim &gt; &gt; | [**build\_uniform\_break\_points**](#function-build_uniform_break_points) (Coord&lt; Dim &gt; min, Coord&lt; Dim &gt; max, IdxStep&lt; Grid1D &gt; n\_cells) <br> |
 
 
@@ -98,7 +98,7 @@ std::vector< Coord< Dim > > build_random_non_uniform_break_points (
     Coord< Dim > min,
     Coord< Dim > max,
     IdxStep< Grid1D > n_cells,
-    double const non_uniformity=1.
+    double const non_uniformity=.9
 ) 
 ```
 
