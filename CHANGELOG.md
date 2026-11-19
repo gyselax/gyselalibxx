@@ -83,8 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `MultipatchSplineBuilder` to `InterpolationBuilderCollection` and move it to `src/multipatch/interpolation/`.
 - Rename `MultipatchSplineBuilder2D` to `InterpolationBuilder2DCollection` and move it to `src/multipatch/interpolation/` (new `gyselalibxx::multipatch_interpolation` library).
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
-- Rename file `multipatch_spline_builder.hpp` to `interpolation_builder_collection.hpp`.
-- Rename file `multipatch_spline_builder_2d.hpp` to `interpolation_builder_2d_collection.hpp`.
+- Rename files `multipatch_spline_builder*` to `interpolation_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
