@@ -127,10 +127,51 @@ private:
                     Patches,
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
+    /// A type alias to get the interpolation index range on a specific patch.
+    template <class Patch>
+    using InterpolationIdxRangeOnPatch = typename Traits<Patch>::interpolation_idx_range_type;
+
+    /// A type alias to get the coefficient index range on a specific patch.
+    template <class Patch>
+    using CoeffIdxRangeOnPatch = typename Traits<Patch>::coeff_idx_range_type;
+
+    template <class MultipatchIdxRangeBatched>
+    using MultipatchIdxRangeBatchedBasis = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<typename Traits<Patches>::template batched_basis_idx_range_type<
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
+
+    template <class MultipatchIdxRangeBatched>
+    using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<typename Traits<Patches>::template batched_derivs_idx_range_type<
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
+
     /// The type of the internal storage of the builders.
     using BuilderTuple = std::tuple<Builders const&...>;
 
     BuilderTuple const m_builders;
+
+public:
+    /// @brief The 1D index range for the interpolation mesh.
+    using interpolation_idx_range_type = MultipatchType<InterpolationIdxRangeOnPatch, Patches...>;
+
+    /// @brief The index range for the interpolation coefficients.
+    using coeff_idx_range_type = MultipatchType<CoeffIdxRangeOnPatch, Patches...>;
+
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
+    /// @brief Multi-patch batched domain with the interpolation grids replaced by the basis grids.
+    template <class MultipatchIdxRangeBatched>
+    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBasis<MultipatchIdxRangeBatched>;
+
+    /// @brief Multi-patch batched domain with the interpolation grids replaced by deriv types.
+    template <class MultipatchIdxRangeBatched>
+    using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv<MultipatchIdxRangeBatched>;
 
 private:
     template <class Patch>
@@ -189,5 +230,20 @@ public:
                  get_deriv_value<Patches>(derivs_xmin),
                  get_deriv_value<Patches>(derivs_xmax)),
          ...);
+    };
+
+    /**
+     * @brief Get a MultipatchType collecting the index ranges typed on the whole basis dimensions.
+     * These index ranges are adapted to allocate interpolation coefficients on the multi-patch domain.
+     * @param[in] idx_ranges MultipatchType collecting the (batched) index ranges on the grids of the patches.
+     * @return a MultipatchType collecting the index ranges typed on the whole basis dimensions.
+     */
+    template <class MultipatchIdxRangeBatched>
+    MultipatchIdxRangeBatchedBasis<MultipatchIdxRangeBatched> const batched_basis_idx_ranges(
+            MultipatchIdxRangeBatched idx_ranges) const
+    {
+        return MultipatchIdxRangeBatchedBasis<MultipatchIdxRangeBatched>(batched_basis_idx_range(
+                get_builder<Patches>(),
+                idx_ranges.template get<Patches>())...);
     };
 };

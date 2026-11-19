@@ -13,6 +13,7 @@
 #include "lagrange_basis_non_uniform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
+#include "multipatch_field_mem.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -85,6 +86,10 @@ using IdentityCoeffOnPatch_1D = DField<IdentityCoeffIdxRange<Patch, typename Pat
 
 template <class Patch>
 using IdentityCoeffOnPatch_2D = DField<IdentityCoeffIdxRange<Patch, typename Patch::IdxRange12>>;
+
+template <class Patch>
+using IdentityCoeffMemOnPatch_2D
+        = DFieldMem<IdentityCoeffIdxRange<Patch, typename Patch::IdxRange12>>;
 
 using IdentityBuilderCollectionX = InterpolationBuilderCollection<
         ddc::TypeSeq<Patch1, Patch2>,
@@ -395,17 +400,15 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
     using CoeffIdxRange1 = IdentityCoeffIdxRange<Patch1, IdxRange<GridX<1>, GridY<1>>>;
     using CoeffIdxRange2 = IdentityCoeffIdxRange<Patch2, IdxRange<GridX<2>, GridY<2>>>;
 
-    DFieldMem<CoeffIdxRange1> function_1_coef_alloc(
-            batched_basis_idx_range(builder_x1, idx_range_xy1));
     DFieldMem<CoeffIdxRange1> function_1_coef_expected_alloc(
             batched_basis_idx_range(builder_x1, idx_range_xy1));
-    DFieldMem<CoeffIdxRange2> function_2_coef_alloc(
-            batched_basis_idx_range(builder_x2, idx_range_xy2));
     DFieldMem<CoeffIdxRange2> function_2_coef_expected_alloc(
             batched_basis_idx_range(builder_x2, idx_range_xy2));
 
-    MultipatchField<IdentityCoeffOnPatch_2D, Patch1, Patch2>
-            function_coef(get_field(function_1_coef_alloc), get_field(function_2_coef_alloc));
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
+    MultipatchFieldMem<IdentityCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
+            builder.batched_basis_idx_ranges(idx_ranges));
+    MultipatchField<IdentityCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
 
 
     // Build the interpolation coefficients on each patch

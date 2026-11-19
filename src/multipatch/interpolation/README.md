@@ -59,7 +59,7 @@ And we build the interpolation coefficients on every patch using,
 builder(coeffs, values);
 ```
 
-`InterpolationBuilderCollection` is used in the same way with 1D builders. It does not provide `batched_basis_idx_ranges`, so the coefficients are allocated using `batched_basis_idx_range(builder_i, idx_range_i)` on each patch.
+`InterpolationBuilderCollection` is used in the same way with 1D builders.
 
 ## Contents
 
