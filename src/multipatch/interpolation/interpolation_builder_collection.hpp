@@ -132,11 +132,11 @@ private:
 
     /// A type alias to get the interpolation index range on a specific patch.
     template <class Patch>
-    using InterpolationIdxRangeOnPatch = typename Traits<Patch>::interpolation_idx_range_type;
+    using IdxRangeInterpolationOnPatch = typename Traits<Patch>::interpolation_idx_range_type;
 
     /// A type alias to get the coefficient index range on a specific patch.
     template <class Patch>
-    using CoeffIdxRangeOnPatch = typename Traits<Patch>::coeff_idx_range_type;
+    using IdxRangeCoeffOnPatch = typename Traits<Patch>::coeff_idx_range_type;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedBasis = detail::MultipatchType<
@@ -157,10 +157,10 @@ private:
 
 public:
     /// @brief The 1D index range for the interpolation mesh.
-    using interpolation_idx_range_type = MultipatchType<InterpolationIdxRangeOnPatch, Patches...>;
+    using interpolation_idx_range_type = MultipatchType<IdxRangeInterpolationOnPatch, Patches...>;
 
     /// @brief The index range for the interpolation coefficients.
-    using coeff_idx_range_type = MultipatchType<CoeffIdxRangeOnPatch, Patches...>;
+    using coeff_idx_range_type = MultipatchType<IdxRangeCoeffOnPatch, Patches...>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()

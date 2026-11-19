@@ -65,14 +65,14 @@ using IdentityXYBuilder = NDIdentityInterpolationBuilder<
         IdxRange<LagBasis1<Patch>, LagBasis2<Patch>>>;
 
 template <class Patch>
-using IdentityCoeffIdxRange = typename InterpolationBuilderTraits<IdentityXYBuilder<Patch>>::
+using IdxRangeIdentityCoeff = typename InterpolationBuilderTraits<IdentityXYBuilder<Patch>>::
         template batched_basis_idx_range_type<typename Patch::IdxRange12>;
 
 template <class Patch>
-using IdentityCoeffMemOnPatch = DFieldMem<IdentityCoeffIdxRange<Patch>>;
+using IdentityCoeffMemOnPatch = DFieldMem<IdxRangeIdentityCoeff<Patch>>;
 
 template <class Patch>
-using IdentityCoeffOnPatch = DField<IdentityCoeffIdxRange<Patch>>;
+using IdentityCoeffOnPatch = DField<IdxRangeIdentityCoeff<Patch>>;
 
 using IdentityBuilderCollectionXY = InterpolationBuilder2DCollection<
         ddc::TypeSeq<Patch1, Patch2>,
@@ -84,8 +84,9 @@ double max_abs_difference(FieldType field, FieldType field_expected)
 {
     auto field_host = ddc::create_mirror_and_copy(field);
     auto field_expected_host = ddc::create_mirror_and_copy(field_expected);
+    using IdxType = typename FieldType::discrete_domain_type::discrete_element_type;
     double max_abs_error = 0;
-    ddc::host_for_each(get_idx_range(field_expected_host), [&](auto const idx) {
+    ddc::host_for_each(get_idx_range(field_expected_host), [&](IdxType const idx) {
         double err = std::abs(field_expected_host(idx) - field_host(idx));
         max_abs_error = std::max(max_abs_error, err);
     });
