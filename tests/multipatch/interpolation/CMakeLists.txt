@@ -3,6 +3,7 @@
 set(test_name_gtest "multipatch_interpolation_tests")
 add_executable("${test_name_gtest}"
         interpolation_builder_2d_collection.cpp
+        interpolation_builder_collection.cpp
         ../../main.cpp
 )
 target_link_libraries("${test_name_gtest}"

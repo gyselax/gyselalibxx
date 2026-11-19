@@ -11,7 +11,6 @@ target_sources("multipatch_spline"
                 constant_extrapolation_rules_onion.hpp
                 multipatch_spline_evaluator_2d.hpp
                 null_extrapolation_rules.hpp
-                spline_builder_collection.hpp
 )
 
 target_link_libraries("multipatch_spline" INTERFACE

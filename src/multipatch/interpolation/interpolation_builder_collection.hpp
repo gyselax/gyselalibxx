@@ -18,7 +18,7 @@
  * @brief A class to call all the builders of all the patches once.
  *
  * We need to instantiate all the builders for all the patches in the main code.
- * We process the same way for the Fields containing the spline coefficients and the
+ * We process the same way for the Fields containing the interpolation coefficients and the
  * values of the function on each patch. The Fields are stored in MultipatchField
  * objects. The builders are stored in this class.
  * This class is instantiated with all the builders.
@@ -36,7 +36,7 @@
  *                  order as the patches in PatchSeq.
  */
 template <ddc::concepts::type_seq PatchSeq, ddc::concepts::type_seq BuilderSeq>
-class SplineBuilderCollection;
+class InterpolationBuilderCollection;
 
 /**
  * @brief A class to call all the builders of all the patches once.
@@ -47,7 +47,7 @@ class SplineBuilderCollection;
  * @tparam Builders The 1D interpolation builders on each patch, in the same order as the patches.
  */
 template <concepts::Patch... Patches, concepts::InterpolationBuilder1D... Builders>
-class SplineBuilderCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>
+class InterpolationBuilderCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>
 {
     static_assert(sizeof...(Patches) > 0, "At least one patch must be provided.");
     static_assert(
@@ -95,9 +95,9 @@ private:
     template <class Patch>
     using Traits = InterpolationBuilderTraits<BuilderOnPatch<Patch>>;
 
-    /// A type alias to get the batched spline coefficients on a specific patch.
+    /// A type alias to get the batched interpolation coefficients on a specific patch.
     template <class Patch, class ValuesType>
-    using SplineOnPatch
+    using CoeffsOnPatch
             = Field<data_type,
                     typename Traits<Patch>::template batched_basis_idx_range_type<
                             typename ValuesType::discrete_domain_type>,
@@ -111,11 +111,11 @@ private:
                     typename ValuesType::discrete_domain_type>,
             memory_space>;
 
-    /// The type of the batched spline coefficients.
+    /// The type of the batched interpolation coefficients.
     template <class MultipatchValues>
-    using MultipatchSplineCoeffs = detail::MultipatchField<
+    using MultipatchCoeffs = detail::MultipatchField<
             PatchOrdering,
-            ddc::TypeSeq<SplineOnPatch<
+            ddc::TypeSeq<CoeffsOnPatch<
                     Patches,
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
@@ -152,22 +152,22 @@ private:
 
 public:
     /**
-     * @brief Instantiate the SplineBuilderCollection from the builders on each patch.
+     * @brief Instantiate the InterpolationBuilderCollection from the builders on each patch.
      *
      * @warning The builders have to be sorted in the same order as the patches.
      *
      * @param builders Interpolation builders for each patch.
      */
-    explicit SplineBuilderCollection(Builders const&... builders)
+    explicit InterpolationBuilderCollection(Builders const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
-    ~SplineBuilderCollection() = default;
+    ~InterpolationBuilderCollection() = default;
 
     /**
-     * @brief Build the spline representation of each given function.
+     * @brief Build the interpolation coefficients of each given function.
      *
-     * @param splines MultipatchField of all the Fields pointing to the spline representations.
+     * @param coeffs MultipatchField of all the Fields pointing to the interpolation coefficients.
      * @param values MultipatchField of all the Fields pointing to the function values.
      * @param derivs_xmin MultipatchField of all the ConstFields describing the function derivatives at the lower bound.
      * @param derivs_xmax MultipatchField of all the ConstFields describing the function derivatives at the upper bound.
@@ -177,14 +177,14 @@ public:
      */
     template <class MultipatchValues>
     void operator()(
-            MultipatchSplineCoeffs<MultipatchValues> splines,
+            MultipatchCoeffs<MultipatchValues> coeffs,
             MultipatchValues const& values,
             std::optional<MultipatchDerivs<MultipatchValues>> derivs_xmin = std::nullopt,
             std::optional<MultipatchDerivs<MultipatchValues>> derivs_xmax = std::nullopt) const
         requires(is_multipatch_field_v<MultipatchValues>)
     {
         (get_builder<Patches>()(
-                 splines.template get<Patches>(),
+                 coeffs.template get<Patches>(),
                  get_const_field(values.template get<Patches>()),
                  get_deriv_value<Patches>(derivs_xmin),
                  get_deriv_value<Patches>(derivs_xmax)),

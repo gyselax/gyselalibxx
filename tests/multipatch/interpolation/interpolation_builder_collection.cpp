@@ -9,10 +9,10 @@
 #include "ddc_helper.hpp"
 #include "i_interpolation_builder.hpp"
 #include "identity_interpolation_builder.hpp"
+#include "interpolation_builder_collection.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
-#include "spline_builder_collection.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -58,7 +58,7 @@ using SplineX2Builder = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK>;
 
 
-using SplineBuilderCollectionX = SplineBuilderCollection<
+using SplineBuilderCollectionX = InterpolationBuilderCollection<
         ddc::TypeSeq<Patch1, Patch2>,
         ddc::TypeSeq<SplineX1Builder, SplineX2Builder>>;
 
@@ -86,12 +86,12 @@ using IdentityCoeffOnPatch_1D = DField<IdentityCoeffIdxRange<Patch, typename Pat
 template <class Patch>
 using IdentityCoeffOnPatch_2D = DField<IdentityCoeffIdxRange<Patch, typename Patch::IdxRange12>>;
 
-using IdentityBuilderCollectionX = SplineBuilderCollection<
+using IdentityBuilderCollectionX = InterpolationBuilderCollection<
         ddc::TypeSeq<Patch1, Patch2>,
         ddc::TypeSeq<IdentityX1Builder<Patch1>, IdentityX1Builder<Patch2>>>;
 
 
-class SplineBuilderCollectionTest : public ::testing::Test
+class InterpolationBuilderCollectionTest : public ::testing::Test
 {
 private:
     static constexpr IdxStep<GridX<1>> x1_size = IdxStep<GridX<1>>(10);
@@ -108,7 +108,7 @@ protected:
     IdxRange<GridY<2>> const idx_range_y2;
 
 public:
-    SplineBuilderCollectionTest()
+    InterpolationBuilderCollectionTest()
         : idx_range_x1(SplineInterpPointsX1::get_domain<GridX<1>>())
         , idx_range_y1(SplineInterpPointsY1::get_domain<GridY<1>>())
         , idx_range_x2(SplineInterpPointsX2::get_domain<GridX<2>>())
@@ -238,7 +238,7 @@ public:
 /*
     The global domain is split into two 1D patches on X1 and X2.
  */
-TEST_F(SplineBuilderCollectionTest, TwoPatches1D)
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches1D)
 {
     // List of spline builders
     SplineX1Builder builder_x1(idx_range_x1);
@@ -306,7 +306,7 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches1D)
     The global domain is split into two 1D patches on X1 and X2.
     The collection is used with builders which are not spline builders.
  */
-TEST_F(SplineBuilderCollectionTest, TwoPatches1DNonSplineBuilder)
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches1DNonSplineBuilder)
 {
     // List of builders
     IdentityX1Builder<Patch1> const builder_x1;
@@ -364,7 +364,7 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches1DNonSplineBuilder)
     The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
     The collection is used with builders which are not spline builders.
  */
-TEST_F(SplineBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
 {
     // List of index ranges
     IdxRange<GridX<1>, GridY<1>> idx_range_xy1(idx_range_x1, idx_range_y1);
@@ -426,7 +426,7 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
 /*
     The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
-TEST_F(SplineBuilderCollectionTest, TwoPatches2D)
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches2D)
 {
     // List of index ranges
     IdxRange<GridX<1>, GridY<1>> idx_range_xy1(idx_range_x1, idx_range_y1);

@@ -9,6 +9,7 @@ target_sources("multipatch_interpolation"
         FILE_SET HEADERS
             FILES
                 interpolation_builder_2d_collection.hpp
+                interpolation_builder_collection.hpp
 )
 
 target_link_libraries("multipatch_interpolation"
