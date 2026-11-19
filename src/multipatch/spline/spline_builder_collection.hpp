@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-#include <cassert>
+#include <optional>
 #include <tuple>
-#include <utility>
+#include <type_traits>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "i_interpolation_builder.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 
 /**
@@ -19,116 +22,126 @@
  * values of the function on each patch. The Fields are stored in MultipatchField
  * objects. The builders are stored in this class.
  * This class is instantiated with all the builders.
- * The operator() allows to call all the builders stored in the member of this class in 
+ * The operator() allows to call all the builders stored in the member of this class in
  * one single line.
  *
  * This function is useful to avoid calling all the builders individually, especially in
  * a multipatch geometry with several patches.
  *
- * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
- * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
- * @tparam BSplineOnPatch A type alias which provides the BSpline type along which the splines are built.
- * @tparam GridOnPatch A type alias which provides the Grid type along which the interpolation points of the splines are found.
- * @tparam SBCLower The lower spline closure.
- * @tparam SBCUpper The upper spline closure.
- * @tparam BcTransition The boundary condition used at the interface between 2 patches.
- * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
- * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
- * @tparam ValuesOnPatch A type alias which provides the field type which will be used to pass the values of the function
- *                      at the interpolation points. The index range of this field type should contain any batch dimensions.
+ * Any 1D interpolation builder (see concepts::InterpolationBuilder1D) can be used. Different
+ * builder types can be used on different patches (e.g. to use different boundary conditions).
+ *
+ * @tparam PatchSeq A ddc::TypeSeq of the patches.
+ * @tparam BuilderSeq A ddc::TypeSeq of the 1D interpolation builders on each patch, in the same
+ *                  order as the patches in PatchSeq.
  */
-template <
-        class ExecSpace,
-        class MemorySpace,
-        template <typename P>
-        typename BSplineOnPatch,
-        template <typename P>
-        typename GridOnPatch,
-        ddc::SplineBuilderClosure SBCLower,
-        ddc::SplineBuilderClosure SBCUpper,
-        ddc::SplineBuilderClosure BcTransition,
-        class Connectivity,
-        ddc::SplineSolver Solver,
-        template <typename P>
-        typename ValuesOnPatch,
-        class... Patches>
-class SplineBuilderCollection
+template <ddc::concepts::type_seq PatchSeq, ddc::concepts::type_seq BuilderSeq>
+class SplineBuilderCollection;
+
+/**
+ * @brief A class to call all the builders of all the patches once.
+ *
+ * See the documentation of the primary template.
+ *
+ * @tparam Patches The patches.
+ * @tparam Builders The 1D interpolation builders on each patch, in the same order as the patches.
+ */
+template <concepts::Patch... Patches, concepts::InterpolationBuilder1D... Builders>
+class SplineBuilderCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>
 {
+    static_assert(sizeof...(Patches) > 0, "At least one patch must be provided.");
     static_assert(
-            (((ddc::is_uniform_bsplines_v<BSplineOnPatch<Patches>>)
-              || (ddc::is_non_uniform_bsplines_v<BSplineOnPatch<Patches>>))
-             && ...),
-            "The BSplineOnPatch argument does not create 1D BSpline objects.");
+            sizeof...(Patches) == sizeof...(Builders),
+            "There must be exactly one builder per patch.");
     static_assert(
-            (((ddc::is_uniform_point_sampling_v<GridOnPatch<Patches>>)
-              || (ddc::is_non_uniform_point_sampling_v<GridOnPatch<Patches>>))
-             && ...),
-            "The GridOnPatch argument does not create 1D Grid objects.");
+            ((std::is_same_v<interpolation_grid_t<Builders>, typename Patches::Grid1>
+              || std::is_same_v<interpolation_grid_t<Builders>, typename Patches::Grid2>)&&...),
+            "The builders must be provided in the same order as the patches and must "
+            "interpolate on one of the grids (Grid1 or Grid2) of their patch.");
 
     using PatchOrdering = ddc::TypeSeq<Patches...>;
-    static constexpr std::size_t n_patches = ddc::type_seq_size_v<PatchOrdering>;
 
-    /**
-     * A small structure allowing the multiple grids to be unpacked from a field and repacked into
-     * a SplineBuilder type.
-     */
-    template <class Patch>
-    struct Build_BuilderType
-    {
-        using lower_matching_edge = equivalent_edge_t<
-                Edge<Patch, GridOnPatch<Patch>, FRONT>,
-                typename Connectivity::interface_collection>;
-        using upper_matching_edge = equivalent_edge_t<
-                Edge<Patch, GridOnPatch<Patch>, BACK>,
-                typename Connectivity::interface_collection>;
-        static constexpr std::size_t patch_id = ddc::type_seq_rank_v<Patch, PatchOrdering>;
-        using type = ddc::SplineBuilder<
-                ExecSpace,
-                MemorySpace,
-                BSplineOnPatch<Patch>,
-                GridOnPatch<Patch>,
-                std::is_same_v<lower_matching_edge, OutsideEdge> ? SBCLower : BcTransition,
-                std::is_same_v<upper_matching_edge, OutsideEdge> ? SBCUpper : BcTransition,
-                Solver>;
-    };
+    using FirstBuilder = ddc::type_seq_element_t<0, ddc::TypeSeq<Builders...>>;
+
+public:
+    /// @brief Execution space.
+    using exec_space = typename FirstBuilder::exec_space;
+
+    /// @brief Memory space.
+    using memory_space = typename FirstBuilder::memory_space;
+
+    /// @brief The data type that the data is saved on.
+    using data_type = typename InterpolationBuilderTraits<FirstBuilder>::data_type;
+
+private:
+    static_assert(
+            (std::is_same_v<typename Builders::exec_space, exec_space> && ...),
+            "All builders must use the same execution space.");
+    static_assert(
+            (std::is_same_v<typename Builders::memory_space, memory_space> && ...),
+            "All builders must use the same memory space.");
+    static_assert(
+            (std::is_same_v<typename InterpolationBuilderTraits<Builders>::data_type, data_type>
+             && ...),
+            "All builders must use the same data type.");
 
     /// A type alias to get the builder type on a specific patch.
     template <class Patch>
-    using BuilderOnPatch = typename Build_BuilderType<Patch>::type;
+    using BuilderOnPatch = ddc::type_seq_element_t<
+            ddc::type_seq_rank_v<Patch, PatchOrdering>,
+            ddc::TypeSeq<Builders...>>;
+
+    /// A type alias to get the traits of the builder on a specific patch.
+    template <class Patch>
+    using Traits = InterpolationBuilderTraits<BuilderOnPatch<Patch>>;
 
     /// A type alias to get the batched spline coefficients on a specific patch.
-    template <class Patch>
-    using SplineOnPatch = DField<
-            typename BuilderOnPatch<Patch>::template batched_spline_domain_type<
-                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
-            MemorySpace>;
+    template <class Patch, class ValuesType>
+    using SplineOnPatch
+            = Field<data_type,
+                    typename Traits<Patch>::template batched_basis_idx_range_type<
+                            typename ValuesType::discrete_domain_type>,
+                    memory_space>;
 
     /// A type alias to get the batched derivatives on a specific patch.
-    template <class Patch>
-    using DerivsOnPatch = DConstField<
-            typename BuilderOnPatch<Patch>::template batched_derivs_domain_type<
-                    typename ValuesOnPatch<Patch>::discrete_domain_type>,
-            MemorySpace>;
+    template <class Patch, class ValuesType>
+    using DerivsOnPatch = ConstField<
+            data_type,
+            typename Traits<Patch>::template batched_derivs_idx_range_type<
+                    typename ValuesType::discrete_domain_type>,
+            memory_space>;
 
     /// The type of the batched spline coefficients.
-    using MultipatchSplineCoeffs = MultipatchField<SplineOnPatch, Patches...>;
+    template <class MultipatchValues>
+    using MultipatchSplineCoeffs = detail::MultipatchField<
+            PatchOrdering,
+            ddc::TypeSeq<SplineOnPatch<
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
-    // For PERIODIC or GREVILLE boundary conditions
-    /// The type of the values at the batched interpolation points.
-    using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
+    /// The type of the batched derivatives.
+    template <class MultipatchValues>
+    using MultipatchDerivs = detail::MultipatchField<
+            PatchOrdering,
+            ddc::TypeSeq<DerivsOnPatch<
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
-    using MultipatchDerivs = MultipatchField<DerivsOnPatch, Patches...>;
-
-    /// The type of the internal storage of the SplineBuilders.
-    using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
-
+    /// The type of the internal storage of the builders.
+    using BuilderTuple = std::tuple<Builders const&...>;
 
     BuilderTuple const m_builders;
 
 private:
     template <class Patch>
-    std::optional<DerivsOnPatch<Patch>> get_deriv_value(
-            std::optional<MultipatchDerivs> derivs) const
+    BuilderOnPatch<Patch> const& get_builder() const
+    {
+        return std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(m_builders);
+    }
+
+    template <class Patch, class MultipatchDerivsType>
+    std::optional<typename MultipatchDerivsType::template TypeOnPatch<Patch>> get_deriv_value(
+            std::optional<MultipatchDerivsType> derivs) const
     {
         if (derivs.has_value()) {
             return derivs->template get<Patch>();
@@ -139,15 +152,13 @@ private:
 
 public:
     /**
-     * @brief Instantiate the SplineBuilderCollection from a std::tuple
-     * of all the builder on each patch. 
-     * 
-     * @warning The builders have to be sorted in the same order as the patches
-     * in the tuple. 
-     * 
-     * @param builders Spline builders for each patch.
+     * @brief Instantiate the SplineBuilderCollection from the builders on each patch.
+     *
+     * @warning The builders have to be sorted in the same order as the patches.
+     *
+     * @param builders Interpolation builders for each patch.
      */
-    explicit SplineBuilderCollection(BuilderOnPatch<Patches> const&... builders)
+    explicit SplineBuilderCollection(Builders const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
@@ -155,23 +166,28 @@ public:
 
     /**
      * @brief Build the spline representation of each given function.
-     * 
-     * @param splines MultipatchField of all the Fields pointing to the spline representations. 
-     * @param values MultipatchField of all the Fields pointing to the function values. 
+     *
+     * @param splines MultipatchField of all the Fields pointing to the spline representations.
+     * @param values MultipatchField of all the Fields pointing to the function values.
      * @param derivs_xmin MultipatchField of all the ConstFields describing the function derivatives at the lower bound.
      * @param derivs_xmax MultipatchField of all the ConstFields describing the function derivatives at the upper bound.
+     *
+     * @tparam MultipatchValues The type of the MultipatchField containing the function values.
+     *          The index range of each field may contain batch dimensions.
      */
+    template <class MultipatchValues>
     void operator()(
-            MultipatchSplineCoeffs splines,
+            MultipatchSplineCoeffs<MultipatchValues> splines,
             MultipatchValues const& values,
-            std::optional<MultipatchDerivs> derivs_xmin = std::nullopt,
-            std::optional<MultipatchDerivs> derivs_xmax = std::nullopt) const
+            std::optional<MultipatchDerivs<MultipatchValues>> derivs_xmin = std::nullopt,
+            std::optional<MultipatchDerivs<MultipatchValues>> derivs_xmax = std::nullopt) const
+        requires(is_multipatch_field_v<MultipatchValues>)
     {
-        ((std::get<BuilderOnPatch<Patches> const&>(m_builders)(
+        (get_builder<Patches>()(
                  splines.template get<Patches>(),
                  get_const_field(values.template get<Patches>()),
                  get_deriv_value<Patches>(derivs_xmin),
-                 get_deriv_value<Patches>(derivs_xmax))),
+                 get_deriv_value<Patches>(derivs_xmax)),
          ...);
     };
 };

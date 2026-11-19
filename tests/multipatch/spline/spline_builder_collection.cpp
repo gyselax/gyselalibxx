@@ -55,34 +55,9 @@ using SplineX2Builder = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK>;
 
 
-using SplineBuilderCollectionX_1d = SplineBuilderCollection<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        Grid1OnPatch,
-        SplineXClosure,
-        SplineXClosure,
-        SplineXClosure,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstField1OnPatch,
-        Patch1,
-        Patch2>;
-
-
-using SplineBuilderCollectionX_2d = SplineBuilderCollection<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        Grid1OnPatch,
-        SplineXClosure,
-        SplineXClosure,
-        SplineXClosure,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstFieldOnPatch,
-        Patch1,
-        Patch2>;
+using SplineBuilderCollectionX = SplineBuilderCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<SplineX1Builder, SplineX2Builder>>;
 
 
 class SplineBuilderCollectionTest : public ::testing::Test
@@ -235,7 +210,7 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches1D)
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    SplineBuilderCollectionX_1d builder(builder_x1, builder_x2);
+    SplineBuilderCollectionX builder(builder_x1, builder_x2);
 
 
     // Function tests
@@ -307,7 +282,7 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches2D)
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    SplineBuilderCollectionX_2d builder(builder_x1, builder_x2);
+    SplineBuilderCollectionX builder(builder_x1, builder_x2);
 
 
     // Function tests
