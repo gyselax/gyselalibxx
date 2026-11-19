@@ -54,7 +54,7 @@ inline constexpr bool is_ddc_spline_builder_2d_v<ddc::SplineBuilder2D<
  * @brief A class to call all the builders of all the patches once.
  *
  * We need to instantiate all the builders for all the patches in the main code.
- * We process the same way for the Field containing the spline coefficients and the
+ * We process the same way for the Field containing the interpolation coefficients and the
  * values of the function on each patch. The Fields are stored in MultipatchField
  * objects. The builders are stored in this class.
  * This class is instantiated with all the builders.
@@ -67,14 +67,14 @@ inline constexpr bool is_ddc_spline_builder_2d_v<ddc::SplineBuilder2D<
  * Any 2D interpolation builder (see concepts::InterpolationBuilder) can be used. Different
  * builder types can be used on different patches (e.g. to use different boundary conditions).
  *
- * @warning SplineBuilder2DCollection is implemented for tensor-product multi-patch decompositions.
+ * @warning InterpolationBuilder2DCollection is implemented for tensor-product multi-patch decompositions.
  *
  * @tparam PatchSeq A ddc::TypeSeq of the patches.
  * @tparam BuilderSeq A ddc::TypeSeq of the 2D interpolation builders on each patch, in the same
  *                  order as the patches in PatchSeq.
  */
 template <ddc::concepts::type_seq PatchSeq, ddc::concepts::type_seq BuilderSeq>
-class SplineBuilder2DCollection;
+class InterpolationBuilder2DCollection;
 
 /**
  * @brief A class to call all the builders of all the patches once.
@@ -85,7 +85,7 @@ class SplineBuilder2DCollection;
  * @tparam Builders The 2D interpolation builders on each patch, in the same order as the patches.
  */
 template <concepts::Patch... Patches, concepts::InterpolationBuilder... Builders>
-class SplineBuilder2DCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>
+class InterpolationBuilder2DCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>
 {
     static_assert(sizeof...(Patches) > 0, "At least one patch must be provided.");
     static_assert(
@@ -154,9 +154,9 @@ private:
         using type = typename FieldType::physical_idx_range_type;
     };
 
-    /// A type alias to get the batched spline coefficients on a specific patch.
+    /// A type alias to get the batched interpolation coefficients on a specific patch.
     template <class Patch, class ValuesType>
-    using SplineOnPatch
+    using CoeffsOnPatch
             = Field<data_type,
                     typename Traits<Patch>::template batched_basis_idx_range_type<
                             typename ValuesIdxRange<ValuesType>::type>,
@@ -220,11 +220,11 @@ private:
     template <class Patch>
     using CoeffIdxRangeOnPatch = typename Traits<Patch>::coeff_idx_range_type;
 
-    /// The type of the batched spline coefficients.
+    /// The type of the batched interpolation coefficients.
     template <class MultipatchValues>
-    using MultipatchSplineCoeffs = detail::MultipatchField<
+    using MultipatchCoeffs = detail::MultipatchField<
             PatchOrdering,
-            ddc::TypeSeq<SplineOnPatch<
+            ddc::TypeSeq<CoeffsOnPatch<
                     Patches,
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
@@ -256,7 +256,7 @@ private:
     using MultipatchDerivField = MultipatchField<DerivConstFieldOnPatch, Patches...>;
 
     template <class MultipatchIdxRangeBatched>
-    using MultipatchIdxRangeBatchedBS = detail::MultipatchType<
+    using MultipatchIdxRangeBatchedBasis = detail::MultipatchType<
             PatchOrdering,
             ddc::TypeSeq<typename Traits<Patches>::template batched_basis_idx_range_type<
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
@@ -288,7 +288,7 @@ public:
 
     /// @brief Multi-patch batched domain with the interpolation grids replaced by the basis grids.
     template <class MultipatchIdxRangeBatched>
-    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched>;
+    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBasis<MultipatchIdxRangeBatched>;
 
     /// @brief Multi-patch batched domain with the interpolation grids replaced by deriv types.
     template <class MultipatchIdxRangeBatched>
@@ -314,22 +314,22 @@ private:
 
 public:
     /**
-     * @brief Instantiate the SplineBuilder2DCollection from the builders on each patch.
+     * @brief Instantiate the InterpolationBuilder2DCollection from the builders on each patch.
      *
      * @warning The builders have to be sorted in the same order as the patches.
      *
      * @param builders Interpolation builders for each patch.
      */
-    explicit SplineBuilder2DCollection(Builders const&... builders)
+    explicit InterpolationBuilder2DCollection(Builders const&... builders)
         : m_builders(std::tie(builders...)) {};
 
 
-    ~SplineBuilder2DCollection() = default;
+    ~InterpolationBuilder2DCollection() = default;
 
     /**
-     * @brief Build the spline representation of each given function.
+     * @brief Build the interpolation coefficients of each given function.
      *
-     * @param[out] splines MultipatchField of all the Fields pointing to the spline representations.
+     * @param[out] coeffs MultipatchField of all the Fields pointing to the interpolation coefficients.
      * @param[in] values MultipatchField of all the Fields pointing to the function values.
      * @param[in] derivs_min1 MultipatchField of all the ConstFields describing the function derivatives
      *                      in the first dimension at the lower bound of the second dimension.
@@ -360,7 +360,7 @@ public:
      */
     template <class MultipatchValues>
     void operator()(
-            MultipatchSplineCoeffs<MultipatchValues> splines,
+            MultipatchCoeffs<MultipatchValues> coeffs,
             MultipatchValues const& values,
             std::optional<MultipatchDerivs1<MultipatchValues>> derivs_min1 = std::nullopt,
             std::optional<MultipatchDerivs1<MultipatchValues>> derivs_max1 = std::nullopt,
@@ -379,7 +379,7 @@ public:
                             MultipatchValues> && (!is_deriv_field_v<typename MultipatchValues::template TypeOnPatch<Patches>> && ...))
     {
         (apply_builder<Patches>(
-                 splines.template get<Patches>(),
+                 coeffs.template get<Patches>(),
                  get_const_field(values.template get<Patches>()),
                  get_deriv_value<Patches>(derivs_min1),
                  get_deriv_value<Patches>(derivs_max1),
@@ -393,36 +393,36 @@ public:
     };
 
     /**
-     * @brief Build the spline representation of each given function.
+     * @brief Build the interpolation coefficients of each given function.
      *
      * The derivatives are only used by builders which are ddc::SplineBuilder2D. Any other
      * builder only uses the function values.
      *
-     * @param[out] splines MultipatchField of all the Fields pointing to the spline representations.
+     * @param[out] coeffs MultipatchField of all the Fields pointing to the interpolation coefficients.
      * @param[in] functions_and_derivs MultipatchField of all the DerivFields pointing to the function values
      * and their derivatives.
      */
     void operator()(
-            MultipatchSplineCoeffs<MultipatchDerivField> splines,
+            MultipatchCoeffs<MultipatchDerivField> coeffs,
             MultipatchDerivField functions_and_derivs) const
     {
         (apply_builder<Patches>(
-                 splines.template get<Patches>(),
+                 coeffs.template get<Patches>(),
                  functions_and_derivs.template get<Patches>()),
          ...);
     };
 
     /**
-     * @brief Get a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
-     * These index ranges are adapted to allocate splines on the multi-patch domain.
+     * @brief Get a MultipatchType collecting the index ranges typed on the whole basis dimensions.
+     * These index ranges are adapted to allocate interpolation coefficients on the multi-patch domain.
      * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches.
-     * @return a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
+     * @return a MultipatchType collecting the index ranges typed on the whole basis dimensions.
      */
     template <class MultipatchIdxRangeBatched>
-    MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched> const batched_basis_idx_ranges(
+    MultipatchIdxRangeBatchedBasis<MultipatchIdxRangeBatched> const batched_basis_idx_ranges(
             MultipatchIdxRangeBatched idx_ranges) const
     {
-        return MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched>(batched_basis_idx_range(
+        return MultipatchIdxRangeBatchedBasis<MultipatchIdxRangeBatched>(batched_basis_idx_range(
                 get_builder<Patches>(),
                 idx_ranges.template get<Patches>())...);
     };
@@ -430,13 +430,13 @@ public:
 private:
     template <
             class Patch,
-            class SplineField,
+            class CoeffsField,
             class ValuesField,
             class Derivs1,
             class Derivs2,
             class Derivs12>
     void apply_builder(
-            SplineField spline,
+            CoeffsField coeffs,
             ValuesField values,
             std::optional<Derivs1> derivs_min1,
             std::optional<Derivs1> derivs_max1,
@@ -449,7 +449,7 @@ private:
     {
         if constexpr (detail::is_ddc_spline_builder_2d_v<BuilderOnPatch<Patch>>) {
             get_builder<Patch>()(
-                    spline,
+                    coeffs,
                     values,
                     derivs_min1,
                     derivs_max1,
@@ -460,13 +460,13 @@ private:
                     cross_derivs_min1_max2,
                     cross_derivs_max1_max2);
         } else {
-            get_builder<Patch>()(spline, values);
+            get_builder<Patch>()(coeffs, values);
         }
     };
 
     template <class Patch>
     void apply_builder(
-            SplineOnPatch<Patch, DerivConstFieldOnPatch<Patch>> spline,
+            CoeffsOnPatch<Patch, DerivConstFieldOnPatch<Patch>> coeffs,
             DerivConstFieldOnPatch<Patch> function_and_deriv) const
     {
         using Builder = BuilderOnPatch<Patch>;
@@ -483,9 +483,9 @@ private:
                     Builder::builder_type2::s_sbc_xmin,
                     Builder::builder_type2::s_sbc_xmax>
                     builder_applier(get_builder<Patch>());
-            builder_applier(spline, function_and_deriv);
+            builder_applier(coeffs, function_and_deriv);
         } else {
-            get_builder<Patch>()(spline, get_const_field(function_and_deriv.get_values_field()));
+            get_builder<Patch>()(coeffs, get_const_field(function_and_deriv.get_values_field()));
         }
     };
 };

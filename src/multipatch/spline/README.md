@@ -3,15 +3,16 @@
 This directory defines structures and methods to deal with different splines on every patches.
 The multipatch patch operators implemented are
 
-- [Multipatch spline builder](#multipatch-spline-builder) - Definition of `SplineBuilderCollection` and `SplineBuilder2DCollection`.
+- [Multipatch spline builder](#multipatch-spline-builder) - Definition of `SplineBuilderCollection`.
 - [Multipatch spline evaluator](#multipatch-spline-evaluator) - Definition of `MultipatchSplineEvaluator2D`.
 - [Multipatch extrapolation rules](#multipatch-extrapolation-rules) - Definition of extrapolation rules depending on the geometries for `MultipatchSplineEvaluator2D`.
 
 ## Multipatch spline builder
 
-The `SplineBuilderCollection` and `SplineBuilder2DCollection` allow all the given spline builders to be called in one single line.
+The `SplineBuilderCollection` allows all the given 1D spline builders to be called in one single line.
+See [multipatch interpolation](./../interpolation/README.md) for the 2D equivalent `InterpolationBuilder2DCollection`.
 
-The template parameters of this class reproduce the `SplineBuilder` and `SplineBuilder2D` classes from DDC.
+The template parameters of this class reproduce the `SplineBuilder` class from DDC.
 The spline coefficients and values of the functions are stored in `MultipatchType` objects.
 The spline builders are stored inside the class in a `std::tuple`.
 
@@ -106,7 +107,6 @@ To evaluate at a given coordinate outside the domain, extrapolation rules have b
 ## Contents
 
 - `constant_extrapolation_rules_onion.hpp`: Define `ConstantExtrapolationRuleOnion`, constant extrapolation rule for onion geometries.
-- `spline_builder_2d_collection.hpp`: Define the `SplineBuilder2DCollection` operator to apply 2D spline builders on every patch.
 - `spline_builder_collection.hpp`: Define the `SplineBuilderCollection` operator to apply 1D spline builders on every patch.
 - `multipatch_spline_evaluator_2d.hpp`: Define the `MultipatchSplineEvaluator2D` operator to apply 2D spline evaluators on every patch.
 - `null_extrapolation_rules.hpp`: Define `NullExtrapolationRule`, a null extrapolation rule for every geometry.  

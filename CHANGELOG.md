@@ -81,9 +81,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `PolarSplineFEMPoissonLikeAssembler` uses `TensorProductBSplinePoissonAssembler` to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.
 - Use Spack to install packages in the docker image.
 - Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
-- Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
+- Rename `MultipatchSplineBuilder2D` to `InterpolationBuilder2DCollection` and move it to `src/multipatch/interpolation/` (new `gyselalibxx::multipatch_interpolation` library).
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
-- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
+- Rename file `multipatch_spline_builder.hpp` to `spline_builder_collection.hpp`.
+- Rename file `multipatch_spline_builder_2d.hpp` to `interpolation_builder_2d_collection.hpp`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.

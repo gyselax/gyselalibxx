@@ -8,12 +8,12 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "i_interpolation_builder.hpp"
+#include "interpolation_builder_2d_collection.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 #include "nd_identity_interpolation_builder.hpp"
-#include "spline_builder_2d_collection.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -42,7 +42,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         ddc::SplineSolver::LAPACK>;
 
 template <ddc::SplineBuilderClosure BC>
-using SplineBuilderCollectionXY = SplineBuilder2DCollection<
+using SplineBuilderCollectionXY = InterpolationBuilder2DCollection<
         ddc::TypeSeq<Patch1, Patch2>,
         ddc::TypeSeq<SplineXYBuilder<1, BC>, SplineXYBuilder<2, BC>>>;
 
@@ -74,7 +74,7 @@ using IdentityCoeffMemOnPatch = DFieldMem<IdentityCoeffIdxRange<Patch>>;
 template <class Patch>
 using IdentityCoeffOnPatch = DField<IdentityCoeffIdxRange<Patch>>;
 
-using IdentityBuilderCollectionXY = SplineBuilder2DCollection<
+using IdentityBuilderCollectionXY = InterpolationBuilder2DCollection<
         ddc::TypeSeq<Patch1, Patch2>,
         ddc::TypeSeq<IdentityXYBuilder<Patch1>, IdentityXYBuilder<Patch2>>>;
 
@@ -116,10 +116,10 @@ typename Patch::IdxRange12 init_lagrange_patch(
     return typename Patch::IdxRange12(idx_range1, idx_range2);
 }
 
-class SplineBuilderCollection2DTest : public ::testing::Test
+class InterpolationBuilder2DCollectionTest : public ::testing::Test
 {
 public:
-    SplineBuilderCollection2DTest() {}
+    InterpolationBuilder2DCollectionTest() {}
 
     static void SetUpTestSuite()
     {
@@ -260,7 +260,7 @@ public:
 /*
     The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
-TEST_F(SplineBuilderCollection2DTest, TwoPatches2D)
+TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2D)
 {
     ddc::init_discrete_space<GridX<1>>(
             SplineInterpPointsX<1, ddc::SplineBuilderClosure::GREVILLE>::get_sampling<GridX<1>>());
@@ -346,7 +346,7 @@ TEST_F(SplineBuilderCollection2DTest, TwoPatches2D)
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
 }
 
-TEST_F(SplineBuilderCollection2DTest, TwoPatches2DHermite)
+TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
 {
     ddc::init_discrete_space<GridX<1>>(
             SplineInterpPointsX<1, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridX<1>>());
@@ -593,7 +593,7 @@ TEST_F(SplineBuilderCollection2DTest, TwoPatches2DHermite)
 }
 
 
-TEST_F(SplineBuilderCollection2DTest, TwoPatches2DHermiteWithDerivField)
+TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
 {
     ddc::init_discrete_space<GridX<1>>(
             SplineInterpPointsX<1, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridX<1>>());
@@ -785,7 +785,7 @@ TEST_F(SplineBuilderCollection2DTest, TwoPatches2DHermiteWithDerivField)
 /*
     The collection is used with builders which are not spline builders.
  */
-TEST_F(SplineBuilderCollection2DTest, TwoPatches2DNonSplineBuilder)
+TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilder)
 {
     typename Patch1::IdxRange12 const idx_range_xy1 = init_lagrange_patch<Patch1>(
             Coord<X<1>>(0.0),
@@ -855,7 +855,7 @@ TEST_F(SplineBuilderCollection2DTest, TwoPatches2DNonSplineBuilder)
     The collection is used with builders which are not spline builders. The values are
     provided in DerivFields. The derivatives are ignored by the builders.
  */
-TEST_F(SplineBuilderCollection2DTest, TwoPatches2DNonSplineBuilderWithDerivField)
+TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilderWithDerivField)
 {
     typename Patch1::IdxRange12 const idx_range_xy1 = init_lagrange_patch<Patch1>(
             Coord<X<1>>(0.0),
