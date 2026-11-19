@@ -107,8 +107,10 @@ typename Patch::IdxRange12 init_lagrange_patch(
 {
     using Grid1 = typename Patch::Grid1;
     using Grid2 = typename Patch::Grid2;
-    ddc::init_discrete_space<Grid1>(build_uniform_break_points(min1, max1, IdxStep<Grid1>(ncells1)));
-    ddc::init_discrete_space<Grid2>(build_uniform_break_points(min2, max2, IdxStep<Grid2>(ncells2)));
+    ddc::init_discrete_space<Grid1>(
+            build_uniform_break_points(min1, max1, IdxStep<Grid1>(ncells1)));
+    ddc::init_discrete_space<Grid2>(
+            build_uniform_break_points(min2, max2, IdxStep<Grid2>(ncells2)));
     IdxRange<Grid1> idx_range1(Idx<Grid1>(0), IdxStep<Grid1>(ncells1 + 1));
     IdxRange<Grid2> idx_range2(Idx<Grid2>(0), IdxStep<Grid2>(ncells2 + 1));
     ddc::init_discrete_space<LagBasis1<Patch>>(idx_range1);

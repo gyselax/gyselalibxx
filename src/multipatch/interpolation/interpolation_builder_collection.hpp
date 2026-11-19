@@ -54,8 +54,10 @@ class InterpolationBuilderCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Buil
             sizeof...(Patches) == sizeof...(Builders),
             "There must be exactly one builder per patch.");
     static_assert(
-            ((std::is_same_v<interpolation_grid_t<Builders>, typename Patches::Grid1>
-              || std::is_same_v<interpolation_grid_t<Builders>, typename Patches::Grid2>)&&...),
+            ((std::is_same_v<
+                      interpolation_grid_t<Builders>,
+                      typename Patches::
+                              Grid1> || std::is_same_v<interpolation_grid_t<Builders>, typename Patches::Grid2>)&&...),
             "The builders must be provided in the same order as the patches and must "
             "interpolate on one of the grids (Grid1 or Grid2) of their patch.");
 
@@ -81,8 +83,9 @@ private:
             (std::is_same_v<typename Builders::memory_space, memory_space> && ...),
             "All builders must use the same memory space.");
     static_assert(
-            (std::is_same_v<typename InterpolationBuilderTraits<Builders>::data_type, data_type>
-             && ...),
+            (std::is_same_v<
+                     typename InterpolationBuilderTraits<Builders>::data_type,
+                     data_type> && ...),
             "All builders must use the same data type.");
 
     /// A type alias to get the builder type on a specific patch.
@@ -222,7 +225,7 @@ public:
             MultipatchValues const& values,
             std::optional<MultipatchDerivs<MultipatchValues>> derivs_xmin = std::nullopt,
             std::optional<MultipatchDerivs<MultipatchValues>> derivs_xmax = std::nullopt) const
-        requires(is_multipatch_field_v<MultipatchValues>)
+            requires(is_multipatch_field_v<MultipatchValues>)
     {
         (get_builder<Patches>()(
                  coeffs.template get<Patches>(),

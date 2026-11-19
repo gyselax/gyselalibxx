@@ -148,8 +148,7 @@ private:
 
     /// Specialisation of ValuesIdxRange for a field with derivatives.
     template <class FieldType>
-        requires(is_deriv_field_v<FieldType>)
-    struct ValuesIdxRange<FieldType>
+    requires(is_deriv_field_v<FieldType>) struct ValuesIdxRange<FieldType>
     {
         using type = typename FieldType::physical_idx_range_type;
     };

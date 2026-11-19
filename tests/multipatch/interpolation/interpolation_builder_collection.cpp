@@ -78,8 +78,8 @@ using IdentityX1Builder = IdentityInterpolationBuilder<
         LagBasis1<Patch>>;
 
 template <class Patch, class IdxRangeValues>
-using IdentityCoeffIdxRange = typename InterpolationBuilderTraits<IdentityX1Builder<Patch>>::
-        template batched_basis_idx_range_type<IdxRangeValues>;
+using IdentityCoeffIdxRange = typename InterpolationBuilderTraits<
+        IdentityX1Builder<Patch>>::template batched_basis_idx_range_type<IdxRangeValues>;
 
 template <class Patch>
 using IdentityCoeffOnPatch_1D = DField<IdentityCoeffIdxRange<Patch, typename Patch::IdxRange1>>;
