@@ -212,8 +212,8 @@ void check_spline(
 
 template <class... Patches, class CoordTransformTuple, class SplineEvaluatorPatchTuple>
 void check_all_splines(
-        std::vector<double> random_values_x,
-        std::vector<double> random_values_y,
+        std::vector<double> & random_values_x,
+        std::vector<double> & random_values_y,
         MultipatchField<SplineCoeffOnPatch_2D, Patches...> const& splines_l,
         host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> const& spline_g,
         SplineEvaluatorPatchTuple const& evaluators_l,
