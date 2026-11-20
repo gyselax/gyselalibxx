@@ -645,4 +645,12 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             get_const_field(function_g_coef),
             coord_transforms,
             TOL_cross_deriv);
+
+                // Check the whole spline representations ---
+    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
+            functions_and_derivs,
+            evaluator_g,
+            get_const_field(function_g_coef),
+            coord_transforms,
+            TOL_spline);
 }
