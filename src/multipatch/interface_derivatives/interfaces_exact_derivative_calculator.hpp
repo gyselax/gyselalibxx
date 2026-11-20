@@ -21,7 +21,6 @@
 #include "types.hpp"
 #include "view.hpp"
 
-
 /**
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces.  

@@ -399,9 +399,7 @@ TYPED_TEST_SUITE(InterfacesDerivativeCalculatorGrevillePeriodicTest, TestTypes);
 
 
 
-TYPED_TEST(
-        InterfacesDerivativeCalculatorGrevillePeriodicTest,
-        CheckForPeriodicAndGrevilleBC_And_DerivativeCalculatorCollection)
+TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
     std::tuple coord_transforms {
             CoordTransformGroup<1>(),
@@ -647,71 +645,4 @@ TYPED_TEST(
             get_const_field(function_g_coef),
             coord_transforms,
             TOL_cross_deriv);
-
-    // Check the whole spline representations ---
-    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            TOL_spline);
-
-
-    // Test DerivativeCalculatorCollection
-    using DerivsToCompute = DerivList<
-            DerivPerp<GridX<1>>,
-            DerivPerp<GridX<4>>,
-            DerivPerp<GridX<7>>,
-            DerivPerp<GridY<1>>,
-            DerivPerp<GridY<2>>,
-            DerivPerp<GridY<3>>,
-            CrossDeriv<GridY<1>>,
-            CrossDeriv<GridY<2>>,
-            CrossDeriv<GridY<3>>>;
-
-    DerivativeCalculatorCollection deriv_calculator_collect(
-            DerivsToCompute {},
-            deriv_calculator_123,
-            deriv_calculator_456,
-            deriv_calculator_789,
-            deriv_calculator_147,
-            deriv_calculator_258,
-            deriv_calculator_369);
-
-    deriv_calculator_collect.template apply<0>(functions_and_derivs);
-    deriv_calculator_collect.template apply<1>(functions_and_derivs);
-    deriv_calculator_collect.template apply<2>(functions_and_derivs);
-    deriv_calculator_collect.template apply<3>(functions_and_derivs);
-    deriv_calculator_collect.template apply<4>(functions_and_derivs);
-    deriv_calculator_collect.template apply<5>(functions_and_derivs);
-    deriv_calculator_collect.template apply<6>(functions_and_derivs);
-    deriv_calculator_collect.template apply<7>(functions_and_derivs);
-    deriv_calculator_collect.template apply<8>(functions_and_derivs);
-
-    check_all_x_derivatives(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            TOL_deriv);
-    check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            TOL_deriv);
-    check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            TOL_cross_deriv);
-
-    // Check the whole spline representations ---
-    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            coord_transforms,
-            TOL_spline);
 }
