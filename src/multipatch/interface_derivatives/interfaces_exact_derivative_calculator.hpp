@@ -598,9 +598,5 @@ template <
         class Grid1D,
         ddc::SplineBuilderClosure LowerBound,
         ddc::SplineBuilderClosure UpperBound>
-inline constexpr bool enable_deriv_calculator<InterfacesExactDerivativeCalculator<
-        Connectivity,
-        Grid1D,
-        LowerBound,
-        UpperBound>> = true;
-        
+inline constexpr bool enable_deriv_calculator<
+        InterfacesExactDerivativeCalculator<Connectivity, Grid1D, LowerBound, UpperBound>> = true;
