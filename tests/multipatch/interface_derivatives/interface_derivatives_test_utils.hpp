@@ -1,8 +1,11 @@
 
 // SPDX-License-Identifier: MIT
 #pragma once
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
+
+#include "ddc_aliases.hpp"
 
 /** 
  * @brief Convert a coordinate on a dimension to another coordinate

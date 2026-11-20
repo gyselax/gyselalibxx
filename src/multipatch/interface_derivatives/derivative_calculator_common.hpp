@@ -27,9 +27,6 @@ template <class T>
 inline constexpr bool is_deriv_calculator_v
         = enable_deriv_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
 
-template <class Connectivity, class Grid1D, class PatchSeq, class DerivCoeffCollection>
-class DerivativeCalculatorCommon;
-
 /**
   * @brief Abstract class to hold the interface derivative coefficients
   * and the index ranges.

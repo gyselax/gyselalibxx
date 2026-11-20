@@ -3,6 +3,7 @@
 set(test_name_gtest "multipatch_spline_tests")
 add_executable("${test_name_gtest}"
         constant_extrapolation_rules_onion.cpp
+        multipatch_spline_builder_2d.cpp
         multipatch_spline_evaluator.cpp
         spline_builder_collection.cpp
         spline_builder_2d_collection.cpp
@@ -16,6 +17,7 @@ PUBLIC
         GTest::gtest
         GTest::gmock
 
+        gyselalibxx::multipatch_interface_derivatives
         gyselalibxx::multipatch_geometries
         gyselalibxx::multipatch_spline
         gyselalibxx::utils

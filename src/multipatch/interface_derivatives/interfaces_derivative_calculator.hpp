@@ -18,6 +18,8 @@
 #include "types.hpp"
 #include "view.hpp"
 
+
+
 /**
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces with an approximation formula.
@@ -296,3 +298,7 @@ private:
         return std::array<const int, 2> {sign_1, sign_2};
     }
 };
+
+template <class Connectivity, class Grid1D>
+inline constexpr bool
+        enable_deriv_calculator<InterfacesDerivativeCalculator<Connectivity, Grid1D>> = true;

@@ -21,18 +21,6 @@
 #include "types.hpp"
 #include "view.hpp"
 
-template <
-        class Connectivity,
-        class Grid1D,
-        class PatchSeq,
-        ddc::SplineBuilderClosure LowerBound,
-        ddc::SplineBuilderClosure UpperBound>
-inline constexpr bool enable_deriv_calculator<InterfacesExactDerivativeCalculator<
-        Connectivity,
-        Grid1D,
-        PatchSeq,
-        LowerBound,
-        UpperBound>> = true;
 
 /**
   * @brief Class to compute the interface derivatives along a given direction 
@@ -604,3 +592,15 @@ private:
         return std::pair(sign_1, sign_2);
     };
 };
+
+template <
+        class Connectivity,
+        class Grid1D,
+        ddc::SplineBuilderClosure LowerBound,
+        ddc::SplineBuilderClosure UpperBound>
+inline constexpr bool enable_deriv_calculator<InterfacesExactDerivativeCalculator<
+        Connectivity,
+        Grid1D,
+        LowerBound,
+        UpperBound>> = true;
+        

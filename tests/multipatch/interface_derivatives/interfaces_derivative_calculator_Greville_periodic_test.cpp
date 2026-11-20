@@ -512,50 +512,28 @@ TYPED_TEST(
                     TestFixture::idx_range_xy8,
                     TestFixture::idx_range_xy9);
 
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3> idx_ranges_123(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6> idx_ranges_456(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch7, Patch8, Patch9> idx_ranges_789(idx_ranges);
-
-    // For 1|4|7, we artificially add another patch to test if the method will modify the correct patches.
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch4, Patch7, Patch2> idx_ranges_147(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch2, Patch5, Patch8> idx_ranges_258(idx_ranges);
-    MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9> idx_ranges_369(idx_ranges);
-
     // Instantiate the derivatives calculators ---------------------------------------------------
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<1>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_123(
-                    idx_ranges_123,
-                    deriv_coeffs_1_2,
-                    deriv_coeffs_2_3,
-                    deriv_coeffs_3_1);
+            deriv_calculator_123(idx_ranges, deriv_coeffs_1_2, deriv_coeffs_2_3, deriv_coeffs_3_1);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<4>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_456(
-                    idx_ranges_456,
-                    deriv_coeffs_4_5,
-                    deriv_coeffs_5_6,
-                    deriv_coeffs_6_4);
+            deriv_calculator_456(idx_ranges, deriv_coeffs_4_5, deriv_coeffs_5_6, deriv_coeffs_6_4);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<7>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_789(
-                    idx_ranges_789,
-                    deriv_coeffs_7_8,
-                    deriv_coeffs_8_9,
-                    deriv_coeffs_9_7);
+            deriv_calculator_789(idx_ranges, deriv_coeffs_7_8, deriv_coeffs_8_9, deriv_coeffs_9_7);
 
-    // Test with an extra patch (Patch2) to check it will only take the needed patches.
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
