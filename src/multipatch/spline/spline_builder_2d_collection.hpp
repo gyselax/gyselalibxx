@@ -246,6 +246,10 @@ class SplineBuilder2DCollection
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
 
 public:
+    /// @brief The type of the SplineBuilder2D used on a given patch.
+    template <class Patch>
+    using builder_type_on_patch = BuilderOnPatch<Patch>;
+
     using multipatch_spline_type = MultipatchSplineCoeffs;
     using multipatch_deriv_field_type = MultipatchDerivField;
 

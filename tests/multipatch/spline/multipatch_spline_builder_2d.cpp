@@ -614,41 +614,6 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
                 evaluator8,
                 evaluator9);
 
-    const SplineBuilder2DCollection<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplines1OnPatch,
-            BSplines2OnPatch,
-            Grid1OnPatch,
-            Grid2OnPatch,
-            ddc::SplineBuilderClosure::GREVILLE,
-            ddc::SplineBuilderClosure::GREVILLE,
-            ddc::SplineBuilderClosure::GREVILLE,
-            ddc::SplineBuilderClosure::GREVILLE,
-            ddc::SplineBuilderClosure::HERMITE,
-            Connectivity,
-            ddc::SplineSolver::LAPACK,
-            DConstFieldOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            builders_collection(
-                    builder1,
-                    builder2,
-                    builder3,
-                    builder4,
-                    builder5,
-                    builder6,
-                    builder7,
-                    builder8,
-                    builder9);
-
     using DerivsToCompute = DerivList<
             DerivPerp<GridX<1>>,
             DerivPerp<GridX<4>>,
@@ -685,7 +650,15 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
                     InterfacesDerivativeCalculator<Connectivity, GridY<3>>>,
             PatchOrdering>
             builders(
-                    builders_collection,
+                    builder1,
+                    builder2,
+                    builder3,
+                    builder4,
+                    builder5,
+                    builder6,
+                    builder7,
+                    builder8,
+                    builder9,
                     deriv_calculator_123,
                     deriv_calculator_456,
                     deriv_calculator_789,
@@ -705,7 +678,7 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             Patch7,
             Patch8,
             Patch9>
-            splines_alloc(builders_collection.batched_basis_idx_ranges(idx_ranges));
+            splines_alloc(builders.batched_basis_idx_ranges(idx_ranges));
     MultipatchField<
             SplineCoeffOnPatch_2D,
             Patch1,
@@ -718,7 +691,6 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             Patch8,
             Patch9>
             splines(splines_alloc);
-
 
     builders(splines, functions_and_derivs);
 

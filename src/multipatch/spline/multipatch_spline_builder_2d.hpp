@@ -50,7 +50,30 @@ struct DerivList
 };
 
 
-
+/**
+ * @brief A class to set all the needed interface derivatives and 
+ * to call all the builders of all the patches once.
+ *
+ * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
+ * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
+ * @tparam BSpline1OnPatch A type alias which provides the first BSpline type along which the splines are built.
+ * @tparam BSpline2OnPatch A type alias which provides the second BSpline type along which the splines are built.
+ * @tparam Grid1OnPatch A type alias which provides the first Grid type along which the interpolation points of the splines are found.
+ * @tparam Grid2OnPatch A type alias which provides the second Grid type along which the interpolation points of the splines are found.
+ * @tparam SBCLower1 The lower spline closure on the first dimension.
+ * @tparam SBCUpper1 The upper spline closure on the first dimension.
+ * @tparam SBCLower2 The lower spline closure on the second dimension.
+ * @tparam SBCUpper2 The upper spline closure on the second dimension.
+ * @tparam BcTransition The boundary condition used at the interface between 2 patches.
+ * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
+ * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
+ * @tparam ValuesOnPatch A type alias which provides the field type which will be used to pass the values of the function
+ *                      at the interpolation points. The index range of this field type should contain any batch dimensions.
+ * @tparam DerivListType A DerivList type that stores the sorted DerivPerp and/or CrossDeriv.
+ *                      Their order acts as an indication on the algorithm to follow to compute all the derivatives. 
+ * @tparam DerivativeCalculatorSeq  A TypeSeq of DerivativeCalculator derivative calculators (non sorted).
+ * @tparam PatchesSeq A TypeSeq of patches.
+ */
 template <
         class ExecSpace,
         class MemorySpace,
@@ -76,7 +99,30 @@ template <
         class PatchesSeq>
 class MultipatchSplineBuilder2D;
 
-
+/**
+ * @brief A class to set all the needed interface derivatives and 
+ * to call all the builders of all the patches once.
+ *
+ * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
+ * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
+ * @tparam BSpline1OnPatch A type alias which provides the first BSpline type along which the splines are built.
+ * @tparam BSpline2OnPatch A type alias which provides the second BSpline type along which the splines are built.
+ * @tparam Grid1OnPatch A type alias which provides the first Grid type along which the interpolation points of the splines are found.
+ * @tparam Grid2OnPatch A type alias which provides the second Grid type along which the interpolation points of the splines are found.
+ * @tparam SBCLower1 The lower spline closure on the first dimension.
+ * @tparam SBCUpper1 The upper spline closure on the first dimension.
+ * @tparam SBCLower2 The lower spline closure on the second dimension.
+ * @tparam SBCUpper2 The upper spline closure on the second dimension.
+ * @tparam BcTransition The boundary condition used at the interface between 2 patches.
+ * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
+ * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
+ * @tparam ValuesOnPatch A type alias which provides the field type which will be used to pass the values of the function
+ *                      at the interpolation points. The index range of this field type should contain any batch dimensions.
+ * @tparam DirectionDerivs Sorted DerivPerp and/or CrossDeriv.
+ *                      Their order acts as an indication on the algorithm to follow to compute all the derivatives. 
+ * @tparam DerivativeCalculators  Derivative calculators (non sorted).
+ * @tparam PatchesSeq Tags for patches.
+ */
 template <
         class ExecSpace,
         class MemorySpace,
@@ -162,8 +208,6 @@ class MultipatchSplineBuilder2D<
             ValuesOnPatch,
             Patches...>;
 
-    // InterfacesDerivativeCalculator<Connectivity, GridX<1>
-
     using MultipatchSplineCoeffs = typename SplineBuilderCollection::multipatch_spline_type;
 
     template <class P>
@@ -179,6 +223,23 @@ class MultipatchSplineBuilder2D<
     using MultipatchDerivField = MultipatchField<DerivFieldOnPatch, Patches...>;
 
     using DerivativeCalculatorCollection = std::tuple<DerivativeCalculators&...>;
+
+    using MultipatchIdxRangeBS = typename SplineBuilderCollection::coeff_idx_range_type;
+
+    template <class Patch, class BatchedIdxRange>
+    using batched_spline_domain_type_on_patch
+            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
+                    ddc::to_type_seq_t<BatchedIdxRange>,
+                    ddc::TypeSeq<typename Patch::Grid1, typename Patch::Grid2>,
+                    ddc::TypeSeq<typename Patch::BSplines1, typename Patch::BSplines2>>>;
+
+    template <class MultipatchIdxRangeBatched>
+    using MultipatchIdxRangeBatchedBS = detail::MultipatchType<
+            typename MultipatchIdxRangeBatched::PatchOrdering,
+            ddc::TypeSeq<batched_spline_domain_type_on_patch<
+                    Patches,
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
+
 
 private:
     /// @brief Sorted list of DerivPerp and/or CrossDeriv.
@@ -211,23 +272,77 @@ private:
                     derivative_calculator_type<IOp>>;
 
 private:
-    SplineBuilderCollection const& m_builders_collection;
+    SplineBuilderCollection const m_builders_collection;
 
     DerivativeCalculatorCollection m_deriv_calculator_collection;
 
 public:
+    /**
+     * @brief Instantiate a MultipatchSplineBuilder2D.
+     * 
+     * @param builders_collection A SplineBuilder2DCollection type that collects the spline builders.
+     * @param deriv_calculators DerivativeCalculatorCommon types that compute the interface derivatives 
+     *      in a given direction.
+     */
     MultipatchSplineBuilder2D(
             SplineBuilderCollection const& builders_collection,
             DerivativeCalculators&... deriv_calculators)
         : m_builders_collection(builders_collection)
         , m_deriv_calculator_collection(deriv_calculators...) {};
 
+    /**
+     * @brief Instantiate a MultipatchSplineBuilder2D.
+     * 
+     * @param builders A SplineBuilder2D types.
+     * @param deriv_calculators DerivativeCalculatorCommon types that compute the interface derivatives 
+     *      in a given direction.
+     */
+    MultipatchSplineBuilder2D(
+            typename SplineBuilderCollection::template builder_type_on_patch<
+                    Patches> const&... builders,
+            DerivativeCalculators&... deriv_calculators)
+        : m_builders_collection(builders...)
+        , m_deriv_calculator_collection(deriv_calculators...) {};
 
+
+    /**
+     * @brief Get the spline coefficients of the given function. 
+     * The interface derivatives in the given DerivFiedls are computed using the derivative calculators
+     * of the class and the builders are called to build the splines. 
+     * @param[out] splines A MultipatchField of splines on each patch.
+     * @param[in, out] functions_and_derivs A MultipatchField of DerivFields on each patch.
+     *      The interface derivatives are modified. 
+     */
     void operator()(MultipatchSplineCoeffs splines, MultipatchDerivField functions_and_derivs)
     {
         set_all_interface_derivatives(std::make_index_sequence<size> {}, functions_and_derivs);
-
         m_builders_collection(splines, get_const_field(functions_and_derivs));
+    };
+
+
+    /**
+     * @brief Get a MultipatchType collecting the index ranges typed on the B-splines dimensions
+     * of the patches. 
+     * These index ranges are adapted to allocate splines on the multi-patch domain. 
+     * @return a MultipatchType collecting the index ranges typed on the B-splines dimensions
+     * of the patches. 
+     */
+    MultipatchIdxRangeBS const spline_idx_ranges() const
+    {
+        return m_builders_collection.spline_idx_ranges();
+    };
+
+    /**
+     * @brief Get a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
+     * These index ranges are adapted to allocate splines on the multi-patch domain. 
+     * @param[in] idx_ranges MultipatchType collecting the index ranges on the grids of the patches. 
+     * @return a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
+     */
+    template <class MultipatchIdxRangeBatched>
+    MultipatchIdxRangeBatchedBS<MultipatchIdxRangeBatched> const batched_basis_idx_ranges(
+            MultipatchIdxRangeBatched idx_ranges) const
+    {
+        return m_builders_collection.batched_basis_idx_ranges(idx_ranges);
     };
 
 private:
@@ -239,7 +354,7 @@ private:
         (set_interface_derivatives<IOp>(functions_and_derivs), ...);
     };
 
-     /**
+    /**
      * @brief Apply the correct derivative calculator 
      * to set the correct derivatives of the given MultipatchDerivField
      * at the step IOpth of the algorithm. 
