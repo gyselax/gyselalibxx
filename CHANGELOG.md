@@ -37,10 +37,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
 - Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
-- Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
+- Add `InterfacesDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 - Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
-- Add `InterfacesExactDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the exact formula.
+- Add `InterfacesExactDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the exact formula.
+- Added a `concepts::Patch` concept.
+- Added a `concepts::Edge` concept.
+- Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
+- Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 
 ### Fixed
 
@@ -48,11 +52,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
 - Fix missing error when using `find_grid_t`.
+- Modify the default non uniformity value of `build_random_non_uniform_break_points()` from 1 to 0.9 to avoid having non-uniform break points too close to each other.
 
 ### Changed
 
 - Rename `SingleInterfaceDerivativesCalculator` to `InterfaceDerivCoeffs`.
-- Rename `SingleInterfaceDerivativesCalculatorCollection` to `InterfaceDerivCoeffsCollection`.
 - Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` to `InterfaceDerivCoeffs::get_approx_deriv()`.
 - Rename file `single_interface_derivatives_calculator.hpp` to `interface_derivative_coefficients.hpp`.
 - Rename file `single_interface_derivatives_calculator_collection.hpp` to `interface_derivative_coefficients_collection.hpp`.
@@ -83,6 +87,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
+- `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
+- Edges in an `Interface` must be ordered by the associated `Patch::id`.
+- Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
 
 ### Deprecated
 
@@ -94,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MatrixBatchCsr::norm`.
 - Remove `MatrixBatchEll::norm`.
 - Remove `detail::combine_t` (prefer `ddc::combine_t`).
+- Remove `SingleInterfaceDerivativesCalculatorCollection`.
 
 ### Dependency requirements
 

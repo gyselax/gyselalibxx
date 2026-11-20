@@ -12,7 +12,6 @@
 #include "derivative_field_mem.hpp"
 #include "interface.hpp"
 #include "interface_derivative_coefficients.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "interfaces_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
@@ -162,9 +161,9 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>>;
 
 // INTERFACES ------------------------------------------------------------------------------------
-using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+using NorthInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+using NorthInterface2 = Interface<OutsideEdge, NorthEdge<2>, true>;
+using NorthInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
 using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
 using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
@@ -276,7 +275,7 @@ struct RevPatch1
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
     using OutsideInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = ReversePatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -301,7 +300,7 @@ struct RevPatch2
     using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = ReversePatchTransform<2>;
@@ -323,10 +322,10 @@ struct RevPatch2
 struct RevPatch3
 {
     using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-    using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
+    using Interface_2_3 = Interface<EastEdge<2>, EastEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -354,7 +353,7 @@ struct ChangeBound1
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
     using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = ChangeBound1Transform;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -382,7 +381,7 @@ struct ChangeBound3
     using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -447,22 +446,12 @@ struct InterfacesDerivativeCalculatorHermiteFixture<
 
     using InterfacesDerivativeCalculatorType = std::conditional_t<
             is_approximation,
-            InterfacesDerivativeCalculator<
-                    typename PatchLayout::Connectivity,
-                    Grid1AlongXg,
-                    ddc::TypeSeq<Patch1, Patch2, Patch3>,
-                    InterfaceDerivCoeffsCollection<
-                            typename PatchLayout::Interface_2_3,
-                            typename PatchLayout::Interface_1_2>>,
+            InterfacesDerivativeCalculator<typename PatchLayout::Connectivity, Grid1AlongXg>,
             InterfacesExactDerivativeCalculator<
                     typename PatchLayout::Connectivity,
                     Grid1AlongXg,
-                    ddc::TypeSeq<Patch1, Patch2, Patch3>,
                     ddc::SplineBuilderClosure::HERMITE,
-                    ddc::SplineBuilderClosure::HERMITE,
-                    InterfaceDerivCoeffsCollection<
-                            typename PatchLayout::Interface_2_3,
-                            typename PatchLayout::Interface_1_2>>>;
+                    ddc::SplineBuilderClosure::HERMITE>>;
 
     typename PatchLayout::CoordTransform1 coord_transform_1;
     typename PatchLayout::CoordTransform2 coord_transform_2;
@@ -629,17 +618,14 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     InterfaceDerivCoeffs<Interface_2_3> const
             deriv_coeffs_2_3(this->idx_range_xy2, this->idx_range_xy3);
 
-    // Collect the derivative calculators --------------------------------------------------------
-    // We do not follow the physical order to test the operator.
-    InterfaceDerivCoeffsCollection deriv_coeffs_collect(deriv_coeffs_2_3, deriv_coeffs_1_2);
-
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
             idx_ranges(this->idx_range_xy1, this->idx_range_xy2, this->idx_range_xy3);
 
     // Instantiate the derivative calculators ----------------------------------------------------
+    // We do not follow the physical order of the interfaces to test the operator.
     typename TestFixture::InterfacesDerivativeCalculatorType
-            deriv_calculator(idx_ranges, deriv_coeffs_collect);
+            deriv_calculator(idx_ranges, deriv_coeffs_2_3, deriv_coeffs_1_2);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
