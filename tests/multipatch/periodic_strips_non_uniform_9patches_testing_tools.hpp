@@ -127,19 +127,19 @@ using MPDerivField = MultipatchField<
         Patch8,
         Patch9>;
 
-        // Operators on the equivalent global spline.
-        using GlobalSplineBuilder = ddc::SplineBuilder2D<
-                HostExecSpace,
-                typename HostExecSpace::memory_space,
-                BSplinesXg,
-                BSplinesYg,
-                GridXg,
-                GridYg,
-                ddc::SplineBuilderClosure::PERIODIC,
-                ddc::SplineBuilderClosure::PERIODIC,
-                ddc::SplineBuilderClosure::GREVILLE,
-                ddc::SplineBuilderClosure::GREVILLE,
-                ddc::SplineSolver::LAPACK>;
+// Operators on the equivalent global spline.
+using GlobalSplineBuilder = ddc::SplineBuilder2D<
+        HostExecSpace,
+        typename HostExecSpace::memory_space,
+        BSplinesXg,
+        BSplinesYg,
+        GridXg,
+        GridYg,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineSolver::LAPACK>;
 
 using GlobalSplineEvaluator = ddc::SplineEvaluator2D<
         HostExecSpace,

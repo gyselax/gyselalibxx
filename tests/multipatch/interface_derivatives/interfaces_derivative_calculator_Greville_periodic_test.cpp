@@ -51,7 +51,7 @@
 */
 
 namespace {
-    
+
 template <class is_approximation_literal>
 struct InterfacesDerivativeCalculatorGrevillePeriodicTest
     : public Multipatch9PatchesPeriodicStripsNonUniformTest<is_approximation_literal>
