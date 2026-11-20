@@ -383,6 +383,20 @@ def search_for_bad_memory(file):
                         'Returned FieldMem object must be saved in a FieldMem else data may be unintentionally deallocated.',
                         f'({line_str})')
                 report_error(FATAL, file, linenr, msg)
+                
+def alias_breaks_naming_conventions(a_name : str):
+    """
+    Check if a provided alias breaks naming conventions.
+    """
+    valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice', 'To', '__')
+
+    def name_breaks_conventions(name : str):
+        return 'Idx' in name and not any(name.startswith(valid_start_name) for valid_start_name in valid_start_names)
+
+    # Strip Multi-patch prefix
+    mp_a_name = a_name.removeprefix('MP')
+    # Beginning with verbs is ok as are some specific prefixes
+    return (a_name == mp_a_name and name_breaks_conventions(a_name)) or name_breaks_conventions(mp_a_name)
 
 def search_for_bad_aliases(file):
     """
