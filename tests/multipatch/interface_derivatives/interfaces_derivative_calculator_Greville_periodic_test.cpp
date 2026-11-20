@@ -8,7 +8,6 @@
 #include "9patches_2d_periodic_strips_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
-#include "derivative_calculator_collection.hpp"
 #include "derivative_field.hpp"
 #include "derivative_field_mem.hpp"
 #include "interface.hpp"
