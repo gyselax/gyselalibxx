@@ -91,7 +91,7 @@ using SplineInterpPointsYg = ddcHelper::NonUniformInterpolationPoints<
         ddc::SplineBuilderClosure::GREVILLE>;
 
 
-using MPIdxRange = MultipatchType<
+using MultipatchIdxRange = MultipatchType<
         IdxRangeOnPatch,
         Patch1,
         Patch2,
@@ -274,7 +274,7 @@ protected:
     const IdxRange<GridX<8>, GridY<8>> idx_range_xy8;
     const IdxRange<GridX<9>, GridY<9>> idx_range_xy9;
 
-    const MPIdxRange idx_ranges;
+    const MultipatchIdxRange idx_ranges;
 
     const IdxRange<GridXg> idx_range_xg;
     const IdxRange<GridYg> idx_range_yg;

@@ -383,20 +383,6 @@ def search_for_bad_memory(file):
                         'Returned FieldMem object must be saved in a FieldMem else data may be unintentionally deallocated.',
                         f'({line_str})')
                 report_error(FATAL, file, linenr, msg)
-                
-def alias_breaks_naming_conventions(a_name : str):
-    """
-    Check if a provided alias breaks naming conventions.
-    """
-    valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice', 'To', '__')
-
-    def name_breaks_conventions(name : str):
-        return 'Idx' in name and not any(name.startswith(valid_start_name) for valid_start_name in valid_start_names)
-
-    # Strip Multi-patch prefix
-    mp_a_name = a_name.removeprefix('MP')
-    # Beginning with verbs is ok as are some specific prefixes
-    return (a_name == mp_a_name and name_breaks_conventions(a_name)) or name_breaks_conventions(mp_a_name)
 
 def search_for_bad_aliases(file):
     """
@@ -417,7 +403,7 @@ def search_for_bad_aliases(file):
             elif val_str.startswith('IdxRange<') and not a_name.startswith('IdxRange'):
                 report_error(STYLE, file, val[0]['linenr'], f"Index type aliases should start with the keyword IdxRange ({a_name})")
 
-     for config in file.configs:
+    for config in file.configs:
         for alias_key in config.type_names:
             a_name = alias_key['str']
             linenr = alias_key['linenr']
@@ -428,17 +414,17 @@ def search_for_bad_aliases(file):
                        "can be multi-D. Please use Grid1D")
                 report_error(STYLE, file, linenr, msg)
             # Beginning with verbs is ok as are some specific prefixes
-            if alias_breaks_naming_conventions(a_name):
-                prefix = 'MP' if a_name.startswith('MP') else ''
-                name = a_name.removeprefix('MP')
-                if 'IdxRange' in name:
+            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice', 'To', '__')
+            if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
+                prefix = 'Multipatch' if 'Multipatch' in a_name else ''
+                name = a_name.replace('Multipatch','')
+                if 'IdxRange' in a_name:
                     expected_name = prefix + 'IdxRange' + name.replace('IdxRange','')
-                elif 'IdxStep' in name:
-                    expected_name = prefix + 'IdxStep' + a_name.replace('IdxStep','')
+                elif 'IdxStep' in a_name:
+                    expected_name = prefix + 'IdxStep' + name.replace('IdxStep','')
                 else:
                     expected_name = prefix + 'Idx' + name.replace('Idx','')
                 report_error(STYLE, file, linenr, f"Type aliases should start with the type keyword ({a_name} -> {expected_name})")
-
 
 def check_struct_names(file):
     """
