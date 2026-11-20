@@ -603,7 +603,7 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
     SplineEvaluatorPatch<8> evaluator8(null_bc, null_bc, null_bc, null_bc);
     SplineEvaluatorPatch<9> evaluator9(null_bc, null_bc, null_bc, null_bc);
 
-    auto evaluators = std::
+    std::tuple evaluators = std::
             tie(evaluator1,
                 evaluator2,
                 evaluator3,

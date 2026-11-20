@@ -307,7 +307,7 @@ public:
 
     /**
      * @brief Get the spline coefficients of the given function. 
-     * The interface derivatives in the given DerivFiedls are computed using the derivative calculators
+     * The interface derivatives in the given DerivFields are computed using the derivative calculators
      * of the class and the builders are called to build the splines. 
      * @param[out] splines A MultipatchField of splines on each patch.
      * @param[in, out] functions_and_derivs A MultipatchField of DerivFields on each patch.
