@@ -16,6 +16,7 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "deriv_details.hpp"`
+* `#include "multipatch_field.hpp"`
 * `#include "multipatch_type.hpp"`
 * `#include "types.hpp"`
 * `#include "utils_patch_locators.hpp"`
