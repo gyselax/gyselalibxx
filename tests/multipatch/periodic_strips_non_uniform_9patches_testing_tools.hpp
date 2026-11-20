@@ -90,19 +90,56 @@ using SplineInterpPointsYg = ddcHelper::NonUniformInterpolationPoints<
         ddc::SplineBuilderClosure::GREVILLE,
         ddc::SplineBuilderClosure::GREVILLE>;
 
-// Operators on the equivalent global spline.
-using GlobalSplineBuilder = ddc::SplineBuilder2D<
-        HostExecSpace,
-        typename HostExecSpace::memory_space,
-        BSplinesXg,
-        BSplinesYg,
-        GridXg,
-        GridYg,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineSolver::LAPACK>;
+
+using MPIdxRange = MultipatchType<
+        IdxRangeOnPatch,
+        Patch1,
+        Patch2,
+        Patch3,
+        Patch4,
+        Patch5,
+        Patch6,
+        Patch7,
+        Patch8,
+        Patch9>;
+
+using MPDerivFieldMem = MultipatchFieldMem<
+        DerivFieldMemOnPatch_host,
+        Patch1,
+        Patch2,
+        Patch3,
+        Patch4,
+        Patch5,
+        Patch6,
+        Patch7,
+        Patch8,
+        Patch9>;
+
+using MPDerivField = MultipatchField<
+        DerivFieldOnPatch_host,
+        Patch1,
+        Patch2,
+        Patch3,
+        Patch4,
+        Patch5,
+        Patch6,
+        Patch7,
+        Patch8,
+        Patch9>;
+
+        // Operators on the equivalent global spline.
+        using GlobalSplineBuilder = ddc::SplineBuilder2D<
+                HostExecSpace,
+                typename HostExecSpace::memory_space,
+                BSplinesXg,
+                BSplinesYg,
+                GridXg,
+                GridYg,
+                ddc::SplineBuilderClosure::PERIODIC,
+                ddc::SplineBuilderClosure::PERIODIC,
+                ddc::SplineBuilderClosure::GREVILLE,
+                ddc::SplineBuilderClosure::GREVILLE,
+                ddc::SplineSolver::LAPACK>;
 
 using GlobalSplineEvaluator = ddc::SplineEvaluator2D<
         HostExecSpace,
@@ -116,36 +153,6 @@ using GlobalSplineEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>,
         ddc::ConstantExtrapolationRule<Yg>>;
 
-template <
-        class P,
-        ddc::SplineBuilderClosure BC1min,
-        ddc::SplineBuilderClosure BC1max,
-        ddc::SplineBuilderClosure BC2min,
-        ddc::SplineBuilderClosure BC2max>
-using LocalSplineBuilder = ddc::SplineBuilder2D<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch<P>,
-        BSplines2OnPatch<P>,
-        Grid1OnPatch<P>,
-        Grid2OnPatch<P>,
-        BC1min,
-        BC1max,
-        BC2min,
-        BC2max,
-        ddc::SplineSolver::LAPACK>;
-
-template <class P>
-using LocalSplineEvaluator = ddc::SplineEvaluatorND<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        ddc::TypeSeq<BSplines1OnPatch<P>, BSplines2OnPatch<P>>,
-        ddc::TypeSeq<Grid1OnPatch<P>, Grid2OnPatch<P>>,
-        ddc::TypeSeq<
-                ddc::NullExtrapolationRule,
-                ddc::NullExtrapolationRule,
-                ddc::NullExtrapolationRule,
-                ddc::NullExtrapolationRule>>;
 
 template <bool is_approximation, class Connectivity, class Grid1D, ddc::SplineBuilderClosure SBC>
 using InterfacesDerivativeCalculatorType = std::conditional_t<
@@ -236,6 +243,7 @@ protected:
     static constexpr ddc::SplineBuilderClosure BcG = ddc::SplineBuilderClosure::GREVILLE;
 
 protected:
+    // Index ranges
     const IdxRange<GridX<1>> idx_range_x1;
     const IdxRange<GridX<2>> idx_range_x2;
     const IdxRange<GridX<3>> idx_range_x3;
@@ -266,12 +274,34 @@ protected:
     const IdxRange<GridX<8>, GridY<8>> idx_range_xy8;
     const IdxRange<GridX<9>, GridY<9>> idx_range_xy9;
 
+    const MPIdxRange idx_ranges;
+
     const IdxRange<GridXg> idx_range_xg;
     const IdxRange<GridYg> idx_range_yg;
     const IdxRange<GridXg, GridYg> idx_range_xy_g;
 
+    // Coordinate transformations
+    std::tuple<
+            CoordTransformGroup<1>,
+            CoordTransformGroup<2>,
+            CoordTransformGroup<3>,
+            CoordTransformGroup<4>,
+            CoordTransformGroup<5>,
+            CoordTransformGroup<6>,
+            CoordTransformGroup<7>,
+            CoordTransformGroup<8>,
+            CoordTransformGroup<9>> const coord_transforms;
+
+    // Global spline operators
+    GlobalSplineBuilder const builder_g;
+    ddc::ConstantExtrapolationRule<Yg> const bc_ymin_g;
+    ddc::ConstantExtrapolationRule<Yg> const bc_ymax_g;
+    ddc::PeriodicExtrapolationRule<Xg> const bc_x_g;
+    GlobalSplineEvaluator const evaluator_g;
+
 public:
     Multipatch9PatchesPeriodicStripsNonUniformTest()
+        // Index ranges
         : idx_range_x1(SplineInterpPointsX<1>::template get_domain<GridX<1>>())
         , idx_range_x2(SplineInterpPointsX<2>::template get_domain<GridX<2>>())
         , idx_range_x3(SplineInterpPointsX<3>::template get_domain<GridX<3>>())
@@ -299,9 +329,36 @@ public:
         , idx_range_xy7(idx_range_x7, idx_range_y7)
         , idx_range_xy8(idx_range_x8, idx_range_y8)
         , idx_range_xy9(idx_range_x9, idx_range_y9)
+        , idx_ranges(
+                  idx_range_xy1,
+                  idx_range_xy2,
+                  idx_range_xy3,
+                  idx_range_xy4,
+                  idx_range_xy5,
+                  idx_range_xy6,
+                  idx_range_xy7,
+                  idx_range_xy8,
+                  idx_range_xy9)
         , idx_range_xg(SplineInterpPointsXg::get_domain<GridXg>())
         , idx_range_yg(SplineInterpPointsYg::get_domain<GridYg>())
         , idx_range_xy_g(idx_range_xg, idx_range_yg)
+        // Coordinate transformations
+        , coord_transforms(
+                  CoordTransformGroup<1>(),
+                  CoordTransformGroup<2>(),
+                  CoordTransformGroup<3>(),
+                  CoordTransformGroup<4>(),
+                  CoordTransformGroup<5>(),
+                  CoordTransformGroup<6>(),
+                  CoordTransformGroup<7>(),
+                  CoordTransformGroup<8>(),
+                  CoordTransformGroup<9>())
+        // Global spline operators
+        , builder_g(idx_range_xy_g)
+        , bc_ymin_g(yg_min)
+        , bc_ymax_g(yg_max)
+        , bc_x_g()
+        , evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g)
     {
     }
 

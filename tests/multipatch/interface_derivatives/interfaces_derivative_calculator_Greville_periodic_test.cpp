@@ -51,7 +51,7 @@
 */
 
 namespace {
-
+    
 template <class is_approximation_literal>
 struct InterfacesDerivativeCalculatorGrevillePeriodicTest
     : public Multipatch9PatchesPeriodicStripsNonUniformTest<is_approximation_literal>
@@ -68,17 +68,6 @@ TYPED_TEST_SUITE(InterfacesDerivativeCalculatorGrevillePeriodicTest, TestTypes);
 
 TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
-    std::tuple coord_transforms {
-            CoordTransformGroup<1>(),
-            CoordTransformGroup<2>(),
-            CoordTransformGroup<3>(),
-            CoordTransformGroup<4>(),
-            CoordTransformGroup<5>(),
-            CoordTransformGroup<6>(),
-            CoordTransformGroup<7>(),
-            CoordTransformGroup<8>(),
-            CoordTransformGroup<9>()};
-
     // Instantiate the derivatives calculators ---------------------------------------------------
     // InterfaceDerivCoeffs for interfaces along y (periodic).
     InterfaceDerivCoeffs<Interface_1_2> const
@@ -153,97 +142,64 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
                     ddc::SplineBuilderClosure::HERMITE,
                     ddc::SplineBuilderClosure::GREVILLE);
 
-    // Collect the index ranges ------------------------------------------------------------------
-    MultipatchType<
-            IdxRangeOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            idx_ranges(
-                    TestFixture::idx_range_xy1,
-                    TestFixture::idx_range_xy2,
-                    TestFixture::idx_range_xy3,
-                    TestFixture::idx_range_xy4,
-                    TestFixture::idx_range_xy5,
-                    TestFixture::idx_range_xy6,
-                    TestFixture::idx_range_xy7,
-                    TestFixture::idx_range_xy8,
-                    TestFixture::idx_range_xy9);
-
     // Instantiate the derivatives calculators ---------------------------------------------------
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<1>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_123(idx_ranges, deriv_coeffs_1_2, deriv_coeffs_2_3, deriv_coeffs_3_1);
+            deriv_calculator_123(
+                    TestFixture::idx_ranges,
+                    deriv_coeffs_1_2,
+                    deriv_coeffs_2_3,
+                    deriv_coeffs_3_1);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<4>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_456(idx_ranges, deriv_coeffs_4_5, deriv_coeffs_5_6, deriv_coeffs_6_4);
+            deriv_calculator_456(
+                    TestFixture::idx_ranges,
+                    deriv_coeffs_4_5,
+                    deriv_coeffs_5_6,
+                    deriv_coeffs_6_4);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridX<7>,
             ddc::SplineBuilderClosure::PERIODIC>
-            deriv_calculator_789(idx_ranges, deriv_coeffs_7_8, deriv_coeffs_8_9, deriv_coeffs_9_7);
+            deriv_calculator_789(
+                    TestFixture::idx_ranges,
+                    deriv_coeffs_7_8,
+                    deriv_coeffs_8_9,
+                    deriv_coeffs_9_7);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridY<1>,
             ddc::SplineBuilderClosure::GREVILLE>
-            deriv_calculator_147(idx_ranges, deriv_coeffs_1_4, deriv_coeffs_4_7);
+            deriv_calculator_147(TestFixture::idx_ranges, deriv_coeffs_1_4, deriv_coeffs_4_7);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridY<2>,
             ddc::SplineBuilderClosure::GREVILLE>
-            deriv_calculator_258(idx_ranges, deriv_coeffs_2_5, deriv_coeffs_5_8);
+            deriv_calculator_258(TestFixture::idx_ranges, deriv_coeffs_2_5, deriv_coeffs_5_8);
 
     InterfacesDerivativeCalculatorType<
             is_approximation,
             Connectivity,
             GridY<3>,
             ddc::SplineBuilderClosure::GREVILLE>
-            deriv_calculator_369(idx_ranges, deriv_coeffs_3_6, deriv_coeffs_6_9);
+            deriv_calculator_369(TestFixture::idx_ranges, deriv_coeffs_3_6, deriv_coeffs_6_9);
 
     // Instantiate DerivField ====================================================================
-    MultipatchFieldMem<
-            DerivFieldMemOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs_alloc(idx_ranges);
-    MultipatchField<
-            DerivFieldOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs(functions_and_derivs_alloc);
+    MPDerivFieldMem functions_and_derivs_alloc(TestFixture::idx_ranges);
+    MPDerivField functions_and_derivs(functions_and_derivs_alloc);
 
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(TestFixture::idx_range_xy_g);
@@ -251,7 +207,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
 
     // Initialise the data =======================================================================
     // --- the function values.
-    initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
+    initialise_all_functions<Xg, Yg>(functions_and_derivs, TestFixture::coord_transforms);
     initialise_2D_function(function_g);
 
     // --- the first derivatives computed from the function values.
@@ -271,20 +227,11 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
     // Build global spline representation ---
-    GlobalSplineBuilder builder_g(TestFixture::idx_range_xy_g);
-
     host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-            builder_g.batched_spline_domain(TestFixture::idx_range_xy_g));
+            TestFixture::builder_g.batched_spline_domain(TestFixture::idx_range_xy_g));
     host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
             = get_field(function_g_coef_alloc);
-
-    builder_g(function_g_coef, get_const_field(function_g));
-
-    // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(TestFixture::yg_min);
-    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(TestFixture::yg_max);
-    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    GlobalSplineEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
+    TestFixture::builder_g(function_g_coef, get_const_field(function_g));
 
     // Check each derivatives ---
     using PatchSeqLowerBound = ddc::TypeSeq<Patch7, Patch8, Patch9>;
@@ -296,28 +243,28 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
 
     check_all_x_derivatives(
             functions_and_derivs,
-            evaluator_g,
+            TestFixture::evaluator_g,
             get_const_field(function_g_coef),
-            coord_transforms,
+            TestFixture::coord_transforms,
             TOL_deriv);
     check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
-            evaluator_g,
+            TestFixture::evaluator_g,
             get_const_field(function_g_coef),
-            coord_transforms,
+            TestFixture::coord_transforms,
             TOL_deriv);
     check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
-            evaluator_g,
+            TestFixture::evaluator_g,
             get_const_field(function_g_coef),
-            coord_transforms,
+            TestFixture::coord_transforms,
             TOL_cross_deriv);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
-            evaluator_g,
+            TestFixture::evaluator_g,
             get_const_field(function_g_coef),
-            coord_transforms,
+            TestFixture::coord_transforms,
             TOL_spline);
 }

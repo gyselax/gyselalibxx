@@ -46,6 +46,38 @@ struct MultipatchSplineBuilder2DTest
 {
 };
 
+template <
+        class P,
+        ddc::SplineBuilderClosure BC1min,
+        ddc::SplineBuilderClosure BC1max,
+        ddc::SplineBuilderClosure BC2min,
+        ddc::SplineBuilderClosure BC2max>
+using LocalSplineBuilder = ddc::SplineBuilder2D<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        BSplines1OnPatch<P>,
+        BSplines2OnPatch<P>,
+        Grid1OnPatch<P>,
+        Grid2OnPatch<P>,
+        BC1min,
+        BC1max,
+        BC2min,
+        BC2max,
+        ddc::SplineSolver::LAPACK>;
+
+template <class P>
+using LocalSplineEvaluator = ddc::SplineEvaluatorND<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        ddc::TypeSeq<BSplines1OnPatch<P>, BSplines2OnPatch<P>>,
+        ddc::TypeSeq<Grid1OnPatch<P>, Grid2OnPatch<P>>,
+        ddc::TypeSeq<
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule>>;
+
+
 template <class P, class CoordTransformType>
 void check_spline(
         std::vector<double>& random_values_x,
@@ -117,19 +149,6 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
     IdxRange<GridX<9>, GridY<9>> const& idx_range_xy9 = this->idx_range_xy9;
 
     IdxRange<GridXg, GridYg> const& idx_range_xy_g = this->idx_range_xy_g;
-    constexpr Coord<Yg> yg_min = this->yg_min;
-    constexpr Coord<Yg> yg_max = this->yg_max;
-
-    std::tuple coord_transforms {
-            CoordTransformGroup<1>(),
-            CoordTransformGroup<2>(),
-            CoordTransformGroup<3>(),
-            CoordTransformGroup<4>(),
-            CoordTransformGroup<5>(),
-            CoordTransformGroup<6>(),
-            CoordTransformGroup<7>(),
-            CoordTransformGroup<8>(),
-            CoordTransformGroup<9>()};
 
     // Instantiate the derivatives calculators ---------------------------------------------------
     constexpr std::size_t nb_chosen_cells = 9;
@@ -172,68 +191,32 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
     InterfaceDerivCoeffs<Interface_6_9> const
             deriv_coeffs_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
 
-    // Collect the index ranges ------------------------------------------------------------------
-    MultipatchType<
-            IdxRangeOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            idx_ranges(
-                    idx_range_xy1,
-                    idx_range_xy2,
-                    idx_range_xy3,
-                    idx_range_xy4,
-                    idx_range_xy5,
-                    idx_range_xy6,
-                    idx_range_xy7,
-                    idx_range_xy8,
-                    idx_range_xy9);
-
     // Instantiate the derivative calculators ----------------------------------------------------
-    InterfacesDerivativeCalculator<Connectivity, GridX<1>>
-            deriv_calculator_123(idx_ranges, deriv_coeffs_1_2, deriv_coeffs_2_3, deriv_coeffs_3_1);
-    InterfacesDerivativeCalculator<Connectivity, GridX<4>>
-            deriv_calculator_456(idx_ranges, deriv_coeffs_4_5, deriv_coeffs_5_6, deriv_coeffs_6_4);
-    InterfacesDerivativeCalculator<Connectivity, GridX<7>>
-            deriv_calculator_789(idx_ranges, deriv_coeffs_7_8, deriv_coeffs_8_9, deriv_coeffs_9_7);
+    InterfacesDerivativeCalculator<Connectivity, GridX<1>> deriv_calculator_123(
+            this->idx_ranges,
+            deriv_coeffs_1_2,
+            deriv_coeffs_2_3,
+            deriv_coeffs_3_1);
+    InterfacesDerivativeCalculator<Connectivity, GridX<4>> deriv_calculator_456(
+            this->idx_ranges,
+            deriv_coeffs_4_5,
+            deriv_coeffs_5_6,
+            deriv_coeffs_6_4);
+    InterfacesDerivativeCalculator<Connectivity, GridX<7>> deriv_calculator_789(
+            this->idx_ranges,
+            deriv_coeffs_7_8,
+            deriv_coeffs_8_9,
+            deriv_coeffs_9_7);
     InterfacesDerivativeCalculator<Connectivity, GridY<1>>
-            deriv_calculator_147(idx_ranges, deriv_coeffs_1_4, deriv_coeffs_4_7);
+            deriv_calculator_147(this->idx_ranges, deriv_coeffs_1_4, deriv_coeffs_4_7);
     InterfacesDerivativeCalculator<Connectivity, GridY<2>>
-            deriv_calculator_258(idx_ranges, deriv_coeffs_2_5, deriv_coeffs_5_8);
+            deriv_calculator_258(this->idx_ranges, deriv_coeffs_2_5, deriv_coeffs_5_8);
     InterfacesDerivativeCalculator<Connectivity, GridY<3>>
-            deriv_calculator_369(idx_ranges, deriv_coeffs_3_6, deriv_coeffs_6_9);
+            deriv_calculator_369(this->idx_ranges, deriv_coeffs_3_6, deriv_coeffs_6_9);
 
     // Instantiate DerivField ====================================================================
-    MultipatchFieldMem<
-            DerivFieldMemOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs_alloc(idx_ranges);
-    MultipatchField<
-            DerivFieldOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs(functions_and_derivs_alloc);
+    MPDerivFieldMem functions_and_derivs_alloc(this->idx_ranges);
+    MPDerivField functions_and_derivs(functions_and_derivs_alloc);
 
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
@@ -241,7 +224,7 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
 
     // Initialise the data =======================================================================
     // --- the function values.
-    initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
+    initialise_all_functions<Xg, Yg>(functions_and_derivs, this->coord_transforms);
     initialise_2D_function(function_g);
 
     constexpr ddc::SplineBuilderClosure SBC_H = ddc::SplineBuilderClosure::HERMITE;
@@ -312,8 +295,7 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
                     InterfacesDerivativeCalculator<Connectivity, GridX<7>>,
                     InterfacesDerivativeCalculator<Connectivity, GridY<1>>,
                     InterfacesDerivativeCalculator<Connectivity, GridY<2>>,
-                    InterfacesDerivativeCalculator<Connectivity, GridY<3>>>,
-            PatchOrdering>
+                    InterfacesDerivativeCalculator<Connectivity, GridY<3>>>>
             builders(
                     builder1,
                     builder2,
@@ -343,7 +325,7 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             Patch7,
             Patch8,
             Patch9>
-            splines_alloc(builders.batched_basis_idx_ranges(idx_ranges));
+            splines_alloc(builders.batched_basis_idx_ranges(this->idx_ranges));
     MultipatchField<
             SplineCoeffOnPatch_2D,
             Patch1,
@@ -362,19 +344,10 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
     // Build global spline representation ---
-    GlobalSplineBuilder builder_g(idx_range_xy_g);
-
     host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> spline_g_alloc(
-            builder_g.batched_spline_domain(idx_range_xy_g));
+            this->builder_g.batched_spline_domain(idx_range_xy_g));
     host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> spline_g = get_field(spline_g_alloc);
-
-    builder_g(spline_g, get_const_field(function_g));
-
-    // Global spline evaluator ---
-    ddc::ConstantExtrapolationRule<Yg> bc_ymin_g(yg_min);
-    ddc::ConstantExtrapolationRule<Yg> bc_ymax_g(yg_max);
-    ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
-    GlobalSplineEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
+    this->builder_g(spline_g, get_const_field(function_g));
 
     // Check
     std::vector<double> random_values_x = {0, 1. / 3, 0.5, M_PI / 4, 1};
@@ -385,7 +358,7 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             splines,
             spline_g,
             evaluators,
-            evaluator_g,
-            coord_transforms,
+            this->evaluator_g,
+            this->coord_transforms,
             1e-6);
 }

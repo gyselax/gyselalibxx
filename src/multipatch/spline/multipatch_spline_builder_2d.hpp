@@ -96,7 +96,7 @@ template <
         typename ValuesOnPatch,
         class DerivListType,
         class DerivativeCalculatorSeq,
-        class PatchesSeq>
+        class PatchesSeq = typename Connectivity::all_patches>
 class MultipatchSplineBuilder2D;
 
 /**
@@ -270,6 +270,8 @@ private:
     using index_type =
             typename ddc::type_seq_element_t<IOp, direction_deriv_seq>::template idx_deriv<
                     derivative_calculator_type<IOp>>;
+
+
 
 private:
     SplineBuilderCollection const m_builders_collection;
