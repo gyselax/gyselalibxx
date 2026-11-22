@@ -591,3 +591,11 @@ private:
         return std::pair(sign_1, sign_2);
     };
 };
+
+template <
+        class Connectivity,
+        class Grid1D,
+        ddc::SplineBuilderClosure LowerBound,
+        ddc::SplineBuilderClosure UpperBound>
+inline constexpr bool enable_deriv_calculator<
+        InterfacesExactDerivativeCalculator<Connectivity, Grid1D, LowerBound, UpperBound>> = true;

@@ -17,6 +17,7 @@
 #include "spline_builder_deriv_field_2d.hpp"
 #include "types.hpp"
 
+
 /**
  * @brief A class to call all the builders of all the patches once.
  *
@@ -245,7 +246,18 @@ class SplineBuilder2DCollection
     /// The type of the internal storage of the SplineBuilders.
     using BuilderTuple = std::tuple<BuilderOnPatch<Patches> const&...>;
 
+public:
+    /// @brief The type of the SplineBuilder2D stored on a given patch.
+    template <class Patch>
+    using builder_type_on_patch = BuilderOnPatch<Patch>;
 
+    /// @brief Type of the multi-patch splines accepted in input.
+    using multipatch_spline_type = MultipatchSplineCoeffs;
+
+    /// @brief Type of the multi-patch DerivField accepted in input.
+    using multipatch_deriv_field_type = MultipatchDerivField;
+
+private:
     BuilderTuple const m_builders;
 
 public:
