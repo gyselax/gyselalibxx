@@ -9,15 +9,23 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "ddc_aliases.hpp"
+#include "interfaces_derivative_calculator.hpp"
+#include "interfaces_exact_derivative_calculator.hpp"
 #include "multipatch_type.hpp"
 #include "spline_builder_2d_collection.hpp"
 #include "types.hpp"
+
+enum class DerivativePrecision { APPROXIMATION, EXACT };
+
 
 /**
  * @brief Tag to indicate to compute a perpendicular derivative with 
  * a derivative calculator.
  */
-template <class Grid1D>
+template <
+        class Grid1D,
+        ddc::SplineBuilderClosure SBC_bound_min = ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure SBC_bound_max = ddc::SplineBuilderClosure::GREVILLE>
 struct DerivPerp
 {
     /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
@@ -25,13 +33,19 @@ struct DerivPerp
     /// @brief Index of the perpendicular derivative.
     template <class Calculator>
     using idx_deriv = typename Calculator::idx_deriv_perp;
+
+    static constexpr ddc::SplineBuilderClosure closure_bound_min = SBC_bound_min;
+    static constexpr ddc::SplineBuilderClosure closure_bound_max = SBC_bound_max;
 };
 
 /**
  * @brief Tag to indicate to compute a cross-derivative with 
  * a derivative calculator.
  */
-template <class Grid1D>
+template <
+        class Grid1D,
+        ddc::SplineBuilderClosure SBC_bound_min = ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure SBC_bound_max = ddc::SplineBuilderClosure::GREVILLE>
 struct CrossDeriv
 {
     /// @brief Grid 1D given to the class indicating the direction of the mesh line along which the derivatives are computed.
@@ -39,6 +53,9 @@ struct CrossDeriv
     /// @brief Index of the cross-derivative.
     template <class Calculator>
     using idx_deriv = typename Calculator::idx_cross_deriv;
+
+    static constexpr ddc::SplineBuilderClosure closure_bound_min = SBC_bound_min;
+    static constexpr ddc::SplineBuilderClosure closure_bound_max = SBC_bound_max;
 };
 
 /**
@@ -49,6 +66,34 @@ struct DerivList
 {
 };
 
+
+namespace multipatch_spline_builder_details {
+
+
+template <DerivativePrecision Precision, class Connectivity, class DirectionDerivSeq>
+struct ToDerivativeCalculatorSeq;
+
+template <DerivativePrecision Precision, class Connectivity, class... DirectionDerivs>
+struct ToDerivativeCalculatorSeq<Precision, Connectivity, ddc::TypeSeq<DirectionDerivs...>>
+{
+    template <class DirectionDeriv>
+    using DerivativeCalculator = std::conditional_t<
+            (Precision == DerivativePrecision::APPROXIMATION),
+            InterfacesDerivativeCalculator<Connectivity, typename DirectionDeriv::grid_direction>,
+            InterfacesExactDerivativeCalculator<
+                    Connectivity,
+                    typename DirectionDeriv::grid_direction,
+                    DirectionDeriv::closure_bound_min,
+                    DirectionDeriv::closure_bound_max>>;
+
+    using type = ddc::TypeSeq<DerivativeCalculator<DirectionDerivs>...>;
+};
+
+template <DerivativePrecision Precision, class Connectivity, class DirectionDerivSeq>
+using derivative_calculator_seq_t =
+        typename ToDerivativeCalculatorSeq<Precision, Connectivity, DirectionDerivSeq>::type;
+
+} // namespace multipatch_spline_builder_details
 
 /**
  * @brief A class to set all the needed interface derivatives and 
@@ -95,7 +140,9 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class DerivListType,
-        class DerivativeCalculatorSeq,
+        DerivativePrecision Precision,
+        class DerivativeCalculatorSeq = multipatch_spline_builder_details::
+                derivative_calculator_seq_t<Precision, Connectivity, Precision>,
         class PatchesSeq = typename Connectivity::all_patches>
 class MultipatchSplineBuilder2D;
 
@@ -144,6 +191,7 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class... DirectionDerivs,
+        DerivativePrecision Precision,
         class... DerivativeCalculators,
         class... Patches>
 class MultipatchSplineBuilder2D<
@@ -162,6 +210,7 @@ class MultipatchSplineBuilder2D<
         Solver,
         ValuesOnPatch,
         DerivList<DirectionDerivs...>,
+        Precision,
         ddc::TypeSeq<DerivativeCalculators...>,
         ddc::TypeSeq<Patches...>>
 {

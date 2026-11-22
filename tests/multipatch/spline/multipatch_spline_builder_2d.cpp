@@ -289,13 +289,15 @@ TEST_F(MultipatchSplineBuilder2DTest, CheckForPeriodicAndGrevilleBC)
             ddc::SplineSolver::LAPACK,
             DConstFieldOnPatch,
             DerivsToCompute,
-            ddc::TypeSeq<
-                    InterfacesDerivativeCalculator<Connectivity, GridX<1>>,
-                    InterfacesDerivativeCalculator<Connectivity, GridX<4>>,
-                    InterfacesDerivativeCalculator<Connectivity, GridX<7>>,
-                    InterfacesDerivativeCalculator<Connectivity, GridY<1>>,
-                    InterfacesDerivativeCalculator<Connectivity, GridY<2>>,
-                    InterfacesDerivativeCalculator<Connectivity, GridY<3>>>>
+            DerivativePrecision::APPROXIMATION,
+            //     ddc::TypeSeq<
+            //             InterfacesDerivativeCalculator<Connectivity, GridX<1>>,
+            //             InterfacesDerivativeCalculator<Connectivity, GridX<4>>,
+            //             InterfacesDerivativeCalculator<Connectivity, GridX<7>>,
+            //             InterfacesDerivativeCalculator<Connectivity, GridY<1>>,
+            //             InterfacesDerivativeCalculator<Connectivity, GridY<2>>,
+            //             InterfacesDerivativeCalculator<Connectivity, GridY<3>>>
+            >
             builders(
                     builder1,
                     builder2,
