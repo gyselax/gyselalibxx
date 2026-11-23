@@ -159,7 +159,7 @@ public:
     template <class PatchType>
     KOKKOS_FUNCTION auto get() const requires(is_patch_v<PatchType>)
     {
-        return std::get<TypeOnPatch<PatchType>>(base_type::m_tuple);
+        return std::get<ddc::type_seq_rank_v<PatchType, PatchOrdering>>(base_type::m_tuple);
     }
 
     /**
@@ -169,8 +169,7 @@ public:
      */
     KOKKOS_FUNCTION discrete_domain_type idx_range() const
     {
-        return discrete_domain_type(
-                get_idx_range(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
+        return discrete_domain_type(get_idx_range(get<Patches>())...);
     }
 
     /**
@@ -180,7 +179,7 @@ public:
      */
     KOKKOS_FUNCTION span_type get_field()
     {
-        return span_type(::get_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
+        return span_type(::get_field(get<Patches>())...);
     }
 
     /**
@@ -190,7 +189,7 @@ public:
      */
     KOKKOS_FUNCTION view_type get_const_field() const
     {
-        return view_type(::get_const_field(std::get<TypeOnPatch<Patches>>(base_type::m_tuple))...);
+        return view_type(::get_const_field(get<Patches>())...);
     }
 
     /**
@@ -235,9 +234,23 @@ inline constexpr bool enable_multipatch_field<
  * @tparam Patches The patches of the objects in the same order of the patches
  *                 that the given objects are defined on.
  */
-template <template <typename P> typename T, class... Patches>
+template <template <typename P> typename T, concepts::Patch... Patches>
 using MultipatchField
         = detail::MultipatchField<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+
+/**
+ * @brief A class to store field objects on patches.
+ *
+ * This alias is equivalent to MultipatchField but takes the patches as a ddc::TypeSeq.
+ * I.e. `MultipatchFieldFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
+ * `MultipatchField<T, Patches...>`.
+ *
+ * @tparam T The type of the fields/derivative fields/vector fields that are stored on the given patches.
+ * @tparam PatchSeq A ddc::TypeSeq of the patches of the objects.
+ */
+template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
+using MultipatchFieldFromSeq =
+        typename detail::MultipatchFromPatchSeq<detail::MultipatchField, T, PatchSeq>::type;
 
 template <class... VectorFieldType, class PatchTypeSeq>
 inline constexpr bool enable_vector_field<detail::MultipatchField<

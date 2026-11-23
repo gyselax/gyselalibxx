@@ -29,7 +29,7 @@ std::vector<Coord<Dim>> build_random_non_uniform_break_points(
         Coord<Dim> min,
         Coord<Dim> max,
         IdxStep<Grid1D> n_cells,
-        double const non_uniformity = 1.)
+        double const non_uniformity = .9)
 {
     static_assert(std::is_same_v<typename Grid1D::continuous_dimension_type, Dim>);
 

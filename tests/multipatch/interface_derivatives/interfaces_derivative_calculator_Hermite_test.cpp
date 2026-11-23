@@ -12,20 +12,21 @@
 #include "derivative_field_mem.hpp"
 #include "interface.hpp"
 #include "interface_derivative_coefficients.hpp"
-#include "interface_derivative_coefficients_collection.hpp"
 #include "interface_derivatives_test_utils.hpp"
 #include "interfaces_derivative_calculator.hpp"
 #include "interfaces_derivative_calculator_test_utils.hpp"
+#include "interfaces_exact_derivative_calculator.hpp"
 #include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field_mem.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "orthogonal_coord_transforms.hpp"
+#include "test_utils.hpp"
 #include "types.hpp"
 #include "view.hpp"
 
 /*
-    Test InterfacesDerivativeCalculator on the following geometry:
+    Test InterfacesDerivativeCalculator or InterfacesExactDerivativeCalculator on the following geometry:
 
     #if defined(REVERSE_PATCH1)
         |  1  |  2  |  3  | 
@@ -160,9 +161,9 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg>>;
 
 // INTERFACES ------------------------------------------------------------------------------------
-using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-using NorthInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+using NorthInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+using NorthInterface2 = Interface<OutsideEdge, NorthEdge<2>, true>;
+using NorthInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
 using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
 using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
@@ -274,7 +275,7 @@ struct RevPatch1
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
     using OutsideInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = ReversePatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -299,7 +300,7 @@ struct RevPatch2
     using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = ReversePatchTransform<2>;
@@ -321,10 +322,10 @@ struct RevPatch2
 struct RevPatch3
 {
     using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-    using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
+    using Interface_2_3 = Interface<EastEdge<2>, EastEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -352,7 +353,7 @@ struct ChangeBound1
     using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 
     using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 
     using CoordTransform1 = ChangeBound1Transform;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -380,7 +381,7 @@ struct ChangeBound3
     using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
 
     using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+    using OutsideInterface3 = Interface<OutsideEdge, NorthEdge<3>, true>;
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
@@ -399,11 +400,17 @@ struct ChangeBound3
             Interface_2_3>;
 };
 
+template <class T>
+struct InterfacesDerivativeCalculatorHermiteFixture;
 
-template <class PatchLayout_>
-struct InterfacesDerivativeCalculatorHermiteFixture : public ::testing::Test
+template <class PatchLayout_, bool is_approximation_>
+struct InterfacesDerivativeCalculatorHermiteFixture<
+        std::tuple<PatchLayout_, std::integral_constant<bool, is_approximation_>>>
+    : public ::testing::Test
 {
     static constexpr int ncells_per_patch = 5;
+
+    static constexpr bool is_approximation = is_approximation_;
 
     // global ------------------------------------
     static constexpr Coord<Xg> xg_min = Coord<Xg>(0.0);
@@ -429,6 +436,22 @@ struct InterfacesDerivativeCalculatorHermiteFixture : public ::testing::Test
     const IdxRange<GridXg, GridYg> idx_range_xy_g;
 
     using PatchLayout = PatchLayout_;
+
+    using Grid1AlongXg = find_grid_t<
+            ddc::type_seq_element_t<
+                    0,
+                    ddc::to_type_seq_t<
+                            typename PatchLayout::CoordTransform1::XTransform::CoordResult>>,
+            AllGrids>;
+
+    using InterfacesDerivativeCalculatorType = std::conditional_t<
+            is_approximation,
+            InterfacesDerivativeCalculator<typename PatchLayout::Connectivity, Grid1AlongXg>,
+            InterfacesExactDerivativeCalculator<
+                    typename PatchLayout::Connectivity,
+                    Grid1AlongXg,
+                    ddc::SplineBuilderClosure::HERMITE,
+                    ddc::SplineBuilderClosure::HERMITE>>;
 
     typename PatchLayout::CoordTransform1 coord_transform_1;
     typename PatchLayout::CoordTransform2 coord_transform_2;
@@ -570,7 +593,9 @@ public:
     }
 };
 
-using TestTypes = ::testing::Types<RevPatch1, RevPatch2, RevPatch3, ChangeBound1, ChangeBound3>;
+using PatchLayouts = std::tuple<RevPatch1, RevPatch2, RevPatch3, ChangeBound1, ChangeBound3>;
+using is_approximation = std::tuple<std::true_type, std::false_type>;
+using TestTypes = tuple_to_types_t<cartesian_product_t<PatchLayouts, is_approximation>>;
 TYPED_TEST_SUITE(InterfacesDerivativeCalculatorHermiteFixture, TestTypes);
 } // end namespace
 
@@ -593,30 +618,14 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
     InterfaceDerivCoeffs<Interface_2_3> const
             deriv_coeffs_2_3(this->idx_range_xy2, this->idx_range_xy3);
 
-    // Collect the derivative calculators --------------------------------------------------------
-    // We do not follow the physical order to test the operator.
-    InterfaceDerivCoeffsCollection deriv_coeffs_collect(deriv_coeffs_2_3, deriv_coeffs_1_2);
-
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
             idx_ranges(this->idx_range_xy1, this->idx_range_xy2, this->idx_range_xy3);
 
-    using Connectivity = typename PatchLayout::Connectivity;
-
-    // Instantiate the matrix calculators --------------------------------------------------------
-    using Grid1AlongXg = find_grid_t<
-            ddc::type_seq_element_t<
-                    0,
-                    ddc::to_type_seq_t<
-                            typename PatchLayout::CoordTransform1::XTransform::CoordResult>>,
-            AllGrids>;
-
-    InterfacesDerivativeCalculator<
-            Connectivity,
-            Grid1AlongXg,
-            ddc::TypeSeq<Patch1, Patch2, Patch3>,
-            InterfaceDerivCoeffsCollection<Interface_2_3, Interface_1_2>>
-            matrix(idx_ranges, deriv_coeffs_collect);
+    // Instantiate the derivative calculators ----------------------------------------------------
+    // We do not follow the physical order of the interfaces to test the operator.
+    typename TestFixture::InterfacesDerivativeCalculatorType
+            deriv_calculator(idx_ranges, deriv_coeffs_2_3, deriv_coeffs_1_2);
 
     // Instantiate DerivField ====================================================================
     MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
@@ -772,18 +781,26 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             coord_transforms);
 
     // --- the first derivatives (on inner interfaces) from the function values.
-    matrix.solve_deriv(functions_and_derivs);
+    using IdxDerivPerp = typename TestFixture::InterfacesDerivativeCalculatorType::idx_deriv_perp;
+    deriv_calculator(IdxDerivPerp(1), functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
     /*
         Here, it is not needed to compute the cross-derivatives because
         they are given by the boundary conditions. However, we want to 
-        check that the matrix computes correctly the values. 
+        check that deriv_calculator computes correctly the values. 
     */
-    matrix.solve_cross_deriv(functions_and_derivs);
+    using IdxCrossDeriv = typename TestFixture::InterfacesDerivativeCalculatorType::idx_cross_deriv;
+    deriv_calculator(IdxCrossDeriv(1, 1), functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::TypeSeq<>;
+
+    bool is_approximation = TestFixture::is_approximation;
+
+    const double TOL_deriv = is_approximation ? 5e-2 : 1e-11;
+    const double TOL_cross_deriv = is_approximation ? 5e-2 : 1e-10;
+    const double TOL_spline = is_approximation ? 1e-6 : 1e-12;
 
     // Check each derivatives ---
     check_all_x_derivatives(
@@ -791,19 +808,19 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            5e-2);
+            TOL_deriv);
     check_all_y_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            5e-2);
+            TOL_deriv);
     check_all_xy_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            5e-2);
+            TOL_cross_deriv);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<EmptyPatchSeq, EmptyPatchSeq>(
@@ -811,5 +828,5 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef,
             coord_transforms,
-            1e-6);
+            TOL_spline);
 }

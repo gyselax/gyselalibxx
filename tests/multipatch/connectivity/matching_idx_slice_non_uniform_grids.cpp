@@ -197,9 +197,9 @@ TEST_F(MatchingIdxSliceNonUniformGridTest, OrderOfEdgeDoesntMatter)
     using SouthEdge1 = Edge<Patch1, GridY<1>, FRONT>;
     using NorthEdge2 = Edge<Patch2, GridY<2>, BACK>;
 
-    using Interface_12 = Interface<NorthEdge2, SouthEdge1, true>;
+    using Interface_12 = Interface<SouthEdge1, NorthEdge2, true>;
 
-    MatchingIdxSlice<Interface_12> idx_matching(idx_range_2, idx_range_1);
+    MatchingIdxSlice<Interface_12> idx_matching(idx_range_1, idx_range_2);
 
     // Get the conforming index ranges.
     IdxRangeSlice<GridX<1>> conforming_idx_range_x1 = idx_matching.get<GridX<1>>();
