@@ -650,6 +650,10 @@ public:
 
     ~MultipatchFieldMem() noexcept = default;
 
+    MultipatchFieldMem(MultipatchFieldMem&amp;&amp;) = default;
+
+    MultipatchFieldMem&amp; operator=(MultipatchFieldMem&amp;&amp;) = default;
+
     template &lt;class Patch&gt;
     typename TypeOnPatch&lt;Patch&gt;::view_type get() const
     {

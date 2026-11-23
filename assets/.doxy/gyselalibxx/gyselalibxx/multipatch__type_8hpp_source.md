@@ -75,6 +75,14 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchType() noexcept = default;
 
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType(MultipatchType const&) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType(MultipatchType&&) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType& operator=(MultipatchType const&) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType& operator=(MultipatchType&&) = default;
+
     template <concepts::Patch Patch>
     KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
             requires(!has_data_access_methods_v<TypeOnPatch<Patch>>)

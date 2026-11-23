@@ -80,6 +80,10 @@ public:
 
     ~MultipatchFieldMem() noexcept = default;
 
+    MultipatchFieldMem(MultipatchFieldMem&&) = default;
+
+    MultipatchFieldMem& operator=(MultipatchFieldMem&&) = default;
+
     template <class Patch>
     typename TypeOnPatch<Patch>::view_type get() const
     {
