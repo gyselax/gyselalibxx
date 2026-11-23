@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a `concepts::Edge` concept.
 - Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
+- Add copy operators for `MultipatchType` and `MultipatchField`.
 
 ### Fixed
 

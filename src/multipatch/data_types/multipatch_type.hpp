@@ -118,6 +118,14 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION ~MultipatchType() noexcept = default;
 
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType(MultipatchType const&) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType(MultipatchType&&) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType& operator=(MultipatchType const&) = default;
+
+    KOKKOS_DEFAULTED_FUNCTION MultipatchType& operator=(MultipatchType&&) = default;
+
     /**
      * Retrieve an object from the patch that it is defined on.
      *
