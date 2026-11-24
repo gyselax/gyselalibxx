@@ -17,6 +17,15 @@
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
+template <class Patch>
+struct LagBasis1 : NonUniformLagrangeBasis<typename Patch::Dim1, 3>
+{
+};
+template <class Patch>
+struct LagBasis2 : NonUniformLagrangeBasis<typename Patch::Dim2, 3>
+{
+};
+
 
 namespace {
 using namespace non_periodic_non_uniform_2d_2patches;
@@ -47,15 +56,6 @@ using SplineBuilderCollectionXY = InterpolationBuilder2DCollection<
         ddc::TypeSeq<SplineXYBuilder<1, BC>, SplineXYBuilder<2, BC>>>;
 
 // Non-spline builders
-template <class Patch>
-struct LagBasis1 : NonUniformLagrangeBasis<typename Patch::Dim1, 3>
-{
-};
-template <class Patch>
-struct LagBasis2 : NonUniformLagrangeBasis<typename Patch::Dim2, 3>
-{
-};
-
 template <class Patch>
 using IdentityXYBuilder = NDIdentityInterpolationBuilder<
         Kokkos::DefaultExecutionSpace,
