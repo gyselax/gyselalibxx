@@ -155,13 +155,13 @@ public:
     /// @tparam Patch Patch type.
     template <class Patch>
     using basis_type1 = ddc::
-            type_seq_element_t<0, ddc::to_type_seq_t<typename Traits<Patch>::coeff_idx_range_type>>;
+            type_seq_element_t<0, ddc::to_type_seq_t<typename Traits<Patch>::basis_idx_range_type>>;
 
     /// @brief The discrete dimension representing the basis along second dimension.
     /// @tparam Patch Patch type.
     template <class Patch>
     using basis_type2 = ddc::
-            type_seq_element_t<1, ddc::to_type_seq_t<typename Traits<Patch>::coeff_idx_range_type>>;
+            type_seq_element_t<1, ddc::to_type_seq_t<typename Traits<Patch>::basis_idx_range_type>>;
 
 
     /// @brief The type of the domain for the 1D evaluation mesh along first dimension used by this class.

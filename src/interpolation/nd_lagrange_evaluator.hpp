@@ -111,6 +111,10 @@ public:
     /// @brief The type of the ND index range on which the Lagrange coefficients are defined.
     using coeff_idx_range_type = IdxRange<HeadCoeffGrid, typename Evaluators1D::coeff_grid_type...>;
 
+    /// @brief The type of the ND index range of the Lagrange bases.
+    using basis_idx_range_type
+            = IdxRange<HeadBasis, typename Evaluators1D::lagrange_basis_type...>;
+
     /**
      * @brief The type of the ND index range on which the Lagrange coefficients are defined
      * plus any batch dimensions.

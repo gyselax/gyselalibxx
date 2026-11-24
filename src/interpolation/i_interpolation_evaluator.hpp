@@ -44,6 +44,7 @@ struct ToDerivIdx<Idx<Grids...>>
  *   - evaluation_idx_range_type
  *   - coord_type
  *   - coeff_idx_range_type
+ *   - basis_idx_range_type
  *   Static functions
  *   - rank()
  *   Type calculators
@@ -67,6 +68,10 @@ struct InterpolationEvaluatorTraits
 
     /// @brief The type of the ND index range on which the interpolation coefficients are defined.
     using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;
+
+    /// @brief The type of the ND index range of the basis (e.g. B-splines, Lagrange basis)
+    /// used to define the interpolation.
+    using basis_idx_range_type = typename Evaluator::basis_idx_range_type;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -142,6 +147,9 @@ public:
     using coeff_idx_range_type
             = decltype(make_coeff_idx_range_type(std::make_index_sequence<sizeof...(BSplines)>()));
 
+    /// @brief The type of the ND index range of the B-splines used to define the interpolation.
+    using basis_idx_range_type = IdxRange<BSplines...>;
+
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
     {
@@ -187,6 +195,7 @@ concept InterpolationEvaluator = requires
     typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coord_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coeff_idx_range_type;
+    typename InterpolationEvaluatorTraits<Evaluator>::basis_idx_range_type;
 }
 &&requires()
 {
