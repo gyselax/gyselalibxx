@@ -732,7 +732,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, HostEvaluateOnSingleCoord)
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<HostExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1_host, evaluator_2_host);
+            evaluators(evaluator_1_host, evaluator_2_host, patch_locator, extrapolation_rule);
 
     // Compare the evaluated functions with the expected functions.
     // Evaluation points
@@ -796,7 +796,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DeviceEvaluateOnSingleCoord)
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Compare the evaluated functions with the expected functions.
     // Evaluation points
@@ -885,7 +885,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Evaluate the functions at the evaluation points.
     evaluators(eval_functions, eval_points, splines);
@@ -936,7 +936,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, HostDerivativesOnSingleCoord)
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<HostExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1_host, evaluator_2_host);
+            evaluators(evaluator_1_host, evaluator_2_host, patch_locator, extrapolation_rule);
 
     // Compare the evaluated functions with the expected functions.
     // Evaluation points
@@ -989,7 +989,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DeviceDerivativesOnSingleCoord)
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Compare the evaluated functions with the expected functions.
     // Evaluation points
@@ -1035,7 +1035,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnSingleCoordDeathTest
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Evaluation points
     typename Patch1::Coord12 const eval_coord_P1_outside(2.5, 0.0);
@@ -1149,7 +1149,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnCoordField)
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Derivative orders (arbitrary between 1 and 2)
     Idx<ddc::Deriv<R>> d_r(1);
@@ -1270,7 +1270,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, HostIntegrateOnCoordField)
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<HostExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1_host, evaluator_2_host);
+            evaluators(evaluator_1_host, evaluator_2_host, patch_locator, extrapolation_rule);
 
     // Evaluate the functions at the evaluation points.
     Kokkos::View<double[2], HostExecSpace> eval_integrals("eval_integrals", 2);
@@ -1332,7 +1332,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateDerivFieldOnCoordField)
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Evaluate the functions at the evaluation points.
     evaluators(eval_functions_and_derivs, eval_points, splines);
@@ -1427,7 +1427,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesDerivFieldOnCoordField
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Derivative orders.
     Idx<ddc::Deriv<R>> d_r(1);
@@ -1501,7 +1501,7 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnSingleCoord)
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     NullExtrapolationRule const extrapolation_rule;
     LagrangeEvaluatorCollection const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     std::array<Coord<R, Theta>, 5> const eval_coords_array {
             Coord<R, Theta>(0.5, 0.0),
@@ -1551,7 +1551,7 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnCoordField)
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     NullExtrapolationRule const extrapolation_rule;
     LagrangeEvaluatorCollection const
-            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Values
     check_lagrange_on_coord_field(Idx<>(), evaluators, evaluator_1, evaluator_2, eval_points, coeffs);

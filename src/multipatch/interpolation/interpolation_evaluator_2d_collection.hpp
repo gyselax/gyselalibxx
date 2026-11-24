@@ -315,15 +315,15 @@ public:
      *
      * @warning The evaluators have to be sorted in the same order as the patches.
      *
+     * @param evaluators The interpolation evaluators for each patch.
      * @param patch_locator An operator to locate a coordinate. The mapping stored in this class
      *      has to be invertible.
      * @param extrapolation_rule The extrapolation rules.
-     * @param evaluators The interpolation evaluators for each patch.
      */
     InterpolationEvaluator2DCollection(
+            Evaluators const&... evaluators,
             PatchLocator const& patch_locator,
-            ExtrapolationRule const& extrapolation_rule,
-            Evaluators const&... evaluators)
+            ExtrapolationRule const& extrapolation_rule)
         : m_patch_locator(patch_locator)
         , m_extrapolation_rule(extrapolation_rule)
         , m_evaluators(evaluators...)
