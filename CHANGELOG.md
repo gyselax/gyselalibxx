@@ -94,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
 - Rename `MultipatchSplineEvaluator2D` to `InterpolationEvaluator2DCollection` and move it to `src/multipatch/interpolation/`.
 - `InterpolationEvaluator2DCollection` is no longer templated on the values type (the type of the values is deduced in each method).
+- `InterpolationEvaluator2DCollection` accepts any 2D interpolation evaluator (see `concepts::InterpolationEvaluator`) and is now templated on a `ddc::TypeSeq` of the patches, a `ddc::TypeSeq` of the evaluators, the patch locator and the extrapolation rule. The evaluators are passed to the constructor.
 
 ### Deprecated
 
