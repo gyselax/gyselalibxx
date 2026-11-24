@@ -15,6 +15,7 @@ PUBLIC
         GTest::gmock
 
         gyselalibxx::multipatch_geometries
+        gyselalibxx::multipatch_interpolation
         gyselalibxx::multipatch_spline
         gyselalibxx::utils
 )

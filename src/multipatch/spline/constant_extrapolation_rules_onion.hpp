@@ -13,7 +13,7 @@
 
 /**
  * @brief Define constant extrapolation rule for onion shape geometries. 
- * Struct useful for the MultipatchSplineEvaluator types.  
+ * Struct useful for the InterpolationEvaluator2DCollection types.
  * @tparam PatchLocator A patch locator specialised for onion shape geometries. 
  */
 template <class PatchLocator>

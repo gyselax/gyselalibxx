@@ -6,10 +6,10 @@
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
 #include "constant_extrapolation_rules_onion.hpp"
+#include "interpolation_evaluator_2d_collection.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
-#include "multipatch_spline_evaluator_2d.hpp"
 #include "multipatch_type.hpp"
 #include "onion_patch_locator.hpp"
 #include "physical_geometry.hpp"
@@ -18,7 +18,7 @@
 
 
 namespace {
-using DeviceMultipatchSplineRThetaEvaluator = MultipatchSplineEvaluator2D<
+using DeviceMultipatchSplineRThetaEvaluator = InterpolationEvaluator2DCollection<
         DeviceExecSpace,
         typename DeviceExecSpace::memory_space,
         BSplines1OnPatch,
@@ -31,7 +31,7 @@ using DeviceMultipatchSplineRThetaEvaluator = MultipatchSplineEvaluator2D<
         Patch1,
         Patch2>;
 
-using HostMultipatchSplineRThetaEvaluator = MultipatchSplineEvaluator2D<
+using HostMultipatchSplineRThetaEvaluator = InterpolationEvaluator2DCollection<
         HostExecSpace,
         typename HostExecSpace::memory_space,
         BSplines1OnPatch,
@@ -51,7 +51,7 @@ using MultipatchSplineRThetaEvaluator = std::conditional_t<
         HostMultipatchSplineRThetaEvaluator>;
 
 
-using MultipatchSplineEvaluatorDerivField = MultipatchSplineEvaluator2D<
+using MultipatchSplineEvaluatorDerivField = InterpolationEvaluator2DCollection<
         DeviceExecSpace,
         typename DeviceExecSpace::memory_space,
         BSplines1OnPatch,
@@ -64,7 +64,7 @@ using MultipatchSplineEvaluatorDerivField = MultipatchSplineEvaluator2D<
         Patch1,
         Patch2>;
 
-class MultipatchSplineEvaluatorTest : public MultipatchSplineOnionShapeTest
+class InterpolationEvaluator2DCollectionTest : public MultipatchSplineOnionShapeTest
 {
 protected:
     // Index ranges
@@ -102,7 +102,7 @@ protected:
     PhysicalToLogicalMapping const to_logical_mapping;
 
 public:
-    MultipatchSplineEvaluatorTest()
+    InterpolationEvaluator2DCollectionTest()
         // Idx ranges
         : idx_range_r1(SplineInterpPointsR<1>::get_domain<GridR<1>>())
         , idx_range_theta1(SplineInterpPointsTheta<1>::get_domain<GridTheta<1>>())
@@ -160,7 +160,7 @@ void set_eval_points_2D(
 }
 
 // Checking functions ----------------------------------------------------------------------------
-// One function per method of MultipatchSplineEvaluator tested.
+// One function per method of InterpolationEvaluator2DCollection tested.
 // Test operator() ...............................................................................
 void test_operator_assignment(
         MultipatchSplineRThetaEvaluator<DeviceExecSpace> const& evaluators,
@@ -468,9 +468,9 @@ void check_cross_deriv_match(
 /* -----------------------------------------------------------------------------------------------
     Test operator() for a single coordinate on host.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, HostEvaluateOnSingleCoord)
+TEST_F(InterpolationEvaluator2DCollectionTest, HostEvaluateOnSingleCoord)
 {
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<HostExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> extrapolation_rule(r1_min, r2_max);
@@ -531,9 +531,9 @@ TEST_F(MultipatchSplineEvaluatorTest, HostEvaluateOnSingleCoord)
 /* -----------------------------------------------------------------------------------------------
     Test operator() for a single coordinate on device.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, DeviceEvaluateOnSingleCoord)
+TEST_F(InterpolationEvaluator2DCollectionTest, DeviceEvaluateOnSingleCoord)
 {
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
@@ -585,7 +585,7 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceEvaluateOnSingleCoord)
 /* -----------------------------------------------------------------------------------------------
     Test operator() for fields of coordinates called from host but stored on device.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
+TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
 {
     // Evaluation points
     // --- patch 1
@@ -622,7 +622,7 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
             eval_functions(eval_function_1, eval_function_2);
 
 
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
@@ -672,9 +672,9 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 /* -----------------------------------------------------------------------------------------------
     Test deriv() for a single coordinate on host.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, HostDerivativesOnSingleCoord)
+TEST_F(InterpolationEvaluator2DCollectionTest, HostDerivativesOnSingleCoord)
 {
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<HostExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> extrapolation_rule(r1_min, r2_max);
@@ -724,9 +724,9 @@ TEST_F(MultipatchSplineEvaluatorTest, HostDerivativesOnSingleCoord)
 /* -----------------------------------------------------------------------------------------------
     Test deriv for a single coordinate on device.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
+TEST_F(InterpolationEvaluator2DCollectionTest, DeviceDerivativesOnSingleCoord)
 {
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
@@ -770,9 +770,9 @@ TEST_F(MultipatchSplineEvaluatorTest, DeviceDerivativesOnSingleCoord)
     Test deriv() for single coordinates outside of the domain. The operators are supposed to
     return an error.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnSingleCoordDeathTest)
+TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnSingleCoordDeathTest)
 {
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
@@ -831,7 +831,7 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnSingleCoordDeathTest)
 /* -----------------------------------------------------------------------------------------------
     Test deriv() for fields of coordinates called from host and stored on device.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
+TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnCoordField)
 {
     // Evaluation points
     // --- patch 1
@@ -886,7 +886,7 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
             eval_derivs_12(eval_derivs_12_patch_1, eval_derivs_12_patch_2);
 
 
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
@@ -1000,7 +1000,7 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
 /* -----------------------------------------------------------------------------------------------
     Test integrate() on host.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
+TEST_F(InterpolationEvaluator2DCollectionTest, HostIntegrateOnCoordField)
 {
     auto function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
     auto function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
@@ -1008,7 +1008,7 @@ TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
             get_const_field(function_1_coef_host),
             get_const_field(function_2_coef_host));
 
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<HostExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>> extrapolation_rule(r1_min, r2_max);
@@ -1037,7 +1037,7 @@ TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
 /* -----------------------------------------------------------------------------------------------
     Test operator() for DerivField and fields of coordinates called from host but stored on device.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
+TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateDerivFieldOnCoordField)
 {
     // Evaluation points
     // --- patch 1
@@ -1069,7 +1069,7 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
     MultipatchField<DerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
             eval_functions_and_derivs_alloc);
 
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
@@ -1135,7 +1135,7 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
 /* -----------------------------------------------------------------------------------------------
     Test deriv() for DerivField and fields of coordinates called from host and stored on device.
     --------------------------------------------------------------------------------------------*/
-TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
+TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesDerivFieldOnCoordField)
 {
     // Evaluation points
     // --- patch 1
@@ -1163,7 +1163,7 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
     MultipatchField<DerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
             eval_functions_and_derivs_alloc);
 
-    // Definition of MultipatchSplineEvaluator2D
+    // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>

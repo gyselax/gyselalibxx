@@ -67,7 +67,7 @@ template <
         typename ValuesOnPatch,
         class PatchLocator,
         class... Patches>
-class MultipatchSplineEvaluator2D
+class InterpolationEvaluator2DCollection
 {
 public:
     /// @brief The type of the first evaluation continuous dimension used by this class.
@@ -227,7 +227,7 @@ private:
     static_assert(
             ((std::is_same_v<typename ValuesOnPatch<Patches>::memory_space, memory_space>)&&...),
             "Template ValuesOnPatch<Patch> need to be defined on the memory space than the"
-            "MultipatchSplineEvaluator2D class.");
+            "InterpolationEvaluator2DCollection class.");
 
     static_assert(
             is_onion_patch_locator_v<PatchLocator>,
@@ -241,16 +241,16 @@ private:
 
 
 public:
-    ~MultipatchSplineEvaluator2D() = default;
+    ~InterpolationEvaluator2DCollection() = default;
 
     /**
-     * @brief Instantiate a MultipatchSplineEvaluator2D. 
+     * @brief Instantiate a InterpolationEvaluator2DCollection.
      * 
      * @param patch_locator An operator to locate a coordinate. The mapping stored in this class 
      *      has to be invertible. 
      * @param extrapolation_rule The extrapolation rules.
      */
-    MultipatchSplineEvaluator2D(
+    InterpolationEvaluator2DCollection(
             PatchLocator const& patch_locator,
             ExtrapolationRule const& extrapolation_rule)
         : m_patch_locator(patch_locator)
@@ -267,7 +267,7 @@ public:
      * They can be obtained via various methods, such as using a SplineBuilder2D or InterpolationBuilder2DCollection.
      * The coordinate is defined on one patch. But it can be physically located on another patch. 
      * 
-     * @anchor MultipatchSplineEvaluatorOperator
+     * @anchor InterpolationEvaluator2DCollectionOperator
      * 
      * @tparam StoringPatch Patch type where the given coordinate is stored. It does not mean that 
      *      the coordinate is physically located on the patch. 
@@ -287,7 +287,7 @@ public:
     /**
      * @brief Evaluate 2D splines (described by their spline coefficients) on meshes.
      * 
-     * See @ref MultipatchSplineEvaluatorOperator. 
+     * See @ref InterpolationEvaluator2DCollectionOperator.
      * 
      * @param[out] patches_values A MultipatchType of DField or DerivField to store the values of the splines 
      *          at the given coordinates. 
@@ -313,7 +313,7 @@ public:
      * @brief Differentiate 2D splines (described by their spline coefficients) at a given coordinate 
      *  along a specified dimension of interest.
      *
-     * See @ref MultipatchSplineEvaluatorOperator. 
+     * See @ref InterpolationEvaluator2DCollectionOperator.
      * 
      * @warning The derivative cannot be computed outside of the domain. 
      *
@@ -351,7 +351,7 @@ public:
      * @brief Differentiate 2D splines (described by their spline coefficients) on a meshes
      * along first dimension of interest.
      *
-     * See @ref MultipatchSplineEvaluatorOperator. 
+     * See @ref InterpolationEvaluator2DCollectionOperator.
      * 
      * @warning The derivatives cannot be computed outside of the domain. 
      *
@@ -396,7 +396,7 @@ public:
     // Integrate operator ------------------------------------------------------------------------
     /** @brief Integration of splines (described by their spline coefficients).
      *
-     * See @ref MultipatchSplineEvaluatorOperator.
+     * See @ref InterpolationEvaluator2DCollectionOperator.
      *
      * @param[out] integrals An Kokkos::View on host containing the integrals of each spline on each patch. 
      * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
@@ -574,11 +574,11 @@ public:
         using IdxBS12 = typename spline_idx_range_type<Patch>::discrete_element_type;
 
         DFieldMem<IdxRange<bsplines_1>, memory_space> values1_alloc(
-                "values1 (MultipatchSplineEvaluator2D::apply_integrate)",
+                "values1 (InterpolationEvaluator2DCollection::apply_integrate)",
                 get_idx_range<bsplines_1>(spline_coef));
         DField<IdxRange<bsplines_1>, memory_space> values1 = get_field(values1_alloc);
         DFieldMem<IdxRange<bsplines_2>, memory_space> values2_alloc(
-                "values2 (MultipatchSplineEvaluator2D::apply_integrate)",
+                "values2 (InterpolationEvaluator2DCollection::apply_integrate)",
                 get_idx_range<bsplines_2>(spline_coef));
         DField<IdxRange<bsplines_2>, memory_space> values2 = get_field(values2_alloc);
         ddc::integrals(exec_space(), values1);

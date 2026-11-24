@@ -65,3 +65,4 @@ builder(coeffs, values);
 
 - `interpolation_builder_2d_collection.hpp`: Define the `InterpolationBuilder2DCollection` operator to apply 2D interpolation builders on every patch.
 - `interpolation_builder_collection.hpp`: Define the `InterpolationBuilderCollection` operator to apply 1D interpolation builders on every patch.
+- `interpolation_evaluator_2d_collection.hpp`: Define the `InterpolationEvaluator2DCollection` operator to apply 2D interpolation evaluators on every patch.
