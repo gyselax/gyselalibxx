@@ -26,7 +26,6 @@ using DeviceMultipatchSplineRThetaEvaluator = InterpolationEvaluator2DCollection
         Grid1OnPatch,
         Grid2OnPatch,
         ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>,
-        DFieldOnPatch,
         PatchLocator<DeviceExecSpace>,
         Patch1,
         Patch2>;
@@ -39,7 +38,6 @@ using HostMultipatchSplineRThetaEvaluator = InterpolationEvaluator2DCollection<
         Grid1OnPatch,
         Grid2OnPatch,
         ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>>,
-        DFieldOnPatch_host,
         PatchLocator<HostExecSpace>,
         Patch1,
         Patch2>;
@@ -49,20 +47,6 @@ using MultipatchSplineRThetaEvaluator = std::conditional_t<
         std::is_same_v<ExecSpace, DeviceExecSpace>,
         DeviceMultipatchSplineRThetaEvaluator,
         HostMultipatchSplineRThetaEvaluator>;
-
-
-using MultipatchSplineEvaluatorDerivField = InterpolationEvaluator2DCollection<
-        DeviceExecSpace,
-        typename DeviceExecSpace::memory_space,
-        BSplines1OnPatch,
-        BSplines2OnPatch,
-        Grid1OnPatch,
-        Grid2OnPatch,
-        ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>,
-        DerivFieldOnPatch,
-        PatchLocator<DeviceExecSpace>,
-        Patch1,
-        Patch2>;
 
 class InterpolationEvaluator2DCollectionTest : public MultipatchSplineOnionShapeTest
 {
@@ -1074,7 +1058,8 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateDerivFieldOnCoordField)
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
-    MultipatchSplineEvaluatorDerivField const evaluators(patch_locator, extrapolation_rule);
+    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
+            evaluators(patch_locator, extrapolation_rule);
 
     // Evaluate the functions at the evaluation points.
     evaluators(eval_functions_and_derivs, eval_points, splines);
@@ -1168,7 +1153,8 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesDerivFieldOnCoordField
             patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
     ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
             extrapolation_rule(r1_min, r2_max);
-    MultipatchSplineEvaluatorDerivField const evaluators(patch_locator, extrapolation_rule);
+    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
+            evaluators(patch_locator, extrapolation_rule);
 
     // Derivative orders.
     Idx<ddc::Deriv<R>> d_r(1);

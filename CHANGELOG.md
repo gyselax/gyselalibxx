@@ -93,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Edges in an `Interface` must be ordered by the associated `Patch::id`.
 - Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
 - Rename `MultipatchSplineEvaluator2D` to `InterpolationEvaluator2DCollection` and move it to `src/multipatch/interpolation/`.
+- `InterpolationEvaluator2DCollection` is no longer templated on the values type (the type of the values is deduced in each method).
 
 ### Deprecated
 

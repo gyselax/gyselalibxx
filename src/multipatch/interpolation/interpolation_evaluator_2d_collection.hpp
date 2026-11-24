@@ -46,8 +46,7 @@
  *          of the splines are found template on the Patch.
  * @tparam Grid2OnPatch A type alias which provides the second Grid type along which the interpolation points 
  *          of the splines are found template on the Patch.
- * @tparam ExtrapolationRule The extrapolation rule type for outside of the global domain. 
- * @tparam ValuesOnPatch A Field or DerivField type storing the evaluated values of the splines. Template on the Patch. 
+ * @tparam ExtrapolationRule The extrapolation rule type for outside of the global domain.
  * @tparam PatchLocator A operator that finds the patch where a given coordinate is physically located. 
  * @tparam Patches A variadic template of all the patches. 
  */
@@ -63,8 +62,6 @@ template <
         template <typename P>
         typename Grid2OnPatch,
         class ExtrapolationRule,
-        template <typename P>
-        typename ValuesOnPatch,
         class PatchLocator,
         class... Patches>
 class InterpolationEvaluator2DCollection
@@ -119,26 +116,27 @@ public:
             evaluation_discrete_dimension_type2<Patch>>;
 
     /// @brief The type of the whole discrete domain (dimensions for grids and derivatives).
-    /// @tparam Patch Patch type.
-    template <class Patch>
-    using idx_range_type = typename ValuesOnPatch<Patch>::discrete_domain_type;
+    /// @tparam ValuesField A Field or DerivField type storing the evaluated values.
+    template <class ValuesField>
+    using idx_range_type = typename ValuesField::discrete_domain_type;
 
     /// @brief TypeSeq of the derivative dimensions (contained in DerivField).
-    /// @tparam Patch Patch type.
-    template <class Patch>
-    using deriv_tags = detail::deriv_sub_set_t<ddc::to_type_seq_t<idx_range_type<Patch>>>;
+    /// @tparam ValuesField A Field or DerivField type storing the evaluated values.
+    template <class ValuesField>
+    using deriv_tags = detail::deriv_sub_set_t<ddc::to_type_seq_t<idx_range_type<ValuesField>>>;
 
     /// @brief TypeSeq of the grid dimensions (without derivative dimensions).
-    /// @tparam Patch Patch type.
-    template <class Patch>
-    using physical_grids
-            = ddc::type_seq_remove_t<ddc::to_type_seq_t<idx_range_type<Patch>>, deriv_tags<Patch>>;
+    /// @tparam ValuesField A Field or DerivField type storing the evaluated values.
+    template <class ValuesField>
+    using physical_grids = ddc::type_seq_remove_t<
+            ddc::to_type_seq_t<idx_range_type<ValuesField>>,
+            deriv_tags<ValuesField>>;
 
     /// @brief The type of the whole domain representing evaluation points.
-    /// @tparam Patch Patch type.
-    template <class Patch>
+    /// @tparam ValuesField A Field or DerivField type storing the evaluated values.
+    template <class ValuesField>
     using batched_evaluation_idx_range_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids<Patch>>;
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids<ValuesField>>;
 
     /// @brief The type of the 1D spline domain corresponding to the first dimension of interest.
     /// @tparam Patch Patch type.
@@ -166,7 +164,6 @@ public:
 
 private:
     // MultipatchTypes
-    using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
     using MultipatchCoordField = MultipatchField<CoordConstFieldOnPatch, Patches...>;
     using MultipatchSplineCoeff = MultipatchField<SplineCoeffOnPatch, Patches...>;
 
@@ -216,18 +213,20 @@ public:
 
 private:
     // Asserts -----------------------------------------------------------------------------------
-    template <class Patch>
-    static bool constexpr same_evaluation_idx_range_types = std::
-            is_same_v<evaluation_idx_range_type<Patch>, batched_evaluation_idx_range_type<Patch>>;
-
-    static_assert(
-            (same_evaluation_idx_range_types<Patches> && ...),
-            "Operator not yet implemented for batched domains.");
-
-    static_assert(
-            ((std::is_same_v<typename ValuesOnPatch<Patches>::memory_space, memory_space>)&&...),
-            "Template ValuesOnPatch<Patch> need to be defined on the memory space than the"
-            "InterpolationEvaluator2DCollection class.");
+    /// Check that the values field can be used to store values evaluated on the StoringPatch.
+    template <class StoringPatch, class ValuesField>
+    static constexpr void check_values_field_type()
+    {
+        static_assert(
+                std::is_same_v<
+                        evaluation_idx_range_type<StoringPatch>,
+                        batched_evaluation_idx_range_type<ValuesField>>,
+                "Operator not yet implemented for batched domains.");
+        static_assert(
+                std::is_same_v<typename ValuesField::memory_space, memory_space>,
+                "The values fields need to be defined on the same memory space as the "
+                "InterpolationEvaluator2DCollection class.");
+    }
 
     static_assert(
             is_onion_patch_locator_v<PatchLocator>,
@@ -289,15 +288,18 @@ public:
      * 
      * See @ref InterpolationEvaluator2DCollectionOperator.
      * 
-     * @param[out] patches_values A MultipatchType of DField or DerivField to store the values of the splines 
-     *          at the given coordinates. 
+     * @tparam MultipatchValues A MultipatchField of DField or DerivField.
+     * @param[out] patches_values A MultipatchType of DField or DerivField to store the values of the splines
+     *          at the given coordinates.
      * @param[in] patches_coords A MultipatchType of Field of Coordinate storing the coordinates of the meshes.
      * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
      */
+    template <class MultipatchValues>
     void operator()(
             MultipatchValues const& patches_values,
             MultipatchCoordField const& patches_coords,
             MultipatchSplineCoeff const& patches_splines) const
+            requires(is_multipatch_field_v<MultipatchValues>)
     {
         (apply_evaluator_field<Patches>(
                  Idx<>(),
@@ -364,19 +366,22 @@ public:
      *          If patches_deriv is a DerivField, the given coordinates can be the coordinates for all function values. 
      *          The operator will select the correct coordinates. 
      * @param[in] patches_splines A MultipatchType of DField storing the 2D spline coefficients.
+     * @tparam MultipatchValues A MultipatchField of DField or DerivField.
      */
-    template <class... DerivDims>
+    template <class MultipatchValues, class... DerivDims>
     void deriv(
             Idx<DerivDims...> const& deriv_order,
             MultipatchValues const& patches_deriv,
             MultipatchCoordField const& patches_coords,
             MultipatchSplineCoeff const& patches_splines) const
+            requires(is_multipatch_field_v<MultipatchValues>)
     {
         static_assert(
                 (ddc::in_tags_v<DerivDims, ddc::TypeSeq<DerivDim1, DerivDim2>> && ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
-        if constexpr ((is_deriv_field_v<ValuesOnPatch<Patches>> && ...)) {
+        if constexpr ((is_deriv_field_v<typename MultipatchValues::template TypeOnPatch<Patches>>
+                       && ...)) {
             (apply_evaluator_deriv_field<Patches>(
                      deriv_order,
                      patches_deriv.template get<Patches>(),
@@ -420,27 +425,29 @@ public:
      * Needed public for functions on GPU. 
      * @tparam StoringPatch Patch type where the given coordinates are stored. 
      *      They are not especially physically located on this patch.
-     * @tparam IdxDeriv Index type of the derivative order, it can be on the first dimension, the second
+     * @tparam ValuesField The type of the field of values (DField or DerivField).
+     * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      *      or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
-     * @param[out] patch_values Field of values of the function or derivative. 
-     * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and 
-     *          where we want to evaluate the function or derivative. 
-     * @param[in] patches_splines MultipatchType of spline coefficients of the splines 
-     *          on every patches. 
+     * @param[out] patch_values Field of values of the function or derivative.
+     * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and
+     *          where we want to evaluate the function or derivative.
+     * @param[in] patches_splines MultipatchType of spline coefficients of the splines
+     *          on every patches.
      */
-    template <class StoringPatch, class... DerivDims>
+    template <class StoringPatch, class ValuesField, class... DerivDims>
     void apply_evaluator_field(
             Idx<DerivDims...> const& deriv_order,
-            ValuesOnPatch<StoringPatch> const& patch_values,
+            ValuesField const& patch_values,
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
             MultipatchSplineCoeff const patches_splines) const
     {
+        check_values_field_type<StoringPatch, ValuesField>();
         assert(get_idx_range(patch_values) == get_idx_range(patch_coords));
 
         using Index =
-                typename batched_evaluation_idx_range_type<StoringPatch>::discrete_element_type;
-        batched_evaluation_idx_range_type<StoringPatch> idx_range = get_idx_range(patch_values);
+                typename batched_evaluation_idx_range_type<ValuesField>::discrete_element_type;
+        batched_evaluation_idx_range_type<ValuesField> idx_range = get_idx_range(patch_values);
 
         const bool is_derivative = (deriv_order != order_zero<DerivDims...>());
 
@@ -468,22 +475,25 @@ public:
      * Needed public for functions on GPU. 
      * @tparam StoringPatch Patch type where the given coordinates are stored. 
      *      They are not especially physically located on this patch.
+     * @tparam ValuesField The type of the DerivField of values.
      * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      * or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
-     * @param[out] patch_values DerivField of values and derivatives of the function. 
-     * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and 
-     *          where we want to evaluate the function or derivative. 
-     * @param[in] patches_splines MultipatchType of spline coefficients of the splines 
-     *          on every patches. 
+     * @param[out] patch_values DerivField of values and derivatives of the function.
+     * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and
+     *          where we want to evaluate the function or derivative.
+     * @param[in] patches_splines MultipatchType of spline coefficients of the splines
+     *          on every patches.
      */
-    template <class StoringPatch, class... DerivDims>
+    template <class StoringPatch, class ValuesField, class... DerivDims>
     void apply_evaluator_deriv_field(
             Idx<DerivDims...> const& deriv_order,
-            ValuesOnPatch<StoringPatch> const& patch_values,
+            ValuesField const& patch_values,
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
             MultipatchSplineCoeff const patches_splines) const
     {
+        static_assert(is_deriv_field_v<ValuesField>, "The values field must be a DerivField.");
+        check_values_field_type<StoringPatch, ValuesField>();
         if constexpr (ddc::in_tags_v<DerivDim1, ddc::TypeSeq<DerivDims...>>) {
             assert((IdxRange<DerivDim1>(patch_values.derivative_idx_range())
                             .contains(Idx<DerivDim1>(deriv_order)))
