@@ -15,7 +15,7 @@
 #include "spline_builder_2d_collection.hpp"
 #include "types.hpp"
 
-enum class DerivativePrecision { APPROXIMATION, EXACT };
+enum class DerivApproxType { APPROXIMATION, EXACT };
 
 
 /**
@@ -70,15 +70,15 @@ struct DerivList
 namespace multipatch_spline_builder_details {
 
 
-template <DerivativePrecision Precision, class Connectivity, class DirectionDerivSeq>
+template <DerivApproxType DerivApprox, class Connectivity, ddc::concepts::type_seq  DirectionDerivSeq>
 struct ToDerivativeCalculatorSeq;
 
-template <DerivativePrecision Precision, class Connectivity, class... DirectionDerivs>
-struct ToDerivativeCalculatorSeq<Precision, Connectivity, ddc::TypeSeq<DirectionDerivs...>>
+template <DerivApproxType DerivApprox, class Connectivity, class... DirectionDerivs>
+struct ToDerivativeCalculatorSeq<DerivApprox, Connectivity, ddc::TypeSeq<DirectionDerivs...>>
 {
     template <class DirectionDeriv>
     using DerivativeCalculator = std::conditional_t<
-            (Precision == DerivativePrecision::APPROXIMATION),
+            (DerivApprox == DerivApproxType::APPROXIMATION),
             InterfacesDerivativeCalculator<Connectivity, typename DirectionDeriv::grid_direction>,
             InterfacesExactDerivativeCalculator<
                     Connectivity,
@@ -89,9 +89,9 @@ struct ToDerivativeCalculatorSeq<Precision, Connectivity, ddc::TypeSeq<Direction
     using type = ddc::TypeSeq<DerivativeCalculator<DirectionDerivs>...>;
 };
 
-template <DerivativePrecision Precision, class Connectivity, class DirectionDerivSeq>
+template <DerivApproxType DerivApprox, class Connectivity, class DirectionDerivSeq>
 using derivative_calculator_seq_t =
-        typename ToDerivativeCalculatorSeq<Precision, Connectivity, DirectionDerivSeq>::type;
+        typename ToDerivativeCalculatorSeq<DerivApprox, Connectivity, DirectionDerivSeq>::type;
 
 } // namespace multipatch_spline_builder_details
 
@@ -140,10 +140,10 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class DerivListType,
-        DerivativePrecision Precision,
+        DerivApproxType DerivApprox,
         class DerivativeCalculatorSeq = multipatch_spline_builder_details::
-                derivative_calculator_seq_t<Precision, Connectivity, Precision>,
-        class PatchesSeq = typename Connectivity::all_patches>
+                derivative_calculator_seq_t<DerivApprox, Connectivity, DerivListType>,
+        ddc::concepts::type_seq PatchesSeq = typename Connectivity::all_patches>
 class MultipatchSplineBuilder2D;
 
 /**
@@ -191,7 +191,7 @@ template <
         template <typename P>
         typename ValuesOnPatch,
         class... DirectionDerivs,
-        DerivativePrecision Precision,
+        DerivApproxType DerivApprox,
         class... DerivativeCalculators,
         class... Patches>
 class MultipatchSplineBuilder2D<
@@ -210,7 +210,7 @@ class MultipatchSplineBuilder2D<
         Solver,
         ValuesOnPatch,
         DerivList<DirectionDerivs...>,
-        Precision,
+        DerivApprox,
         ddc::TypeSeq<DerivativeCalculators...>,
         ddc::TypeSeq<Patches...>>
 {
@@ -339,7 +339,7 @@ public:
             SplineBuilderCollection const& builders_collection,
             DerivativeCalculators&... deriv_calculators)
         : m_builders_collection(builders_collection)
-        , m_deriv_calculator_collection(deriv_calculators...) {};
+        , m_deriv_calculator_collection(deriv_calculators...) {}
 
     /**
      * @brief Instantiate a MultipatchSplineBuilder2D.
@@ -368,7 +368,7 @@ public:
     {
         set_all_interface_derivatives(std::make_index_sequence<size> {}, functions_and_derivs);
         m_builders_collection(splines, get_const_field(functions_and_derivs));
-    };
+    }
 
 
     /**
@@ -381,7 +381,7 @@ public:
     MultipatchIdxRangeBS const spline_idx_ranges() const
     {
         return m_builders_collection.spline_idx_ranges();
-    };
+    }
 
     /**
      * @brief Get a MultipatchType collecting the index ranges typed on the whole B-splines dimensions.
@@ -394,7 +394,7 @@ public:
             MultipatchIdxRangeBatched idx_ranges) const
     {
         return m_builders_collection.batched_basis_idx_ranges(idx_ranges);
-    };
+    }
 
 private:
     template <std::size_t... IOp>
@@ -403,7 +403,7 @@ private:
             MultipatchDerivField functions_and_derivs)
     {
         (set_interface_derivatives<IOp>(functions_and_derivs), ...);
-    };
+    }
 
     /**
      * @brief Apply the correct derivative calculator 
@@ -413,8 +413,8 @@ private:
     template <std::size_t IOp>
     void set_interface_derivatives(MultipatchDerivField functions_and_derivs)
     {
-        this->get<IOp>()(this->get_index<IOp>(), functions_and_derivs);
-    };
+        get<IOp>()(get_index<IOp>(), functions_and_derivs);
+    }
 
     /**
      * @brief Get the derivative index at the step IOpth of the algorithm. 
