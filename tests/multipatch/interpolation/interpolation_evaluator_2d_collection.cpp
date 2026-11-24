@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MIT
+#include <array>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
@@ -6,15 +8,31 @@
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
 #include "constant_extrapolation_rules_onion.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "interpolation_evaluator_2d_collection.hpp"
+#include "lagrange_basis_non_uniform.hpp"
+#include "lagrange_evaluator.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 #include "multipatch_type.hpp"
+#include "nd_identity_interpolation_builder.hpp"
+#include "nd_lagrange_evaluator.hpp"
+#include "null_extrapolation_rules.hpp"
 #include "onion_patch_locator.hpp"
 #include "physical_geometry.hpp"
 #include "spline_testing_tools.hpp"
 #include "types.hpp"
+
+template <class Patch>
+struct LagBasisR : NonUniformLagrangeBasis<typename Patch::Dim1, 3>
+{
+};
+template <class Patch>
+struct LagBasisTheta : NonUniformLagrangeBasis<typename Patch::Dim2, 3>
+{
+};
 
 
 namespace {
@@ -437,6 +455,269 @@ void check_cross_deriv_match(
         }
     }
 };
+
+// Non-spline (Lagrange) evaluators ------------------------------------------------------------
+template <class Patch>
+using LagrangeEvaluatorR = LagrangeEvaluator<
+        DeviceExecSpace,
+        typename DeviceExecSpace::memory_space,
+        double,
+        LagBasisR<Patch>,
+        typename Patch::Grid1,
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule>;
+
+template <class Patch>
+using LagrangeEvaluatorTheta = LagrangeEvaluator<
+        DeviceExecSpace,
+        typename DeviceExecSpace::memory_space,
+        double,
+        LagBasisTheta<Patch>,
+        typename Patch::Grid2,
+        ddc::PeriodicExtrapolationRule<typename Patch::Dim2>,
+        ddc::PeriodicExtrapolationRule<typename Patch::Dim2>>;
+
+template <class Patch>
+using LagrangeEvaluatorRTheta
+        = NDLagrangeEvaluator<LagrangeEvaluatorR<Patch>, LagrangeEvaluatorTheta<Patch>>;
+
+template <class Patch>
+using LagrangeBuilderRTheta = NDIdentityInterpolationBuilder<
+        DeviceExecSpace,
+        typename DeviceExecSpace::memory_space,
+        double,
+        typename Patch::IdxRange12,
+        IdxRange<LagBasisR<Patch>, LagBasisTheta<Patch>>>;
+
+template <class Patch>
+using IdxRangeLagrangeCoeff =
+        typename InterpolationEvaluatorTraits<LagrangeEvaluatorRTheta<Patch>>::coeff_idx_range_type;
+
+template <class Patch>
+using LagrangeCoeffMemOnPatch = DFieldMem<IdxRangeLagrangeCoeff<Patch>>;
+
+template <class Patch>
+using LagrangeConstCoeffOnPatch = DConstField<IdxRangeLagrangeCoeff<Patch>>;
+
+using LagrangeEvaluatorCollection = InterpolationEvaluator2DCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<LagrangeEvaluatorRTheta<Patch1>, LagrangeEvaluatorRTheta<Patch2>>,
+        PatchLocator<DeviceExecSpace>,
+        NullExtrapolationRule>;
+
+/**
+ * Initialise the (non-uniform) grids of a patch with uniformly spaced points and the
+ * Lagrange bases defined on these grids. The second dimension is periodic on [0, 2pi].
+ * @return The index range of the interpolation points (without the last periodic point).
+ */
+template <class Patch>
+typename Patch::IdxRange12 init_lagrange_patch(
+        typename Patch::Coord1 r_min,
+        typename Patch::Coord1 r_max,
+        std::size_t r_ncells,
+        std::size_t theta_ncells)
+{
+    using Grid1 = typename Patch::Grid1;
+    using Grid2 = typename Patch::Grid2;
+    typename Patch::Coord2 const theta_min(0.0);
+    typename Patch::Coord2 const theta_max(2 * M_PI);
+    ddc::init_discrete_space<Grid1>(
+            build_uniform_break_points(r_min, r_max, IdxStep<Grid1>(r_ncells)));
+    ddc::init_discrete_space<Grid2>(
+            build_uniform_break_points(theta_min, theta_max, IdxStep<Grid2>(theta_ncells)));
+    IdxRange<Grid1> idx_range1(Idx<Grid1>(0), IdxStep<Grid1>(r_ncells + 1));
+    IdxRange<Grid2> idx_range2(Idx<Grid2>(0), IdxStep<Grid2>(theta_ncells + 1));
+    ddc::init_discrete_space<LagBasisR<Patch>>(idx_range1);
+    ddc::init_discrete_space<LagBasisTheta<Patch>>(idx_range2);
+    // The last point in the periodic dimension is the same as the first point.
+    return typename Patch::IdxRange12(idx_range1, idx_range2.remove_last(IdxStep<Grid2>(1)));
+}
+
+/**
+ * Build the Lagrange coefficients of the function f(r, theta) = r^power sin(theta)
+ * on the given patch.
+ */
+template <class Patch>
+LagrangeCoeffMemOnPatch<Patch> build_lagrange_coeffs(
+        typename Patch::IdxRange12 const& idx_range,
+        int const power)
+{
+    DFieldMem<typename Patch::IdxRange12> values_alloc(idx_range);
+    DField<typename Patch::IdxRange12> values = get_field(values_alloc);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range,
+            KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                typename Patch::Idx1 const idx_r(idx);
+                typename Patch::Idx2 const idx_theta(idx);
+                double const r = ddc::coordinate(idx_r);
+                double const theta = ddc::coordinate(idx_theta);
+                values(idx) = Kokkos::pow(r, power) * Kokkos::sin(theta);
+            });
+
+    LagrangeBuilderRTheta<Patch> const builder;
+    static_assert(std::is_same_v<
+                  typename InterpolationBuilderTraits<LagrangeBuilderRTheta<Patch>>::
+                          template batched_basis_idx_range_type<typename Patch::IdxRange12>,
+                  IdxRangeLagrangeCoeff<Patch>>);
+    LagrangeCoeffMemOnPatch<Patch> coeffs_alloc(batched_basis_idx_range(builder, idx_range));
+    builder(get_field(coeffs_alloc), get_const_field(values_alloc));
+    return coeffs_alloc;
+}
+
+/// Create the Lagrange evaluator of a patch.
+template <class Patch>
+LagrangeEvaluatorRTheta<Patch> make_lagrange_evaluator()
+{
+    ddc::NullExtrapolationRule const null_extrap;
+    ddc::PeriodicExtrapolationRule<typename Patch::Dim2> const periodic_extrap;
+    LagrangeEvaluatorR<Patch> const evaluator_r(null_extrap, null_extrap);
+    LagrangeEvaluatorTheta<Patch> const evaluator_theta(periodic_extrap, periodic_extrap);
+    return LagrangeEvaluatorRTheta<Patch>(evaluator_r, evaluator_theta);
+}
+
+/// Get the maximum absolute difference between two fields defined on the same index range.
+template <class FieldType>
+double max_abs_difference(FieldType field, FieldType field_expected)
+{
+    auto field_host = ddc::create_mirror_and_copy(field);
+    auto field_expected_host = ddc::create_mirror_and_copy(field_expected);
+    using IdxType = typename FieldType::discrete_domain_type::discrete_element_type;
+    double max_abs_error = 0;
+    ddc::host_for_each(get_idx_range(field_expected_host), [&](IdxType const idx) {
+        double err = std::abs(field_expected_host(idx) - field_host(idx));
+        max_abs_error = std::max(max_abs_error, err);
+    });
+    return max_abs_error;
+}
+
+/**
+ * @brief Google test class to define the Lagrange interpolations on an Onion shape
+ * domain with 2 patches.
+ */
+class InterpolationEvaluator2DCollectionLagrangeTest : public ::testing::Test
+{
+protected:
+    Patch1::IdxRange12 const idx_range_rtheta1;
+    Patch2::IdxRange12 const idx_range_rtheta2;
+
+    // Lagrange coefficients of f(r, theta) = r sin(theta) on Patch1
+    // and f(r, theta) = r^2 sin(theta) on Patch2.
+    LagrangeCoeffMemOnPatch<Patch1> const function_1_coef_alloc;
+    LagrangeCoeffMemOnPatch<Patch2> const function_2_coef_alloc;
+    MultipatchField<LagrangeConstCoeffOnPatch, Patch1, Patch2> const coeffs;
+
+    // Evaluators on single patch
+    LagrangeEvaluatorRTheta<Patch1> const evaluator_1;
+    LagrangeEvaluatorRTheta<Patch2> const evaluator_2;
+
+    MultipatchIdxRange const all_idx_ranges;
+    LogicalToPhysicalMapping const to_physical_mapping;
+    PhysicalToLogicalMapping const to_logical_mapping;
+
+public:
+    InterpolationEvaluator2DCollectionLagrangeTest()
+        : idx_range_rtheta1(
+                init_lagrange_patch<Patch1>(Patch1::Coord1(0.25), Patch1::Coord1(1.0), 16, 10))
+        , idx_range_rtheta2(
+                  init_lagrange_patch<Patch2>(Patch2::Coord1(1.0), Patch2::Coord1(2.0), 8, 12))
+        , function_1_coef_alloc(build_lagrange_coeffs<Patch1>(idx_range_rtheta1, 1))
+        , function_2_coef_alloc(build_lagrange_coeffs<Patch2>(idx_range_rtheta2, 2))
+        , coeffs(get_const_field(function_1_coef_alloc), get_const_field(function_2_coef_alloc))
+        , evaluator_1(make_lagrange_evaluator<Patch1>())
+        , evaluator_2(make_lagrange_evaluator<Patch2>())
+        , all_idx_ranges(idx_range_rtheta1, idx_range_rtheta2)
+        , to_physical_mapping()
+        , to_logical_mapping()
+    {
+    }
+};
+
+/**
+ * Check the collection against the evaluator of each patch on fields of coordinates
+ * (each coordinate is located on its storing patch).
+ */
+template <class... DerivDims>
+void check_lagrange_on_coord_field(
+        Idx<DerivDims...> const& deriv_order,
+        LagrangeEvaluatorCollection const& evaluators,
+        LagrangeEvaluatorRTheta<Patch1> const& evaluator_1,
+        LagrangeEvaluatorRTheta<Patch2> const& evaluator_2,
+        MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const& eval_points,
+        MultipatchField<LagrangeConstCoeffOnPatch, Patch1, Patch2> const& coeffs)
+{
+    Patch1::IdxRange12 const idx_range_eval_1 = get_idx_range(eval_points.get<Patch1>());
+    Patch2::IdxRange12 const idx_range_eval_2 = get_idx_range(eval_points.get<Patch2>());
+
+    DFieldMem<Patch1::IdxRange12> eval_1_alloc(idx_range_eval_1);
+    DFieldMem<Patch2::IdxRange12> eval_2_alloc(idx_range_eval_2);
+    DFieldMem<Patch1::IdxRange12> expected_1_alloc(idx_range_eval_1);
+    DFieldMem<Patch2::IdxRange12> expected_2_alloc(idx_range_eval_2);
+
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> const
+            eval_values(get_field(eval_1_alloc), get_field(eval_2_alloc));
+
+    if constexpr (sizeof...(DerivDims) == 0) {
+        evaluators(eval_values, eval_points, coeffs);
+        evaluator_1(
+                get_field(expected_1_alloc),
+                eval_points.get<Patch1>(),
+                coeffs.get<Patch1>());
+        evaluator_2(
+                get_field(expected_2_alloc),
+                eval_points.get<Patch2>(),
+                coeffs.get<Patch2>());
+    } else {
+        evaluators.deriv(deriv_order, eval_values, eval_points, coeffs);
+        evaluator_1.deriv(
+                deriv_order,
+                get_field(expected_1_alloc),
+                eval_points.get<Patch1>(),
+                coeffs.get<Patch1>());
+        evaluator_2.deriv(
+                deriv_order,
+                get_field(expected_2_alloc),
+                eval_points.get<Patch2>(),
+                coeffs.get<Patch2>());
+    }
+
+    EXPECT_LE(max_abs_difference(get_field(eval_1_alloc), get_field(expected_1_alloc)), 1e-12);
+    EXPECT_LE(max_abs_difference(get_field(eval_2_alloc), get_field(expected_2_alloc)), 1e-12);
+}
+
+/**
+ * Check the collection against the evaluator of the patch where each coordinate is
+ * physically located. Outside the domain the null extrapolation rule is expected.
+ */
+void check_lagrange_on_single_coords(
+        LagrangeEvaluatorCollection const& evaluators,
+        LagrangeEvaluatorRTheta<Patch1> const& evaluator_1,
+        LagrangeEvaluatorRTheta<Patch2> const& evaluator_2,
+        Kokkos::View<Coord<R, Theta>*, Kokkos::DefaultExecutionSpace::memory_space> const&
+                eval_coords,
+        MultipatchField<LagrangeConstCoeffOnPatch, Patch1, Patch2> const& coeffs)
+{
+    LagrangeConstCoeffOnPatch<Patch1> const coeffs_1 = coeffs.get<Patch1>();
+    LagrangeConstCoeffOnPatch<Patch2> const coeffs_2 = coeffs.get<Patch2>();
+    // The interface between the patches is at r = 1 and the outer boundary at r = 2.
+    double max_error = 0;
+    Kokkos::parallel_reduce(
+            eval_coords.extent(0),
+            KOKKOS_LAMBDA(int i, double& err) {
+                Coord<R, Theta> const coord = eval_coords(i);
+                double const eval_function = evaluators(coord, coeffs);
+                double expected_function = 0.0;
+                double const r = ddc::get<R>(coord);
+                if (r < 1.0) {
+                    expected_function = evaluator_1(coord, coeffs_1);
+                } else if (r <= 2.0) {
+                    expected_function = evaluator_2(coord, coeffs_2);
+                }
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
+            },
+            Kokkos::Max<double>(max_error));
+    EXPECT_LE(max_error, 1e-12);
+}
 
 } // namespace
 
@@ -1206,4 +1487,95 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesDerivFieldOnCoordField
             eval_functions_and_derivs.template get<Patch2>(),
             evaluator_2,
             const_spline_2);
+}
+
+
+/* -----------------------------------------------------------------------------------------------
+    Test operator() for single coordinates with non-spline (Lagrange) evaluators.
+    The coordinates are located on different patches, outside the periodic domain and
+    outside the global domain.
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnSingleCoord)
+{
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    NullExtrapolationRule const extrapolation_rule;
+    LagrangeEvaluatorCollection const
+            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+
+    std::array<Coord<R, Theta>, 5> const eval_coords_array {
+            Coord<R, Theta>(0.5, 0.0),
+            Coord<R, Theta>(1.1, M_PI),
+            Coord<R, Theta>(0.5, 3 / 2. * M_PI),
+            Coord<R, Theta>(1.9, 4 * M_PI),
+            Coord<R, Theta>(2.3, -M_PI)};
+
+    Kokkos::View<Coord<R, Theta>*, Kokkos::DefaultExecutionSpace::memory_space>
+            coords("coords", eval_coords_array.size());
+    Kokkos::View<Coord<R, Theta>*, Kokkos::HostSpace> coords_host(
+            "coords_host",
+            eval_coords_array.size());
+    for (std::size_t i(0); i < eval_coords_array.size(); ++i) {
+        coords_host(i) = eval_coords_array[i];
+    }
+    Kokkos::deep_copy(coords, coords_host);
+
+    check_lagrange_on_single_coords(evaluators, evaluator_1, evaluator_2, coords, coeffs);
+}
+
+
+/* -----------------------------------------------------------------------------------------------
+    Test operator() and deriv() for fields of coordinates with non-spline (Lagrange) evaluators.
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnCoordField)
+{
+    // Evaluation points
+    Patch1::IdxRange12 const idx_range_eval_1(
+            Patch1::IdxRange1(idx_range_rtheta1).remove_last(Patch1::IdxStep1(1)),
+            Patch1::IdxRange2(idx_range_rtheta1));
+    Patch2::IdxRange12 const idx_range_eval_2(
+            Patch2::IdxRange1(idx_range_rtheta2).remove_last(Patch2::IdxStep1(1)),
+            Patch2::IdxRange2(idx_range_rtheta2));
+
+    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(idx_range_eval_1);
+    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(idx_range_eval_2);
+    set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(get_field(eval_points_1_alloc));
+    set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(get_field(eval_points_2_alloc));
+
+    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points(
+            get_const_field(eval_points_1_alloc),
+            get_const_field(eval_points_2_alloc));
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    NullExtrapolationRule const extrapolation_rule;
+    LagrangeEvaluatorCollection const
+            evaluators(patch_locator, extrapolation_rule, evaluator_1, evaluator_2);
+
+    // Values
+    check_lagrange_on_coord_field(Idx<>(), evaluators, evaluator_1, evaluator_2, eval_points, coeffs);
+
+    // Derivatives
+    check_lagrange_on_coord_field(
+            Idx<ddc::Deriv<R>>(1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            eval_points,
+            coeffs);
+    check_lagrange_on_coord_field(
+            Idx<ddc::Deriv<Theta>>(2),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            eval_points,
+            coeffs);
+    check_lagrange_on_coord_field(
+            Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            eval_points,
+            coeffs);
 }
