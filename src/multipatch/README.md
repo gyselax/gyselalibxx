@@ -8,6 +8,8 @@ The `multipatch` folder contains all the code describing methods and classes whi
 
 - [interface\_derivatives](./interface_derivatives/README.md) - Defines classes to compute the derivatives on the patch interfaces to define spline with Hermite boundary conditions.
 
+- [interpolation](./interpolation/README.md) - Defines structures and methods to apply interpolation operators on every patch.
+
 - [spline](./spline/README.md) - Defines structures and methods to deal with different splines on every patches.
 
 - [utils](./utils/README.md) - Defines utility functions to operate over multiple patches.

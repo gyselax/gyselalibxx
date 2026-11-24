@@ -7,11 +7,20 @@
 #include "2patches_2d_non_periodic_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation_builder.hpp"
+#include "identity_interpolation_builder.hpp"
+#include "interpolation_builder_collection.hpp"
+#include "lagrange_basis_non_uniform.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
-#include "spline_builder_collection.hpp"
+#include "multipatch_field_mem.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
+
+template <class Patch>
+struct LagBasis1 : NonUniformLagrangeBasis<typename Patch::Dim1, 3>
+{
+};
 
 
 namespace {
@@ -55,37 +64,39 @@ using SplineX2Builder = ddc::SplineBuilder<
         ddc::SplineSolver::LAPACK>;
 
 
-using SplineBuilderCollectionX_1d = SplineBuilderCollection<
+using SplineBuilderCollectionX = InterpolationBuilderCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<SplineX1Builder, SplineX2Builder>>;
+
+// Non-spline builders
+template <class Patch>
+using IdentityX1Builder = IdentityInterpolationBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        Grid1OnPatch,
-        SplineXClosure,
-        SplineXClosure,
-        SplineXClosure,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstField1OnPatch,
-        Patch1,
-        Patch2>;
+        double,
+        typename Patch::Grid1,
+        LagBasis1<Patch>>;
+
+template <class Patch, class IdxRangeValues>
+using IdxRangeIdentityCoeff = typename InterpolationBuilderTraits<
+        IdentityX1Builder<Patch>>::template batched_basis_idx_range_type<IdxRangeValues>;
+
+template <class Patch>
+using IdentityCoeffOnPatch_1D = DField<IdxRangeIdentityCoeff<Patch, typename Patch::IdxRange1>>;
+
+template <class Patch>
+using IdentityCoeffOnPatch_2D = DField<IdxRangeIdentityCoeff<Patch, typename Patch::IdxRange12>>;
+
+template <class Patch>
+using IdentityCoeffMemOnPatch_2D
+        = DFieldMem<IdxRangeIdentityCoeff<Patch, typename Patch::IdxRange12>>;
+
+using IdentityBuilderCollectionX = InterpolationBuilderCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<IdentityX1Builder<Patch1>, IdentityX1Builder<Patch2>>>;
 
 
-using SplineBuilderCollectionX_2d = SplineBuilderCollection<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        Grid1OnPatch,
-        SplineXClosure,
-        SplineXClosure,
-        SplineXClosure,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstFieldOnPatch,
-        Patch1,
-        Patch2>;
-
-
-class SplineBuilderCollectionTest : public ::testing::Test
+class InterpolationBuilderCollectionTest : public ::testing::Test
 {
 private:
     static constexpr IdxStep<GridX<1>> x1_size = IdxStep<GridX<1>>(10);
@@ -102,7 +113,7 @@ protected:
     IdxRange<GridY<2>> const idx_range_y2;
 
 public:
-    SplineBuilderCollectionTest()
+    InterpolationBuilderCollectionTest()
         : idx_range_x1(SplineInterpPointsX1::get_domain<GridX<1>>())
         , idx_range_y1(SplineInterpPointsY1::get_domain<GridY<1>>())
         , idx_range_x2(SplineInterpPointsX2::get_domain<GridX<2>>())
@@ -136,6 +147,10 @@ public:
 
         ddc::init_discrete_space<GridX<2>>(SplineInterpPointsX2::get_sampling<GridX<2>>());
         ddc::init_discrete_space<GridY<2>>(SplineInterpPointsY2::get_sampling<GridY<2>>());
+
+        // Lagrange bases for the non-spline builders
+        ddc::init_discrete_space<LagBasis1<Patch1>>(SplineInterpPointsX1::get_domain<GridX<1>>());
+        ddc::init_discrete_space<LagBasis1<Patch2>>(SplineInterpPointsX2::get_domain<GridX<2>>());
     }
 
 
@@ -228,14 +243,14 @@ public:
 /*
     The global domain is split into two 1D patches on X1 and X2.
  */
-TEST_F(SplineBuilderCollectionTest, TwoPatches1D)
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches1D)
 {
     // List of spline builders
     SplineX1Builder builder_x1(idx_range_x1);
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    SplineBuilderCollectionX_1d builder(builder_x1, builder_x2);
+    SplineBuilderCollectionX builder(builder_x1, builder_x2);
 
 
     // Function tests
@@ -293,9 +308,128 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches1D)
 
 
 /*
+    The global domain is split into two 1D patches on X1 and X2.
+    The collection is used with builders which are not spline builders.
+ */
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches1DNonSplineBuilder)
+{
+    // List of builders
+    IdentityX1Builder<Patch1> const builder_x1;
+    IdentityX1Builder<Patch2> const builder_x2;
+
+    // Collection of builders for each patch
+    IdentityBuilderCollectionX builder(builder_x1, builder_x2);
+
+
+    // Function tests
+    DFieldMem<IdxRange<GridX<1>>> function_1_alloc(idx_range_x1);
+    DField<IdxRange<GridX<1>>> function_1 = get_field(function_1_alloc);
+    DFieldMem<IdxRange<GridX<2>>> function_2_alloc(idx_range_x2);
+    DField<IdxRange<GridX<2>>> function_2 = get_field(function_2_alloc);
+
+    initialise_1D_functions(function_1, function_2);
+
+    MultipatchField<DConstField1OnPatch, Patch1, Patch2>
+            function_values(get_const_field(function_1), get_const_field(function_2));
+
+
+    // Interpolation coefficients
+    using IdxRangeCoeff1 = IdxRangeIdentityCoeff<Patch1, IdxRange<GridX<1>>>;
+    using IdxRangeCoeff2 = IdxRangeIdentityCoeff<Patch2, IdxRange<GridX<2>>>;
+
+    DFieldMem<IdxRangeCoeff1> function_1_coef_alloc(
+            batched_basis_idx_range(builder_x1, idx_range_x1));
+    DFieldMem<IdxRangeCoeff1> function_1_coef_expected_alloc(
+            batched_basis_idx_range(builder_x1, idx_range_x1));
+    DFieldMem<IdxRangeCoeff2> function_2_coef_alloc(
+            batched_basis_idx_range(builder_x2, idx_range_x2));
+    DFieldMem<IdxRangeCoeff2> function_2_coef_expected_alloc(
+            batched_basis_idx_range(builder_x2, idx_range_x2));
+
+    MultipatchField<IdentityCoeffOnPatch_1D, Patch1, Patch2>
+            function_coef(get_field(function_1_coef_alloc), get_field(function_2_coef_alloc));
+
+
+    // Build the interpolation coefficients on each patch
+    builder(function_coef, function_values);
+
+
+    // Check the results are the same as when building one by one
+    builder_x1(get_field(function_1_coef_expected_alloc), get_const_field(function_1));
+    builder_x2(get_field(function_2_coef_expected_alloc), get_const_field(function_2));
+    check_if_equal_to_expected(
+            function_coef,
+            get_field(function_1_coef_expected_alloc),
+            get_field(function_2_coef_expected_alloc));
+}
+
+
+
+/*
+    The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
+    The collection is used with builders which are not spline builders.
+ */
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
+{
+    // List of index ranges
+    IdxRange<GridX<1>, GridY<1>> idx_range_xy1(idx_range_x1, idx_range_y1);
+    IdxRange<GridX<2>, GridY<2>> idx_range_xy2(idx_range_x2, idx_range_y2);
+
+
+    // List of builders
+    IdentityX1Builder<Patch1> const builder_x1;
+    IdentityX1Builder<Patch2> const builder_x2;
+
+    // Collection of builders for each patch
+    IdentityBuilderCollectionX builder(builder_x1, builder_x2);
+
+
+    // Function tests
+    DFieldMem<IdxRange<GridX<1>, GridY<1>>> function_1_alloc(idx_range_xy1);
+    DField<IdxRange<GridX<1>, GridY<1>>> function_1 = get_field(function_1_alloc);
+    DFieldMem<IdxRange<GridX<2>, GridY<2>>> function_2_alloc(idx_range_xy2);
+    DField<IdxRange<GridX<2>, GridY<2>>> function_2 = get_field(function_2_alloc);
+
+    initialise_2D_functions(function_1, function_2);
+
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
+            function_values(get_const_field(function_1), get_const_field(function_2));
+
+
+    // Interpolation coefficients
+    using IdxRangeCoeff1 = IdxRangeIdentityCoeff<Patch1, IdxRange<GridX<1>, GridY<1>>>;
+    using IdxRangeCoeff2 = IdxRangeIdentityCoeff<Patch2, IdxRange<GridX<2>, GridY<2>>>;
+
+    DFieldMem<IdxRangeCoeff1> function_1_coef_expected_alloc(
+            batched_basis_idx_range(builder_x1, idx_range_xy1));
+    DFieldMem<IdxRangeCoeff2> function_2_coef_expected_alloc(
+            batched_basis_idx_range(builder_x2, idx_range_xy2));
+
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
+    MultipatchFieldMem<IdentityCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
+            builder.batched_basis_idx_ranges(idx_ranges));
+    MultipatchField<IdentityCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
+
+
+    // Build the interpolation coefficients on each patch
+    builder(function_coef, function_values);
+
+
+    // Check the results are the same as when building one by one
+    builder_x1(get_field(function_1_coef_expected_alloc), get_const_field(function_1));
+    builder_x2(get_field(function_2_coef_expected_alloc), get_const_field(function_2));
+    check_if_equal_to_expected(
+            function_coef,
+            get_field(function_1_coef_expected_alloc),
+            get_field(function_2_coef_expected_alloc));
+}
+
+
+
+/*
     The global domain is split into two 2D patches on (X1, Y1) and (X2, Y2).
  */
-TEST_F(SplineBuilderCollectionTest, TwoPatches2D)
+TEST_F(InterpolationBuilderCollectionTest, TwoPatches2D)
 {
     // List of index ranges
     IdxRange<GridX<1>, GridY<1>> idx_range_xy1(idx_range_x1, idx_range_y1);
@@ -307,7 +441,7 @@ TEST_F(SplineBuilderCollectionTest, TwoPatches2D)
     SplineX2Builder builder_x2(idx_range_x2);
 
     // Collection of builders for each patch
-    SplineBuilderCollectionX_2d builder(builder_x1, builder_x2);
+    SplineBuilderCollectionX builder(builder_x1, builder_x2);
 
 
     // Function tests

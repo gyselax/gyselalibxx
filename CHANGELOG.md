@@ -34,8 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
 - Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
 - Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis.
-- Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
-- Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
+- Add an `InterpolationBuilder2DCollection::operator()` which takes a `DerivField`.
+- Add `InterpolationBuilderCollection::batched_basis_idx_ranges()` and `InterpolationBuilder2DCollection::batched_basis_idx_ranges()`.
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
 - Add `InterfacesDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
@@ -82,10 +82,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Calls to Kokkos profiling's region push/pop were replaced by calls `ScopedRegion` whenever possible to capture RAII deallocations.
 - `PolarSplineFEMPoissonLikeAssembler` uses `TensorProductBSplinePoissonAssembler` to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.
 - Use Spack to install packages in the docker image.
-- Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
-- Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
+- Rename `MultipatchSplineBuilder` to `InterpolationBuilderCollection` and move it to `src/multipatch/interpolation/`.
+- `InterpolationBuilderCollection` accepts any 1D interpolation builder (see `concepts::InterpolationBuilder1D`) and is now templated on a `ddc::TypeSeq` of the patches and a `ddc::TypeSeq` of the builders.
+- `InterpolationBuilderCollection` is no longer templated on the values type (the same type is valid for different batches).
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
-- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
+- Rename files `multipatch_spline_builder*` to `interpolation_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
