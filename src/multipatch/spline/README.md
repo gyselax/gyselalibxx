@@ -3,50 +3,17 @@
 This directory defines structures and methods to deal with different splines on every patches.
 The multipatch patch operators implemented are
 
-- [Multipatch spline evaluator](#multipatch-spline-evaluator) - Definition of `InterpolationEvaluator2DCollection`.
 - [Multipatch extrapolation rules](#multipatch-extrapolation-rules) - Definition of extrapolation rules depending on the geometries for `InterpolationEvaluator2DCollection`.
 
-The spline builders can be applied on every patch using `InterpolationBuilderCollection` and `InterpolationBuilder2DCollection` (see [multipatch interpolation](./../interpolation/README.md)).
-
-## Multipatch spline evaluator
-
-The `InterpolationEvaluator2DCollection` allows all the spline evaluators to be called in one single line.
-
-Contrary to the `InterpolationBuilderCollection` class, the spline evaluators are not given as input but we directly
-compute the evaluation inside the class. The template parameters and aliases are similar to the ones in the `SplineEvaluator2D`
-class in DDC.
-
-To instantiate a `InterpolationEvaluator2DCollection`, we need a patch locator operator to be able to determine on which patch the given (see [Connectivity](./../connectivity/README.md))
-coordinates will be physically located. We also need extrapolation rules to know what value is returned if the
-coordinates are outside the domain. Multi-patch extrapolation rules are implemented and defined below [Multipatch extrapolation rules](#multipatch-extrapolation-rules).
-
-The coordinates are stored in fields stored in `MultipatchType` objects.
-They are stored on patches. Each field corresponds to the coordinates stored on a given patch.
-The coordinates are not enforced to be physically located on the storing patch.
-
-> For example, these coordinates can be characteristic feet stored on the patch where the initial coordinates were.
-> Here the coordinates are in the same field if their initial coordinates were on the same patch. They are on the
-> same storing patch, but some of them can be physically located outside the storing patch if the feet have crossed
-> the edges.
-
-Similarly to `SplineEvaluator2D`, methods to get the derivatives are implemented. No extrapolation rules are given, so `InterpolationEvaluator2DCollection` will throw an exception error if we give a coordinate outside the domain.
-The methods implemented are
-
-- `operator()` to compute a single value or fields of values.
-- `deriv()` to compute derivatives on the first and/or second dimension on a single coordinates or fields of coordinates.
-- `integrate()` to compute the integral on each patch. The integral are stored in a `Kokkos::View` defined on host and of the same size as the number of patches.
-
-**Warning:** The current version of `InterpolationEvaluator2DCollection` does not work on batched domain.
-
-**Warning:** `InterpolationEvaluator2DCollection` applies to patches defined on the same continuous dimensions.
+The spline builders and evaluators can be applied on every patch using `InterpolationBuilderCollection`, `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection` (see [multipatch interpolation](./../interpolation/README.md)).
 
 ## Multipatch extrapolation rules
 
 To evaluate at a given coordinate outside the domain, extrapolation rules have been implemented. They are declined according to the geometry:
 
-- `NullExtrapolationRule`: general for every geometry. It sets the values at zero for every coordinates outside the domain.
+- `NullExtrapolationRule`: general for every geometry and every interpolation method. It sets the values at zero for every coordinates outside the domain.
 
-- `ConstantExtrapolationRuleOnion`: specialised for onion geometries (see `OnionPatchLocator` and [Connectivity](./../connectivity/README.md)). It calls `ddc::ConstantExtrapolationRule` to evaluate the outside coordinate.
+- `ConstantExtrapolationRuleOnion`: specialised for onion geometries (see `OnionPatchLocator` and [Connectivity](./../connectivity/README.md)) and spline interpolations. It calls `ddc::ConstantExtrapolationRule` to evaluate the outside coordinate.
  Two areas are considered as outside: with radius inferior to the minimum radius and with radius superior to the maximum radius.
 
 ## Contents
