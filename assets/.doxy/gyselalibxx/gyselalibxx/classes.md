@@ -30,10 +30,7 @@
 * [**BSplinesThetaRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined.md)
 ([**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md))
 * [**Build\_BuilderType**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType.md)
-* [**Build\_BuilderType**](structSplineBuilder2DCollection_1_1Build__BuilderType.md)
-* [**Build\_BuilderType**](structSplineBuilderCollection_1_1Build__BuilderType.md)
 * [**Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a.md)
-* [**Build\_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;**](structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.md)
 * [**BumpontailEquilibrium**](classBumpontailEquilibrium.md)
 
 
@@ -305,6 +302,10 @@
 * [**InterfacesExactDerivativeCalculator**](classInterfacesExactDerivativeCalculator.md)
 * [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
+* [**InterpolationBuilder2DCollection**](classInterpolationBuilder2DCollection.md)
+* [**InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;**](classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db.md)
+* [**InterpolationBuilderCollection**](classInterpolationBuilderCollection.md)
+* [**InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;**](classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4.md)
 * [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md)
 * [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md)
 * [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md)
@@ -505,8 +506,6 @@
 * [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md)
 * [**SplineBoundaryClosures**](structSplineBoundaryClosures.md)
 * [**SplineBuilder2DCache**](classSplineBuilder2DCache.md)
-* [**SplineBuilder2DCollection**](classSplineBuilder2DCollection.md)
-* [**SplineBuilderCollection**](classSplineBuilderCollection.md)
 * [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md)
 * [**SplinePolarFootFinder**](classSplinePolarFootFinder.md)
 * [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md)
@@ -554,6 +553,8 @@
 
 ## v
 
+* [**ValuesIdxRange**](structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648.md)
+* [**ValuesIdxRange&lt; FieldType &gt;**](structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typd0c266faf25bb6716ab3985d97711716.md)
 * [**vector\_index\_set\_dual**](structtensor__tools_1_1vector__index__set__dual.md)
 ([**tensor\_tools**](namespacetensor__tools.md))
 * [**vector\_index\_set\_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md)

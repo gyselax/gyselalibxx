@@ -207,23 +207,8 @@
   </compound>
   <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType</name>
   </compound>
-  <compound refid="structSplineBuilder2DCollection_1_1Build__BuilderType" kind="struct"><name>SplineBuilder2DCollection::Build_BuilderType</name>
-  </compound>
-  <compound refid="structSplineBuilderCollection_1_1Build__BuilderType" kind="struct"><name>SplineBuilderCollection::Build_BuilderType</name>
-    <member refid="structSplineBuilderCollection_1_1Build__BuilderType_1ab7c35341f8f1fb6a01519daa5001e129" kind="typedef"><name>lower_matching_edge</name></member>
-    <member refid="structSplineBuilderCollection_1_1Build__BuilderType_1ad6b4a2c5833e1fd0610fa98e4393e2d5" kind="typedef"><name>upper_matching_edge</name></member>
-    <member refid="structSplineBuilderCollection_1_1Build__BuilderType_1a1094d971e2888fd502ff18160dca9bdc" kind="typedef"><name>type</name></member>
-    <member refid="structSplineBuilderCollection_1_1Build__BuilderType_1a9d83d01bc5db6b3f791de74862adf16c" kind="variable"><name>patch_id</name></member>
-  </compound>
   <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, Solver &gt; &gt;</name>
     <member refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda5addbecd630ca6ccf69931edf7a6e5a_1ae1d231e419d853d4cf32f5d519a77a64" kind="typedef"><name>type</name></member>
-  </compound>
-  <compound refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc" kind="struct"><name>SplineBuilder2DCollection::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</name>
-    <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1a29ab1e354e31d46e26191d2d1231aec3" kind="typedef"><name>lower_matching_edge1</name></member>
-    <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1ac1b5767f0e9b69a1836dba8a7e7140f6" kind="typedef"><name>upper_matching_edge1</name></member>
-    <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1ad7e609d90ef6c4cc09b6373a1c297634" kind="typedef"><name>lower_matching_edge2</name></member>
-    <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1a0ab61b2306cf53a43796072344eb445b" kind="typedef"><name>upper_matching_edge2</name></member>
-    <member refid="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc_1a6249fd6ff06357e4fa8d5c1d473fd94c" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classBumpontailEquilibrium" kind="class"><name>BumpontailEquilibrium</name>
     <member refid="classBumpontailEquilibrium_1a4cba6a2b73fc62395cee7561dfef4b1a" kind="variable"><name>m_epsilon_bot</name></member>
@@ -1978,6 +1963,80 @@
   </compound>
   <compound refid="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis" kind="struct"><name>PolarBSplines::Impl::IntermediateBernsteinBasis</name>
   </compound>
+  <compound refid="classInterpolationBuilder2DCollection" kind="class"><name>InterpolationBuilder2DCollection</name>
+  </compound>
+  <compound refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db" kind="class"><name>InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</name>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1aa8dcd7382b63fddada1e0d58a78118ec" kind="typedef"><name>PatchOrdering</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a31a086109b2ed2a044b1965ee3c04050" kind="typedef"><name>FirstBuilder</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a6f5c3a8253fc2695347734bed0cec3f0" kind="typedef"><name>BuilderOnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a0835e02a37252768f68edfca093cf2f3" kind="typedef"><name>Traits</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a2400f5470ab839da7e8e31ecdca2ac90" kind="typedef"><name>CoeffsOnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1ac8846c9ebcf6115bda7aaf28f18e20d0" kind="typedef"><name>Derivs1OnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a8abd7b594af86f7a3f511d0f2b00f98f" kind="typedef"><name>Derivs2OnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1aeb3e076ccebbeae9e2de703f74783467" kind="typedef"><name>batched_derivs_idx_range_type_on_patch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a44d0a8b203d836910ca84eeed00a1bc4" kind="typedef"><name>Derivs12OnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a9df451c5496b471806aa91cd56d3938e" kind="typedef"><name>DerivConstFieldOnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1ab74c0092c6c2cea2d44c1328f2052dbc" kind="typedef"><name>IdxRangeInterpolationOnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a05f6a320e21df1c493da4342767878d1" kind="typedef"><name>IdxRangeCoeffOnPatch</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a132094807dc3dc723f2fa36d845e24e3" kind="typedef"><name>MultipatchCoeffs</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a3ef05f835d13e5f40e86a1a7f47bf1f7" kind="typedef"><name>MultipatchDerivs1</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1aaab806aba5ad412090bedcde6f23b946" kind="typedef"><name>MultipatchDerivs2</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1af2d6231ec243a638956cfeca40fde52d" kind="typedef"><name>MultipatchDerivs12</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a2c5c34a9d8ee6ce5ab515d2ee3355a0b" kind="typedef"><name>MultipatchDerivField</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a82813daee187843721b77f5164b4664c" kind="typedef"><name>MultipatchIdxRangeBatchedBasis</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a2b6ee061327ee90fafc1080d0745279f" kind="typedef"><name>MultipatchIdxRangeBatchedDeriv</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1aa3267b7394384f2087f1bae0c7fcd50b" kind="typedef"><name>BuilderTuple</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a80840f79c2ef6e8ba46456ab8bd72752" kind="typedef"><name>exec_space</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a157320474de75e4f1839cee3f2f630f0" kind="typedef"><name>memory_space</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a2a674f19e74a277a8f60b61c0c021f03" kind="typedef"><name>data_type</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a9ff7941ef54e6be0b657557dc55303de" kind="typedef"><name>interpolation_idx_range_type</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1ad4484f5101348a3975349d647698bfbd" kind="typedef"><name>coeff_idx_range_type</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a53f60eb72f9dd5776b9269e8cc734fba" kind="typedef"><name>batched_basis_idx_range_type</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a1f9589c02569859086a121eff5480bfa" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a3858d10d184cff49fddff990cf3bfe64" kind="variable"><name>m_builders</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1ab69acf20c927281464703a608cc055aa" kind="function"><name>rank</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a86c7d9acc928016ca07ee1606f0db848" kind="function"><name>get_builder</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a41c9c1e66a21fbaf1ad132fb217f2e4e" kind="function"><name>get_deriv_value</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a8f03cce9dc37128038f501bcbba379d8" kind="function"><name>apply_builder</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a7914d991bd58fe28476be88779c2f7f9" kind="function"><name>apply_builder</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a24a916cf1f22f38e4f5545740d4a52d7" kind="function"><name>InterpolationBuilder2DCollection</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a88d2f5c5c44f0721c24f6bda918ab114" kind="function"><name>~InterpolationBuilder2DCollection</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a2a9538800ce8117ba2b8f188aedc459c" kind="function"><name>operator()</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a8cb1a9ba7f9d014850223baab81b73bb" kind="function"><name>operator()</name></member>
+    <member refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db_1a7f15f562e732b07cc7b185c6d6d1a5da" kind="function"><name>batched_basis_idx_ranges</name></member>
+  </compound>
+  <compound refid="classInterpolationBuilderCollection" kind="class"><name>InterpolationBuilderCollection</name>
+  </compound>
+  <compound refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4" kind="class"><name>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</name>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a5da855aab2cefc68e58532d38b60c62c" kind="typedef"><name>PatchOrdering</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ab257aab3ab27ae6537e058a046c0c9c3" kind="typedef"><name>FirstBuilder</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a6bdb47c5483e6bc402cda2a19f2482eb" kind="typedef"><name>BuilderOnPatch</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a27f63f9535bea51658f90fa816c3d909" kind="typedef"><name>Traits</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac51bdd0d4e1162d7b2083de20fd35afe" kind="typedef"><name>CoeffsOnPatch</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a2f929ea670e60e715c5af1a55199fc5a" kind="typedef"><name>DerivsOnPatch</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3133d53d42382e15894a72adfb5a90b5" kind="typedef"><name>MultipatchCoeffs</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ab195850fd94ddd8766d3a8ea5505c33a" kind="typedef"><name>MultipatchDerivs</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac3be4b90f8e7707a60eeeb0ec3eb10a4" kind="typedef"><name>IdxRangeInterpolationOnPatch</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1abef101dc2690c2808dbdb8c70cbd8d01" kind="typedef"><name>IdxRangeCoeffOnPatch</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3126331b71aae30caebb34ed3f65fb3a" kind="typedef"><name>MultipatchIdxRangeBatchedBasis</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1acd51e7f8771034acdb76bf9e02eb80b5" kind="typedef"><name>MultipatchIdxRangeBatchedDeriv</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ade1d7835addac902370d99414198ad91" kind="typedef"><name>BuilderTuple</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ae02e528ad9bf34b7f9d4a271642c4f8b" kind="typedef"><name>exec_space</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aefdcb9d99907886a541d3a960a594367" kind="typedef"><name>memory_space</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aa0bc7dffcae03b40d70c3f294a519135" kind="typedef"><name>data_type</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a8e82c1b4d175f171492fac8b8cab8d0e" kind="typedef"><name>interpolation_idx_range_type</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1adbfcd9db643afea8592abe8d96aff724" kind="typedef"><name>coeff_idx_range_type</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a7f5eaac261d3d73b70ad0461026668f9" kind="typedef"><name>batched_basis_idx_range_type</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a85fe691fc2cb082a2ff476a99710ce67" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3ee083e9c85a51456d194897711da6a0" kind="variable"><name>m_builders</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aedc2c4cfa0516c69b90919bd269ca0ad" kind="function"><name>rank</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a1dcc328d5904380315fe49bca42efdf6" kind="function"><name>get_builder</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a66da85cd65030f213ce9098f80dabf2a" kind="function"><name>get_deriv_value</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aec71bebbe21e7bafd6a0d33d10c0ca2d" kind="function"><name>InterpolationBuilderCollection</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aaee0889d98f6cff9c810613f9306c318" kind="function"><name>~InterpolationBuilderCollection</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac7c0026e196a36643371870fad90ffaa" kind="function"><name>operator()</name></member>
+    <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a59f7654a990f80d76377aafd6b279951" kind="function"><name>batched_basis_idx_ranges</name></member>
+  </compound>
   <compound refid="structInterpolationBuilderTraits" kind="struct"><name>InterpolationBuilderTraits</name>
     <member refid="structInterpolationBuilderTraits_1a1cfb37f788c7cf72aba5f9cac0929d90" kind="typedef"><name>data_type</name></member>
     <member refid="structInterpolationBuilderTraits_1a28f0e9c3a2146db9ea37f936330d19e5" kind="typedef"><name>interpolation_idx_range_type</name></member>
@@ -3407,60 +3466,6 @@
     <member refid="classSplineBuilder2DCache_1a78da48710cb31c905f7e96d5cb7d2bce" kind="function"><name>compute_coeffs</name></member>
     <member refid="classSplineBuilder2DCache_1aa3f0d45c1e346fd20e29efd81a210a08" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="classSplineBuilder2DCollection" kind="class"><name>SplineBuilder2DCollection</name>
-    <member refid="classSplineBuilder2DCollection_1aa14622509478d9ea9e9ad486a395dfc9" kind="typedef"><name>BuilderOnPatch</name></member>
-    <member refid="classSplineBuilder2DCollection_1a7d7679a5a75e0b983437ce57f69fd52f" kind="typedef"><name>SplineOnPatch</name></member>
-    <member refid="classSplineBuilder2DCollection_1ad8c800ada211160932bf05fc7d098284" kind="typedef"><name>Derivs1OnPatch</name></member>
-    <member refid="classSplineBuilder2DCollection_1a82717b8f2959a50c777e87a51bfeaf63" kind="typedef"><name>Derivs2OnPatch</name></member>
-    <member refid="classSplineBuilder2DCollection_1a0e6149acfe09c41799f305d2056d612e" kind="typedef"><name>Derivs12OnPatch</name></member>
-    <member refid="classSplineBuilder2DCollection_1ae2535bd9f42450899c40e662d275e3a3" kind="typedef"><name>DerivConstFieldOnPatch</name></member>
-    <member refid="classSplineBuilder2DCollection_1a8d6d54742d301d7da80212a9f0a5b07b" kind="typedef"><name>batched_spline_domain_type_on_patch</name></member>
-    <member refid="classSplineBuilder2DCollection_1acc2a70784c695c40d24c5d2dbad904a7" kind="typedef"><name>batched_derivs_domain_type_on_patch</name></member>
-    <member refid="classSplineBuilder2DCollection_1a6d7dc908423d9a7b590a2cda9886d0ad" kind="typedef"><name>MultipatchSplineCoeffs</name></member>
-    <member refid="classSplineBuilder2DCollection_1a577a5a3f638b54e8f71d70ca3d3a77fa" kind="typedef"><name>MultipatchValues</name></member>
-    <member refid="classSplineBuilder2DCollection_1a1e289fbd373db06933e4b8db6b180860" kind="typedef"><name>MultipatchDerivs1</name></member>
-    <member refid="classSplineBuilder2DCollection_1a447e60540561d7fdf91a1225fff3bf31" kind="typedef"><name>MultipatchDerivs2</name></member>
-    <member refid="classSplineBuilder2DCollection_1ae07634d06f8f276834f2fed4f7e8b55e" kind="typedef"><name>MultipatchDerivs12</name></member>
-    <member refid="classSplineBuilder2DCollection_1af2bb3cb871af2c11a7e034101f71868a" kind="typedef"><name>MultipatchDerivField</name></member>
-    <member refid="classSplineBuilder2DCollection_1a0f431c9d0f4d0a53cc03b9af1dcdbcd0" kind="typedef"><name>MultipatchIdxRange</name></member>
-    <member refid="classSplineBuilder2DCollection_1abc3f8c4709a6d4a9d8dab7fbca1822a0" kind="typedef"><name>MultipatchIdxRangeBS</name></member>
-    <member refid="classSplineBuilder2DCollection_1accbe9e5812018acd0f9ed5a3bb7765e1" kind="typedef"><name>MultipatchIdxRangeBatchedBS</name></member>
-    <member refid="classSplineBuilder2DCollection_1a0f21f670a6787ebe9aadc88f50316ddc" kind="typedef"><name>MultipatchIdxRangeBatchedDeriv</name></member>
-    <member refid="classSplineBuilder2DCollection_1acc596938d56a6e40e6e057e220b7de17" kind="typedef"><name>BuilderTuple</name></member>
-    <member refid="classSplineBuilder2DCollection_1a0a59289caf0ac75ff63dbc35027e8f45" kind="typedef"><name>exec_space</name></member>
-    <member refid="classSplineBuilder2DCollection_1ad1e22aef21662976af24f227cde05eba" kind="typedef"><name>memory_space</name></member>
-    <member refid="classSplineBuilder2DCollection_1a215bd1acf9c0b59ce2195ce04faa4877" kind="typedef"><name>data_type</name></member>
-    <member refid="classSplineBuilder2DCollection_1ac9bc5dba7489fe3e17930a0d9a4e8999" kind="typedef"><name>interpolation_idx_range_type</name></member>
-    <member refid="classSplineBuilder2DCollection_1a87baca3fc36221dcccc974ff832734a2" kind="typedef"><name>coeff_idx_range_type</name></member>
-    <member refid="classSplineBuilder2DCollection_1af86e598254a0e75aa91f6dc9d3ccc8d1" kind="typedef"><name>batched_basis_idx_range_type</name></member>
-    <member refid="classSplineBuilder2DCollection_1aa8a723b54bbfb9614faebd2a4f661ce5" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
-    <member refid="classSplineBuilder2DCollection_1a5e9f0c726717818d69971a0d7b82f24a" kind="variable"><name>m_builders</name></member>
-    <member refid="classSplineBuilder2DCollection_1aefe64ebad773e87257ca014f8318a5d3" kind="function"><name>rank</name></member>
-    <member refid="classSplineBuilder2DCollection_1a4895ca0becdcbe4a039f119f8571f904" kind="function"><name>get_deriv_value</name></member>
-    <member refid="classSplineBuilder2DCollection_1a33c4edd35fe9a0d09a050a4663710c90" kind="function"><name>SplineBuilder2DCollection</name></member>
-    <member refid="classSplineBuilder2DCollection_1a4a24b0e1934adebba27b4da2f82a9e02" kind="function"><name>~SplineBuilder2DCollection</name></member>
-    <member refid="classSplineBuilder2DCollection_1a038b752afe6a51a58fe39b64695398e9" kind="function"><name>operator()</name></member>
-    <member refid="classSplineBuilder2DCollection_1a978d6edd29c369a89ec8bdfaeb302aa3" kind="function"><name>operator()</name></member>
-    <member refid="classSplineBuilder2DCollection_1ae299c908d78d0b3dbb9c8fb05392d16b" kind="function"><name>spline_idx_ranges</name></member>
-    <member refid="classSplineBuilder2DCollection_1ae265734bebc3b1cb4ec38bfd35b2718c" kind="function"><name>batched_basis_idx_ranges</name></member>
-    <member refid="classSplineBuilder2DCollection_1a213a4b556606f43260486412a8c91f14" kind="function"><name>apply_builder</name></member>
-  </compound>
-  <compound refid="classSplineBuilderCollection" kind="class"><name>SplineBuilderCollection</name>
-    <member refid="classSplineBuilderCollection_1a2658754616aa9b44f3aed315da079ff6" kind="typedef"><name>PatchOrdering</name></member>
-    <member refid="classSplineBuilderCollection_1a042d76ee27f558afe0af58d2649bb9dc" kind="typedef"><name>BuilderOnPatch</name></member>
-    <member refid="classSplineBuilderCollection_1a361da5e61cfe4e7c25d8cda2ef94edb3" kind="typedef"><name>SplineOnPatch</name></member>
-    <member refid="classSplineBuilderCollection_1a73c301f054cc8310434d98287bac1c1d" kind="typedef"><name>DerivsOnPatch</name></member>
-    <member refid="classSplineBuilderCollection_1aeed713006dc965411729239a02ef3eae" kind="typedef"><name>MultipatchSplineCoeffs</name></member>
-    <member refid="classSplineBuilderCollection_1a9d614c76ff63f65fe7bd9b18a8e04061" kind="typedef"><name>MultipatchValues</name></member>
-    <member refid="classSplineBuilderCollection_1a196830a76aa0ed0fe731563a404cd170" kind="typedef"><name>MultipatchDerivs</name></member>
-    <member refid="classSplineBuilderCollection_1ac01d3509ca7b0b6f255acd11b6ad07c6" kind="typedef"><name>BuilderTuple</name></member>
-    <member refid="classSplineBuilderCollection_1a906dca17f5f7ad182bc8f88cd4aad5e3" kind="variable"><name>n_patches</name></member>
-    <member refid="classSplineBuilderCollection_1a97cb3c98c122cfea7b0efe05bbed7098" kind="variable"><name>m_builders</name></member>
-    <member refid="classSplineBuilderCollection_1a50c47dd76c3e7791c13863cd1452cccf" kind="function"><name>get_deriv_value</name></member>
-    <member refid="classSplineBuilderCollection_1aed8b9d5690a1b0d6184f249093b360e8" kind="function"><name>SplineBuilderCollection</name></member>
-    <member refid="classSplineBuilderCollection_1a678ca0aab2c36291321e5082c4867101" kind="function"><name>~SplineBuilderCollection</name></member>
-    <member refid="classSplineBuilderCollection_1a883403d5d0125783e14f6bdfbe216ce5" kind="function"><name>operator()</name></member>
-  </compound>
   <compound refid="classSplineBuilderDerivField2D" kind="class"><name>SplineBuilderDerivField2D</name>
     <member refid="classSplineBuilderDerivField2D_1a4deb08e88f5bccc8fed1695cbd342e4b" kind="typedef"><name>MemorySpace</name></member>
     <member refid="classSplineBuilderDerivField2D_1a18b53d1e48455ed6df47409a1aac1c6a" kind="typedef"><name>Dim1</name></member>
@@ -3752,6 +3757,12 @@
     <member refid="classUniformLagrangeBasis_1a98969db8adfd92291c4db483ca26233e" kind="function"><name>is_uniform</name></member>
   </compound>
   <compound refid="structUniformLagrangeKnots" kind="struct"><name>UniformLagrangeKnots</name>
+  </compound>
+  <compound refid="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648" kind="struct"><name>InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange</name>
+    <member refid="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648_1acee1fdd409e4511676e324412283e5d3" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typd0c266faf25bb6716ab3985d97711716" kind="struct"><name>InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange&lt; FieldType &gt;</name>
+    <member refid="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typd0c266faf25bb6716ab3985d97711716_1a15343f8652e08a357a88f2f3d86399d3" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structtensor__tools_1_1vector__index__set__dual" kind="struct"><name>tensor_tools::vector_index_set_dual</name>
   </compound>
@@ -4370,6 +4381,12 @@
   </compound>
   <compound refid="vortex__merger__initialisation_8hpp" kind="file"><name>vortex_merger_initialisation.hpp</name>
   </compound>
+  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
+  </compound>
   <compound refid="poisson__like__rhs__function_8hpp" kind="file"><name>poisson_like_rhs_function.hpp</name>
   </compound>
   <compound refid="bsl__predcorr_8hpp" kind="file"><name>bsl_predcorr.hpp</name>
@@ -4377,6 +4394,12 @@
   <compound refid="bsl__predcorr__second__order__explicit_8hpp" kind="file"><name>bsl_predcorr_second_order_explicit.hpp</name>
   </compound>
   <compound refid="bsl__predcorr__second__order__implicit_8hpp" kind="file"><name>bsl_predcorr_second_order_implicit.hpp</name>
+  </compound>
+  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="collision__configuration_8hpp" kind="file"><name>collision_configuration.hpp</name>
   </compound>
@@ -4576,12 +4599,6 @@
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2ichargedensitycalculator_8hpp" kind="file"><name>ichargedensitycalculator.hpp</name>
   </compound>
-  <compound refid="geometryRTheta_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2poisson_2iqnsolver_8hpp" kind="file"><name>iqnsolver.hpp</name>
-  </compound>
   <compound refid="geometryXVx_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
   </compound>
   <compound refid="geometryXYVxVy_2poisson_2nullqnsolver_8cpp" kind="file"><name>nullqnsolver.cpp</name>
@@ -4647,12 +4664,6 @@
     <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72a960b44c579bc2f6818d2daaf9e4c16f0" kind="enumvalue"><name>Normal</name></member>
     <member refid="mask__tanh_8hpp_1a6f9734fca864f135565da5376b5c3e72acf4c2a4bf7c328c4e51f902350475343" kind="enumvalue"><name>Inverted</name></member>
     <member refid="mask__tanh_8hpp_1a1d4432f5d3a7e655b4faae141b2d4eea" kind="function"><name>mask_tanh</name></member>
-  </compound>
-  <compound refid="geometryRTheta_2time__solver_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2time__integration_2itimesolver_8hpp" kind="file"><name>itimesolver.hpp</name>
   </compound>
   <compound refid="geometryXVx_2time__integration_2predcorr_8cpp" kind="file"><name>predcorr.cpp</name>
   </compound>
@@ -5100,15 +5111,15 @@
   </compound>
   <compound refid="interfaces__exact__derivative__calculator_8hpp" kind="file"><name>interfaces_exact_derivative_calculator.hpp</name>
   </compound>
+  <compound refid="interpolation__builder__2d__collection_8hpp" kind="file"><name>interpolation_builder_2d_collection.hpp</name>
+  </compound>
+  <compound refid="interpolation__builder__collection_8hpp" kind="file"><name>interpolation_builder_collection.hpp</name>
+  </compound>
   <compound refid="constant__extrapolation__rules__onion_8hpp" kind="file"><name>constant_extrapolation_rules_onion.hpp</name>
   </compound>
   <compound refid="multipatch__spline__evaluator__2d_8hpp" kind="file"><name>multipatch_spline_evaluator_2d.hpp</name>
   </compound>
   <compound refid="null__extrapolation__rules_8hpp" kind="file"><name>null_extrapolation_rules.hpp</name>
-  </compound>
-  <compound refid="spline__builder__2d__collection_8hpp" kind="file"><name>spline_builder_2d_collection.hpp</name>
-  </compound>
-  <compound refid="spline__builder__collection_8hpp" kind="file"><name>spline_builder_collection.hpp</name>
   </compound>
   <compound refid="multipatch__math__tools_8hpp" kind="file"><name>multipatch_math_tools.hpp</name>
     <member refid="multipatch__math__tools_8hpp_1afdae59ce2e4a611786aea5174762ae0c" kind="function"><name>norm_inf</name></member>
@@ -5379,6 +5390,8 @@
   <compound refid="dir_d1bd52a3e76a422151eefdcc4e15c189" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives</name>
   </compound>
   <compound refid="dir_264890e5c091f8c8d7fe1f842870c25e" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation</name>
+  </compound>
+  <compound refid="dir_54175eb71bf3bdb1ca864f2a0d352472" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation</name>
   </compound>
   <compound refid="dir_c184e51c84f2c3f0345bbc8a0d75d3e1" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io</name>
   </compound>

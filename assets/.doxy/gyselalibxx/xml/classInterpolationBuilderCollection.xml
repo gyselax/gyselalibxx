@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classInterpolationBuilderCollection" kind="class" language="C++" prot="public">
+    <compoundname>InterpolationBuilderCollection</compoundname>
+    <templateparamlist>
+      <param>
+        <type>ddc::concepts::type_seq</type>
+        <declname>PatchSeq</declname>
+        <defname>PatchSeq</defname>
+      </param>
+      <param>
+        <type>ddc::concepts::type_seq</type>
+        <declname>BuilderSeq</declname>
+        <defname>BuilderSeq</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to call all the builders of all the patches once. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the interpolation coefficients and the values of the function on each patch. The Fields are stored in MultipatchField objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</para>
+<para>This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.</para>
+<para>Any 1D interpolation builder (see <ref refid="conceptconcepts_1_1InterpolationBuilder1D" kindref="compound">concepts::InterpolationBuilder1D</ref>) can be used. Different builder types can be used on different patches (e.g. to use different boundary conditions).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PatchSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ddc::TypeSeq of the patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BuilderSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ddc::TypeSeq of the 1D interpolation builders on each patch, in the same order as the patches in PatchSeq. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="39" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="39" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

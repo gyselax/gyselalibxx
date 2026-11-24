@@ -336,6 +336,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interpolation/index.html">Interpolation on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -728,6 +734,12 @@
 <li><strong>class</strong> <a href="classInterfaceDerivCoeffs.html"><strong>InterfaceDerivCoeffs</strong></a> <em>Compute the coefficients a, b and c of the interface derivative reconstruction method for a given</em> <a href="structInterface.html"><em><strong>Interface</strong></em></a> <em>between two patches.</em>    </li>
 <li><strong>class</strong> <a href="classInterfacesDerivativeCalculator.html"><strong>InterfacesDerivativeCalculator</strong></a> <em>Class to compute the interface derivatives along a given direction on all the interfaces with an approximation formula.</em>     </li>
 <li><strong>class</strong> <a href="classInterfacesExactDerivativeCalculator.html"><strong>InterfacesExactDerivativeCalculator</strong></a> <em>Class to compute the interface derivatives along a given direction on all the interfaces.</em>     </li>
+<li><strong>class</strong> <a href="classInterpolationBuilder2DCollection.html"><strong>InterpolationBuilder2DCollection</strong></a> <em>A class to call all the builders of all the patches once.</em> </li>
+<li><strong>class</strong> <a href="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db.html"><strong>InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</strong></a> <em>A class to call all the builders of all the patches once.</em>     </li>
+<li><strong>struct</strong> <a href="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648.html"><strong>ValuesIdxRange</strong></a> <em>A structure to get the index range of the function values stored in a field.</em>     </li>
+<li><strong>struct</strong> <a href="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typd0c266faf25bb6716ab3985d97711716.html"><strong>ValuesIdxRange&lt; FieldType &gt;</strong></a> <em>Specialisation of ValuesIdxRange for a field with derivatives.</em>     </li>
+<li><strong>class</strong> <a href="classInterpolationBuilderCollection.html"><strong>InterpolationBuilderCollection</strong></a> <em>A class to call all the builders of all the patches once.</em> </li>
+<li><strong>class</strong> <a href="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4.html"><strong>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</strong></a> <em>A class to call all the builders of all the patches once.</em>     </li>
 <li><strong>struct</strong> <a href="structInterpolationBuilderTraits.html"><strong>InterpolationBuilderTraits</strong></a> <em>A traits struct for accessing type aliases of an interpolation builder.</em>     </li>
 <li><strong>struct</strong> <a href="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.html"><strong>InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;</strong></a> <em>Specialisation of</em> <a href="structInterpolationBuilderTraits.html"><em><strong>InterpolationBuilderTraits</strong></em></a> <em>for ddc::SplineBuilder2D.</em>    </li>
 <li><strong>struct</strong> <a href="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.html"><strong>InterpolationBuilderTraits&lt; ddc::SplineBuilder3D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver &gt; &gt;</strong></a> <em>Specialisation of</em> <a href="structInterpolationBuilderTraits.html"><em><strong>InterpolationBuilderTraits</strong></em></a> <em>for ddc::SplineBuilder3D.</em>    </li>
@@ -853,11 +865,6 @@
 <li><strong>namespace</strong> <a href="namespaceSplineBoundaryClosure.html"><strong>SplineBoundaryClosure</strong></a> <em>Predefined</em> <a href="structSplineBoundaryClosures.html"><em><strong>SplineBoundaryClosures</strong></em></a> <em>for the common case where the same closure applies at both boundaries.</em>    </li>
 <li><strong>struct</strong> <a href="structSplineBoundaryClosures.html"><strong>SplineBoundaryClosures</strong></a> <em>Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a spline builder into a single non-type template argument.</em>     </li>
 <li><strong>class</strong> <a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a> <em>A class that stores spline builder coefficients and recomputes them when required.</em>     </li>
-<li><strong>class</strong> <a href="classSplineBuilder2DCollection.html"><strong>SplineBuilder2DCollection</strong></a> <em>A class to call all the builders of all the patches once.</em>     </li>
-<li><strong>struct</strong> <a href="structSplineBuilder2DCollection_1_1Build__BuilderType.html"><strong>Build_BuilderType</strong></a> </li>
-<li><strong>struct</strong> <a href="structSplineBuilder2DCollection_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_cb7a2d12deffee994288018cf96941fc.html"><strong>Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</strong></a>     </li>
-<li><strong>class</strong> <a href="classSplineBuilderCollection.html"><strong>SplineBuilderCollection</strong></a> <em>A class to call all the builders of all the patches once.</em>     </li>
-<li><strong>struct</strong> <a href="structSplineBuilderCollection_1_1Build__BuilderType.html"><strong>Build_BuilderType</strong></a>     </li>
 <li><strong>class</strong> <a href="classSplineBuilderDerivField2D.html"><strong>SplineBuilderDerivField2D</strong></a> <em>[Temporary] Apply a SplineBuilder2D to a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>.</em>    </li>
 <li><strong>class</strong> <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> <em>A class to find the foot of the characteristics on the</em> <span class="arithmatex">\((r,\theta)\)</span> <em>plane.</em>    </li>
 <li><strong>class</strong> <a href="classSplitRightHandSideSolver.html"><strong>SplitRightHandSideSolver</strong></a> <em>A class that solves a Boltzmann equation using Strang's splitting.</em>     </li>

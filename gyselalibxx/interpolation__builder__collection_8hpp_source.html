@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class SplineBuilderCollection - GyselalibX</title>
+    <title>File interpolation_builder_collection.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class SplineBuilderCollection";
-        var mkdocs_page_input_path = "gyselalibxx/classSplineBuilderCollection.md";
+        var mkdocs_page_name = "File interpolation_builder_collection.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/interpolation__builder__collection_8hpp_source.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -336,6 +336,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interpolation/index.html">Interpolation on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -565,9 +571,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class SplineBuilderCollection</li>
+      <li class="breadcrumb-item active">File interpolation_builder_collection.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classSplineBuilderCollection.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/interpolation__builder__collection_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,92 +581,192 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-splinebuildercollection">Class SplineBuilderCollection</h1>
-<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::SplineBuilderClosure SBCLower, ddc::SplineBuilderClosure SBCUpper, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineBuilderCollection.html"><strong>SplineBuilderCollection</strong></a></p>
-<p><em>A class to call all the builders of all the patches once.</em> <a href="#detailed-description">More...</a></p>
-<ul>
-<li><code>#include &lt;spline_builder_collection.hpp&gt;</code></li>
-</ul>
-<h2 id="public-functions">Public Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splinebuildercollection"><strong>SplineBuilderCollection</strong></a> (BuilderOnPatch&lt; Patches &gt; const &amp;... builders) <br><em>Instantiate the</em> <a href="classSplineBuilderCollection.html"><em><strong>SplineBuilderCollection</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (MultipatchSplineCoeffs splines, MultipatchValues const &amp; values, std::optional&lt; MultipatchDerivs &gt; derivs_xmin=std::nullopt, std::optional&lt; MultipatchDerivs &gt; derivs_xmax=std::nullopt) const<br><em>Build the spline representation of each given function.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splinebuildercollection"><strong>~SplineBuilderCollection</strong></a> () = default<br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="detailed-description">Detailed Description</h2>
-<p>We need to instantiate all the builders for all the patches in the main code. We process the same way for the Fields containing the spline coefficients and the values of the function on each patch. The Fields are stored in MultipatchField objects. The builders are stored in this class. This class is instantiated with all the builders. The operator() allows to call all the builders stored in the member of this class in one single line.</p>
-<p>This function is useful to avoid calling all the builders individually, especially in a multipatch geometry with several patches.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>ExecSpace</code> The space (CPU/GPU) where the calculations are carried out. </li>
-<li><code>MemorySpace</code> The space (CPU/GPU) where the coefficients and values are stored. </li>
-<li><code>BSplineOnPatch</code> A type alias which provides the BSpline type along which the splines are built. </li>
-<li><code>GridOnPatch</code> A type alias which provides the Grid type along which the interpolation points of the splines are found. </li>
-<li><code>SBCLower</code> The lower spline closure. </li>
-<li><code>SBCUpper</code> The upper spline closure. </li>
-<li><code>BcTransition</code> The boundary condition used at the interface between 2 patches. </li>
-<li><code>Connectivity</code> A <a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a> object describing the interfaces between patches. </li>
-<li><code>Solver</code> The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. </li>
-<li><code>ValuesOnPatch</code> A type alias which provides the field type which will be used to pass the values of the function at the interpolation points. The index range of this field type should contain any batch dimensions. </li>
-</ul>
-<h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-splinebuildercollection">function SplineBuilderCollection</h3>
-<p><em>Instantiate the</em> <a href="classSplineBuilderCollection.html"><em><strong>SplineBuilderCollection</strong></em></a> <em>from a std::tuple of all the builder on each patch.</em></p>
-<pre><code class="language-C++">inline explicit SplineBuilderCollection::SplineBuilderCollection (
-    BuilderOnPatch&lt; Patches &gt; const &amp;... builders
-) 
-</code></pre>
-<p><strong>Warning:</strong></p>
-<p>The builders have to be sorted in the same order as the patches in the tuple.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>builders</code> Spline builders for each patch. </li>
-</ul>
-<hr>
+                <div><h1 id="file-interpolation_builder_collectionhpp">File interpolation_builder_collection.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_54175eb71bf3bdb1ca864f2a0d352472.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="interpolation__builder__collection_8hpp.html"><strong>interpolation_builder_collection.hpp</strong></a></p>
+<p><a href="interpolation__builder__collection_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
 
-<h3 id="function-operator">function operator()</h3>
-<p><em>Build the spline representation of each given function.</em> </p>
-<pre><code class="language-C++">inline void SplineBuilderCollection::operator() (
-    MultipatchSplineCoeffs splines,
-    MultipatchValues const &amp; values,
-    std::optional&lt; MultipatchDerivs &gt; derivs_xmin=std::nullopt,
-    std::optional&lt; MultipatchDerivs &gt; derivs_xmax=std::nullopt
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>splines</code> MultipatchField of all the Fields pointing to the spline representations. </li>
-<li><code>values</code> MultipatchField of all the Fields pointing to the function values. </li>
-<li><code>derivs_xmin</code> MultipatchField of all the ConstFields describing the function derivatives at the lower bound. </li>
-<li><code>derivs_xmax</code> MultipatchField of all the ConstFields describing the function derivatives at the upper bound. </li>
-</ul>
-<hr>
+#pragma once
+#include &lt;optional&gt;
+#include &lt;tuple&gt;
+#include &lt;type_traits&gt;
 
-<h3 id="function-splinebuildercollection_1">function ~SplineBuilderCollection</h3>
-<pre><code class="language-C++">SplineBuilderCollection::~SplineBuilderCollection () = default
-</code></pre>
-<hr>
+#include &lt;ddc/ddc.hpp&gt;
+#include &lt;ddc/kernels/splines.hpp&gt;
 
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_collection.hpp</code></p></div>
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "i_interpolation_builder.hpp"
+#include "multipatch_field.hpp"
+#include "multipatch_type.hpp"
+
+template &lt;ddc::concepts::type_seq PatchSeq, ddc::concepts::type_seq BuilderSeq&gt;
+class InterpolationBuilderCollection;
+
+template &lt;concepts::Patch... Patches, concepts::InterpolationBuilder1D... Builders&gt;
+class InterpolationBuilderCollection&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;Builders...&gt;&gt;
+{
+    static_assert(sizeof...(Patches) &gt; 0, "At least one patch must be provided.");
+    static_assert(
+            sizeof...(Patches) == sizeof...(Builders),
+            "There must be exactly one builder per patch.");
+    static_assert(
+            ((std::is_same_v&lt;
+                      interpolation_grid_t&lt;Builders&gt;,
+                      typename Patches::
+                              Grid1&gt; || std::is_same_v&lt;interpolation_grid_t&lt;Builders&gt;, typename Patches::Grid2&gt;)&amp;&amp;...),
+            "The builders must be provided in the same order as the patches and must "
+            "interpolate on one of the grids (Grid1 or Grid2) of their patch.");
+
+    using PatchOrdering = ddc::TypeSeq&lt;Patches...&gt;;
+
+    using FirstBuilder = ddc::type_seq_element_t&lt;0, ddc::TypeSeq&lt;Builders...&gt;&gt;;
+
+public:
+    using exec_space = typename FirstBuilder::exec_space;
+
+    using memory_space = typename FirstBuilder::memory_space;
+
+    using data_type = typename InterpolationBuilderTraits&lt;FirstBuilder&gt;::data_type;
+
+private:
+    static_assert(
+            (std::is_same_v&lt;typename Builders::exec_space, exec_space&gt; &amp;&amp; ...),
+            "All builders must use the same execution space.");
+    static_assert(
+            (std::is_same_v&lt;typename Builders::memory_space, memory_space&gt; &amp;&amp; ...),
+            "All builders must use the same memory space.");
+    static_assert(
+            (std::is_same_v&lt;
+                     typename InterpolationBuilderTraits&lt;Builders&gt;::data_type,
+                     data_type&gt; &amp;&amp; ...),
+            "All builders must use the same data type.");
+
+    template &lt;class Patch&gt;
+    using BuilderOnPatch = ddc::type_seq_element_t&lt;
+            ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;,
+            ddc::TypeSeq&lt;Builders...&gt;&gt;;
+
+    template &lt;class Patch&gt;
+    using Traits = InterpolationBuilderTraits&lt;BuilderOnPatch&lt;Patch&gt;&gt;;
+
+    template &lt;class Patch, class ValuesType&gt;
+    using CoeffsOnPatch
+            = Field&lt;data_type,
+                    typename Traits&lt;Patch&gt;::template batched_basis_idx_range_type&lt;
+                            typename ValuesType::discrete_domain_type&gt;,
+                    memory_space&gt;;
+
+    template &lt;class Patch, class ValuesType&gt;
+    using DerivsOnPatch = ConstField&lt;
+            data_type,
+            typename Traits&lt;Patch&gt;::template batched_derivs_idx_range_type&lt;
+                    typename ValuesType::discrete_domain_type&gt;,
+            memory_space&gt;;
+
+    template &lt;class MultipatchValues&gt;
+    using MultipatchCoeffs = detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;CoeffsOnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchValues&gt;
+    using MultipatchDerivs = detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;DerivsOnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class Patch&gt;
+    using IdxRangeInterpolationOnPatch = typename Traits&lt;Patch&gt;::interpolation_idx_range_type;
+
+    template &lt;class Patch&gt;
+    using IdxRangeCoeffOnPatch = typename Traits&lt;Patch&gt;::coeff_idx_range_type;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using MultipatchIdxRangeBatchedBasis = detail::MultipatchType&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;typename Traits&lt;Patches&gt;::template batched_basis_idx_range_type&lt;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;typename Traits&lt;Patches&gt;::template batched_derivs_idx_range_type&lt;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    using BuilderTuple = std::tuple&lt;Builders const&amp;...&gt;;
+
+    BuilderTuple const m_builders;
+
+public:
+    using interpolation_idx_range_type = MultipatchType&lt;IdxRangeInterpolationOnPatch, Patches...&gt;;
+
+    using coeff_idx_range_type = MultipatchType&lt;IdxRangeCoeffOnPatch, Patches...&gt;;
+
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv&lt;MultipatchIdxRangeBatched&gt;;
+
+private:
+    template &lt;class Patch&gt;
+    BuilderOnPatch&lt;Patch&gt; const&amp; get_builder() const
+    {
+        return std::get&lt;ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;&gt;(m_builders);
+    }
+
+    template &lt;class Patch, class MultipatchDerivsType&gt;
+    std::optional&lt;typename MultipatchDerivsType::template TypeOnPatch&lt;Patch&gt;&gt; get_deriv_value(
+            std::optional&lt;MultipatchDerivsType&gt; derivs) const
+    {
+        if (derivs.has_value()) {
+            return derivs-&gt;template get&lt;Patch&gt;();
+        } else {
+            return std::nullopt;
+        }
+    }
+
+public:
+    explicit InterpolationBuilderCollection(Builders const&amp;... builders)
+        : m_builders(std::tie(builders...)) {};
+
+
+    ~InterpolationBuilderCollection() = default;
+
+    template &lt;class MultipatchValues&gt;
+    void operator()(
+            MultipatchCoeffs&lt;MultipatchValues&gt; coeffs,
+            MultipatchValues const&amp; values,
+            std::optional&lt;MultipatchDerivs&lt;MultipatchValues&gt;&gt; derivs_xmin = std::nullopt,
+            std::optional&lt;MultipatchDerivs&lt;MultipatchValues&gt;&gt; derivs_xmax = std::nullopt) const
+            requires(is_multipatch_field_v&lt;MultipatchValues&gt;)
+    {
+        (get_builder&lt;Patches&gt;()(
+                 coeffs.template get&lt;Patches&gt;(),
+                 get_const_field(values.template get&lt;Patches&gt;()),
+                 get_deriv_value&lt;Patches&gt;(derivs_xmin),
+                 get_deriv_value&lt;Patches&gt;(derivs_xmax)),
+         ...);
+    };
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt; const batched_basis_idx_ranges(
+            MultipatchIdxRangeBatched idx_ranges) const
+    {
+        return MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt;(batched_basis_idx_range(
+                get_builder&lt;Patches&gt;(),
+                idx_ranges.template get&lt;Patches&gt;())...);
+    };
+};
+</code></pre></div>
               
             </div>
           </div><footer>

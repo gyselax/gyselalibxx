@@ -336,6 +336,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interpolation/index.html">Interpolation on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -1135,7 +1141,7 @@ inline KOKKOS_FUNCTION double MultipatchSplineEvaluator2D::operator() (
     MultipatchSplineCoeff const &amp; patches_splines
 ) const
 </code></pre>
-<p>The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder2D or <a href="classSplineBuilder2DCollection.html"><strong>SplineBuilder2DCollection</strong></a>. The coordinate is defined on one patch. But it can be physically located on another patch.</p>
+<p>The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder2D or <a href="classInterpolationBuilder2DCollection.html"><strong>InterpolationBuilder2DCollection</strong></a>. The coordinate is defined on one patch. But it can be physically located on another patch.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>StoringPatch</code> <a href="structPatch.html"><strong>Patch</strong></a> type where the given coordinate is stored. It does not mean that the coordinate is physically located on the patch. </li>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File spline_builder_2d_collection.hpp - GyselalibX</title>
+    <title>File interpolation_builder_2d_collection.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File spline_builder_2d_collection.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/spline__builder__2d__collection_8hpp.md";
+        var mkdocs_page_name = "File interpolation_builder_2d_collection.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/interpolation__builder__2d__collection_8hpp_source.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -336,6 +336,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interpolation/index.html">Interpolation on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -565,9 +571,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File spline_builder_2d_collection.hpp</li>
+      <li class="breadcrumb-item active">File interpolation_builder_2d_collection.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/spline__builder__2d__collection_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/interpolation__builder__2d__collection_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,41 +581,386 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-spline_builder_2d_collectionhpp">File spline_builder_2d_collection.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_7740c6927b2da0a836b00bedb040a06d.html"><strong>multipatch</strong></a> <strong>&gt;</strong> <a href="dir_729d943c83b6b5573a69e28a4db4673a.html"><strong>spline</strong></a> <strong>&gt;</strong> <a href="spline__builder__2d__collection_8hpp.html"><strong>spline_builder_2d_collection.hpp</strong></a></p>
-<p><a href="spline__builder__2d__collection_8hpp_source.html">Go to the source code of this file</a></p>
-<ul>
-<li><code>#include &lt;cassert&gt;</code></li>
-<li><code>#include &lt;tuple&gt;</code></li>
-<li><code>#include &lt;utility&gt;</code></li>
-<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
-<li><code>#include "connectivity_details.hpp"</code></li>
-<li><code>#include "ddc_aliases.hpp"</code></li>
-<li><code>#include "edge.hpp"</code></li>
-<li><code>#include "i_interpolation_builder.hpp"</code></li>
-<li><code>#include "multipatch_field.hpp"</code></li>
-<li><code>#include "multipatch_type.hpp"</code></li>
-<li><code>#include "spline_builder_deriv_field_2d.hpp"</code></li>
-<li><code>#include "types.hpp"</code></li>
-</ul>
-<h2 id="classes">Classes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classSplineBuilder2DCollection.html"><strong>SplineBuilder2DCollection</strong></a> &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, SBCLower1, SBCUpper1, SBCLower2, SBCUpper2, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br><em>A class to call all the builders of all the patches once.</em></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_2d_collection.hpp</code></p></div>
+                <div><h1 id="file-interpolation_builder_2d_collectionhpp">File interpolation_builder_2d_collection.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_54175eb71bf3bdb1ca864f2a0d352472.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="interpolation__builder__2d__collection_8hpp.html"><strong>interpolation_builder_2d_collection.hpp</strong></a></p>
+<p><a href="interpolation__builder__2d__collection_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+
+#pragma once
+#include &lt;optional&gt;
+#include &lt;tuple&gt;
+#include &lt;type_traits&gt;
+
+#include &lt;ddc/ddc.hpp&gt;
+#include &lt;ddc/kernels/splines.hpp&gt;
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "i_interpolation_builder.hpp"
+#include "multipatch_field.hpp"
+#include "multipatch_type.hpp"
+#include "spline_builder_deriv_field_2d.hpp"
+#include "types.hpp"
+
+namespace detail {
+
+template &lt;class Builder&gt;
+inline constexpr bool is_ddc_spline_builder_2d_v = false;
+
+template &lt;
+        class ExecSpace,
+        class MemorySpace,
+        class BSpline1,
+        class BSpline2,
+        class InterpolationDDim1,
+        class InterpolationDDim2,
+        ddc::SplineBuilderClosure BcLower1,
+        ddc::SplineBuilderClosure BcUpper1,
+        ddc::SplineBuilderClosure BcLower2,
+        ddc::SplineBuilderClosure BcUpper2,
+        ddc::SplineSolver Solver&gt;
+inline constexpr bool is_ddc_spline_builder_2d_v&lt;ddc::SplineBuilder2D&lt;
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        Solver&gt;&gt; = true;
+
+} // namespace detail
+
+template &lt;ddc::concepts::type_seq PatchSeq, ddc::concepts::type_seq BuilderSeq&gt;
+class InterpolationBuilder2DCollection;
+
+template &lt;concepts::Patch... Patches, concepts::InterpolationBuilder... Builders&gt;
+class InterpolationBuilder2DCollection&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;Builders...&gt;&gt;
+{
+    static_assert(sizeof...(Patches) &gt; 0, "At least one patch must be provided.");
+    static_assert(
+            sizeof...(Patches) == sizeof...(Builders),
+            "There must be exactly one builder per patch.");
+    static_assert(
+            ((InterpolationBuilderTraits&lt;Builders&gt;::rank() == 2) &amp;&amp; ...),
+            "All builders must be 2D builders.");
+
+    using PatchOrdering = ddc::TypeSeq&lt;Patches...&gt;;
+
+    using FirstBuilder = ddc::type_seq_element_t&lt;0, ddc::TypeSeq&lt;Builders...&gt;&gt;;
+
+public:
+    using exec_space = typename FirstBuilder::exec_space;
+
+    using memory_space = typename FirstBuilder::memory_space;
+
+    using data_type = typename InterpolationBuilderTraits&lt;FirstBuilder&gt;::data_type;
+
+private:
+    static_assert(
+            (std::is_same_v&lt;typename Builders::exec_space, exec_space&gt; &amp;&amp; ...),
+            "All builders must use the same execution space.");
+    static_assert(
+            (std::is_same_v&lt;typename Builders::memory_space, memory_space&gt; &amp;&amp; ...),
+            "All builders must use the same memory space.");
+    static_assert(
+            (std::is_same_v&lt;
+                     typename InterpolationBuilderTraits&lt;Builders&gt;::data_type,
+                     data_type&gt; &amp;&amp; ...),
+            "All builders must use the same data type.");
+
+    template &lt;class Patch&gt;
+    using BuilderOnPatch = ddc::type_seq_element_t&lt;
+            ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;,
+            ddc::TypeSeq&lt;Builders...&gt;&gt;;
+
+    template &lt;class Patch&gt;
+    using Traits = InterpolationBuilderTraits&lt;BuilderOnPatch&lt;Patch&gt;&gt;;
+
+    static_assert(
+            (std::is_same_v&lt;
+                     typename Traits&lt;Patches&gt;::interpolation_idx_range_type,
+                     IdxRange&lt;typename Patches::Grid1, typename Patches::Grid2&gt;&gt; &amp;&amp; ...),
+            "The builders must be provided in the same order as the patches and must "
+            "interpolate on the grids (Grid1, Grid2) of their patch.");
+
+    template &lt;class FieldType&gt;
+    struct ValuesIdxRange
+    {
+        using type = typename FieldType::discrete_domain_type;
+    };
+
+    template &lt;class FieldType&gt;
+    requires(is_deriv_field_v&lt;FieldType&gt;) struct ValuesIdxRange&lt;FieldType&gt;
+    {
+        using type = typename FieldType::physical_idx_range_type;
+    };
+
+    template &lt;class Patch, class ValuesType&gt;
+    using CoeffsOnPatch
+            = Field&lt;data_type,
+                    typename Traits&lt;Patch&gt;::template batched_basis_idx_range_type&lt;
+                            typename ValuesIdxRange&lt;ValuesType&gt;::type&gt;,
+                    memory_space&gt;;
+
+    template &lt;class Patch, class ValuesType&gt;
+    using Derivs1OnPatch = ConstField&lt;
+            data_type,
+            ddc::replace_dim_of_t&lt;
+                    typename ValuesType::discrete_domain_type,
+                    typename Patch::Grid1,
+                    ddc::Deriv&lt;typename Patch::Dim1&gt;&gt;,
+            memory_space&gt;;
+
+    template &lt;class Patch, class ValuesType&gt;
+    using Derivs2OnPatch = ConstField&lt;
+            data_type,
+            ddc::replace_dim_of_t&lt;
+                    typename ValuesType::discrete_domain_type,
+                    typename Patch::Grid2,
+                    ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;,
+            memory_space&gt;;
+
+    template &lt;class Patch, class BatchedIdxRange&gt;
+    using batched_derivs_idx_range_type_on_patch = ddc::replace_dim_of_t&lt;
+            ddc::replace_dim_of_t&lt;
+                    BatchedIdxRange,
+                    typename Patch::Grid1,
+                    ddc::Deriv&lt;typename Patch::Dim1&gt;&gt;,
+            typename Patch::Grid2,
+            ddc::Deriv&lt;typename Patch::Dim2&gt;&gt;;
+
+    template &lt;class Patch, class ValuesType&gt;
+    using Derivs12OnPatch = ConstField&lt;
+            data_type,
+            batched_derivs_idx_range_type_on_patch&lt;
+                    Patch,
+                    typename ValuesType::discrete_domain_type&gt;,
+            memory_space&gt;;
+
+    template &lt;class Patch&gt;
+    using DerivConstFieldOnPatch = DerivConstField&lt;
+            data_type,
+            IdxRange&lt;
+                    ddc::Deriv&lt;typename Patch::Dim1&gt;,
+                    typename Patch::Grid1,
+                    ddc::Deriv&lt;typename Patch::Dim2&gt;,
+                    typename Patch::Grid2&gt;,
+            memory_space&gt;;
+
+    template &lt;class Patch&gt;
+    using IdxRangeInterpolationOnPatch = typename Traits&lt;Patch&gt;::interpolation_idx_range_type;
+
+    template &lt;class Patch&gt;
+    using IdxRangeCoeffOnPatch = typename Traits&lt;Patch&gt;::coeff_idx_range_type;
+
+    template &lt;class MultipatchValues&gt;
+    using MultipatchCoeffs = detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;CoeffsOnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchValues&gt;
+    using MultipatchDerivs1 = detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;Derivs1OnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchValues&gt;
+    using MultipatchDerivs2 = detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;Derivs2OnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchValues&gt;
+    using MultipatchDerivs12 = detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;Derivs12OnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    using MultipatchDerivField = MultipatchField&lt;DerivConstFieldOnPatch, Patches...&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using MultipatchIdxRangeBatchedBasis = detail::MultipatchType&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;typename Traits&lt;Patches&gt;::template batched_basis_idx_range_type&lt;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using MultipatchIdxRangeBatchedDeriv = detail::MultipatchType&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;batched_derivs_idx_range_type_on_patch&lt;
+                    Patches,
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;;
+
+    using BuilderTuple = std::tuple&lt;Builders const&amp;...&gt;;
+
+    BuilderTuple const m_builders;
+
+public:
+    using interpolation_idx_range_type = MultipatchType&lt;IdxRangeInterpolationOnPatch, Patches...&gt;;
+
+    using coeff_idx_range_type = MultipatchType&lt;IdxRangeCoeffOnPatch, Patches...&gt;;
+
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using batched_basis_idx_range_type = MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt;;
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    using batched_derivs_idx_range_type = MultipatchIdxRangeBatchedDeriv&lt;MultipatchIdxRangeBatched&gt;;
+
+private:
+    template &lt;class Patch&gt;
+    BuilderOnPatch&lt;Patch&gt; const&amp; get_builder() const
+    {
+        return std::get&lt;ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;&gt;(m_builders);
+    }
+
+    template &lt;class Patch, class MultipatchDerivs&gt;
+    std::optional&lt;typename MultipatchDerivs::template TypeOnPatch&lt;Patch&gt;&gt; get_deriv_value(
+            std::optional&lt;MultipatchDerivs&gt; derivs) const
+    {
+        if (derivs.has_value()) {
+            return derivs-&gt;template get&lt;Patch&gt;();
+        } else {
+            return std::nullopt;
+        }
+    }
+
+public:
+    explicit InterpolationBuilder2DCollection(Builders const&amp;... builders)
+        : m_builders(std::tie(builders...)) {};
+
+
+    ~InterpolationBuilder2DCollection() = default;
+
+    template &lt;class MultipatchValues&gt;
+    void operator()(
+            MultipatchCoeffs&lt;MultipatchValues&gt; coeffs,
+            MultipatchValues const&amp; values,
+            std::optional&lt;MultipatchDerivs1&lt;MultipatchValues&gt;&gt; derivs_min1 = std::nullopt,
+            std::optional&lt;MultipatchDerivs1&lt;MultipatchValues&gt;&gt; derivs_max1 = std::nullopt,
+            std::optional&lt;MultipatchDerivs2&lt;MultipatchValues&gt;&gt; derivs_min2 = std::nullopt,
+            std::optional&lt;MultipatchDerivs2&lt;MultipatchValues&gt;&gt; derivs_max2 = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&lt;MultipatchValues&gt;&gt; cross_derivs_min1_min2
+            = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&lt;MultipatchValues&gt;&gt; cross_derivs_max1_min2
+            = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&lt;MultipatchValues&gt;&gt; cross_derivs_min1_max2
+            = std::nullopt,
+            std::optional&lt;MultipatchDerivs12&lt;MultipatchValues&gt;&gt; cross_derivs_max1_max2
+            = std::nullopt) const
+            requires(
+                    is_multipatch_field_v&lt;
+                            MultipatchValues&gt; &amp;&amp; (!is_deriv_field_v&lt;typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt; &amp;&amp; ...))
+    {
+        (apply_builder&lt;Patches&gt;(
+                 coeffs.template get&lt;Patches&gt;(),
+                 get_const_field(values.template get&lt;Patches&gt;()),
+                 get_deriv_value&lt;Patches&gt;(derivs_min1),
+                 get_deriv_value&lt;Patches&gt;(derivs_max1),
+                 get_deriv_value&lt;Patches&gt;(derivs_min2),
+                 get_deriv_value&lt;Patches&gt;(derivs_max2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_min1_min2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_max1_min2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_min1_max2),
+                 get_deriv_value&lt;Patches&gt;(cross_derivs_max1_max2)),
+         ...);
+    };
+
+    void operator()(
+            MultipatchCoeffs&lt;MultipatchDerivField&gt; coeffs,
+            MultipatchDerivField functions_and_derivs) const
+    {
+        (apply_builder&lt;Patches&gt;(
+                 coeffs.template get&lt;Patches&gt;(),
+                 functions_and_derivs.template get&lt;Patches&gt;()),
+         ...);
+    };
+
+    template &lt;class MultipatchIdxRangeBatched&gt;
+    MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt; const batched_basis_idx_ranges(
+            MultipatchIdxRangeBatched idx_ranges) const
+    {
+        return MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt;(batched_basis_idx_range(
+                get_builder&lt;Patches&gt;(),
+                idx_ranges.template get&lt;Patches&gt;())...);
+    };
+
+private:
+    template &lt;
+            class Patch,
+            class CoeffsField,
+            class ValuesField,
+            class Derivs1,
+            class Derivs2,
+            class Derivs12&gt;
+    void apply_builder(
+            CoeffsField coeffs,
+            ValuesField values,
+            std::optional&lt;Derivs1&gt; derivs_min1,
+            std::optional&lt;Derivs1&gt; derivs_max1,
+            std::optional&lt;Derivs2&gt; derivs_min2,
+            std::optional&lt;Derivs2&gt; derivs_max2,
+            std::optional&lt;Derivs12&gt; cross_derivs_min1_min2,
+            std::optional&lt;Derivs12&gt; cross_derivs_max1_min2,
+            std::optional&lt;Derivs12&gt; cross_derivs_min1_max2,
+            std::optional&lt;Derivs12&gt; cross_derivs_max1_max2) const
+    {
+        if constexpr (detail::is_ddc_spline_builder_2d_v&lt;BuilderOnPatch&lt;Patch&gt;&gt;) {
+            get_builder&lt;Patch&gt;()(
+                    coeffs,
+                    values,
+                    derivs_min1,
+                    derivs_max1,
+                    derivs_min2,
+                    derivs_max2,
+                    cross_derivs_min1_min2,
+                    cross_derivs_max1_min2,
+                    cross_derivs_min1_max2,
+                    cross_derivs_max1_max2);
+        } else {
+            get_builder&lt;Patch&gt;()(coeffs, values);
+        }
+    };
+
+    template &lt;class Patch&gt;
+    void apply_builder(
+            CoeffsOnPatch&lt;Patch, DerivConstFieldOnPatch&lt;Patch&gt;&gt; coeffs,
+            DerivConstFieldOnPatch&lt;Patch&gt; function_and_deriv) const
+    {
+        using Builder = BuilderOnPatch&lt;Patch&gt;;
+        if constexpr (detail::is_ddc_spline_builder_2d_v&lt;Builder&gt;) {
+            using BasisSeq = ddc::to_type_seq_t&lt;typename Traits&lt;Patch&gt;::coeff_idx_range_type&gt;;
+            SplineBuilderDerivField2D&lt;
+                    exec_space,
+                    ddc::type_seq_element_t&lt;0, BasisSeq&gt;,
+                    ddc::type_seq_element_t&lt;1, BasisSeq&gt;,
+                    typename Patch::Grid1,
+                    typename Patch::Grid2,
+                    Builder::builder_type1::s_sbc_xmin,
+                    Builder::builder_type1::s_sbc_xmax,
+                    Builder::builder_type2::s_sbc_xmin,
+                    Builder::builder_type2::s_sbc_xmax&gt;
+                    builder_applier(get_builder&lt;Patch&gt;());
+            builder_applier(coeffs, function_and_deriv);
+        } else {
+            get_builder&lt;Patch&gt;()(coeffs, get_const_field(function_and_deriv.get_values_field()));
+        }
+    };
+};
+</code></pre></div>
               
             </div>
           </div><footer>

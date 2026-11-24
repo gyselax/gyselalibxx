@@ -1,0 +1,708 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4" kind="class" language="C++" prot="public">
+    <compoundname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</compoundname>
+    <includes refid="interpolation__builder__collection_8hpp" local="no">interpolation_builder_collection.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>concepts::Patch...</type>
+        <declname>Patches</declname>
+        <defname>Patches</defname>
+      </param>
+      <param>
+        <type>concepts::InterpolationBuilder1D...</type>
+        <declname>Builders</declname>
+        <defname>Builders</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a5da855aab2cefc68e58532d38b60c62c" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; Patches... &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::PatchOrdering =  ddc::TypeSeq&lt;Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>PatchOrdering</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::PatchOrdering</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ab257aab3ab27ae6537e058a046c0c9c3" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, ddc::TypeSeq&lt; Builders... &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::FirstBuilder =  ddc::type_seq_element_t&lt;0, ddc::TypeSeq&lt;Builders...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>FirstBuilder</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::FirstBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a6bdb47c5483e6bc402cda2a19f2482eb" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, PatchOrdering &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::BuilderOnPatch =  ddc::type_seq_element_t&lt;
+            ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;,
+            ddc::TypeSeq&lt;Builders...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>BuilderOnPatch</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::BuilderOnPatch</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the builder type on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a27f63f9535bea51658f90fa816c3d909" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; BuilderOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::Traits =  InterpolationBuilderTraits&lt;BuilderOnPatch&lt;Patch&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>Traits</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::Traits</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the traits of the builder on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac51bdd0d4e1162d7b2083de20fd35afe" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+          <param>
+            <type>class ValuesType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aa0bc7dffcae03b40d70c3f294a519135" kindref="member">data_type</ref>, typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::template <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a7f5eaac261d3d73b70ad0461026668f9" kindref="member">batched_basis_idx_range_type</ref>&lt; typename ValuesType::discrete_domain_type &gt;, <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aefdcb9d99907886a541d3a960a594367" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::CoeffsOnPatch =  Field&lt;data_type,
+                    typename Traits&lt;Patch&gt;::template batched_basis_idx_range_type&lt;
+                            typename ValuesType::discrete_domain_type&gt;,
+                    memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoeffsOnPatch</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::CoeffsOnPatch</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the batched interpolation coefficients on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a2f929ea670e60e715c5af1a55199fc5a" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+          <param>
+            <type>class ValuesType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aa0bc7dffcae03b40d70c3f294a519135" kindref="member">data_type</ref>, typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::template <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a85fe691fc2cb082a2ff476a99710ce67" kindref="member">batched_derivs_idx_range_type</ref>&lt; typename ValuesType::discrete_domain_type &gt;, <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aefdcb9d99907886a541d3a960a594367" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::DerivsOnPatch =  ConstField&lt;
+            data_type,
+            typename Traits&lt;Patch&gt;::template batched_derivs_idx_range_type&lt;
+                    typename ValuesType::discrete_domain_type&gt;,
+            memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivsOnPatch</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::DerivsOnPatch</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the batched derivatives on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3133d53d42382e15894a72adfb5a90b5" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchValues</type>
+          </param>
+        </templateparamlist>
+        <type>detail::MultipatchField&lt; PatchOrdering, ddc::TypeSeq&lt; CoeffsOnPatch&lt; Patches, typename MultipatchValues::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchCoeffs =  detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;CoeffsOnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchCoeffs</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchCoeffs</qualifiedname>
+        <briefdescription>
+<para>The type of the batched interpolation coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="118" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ab195850fd94ddd8766d3a8ea5505c33a" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchValues</type>
+          </param>
+        </templateparamlist>
+        <type>detail::MultipatchField&lt; PatchOrdering, ddc::TypeSeq&lt; DerivsOnPatch&lt; Patches, typename MultipatchValues::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchDerivs =  detail::MultipatchField&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;DerivsOnPatch&lt;
+                    Patches,
+                    typename MultipatchValues::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchDerivs</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchDerivs</qualifiedname>
+        <briefdescription>
+<para>The type of the batched derivatives. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="126" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac3be4b90f8e7707a60eeeb0ec3eb10a4" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a8e82c1b4d175f171492fac8b8cab8d0e" kindref="member">::interpolation_idx_range_type</ref></type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::IdxRangeInterpolationOnPatch =  typename Traits&lt;Patch&gt;::interpolation_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeInterpolationOnPatch</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::IdxRangeInterpolationOnPatch</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the interpolation index range on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="134" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1abef101dc2690c2808dbdb8c70cbd8d01" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1adbfcd9db643afea8592abe8d96aff724" kindref="member">::coeff_idx_range_type</ref></type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::IdxRangeCoeffOnPatch =  typename Traits&lt;Patch&gt;::coeff_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeCoeffOnPatch</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::IdxRangeCoeffOnPatch</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the coefficient index range on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="138" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3126331b71aae30caebb34ed3f65fb3a" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchIdxRangeBatched</type>
+          </param>
+        </templateparamlist>
+        <type>detail::MultipatchType&lt; PatchOrdering, ddc::TypeSeq&lt; typename Traits&lt; Patches &gt;::template <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a7f5eaac261d3d73b70ad0461026668f9" kindref="member">batched_basis_idx_range_type</ref>&lt; typename MultipatchIdxRangeBatched::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchIdxRangeBatchedBasis =  detail::MultipatchType&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;typename Traits&lt;Patches&gt;::template batched_basis_idx_range_type&lt;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchIdxRangeBatchedBasis</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchIdxRangeBatchedBasis</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="141" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1acd51e7f8771034acdb76bf9e02eb80b5" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchIdxRangeBatched</type>
+          </param>
+        </templateparamlist>
+        <type>detail::MultipatchType&lt; PatchOrdering, ddc::TypeSeq&lt; typename Traits&lt; Patches &gt;::template <ref refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a85fe691fc2cb082a2ff476a99710ce67" kindref="member">batched_derivs_idx_range_type</ref>&lt; typename MultipatchIdxRangeBatched::template TypeOnPatch&lt; Patches &gt; &gt;... &gt; &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchIdxRangeBatchedDeriv =  detail::MultipatchType&lt;
+            PatchOrdering,
+            ddc::TypeSeq&lt;typename Traits&lt;Patches&gt;::template batched_derivs_idx_range_type&lt;
+                    typename MultipatchIdxRangeBatched::template TypeOnPatch&lt;Patches&gt;&gt;...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchIdxRangeBatchedDeriv</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::MultipatchIdxRangeBatchedDeriv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="147" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ade1d7835addac902370d99414198ad91" prot="private" static="no">
+        <type>std::tuple&lt; Builders const  &amp;... &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::BuilderTuple =  std::tuple&lt;Builders const&amp;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>BuilderTuple</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::BuilderTuple</qualifiedname>
+        <briefdescription>
+<para>The type of the internal storage of the builders. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="153" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ae02e528ad9bf34b7f9d4a271642c4f8b" prot="public" static="no">
+        <type>typename FirstBuilder::exec_space</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::exec_space =  typename FirstBuilder::exec_space</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::exec_space</qualifiedname>
+        <briefdescription>
+<para>Execution space. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aefdcb9d99907886a541d3a960a594367" prot="public" static="no">
+        <type>typename FirstBuilder::memory_space</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::memory_space =  typename FirstBuilder::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::memory_space</qualifiedname>
+        <briefdescription>
+<para>Memory space. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aa0bc7dffcae03b40d70c3f294a519135" prot="public" static="no">
+        <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FirstBuilder &gt;::data_type</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::data_type =  typename InterpolationBuilderTraits&lt;FirstBuilder&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a8e82c1b4d175f171492fac8b8cab8d0e" prot="public" static="no">
+        <type>MultipatchType&lt; IdxRangeInterpolationOnPatch, Patches... &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::interpolation_idx_range_type =  MultipatchType&lt;IdxRangeInterpolationOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>interpolation_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::interpolation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The 1D index range for the interpolation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="159" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1adbfcd9db643afea8592abe8d96aff724" prot="public" static="no">
+        <type>MultipatchType&lt; IdxRangeCoeffOnPatch, Patches... &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::coeff_idx_range_type =  MultipatchType&lt;IdxRangeCoeffOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The index range for the interpolation coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="162" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a7f5eaac261d3d73b70ad0461026668f9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchIdxRangeBatched</type>
+          </param>
+        </templateparamlist>
+        <type>MultipatchIdxRangeBatchedBasis&lt; MultipatchIdxRangeBatched &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::batched_basis_idx_range_type =  MultipatchIdxRangeBatchedBasis&lt;MultipatchIdxRangeBatched&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_basis_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::batched_basis_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Multi-patch batched domain with the interpolation grids replaced by the basis grids. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="172" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a85fe691fc2cb082a2ff476a99710ce67" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchIdxRangeBatched</type>
+          </param>
+        </templateparamlist>
+        <type>MultipatchIdxRangeBatchedDeriv&lt; MultipatchIdxRangeBatched &gt;</type>
+        <definition>using InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::batched_derivs_idx_range_type =  MultipatchIdxRangeBatchedDeriv&lt;MultipatchIdxRangeBatched&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_derivs_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::batched_derivs_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Multi-patch batched domain with the interpolation grids replaced by deriv types. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="176" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="176" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3ee083e9c85a51456d194897711da6a0" prot="private" static="no" mutable="no">
+        <type>BuilderTuple const</type>
+        <definition>BuilderTuple const InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::m_builders</definition>
+        <argsstring></argsstring>
+        <name>m_builders</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::m_builders</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="155" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aedc2c4cfa0516c69b90919bd269ca0ad" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static constexpr std::size_t InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="165" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="165" bodyend="168"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a1dcc328d5904380315fe49bca42efdf6" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>BuilderOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; const &amp;</type>
+        <definition>BuilderOnPatch&lt; Patch &gt; const  &amp; InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::get_builder</definition>
+        <argsstring>() const</argsstring>
+        <name>get_builder</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::get_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="180" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a66da85cd65030f213ce9098f80dabf2a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+          <param>
+            <type>class MultipatchDerivsType</type>
+          </param>
+        </templateparamlist>
+        <type>std::optional&lt; typename MultipatchDerivsType::template TypeOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>std::optional&lt; typename MultipatchDerivsType::template TypeOnPatch&lt; Patch &gt; &gt; InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::get_deriv_value</definition>
+        <argsstring>(std::optional&lt; MultipatchDerivsType &gt; derivs) const</argsstring>
+        <name>get_deriv_value</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::get_deriv_value</qualifiedname>
+        <param>
+          <type>std::optional&lt; MultipatchDerivsType &gt;</type>
+          <declname>derivs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="186" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="186" bodyend="194"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aec71bebbe21e7bafd6a0d33d10c0ca2d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::InterpolationBuilderCollection</definition>
+        <argsstring>(Builders const &amp;... builders)</argsstring>
+        <name>InterpolationBuilderCollection</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::InterpolationBuilderCollection</qualifiedname>
+        <param>
+          <type>Builders const &amp;...</type>
+          <declname>builders</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate the <ref refid="classInterpolationBuilderCollection" kindref="compound">InterpolationBuilderCollection</ref> from the builders on each patch. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>The builders have to be sorted in the same order as the patches.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>builders</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolation builders for each patch. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="204" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="204" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aaee0889d98f6cff9c810613f9306c318" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::~InterpolationBuilderCollection</definition>
+        <argsstring>()=default</argsstring>
+        <name>~InterpolationBuilderCollection</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::~InterpolationBuilderCollection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="208" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac7c0026e196a36643371870fad90ffaa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchValues</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::operator()</definition>
+        <argsstring>(MultipatchCoeffs&lt; MultipatchValues &gt; coeffs, MultipatchValues const &amp;values, std::optional&lt; MultipatchDerivs&lt; MultipatchValues &gt; &gt; derivs_xmin=std::nullopt, std::optional&lt; MultipatchDerivs&lt; MultipatchValues &gt; &gt; derivs_xmax=std::nullopt) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::operator()</qualifiedname>
+        <param>
+          <type>MultipatchCoeffs&lt; MultipatchValues &gt;</type>
+          <declname>coeffs</declname>
+        </param>
+        <param>
+          <type>MultipatchValues const &amp;</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; MultipatchDerivs&lt; MultipatchValues &gt; &gt;</type>
+          <declname>derivs_xmin</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; MultipatchDerivs&lt; MultipatchValues &gt; &gt;</type>
+          <declname>derivs_xmax</declname>
+          <defval>std::nullopt</defval>
+        </param>
+    <requiresclause>(is_multipatch_field_v&lt;MultipatchValues&gt;)    </requiresclause>
+        <briefdescription>
+<para>Build the interpolation coefficients of each given function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchField of all the Fields pointing to the interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchField of all the Fields pointing to the function values. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>derivs_xmin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchField of all the ConstFields describing the function derivatives at the lower bound. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>derivs_xmax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchField of all the ConstFields describing the function derivatives at the upper bound.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>MultipatchValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the MultipatchField containing the function values. The index range of each field may contain batch dimensions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="222" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="222" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a59f7654a990f80d76377aafd6b279951" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchIdxRangeBatched</type>
+          </param>
+        </templateparamlist>
+        <type>MultipatchIdxRangeBatchedBasis&lt; MultipatchIdxRangeBatched &gt; const</type>
+        <definition>MultipatchIdxRangeBatchedBasis&lt; MultipatchIdxRangeBatched &gt; const InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::batched_basis_idx_ranges</definition>
+        <argsstring>(MultipatchIdxRangeBatched idx_ranges) const</argsstring>
+        <name>batched_basis_idx_ranges</name>
+        <qualifiedname>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::batched_basis_idx_ranges</qualifiedname>
+        <param>
+          <type>MultipatchIdxRangeBatched</type>
+          <declname>idx_ranges</declname>
+        </param>
+        <briefdescription>
+<para>Get a MultipatchType collecting the index ranges typed on the whole basis dimensions. These index ranges are adapted to allocate interpolation coefficients on the multi-patch domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_ranges</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchType collecting the (batched) index ranges on the grids of the patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a MultipatchType collecting the index ranges typed on the whole basis dimensions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="244" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="244" bodyend="250"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to call all the builders of all the patches once. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>See the documentation of the primary template.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Patches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Builders</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D interpolation builders on each patch, in the same order as the patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp" bodystart="51" bodyend="252"/>
+    <listofallmembers>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a7f5eaac261d3d73b70ad0461026668f9" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>batched_basis_idx_range_type</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a59f7654a990f80d76377aafd6b279951" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>batched_basis_idx_ranges</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a85fe691fc2cb082a2ff476a99710ce67" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a6bdb47c5483e6bc402cda2a19f2482eb" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>BuilderOnPatch</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ade1d7835addac902370d99414198ad91" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>BuilderTuple</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1adbfcd9db643afea8592abe8d96aff724" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>coeff_idx_range_type</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac51bdd0d4e1162d7b2083de20fd35afe" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>CoeffsOnPatch</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aa0bc7dffcae03b40d70c3f294a519135" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a2f929ea670e60e715c5af1a55199fc5a" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>DerivsOnPatch</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ae02e528ad9bf34b7f9d4a271642c4f8b" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>exec_space</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ab257aab3ab27ae6537e058a046c0c9c3" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>FirstBuilder</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a1dcc328d5904380315fe49bca42efdf6" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>get_builder</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a66da85cd65030f213ce9098f80dabf2a" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>get_deriv_value</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1abef101dc2690c2808dbdb8c70cbd8d01" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>IdxRangeCoeffOnPatch</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac3be4b90f8e7707a60eeeb0ec3eb10a4" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>IdxRangeInterpolationOnPatch</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a8e82c1b4d175f171492fac8b8cab8d0e" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>interpolation_idx_range_type</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aec71bebbe21e7bafd6a0d33d10c0ca2d" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>InterpolationBuilderCollection</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3ee083e9c85a51456d194897711da6a0" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>m_builders</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aefdcb9d99907886a541d3a960a594367" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>memory_space</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3133d53d42382e15894a72adfb5a90b5" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>MultipatchCoeffs</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ab195850fd94ddd8766d3a8ea5505c33a" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>MultipatchDerivs</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a3126331b71aae30caebb34ed3f65fb3a" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>MultipatchIdxRangeBatchedBasis</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1acd51e7f8771034acdb76bf9e02eb80b5" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>MultipatchIdxRangeBatchedDeriv</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1ac7c0026e196a36643371870fad90ffaa" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>operator()</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a5da855aab2cefc68e58532d38b60c62c" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>PatchOrdering</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aedc2c4cfa0516c69b90919bd269ca0ad" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>rank</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1a27f63f9535bea51658f90fa816c3d909" prot="private" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>Traits</name></member>
+      <member refid="classInterpolationBuilderCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1TypeSeq_3_01Builders_8_8_8_01_4_01_4_1aaee0889d98f6cff9c810613f9306c318" prot="public" virt="non-virtual"><scope>InterpolationBuilderCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</scope><name>~InterpolationBuilderCollection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

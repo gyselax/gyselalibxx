@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File spline_builder_collection.hpp - GyselalibX</title>
+    <title>Struct InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File spline_builder_collection.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/spline__builder__collection_8hpp.md";
+        var mkdocs_page_name = "Struct InterpolationBuilder2DCollection\u0026lt; ddc::TypeSeq\u0026lt; Patches... \u0026gt;, ddc::TypeSeq\u0026lt; Builders... \u0026gt; \u0026gt;::ValuesIdxRange";
+        var mkdocs_page_input_path = "gyselalibxx/structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -336,6 +336,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interpolation/index.html">Interpolation on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -565,9 +571,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File spline_builder_collection.hpp</li>
+      <li class="breadcrumb-item active">Struct InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/spline__builder__collection_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -575,19 +581,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-spline_builder_collectionhpp">File spline_builder_collection.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_7740c6927b2da0a836b00bedb040a06d.html"><strong>multipatch</strong></a> <strong>&gt;</strong> <a href="dir_729d943c83b6b5573a69e28a4db4673a.html"><strong>spline</strong></a> <strong>&gt;</strong> <a href="spline__builder__collection_8hpp.html"><strong>spline_builder_collection.hpp</strong></a></p>
-<p><a href="spline__builder__collection_8hpp_source.html">Go to the source code of this file</a></p>
-<ul>
-<li><code>#include &lt;cassert&gt;</code></li>
-<li><code>#include &lt;tuple&gt;</code></li>
-<li><code>#include &lt;utility&gt;</code></li>
-<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
-<li><code>#include "ddc_aliases.hpp"</code></li>
-<li><code>#include "multipatch_type.hpp"</code></li>
-</ul>
-<h2 id="classes">Classes</h2>
+                <div><h1 id="struct-interpolationbuilder2dcollection-ddctypeseq-patches-ddctypeseq-builders-valuesidxrange">Struct InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange</h1>
+<p><strong>template &lt;class FieldType&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648.html"><strong>ValuesIdxRange</strong></a></p>
+<p><em>A structure to get the index range of the function values stored in a field.</em> </p>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -597,13 +595,19 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classSplineBuilderCollection.html"><strong>SplineBuilderCollection</strong></a> &lt;class ExecSpace, class MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br><em>A class to call all the builders of all the patches once.</em></td>
+<td style="text-align: right;">typedef typename FieldType::discrete_domain_type</td>
+<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-type">typedef type</h3>
+<pre><code class="language-C++">using InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange&lt; FieldType &gt;::type =  typename FieldType::discrete_domain_type;
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/spline_builder_collection.hpp</code></p></div>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_2d_collection.hpp</code></p></div>
               
             </div>
           </div><footer>

@@ -336,6 +336,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="src/multipatch/interpolation/index.html">Interpolation on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -752,8 +758,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add <code>symmetric_tensor_mul</code> to calculate a tensor multiplication whose result is symmetric.</li>
 <li>Add new helper functions <code>find_point_missing_from_superset</code> and <code>points_are_subset</code>.</li>
 <li>Add <code>TensorProductBSplinePoissonAssembler</code> to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis.</li>
-<li>Add a <code>MultipatchSplineBuilder2D::operator()</code> which takes a <code>DerivField</code>.</li>
-<li>Add <code>MultipatchSplineBuilder2D::spline_idx_ranges()</code> and <code>MultipatchSplineBuilder2D::batched_spline_idx_ranges()</code>.</li>
+<li>Add an <code>InterpolationBuilder2DCollection::operator()</code> which takes a <code>DerivField</code>.</li>
+<li>Add <code>InterpolationBuilderCollection::batched_basis_idx_ranges()</code> and <code>InterpolationBuilder2DCollection::batched_basis_idx_ranges()</code>.</li>
 <li><code>MultipatchSplineEvaluator2D</code> works with <code>DerivField</code>.</li>
 <li>Add <code>InterfacesDerivativeCalculator</code> to compute all the coupled interface derivatives along a direction with the approximation formula.</li>
 <li>Add <code>DerivativeCalculatorCommon</code> to avoid code duplication in operators in <code>src/multipatch/interface_derivatives</code>.</li>
@@ -800,10 +806,11 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Calls to Kokkos profiling's region push/pop were replaced by calls <code>ScopedRegion</code> whenever possible to capture RAII deallocations.</li>
 <li><code>PolarSplineFEMPoissonLikeAssembler</code> uses <code>TensorProductBSplinePoissonAssembler</code> to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.</li>
 <li>Use Spack to install packages in the docker image.</li>
-<li>Rename <code>MultipatchSplineBuilder</code> to <code>SplineBuilderCollection</code>.</li>
-<li>Rename <code>MultipatchSplineBuilder2D</code> to <code>SplineBuilder2DCollection</code>.</li>
+<li>Rename <code>MultipatchSplineBuilder</code> to <code>InterpolationBuilderCollection</code> and move it to <code>src/multipatch/interpolation/</code>.</li>
+<li><code>InterpolationBuilderCollection</code> accepts any 1D interpolation builder (see <code>concepts::InterpolationBuilder1D</code>) and is now templated on a <code>ddc::TypeSeq</code> of the patches and a <code>ddc::TypeSeq</code> of the builders.</li>
+<li><code>InterpolationBuilderCollection</code> is no longer templated on the values type (the same type is valid for different batches).</li>
 <li>Move non-analytical type aliases from <code>IPartialDerivative</code> to new class <code>INonAnalyticalPartialDerivative</code>.</li>
-<li>Rename files <code>multipatch_spline_builder*</code> to <code>spline_builder_*collection*</code>.</li>
+<li>Rename files <code>multipatch_spline_builder*</code> to <code>interpolation_builder_*collection*</code>.</li>
 <li>Improve implementation of <code>DerivReconstructionCoeffs</code> to avoid unnecessary memory allocation and copies.</li>
 <li>Don't assume that elements of a <code>MultipatchType</code> have different types.</li>
 <li><code>Patch</code> takes a unique unsigned integer identifier as its first template parameter (accessible via <code>Patch::id</code>). <code>MultipatchConnectivity</code> checks that the ids of its patches are unique.</li>

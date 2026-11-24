@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_54175eb71bf3bdb1ca864f2a0d352472" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation</compoundname>
+    <innerfile refid="interpolation__builder__2d__collection_8hpp">interpolation_builder_2d_collection.hpp</innerfile>
+    <innerfile refid="interpolation__builder__collection_8hpp">interpolation_builder_collection.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/"/>
+  </compounddef>
+</doxygen>
