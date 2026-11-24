@@ -659,26 +659,20 @@ void check_lagrange_on_coord_field(
 
     if constexpr (sizeof...(DerivDims) == 0) {
         evaluators(eval_values, eval_points, coeffs);
-        evaluator_1(
-                get_field(expected_1_alloc),
-                eval_points.get<Patch1>(),
-                coeffs.get<Patch1>());
-        evaluator_2(
-                get_field(expected_2_alloc),
-                eval_points.get<Patch2>(),
-                coeffs.get<Patch2>());
+        evaluator_1(get_field(expected_1_alloc), eval_points.get<Patch1>(), coeffs.get<Patch1>());
+        evaluator_2(get_field(expected_2_alloc), eval_points.get<Patch2>(), coeffs.get<Patch2>());
     } else {
         evaluators.deriv(deriv_order, eval_values, eval_points, coeffs);
-        evaluator_1.deriv(
-                deriv_order,
-                get_field(expected_1_alloc),
-                eval_points.get<Patch1>(),
-                coeffs.get<Patch1>());
-        evaluator_2.deriv(
-                deriv_order,
-                get_field(expected_2_alloc),
-                eval_points.get<Patch2>(),
-                coeffs.get<Patch2>());
+        evaluator_1
+                .deriv(deriv_order,
+                       get_field(expected_1_alloc),
+                       eval_points.get<Patch1>(),
+                       coeffs.get<Patch1>());
+        evaluator_2
+                .deriv(deriv_order,
+                       get_field(expected_2_alloc),
+                       eval_points.get<Patch2>(),
+                       coeffs.get<Patch2>());
     }
 
     EXPECT_LE(max_abs_difference(get_field(eval_1_alloc), get_field(expected_1_alloc)), 1e-12);
@@ -1512,9 +1506,8 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnSingleCoord)
 
     Kokkos::View<Coord<R, Theta>*, Kokkos::DefaultExecutionSpace::memory_space>
             coords("coords", eval_coords_array.size());
-    Kokkos::View<Coord<R, Theta>*, Kokkos::HostSpace> coords_host(
-            "coords_host",
-            eval_coords_array.size());
+    Kokkos::View<Coord<R, Theta>*, Kokkos::HostSpace>
+            coords_host("coords_host", eval_coords_array.size());
     for (std::size_t i(0); i < eval_coords_array.size(); ++i) {
         coords_host(i) = eval_coords_array[i];
     }
@@ -1542,9 +1535,8 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnCoordField)
     set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(get_field(eval_points_1_alloc));
     set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(get_field(eval_points_2_alloc));
 
-    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points(
-            get_const_field(eval_points_1_alloc),
-            get_const_field(eval_points_2_alloc));
+    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const
+            eval_points(get_const_field(eval_points_1_alloc), get_const_field(eval_points_2_alloc));
 
     // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
@@ -1554,7 +1546,13 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnCoordField)
             evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Values
-    check_lagrange_on_coord_field(Idx<>(), evaluators, evaluator_1, evaluator_2, eval_points, coeffs);
+    check_lagrange_on_coord_field(
+            Idx<>(),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            eval_points,
+            coeffs);
 
     // Derivatives
     check_lagrange_on_coord_field(

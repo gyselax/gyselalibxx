@@ -195,7 +195,8 @@ public:
     /// @tparam ValuesField A Field or DerivField type storing the evaluated values.
     template <class ValuesField>
     using batched_evaluation_idx_range_type =
-            typename ddc::detail::convert_type_seq_to_discrete_domain_t<physical_grids<ValuesField>>;
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t<
+                    physical_grids<ValuesField>>;
 
     /// @brief The type of the 2D index range on which the interpolation coefficients are defined.
     /// @tparam Patch Patch type.
@@ -235,8 +236,9 @@ private:
                      data_type> && ...),
             "All evaluators must use the same data type.");
     static_assert(
-            (std::is_same_v<typename InterpolationEvaluatorTraits<Evaluators>::coord_type, coord_type>
-             && ...),
+            (std::is_same_v<
+                     typename InterpolationEvaluatorTraits<Evaluators>::coord_type,
+                     coord_type> && ...),
             "All evaluators must be defined on the same continuous dimensions.");
     static_assert(
             (std::is_same_v<
@@ -346,9 +348,8 @@ public:
      * @return The value of the interpolation at the desired coordinate on the right patch.
      */
     template <class Coord>
-    KOKKOS_FUNCTION data_type operator()(
-            Coord const coord_eval,
-            MultipatchCoeffs const& patches_coeffs) const
+    KOKKOS_FUNCTION data_type
+    operator()(Coord const coord_eval, MultipatchCoeffs const& patches_coeffs) const
     {
         int const patch_idx = get_patch_idx(coord_eval);
         return recursive_dispatch_patch_function(Idx<>(), coord_eval, patches_coeffs, patch_idx);
@@ -399,10 +400,10 @@ public:
      * @return The derivative of the interpolation at the desired coordinate on the right patch.
      */
     template <class... DerivDims>
-    KOKKOS_FUNCTION data_type deriv(
-            Idx<DerivDims...> const& deriv_order,
-            Coord<CDim1, CDim2> const& coord_eval,
-            MultipatchCoeffs const& patches_coeffs) const
+    KOKKOS_FUNCTION data_type
+    deriv(Idx<DerivDims...> const& deriv_order,
+          Coord<CDim1, CDim2> const& coord_eval,
+          MultipatchCoeffs const& patches_coeffs) const
     {
         static_assert(
                 (ddc::in_tags_v<DerivDims, ddc::TypeSeq<DerivDim1, DerivDim2>> && ...),
@@ -451,8 +452,8 @@ public:
                 (ddc::in_tags_v<DerivDims, ddc::TypeSeq<DerivDim1, DerivDim2>> && ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
-        if constexpr ((is_deriv_field_v<typename MultipatchValues::template TypeOnPatch<Patches>>
-                       && ...)) {
+        if constexpr ((is_deriv_field_v<
+                               typename MultipatchValues::template TypeOnPatch<Patches>> && ...)) {
             (apply_evaluator_deriv_field<Patches>(
                      deriv_order,
                      patches_deriv.template get<Patches>(),
@@ -483,7 +484,7 @@ public:
     void integrate(
             DKokkosView_h<n_patches> const& integrals,
             MultipatchCoeffs const& patches_coeffs) const
-            requires((detail::is_ddc_spline_evaluator_nd_v<Evaluators>) && ...)
+            requires((detail::is_ddc_spline_evaluator_nd_v<Evaluators>)&&...)
     {
         (apply_integrate<Patches>(
                  integrals(ddc::type_seq_rank_v<Patches, PatchOrdering>),
