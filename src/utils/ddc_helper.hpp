@@ -312,6 +312,15 @@ KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
         return linear_idx;
     }
 }
+
+template <ddc::concepts::discrete_dimension... Dims>
+IdxRangeSlice<Dims...> to_strided_idx_range(IdxRange<Dims...> idx_range)
+{
+    return IdxRangeSlice<Dims...>(
+            idx_range.front(),
+            idx_range.extents(),
+            IdxStep<Dims...> {IdxStep<Dims> {1}...});
+}
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------
