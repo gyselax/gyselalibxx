@@ -47,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 - Add copy operators for `MultipatchType` and `MultipatchField`.
+- Add `MultipatchInterpolation2D` to construct and own the 2D interpolations of every patch and the matching `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection`.
+- Add `MultipatchSplineInterpolator2D` and `MultipatchLagrangeInterpolator2D` aliases to define a `MultipatchInterpolation2D` using spline or Lagrange interpolation on every patch.
 
 ### Fixed
 
