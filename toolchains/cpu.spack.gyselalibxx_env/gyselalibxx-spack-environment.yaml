@@ -11,6 +11,7 @@ spack:
     - 'ddc@0.17 +fft +pdi +splines'
     - 'ginkgo@1.11'
     - 'gmgpolar@2.4'
+    - 'gmsh@4.15 ~alglib ~fltk +external ~cgns ~med ~mmg ~voropp'
     - 'googletest@1.17 +gmock'
     - 'kokkos@5.1 +serial'
     - 'kokkos-kernels@5.1'
