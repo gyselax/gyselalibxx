@@ -9,6 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "deriv_details.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "types.hpp"
 #include "utils_patch_locators.hpp"
@@ -263,7 +264,7 @@ public:
      * @brief Evaluate the 2D splines (described by their spline coefficients) at a given coordinate.
      *
      * The spline coefficients represent a 2D spline function defined on a B-splines (basis splines). 
-     * They can be obtained via various methods, such as using a SplineBuilder2D or SplineBuilder2DCollection.
+     * They can be obtained via various methods, such as using a SplineBuilder2D or InterpolationBuilder2DCollection.
      * The coordinate is defined on one patch. But it can be physically located on another patch. 
      * 
      * @anchor MultipatchSplineEvaluatorOperator

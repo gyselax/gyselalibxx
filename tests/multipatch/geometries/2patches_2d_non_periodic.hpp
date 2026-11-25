@@ -118,48 +118,47 @@ struct BSplinesY
 
 
 // PATCHES ---------------------------------------------------------------------------------------
+template <int PatchIdx>
+class PatchType
+    : public Patch<
+              PatchIdx,
+              GridX<PatchIdx>,
+              GridY<PatchIdx>,
+              BSplinesX<PatchIdx>,
+              BSplinesY<PatchIdx>>
+{
+};
+
 /// @brief First patch.
-using Patch1 = Patch<GridX<1>, GridY<1>, BSplinesX<1>, BSplinesY<1>>;
+using Patch1 = PatchType<1>;
 
 /// @brief Second patch.
-using Patch2 = Patch<GridX<2>, GridY<2>, BSplinesX<2>, BSplinesY<2>>;
+using Patch2 = PatchType<2>;
+
+
+// EDGES -----------------------------------------------------------------------------------------
+template <int PatchIdx>
+using NorthEdge = Edge<PatchType<PatchIdx>, GridY<PatchIdx>, BACK>;
+template <int PatchIdx>
+using SouthEdge = Edge<PatchType<PatchIdx>, GridY<PatchIdx>, FRONT>;
+template <int PatchIdx>
+using EastEdge = Edge<PatchType<PatchIdx>, GridX<PatchIdx>, BACK>;
+template <int PatchIdx>
+using WestEdge = Edge<PatchType<PatchIdx>, GridX<PatchIdx>, FRONT>;
 
 #ifndef EXTEND_GEOMETRY
 /// @brief Sorted list of patches.
 using PatchOrdering = ddc::TypeSeq<Patch1, Patch2>;
 
 
-// EDGES -----------------------------------------------------------------------------------------
-template <int PatchIdx>
-using NorthEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridY<PatchIdx>,
-               BACK>;
-template <int PatchIdx>
-using SouthEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridY<PatchIdx>,
-               FRONT>;
-template <int PatchIdx>
-using EastEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridX<PatchIdx>,
-               BACK>;
-template <int PatchIdx>
-using WestEdge
-        = Edge<typename ddc::type_seq_element_t<PatchIdx - 1, PatchOrdering>,
-               GridX<PatchIdx>,
-               FRONT>;
-
-
 // INTERFACES ------------------------------------------------------------------------------------
-using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
-using SouthInterface1 = Interface<SouthEdge<1>, OutsideEdge, true>;
-using WestInterface1 = Interface<WestEdge<1>, OutsideEdge, true>;
+using NorthInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+using SouthInterface1 = Interface<OutsideEdge, SouthEdge<1>, true>;
+using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
 
-using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
-using SouthInterface2 = Interface<SouthEdge<2>, OutsideEdge, true>;
-using EastInterface2 = Interface<EastEdge<2>, OutsideEdge, true>;
+using NorthInterface2 = Interface<OutsideEdge, NorthEdge<2>, true>;
+using SouthInterface2 = Interface<OutsideEdge, SouthEdge<2>, true>;
+using EastInterface2 = Interface<OutsideEdge, EastEdge<2>, true>;
 
 using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
 

@@ -34,11 +34,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `symmetric_tensor_mul` to calculate a tensor multiplication whose result is symmetric.
 - Add new helper functions `find_point_missing_from_superset` and `points_are_subset`.
 - Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis.
-- Add a `MultipatchSplineBuilder2D::operator()` which takes a `DerivField`.
-- Add `MultipatchSplineBuilder2D::spline_idx_ranges()` and `MultipatchSplineBuilder2D::batched_spline_idx_ranges()`.
+- Add an `InterpolationBuilder2DCollection::operator()` which takes a `DerivField`.
+- Add `InterpolationBuilderCollection::batched_basis_idx_ranges()` and `InterpolationBuilder2DCollection::batched_basis_idx_ranges()`.
 - `MultipatchSplineEvaluator2D` works with `DerivField`.
-- Add `InterfacesDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
+- Add `InterfacesDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
+- Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
+- Add `InterfacesExactDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the exact formula.
+- Added a `concepts::Patch` concept.
+- Added a `concepts::Edge` concept.
+- Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
+- Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
+- Add copy operators for `MultipatchType` and `MultipatchField`.
 
 ### Fixed
 
@@ -46,11 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix errors in `InterfaceDerivCoeffs` for uniform patches with a different $\Delta x$.
 - Fix Jean-Zay environment with missing environment variables.
 - Fix missing error when using `find_grid_t`.
+- Modify the default non uniformity value of `build_random_non_uniform_break_points()` from 1 to 0.9 to avoid having non-uniform break points too close to each other.
 
 ### Changed
 
 - Rename `SingleInterfaceDerivativesCalculator` to `InterfaceDerivCoeffs`.
-- Rename `SingleInterfaceDerivativesCalculatorCollection` to `InterfaceDerivCoeffsCollection`.
 - Rename `SingleInterfaceDerivativesCalculator::get_function_coefficients()` to `InterfaceDerivCoeffs::get_approx_deriv()`.
 - Rename file `single_interface_derivatives_calculator.hpp` to `interface_derivative_coefficients.hpp`.
 - Rename file `single_interface_derivatives_calculator_collection.hpp` to `interface_derivative_coefficients_collection.hpp`.
@@ -75,12 +82,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Calls to Kokkos profiling's region push/pop were replaced by calls `ScopedRegion` whenever possible to capture RAII deallocations.
 - `PolarSplineFEMPoissonLikeAssembler` uses `TensorProductBSplinePoissonAssembler` to assemble the elements of the matrix corresponding to the inner products of tensor product B-splines.
 - Use Spack to install packages in the docker image.
-- Rename `MultipatchSplineBuilder` to `SplineBuilderCollection`.
-- Rename `MultipatchSplineBuilder2D` to `SplineBuilder2DCollection`.
+- Rename `MultipatchSplineBuilder` to `InterpolationBuilderCollection` and move it to `src/multipatch/interpolation/`.
+- `InterpolationBuilderCollection` accepts any 1D interpolation builder (see `concepts::InterpolationBuilder1D`) and is now templated on a `ddc::TypeSeq` of the patches and a `ddc::TypeSeq` of the builders.
+- `InterpolationBuilderCollection` is no longer templated on the values type (the same type is valid for different batches).
 - Move non-analytical type aliases from `IPartialDerivative` to new class `INonAnalyticalPartialDerivative`.
-- Rename files `multipatch_spline_builder*` to `spline_builder_*collection*`.
+- Rename files `multipatch_spline_builder*` to `interpolation_builder_*collection*`.
 - Improve implementation of `DerivReconstructionCoeffs` to avoid unnecessary memory allocation and copies.
 - Don't assume that elements of a `MultipatchType` have different types.
+- `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
+- Edges in an `Interface` must be ordered by the associated `Patch::id`.
+- Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
 
 ### Deprecated
 
@@ -92,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MatrixBatchCsr::norm`.
 - Remove `MatrixBatchEll::norm`.
 - Remove `detail::combine_t` (prefer `ddc::combine_t`).
+- Remove `SingleInterfaceDerivativesCalculatorCollection`.
 
 ### Dependency requirements
 

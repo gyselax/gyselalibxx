@@ -31,6 +31,11 @@ public:
             ddc::type_seq_size_v<inner_edges> == 4 * ddc::type_seq_size_v<all_patches>,
             "Missing edges. There should be 4 edges for each patch.");
 
+    static_assert(
+            patch_ids_are_unique_v<all_patches>,
+            "Each patch must have a unique id. Two different patches have been defined with "
+            "the same id.");
+
     /**
      * @brief A tool to find a type sequence of all interfaces of a patch.
      *
@@ -57,6 +62,17 @@ public:
     using find_connections_t = ddcHelper::type_seq_intersection_t<
             get_type_seq_connections_t<QueryPatch1>,
             get_type_seq_connections_t<QueryPatch2>>;
+
+    /**
+     * @brief A tool to find all patches along a line which passes through the requested grid.
+     * The patches are sorted in the order in which they are encountered along the line.
+     *
+     * @tparam Grid1D The grid indicating the direction of interest.
+     */
+    template <class Grid1D>
+    using get_all_patches_along_direction_t = find_patches_t<
+            collect_grids_on_dim_t<find_patch_t<Grid1D, all_patches>, Grid1D, interface_collection>,
+            all_patches>;
 
     /**
      * @brief A tool to find all interfaces along a line which passes through the requested grid.

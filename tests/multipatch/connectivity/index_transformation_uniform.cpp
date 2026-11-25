@@ -96,7 +96,7 @@ TEST_F(IndexTransformationUniformTest, IndexAvailability)
 
     using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
     using EdgeY3F = Edge<Patch3, GridY<3>, FRONT>;
-    using Interface31 = Interface<EdgeY3F, EdgeY1B, false>;
+    using Interface31 = Interface<EdgeY1B, EdgeY3F, false>;
 
     // Coordinate transformation .................................................................
     // Index starting at 0
@@ -122,7 +122,7 @@ TEST_F(IndexTransformationUniformTest, IndexAvailability)
     EXPECT_TRUE(is_available);
 
     // Current index not starting at 0
-    EdgeTransformation<Interface31> index_transformation_31(idx_range_x3, idx_range_x1);
+    EdgeTransformation<Interface31> index_transformation_31(idx_range_x1, idx_range_x3);
 
     test_idx_x1 = Patch1::Idx1(8);
     is_available = index_transformation_31.is_match_available(test_idx_x1);

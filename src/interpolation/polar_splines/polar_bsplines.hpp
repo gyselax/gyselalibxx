@@ -916,8 +916,8 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
             "MemorySpace has to be accessible for ExecutionSpace.");
     using BSplinesR = typename DDim::BSplinesR_tag;
     using BSplinesTheta = typename DDim::BSplinesTheta_tag;
-    using IdxR = Idx<BSplinesR>;
-    using IdxTheta = Idx<BSplinesTheta>;
+    using IdxStepR = IdxStep<BSplinesR>;
+    using IdxStepTheta = IdxStep<BSplinesTheta>;
 
     auto r_bspl_space = ddc::discrete_space<BSplinesR>();
     auto theta_bspl_space = ddc::discrete_space<BSplinesTheta>();
@@ -943,19 +943,20 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
     std::size_t n_singular_theta = singular_2d_idx_range.template extent<BSplinesTheta>().value();
 
     IdxRange<DDim> singular_idx_range = DDim::template singular_idx_range<DDim>();
-    Kokkos::parallel_for(
-            Kokkos::TeamPolicy<>(execution_space, singular_idx_range.size(), Kokkos::AUTO),
-            KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                const int idx = team.league_rank();
-                Idx<DDim> k(idx);
-
+    ddc::parallel_for_each_team(
+            execution_space,
+            singular_idx_range,
+            KOKKOS_LAMBDA(
+                    ddc::TeamPolicyMember<ExecSpace> const& team,
+                    Idx<DDim> const idx_singular) {
+                IdxStep<DDim> k = idx_singular - singular_idx_range.front();
                 // Sum over quadrature dimensions
                 double teamSum = 0;
                 Kokkos::parallel_reduce(
                         Kokkos::TeamThreadMDRange(team, n_singular_r, n_singular_theta),
                         [&](int r_thread_index, int theta_thread_index, double& sum) {
-                            IdxR i(r_thread_index);
-                            IdxTheta j(theta_thread_index);
+                            IdxStepR i(r_thread_index);
+                            IdxStepTheta j(theta_thread_index);
                             sum += ddc::discrete_space<DDim>().m_singular_basis_elements(k, i, j)
                                    * r_integrals(i) * theta_integrals(j);
                         },

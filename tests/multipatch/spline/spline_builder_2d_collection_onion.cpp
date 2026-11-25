@@ -8,10 +8,10 @@
 #include "connectivity.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "interpolation_builder_2d_collection.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
-#include "spline_builder_2d_collection.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -67,23 +67,9 @@ using SplineBuilderOnPatch = ddc::SplineBuilder2D<
         ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 
-using SplineBuilderCollection = SplineBuilder2DCollection<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplines1OnPatch,
-        BSplines2OnPatch,
-        Grid1OnPatch,
-        Grid2OnPatch,
-        ddc::SplineBuilderClosure::HERMITE,
-        ddc::SplineBuilderClosure::HERMITE,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::HERMITE,
-        Connectivity,
-        ddc::SplineSolver::LAPACK,
-        DConstFieldOnPatch,
-        Patch1,
-        Patch2>;
+using SplineBuilderCollection = InterpolationBuilder2DCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<SplineBuilderOnPatch<1>, SplineBuilderOnPatch<2>>>;
 
 class SplineBuilderCollection2DOnionTest : public ::testing::Test
 {
@@ -229,6 +215,7 @@ TEST_F(SplineBuilderCollection2DOnionTest, SameContinuousDimTest)
 
     // Function tests
     // --- patch 1
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_range(idx_range_rtheta1, idx_range_rtheta2);
     DFieldMemOnPatch<Patch1> function_1_alloc(idx_range_rtheta1);
     DFieldOnPatch<Patch1> function_1 = get_field(function_1_alloc);
 
@@ -286,7 +273,7 @@ TEST_F(SplineBuilderCollection2DOnionTest, SameContinuousDimTest)
 
     // --- collection
     MultipatchFieldMem<SplineCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
-            builders.spline_idx_ranges());
+            builders.batched_basis_idx_ranges(idx_range));
     MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
 
     // Build the spline representations on each patch

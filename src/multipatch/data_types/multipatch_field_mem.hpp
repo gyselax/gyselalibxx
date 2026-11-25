@@ -114,6 +114,10 @@ public:
 
     ~MultipatchFieldMem() noexcept = default;
 
+    MultipatchFieldMem(MultipatchFieldMem&&) = default;
+
+    MultipatchFieldMem& operator=(MultipatchFieldMem&&) = default;
+
     /**
      * Retrieve an object from the patch that it is defined on.
      *

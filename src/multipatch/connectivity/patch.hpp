@@ -1,29 +1,38 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
+#include <type_traits>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
 
 /**
- * @brief Base tag for a patch. 
- * @tparam T Variadic template parameter allowing us to use Patch struct 
- * for different numbers of dimensions. 
+ * @brief Base tag for a patch.
+ * @tparam PatchId A unique identifier for the patch. This provides a compile-time
+ * ordering of the patches.
+ * @tparam T Variadic template parameter allowing us to use Patch struct
+ * for different numbers of dimensions.
  */
-template <class... T>
+template <std::size_t PatchId, class... T>
 struct Patch;
 
 /**
- * @brief Tag for a patch. 
- * 
- * @tparam grid1 Grid on the first logical dimension associated to the patch. 
- * @tparam grid2 Grid on the second logical dimension associated to the patch. 
- * @tparam bsplines_dim1 Bspline dimension defined on the first logical continuous dimension associated to the patch. 
- * @tparam bsplines_dim2 Bspline dimension defined on the second logical continuous dimension associated to the patch. 
+ * @brief Tag for a patch.
+ *
+ * @tparam PatchId A unique identifier for the patch. This provides a compile-time
+ * ordering of the patches.
+ * @tparam grid1 Grid on the first logical dimension associated to the patch.
+ * @tparam grid2 Grid on the second logical dimension associated to the patch.
+ * @tparam bsplines_dim1 Bspline dimension defined on the first logical continuous dimension associated to the patch.
+ * @tparam bsplines_dim2 Bspline dimension defined on the second logical continuous dimension associated to the patch.
  */
-template <class grid1, class grid2, class bsplines_dim1, class bsplines_dim2>
-struct Patch<grid1, grid2, bsplines_dim1, bsplines_dim2>
+template <std::size_t PatchId, class grid1, class grid2, class bsplines_dim1, class bsplines_dim2>
+struct Patch<PatchId, grid1, grid2, bsplines_dim1, bsplines_dim2>
 {
+    /// @brief The unique identifier of the patch.
+    static constexpr std::size_t id = PatchId;
+
     /// @brief The number of dimensions of the patch.
     static int constexpr n_dims = 2;
 
@@ -78,15 +87,32 @@ struct Patch<grid1, grid2, bsplines_dim1, bsplines_dim2>
     using IdxRangeBS12 = IdxRange<BSplines1, BSplines2>;
 };
 
-template <class PatchType>
-struct is_patch : std::false_type
-{
-};
+namespace detail {
+/**
+ * @brief Overload selected if the argument points to a Patch or to a class
+ * which derives (publicly and unambiguously) from a Patch.
+ */
+template <std::size_t PatchId, class... T>
+std::true_type is_patch_impl(Patch<PatchId, T...> const*);
 
-template <class Grid1, class Grid2, class BsplinesDim1, class BsplinesDim2>
-struct is_patch<Patch<Grid1, Grid2, BsplinesDim1, BsplinesDim2>> : std::true_type
+/// @brief Fallback overload selected for any type which is not a Patch.
+std::false_type is_patch_impl(...);
+} // namespace detail
+
+/**
+ * @brief A type trait to determine whether a type is a Patch, i.e. either an
+ * instantiation of Patch or a class deriving from such an instantiation.
+ * @tparam PatchType The type being examined.
+ */
+template <class PatchType>
+struct is_patch : decltype(detail::is_patch_impl(std::declval<std::add_pointer_t<PatchType>>()))
 {
 };
 
 template <class PatchType>
 bool constexpr is_patch_v = is_patch<PatchType>::value;
+
+namespace concepts {
+template <class PatchType>
+concept Patch = is_patch_v<PatchType>;
+}; // namespace concepts
