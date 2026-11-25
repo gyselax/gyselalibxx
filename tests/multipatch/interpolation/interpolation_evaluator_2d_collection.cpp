@@ -877,7 +877,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
             evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Evaluate the functions at the evaluation points.
-    evaluators(eval_functions, eval_points, splines);
+    evaluators(eval_functions, get_const_field(eval_points), get_const_field(splines));
 
     // Expected functions
     // --- patch 1
