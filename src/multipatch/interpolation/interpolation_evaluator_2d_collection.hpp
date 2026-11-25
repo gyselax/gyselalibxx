@@ -39,9 +39,18 @@
  * Any 2D interpolation evaluator (see concepts::InterpolationEvaluator) can be used. Different
  * evaluator types can be used on different patches.
  *
- * @warning This operator does not work on batched domain.
+ * The evaluations can be computed for a batch of points at once: the fields of values (plain
+ * fields and DerivField) may be defined on an index range extended with batch dimensions, e.g.
+ * (batch, Grid1, Grid2). In that case, the interpolation coefficients on each patch must be
+ * defined on the same index range with the interpolation grids replaced by the bases on which
+ * the interpolations are defined (e.g. (batch, BSplines1, BSplines2)), while the fields of
+ * coordinates are shared by all the batch points and remain defined on the 2D mesh
+ * (Grid1, Grid2) of each patch.
  *
  * @warning This operator only works for patches defined on the same continuous dimensions!
+ *
+ * @warning The evaluation on a single coordinate and the integration are only available with
+ * unbatched coefficients.
  *
  * @tparam PatchSeq A ddc::TypeSeq of the patches.
  * @tparam EvaluatorSeq A ddc::TypeSeq of the 2D interpolation evaluators on each patch, in the same
@@ -512,6 +521,10 @@ public:
      *
      * This function is only available if all the evaluators are spline evaluators
      * (ddc::SplineEvaluatorND).
+     *
+     * @warning The integration does not support batched coefficients: the coefficients on each
+     * patch must be defined on the 2D interpolation mesh, without batch dimensions, and one
+     * integral is computed per patch.
      *
      * @param[out] integrals An Kokkos::View on host containing the integrals of each spline on each patch.
      * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
