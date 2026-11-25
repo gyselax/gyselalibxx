@@ -275,6 +275,30 @@ private:
                 "InterpolationEvaluator2DCollection class.");
     }
 
+    /// Check that the coefficients field can be used to evaluate the given values field.
+    template <class StoringPatch, class ValuesField, class CoeffsField>
+    static constexpr void check_coeffs_field_type()
+    {
+        static_assert(
+                std::is_same_v<
+                        typename CoeffsField::discrete_domain_type,
+                        typename Traits<StoringPatch>::template batched_coeff_idx_range_type<
+                                batched_evaluation_idx_range_type<ValuesField>>>,
+                "The coefficients fields must be defined on the coefficient index range of the "
+                "patch (with the same batch dimensions as the values field).");
+        static_assert(
+                std::is_same_v<typename CoeffsField::memory_space, memory_space>,
+                "The coefficients fields need to be defined on the same memory space as the "
+                "InterpolationEvaluator2DCollection class.");
+        static_assert(
+                std::is_const_v<typename CoeffsField::element_type>,
+                "The coefficients should be constant.");
+        static_assert(
+                std::is_same_v<std::remove_const_t<typename CoeffsField::element_type>, data_type>,
+                "The coefficients fields need to store the same data type as the "
+                "InterpolationEvaluator2DCollection class.");
+    }
+
     static_assert(
             is_onion_patch_locator_v<PatchLocator>,
             "Operator currently works only on analytical mappings and patches on the same logical "
@@ -345,18 +369,28 @@ public:
      * See @ref InterpolationEvaluator2DCollectionOperator.
      *
      * @tparam MultipatchValues A MultipatchField of DField or DerivField.
+     * @tparam MultipatchCoeffsType A MultipatchField of DField storing the 2D interpolation
+     *          coefficients. The index range of the coefficients on each patch may contain
+     *          batch dimensions (matching the batch dimensions of the values).
      * @param[out] patches_values A MultipatchType of DField or DerivField to store the values of the interpolations
      *          at the given coordinates.
      * @param[in] patches_coords A MultipatchType of Field of Coordinate storing the coordinates of the meshes.
      * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
      */
-    template <class MultipatchValues>
+    template <class MultipatchValues, class MultipatchCoeffsType>
     void operator()(
             MultipatchValues const& patches_values,
             MultipatchCoordField const& patches_coords,
-            MultipatchCoeffs const& patches_coeffs) const
+            MultipatchCoeffsType const& patches_coeffs) const
             requires(is_multipatch_field_v<MultipatchValues>)
     {
+        static_assert(
+                is_multipatch_field_v<MultipatchCoeffsType>,
+                "The interpolation coefficients must be provided as a MultipatchField.");
+        static_assert(
+                std::is_same_v<typename MultipatchCoeffsType::PatchOrdering, PatchOrdering>,
+                "The coefficients must be provided on the same patches as the values, "
+                "in the same order.");
         (apply_evaluator_field<Patches>(
                  Idx<>(),
                  patches_values.template get<Patches>(),
@@ -422,20 +456,30 @@ public:
      *          If patches_deriv is a DerivField, the given coordinates can be the coordinates for all function values. 
      *          The operator will select the correct coordinates. 
      * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
+     *          The index range of the coefficients on each patch may contain batch dimensions
+     *          (matching the batch dimensions of the values).
      * @tparam MultipatchValues A MultipatchField of DField or DerivField.
+     * @tparam MultipatchCoeffsType A MultipatchField of DField storing the 2D interpolation coefficients.
      */
-    template <class MultipatchValues, class... DerivDims>
+    template <class MultipatchValues, class MultipatchCoeffsType, class... DerivDims>
     void deriv(
             Idx<DerivDims...> const& deriv_order,
             MultipatchValues const& patches_deriv,
             MultipatchCoordField const& patches_coords,
-            MultipatchCoeffs const& patches_coeffs) const
+            MultipatchCoeffsType const& patches_coeffs) const
             requires(is_multipatch_field_v<MultipatchValues>)
     {
         static_assert(
                 (ddc::in_tags_v<DerivDims, ddc::TypeSeq<DerivDim1, DerivDim2>> && ...),
                 "Please provide a deriv_order indexed on the derivative dimensions of the patches "
                 "(same dimensions for all the patches).");
+        static_assert(
+                is_multipatch_field_v<MultipatchCoeffsType>,
+                "The interpolation coefficients must be provided as a MultipatchField.");
+        static_assert(
+                std::is_same_v<typename MultipatchCoeffsType::PatchOrdering, PatchOrdering>,
+                "The coefficients must be provided on the same patches as the values, "
+                "in the same order.");
         if constexpr ((is_deriv_field_v<
                                typename MultipatchValues::template TypeOnPatch<Patches>> && ...)) {
             (apply_evaluator_deriv_field<Patches>(
@@ -493,16 +537,21 @@ public:
      * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and
      *          where we want to evaluate the function or derivative.
      * @param[in] patches_coeffs MultipatchType of interpolation coefficients
-     *          on every patches.
+     *          on every patches. The index range of the coefficients on each patch may
+     *          contain batch dimensions (matching the batch dimensions of the values).
      */
-    template <class StoringPatch, class ValuesField, class... DerivDims>
+    template <class StoringPatch, class ValuesField, class MultipatchCoeffsType, class... DerivDims>
     void apply_evaluator_field(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
-            MultipatchCoeffs const patches_coeffs) const
+            MultipatchCoeffsType const patches_coeffs) const
     {
         check_values_field_type<StoringPatch, ValuesField>();
+        check_coeffs_field_type<
+                StoringPatch,
+                ValuesField,
+                typename MultipatchCoeffsType::template TypeOnPatch<StoringPatch>>();
         assert(get_idx_range(patch_values) == get_idx_range(patch_coords));
 
         using Index =
@@ -543,17 +592,22 @@ public:
      * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and
      *          where we want to evaluate the function or derivative.
      * @param[in] patches_coeffs MultipatchType of interpolation coefficients
-     *          on every patches.
+     *          on every patches. The index range of the coefficients on each patch may
+     *          contain batch dimensions (matching the batch dimensions of the values).
      */
-    template <class StoringPatch, class ValuesField, class... DerivDims>
+    template <class StoringPatch, class ValuesField, class MultipatchCoeffsType, class... DerivDims>
     void apply_evaluator_deriv_field(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
             CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
-            MultipatchCoeffs const patches_coeffs) const
+            MultipatchCoeffsType const patches_coeffs) const
     {
         static_assert(is_deriv_field_v<ValuesField>, "The values field must be a DerivField.");
         check_values_field_type<StoringPatch, ValuesField>();
+        check_coeffs_field_type<
+                StoringPatch,
+                ValuesField,
+                typename MultipatchCoeffsType::template TypeOnPatch<StoringPatch>>();
         if constexpr (ddc::in_tags_v<DerivDim1, ddc::TypeSeq<DerivDims...>>) {
             assert((IdxRange<DerivDim1>(patch_values.derivative_idx_range())
                             .contains(Idx<DerivDim1>(deriv_order)))
@@ -673,11 +727,11 @@ private:
     // Recursive method to dispatch the coordinates on the right patch ---------------------------
 
     /// @brief Dispatch the given coordinate on the right patch to evaluate the right interpolation.
-    template <class IdxDeriv, int TestPatchIdx = 0>
+    template <class IdxDeriv, class MultipatchCoeffsType, int TestPatchIdx = 0>
     KOKKOS_INLINE_FUNCTION data_type recursive_dispatch_patch_function(
             IdxDeriv const& deriv_order,
             Coord<CDim1, CDim2> coord,
-            MultipatchCoeffs const& patches_coeffs,
+            MultipatchCoeffsType const& patches_coeffs,
             int const patch_idx) const
     {
         if constexpr (TestPatchIdx == ddc::type_seq_size_v<PatchOrdering>) {
@@ -716,6 +770,7 @@ private:
             } else {
                 return recursive_dispatch_patch_function<
                         IdxDeriv,
+                        MultipatchCoeffsType,
                         TestPatchIdx + 1>(deriv_order, coord, patches_coeffs, patch_idx);
             }
         }
