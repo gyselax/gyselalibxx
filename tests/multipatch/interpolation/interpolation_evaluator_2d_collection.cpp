@@ -112,17 +112,13 @@ public:
         , to_logical_mapping()
         , interpolation(
                   all_idx_ranges,
-                  PatchLocator<DeviceExecSpace>(
-                          all_idx_ranges,
-                          to_physical_mapping,
-                          to_logical_mapping),
+                  PatchLocator<
+                          DeviceExecSpace>(all_idx_ranges, to_physical_mapping, to_logical_mapping),
                   ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>(r1_min, r2_max))
         , interpolation_host(
                   all_idx_ranges,
-                  PatchLocator<HostExecSpace>(
-                          all_idx_ranges,
-                          to_physical_mapping,
-                          to_logical_mapping),
+                  PatchLocator<
+                          HostExecSpace>(all_idx_ranges, to_physical_mapping, to_logical_mapping),
                   ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>>(r1_min, r2_max))
         , evaluators(interpolation.get_evaluator())
         , evaluators_host(interpolation_host.get_evaluator())
@@ -643,10 +639,8 @@ public:
         , to_logical_mapping()
         , interpolation(
                   all_idx_ranges,
-                  PatchLocator<DeviceExecSpace>(
-                          all_idx_ranges,
-                          to_physical_mapping,
-                          to_logical_mapping))
+                  PatchLocator<
+                          DeviceExecSpace>(all_idx_ranges, to_physical_mapping, to_logical_mapping))
         , evaluators(interpolation.get_evaluator())
         , evaluator_1(interpolation.get_interpolation<Patch1>().get_evaluator())
         , evaluator_2(interpolation.get_interpolation<Patch2>().get_evaluator())
@@ -1464,7 +1458,6 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesDerivFieldOnCoordField
     --------------------------------------------------------------------------------------------*/
 TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnSingleCoord)
 {
-
     std::array<Coord<R, Theta>, 5> const eval_coords_array {
             Coord<R, Theta>(0.5, 0.0),
             Coord<R, Theta>(1.1, M_PI),

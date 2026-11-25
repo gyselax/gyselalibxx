@@ -139,8 +139,10 @@ public:
      */
     MultipatchInterpolation2DImpl(
             MultipatchIdxRange const& idx_ranges,
-            PatchLocator const& patch_locator)
-            requires(std::is_default_constructible_v<MultipatchExtrapolationRule>)
+            PatchLocator const&
+                    patch_locator) requires(std::
+                                                    is_default_constructible_v<
+                                                            MultipatchExtrapolationRule>)
         : MultipatchInterpolation2DImpl(idx_ranges, patch_locator, MultipatchExtrapolationRule())
     {
     }
@@ -209,7 +211,11 @@ public:
  * @tparam MultipatchExtrapolationRule The extrapolation rule used outside of the global domain
  *          (e.g. ConstantExtrapolationRuleOnion or NullExtrapolationRule).
  */
-template <template <class> class InterpOnPatch, class PatchLocator, class MultipatchExtrapolationRule>
+template <
+        template <class>
+        class InterpOnPatch,
+        class PatchLocator,
+        class MultipatchExtrapolationRule>
 using MultipatchInterpolation2D = detail::MultipatchInterpolation2DImpl<
         typename PatchLocator::PatchOrdering,
         InterpOnPatch,
