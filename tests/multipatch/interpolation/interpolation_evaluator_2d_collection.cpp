@@ -2159,20 +2159,18 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordF
             get_const_field(batched_coeffs_alloc));
 
     // Coordinates on the meshes of the patches (shared by all the batch points).
-    // --- patch 1
-    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(idx_range_eval_rtheta1);
-    Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = get_field(eval_points_1_alloc);
-
-    // --- patch 2
-    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(idx_range_eval_rtheta2);
-    Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = get_field(eval_points_2_alloc);
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_evals(idx_range_eval_rtheta1, idx_range_eval_rtheta2);
+    MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2> eval_points_alloc(idx_range_evals);
+    Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = eval_points_alloc.get<Patch1>();
+    Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = eval_points_alloc.get<Patch2>();
 
     set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_1);
     set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_2);
 
     // --- collection
-    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const
-            eval_points(get_const_field(eval_points_1), get_const_field(eval_points_2));
+    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points(
+            get_const_field(eval_points_alloc));
 
     // Batched values and derivatives on the meshes of the patches.
     MultipatchType<IdxRangeBatchedOnPatch, Patch1, Patch2> idx_range_batched_evals(
@@ -2221,10 +2219,9 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordF
     MultipatchField<BatchedDFieldOnPatch, Patch1, Patch2> const eval_values(eval_values_alloc);
 
     // Expected values on the meshes of the patches.
-    DFieldMem<Patch1::IdxRange12> expected_1_alloc(idx_range_eval_rtheta1);
-    DField<Patch1::IdxRange12> expected_1 = get_field(expected_1_alloc);
-    DFieldMem<Patch2::IdxRange12> expected_2_alloc(idx_range_eval_rtheta2);
-    DField<Patch2::IdxRange12> expected_2 = get_field(expected_2_alloc);
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> expected_alloc(idx_range_evals);
+    DField<Patch1::IdxRange12> expected_1 = expected_alloc.get<Patch1>();
+    DField<Patch2::IdxRange12> expected_2 = expected_alloc.get<Patch2>();
 
     for (Idx<GridBatch> const batch : batch_idx_range) {
         evaluator_1(expected_1, get_const_field(eval_points_1), batched_coeffs_1_const[batch]);
