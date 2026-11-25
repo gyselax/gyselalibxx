@@ -31,7 +31,7 @@ struct SplineInterpolatorOnPatch
 {
     /// @brief The 2D spline interpolation on the given patch.
     template <class Patch>
-    using type = SplineInterpolatorWSolver<
+    using type = ::SplineInterpolatorWSolver<
             ExecSpace,
             typename Patch::IdxRangeBS12,
             typename Patch::IdxRange12,

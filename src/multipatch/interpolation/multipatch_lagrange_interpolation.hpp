@@ -33,7 +33,7 @@ struct LagrangeInterpolatorOnPatch
 {
     /// @brief The 2D Lagrange interpolation on the given patch.
     template <class Patch>
-    using type = LagrangeInterpolator<
+    using type = ::LagrangeInterpolator<
             ExecSpace,
             DataType,
             IdxRange<Basis1OnPatch<Patch>, Basis2OnPatch<Patch>>,
