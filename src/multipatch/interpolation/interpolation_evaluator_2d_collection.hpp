@@ -810,11 +810,8 @@ private:
     {
         return detail::MultipatchField<
                 PatchOrdering,
-                ddc::TypeSeq<ConstField<
-                        data_type,
-                        coeff_idx_range_type<Patches>,
-                        memory_space,
-                        Kokkos::layout_stride>...>>(
+                ddc::TypeSeq<std::remove_cv_t<std::remove_reference_t<
+                        decltype(patches_coeffs.template get<Patches>()[batch_idx])>>...>>(
                 patches_coeffs.template get<Patches>()[batch_idx]...);
     }
 
