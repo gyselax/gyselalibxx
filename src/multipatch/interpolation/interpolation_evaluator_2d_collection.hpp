@@ -261,14 +261,17 @@ public:
 private:
     // Asserts -----------------------------------------------------------------------------------
     /// Check that the values field can be used to store values evaluated on the StoringPatch.
+    /// @tparam AllowBatched Allow the values field to carry batch dimensions (only enabled
+    ///         for the evaluation paths which support batching).
     template <class StoringPatch, class ValuesField>
     static constexpr void check_values_field_type()
     {
+        using BatchedEvalDims = ddc::to_type_seq_t<batched_evaluation_idx_range_type<ValuesField>>;
         static_assert(
-                std::is_same_v<
-                        evaluation_idx_range_type<StoringPatch>,
-                        batched_evaluation_idx_range_type<ValuesField>>,
-                "Operator not yet implemented for batched domains.");
+                ((ddc::in_tags_v<typename StoringPatch::Grid1, BatchedEvalDims>)&&(
+                        ddc::in_tags_v<typename StoringPatch::Grid2, BatchedEvalDims>)),
+                "The values fields must be defined on the grids of the patches (Grid1, "
+                "Grid2), possibly with additional batch dimensions.");
         static_assert(
                 std::is_same_v<typename ValuesField::memory_space, memory_space>,
                 "The values fields need to be defined on the same memory space as the "
@@ -360,7 +363,12 @@ public:
     operator()(Coord const coord_eval, MultipatchCoeffs const& patches_coeffs) const
     {
         int const patch_idx = get_patch_idx(coord_eval);
-        return recursive_dispatch_patch_function(Idx<>(), coord_eval, patches_coeffs, patch_idx);
+        return recursive_dispatch_patch_function(
+                Idx<>(),
+                coord_eval,
+                patches_coeffs,
+                Idx<>(),
+                patch_idx);
     }
 
     /**
@@ -436,6 +444,7 @@ public:
                 deriv_order,
                 coord_eval,
                 patches_coeffs,
+                Idx<>(),
                 patch_idx);
     }
 
@@ -529,7 +538,10 @@ public:
      * Needed public for functions on GPU. 
      * @tparam StoringPatch Patch type where the given coordinates are stored. 
      *      They are not especially physically located on this patch.
-     * @tparam ValuesField The type of the field of values (DField or DerivField).
+     * @tparam ValuesField The type of the field of values (DField or DerivField). It may be
+     *      defined on a batched index range (the 2D evaluation mesh of the patch extended
+     *      with batch dimensions, the coordinates being shared by all the batch points).
+     * @tparam MultipatchCoeffsType The type of the MultipatchField of interpolation coefficients.
      * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      *      or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
@@ -556,6 +568,12 @@ public:
         using PGrid1 = typename StoringPatch::Grid1;
         using PGrid2 = typename StoringPatch::Grid2;
 
+        // The type of the index of the values range with the grids of the patch removed.
+        // This is the index of the batch dimensions (Idx<> for unbatched values).
+        using IdxRangeBatch = ddc::
+                remove_dims_of_t<batched_evaluation_idx_range_type<ValuesField>, PGrid1, PGrid2>;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+
         // The coordinates are defined on the 2D mesh of the storing patch. The values
         // may carry additional batch dimensions, so only the 2D part of the values
         // index range is compared with the coordinates index range.
@@ -575,6 +593,7 @@ public:
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
                     Idx<PGrid1, PGrid2> idx_2d(idx);
+                    IdxBatch const batch_idx(idx);
                     int const patch_idx = get_patch_idx(patch_coords(idx_2d));
                     if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
@@ -584,6 +603,7 @@ public:
                             deriv_order,
                             patch_coords(idx_2d),
                             patches_coeffs,
+                            batch_idx,
                             patch_idx);
                 });
     }
@@ -638,6 +658,7 @@ public:
                 = ddc::detail::convert_type_seq_to_strided_discrete_domain_t<BatchDims>;
         using IdxRangeSliceType = ddc::combine_t<IdxRangeSliceBatch, IdxRangeSlice<PGrid1, PGrid2>>;
         using IdxType = typename IdxRangeSliceType::discrete_element_type;
+        using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
         IdxRangeSlice<PGrid1> idx_range_deriv_1
                 = patch_values.template idx_range_for_deriv<PGrid1>();
@@ -713,6 +734,7 @@ public:
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(IdxType const& idx) {
                     Idx<PGrid1, PGrid2> idx_2d(idx);
+                    IdxBatch idx_batch(idx);
                     int const patch_idx = get_patch_idx(patch_coords(idx_2d));
                     if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
@@ -722,6 +744,7 @@ public:
                             deriv_order,
                             patch_coords(idx_2d),
                             patches_coeffs,
+                            idx_batch,
                             patch_idx);
                 });
     }
@@ -775,12 +798,35 @@ public:
 private:
     // Recursive method to dispatch the coordinates on the right patch ---------------------------
 
+    /// @brief Build a MultipatchField collecting the batch slice of the coefficients of each patch.
+    ///
+    /// The batch dimensions are the same on all the patches, so a single batch index is
+    /// valid for the coefficients of every patch.
+    template <class IdxBatchType, class... FieldOnPatchType>
+    KOKKOS_INLINE_FUNCTION auto batch_slice_coeffs(
+            detail::MultipatchField<PatchOrdering, ddc::TypeSeq<FieldOnPatchType...>> const&
+                    patches_coeffs,
+            IdxBatchType const& batch_idx) const
+    {
+        return detail::MultipatchField<
+                PatchOrdering,
+                ddc::TypeSeq<ConstField<
+                        data_type,
+                        coeff_idx_range_type<Patches>,
+                        memory_space,
+                        Kokkos::layout_stride>...>>(
+                patches_coeffs.template get<Patches>()[batch_idx]...);
+    }
+
     /// @brief Dispatch the given coordinate on the right patch to evaluate the right interpolation.
-    template <class IdxDeriv, class MultipatchCoeffsType, int TestPatchIdx = 0>
+    /// @tparam IdxBatchType The type of the index of the batch dimensions of the coefficients
+    ///         (Idx<> for unbatched coefficients).
+    template <class IdxDeriv, class MultipatchCoeffsType, class IdxBatchType, int TestPatchIdx = 0>
     KOKKOS_INLINE_FUNCTION data_type recursive_dispatch_patch_function(
             IdxDeriv const& deriv_order,
             Coord<CDim1, CDim2> coord,
             MultipatchCoeffsType const& patches_coeffs,
+            IdxBatchType const& batch_idx,
             int const patch_idx) const
     {
         if constexpr (TestPatchIdx == ddc::type_seq_size_v<PatchOrdering>) {
@@ -798,7 +844,18 @@ private:
                 */
                 using AnyPatch = ddc::type_seq_element_t<0, PatchOrdering>;
                 replace_periodic_coord_inside<AnyPatch>(coord);
-                return m_extrapolation_rule(coord, patches_coeffs, patch_idx);
+                if constexpr (std::is_same_v<IdxBatchType, Idx<>>) {
+                    // Unbatched coefficients: the rule is called with the coefficients as
+                    // they are.
+                    return m_extrapolation_rule(coord, patches_coeffs, patch_idx);
+                } else {
+                    // Batched coefficients: the rule is called with the batch slice of the
+                    // coefficients of each patch.
+                    return m_extrapolation_rule(
+                            coord,
+                            batch_slice_coeffs(patches_coeffs, batch_idx),
+                            patch_idx);
+                }
             } else {
                 Kokkos::abort( // cppcheck-suppress missingReturn
                         "The derivatives cannot be evaluated at coordinates "
@@ -809,8 +866,10 @@ private:
                 using TestPatch = ddc::type_seq_element_t<TestPatchIdx, PatchOrdering>;
                 replace_periodic_coord_inside<TestPatch>(coord);
 
+                // The batch dimensions are the same on all the patches, so the batch
+                // index is valid for the coefficients of every patch.
                 CoeffOnPatch<TestPatch> const test_coeffs
-                        = patches_coeffs.template get<TestPatch>();
+                        = patches_coeffs.template get<TestPatch>()[batch_idx];
                 return evaluate_on_patch(
                         m_evaluators.template get<TestPatch>(),
                         deriv_order,
@@ -820,7 +879,8 @@ private:
                 return recursive_dispatch_patch_function<
                         IdxDeriv,
                         MultipatchCoeffsType,
-                        TestPatchIdx + 1>(deriv_order, coord, patches_coeffs, patch_idx);
+                        IdxBatchType,
+                        TestPatchIdx + 1>(deriv_order, coord, patches_coeffs, batch_idx, patch_idx);
             }
         }
     }
