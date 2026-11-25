@@ -552,7 +552,15 @@ public:
                 StoringPatch,
                 ValuesField,
                 typename MultipatchCoeffsType::template TypeOnPatch<StoringPatch>>();
-        assert(get_idx_range(patch_values) == get_idx_range(patch_coords));
+
+        using PGrid1 = typename StoringPatch::Grid1;
+        using PGrid2 = typename StoringPatch::Grid2;
+
+        // The coordinates are defined on the 2D mesh of the storing patch. The values
+        // may carry additional batch dimensions, so only the 2D part of the values
+        // index range is compared with the coordinates index range.
+        assert((IdxRange<PGrid1, PGrid2>(get_idx_range(patch_values))
+                == get_idx_range(patch_coords)));
 
         using Index =
                 typename batched_evaluation_idx_range_type<ValuesField>::discrete_element_type;
@@ -566,14 +574,15 @@ public:
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
-                    int const patch_idx = get_patch_idx(patch_coords(idx));
+                    Idx<PGrid1, PGrid2> idx_2d(idx);
+                    int const patch_idx = get_patch_idx(patch_coords(idx_2d));
                     if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
                     patch_values(idx) = recursive_dispatch_patch_function(
                             deriv_order,
-                            patch_coords(idx),
+                            patch_coords(idx_2d),
                             patches_coeffs,
                             patch_idx);
                 });
@@ -622,6 +631,14 @@ public:
         using PGrid1 = typename StoringPatch::Grid1;
         using PGrid2 = typename StoringPatch::Grid2;
 
+        using IdxRangeType = typename CoordConstFieldOnPatch<StoringPatch>::discrete_domain_type;
+        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeType, PGrid1, PGrid2>;
+        using BatchDims = ddc::to_type_seq_t<IdxRangeBatch>;
+        using IdxRangeSliceBatch
+                = ddc::detail::convert_type_seq_to_strided_discrete_domain_t<BatchDims>;
+        using IdxRangeSliceType = ddc::combine_t<IdxRangeSliceBatch, IdxRangeSlice<PGrid1, PGrid2>>;
+        using IdxType = typename IdxRangeSliceType::discrete_element_type;
+
         IdxRangeSlice<PGrid1> idx_range_deriv_1
                 = patch_values.template idx_range_for_deriv<PGrid1>();
         IdxRangeSlice<PGrid2> idx_range_deriv_2
@@ -640,22 +657,53 @@ public:
                 IdxStep<PGrid2>(idx_range_2.size()),
                 IdxStep<PGrid2>(1));
 
-        IdxRangeSlice<PGrid1, PGrid2> idx_range;
-        if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1>>) {
-            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_deriv_1, idx_range_to_slice_2);
-        } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim2>>) {
-            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_deriv_2);
-        } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1, DerivDim2>>) {
-            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_deriv_1, idx_range_deriv_2);
+        IdxRangeSliceBatch idx_range_batch(
+                ddcHelper::to_strided_idx_range(get_idx_range(patch_values)));
+        IdxRangeSliceType idx_range;
+        if constexpr (IdxRangeSliceBatch::rank() == 0) {
+            if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1>>) {
+                idx_range = IdxRangeSliceType(idx_range_deriv_1, idx_range_to_slice_2);
+            } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim2>>) {
+                idx_range = IdxRangeSliceType(idx_range_to_slice_1, idx_range_deriv_2);
+            } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1, DerivDim2>>) {
+                idx_range = IdxRangeSliceType(idx_range_deriv_1, idx_range_deriv_2);
+            } else {
+                idx_range = IdxRangeSliceType(idx_range_to_slice_1, idx_range_to_slice_2);
+            }
         } else {
-            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_to_slice_2);
+            if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1>>) {
+                idx_range = IdxRangeSliceType(
+                        idx_range_batch,
+                        idx_range_deriv_1,
+                        idx_range_to_slice_2);
+            } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim2>>) {
+                idx_range = IdxRangeSliceType(
+                        idx_range_batch,
+                        idx_range_to_slice_1,
+                        idx_range_deriv_2);
+            } else if constexpr (std::is_same_v<Idx<DerivDims...>, Idx<DerivDim1, DerivDim2>>) {
+                idx_range
+                        = IdxRangeSliceType(idx_range_batch, idx_range_deriv_1, idx_range_deriv_2);
+            } else {
+                idx_range = IdxRangeSliceType(
+                        idx_range_batch,
+                        idx_range_to_slice_1,
+                        idx_range_to_slice_2);
+            }
         }
 
         const bool is_derivative = (deriv_order != order_zero<DerivDims...>());
 
         // Correction if deriv_order is zero.
         if (!is_derivative) {
-            idx_range = IdxRangeSlice<PGrid1, PGrid2>(idx_range_to_slice_1, idx_range_to_slice_2);
+            if constexpr (IdxRangeSliceBatch::rank() == 0) {
+                idx_range = IdxRangeSliceType(idx_range_to_slice_1, idx_range_to_slice_2);
+            } else {
+                idx_range = IdxRangeSliceType(
+                        idx_range_batch,
+                        idx_range_to_slice_1,
+                        idx_range_to_slice_2);
+            }
         }
 
         const std::source_location location = std::source_location::current();
@@ -663,15 +711,16 @@ public:
                 location.function_name(),
                 exec_space(),
                 idx_range,
-                KOKKOS_CLASS_LAMBDA(Idx<PGrid1, PGrid2> const& idx) {
-                    int const patch_idx = get_patch_idx(patch_coords(idx));
+                KOKKOS_CLASS_LAMBDA(IdxType const& idx) {
+                    Idx<PGrid1, PGrid2> idx_2d(idx);
+                    int const patch_idx = get_patch_idx(patch_coords(idx_2d));
                     if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
                     patch_values(deriv_order, idx) = recursive_dispatch_patch_function(
                             deriv_order,
-                            patch_coords(idx),
+                            patch_coords(idx_2d),
                             patches_coeffs,
                             patch_idx);
                 });
