@@ -261,8 +261,6 @@ public:
 private:
     // Asserts -----------------------------------------------------------------------------------
     /// Check that the values field can be used to store values evaluated on the StoringPatch.
-    /// @tparam AllowBatched Allow the values field to carry batch dimensions (only enabled
-    ///         for the evaluation paths which support batching).
     template <class StoringPatch, class ValuesField>
     static constexpr void check_values_field_type()
     {
@@ -651,8 +649,10 @@ public:
         using PGrid1 = typename StoringPatch::Grid1;
         using PGrid2 = typename StoringPatch::Grid2;
 
-        using IdxRangeType = typename CoordConstFieldOnPatch<StoringPatch>::discrete_domain_type;
-        using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeType, PGrid1, PGrid2>;
+        // The type of the index of the values range with the grids of the patch removed.
+        // This is the index of the batch dimensions (Idx<> for unbatched values).
+        using IdxRangeBatch = ddc::
+                remove_dims_of_t<batched_evaluation_idx_range_type<ValuesField>, PGrid1, PGrid2>;
         using BatchDims = ddc::to_type_seq_t<IdxRangeBatch>;
         using IdxRangeSliceBatch
                 = ddc::detail::convert_type_seq_to_strided_discrete_domain_t<BatchDims>;
