@@ -14,11 +14,10 @@
 #include "l_norm_tools.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_evaluator.hpp"
-#include "lagrange_interpolation.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
-#include "multipatch_interpolation_2d.hpp"
+#include "multipatch_lagrange_interpolation.hpp"
 #include "multipatch_spline_interpolation.hpp"
 #include "multipatch_type.hpp"
 #include "nd_identity_interpolation_builder.hpp"
@@ -519,20 +518,13 @@ using LagrangeCoeffMemOnPatch = DFieldMem<IdxRangeLagrangeCoeff<Patch>>;
 template <class Patch>
 using LagrangeConstCoeffOnPatch = DConstField<IdxRangeLagrangeCoeff<Patch>>;
 
-/// The Lagrange interpolation used on each patch.
-template <class Patch>
-using LagrangeInterpolationOnPatch = LagrangeInterpolator<
-        DeviceExecSpace,
-        double,
-        IdxRange<LagBasisR<Patch>, LagBasisTheta<Patch>>,
-        typename Patch::IdxRange12,
+using MultipatchLagrangeInterpolation = MultipatchLagrangeInterpolator2D<
+        PatchLocator<DeviceExecSpace>,
+        NullExtrapolationRule,
+        LagBasisR,
+        LagBasisTheta,
         ExtrapolationRule::Null_Null,
         ExtrapolationRule::Periodic>;
-
-using MultipatchLagrangeInterpolation = MultipatchInterpolation2D<
-        LagrangeInterpolationOnPatch,
-        PatchLocator<DeviceExecSpace>,
-        NullExtrapolationRule>;
 
 using LagrangeEvaluatorCollection = MultipatchLagrangeInterpolation::EvaluatorType;
 
