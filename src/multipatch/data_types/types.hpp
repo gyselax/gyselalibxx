@@ -243,6 +243,30 @@ using ConstSplineCoeffOnPatch_2D_host = host_t<ConstSplineCoeffOnPatch_2D<Patch>
 
 // --- ON DEVICE ---
 /**
+ * @brief A field allocation of the n-th derivatives in the direction of Patch's first
+ * logical grid defined on the index range of n and the Patch's second logical grid.
+ */
+template <class Patch>
+using Deriv1Mem_OnPatch_2D
+        = DFieldMem<IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>>;
+
+/**
+ * @brief A field allocation of the n-th derivatives in the direction of Patch's second
+ * logical grid defined on the index range of n and the Patch's first logical grid.
+ */
+template <class Patch>
+using Deriv2Mem_OnPatch_2D
+        = DFieldMem<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
+
+/**
+ * @brief A field allocation of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
+ * defined on the index ranges of valid n and m.
+ */
+template <class Patch>
+using Deriv12Mem_OnPatch_2D
+        = DFieldMem<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
+
+/**
  * @brief A constant field of the n-th derivatives in the direction of Patch's first
  * logical grid defined on the index range of n and the Patch's second logical grid.
  */

@@ -71,6 +71,9 @@ using SplineBuilderCollection = InterpolationBuilder2DCollection<
         ddc::TypeSeq<Patch1, Patch2>,
         ddc::TypeSeq<SplineBuilderOnPatch<1>, SplineBuilderOnPatch<2>>>;
 
+template <class Patch>
+using IdxRangeDeriv1 = IdxRange<ddc::Deriv<R>, typename Patch::Grid2>;
+
 class SplineBuilderCollection2DOnionTest : public ::testing::Test
 {
 public:
@@ -213,50 +216,40 @@ TEST_F(SplineBuilderCollection2DOnionTest, SameContinuousDimTest)
     // Collection of builders for each patch
     SplineBuilderCollection builders(builder1, builder2);
 
-    // Function tests
-    // --- patch 1
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_range(idx_range_rtheta1, idx_range_rtheta2);
-    DFieldMemOnPatch<Patch1> function_1_alloc(idx_range_rtheta1);
-    DFieldOnPatch<Patch1> function_1 = get_field(function_1_alloc);
 
-    // --- patch 2
-    DFieldMemOnPatch<Patch2> function_2_alloc(idx_range_rtheta2);
-    DFieldOnPatch<Patch2> function_2 = get_field(function_2_alloc);
+    // Function tests
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> function_alloc(idx_range);
 
-    initialise_2D_functions(function_1, function_2);
+    initialise_2D_functions(function_alloc.get<Patch1>(), function_alloc.get<Patch2>());
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
-            function_values(get_const_field(function_1), get_const_field(function_2));
+    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> function_values
+            = get_const_field(function_alloc);
 
-    // Derivatives Patch1
+    // Derivatives
     IdxRange<ddc::Deriv<R>> deriv_r_idx_range(Idx<ddc::Deriv<R>>(1), IdxStep<ddc::Deriv<R>>(1));
+    IdxRangeDeriv1<Patch1> derivs_r1_idx_range(deriv_r_idx_range, idx_range_theta1);
+    IdxRangeDeriv1<Patch2> derivs_r2_idx_range(deriv_r_idx_range, idx_range_theta2);
+    MultipatchType<IdxRangeDeriv1, Patch1, Patch2>
+            derivs_idx_range(derivs_r1_idx_range, derivs_r2_idx_range);
 
-    IdxRange<ddc::Deriv<R>, GridTheta<1>> derivs_r1_idx_range(deriv_r_idx_range, idx_range_theta1);
-    DFieldMem<IdxRange<ddc::Deriv<R>, GridTheta<1>>> derivs_rmin1_alloc(derivs_r1_idx_range);
-    DFieldMem<IdxRange<ddc::Deriv<R>, GridTheta<1>>> derivs_rmax1_alloc(derivs_r1_idx_range);
-    DField<IdxRange<ddc::Deriv<R>, GridTheta<1>>> derivs_rmin1 = get_field(derivs_rmin1_alloc);
-    DField<IdxRange<ddc::Deriv<R>, GridTheta<1>>> derivs_rmax1 = get_field(derivs_rmax1_alloc);
+    MultipatchFieldMem<Deriv1Mem_OnPatch_2D, Patch1, Patch2> derivs_rmin_alloc(derivs_idx_range);
+    MultipatchFieldMem<Deriv1Mem_OnPatch_2D, Patch1, Patch2> derivs_rmax_alloc(derivs_idx_range);
 
     double const rmin1 = ddc::coordinate(idx_range_r1.front());
     double const rmax1 = ddc::coordinate(idx_range_r1.back());
-    ddc::parallel_fill(derivs_rmin1, Kokkos::cos(rmin1));
-    ddc::parallel_fill(derivs_rmax1, Kokkos::cos(rmax1));
+    ddc::parallel_fill(derivs_rmin_alloc.get<Patch1>(), Kokkos::cos(rmin1));
+    ddc::parallel_fill(derivs_rmax_alloc.get<Patch1>(), Kokkos::cos(rmax1));
 
-    // Derivatives Patch 2
-    IdxRange<ddc::Deriv<R>, GridTheta<2>> derivs_r2_idx_range(deriv_r_idx_range, idx_range_theta2);
-    DFieldMem<IdxRange<ddc::Deriv<R>, GridTheta<2>>> derivs_rmin2_alloc(derivs_r2_idx_range);
-    DFieldMem<IdxRange<ddc::Deriv<R>, GridTheta<2>>> derivs_rmax2_alloc(derivs_r2_idx_range);
-    DField<IdxRange<ddc::Deriv<R>, GridTheta<2>>> derivs_rmin2 = get_field(derivs_rmin2_alloc);
-    DField<IdxRange<ddc::Deriv<R>, GridTheta<2>>> derivs_rmax2 = get_field(derivs_rmax2_alloc);
 
-    initialise_2D_derivatives_2(derivs_rmin2, derivs_rmax2);
+    initialise_2D_derivatives_2(derivs_rmin_alloc.get<Patch2>(), derivs_rmax_alloc.get<Patch2>());
 
     // --- collection of values of the function on each patch
-    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
-            derivs_rmin(get_const_field(derivs_rmin1), get_const_field(derivs_rmin2));
-    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
-            derivs_rmax(get_const_field(derivs_rmax1), get_const_field(derivs_rmax2));
+    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_rmin
+            = get_const_field(derivs_rmin_alloc);
+    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2> derivs_rmax
+            = get_const_field(derivs_rmax_alloc);
 
     // Spline representations
     // --- patch 1
@@ -282,14 +275,14 @@ TEST_F(SplineBuilderCollection2DOnionTest, SameContinuousDimTest)
     // Check the results are the same than with one by one spline building
     builder1(
             function_1_coef_expected,
-            get_const_field(function_1),
-            std::optional(get_const_field(derivs_rmin1)),
-            std::optional(get_const_field(derivs_rmax1)));
+            get_const_field(function_values.get<Patch1>()),
+            std::optional(get_const_field(derivs_rmin.get<Patch1>())),
+            std::optional(get_const_field(derivs_rmax.get<Patch1>())));
     builder2(
             function_2_coef_expected,
-            get_const_field(function_2),
-            std::optional(get_const_field(derivs_rmin2)),
-            std::optional(get_const_field(derivs_rmax2)));
+            get_const_field(function_values.get<Patch2>()),
+            std::optional(get_const_field(derivs_rmin.get<Patch2>())),
+            std::optional(get_const_field(derivs_rmax.get<Patch2>())));
 
     check_if_equal_to_expected(function_coef, function_1_coef_expected, function_2_coef_expected);
 }
