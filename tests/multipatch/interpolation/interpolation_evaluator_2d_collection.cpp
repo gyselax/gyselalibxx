@@ -19,13 +19,13 @@
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 #include "multipatch_interpolation_2d.hpp"
+#include "multipatch_spline_interpolation.hpp"
 #include "multipatch_type.hpp"
 #include "nd_identity_interpolation_builder.hpp"
 #include "nd_lagrange_evaluator.hpp"
 #include "null_extrapolation_rules.hpp"
 #include "onion_patch_locator.hpp"
 #include "physical_geometry.hpp"
-#include "spline_interpolation.hpp"
 #include "spline_testing_tools.hpp"
 #include "types.hpp"
 
@@ -40,26 +40,14 @@ struct LagBasisTheta : NonUniformLagrangeBasis<typename Patch::Dim2, 3>
 
 
 namespace {
-/// The spline interpolation used on each patch.
-template <class ExecSpace>
-struct SplineRThetaInterpolationOnPatch
-{
-    template <class Patch>
-    using type = SplineInterpolator<
-            ExecSpace,
-            typename Patch::IdxRangeBS12,
-            typename Patch::IdxRange12,
-            ExtrapolationRule::Constant_Constant,
-            ExtrapolationRule::Periodic,
-            SplineBoundaryClosure::Greville_Greville,
-            SplineBoundaryClosure::Periodic>;
-};
-
 template <typename ExecSpace>
-using MultipatchSplineRThetaInterpolation = MultipatchInterpolation2D<
-        SplineRThetaInterpolationOnPatch<ExecSpace>::template type,
+using MultipatchSplineRThetaInterpolation = MultipatchSplineInterpolator2D<
         PatchLocator<ExecSpace>,
-        ConstantExtrapolationRuleOnion<PatchLocator<ExecSpace>>>;
+        ConstantExtrapolationRuleOnion<PatchLocator<ExecSpace>>,
+        ExtrapolationRule::Constant_Constant,
+        ExtrapolationRule::Periodic,
+        SplineBoundaryClosure::Greville_Greville,
+        SplineBoundaryClosure::Periodic>;
 
 template <typename ExecSpace>
 using MultipatchSplineRThetaEvaluator =

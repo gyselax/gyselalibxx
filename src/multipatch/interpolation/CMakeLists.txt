@@ -12,6 +12,7 @@ target_sources("multipatch_interpolation"
                 interpolation_builder_collection.hpp
                 interpolation_evaluator_2d_collection.hpp
                 multipatch_interpolation_2d.hpp
+                multipatch_spline_interpolation.hpp
 )
 
 target_link_libraries("multipatch_interpolation"
