@@ -61,7 +61,10 @@ public:
      * @tparam TypeSeqPatches A TypeSeq of the patch types.
      * @tparam TypeSeqInternalTypes A TypeSeq of the types of the fields of spline coefficients on each patch.
      * @param[in] coord_extrap Coordinate where we want to evaluate.
-     * @param[in] patches_splines Splines stored in a MultipatchType.
+     * @param[in] patches_splines Splines stored in a MultipatchType. The coefficients on each
+     *      patch are always defined on the unbatched coefficient index range of the patch.
+     *      When the evaluated values are batched, the InterpolationEvaluator2DCollection
+     *      provides the batch slice of the coefficients corresponding to the evaluated point.
      * @param[in] out_of_bounds_idx Index of the localisation of the coordinate.
      *      It is supposed to be negative to be considered as outside of the domain.
      * @return A double with the evaluation outside of the domain.
