@@ -42,15 +42,18 @@ InterpolationBuilder2DCollection<
 We allocate memory for the interpolation coefficients on each patch,
 
 ```cpp
-MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_1, idx_range_2);
-MultipatchFieldMemOf<CoeffsMemOnPatch, Patch1, Patch2> coeffs_alloc(builder.batched_basis_idx_ranges(idx_ranges));
-MultipatchFieldOf<CoeffsOnPatch, Patch1, Patch2> coeffs(coeffs_alloc);
+using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeCoeffs = BuilderCollectionType::batched_basis_idx_range_type<MultipatchIdxRange>;
+
+MultipatchIdxRange idx_ranges(idx_range_1, idx_range_2);
+DMultipatchFieldMem<MultipatchIdxRangeCoeffs> coeffs_alloc(builder.batched_basis_idx_ranges(idx_ranges));
+DMultipatchField<MultipatchIdxRangeCoeffs> coeffs(coeffs_alloc);
 ```
 
 We store the values of the function on each patch,
 
 ```cpp
-MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2> values(get_const_field(values_1), get_const_field(values_2));
+DMultipatchConstField<MultipatchIdxRange> values(get_const_field(values_1), get_const_field(values_2));
 ```
 
 And we build the interpolation coefficients on every patch using,
