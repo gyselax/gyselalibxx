@@ -65,6 +65,9 @@ public:
     /// @brief The type of the 1D Lagrange domain corresponding to the dimension of interest.
     using coeff_idx_range_type = IdxRange<coeff_grid_type>;
 
+    /// @brief The type of the 1D index range of the Lagrange basis.
+    using basis_idx_range_type = IdxRange<LagrangeBasis>;
+
     /**
      * @brief The type of the batch domain (obtained by removing the dimension of interest
      * from the whole domain).

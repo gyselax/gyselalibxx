@@ -36,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `TensorProductBSplinePoissonAssembler` to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis.
 - Add an `InterpolationBuilder2DCollection::operator()` which takes a `DerivField`.
 - Add `InterpolationBuilderCollection::batched_basis_idx_ranges()` and `InterpolationBuilder2DCollection::batched_basis_idx_ranges()`.
-- `MultipatchSplineEvaluator2D` works with `DerivField`.
+- `InterpolationEvaluator2DCollection` works with `DerivField`.
 - Add `InterfacesDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 - Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 - Add copy operators for `MultipatchType` and `MultipatchField`.
+- Add `InterpolationEvaluatorTraits::basis_idx_range_type` to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).
 
 ### Fixed
 
@@ -92,6 +93,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Patch` takes a unique unsigned integer identifier as its first template parameter (accessible via `Patch::id`). `MultipatchConnectivity` checks that the ids of its patches are unique.
 - Edges in an `Interface` must be ordered by the associated `Patch::id`.
 - Patches can be defined as subclasses of `Patch` (e.g. `struct Patch1 : Patch<1, GridX, GridY, BSplinesX, BSplinesY> {};`).
+- Rename `MultipatchSplineEvaluator2D` to `InterpolationEvaluator2DCollection` and move it to `src/multipatch/interpolation/`.
+- `InterpolationEvaluator2DCollection` is no longer templated on the values type (the type of the values is deduced in each method).
+- `InterpolationEvaluator2DCollection` accepts any 2D interpolation evaluator (see `concepts::InterpolationEvaluator`) and is now templated on a `ddc::TypeSeq` of the patches, a `ddc::TypeSeq` of the evaluators, the patch locator and the extrapolation rule. The evaluators are passed to the constructor.
 
 ### Deprecated
 

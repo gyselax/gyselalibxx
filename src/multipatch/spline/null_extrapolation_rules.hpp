@@ -11,7 +11,7 @@
 
 /**
  * @brief Define null extrapolation rule common to all geometries. 
- * @see MultipatchSplineEvaluator2D.
+ * @see InterpolationEvaluator2DCollection.
  */
 struct NullExtrapolationRule
 {

@@ -9,7 +9,6 @@ target_sources("multipatch_spline"
         FILE_SET HEADERS
             FILES
                 constant_extrapolation_rules_onion.hpp
-                multipatch_spline_evaluator_2d.hpp
                 null_extrapolation_rules.hpp
 )
 
