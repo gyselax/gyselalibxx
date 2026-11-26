@@ -549,7 +549,9 @@ void set_batched_function_values(
             KOKKOS_LAMBDA(Idx<GridBatch, Grid1, Grid2> const idx) {
                 double const r = ddc::coordinate(Idx<Grid1>(idx));
                 double const theta = ddc::coordinate(Idx<Grid2>(idx));
-                double const batch_factor = Idx<GridBatch>(idx).uid() + 1;
+                double const batch_factor
+                        = (Idx<GridBatch>(idx) - get_idx_range<GridBatch>(batched_values).front())
+                          + 1;
                 batched_values(idx) = batch_factor * Kokkos::pow(r, power) * Kokkos::sin(theta);
             });
 }
@@ -1995,14 +1997,14 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
             Kokkos::DefaultExecutionSpace(),
             batched_spline_idx_ranges.get<Patch1>(),
             KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<1>, BSplinesTheta<1>> const idx) {
-                batched_coeffs_1(idx) = (Idx<GridBatch>(idx).uid() + 1)
+                batched_coeffs_1(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
                                         * function_1_coef(Idx<BSplinesR<1>, BSplinesTheta<1>>(idx));
             });
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             batched_spline_idx_ranges.get<Patch2>(),
             KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<2>, BSplinesTheta<2>> const idx) {
-                batched_coeffs_2(idx) = (Idx<GridBatch>(idx).uid() + 1)
+                batched_coeffs_2(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
                                         * function_2_coef(Idx<BSplinesR<2>, BSplinesTheta<2>>(idx));
             });
 
@@ -2159,14 +2161,14 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordF
             Kokkos::DefaultExecutionSpace(),
             batched_spline_idx_ranges.get<Patch1>(),
             KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<1>, BSplinesTheta<1>> const idx) {
-                batched_coeffs_1(idx) = (Idx<GridBatch>(idx).uid() + 1)
+                batched_coeffs_1(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
                                         * function_1_coef(Idx<BSplinesR<1>, BSplinesTheta<1>>(idx));
             });
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             batched_spline_idx_ranges.get<Patch2>(),
             KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<2>, BSplinesTheta<2>> const idx) {
-                batched_coeffs_2(idx) = (Idx<GridBatch>(idx).uid() + 1)
+                batched_coeffs_2(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
                                         * function_2_coef(Idx<BSplinesR<2>, BSplinesTheta<2>>(idx));
             });
 
