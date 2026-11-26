@@ -42,13 +42,16 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.06
+      destination: repos/gysela-patches
     builtin:
-      branch: releases/v2026.06
+      tag: v2026.06.0
+      destination: $spack/var/spack/repos/builtin-v2026.06.0
   specs:
     - 'cmake@3.31'
     - 'ddc@0.17 +fft +pdi +splines'
     - 'ginkgo@1.11'
     - 'gmgpolar@2.4'
+    - 'gmsh@4.15 ~alglib ~fltk +external ~cgns ~med ~mmg ~voropp'
     - 'googletest@1.17 +gmock'
     - 'kokkos@5.1 +serial'
     - 'kokkos-kernels@5.1'

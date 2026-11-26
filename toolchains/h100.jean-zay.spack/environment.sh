@@ -28,6 +28,7 @@ eval -- "$(
         gcc \
         ginkgo \
         gmgpolar \
+        gmsh \
         googletest \
         kokkos \
         kokkos-kernels \

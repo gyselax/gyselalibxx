@@ -83,7 +83,8 @@ RUN --mount=type=secret,id=github_user_id,env=GITHUB_USER \
         && spack --env "gyselalibxx-${backend}" config add config:install_tree:padded_length:128 \
         && spack --env "gyselalibxx-${backend}" mirror set --autopush github-buildcache \
         && spack --env "gyselalibxx-${backend}" repo update \
-        && spack --env "gyselalibxx-${backend}" install --fail-fast --include-build-deps; \
+        && spack --env "gyselalibxx-${backend}" install --fail-fast --include-build-deps \
+        && spack --env "gyselalibxx-${backend}" mirror set --no-autopush github-buildcache; \
     done
 
 ENTRYPOINT ["/bin/bash_run"]
