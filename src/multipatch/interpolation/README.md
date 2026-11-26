@@ -34,9 +34,10 @@ BuilderType2 builder_2(idx_range_2);
 We can instantiate an `InterpolationBuilder2DCollection` from these builders,
 
 ```cpp
-InterpolationBuilder2DCollection<
+using BuilderCollectionType = InterpolationBuilder2DCollection<
         ddc::TypeSeq<Patch1, Patch2>,
-        ddc::TypeSeq<BuilderType1, BuilderType2>> builder(builder_1, builder_2);
+        ddc::TypeSeq<BuilderType1, BuilderType2>>;
+BuilderCollectionType builder(builder_1, builder_2);
 ```
 
 We allocate memory for the interpolation coefficients on each patch,
