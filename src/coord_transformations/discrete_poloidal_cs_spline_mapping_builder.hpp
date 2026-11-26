@@ -21,6 +21,10 @@
 template <class X, class Y, concepts::Interpolation Interpolator>
 class DiscretePoloidalCSSplineMappingBuilder
 {
+    static_assert(
+            !is_multipatch_interpolation_v<Interpolator>,
+            "DiscretePoloidalCSSplineMappingBuilder does not support multipatch interpolations.");
+
     using SplineBuilder = Interpolator::BuilderType;
     using SplineEvaluator = Interpolator::EvaluatorType;
 
@@ -172,6 +176,11 @@ public:
 template <class X, class Y, concepts::Interpolation Interpolator, int ncells_r, int ncells_theta>
 class RefinedDiscretePoloidalCSSplineMappingBuilder
 {
+    static_assert(
+            !is_multipatch_interpolation_v<Interpolator>,
+            "RefinedDiscretePoloidalCSSplineMappingBuilder does not support multipatch "
+            "interpolations.");
+
     using SplineBuilder = typename Interpolator::BuilderType;
     using SplineEvaluator = typename Interpolator::EvaluatorType;
 

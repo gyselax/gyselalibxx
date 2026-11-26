@@ -48,6 +48,9 @@ template <
 class PolarFootFinder
 {
     static_assert(
+            !is_multipatch_interpolation_v<RThetaAdvectionInterpolator>,
+            "PolarFootFinder does not support multipatch interpolations.");
+    static_assert(
             FFSpace != FootFindingSpace::PHYSICAL
                     || is_analytical_mapping_v<LogicalToPhysicalMapping>,
             "It is not possible to find the foot of the characteristic in Physical space as there "

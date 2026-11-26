@@ -56,6 +56,7 @@ using MPBSIdxRange = MultipatchType<IdxRangeBSOnPatch, Patch1, Patch2>;
 
 static_assert(concepts::Interpolation<MultipatchSplineRThetaInterpolation<DeviceExecSpace>>);
 static_assert(concepts::Interpolation<MultipatchSplineRThetaInterpolation<HostExecSpace>>);
+static_assert(is_multipatch_interpolation_v<MultipatchSplineRThetaInterpolation<DeviceExecSpace>>);
 
 class InterpolationEvaluator2DCollectionTest : public MultipatchSplineOnionShapeTest
 {
@@ -537,6 +538,7 @@ using MultipatchLagrangeInterpolation = MultipatchLagrangeInterpolator2D<
 using LagrangeEvaluatorCollection = MultipatchLagrangeInterpolation::EvaluatorType;
 
 static_assert(concepts::Interpolation<MultipatchLagrangeInterpolation>);
+static_assert(is_multipatch_interpolation_v<MultipatchLagrangeInterpolation>);
 
 /**
  * Initialise the (non-uniform) grids of a patch with uniformly spaced points and the

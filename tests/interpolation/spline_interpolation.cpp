@@ -128,6 +128,7 @@ TEST(SplineInterpolatorAPI, TwoD)
     static_assert(concepts::InterpolationBuilder<Interp2D::BuilderType>);
     static_assert(concepts::InterpolationEvaluator<Interp2D::EvaluatorType>);
     static_assert(Interp2D::rank() == 2);
+    static_assert(!is_multipatch_interpolation_v<Interp2D>);
 }
 
 TEST(SplineInterpolatorAPI, ThreeD)
