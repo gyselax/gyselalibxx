@@ -259,8 +259,6 @@ private:
 
 
 public:
-    ~InterpolationEvaluator2DCollection() = default;
-
     /**
      * @brief Instantiate a InterpolationEvaluator2DCollection.
      *
