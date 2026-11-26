@@ -42,6 +42,7 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.06
+      destination: repos/gysela-patches
     builtin:
       tag: v2026.06.0
       destination: $spack/var/spack/repos/builtin-v2026.06.0
