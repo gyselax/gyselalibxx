@@ -27,10 +27,13 @@ using MultipatchIdxRangeRTheta = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
 using CMultipatchFieldMemRTheta = MultipatchFieldMem<Coord<R, Theta>, MultipatchIdxRangeRTheta>;
 using CMultipatchFieldRTheta = MultipatchField<Coord<R, Theta>, MultipatchIdxRangeRTheta>;
 using CMultipatchConstFieldRTheta = MultipatchConstField<Coord<R, Theta>, MultipatchIdxRangeRTheta>;
+using VectorIndexSetRTheta = VectorIndexSet<R, Theta>;
 using CMultipatchVectorFieldMemRTheta
-        = MultipatchFieldMemOf<DVectorFieldMemOnPatch, Patch1, Patch2>;
-using CMultipatchVectorFieldRTheta = typename CMultipatchVectorFieldMemRTheta::span_type;
-using CMultipatchVectorConstFieldRTheta = typename CMultipatchVectorFieldMemRTheta::view_type;
+        = DMultipatchVectorFieldMem<MultipatchIdxRangeRTheta, VectorIndexSetRTheta>;
+using CMultipatchVectorFieldRTheta
+        = DMultipatchVectorField<MultipatchIdxRangeRTheta, VectorIndexSetRTheta>;
+using CMultipatchVectorConstFieldRTheta
+        = DMultipatchVectorConstField<MultipatchIdxRangeRTheta, VectorIndexSetRTheta>;
 
 using CoordRTheta = Coord<R, Theta>;
 using IdxR1 = Idx<GridR<1>>;
@@ -47,10 +50,12 @@ using CFieldRTheta1 = Field<CoordRTheta, IdxRange<GridR<1>, GridTheta<1>>>;
 using CFieldRTheta2 = Field<CoordRTheta, IdxRange<GridR<2>, GridTheta<2>>>;
 using CConstFieldRTheta1 = ConstField<CoordRTheta, IdxRange<GridR<1>, GridTheta<1>>>;
 using CConstFieldRTheta2 = ConstField<CoordRTheta, IdxRange<GridR<2>, GridTheta<2>>>;
-using VectorFieldRTheta1 = DVectorFieldOnPatch<Patch1>;
-using VectorFieldRTheta2 = DVectorFieldOnPatch<Patch2>;
-using VectorConstFieldRTheta1 = DVectorConstFieldOnPatch<Patch1>;
-using VectorConstFieldRTheta2 = DVectorConstFieldOnPatch<Patch2>;
+using VectorFieldRTheta1 = DVectorField<IdxRange<GridR<1>, GridTheta<1>>, VectorIndexSetRTheta>;
+using VectorFieldRTheta2 = DVectorField<IdxRange<GridR<2>, GridTheta<2>>, VectorIndexSetRTheta>;
+using VectorConstFieldRTheta1
+        = DVectorConstField<IdxRange<GridR<1>, GridTheta<1>>, VectorIndexSetRTheta>;
+using VectorConstFieldRTheta2
+        = DVectorConstField<IdxRange<GridR<2>, GridTheta<2>>, VectorIndexSetRTheta>;
 
 template <class TimeStepper>
 void multipatch_timestepper_test(double expected_order)
