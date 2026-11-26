@@ -78,9 +78,8 @@ struct InterpolationEvaluatorTraits
             = ddc::coordinate_of_t<typename evaluation_idx_range_type::discrete_element_type>;
 
     /// @brief The type of the index describing the order of the derivatives in each dimension.
-    using deriv_idx_type =
-            typename detail::ToDerivIdx<typename evaluation_idx_range_type::discrete_element_type>::
-                    type;
+    using deriv_idx_type = typename detail::ToDerivIdx<
+            typename evaluation_idx_range_type::discrete_element_type>::type;
 
     /// @brief The type of the ND index range on which the interpolation coefficients are defined.
     using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;

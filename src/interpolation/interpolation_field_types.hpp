@@ -30,7 +30,8 @@ struct InterpolationFieldTypes
 
     /// @brief A modifiable vector field of ElementType defined on IdxRangeType.
     template <class ElementType, class IdxRangeType, class VectorIndexSetType>
-    using vector_field_type = VectorField<ElementType, IdxRangeType, VectorIndexSetType, MemorySpace>;
+    using vector_field_type
+            = VectorField<ElementType, IdxRangeType, VectorIndexSetType, MemorySpace>;
 
     /// @brief A constant vector field of ElementType defined on IdxRangeType.
     template <class ElementType, class IdxRangeType, class VectorIndexSetType>

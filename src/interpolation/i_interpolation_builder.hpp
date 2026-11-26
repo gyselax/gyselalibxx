@@ -39,8 +39,7 @@
  * @tparam Builder The interpolation builder type.
  */
 template <class Builder>
-struct InterpolationBuilderTraits
-    : detail::InterpolationFieldTypes<typename Builder::memory_space>
+struct InterpolationBuilderTraits : detail::InterpolationFieldTypes<typename Builder::memory_space>
 {
     /// @brief The data type that the data is saved on.
     using data_type = typename Builder::data_type;

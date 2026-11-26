@@ -973,12 +973,14 @@ public:
     /// @brief The MultipatchType of the index ranges on which the interpolation coefficients are defined.
     using coeff_idx_range_type = detail::MultipatchType<
             PatchOrdering,
-            ddc::TypeSeq<typename InterpolationEvaluatorTraits<Evaluators>::coeff_idx_range_type...>>;
+            ddc::TypeSeq<
+                    typename InterpolationEvaluatorTraits<Evaluators>::coeff_idx_range_type...>>;
 
     /// @brief The MultipatchType of the index ranges of the bases used to define the interpolations.
     using basis_idx_range_type = detail::MultipatchType<
             PatchOrdering,
-            ddc::TypeSeq<typename InterpolationEvaluatorTraits<Evaluators>::basis_idx_range_type...>>;
+            ddc::TypeSeq<
+                    typename InterpolationEvaluatorTraits<Evaluators>::basis_idx_range_type...>>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
