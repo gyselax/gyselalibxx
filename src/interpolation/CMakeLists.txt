@@ -14,6 +14,7 @@ target_sources("interpolation"
                 i_interpolation_builder.hpp
                 i_interpolation_evaluator.hpp
                 identity_interpolation_builder.hpp
+                interpolation_field_types.hpp
                 lagrange_basis_non_uniform.hpp
                 lagrange_basis_uniform.hpp
                 lagrange_evaluator.hpp

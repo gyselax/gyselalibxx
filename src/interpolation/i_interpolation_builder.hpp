@@ -5,6 +5,7 @@
 #include <type_traits>
 
 #include "ddc_aliases.hpp"
+#include "interpolation_field_types.hpp"
 
 /**
  * @brief A traits struct for accessing type aliases of an interpolation builder.
@@ -26,11 +27,20 @@
  *   Type calculators:
  *   - batched_basis_idx_range_type
  *   - batched_derivs_idx_range_type  (1D builders only; not required by the concept)
+ *   - field_type<ElementType, IdxRangeType>
+ *   - const_field_type<ElementType, IdxRangeType>
+ *   - vector_field_type<ElementType, IdxRangeType, VectorIndexSetType>
+ *   - const_vector_field_type<ElementType, IdxRangeType, VectorIndexSetType>
+ *
+ * The field type calculators give the type of the objects which store the data passed
+ * to the builder (e.g. Field for a builder on a single index range, MultipatchField for
+ * a builder acting on several patches).
  *
  * @tparam Builder The interpolation builder type.
  */
 template <class Builder>
 struct InterpolationBuilderTraits
+    : detail::InterpolationFieldTypes<typename Builder::memory_space>
 {
     /// @brief The data type that the data is saved on.
     using data_type = typename Builder::data_type;
@@ -86,7 +96,7 @@ struct InterpolationBuilderTraits<ddc::SplineBuilder<
         InterpolationDDim,
         SBCLower,
         SBCUpper,
-        Solver>>
+        Solver>> : detail::InterpolationFieldTypes<MemorySpace>
 {
 private:
     using Builder = ddc::SplineBuilder<
@@ -164,7 +174,7 @@ struct InterpolationBuilderTraits<ddc::SplineBuilder2D<
         BcUpper1,
         BcLower2,
         BcUpper2,
-        Solver>>
+        Solver>> : detail::InterpolationFieldTypes<MemorySpace>
 {
 private:
     using Builder = ddc::SplineBuilder2D<
@@ -256,7 +266,7 @@ struct InterpolationBuilderTraits<ddc::SplineBuilder3D<
         BcUpper2,
         BcLower3,
         BcUpper3,
-        Solver>>
+        Solver>> : detail::InterpolationFieldTypes<MemorySpace>
 {
 private:
     using Builder = ddc::SplineBuilder3D<
@@ -348,6 +358,8 @@ namespace concepts {
  * The callable requirement is verified using interpolation_idx_range_type as the
  * representative non-batched domain:
  *  - b(coeffs, vals) — build interpolation coefficients from function values.
+ * The types of coeffs and vals are given by the field type calculators of the traits
+ * (field_type and const_field_type).
  */
 template <class Builder>
 concept InterpolationBuilder = requires
@@ -359,14 +371,14 @@ concept InterpolationBuilder = requires
 }
 &&requires(
         Builder const& b,
-        Field<typename InterpolationBuilderTraits<Builder>::data_type,
-              typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
-                      typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>,
-              typename Builder::memory_space> coeffs,
-        ConstField<
+        typename InterpolationBuilderTraits<Builder>::template field_type<
                 typename InterpolationBuilderTraits<Builder>::data_type,
-                typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type,
-                typename Builder::memory_space> vals)
+                typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
+                        typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>>
+                coeffs,
+        typename InterpolationBuilderTraits<Builder>::template const_field_type<
+                typename InterpolationBuilderTraits<Builder>::data_type,
+                typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type> vals)
 {
     {b(coeffs, vals)};
 };

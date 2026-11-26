@@ -62,6 +62,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `DMultipatchVectorConstField`
   - `MultipatchVectorFieldMem`
   - `DMultipatchVectorFieldMem`
+- Add `field_type`, `const_field_type`, `vector_field_type` and `const_vector_field_type` type calculators to `InterpolationBuilderTraits` and `InterpolationEvaluatorTraits`, and a `deriv_idx_type` alias to `InterpolationEvaluatorTraits`.
+- Specialise `InterpolationBuilderTraits` and `InterpolationEvaluatorTraits` for `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection` so `MultipatchInterpolation2D` satisfies `concepts::Interpolation`.
+- Add `InterpolationEvaluator2DCollection::operator()` and `InterpolationEvaluator2DCollection::deriv` overloads which evaluate on the evaluation mesh of each patch.
 
 ### Fixed
 
