@@ -215,46 +215,16 @@ public:
     /// @brief The ND coordinate type corresponding to the evaluation mesh.
     using coord_type = typename InterpolationEvaluatorTraits<FirstEvaluator>::coord_type;
 
-    /**
-     * @brief Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched
-     * interpolation defined on both of the Patch's logical dimensions.
-     * Needed public for functions on GPU.
-     */
-    template <class Patch>
-    using CoeffOnPatch = ConstField<data_type, coeff_idx_range_type<Patch>, memory_space>;
-
 private:
-    static_assert(
-            (std::is_same_v<typename Evaluators::exec_space, exec_space> && ...),
-            "All evaluators must use the same execution space.");
-    static_assert(
-            (std::is_same_v<typename Evaluators::memory_space, memory_space> && ...),
-            "All evaluators must use the same memory space.");
-    static_assert(
-            (std::is_same_v<
-                     typename InterpolationEvaluatorTraits<Evaluators>::data_type,
-                     data_type> && ...),
-            "All evaluators must use the same data type.");
-    static_assert(
-            (std::is_same_v<
-                     typename InterpolationEvaluatorTraits<Evaluators>::coord_type,
-                     coord_type> && ...),
-            "All evaluators must be defined on the same continuous dimensions.");
-    static_assert(
-            (std::is_same_v<
-                     evaluation_idx_range_type<Patches>,
-                     IdxRange<typename Patches::Grid1, typename Patches::Grid2>> && ...),
-            "The evaluators must be provided in the same order as the patches and must "
-            "evaluate on the grids (Grid1, Grid2) of their patch.");
-
-    // Fields
-    template <class Patch>
-    using CoordConstFieldOnPatch
-            = ConstField<coord_type, evaluation_idx_range_type<Patch>, memory_space>;
+    // Multipatch index ranges
+    using MultipatchIdxRangeEval = MultipatchType<evaluation_idx_range_type, Patches...>;
+    using MultipatchIdxRangeCoeffs = MultipatchType<coeff_idx_range_type, Patches...>;
 
     // MultipatchTypes
-    using MultipatchCoordField = MultipatchField<CoordConstFieldOnPatch, Patches...>;
-    using MultipatchCoeffs = MultipatchField<CoeffOnPatch, Patches...>;
+    using MultipatchCoordField
+            = MultipatchConstField<coord_type, MultipatchIdxRangeEval, memory_space>;
+    using MultipatchCoeffs
+            = MultipatchConstField<data_type, MultipatchIdxRangeCoeffs, memory_space>;
     using MultipatchEvaluators = detail::MultipatchType<PatchOrdering, ddc::TypeSeq<Evaluators...>>;
 
 
@@ -515,7 +485,8 @@ public:
     void apply_evaluator_field(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
-            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            ConstField<coord_type, evaluation_idx_range_type<StoringPatch>, memory_space> const&
+                    patch_coords,
             MultipatchCoeffs const patches_coeffs) const
     {
         check_values_field_type<StoringPatch, ValuesField>();
@@ -565,7 +536,8 @@ public:
     void apply_evaluator_deriv_field(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
-            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            ConstField<coord_type, evaluation_idx_range_type<StoringPatch>, memory_space> const&
+                    patch_coords,
             MultipatchCoeffs const patches_coeffs) const
     {
         static_assert(is_deriv_field_v<ValuesField>, "The values field must be a DerivField.");
@@ -646,7 +618,9 @@ public:
      * @param[in] coeffs ConstField of spline coefficients of the spline on the given Patch.
      */
     template <class Patch>
-    void apply_integrate(double& integral, CoeffOnPatch<Patch> const& coeffs) const
+    void apply_integrate(
+            double& integral,
+            ConstField<data_type, coeff_idx_range_type<Patch>, memory_space> const& coeffs) const
     {
         static_assert(
                 std::is_same_v<exec_space, Kokkos::DefaultHostExecutionSpace>,
@@ -722,7 +696,8 @@ private:
                 using TestPatch = ddc::type_seq_element_t<TestPatchIdx, PatchOrdering>;
                 replace_periodic_coord_inside<TestPatch>(coord);
 
-                CoeffOnPatch<TestPatch> const test_coeffs
+                ConstField<data_type, coeff_idx_range_type<TestPatch>, memory_space> const
+                        test_coeffs
                         = patches_coeffs.template get<TestPatch>();
                 return evaluate_on_patch(
                         m_evaluators.template get<TestPatch>(),

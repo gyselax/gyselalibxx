@@ -26,11 +26,13 @@ namespace {
 using DFieldMem1 = DFieldMem<Patch1::IdxRange12>;
 using DFieldMem2 = DFieldMem<Patch2::IdxRange12>;
 
-using Field1 = DFieldOnPatch<Patch1>;
-using Field2 = DFieldOnPatch<Patch2>;
+using Field1 = DField<Patch1::IdxRange12>;
+using Field2 = DField<Patch2::IdxRange12>;
 
-using ConstField1 = DConstFieldOnPatch<Patch1>;
-using ConstField2 = DConstFieldOnPatch<Patch2>;
+using ConstField1 = DConstField<Patch1::IdxRange12>;
+using ConstField2 = DConstField<Patch2::IdxRange12>;
+
+using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
 
 } // namespace
 
@@ -133,7 +135,7 @@ TEST_F(MultiPatchField2Patches, ZeroOnFirstPatchOneOnSecond)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field1, 0.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field2, 1.0);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -159,7 +161,7 @@ TEST_F(MultiPatchField2Patches, Polynomials)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -189,9 +191,9 @@ TEST_F(MultiPatchField2Patches, GetIdxRange)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(get_idx_range(global_field));
+    MultipatchIdxRange all_idx_ranges(get_idx_range(global_field));
 
     ASSERT_EQ(get_idx_range(field1), all_idx_ranges.get<Patch1>());
     ASSERT_EQ(get_idx_range(field2), all_idx_ranges.get<Patch2>());
@@ -205,10 +207,9 @@ TEST_F(MultiPatchField2Patches, ConstField)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
-            global_field.get_const_field());
+    DMultipatchConstField<MultipatchIdxRange> global_const_field(global_field.get_const_field());
 
     // Act
     ConstField1 field1_from_multipatch = global_const_field.get<Patch1>();
@@ -232,10 +233,11 @@ TEST_F(MultiPatchField2Patches, ConstField)
 
 TEST_F(MultiPatchField2Patches, DerivField)
 {
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(index_range_xy1, index_range_xy2);
+    MultipatchIdxRange idx_ranges(index_range_xy1, index_range_xy2);
 
-    MultipatchFieldMem<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(idx_ranges);
-    MultipatchField<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
+    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(
+            idx_ranges);
+    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
             functions_and_derivs_alloc);
 
     // f1(x,y) = x^2 + y^2; f2(x,y) = x^2 - y^2;
@@ -243,10 +245,10 @@ TEST_F(MultiPatchField2Patches, DerivField)
             functions_and_derivs.template get<Patch1>().get_values_field(),
             functions_and_derivs.template get<Patch2>().get_values_field());
 
-    DFieldMemOnPatch<Patch1> field1_from_multipatch_alloc(index_range_xy1);
-    DFieldMemOnPatch<Patch2> field2_from_multipatch_alloc(index_range_xy2);
-    DFieldOnPatch<Patch1> field1_from_multipatch(field1_from_multipatch_alloc);
-    DFieldOnPatch<Patch2> field2_from_multipatch(field2_from_multipatch_alloc);
+    DFieldMem1 field1_from_multipatch_alloc(index_range_xy1);
+    DFieldMem2 field2_from_multipatch_alloc(index_range_xy2);
+    Field1 field1_from_multipatch(field1_from_multipatch_alloc);
+    Field2 field2_from_multipatch(field2_from_multipatch_alloc);
 
     ddc::parallel_deepcopy(
             field1_from_multipatch,

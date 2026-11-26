@@ -98,38 +98,6 @@ private:
     template <class Patch>
     using Traits = InterpolationBuilderTraits<BuilderOnPatch<Patch>>;
 
-    /// A type alias to get the batched interpolation coefficients on a specific patch.
-    template <class Patch, class ValuesType>
-    using CoeffsOnPatch
-            = Field<data_type,
-                    typename Traits<Patch>::template batched_basis_idx_range_type<
-                            typename ValuesType::discrete_domain_type>,
-                    memory_space>;
-
-    /// A type alias to get the batched derivatives on a specific patch.
-    template <class Patch, class ValuesType>
-    using DerivsOnPatch = ConstField<
-            data_type,
-            typename Traits<Patch>::template batched_derivs_idx_range_type<
-                    typename ValuesType::discrete_domain_type>,
-            memory_space>;
-
-    /// The type of the batched interpolation coefficients.
-    template <class MultipatchValues>
-    using MultipatchCoeffs = detail::MultipatchField<
-            PatchOrdering,
-            ddc::TypeSeq<CoeffsOnPatch<
-                    Patches,
-                    typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
-
-    /// The type of the batched derivatives.
-    template <class MultipatchValues>
-    using MultipatchDerivs = detail::MultipatchField<
-            PatchOrdering,
-            ddc::TypeSeq<DerivsOnPatch<
-                    Patches,
-                    typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
-
     /// A type alias to get the interpolation index range on a specific patch.
     template <class Patch>
     using IdxRangeInterpolationOnPatch = typename Traits<Patch>::interpolation_idx_range_type;
@@ -149,6 +117,20 @@ private:
             PatchOrdering,
             ddc::TypeSeq<typename Traits<Patches>::template batched_derivs_idx_range_type<
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
+
+    /// The type of the batched interpolation coefficients.
+    template <class MultipatchValues>
+    using MultipatchCoeffs = MultipatchField<
+            data_type,
+            MultipatchIdxRangeBatchedBasis<typename MultipatchValues::discrete_domain_type>,
+            memory_space>;
+
+    /// The type of the batched derivatives.
+    template <class MultipatchValues>
+    using MultipatchDerivs = MultipatchConstField<
+            data_type,
+            MultipatchIdxRangeBatchedDeriv<typename MultipatchValues::discrete_domain_type>,
+            memory_space>;
 
     /// The type of the internal storage of the builders.
     using BuilderTuple = std::tuple<Builders const&...>;

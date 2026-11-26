@@ -575,7 +575,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             deriv_calculator_369(idx_ranges_369, deriv_coeffs_3_6, deriv_coeffs_6_9);
 
     // Instantiate DerivField ====================================================================
-    MultipatchFieldMem<
+    MultipatchFieldMemOf<
             DerivFieldMemOnPatch_host,
             Patch1,
             Patch2,
@@ -587,7 +587,7 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             Patch8,
             Patch9>
             functions_and_derivs_alloc(idx_ranges);
-    MultipatchField<
+    MultipatchFieldOf<
             DerivFieldOnPatch_host,
             Patch1,
             Patch2,
