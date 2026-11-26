@@ -43,9 +43,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `InterfacesExactDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the exact formula.
 - Added a `concepts::Patch` concept.
 - Added a `concepts::Edge` concept.
-- Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
+- Add `MultipatchTypeFromSeq` and `MultipatchFieldOfFromSeq` aliases to define a `MultipatchType`/`MultipatchFieldOf` from a `ddc::TypeSeq` of patches.
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 - Add copy operators for `MultipatchType` and `MultipatchField`.
+- Add multipatch aliases templated like their non-multipatch equivalents:
+  - `MultipatchField`
+  - `DMultipatchField`
+  - `MultipatchConstField`
+  - `DMultipatchConstField`
+  - `MultipatchFieldMem`
+  - `DMultipatchFieldMem`
 
 ### Fixed
 
@@ -65,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace `MultipatchSplineEvaluator::deriv_dim_1()`, `MultipatchSplineEvaluator::deriv_dim_2()`, `MultipatchSplineEvaluator::deriv_1_and_2()`, `MultipatchSplineEvaluator::deriv<InterestDim>()` by `MultipatchSplineEvaluator::deriv()` taking as input the derivative order (similar as `ddc::SplineEvaluator2D`).
 - `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
 - The constructor of `MultipatchField` from another multipatch object is now explicit.
+- Rename the aliases `MultipatchField<T, Patches...>` and `MultipatchFieldMem<T, Patches...>` (templated on a type template) to `MultipatchFieldOf` and `MultipatchFieldMemOf`.
 - Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
 - The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
 - Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
@@ -104,6 +112,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MatrixBatchEll::norm`.
 - Remove `detail::combine_t` (prefer `ddc::combine_t`).
 - Remove `SingleInterfaceDerivativesCalculatorCollection`.
+- Remove the per-patch field aliases from `types.hpp`. Use `MultipatchField`/`MultipatchFieldMem` (and their `D`/`Const` variants) with a `MultipatchType` of index ranges instead.:
+  - `DFieldMemOnPatch`
+  - `DFieldMem1OnPatch`
+  - `DFieldMem2OnPatch`
+  - `DField1OnPatch`
+  - `DField2OnPatch`
+  - `DConstFieldOnPatch`
+  - `DConstField1OnPatch`
+  - `DConstFieldOnPatch_host`
+  - `CoordFieldMemOnPatch`
+  - `CoordFieldOnPatch`
+  - `CoordConstFieldOnPatch`
+  - `Coord1Field1OnPatch_1D`
+  - `SplineCoeffMemOnPatch_2D`
+  - `SplineCoeffOnPatch_2D`
+  - `ConstSplineCoeffOnPatch_2D`
+  - `SplineCoeff1OnPatch_2D`
+  - `ConstSplineCoeff1OnPatch_2D`
+  - `SplineCoeff1OnPatch_1D`
+  - `ConstSplineCoeff1OnPatch_1D`
+  - `SplineCoeffMemOnPatch_2D_host`
+  - `SplineCoeffOnPatch_2D_host`
+  - `ConstSplineCoeffOnPatch_2D_host`
 
 ### Dependency requirements
 

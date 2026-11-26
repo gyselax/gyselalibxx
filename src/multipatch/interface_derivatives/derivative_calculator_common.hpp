@@ -254,11 +254,11 @@ public:
 
     /// @brief Type containing a DerivField per patch defined on CPU.
     using MultipatchDerivField_host
-            = MultipatchFieldFromSeq<DerivFieldOnPatch_host, relevant_patches>;
+            = MultipatchFieldOfFromSeq<DerivFieldOnPatch_host, relevant_patches>;
 
     /// @brief Type containing a DerivConstField per patch defined on CPU.
     using MultipatchDerivConstField_host
-            = MultipatchFieldFromSeq<DerivConstFieldOnPatch_host, relevant_patches>;
+            = MultipatchFieldOfFromSeq<DerivConstFieldOnPatch_host, relevant_patches>;
 
 protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.

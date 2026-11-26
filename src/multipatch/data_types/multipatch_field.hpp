@@ -25,8 +25,8 @@ class MultipatchField;
  * on.
  *
  * This class should not be used directly to instantiate objects. Instead the global alias
- * MultipatchField should be used.
- * I.e. use `MultipatchField<TypeOnPatch, Patches...>` instead of
+ * MultipatchFieldOf should be used.
+ * I.e. use `MultipatchFieldOf<TypeOnPatch, Patches...>` instead of
  * `detail::MultipatchField<TypeSeqPatches, TypeSeqInternalTypes>`.
  *
  * @tparam Patches The patches on which the objects are defined.
@@ -235,22 +235,133 @@ inline constexpr bool enable_multipatch_field<
  *                 that the given objects are defined on.
  */
 template <template <typename P> typename T, concepts::Patch... Patches>
-using MultipatchField
+using MultipatchFieldOf
         = detail::MultipatchField<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 
 /**
  * @brief A class to store field objects on patches.
  *
- * This alias is equivalent to MultipatchField but takes the patches as a ddc::TypeSeq.
- * I.e. `MultipatchFieldFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
- * `MultipatchField<T, Patches...>`.
+ * This alias is equivalent to MultipatchFieldOf but takes the patches as a ddc::TypeSeq.
+ * I.e. `MultipatchFieldOfFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
+ * `MultipatchFieldOf<T, Patches...>`.
  *
  * @tparam T The type of the fields/derivative fields/vector fields that are stored on the given patches.
  * @tparam PatchSeq A ddc::TypeSeq of the patches of the objects.
  */
 template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
-using MultipatchFieldFromSeq =
+using MultipatchFieldOfFromSeq =
         typename detail::MultipatchFromPatchSeq<detail::MultipatchField, T, PatchSeq>::type;
+
+namespace detail {
+
+/**
+ * @brief A helper to build a MultipatchField of Fields from a MultipatchType of index ranges.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ * @tparam LayoutStridedPolicy The layout of the data in memory.
+ */
+template <class ElementType, class MultipatchIdxRange, class MemorySpace, class LayoutStridedPolicy>
+struct MultipatchFieldFromIdxRange;
+
+/// @brief Specialisation of MultipatchFieldFromIdxRange to unpack the patches and index ranges.
+template <
+        class ElementType,
+        class... Patches,
+        class... IdxRanges,
+        class MemorySpace,
+        class LayoutStridedPolicy>
+struct MultipatchFieldFromIdxRange<
+        ElementType,
+        MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<IdxRanges...>>,
+        MemorySpace,
+        LayoutStridedPolicy>
+{
+    static_assert(
+            (ddc::is_discrete_domain_v<IdxRanges> && ...),
+            "The MultipatchType must contain an index range on each patch.");
+    /// The MultipatchField of Fields defined on the index ranges.
+    using type = MultipatchField<
+            ddc::TypeSeq<Patches...>,
+            ddc::TypeSeq<Field<ElementType, IdxRanges, MemorySpace, LayoutStridedPolicy>...>>;
+};
+
+} // namespace detail
+
+/**
+ * @brief A class to store a Field on each patch.
+ *
+ * This alias is templated in the same way as Field, with the index range replaced by a
+ * MultipatchType of index ranges (e.g. `MultipatchType<IdxRangeOnPatch, Patches...>`). The
+ * resulting type is the same as `MultipatchFieldOf<T, Patches...>` where
+ * `T<Patch> = Field<ElementType, IdxRangeOnPatch<Patch>, MemorySpace, LayoutStridedPolicy>`.
+ *
+ * Fields which are not plain Fields (e.g. DerivField, VectorField) should be stored using
+ * MultipatchFieldOf.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ * @tparam LayoutStridedPolicy The layout of the data in memory.
+ */
+template <
+        class ElementType,
+        class MultipatchIdxRange,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = Kokkos::layout_right>
+using MultipatchField = typename detail::MultipatchFieldFromIdxRange<
+        ElementType,
+        MultipatchIdxRange,
+        MemorySpace,
+        LayoutStridedPolicy>::type;
+
+/**
+ * @brief A class to store a Field of doubles on each patch.
+ * See MultipatchField.
+ *
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ * @tparam LayoutStridedPolicy The layout of the data in memory.
+ */
+template <
+        class MultipatchIdxRange,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = Kokkos::layout_right>
+using DMultipatchField
+        = MultipatchField<double, MultipatchIdxRange, MemorySpace, LayoutStridedPolicy>;
+
+/**
+ * @brief A class to store a constant Field on each patch.
+ * See MultipatchField.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ * @tparam LayoutStridedPolicy The layout of the data in memory.
+ */
+template <
+        class ElementType,
+        class MultipatchIdxRange,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = Kokkos::layout_right>
+using MultipatchConstField
+        = MultipatchField<ElementType const, MultipatchIdxRange, MemorySpace, LayoutStridedPolicy>;
+
+/**
+ * @brief A class to store a constant Field of doubles on each patch.
+ * See MultipatchField.
+ *
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ * @tparam LayoutStridedPolicy The layout of the data in memory.
+ */
+template <
+        class MultipatchIdxRange,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutStridedPolicy = Kokkos::layout_right>
+using DMultipatchConstField
+        = MultipatchConstField<double, MultipatchIdxRange, MemorySpace, LayoutStridedPolicy>;
 
 template <class... VectorFieldType, class PatchTypeSeq>
 inline constexpr bool enable_vector_field<detail::MultipatchField<
