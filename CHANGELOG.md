@@ -59,6 +59,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `DMultipatchVectorConstField`
   - `MultipatchVectorFieldMem`
   - `DMultipatchVectorFieldMem`
+  - `MultipatchDerivField`
+  - `DMultipatchDerivField`
+  - `MultipatchDerivConstField`
+  - `DMultipatchDerivConstField`
+  - `MultipatchDerivFieldMem`
+  - `DMultipatchDerivFieldMem`
+- Add `IdxRangeDerivOnPatch` alias describing the index range on which a `DerivField` is defined on a patch.
 
 ### Fixed
 

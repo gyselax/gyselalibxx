@@ -3,7 +3,9 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "derivative_field_common.hpp"
 
 template <class, class, int, class>

@@ -62,6 +62,17 @@ using Idx1OnPatch = typename Patch::Idx1;
 template <class Patch>
 using IdxRangeBSOnPatch = typename Patch::IdxRangeBS12;
 
+/**
+ * @brief The index range on (dx, x, dy, y) on which a DerivField is defined for the grids on the
+ * Patch's 2D logical domain.
+ */
+template <class Patch>
+using IdxRangeDerivOnPatch = IdxRange<
+        ddc::Deriv<typename Patch::Dim1>,
+        typename Patch::Grid1,
+        ddc::Deriv<typename Patch::Dim2>,
+        typename Patch::Grid2>;
+
 
 // IDXRANGESLICE ---------------------------------------------------------------------------------
 
