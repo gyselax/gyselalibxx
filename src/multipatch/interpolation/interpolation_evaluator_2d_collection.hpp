@@ -309,8 +309,10 @@ public:
     {
     }
 
+    /// Default destructor callable from GPU
     KOKKOS_DEFAULTED_FUNCTION ~InterpolationEvaluator2DCollection() = default;
 
+    /// Default copy operator callable from GPU
     KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(
             InterpolationEvaluator2DCollection const&)
             = default;
