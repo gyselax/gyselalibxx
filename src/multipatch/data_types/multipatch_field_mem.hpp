@@ -206,4 +206,66 @@ inline constexpr bool enable_data_access_methods<
  */
 template <template <typename P> typename T, class... Patches>
 using MultipatchFieldMemOf
-        =detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+        = detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+
+namespace detail {
+
+/**
+ * @brief A helper to build a MultipatchFieldMem of FieldMems from a MultipatchType of index ranges.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <class ElementType, class MultipatchIdxRange, class MemorySpace>
+struct MultipatchFieldMemFromIdxRange;
+
+/// @brief Specialisation of MultipatchFieldMemFromIdxRange to unpack the patches and index ranges.
+template <class ElementType, class... Patches, class... IdxRanges, class MemorySpace>
+struct MultipatchFieldMemFromIdxRange<
+        ElementType,
+        MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<IdxRanges...>>,
+        MemorySpace>
+{
+    static_assert(
+            (ddc::is_discrete_domain_v<IdxRanges> && ...),
+            "The MultipatchType must contain an index range on each patch.");
+    /// The MultipatchFieldMem of FieldMems defined on the index ranges.
+    using type = MultipatchFieldMem<
+            ddc::TypeSeq<Patches...>,
+            ddc::TypeSeq<FieldMem<ElementType, IdxRanges, MemorySpace>...>>;
+};
+
+} // namespace detail
+
+/**
+ * @brief A class to store a FieldMem on each patch.
+ *
+ * This alias is templated in the same way as FieldMem, with the index range replaced by a
+ * MultipatchType of index ranges (e.g. `MultipatchType<IdxRangeOnPatch, Patches...>`). The
+ * resulting type is the same as `MultipatchFieldMemOf<T, Patches...>` where
+ * `T<Patch> = FieldMem<ElementType, IdxRangeOnPatch<Patch>, MemorySpace>`.
+ *
+ * Memory blocks which are not plain FieldMems (e.g. DerivFieldMem, VectorFieldMem) should be
+ * stored using MultipatchFieldMemOf.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <
+        class ElementType,
+        class MultipatchIdxRange,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+using MultipatchFieldMem = typename detail::
+        MultipatchFieldMemFromIdxRange<ElementType, MultipatchIdxRange, MemorySpace>::type;
+
+/**
+ * @brief A class to store a FieldMem of doubles on each patch.
+ * See MultipatchFieldMem.
+ *
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <class MultipatchIdxRange, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+using DMultipatchFieldMem = MultipatchFieldMem<double, MultipatchIdxRange, MemorySpace>;

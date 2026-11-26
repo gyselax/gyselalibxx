@@ -191,15 +191,6 @@ private:
             typename Patch::Grid2,
             ddc::Deriv<typename Patch::Dim2>>;
 
-    /// A type alias to get the batched cross-derivatives on a specific patch.
-    template <class Patch, class ValuesType>
-    using Derivs12OnPatch = ConstField<
-            data_type,
-            batched_derivs_idx_range_type_on_patch<
-                    Patch,
-                    typename ValuesType::discrete_domain_type>,
-            memory_space>;
-
     /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
     using DerivConstFieldOnPatch = DerivConstField<
@@ -243,14 +234,6 @@ private:
                     Patches,
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
-    /// The type of the batched cross-derivatives.
-    template <class MultipatchValues>
-    using MultipatchDerivs12 = detail::MultipatchField<
-            PatchOrdering,
-            ddc::TypeSeq<Derivs12OnPatch<
-                    Patches,
-                    typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
-
     /// The type of the function values and derivatives stored in DerivFields.
     using MultipatchDerivField = MultipatchFieldOf<DerivConstFieldOnPatch, Patches...>;
 
@@ -266,6 +249,13 @@ private:
             ddc::TypeSeq<batched_derivs_idx_range_type_on_patch<
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
+
+    /// The type of the batched cross-derivatives.
+    template <class MultipatchValues>
+    using MultipatchDerivs12 = MultipatchConstField<
+            data_type,
+            MultipatchIdxRangeBatchedDeriv<typename MultipatchValues::discrete_domain_type>,
+            memory_space>;
 
     /// The type of the internal storage of the builders.
     using BuilderTuple = std::tuple<Builders const&...>;
