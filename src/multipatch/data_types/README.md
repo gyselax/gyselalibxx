@@ -48,9 +48,20 @@ DMultipatchConstField<MultipatchIdxRange> const_fields(fields.get_const_field())
 MultipatchConstField<Coord<R, Theta>, MultipatchIdxRange> coords(coords_1, coords_2);
 ```
 
-Objects which are not plain fields (e.g. `DerivField`, `VectorField`) are stored with
-`MultipatchFieldOf` and `MultipatchFieldMemOf`. These are templated on a type template which
-gives the type stored on each patch, e.g. `MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>`.
+Vector fields whose components are the same on every patch are stored in a `MultipatchVectorField`
+or a `MultipatchVectorFieldMem`. These are templated in the same way as `VectorField` and
+`VectorFieldMem`:
+
+```cpp
+DMultipatchVectorFieldMem<MultipatchIdxRange, VectorIndexSet<R, Theta>> vec_fields_alloc(idx_ranges);
+DMultipatchVectorField<MultipatchIdxRange, VectorIndexSet<R, Theta>> vec_fields(vec_fields_alloc);
+DMultipatchField<MultipatchIdxRange> vec_fields_r = ddcHelper::get<R>(vec_fields);
+```
+
+Other objects (e.g. `DerivField`, or vector fields whose components differ from one patch to
+another) are stored with `MultipatchFieldOf` and `MultipatchFieldMemOf`. These are templated on a
+type template which gives the type stored on each patch, e.g.
+`MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>`.
 
 ### Types
 
@@ -58,7 +69,6 @@ In `types.hpp` file different aliases are defined to use with `MultipatchType` a
 
 - To store 1D grids: `Grid1OnPatch` and `Grid2OnPatch`.
 - To store fields: `DFieldOnPatch` (and `DFieldOnPatch_host`).
-- To store vector fields: `DVectorFieldMemOnPatch`, `DVectorFieldOnPatch` and `DVectorConstFieldOnPatch`.
 - To store indices and index ranges:
   - 2D: `IdxRangeOnPatch` and `IdxRangeBSOnPatch` (B-splines);
   - 1D on first dimension: `IdxRange1OnPatch` and `Idx1OnPatch`;

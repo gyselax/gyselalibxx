@@ -13,9 +13,9 @@
 
 /*
     List of aliases useful to store data in MultipatchType or MultipatchFieldOf.
-    Fields of doubles or coordinates on each patch should rather be stored using the aliases
-    MultipatchField, DMultipatchField, MultipatchFieldMem, etc. with a MultipatchType of the
-    index range aliases below.
+    Fields and vector fields on each patch should rather be stored using the aliases
+    MultipatchField, MultipatchFieldMem, MultipatchVectorField, MultipatchVectorFieldMem, etc.
+    with a MultipatchType of the index range aliases below.
 */
 
 
@@ -42,31 +42,6 @@ using DFieldOnPatch = DField<typename Patch::IdxRange12>;
 /// @brief A Field of doubles defined on host on the Patch's 2D logical domain.
 template <class Patch>
 using DFieldOnPatch_host = host_t<DFieldOnPatch<Patch>>;
-
-
-// VECTOR FIELDS ---------------------------------------------------------------------------------
-
-// --- ON DEVICE ---
-/// @brief A VectorFieldMem of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DVectorFieldMemOnPatch = VectorFieldMem<
-        double,
-        typename Patch::IdxRange12,
-        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
-
-/// @brief A VectorField of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DVectorFieldOnPatch = VectorField<
-        double,
-        typename Patch::IdxRange12,
-        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
-
-/// @brief A ConstVectorField of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DVectorConstFieldOnPatch = VectorConstField<
-        double,
-        typename Patch::IdxRange12,
-        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
 
 
 // IDX, IDXRANGE ---------------------------------------------------------------------------------

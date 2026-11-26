@@ -13,14 +13,16 @@ using namespace onion_shape_uniform_2d_2patches;
 
 namespace {
 
-using VectorFieldMem1 = DVectorFieldMemOnPatch<Patch1>;
-using VectorFieldMem2 = DVectorFieldMemOnPatch<Patch2>;
+using VectorIndexSetRTheta = VectorIndexSet<R, Theta>;
+
+using VectorFieldMem1 = DVectorFieldMem<Patch1::IdxRange12, VectorIndexSetRTheta>;
+using VectorFieldMem2 = DVectorFieldMem<Patch2::IdxRange12, VectorIndexSetRTheta>;
 
 using Field1 = DField<Patch1::IdxRange12>;
 using Field2 = DField<Patch2::IdxRange12>;
 
-using VectorField1 = DVectorFieldOnPatch<Patch1>;
-using VectorField2 = DVectorFieldOnPatch<Patch2>;
+using VectorField1 = DVectorField<Patch1::IdxRange12, VectorIndexSetRTheta>;
+using VectorField2 = DVectorField<Patch2::IdxRange12, VectorIndexSetRTheta>;
 
 using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
 
@@ -64,7 +66,8 @@ TEST(MultiPatchField2PatchesOnion, VectorField)
     VectorField1 vec_field1 = get_field(vec_field_mem1);
     VectorField2 vec_field2 = get_field(vec_field_mem2);
 
-    MultipatchFieldOf<DVectorFieldOnPatch, Patch1, Patch2> global_field(vec_field1, vec_field2);
+    DMultipatchVectorField<MultipatchIdxRange, VectorIndexSetRTheta>
+            global_field(vec_field1, vec_field2);
 
     DMultipatchField<MultipatchIdxRange> global_field_r = ddcHelper::get<R>(global_field);
     DMultipatchField<MultipatchIdxRange> global_field_theta = ddcHelper::get<Theta>(global_field);
