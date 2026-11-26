@@ -3,6 +3,7 @@
 
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
+#include "vector_field_mem.hpp"
 
 template <class T>
 inline constexpr bool enable_multipatch_field_mem = false;
@@ -246,8 +247,8 @@ struct MultipatchFieldMemFromIdxRange<
  * resulting type is the same as `MultipatchFieldMemOf<T, Patches...>` where
  * `T<Patch> = FieldMem<ElementType, IdxRangeOnPatch<Patch>, MemorySpace>`.
  *
- * Memory blocks which are not plain FieldMems (e.g. DerivFieldMem, VectorFieldMem) should be
- * stored using MultipatchFieldMemOf.
+ * VectorFieldMems should be stored using MultipatchVectorFieldMem. Other memory blocks which are
+ * not plain FieldMems (e.g. DerivFieldMem) should be stored using MultipatchFieldMemOf.
  *
  * @tparam ElementType The type of the elements inside the fields.
  * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
@@ -269,3 +270,83 @@ using MultipatchFieldMem = typename detail::
  */
 template <class MultipatchIdxRange, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 using DMultipatchFieldMem = MultipatchFieldMem<double, MultipatchIdxRange, MemorySpace>;
+
+namespace detail {
+
+/**
+ * @brief A helper to build a MultipatchFieldMem of VectorFieldMems from a MultipatchType of
+ * index ranges.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam VectorIndexSetType A VectorIndexSet describing the components of the vector field.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <class ElementType, class MultipatchIdxRange, class VectorIndexSetType, class MemorySpace>
+struct MultipatchVectorFieldMemFromIdxRange;
+
+/// @brief Specialisation of MultipatchVectorFieldMemFromIdxRange to unpack the patches and index ranges.
+template <
+        class ElementType,
+        class... Patches,
+        class... IdxRanges,
+        class VectorIndexSetType,
+        class MemorySpace>
+struct MultipatchVectorFieldMemFromIdxRange<
+        ElementType,
+        MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<IdxRanges...>>,
+        VectorIndexSetType,
+        MemorySpace>
+{
+    static_assert(
+            (ddc::is_discrete_domain_v<IdxRanges> && ...),
+            "The MultipatchType must contain an index range on each patch.");
+    /// The MultipatchFieldMem of VectorFieldMems defined on the index ranges.
+    using type = MultipatchFieldMem<
+            ddc::TypeSeq<Patches...>,
+            ddc::TypeSeq<VectorFieldMem<ElementType, IdxRanges, VectorIndexSetType, MemorySpace>...>>;
+};
+
+} // namespace detail
+
+/**
+ * @brief A class to store a VectorFieldMem on each patch.
+ *
+ * This alias is templated in the same way as VectorFieldMem, with the index range replaced by a
+ * MultipatchType of index ranges (e.g. `MultipatchType<IdxRangeOnPatch, Patches...>`). The
+ * resulting type is the same as `MultipatchFieldMemOf<T, Patches...>` where
+ * `T<Patch> = VectorFieldMem<ElementType, IdxRangeOnPatch<Patch>, VectorIndexSetType, MemorySpace>`.
+ *
+ * The same components (VectorIndexSetType) are used on every patch. Vector fields whose
+ * components differ from one patch to another should be stored using MultipatchFieldMemOf.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam VectorIndexSetType A VectorIndexSet describing the components of the vector field.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <
+        class ElementType,
+        class MultipatchIdxRange,
+        class VectorIndexSetType,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+using MultipatchVectorFieldMem = typename detail::MultipatchVectorFieldMemFromIdxRange<
+        ElementType,
+        MultipatchIdxRange,
+        VectorIndexSetType,
+        MemorySpace>::type;
+
+/**
+ * @brief A class to store a VectorFieldMem of doubles on each patch.
+ * See MultipatchVectorFieldMem.
+ *
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
+ * @tparam VectorIndexSetType A VectorIndexSet describing the components of the vector field.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <
+        class MultipatchIdxRange,
+        class VectorIndexSetType,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+using DMultipatchVectorFieldMem
+        = MultipatchVectorFieldMem<double, MultipatchIdxRange, VectorIndexSetType, MemorySpace>;

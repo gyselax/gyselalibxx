@@ -53,6 +53,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `DMultipatchConstField`
   - `MultipatchFieldMem`
   - `DMultipatchFieldMem`
+  - `MultipatchVectorField`
+  - `DMultipatchVectorField`
+  - `MultipatchVectorConstField`
+  - `DMultipatchVectorConstField`
+  - `MultipatchVectorFieldMem`
+  - `DMultipatchVectorFieldMem`
 
 ### Fixed
 
