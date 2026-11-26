@@ -77,7 +77,7 @@
 <para>Define null extrapolation rule common to all geometries. </para>
     </briefdescription>
     <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classMultipatchSplineEvaluator2D" kindref="compound">MultipatchSplineEvaluator2D</ref>. </para>
+<para><simplesect kind="see"><para><ref refid="classInterpolationEvaluator2DCollection" kindref="compound">InterpolationEvaluator2DCollection</ref>. </para>
 </simplesect>
 </para>
     </detaileddescription>

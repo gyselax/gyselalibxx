@@ -1,0 +1,1786 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106" kind="class" language="C++" prot="public">
+    <compoundname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</compoundname>
+    <includes refid="interpolation__evaluator__2d__collection_8hpp" local="no">interpolation_evaluator_2d_collection.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>concepts::Patch...</type>
+        <declname>Patches</declname>
+        <defname>Patches</defname>
+      </param>
+      <param>
+        <type>concepts::InterpolationEvaluator...</type>
+        <declname>Evaluators</declname>
+        <defname>Evaluators</defname>
+      </param>
+      <param>
+        <type>class PatchLocator</type>
+      </param>
+      <param>
+        <type>class <ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af972bb38e4854d402105b8e6fd45636f" prot="private" static="no">
+        <type>ddc::TypeSeq&lt; Patches... &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::PatchOrdering =  ddc::TypeSeq&lt;Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>PatchOrdering</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::PatchOrdering</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad6fa6f1c6cdbbf1ba36caaa61cd800bc" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, ddc::TypeSeq&lt; Evaluators... &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::FirstEvaluator =  ddc::type_seq_element_t&lt;0, ddc::TypeSeq&lt;Evaluators...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>FirstEvaluator</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::FirstEvaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae803bb08bac13ed1e7046bab3a6f7998" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, PatchOrdering &gt;, ddc::TypeSeq&lt; Evaluators... &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::EvaluatorOnPatch =  ddc::type_seq_element_t&lt;
+            ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;,
+            ddc::TypeSeq&lt;Evaluators...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>EvaluatorOnPatch</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::EvaluatorOnPatch</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the evaluator type on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae9b8ef7e7dc99aba3481717cf061ebef" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; EvaluatorOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::Traits =  InterpolationEvaluatorTraits&lt;EvaluatorOnPatch&lt;Patch&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>Traits</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::Traits</qualifiedname>
+        <briefdescription>
+<para>A type alias to get the traits of the evaluator on a specific patch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a05122ce6eaafa827e150ec1d83a15174" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a338469ecb991a5012069142508edfacb" kindref="member">coord_type</ref>, <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3688de35829c97b3a0c0fd509b90695e" kindref="member">evaluation_idx_range_type</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af404d13bb8ae36d524ee200797e8dbdf" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CoordConstFieldOnPatch =  ConstField&lt;coord_type, evaluation_idx_range_type&lt;Patch&gt;, memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordConstFieldOnPatch</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CoordConstFieldOnPatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="229" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad165f523f7ee6e14429a1fcecda2df0b" prot="private" static="no">
+        <type>MultipatchField&lt; CoordConstFieldOnPatch, Patches... &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::MultipatchCoordField =  MultipatchField&lt;CoordConstFieldOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchCoordField</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::MultipatchCoordField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="232" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae1b350f798acf83f5361fe462a8bc1f9" prot="private" static="no">
+        <type>MultipatchField&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a4b5312076dda3c9bd4a2d02f15cf17d7" kindref="member">CoeffOnPatch</ref>, Patches... &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::MultipatchCoeffs =  MultipatchField&lt;CoeffOnPatch, Patches...&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchCoeffs</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::MultipatchCoeffs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="233" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1abf8dbdc0ff5f31d87a15e0a40c258ecb" prot="private" static="no">
+        <type>detail::MultipatchType&lt; PatchOrdering, ddc::TypeSeq&lt; Evaluators... &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::MultipatchEvaluators =  detail::MultipatchType&lt;PatchOrdering, ddc::TypeSeq&lt;Evaluators...&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>MultipatchEvaluators</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::MultipatchEvaluators</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="234" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a8e524887ebe7f873ada75d9467fbb734" prot="private" static="no">
+        <type><ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae0fb35bcba10b8443e1348182ceb234b" kindref="member">continuous_dimension_type1</ref>&lt; ddc::type_seq_element_t&lt; 0, PatchOrdering &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CDim1 =  continuous_dimension_type1&lt;ddc::type_seq_element_t&lt;0, PatchOrdering&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>CDim1</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CDim1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="239" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a75def774f94049a39d2d71a5df619ec0" prot="private" static="no">
+        <type><ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3e771a4f11809d466a0afa2dbbefb6c3" kindref="member">continuous_dimension_type2</ref>&lt; ddc::type_seq_element_t&lt; 0, PatchOrdering &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CDim2 =  continuous_dimension_type2&lt;ddc::type_seq_element_t&lt;0, PatchOrdering&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>CDim2</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CDim2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="241" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a34e44e97a829650b90796dac0228879d" prot="private" static="no">
+        <type>ddc::Deriv&lt; CDim1 &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::DerivDim1 =  ddc::Deriv&lt;CDim1&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivDim1</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::DerivDim1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="244" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a886dfdcc15f1bb354b6301d30606f084" prot="private" static="no">
+        <type>ddc::Deriv&lt; CDim2 &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::DerivDim2 =  ddc::Deriv&lt;CDim2&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivDim2</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::DerivDim2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="246" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="246" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3688de35829c97b3a0c0fd509b90695e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::evaluation_idx_range_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_idx_range_type =  typename Traits&lt;Patch&gt;::evaluation_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the 2D evaluation mesh used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="107" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a0555b84bfcd6bd90ca40b0323974db4b" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3688de35829c97b3a0c0fd509b90695e" kindref="member">evaluation_idx_range_type</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_discrete_dimension_type1 =  ddc::type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;evaluation_idx_range_type&lt;Patch&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>evaluation_discrete_dimension_type1</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_discrete_dimension_type1</qualifiedname>
+        <briefdescription>
+<para>The type of the first discrete dimension of interest used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="112" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a693d7b491955faf83b3c3b5af9f0d2e1" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3688de35829c97b3a0c0fd509b90695e" kindref="member">evaluation_idx_range_type</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_discrete_dimension_type2 =  ddc::type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;evaluation_idx_range_type&lt;Patch&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>evaluation_discrete_dimension_type2</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_discrete_dimension_type2</qualifiedname>
+        <briefdescription>
+<para>The type of the second discrete dimension of interest used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="117" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae0fb35bcba10b8443e1348182ceb234b" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a0555b84bfcd6bd90ca40b0323974db4b" kindref="member">evaluation_discrete_dimension_type1</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::continuous_dimension_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::continuous_dimension_type1 = 
+            typename evaluation_discrete_dimension_type1&lt;Patch&gt;::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>continuous_dimension_type1</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::continuous_dimension_type1</qualifiedname>
+        <briefdescription>
+<para>The type of the first evaluation continuous dimension used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="122" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3e771a4f11809d466a0afa2dbbefb6c3" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a693d7b491955faf83b3c3b5af9f0d2e1" kindref="member">evaluation_discrete_dimension_type2</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::continuous_dimension_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::continuous_dimension_type2 = 
+            typename evaluation_discrete_dimension_type2&lt;Patch&gt;::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>continuous_dimension_type2</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::continuous_dimension_type2</qualifiedname>
+        <briefdescription>
+<para>The type of the second evaluation continuous dimension used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a280fa827bcbf1117cedb55e40d631276" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc:: type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::basis_idx_range_type &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::basis_type1 =  ddc::
+            type_seq_element_t&lt;0, ddc::to_type_seq_t&lt;typename Traits&lt;Patch&gt;::basis_idx_range_type&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>basis_type1</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::basis_type1</qualifiedname>
+        <briefdescription>
+<para>The discrete dimension representing the basis along first dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="134" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a243e9168912ceac1ee589d706b79e560" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ddc:: type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::basis_idx_range_type &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::basis_type2 =  ddc::
+            type_seq_element_t&lt;1, ddc::to_type_seq_t&lt;typename Traits&lt;Patch&gt;::basis_idx_range_type&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>basis_type2</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::basis_type2</qualifiedname>
+        <briefdescription>
+<para>The discrete dimension representing the basis along second dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="140" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a54b147ba5e089d26af8537f03acfa381" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a0555b84bfcd6bd90ca40b0323974db4b" kindref="member">evaluation_discrete_dimension_type1</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_idx_range_type1 =  IdxRange&lt;evaluation_discrete_dimension_type1&lt;Patch&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type1</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_idx_range_type1</qualifiedname>
+        <briefdescription>
+<para>The type of the domain for the 1D evaluation mesh along first dimension used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="147" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1abb3e4d92142bf03cf3d9fd7431a62a8c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a693d7b491955faf83b3c3b5af9f0d2e1" kindref="member">evaluation_discrete_dimension_type2</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_idx_range_type2 =  IdxRange&lt;evaluation_discrete_dimension_type2&lt;Patch&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type2</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluation_idx_range_type2</qualifiedname>
+        <briefdescription>
+<para>The type of the domain for the 1D evaluation mesh along second dimension used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="152" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a54d2f7f462f891d8aad81afc38de5ae9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+        </templateparamlist>
+        <type>typename ValuesField::discrete_domain_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::idx_range_type =  typename ValuesField::discrete_domain_type</definition>
+        <argsstring></argsstring>
+        <name>idx_range_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the whole discrete domain (dimensions for grids and derivatives). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValuesField</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field or <ref refid="classDerivField" kindref="compound">DerivField</ref> type storing the evaluated values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="157" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a36ff859567c6bc16eb2518db3ff7c14a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+        </templateparamlist>
+        <type>detail::deriv_sub_set_t&lt; ddc::to_type_seq_t&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a54d2f7f462f891d8aad81afc38de5ae9" kindref="member">idx_range_type</ref>&lt; ValuesField &gt; &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::deriv_tags =  detail::deriv_sub_set_t&lt;ddc::to_type_seq_t&lt;idx_range_type&lt;ValuesField&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>deriv_tags</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::deriv_tags</qualifiedname>
+        <briefdescription>
+<para>TypeSeq of the derivative dimensions (contained in <ref refid="classDerivField" kindref="compound">DerivField</ref>). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValuesField</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field or <ref refid="classDerivField" kindref="compound">DerivField</ref> type storing the evaluated values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="162" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aebcf1b090a6755fa3e12ea8dc085cd92" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+        </templateparamlist>
+        <type>ddc::type_seq_remove_t&lt; ddc::to_type_seq_t&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a54d2f7f462f891d8aad81afc38de5ae9" kindref="member">idx_range_type</ref>&lt; ValuesField &gt; &gt;, <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a36ff859567c6bc16eb2518db3ff7c14a" kindref="member">deriv_tags</ref>&lt; ValuesField &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::physical_grids =  ddc::type_seq_remove_t&lt;
+            ddc::to_type_seq_t&lt;idx_range_type&lt;ValuesField&gt;&gt;,
+            deriv_tags&lt;ValuesField&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>physical_grids</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::physical_grids</qualifiedname>
+        <briefdescription>
+<para>TypeSeq of the grid dimensions (without derivative dimensions). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValuesField</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field or <ref refid="classDerivField" kindref="compound">DerivField</ref> type storing the evaluated values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="167" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a128175bad4f29da64c07108e532f2f0c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+        </templateparamlist>
+        <type>typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aebcf1b090a6755fa3e12ea8dc085cd92" kindref="member">physical_grids</ref>&lt; ValuesField &gt; &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::batched_evaluation_idx_range_type = 
+            typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;
+                    physical_grids&lt;ValuesField&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::batched_evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the whole domain representing evaluation points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ValuesField</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field or <ref refid="classDerivField" kindref="compound">DerivField</ref> type storing the evaluated values. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="174" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04ef426b8556c5ce4ba548ed3f294966" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>typename Traits&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;::coeff_idx_range_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::coeff_idx_range_type =  typename Traits&lt;Patch&gt;::coeff_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the 2D index range on which the interpolation coefficients are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="181" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae9543e48cdd79a017184cf0fee6ec2e4" prot="public" static="no">
+        <type>typename FirstEvaluator::exec_space</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::exec_space =  typename FirstEvaluator::exec_space</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::exec_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos execution space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="184" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af404d13bb8ae36d524ee200797e8dbdf" prot="public" static="no">
+        <type>typename FirstEvaluator::memory_space</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::memory_space =  typename FirstEvaluator::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::memory_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos memory space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="187" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" prot="public" static="no">
+        <type>typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; FirstEvaluator &gt;::data_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::data_type =  typename InterpolationEvaluatorTraits&lt;FirstEvaluator&gt;::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="190" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a338469ecb991a5012069142508edfacb" prot="public" static="no">
+        <type>typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt; FirstEvaluator &gt;::coord_type</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::coord_type =  typename InterpolationEvaluatorTraits&lt;FirstEvaluator&gt;::coord_type</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::coord_type</qualifiedname>
+        <briefdescription>
+<para>The ND coordinate type corresponding to the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="193" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a4b5312076dda3c9bd4a2d02f15cf17d7" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" kindref="member">data_type</ref>, <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04ef426b8556c5ce4ba548ed3f294966" kindref="member">coeff_idx_range_type</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af404d13bb8ae36d524ee200797e8dbdf" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CoeffOnPatch =  ConstField&lt;data_type, coeff_idx_range_type&lt;Patch&gt;, memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoeffOnPatch</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CoeffOnPatch</qualifiedname>
+        <briefdescription>
+<para>Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched interpolation defined on both of the <ref refid="structPatch" kindref="compound">Patch</ref>&apos;s logical dimensions. Needed public for functions on GPU. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="201" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad43d6d243d4e33ec0093f6734eed681b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::n_patches</definition>
+        <argsstring></argsstring>
+        <name>n_patches</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::n_patches</qualifiedname>
+        <initializer>= ddc::type_seq_size_v&lt;PatchOrdering&gt;</initializer>
+        <briefdescription>
+<para>The number of patches. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="250" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a7f4074a288f951c1caf757872ef1b555" prot="private" static="no" mutable="no">
+        <type>PatchLocator const</type>
+        <definition>PatchLocator const InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::m_patch_locator</definition>
+        <argsstring></argsstring>
+        <name>m_patch_locator</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::m_patch_locator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="282" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a0fa8f926ad3f1b98ea59b9d137a5e93b" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref> const</type>
+        <definition>ExtrapolationRule const InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::m_extrapolation_rule</definition>
+        <argsstring></argsstring>
+        <name>m_extrapolation_rule</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::m_extrapolation_rule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="283" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a2994395258fcd8b8d80e33436b49bbd6" prot="private" static="no" mutable="no">
+        <type>MultipatchEvaluators const</type>
+        <definition>MultipatchEvaluators const InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::m_evaluators</definition>
+        <argsstring></argsstring>
+        <name>m_evaluators</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::m_evaluators</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="285" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="285" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a52ac084ee0326842a23eb7141fc86efe" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static constexpr std::size_t InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="253" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="253" bodyend="256"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1adcff4749b1d4298abc161203bab21f25" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class StoringPatch</type>
+          </param>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static constexpr void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::check_values_field_type</definition>
+        <argsstring>()</argsstring>
+        <name>check_values_field_type</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::check_values_field_type</qualifiedname>
+        <briefdescription>
+<para>Check that the values field can be used to store values evaluated on the StoringPatch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="262" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="262" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a66d0c837095659bb8097ac56352423e1" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION Idx&lt; DerivDims... &gt;</type>
+        <definition>static KOKKOS_FUNCTION Idx&lt; DerivDims... &gt; InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::order_zero</definition>
+        <argsstring>()</argsstring>
+        <name>order_zero</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::order_zero</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="792" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="792" bodyend="795"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a6c0d5cabf8e80001b6eb0482aeb2d426" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION Idx&lt; DerivDims... &gt;</type>
+        <definition>static KOKKOS_FUNCTION Idx&lt; DerivDims... &gt; InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::order_zero</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;)</argsstring>
+        <name>order_zero</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::order_zero</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="798" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="798" bodyend="801"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a16f62ab5c52e1c6609fdec91114c7ff8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::InterpolationEvaluator2DCollection</definition>
+        <argsstring>(Evaluators const &amp;... evaluators, PatchLocator const &amp;patch_locator, ExtrapolationRule const &amp;extrapolation_rule)</argsstring>
+        <name>InterpolationEvaluator2DCollection</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::InterpolationEvaluator2DCollection</qualifiedname>
+        <param>
+          <type>Evaluators const &amp;...</type>
+          <declname>evaluators</declname>
+        </param>
+        <param>
+          <type>PatchLocator const &amp;</type>
+          <declname>patch_locator</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref> const &amp;</type>
+          <declname>extrapolation_rule</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classInterpolationEvaluator2DCollection" kindref="compound">InterpolationEvaluator2DCollection</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>The evaluators have to be sorted in the same order as the patches.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>evaluators</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation evaluators for each patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>patch_locator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An operator to locate a coordinate. The mapping stored in this class has to be invertible. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extrapolation_rule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extrapolation rules. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="299" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="299" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a2eeb27f1a9f3252efde0b80b28e6ab91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::~InterpolationEvaluator2DCollection</definition>
+        <argsstring>()=default</argsstring>
+        <name>~InterpolationEvaluator2DCollection</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::~InterpolationEvaluator2DCollection</qualifiedname>
+        <briefdescription>
+<para>Default destructor callable from GPU. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="310" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aa534efa816ffeb5187243886536c03f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_DEFAULTED_FUNCTION</type>
+        <definition>KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::InterpolationEvaluator2DCollection</definition>
+        <argsstring>(InterpolationEvaluator2DCollection const &amp;)=default</argsstring>
+        <name>InterpolationEvaluator2DCollection</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::InterpolationEvaluator2DCollection</qualifiedname>
+        <param>
+          <type><ref refid="classInterpolationEvaluator2DCollection" kindref="compound">InterpolationEvaluator2DCollection</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Default copy operator callable from GPU. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="313" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a7ce1a210f3d1b4a9c759b24f4a381531" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Coord</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" kindref="member">data_type</ref></type>
+        <definition>KOKKOS_FUNCTION data_type InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(Coord const coord_eval, MultipatchCoeffs const &amp;patches_coeffs) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::operator()</qualifiedname>
+        <param>
+          <type>Coord const</type>
+          <declname>coord_eval</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const &amp;</type>
+          <declname>patches_coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the 2D interpolations (described by their interpolation coefficients) at a given coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The interpolation coefficients represent a 2D function defined on the basis of the evaluator of each patch. They can be obtained via various methods, such as using an <ref refid="classInterpolationBuilder2DCollection" kindref="compound">InterpolationBuilder2DCollection</ref>. The coordinate is defined on one patch. But it can be physically located on another patch.</para>
+<para><anchor id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1InterpolationEvaluator2DCollectionOperator"/> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coord_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the interpolation is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField storing the 2D interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the interpolation at the desired coordinate on the right patch. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="333" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="333" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab5e8a0f1f26d34fc0c28a34cb99d4588" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchValues</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(MultipatchValues const &amp;patches_values, MultipatchCoordField const &amp;patches_coords, MultipatchCoeffs const &amp;patches_coeffs) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::operator()</qualifiedname>
+        <param>
+          <type>MultipatchValues const &amp;</type>
+          <declname>patches_values</declname>
+        </param>
+        <param>
+          <type>MultipatchCoordField const &amp;</type>
+          <declname>patches_coords</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const &amp;</type>
+          <declname>patches_coeffs</declname>
+        </param>
+    <requiresclause>(is_multipatch_field_v&lt;MultipatchValues&gt;)    </requiresclause>
+        <briefdescription>
+<para>Evaluate 2D interpolations (described by their interpolation coefficients) on meshes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1InterpolationEvaluator2DCollectionOperator" kindref="member">InterpolationEvaluator2DCollectionOperator</ref>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>MultipatchValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchField of DField or <ref refid="classDerivField" kindref="compound">DerivField</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">patches_values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField or <ref refid="classDerivField" kindref="compound">DerivField</ref> to store the values of the interpolations at the given coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of Field of Coordinate storing the coordinates of the meshes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField storing the 2D interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="351" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="351" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab6337839e4e34e508a184ecdb5227d89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" kindref="member">data_type</ref></type>
+        <definition>KOKKOS_FUNCTION data_type InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::deriv</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, Coord&lt; CDim1, CDim2 &gt; const &amp;coord_eval, MultipatchCoeffs const &amp;patches_coeffs) const</argsstring>
+        <name>deriv</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::deriv</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Coord&lt; CDim1, CDim2 &gt; const &amp;</type>
+          <declname>coord_eval</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const &amp;</type>
+          <declname>patches_coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Differentiate 2D interpolations (described by their interpolation coefficients) at a given coordinate along a specified dimension of interest. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1InterpolationEvaluator2DCollectionOperator" kindref="member">InterpolationEvaluator2DCollectionOperator</ref>.</para>
+<para><simplesect kind="warning"><para>The derivative cannot be computed outside of the domain.</para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>DerivDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivative dimension types, it can be on the first dimension, the second or both. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the interpolation is differentiated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField storing the 2D interpolation coefficients.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The derivative of the interpolation at the desired coordinate on the right patch. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="385" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="385" bodyend="403"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1afc6e2a71f2fa1072a05ffb1b7c270d67" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchValues</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::deriv</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, MultipatchValues const &amp;patches_deriv, MultipatchCoordField const &amp;patches_coords, MultipatchCoeffs const &amp;patches_coeffs) const</argsstring>
+        <name>deriv</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::deriv</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>MultipatchValues const &amp;</type>
+          <declname>patches_deriv</declname>
+        </param>
+        <param>
+          <type>MultipatchCoordField const &amp;</type>
+          <declname>patches_coords</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const &amp;</type>
+          <declname>patches_coeffs</declname>
+        </param>
+    <requiresclause>(is_multipatch_field_v&lt;MultipatchValues&gt;)    </requiresclause>
+        <briefdescription>
+<para>Differentiate 2D interpolations (described by their interpolation coefficients) on meshes along first dimension of interest. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1InterpolationEvaluator2DCollectionOperator" kindref="member">InterpolationEvaluator2DCollectionOperator</ref>.</para>
+<para><simplesect kind="warning"><para>The derivatives cannot be computed outside of the domain.</para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>DerivDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivative dimension types, it can be on the first dimension, the second or both. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f(x,y)). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">patches_deriv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField or <ref refid="classDerivField" kindref="compound">DerivField</ref> to store the derivatives of the interpolations at the given coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of Field of Coordinate storing the coordinates of the meshes. If patches_deriv is a <ref refid="classDerivField" kindref="compound">DerivField</ref>, the given coordinates can be the coordinates for all function values. The operator will select the correct coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField storing the 2D interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>MultipatchValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchField of DField or <ref refid="classDerivField" kindref="compound">DerivField</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="425" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="425" bodyend="452"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a5ad2761e198e63925949cad725b39b5a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::integrate</definition>
+        <argsstring>(DKokkosView_h&lt; n_patches &gt; const &amp;integrals, MultipatchCoeffs const &amp;patches_coeffs) const</argsstring>
+        <name>integrate</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::integrate</qualifiedname>
+        <param>
+          <type>DKokkosView_h&lt; <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad43d6d243d4e33ec0093f6734eed681b" kindref="member">n_patches</ref> &gt; const &amp;</type>
+          <declname>integrals</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const &amp;</type>
+          <declname>patches_coeffs</declname>
+        </param>
+    <requiresclause>((detail::is_ddc_spline_evaluator_nd_v&lt;Evaluators&gt;)&amp;&amp;...)    </requiresclause>
+        <briefdescription>
+<para>Integration of splines (described by their spline coefficients). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1InterpolationEvaluator2DCollectionOperator" kindref="member">InterpolationEvaluator2DCollectionOperator</ref>.</para>
+<para>This function is only available if all the evaluators are spline evaluators (ddc::SplineEvaluatorND).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">integrals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An Kokkos::View on host containing the integrals of each spline on each patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A MultipatchType of DField storing the 2D interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="465" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="465" bodyend="474"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1add785706f49d15422d8b2317e1c622c4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class StoringPatch</type>
+          </param>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::apply_evaluator_field</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, ValuesField const &amp;patch_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;patch_coords, MultipatchCoeffs const patches_coeffs) const</argsstring>
+        <name>apply_evaluator_field</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::apply_evaluator_field</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>ValuesField const &amp;</type>
+          <declname>patch_values</declname>
+        </param>
+        <param>
+          <type>CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;</type>
+          <declname>patch_coords</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const</type>
+          <declname>patches_coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Compute the values or the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch_values on DField. Needed public for functions on GPU. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StoringPatch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type where the given coordinates are stored. They are not especially physically located on this patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ValuesField</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the field of values (DField or <ref refid="classDerivField" kindref="compound">DerivField</ref>). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivative dimension types, it can be on the first dimension, the second or both. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">patch_values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field of values of the function or derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patch_coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ConstField of coordinates defined on the StoringPatch and where we want to evaluate the function or derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchType of interpolation coefficients on every patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="496" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="496" bodyend="528"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a7bd99588caf14cf6d842ea55bcf5752c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class StoringPatch</type>
+          </param>
+          <param>
+            <type>class ValuesField</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::apply_evaluator_deriv_field</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, ValuesField const &amp;patch_values, CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;patch_coords, MultipatchCoeffs const patches_coeffs) const</argsstring>
+        <name>apply_evaluator_deriv_field</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::apply_evaluator_deriv_field</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>ValuesField const &amp;</type>
+          <declname>patch_values</declname>
+        </param>
+        <param>
+          <type>CoordConstFieldOnPatch&lt; StoringPatch &gt; const &amp;</type>
+          <declname>patch_coords</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const</type>
+          <declname>patches_coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Compute the derivatives of a given patch at the coordinates defined on the given patch. Specialisation for patch_values on <ref refid="classDerivField" kindref="compound">DerivField</ref>. Needed public for functions on GPU. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>StoringPatch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type where the given coordinates are stored. They are not especially physically located on this patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ValuesField</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the <ref refid="classDerivField" kindref="compound">DerivField</ref> of values. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Derivative dimension types, it can be on the first dimension, the second or both. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order (k,l) of the derivatives (e.g. d_x^k d_y^l f). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">patch_values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> of values and derivatives of the function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patch_coords</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ConstField of coordinates defined on the StoringPatch and where we want to evaluate the function or derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">patches_coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MultipatchType of interpolation coefficients on every patches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="546" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="546" bodyend="621"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab1d484cce97df828956a0974d18e9059" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::apply_integrate</definition>
+        <argsstring>(double &amp;integral, CoeffOnPatch&lt; Patch &gt; const &amp;coeffs) const</argsstring>
+        <name>apply_integrate</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::apply_integrate</qualifiedname>
+        <param>
+          <type>double &amp;</type>
+          <declname>integral</declname>
+        </param>
+        <param>
+          <type><ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a4b5312076dda3c9bd4a2d02f15cf17d7" kindref="member">CoeffOnPatch</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt; const &amp;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Integrate the spline defined on the given patch. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPatch" kindref="compound">Patch</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structPatch" kindref="compound">Patch</ref> type where the integration of the spline is computed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">integral</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double, value of the integral of the spline on the given <ref refid="structPatch" kindref="compound">Patch</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ConstField of spline coefficients of the spline on the given <ref refid="structPatch" kindref="compound">Patch</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="630" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="630" bodyend="665"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aaf2fc3aa32ad37c21613ff36589da634" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxDeriv</type>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>TestPatchIdx</declname>
+            <defname>TestPatchIdx</defname>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" kindref="member">data_type</ref></type>
+        <definition>KOKKOS_INLINE_FUNCTION data_type InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::recursive_dispatch_patch_function</definition>
+        <argsstring>(IdxDeriv const &amp;deriv_order, Coord&lt; CDim1, CDim2 &gt; coord, MultipatchCoeffs const &amp;patches_coeffs, int const patch_idx) const</argsstring>
+        <name>recursive_dispatch_patch_function</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::recursive_dispatch_patch_function</qualifiedname>
+        <param>
+          <type>IdxDeriv const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Coord&lt; CDim1, CDim2 &gt;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type>MultipatchCoeffs const &amp;</type>
+          <declname>patches_coeffs</declname>
+        </param>
+        <param>
+          <type>int const</type>
+          <declname>patch_idx</declname>
+        </param>
+        <briefdescription>
+<para>Dispatch the given coordinate on the right patch to evaluate the right interpolation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="674" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="674" bodyend="719"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a8d7954b5b5948a165fa42810a3be7776" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Evaluator</type>
+          </param>
+          <param>
+            <type>class Coeffs</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" kindref="member">data_type</ref></type>
+        <definition>KOKKOS_INLINE_FUNCTION data_type InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluate_on_patch</definition>
+        <argsstring>(Evaluator const &amp;evaluator, Idx&lt; DerivDims... &gt; const &amp;deriv_order, Coord&lt; CDim1, CDim2 &gt; const &amp;coord, Coeffs const &amp;coeffs) const</argsstring>
+        <name>evaluate_on_patch</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::evaluate_on_patch</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Coord&lt; CDim1, CDim2 &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type>Coeffs const &amp;</type>
+          <declname>coeffs</declname>
+        </param>
+        <briefdescription>
+<para>Call the evaluator of a patch with the given derivative order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The dimensions with a zero derivative order are removed from the derivative order before calling the evaluator. If all the orders are zero the function itself is evaluated. This is necessary as some evaluators (e.g. ddc::SplineEvaluatorND) do not accept zero orders in <ref refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab6337839e4e34e508a184ecdb5227d89" kindref="member">deriv()</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="731" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="731" bodyend="761"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af1ef9ab4c8c75e0dec21fae4f4eadadf" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION int</type>
+        <definition>KOKKOS_INLINE_FUNCTION int InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::get_patch_idx</definition>
+        <argsstring>(Coord&lt; CDim1, CDim2 &gt; const coord) const</argsstring>
+        <name>get_patch_idx</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::get_patch_idx</qualifiedname>
+        <param>
+          <type>Coord&lt; CDim1, CDim2 &gt; const</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Call the patch locator to get the index of the patch where the given coordinate is physically located. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="767" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="767" bodyend="772"/>
+      </memberdef>
+      <memberdef kind="function" id="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a60884dd9612f1336c1486793df491308" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION void</type>
+        <definition>KOKKOS_INLINE_FUNCTION void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::replace_periodic_coord_inside</definition>
+        <argsstring>(Coord&lt; CDim1, CDim2 &gt; &amp;coord) const</argsstring>
+        <name>replace_periodic_coord_inside</name>
+        <qualifiedname>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::replace_periodic_coord_inside</qualifiedname>
+        <param>
+          <type>Coord&lt; CDim1, CDim2 &gt; &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Replace a coordinate inside the domain if it is periodic. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="776" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="776" bodyend="788"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to evaluate all the interpolations of all the patches at once. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>See the documentation of the primary template.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Patches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Evaluators</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 2D interpolation evaluators on each patch, in the same order as the patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PatchLocator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A operator that finds the patch where a given coordinate is physically located. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extrapolation rule type for outside of the global domain. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="74" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="79" bodyend="805"/>
+    <listofallmembers>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a7bd99588caf14cf6d842ea55bcf5752c" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>apply_evaluator_deriv_field</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1add785706f49d15422d8b2317e1c622c4" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>apply_evaluator_field</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab1d484cce97df828956a0974d18e9059" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>apply_integrate</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a280fa827bcbf1117cedb55e40d631276" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>basis_type1</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a243e9168912ceac1ee589d706b79e560" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>basis_type2</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a128175bad4f29da64c07108e532f2f0c" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a8e524887ebe7f873ada75d9467fbb734" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>CDim1</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a75def774f94049a39d2d71a5df619ec0" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>CDim2</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1adcff4749b1d4298abc161203bab21f25" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>check_values_field_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04ef426b8556c5ce4ba548ed3f294966" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>coeff_idx_range_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a4b5312076dda3c9bd4a2d02f15cf17d7" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>CoeffOnPatch</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae0fb35bcba10b8443e1348182ceb234b" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>continuous_dimension_type1</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3e771a4f11809d466a0afa2dbbefb6c3" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>continuous_dimension_type2</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a338469ecb991a5012069142508edfacb" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>coord_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a05122ce6eaafa827e150ec1d83a15174" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>CoordConstFieldOnPatch</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a04f325092ebfedfb1f066df6a58b76f5" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>data_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab6337839e4e34e508a184ecdb5227d89" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>deriv</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1afc6e2a71f2fa1072a05ffb1b7c270d67" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>deriv</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a36ff859567c6bc16eb2518db3ff7c14a" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>deriv_tags</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a34e44e97a829650b90796dac0228879d" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>DerivDim1</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a886dfdcc15f1bb354b6301d30606f084" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>DerivDim2</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a8d7954b5b5948a165fa42810a3be7776" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>evaluate_on_patch</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a0555b84bfcd6bd90ca40b0323974db4b" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>evaluation_discrete_dimension_type1</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a693d7b491955faf83b3c3b5af9f0d2e1" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>evaluation_discrete_dimension_type2</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a3688de35829c97b3a0c0fd509b90695e" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>evaluation_idx_range_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a54b147ba5e089d26af8537f03acfa381" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>evaluation_idx_range_type1</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1abb3e4d92142bf03cf3d9fd7431a62a8c" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>evaluation_idx_range_type2</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae803bb08bac13ed1e7046bab3a6f7998" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>EvaluatorOnPatch</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae9543e48cdd79a017184cf0fee6ec2e4" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>exec_space</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad6fa6f1c6cdbbf1ba36caaa61cd800bc" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>FirstEvaluator</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af1ef9ab4c8c75e0dec21fae4f4eadadf" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>get_patch_idx</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a54d2f7f462f891d8aad81afc38de5ae9" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>idx_range_type</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a5ad2761e198e63925949cad725b39b5a" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>integrate</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a16f62ab5c52e1c6609fdec91114c7ff8" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>InterpolationEvaluator2DCollection</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aa534efa816ffeb5187243886536c03f7" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>InterpolationEvaluator2DCollection</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a2994395258fcd8b8d80e33436b49bbd6" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>m_evaluators</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a0fa8f926ad3f1b98ea59b9d137a5e93b" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>m_extrapolation_rule</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a7f4074a288f951c1caf757872ef1b555" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>m_patch_locator</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af404d13bb8ae36d524ee200797e8dbdf" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>memory_space</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae1b350f798acf83f5361fe462a8bc1f9" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>MultipatchCoeffs</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad165f523f7ee6e14429a1fcecda2df0b" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>MultipatchCoordField</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1abf8dbdc0ff5f31d87a15e0a40c258ecb" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>MultipatchEvaluators</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ad43d6d243d4e33ec0093f6734eed681b" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>n_patches</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a7ce1a210f3d1b4a9c759b24f4a381531" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>operator()</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ab5e8a0f1f26d34fc0c28a34cb99d4588" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>operator()</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a66d0c837095659bb8097ac56352423e1" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>order_zero</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a6c0d5cabf8e80001b6eb0482aeb2d426" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>order_zero</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1af972bb38e4854d402105b8e6fd45636f" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>PatchOrdering</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aebcf1b090a6755fa3e12ea8dc085cd92" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>physical_grids</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a52ac084ee0326842a23eb7141fc86efe" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>rank</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1aaf2fc3aa32ad37c21613ff36589da634" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>recursive_dispatch_patch_function</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a60884dd9612f1336c1486793df491308" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>replace_periodic_coord_inside</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1ae9b8ef7e7dc99aba3481717cf061ebef" prot="private" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>Traits</name></member>
+      <member refid="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106_1a2eeb27f1a9f3252efde0b80b28e6ab91" prot="public" virt="non-virtual"><scope>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</scope><name>~InterpolationEvaluator2DCollection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

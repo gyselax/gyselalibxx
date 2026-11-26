@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" prot="public" static="no">
         <type>typename Evaluator::evaluation_idx_range_type</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" prot="public" static="no">
         <type>ddc::coordinate_of_t&lt; typename evaluation_idx_range_type::discrete_element_type &gt;</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="65" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" prot="public" static="no">
         <type>typename Evaluator::coeff_idx_range_type</type>
@@ -67,7 +67,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="68" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a64708fd581aa010b627d2af00814d54b" prot="public" static="no">
+        <type>typename Evaluator::basis_idx_range_type</type>
+        <definition>using InterpolationEvaluatorTraits&lt; Evaluator &gt;::basis_idx_range_type =  typename Evaluator::basis_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>basis_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits::basis_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the ND index range of the basis (e.g. B-splines, Lagrange basis) used to define the interpolation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" prot="public" static="no">
         <templateparamlist>
@@ -89,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="78" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" prot="public" static="no">
         <templateparamlist>
@@ -110,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="84" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="84" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -127,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="71" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="71" bodyend="74"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="76" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="76" bodyend="79"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -140,7 +155,8 @@
 <listitem><para><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">data_type</ref></para>
 </listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">evaluation_idx_range_type</ref></para>
 </listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">coord_type</ref></para>
-</listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kindref="member">coeff_idx_range_type</ref> Static functions</para>
+</listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kindref="member">coeff_idx_range_type</ref></para>
+</listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1a64708fd581aa010b627d2af00814d54b" kindref="member">basis_idx_range_type</ref> Static functions</para>
 </listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">rank()</ref> Type calculators</para>
 </listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" kindref="member">batched_evaluation_idx_range_type</ref></para>
 </listitem><listitem><para><ref refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" kindref="member">batched_coeff_idx_range_type</ref></para>
@@ -157,8 +173,9 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="56" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="57" bodyend="87"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="57" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="58" bodyend="92"/>
     <listofallmembers>
+      <member refid="structInterpolationEvaluatorTraits_1a64708fd581aa010b627d2af00814d54b" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>basis_idx_range_type</name></member>
       <member refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>batched_coeff_idx_range_type</name></member>
       <member refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>batched_evaluation_idx_range_type</name></member>
       <member refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>coeff_idx_range_type</name></member>

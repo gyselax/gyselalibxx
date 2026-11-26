@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="115" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="115" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="120" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="120" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="132" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="132" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="137" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" prot="public" static="no">
         <type>decltype(make_evaluation_idx_range_type( std::make_index_sequence&lt; sizeof...(BSplines)&gt;()))</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="135" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="135" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="140" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" prot="public" static="no">
         <type>Coord&lt; typename EvaluationDDim::continuous_dimension_type... &gt;</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="139" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="139" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="144" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="144" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" prot="public" static="no">
         <type>decltype(make_coeff_idx_range_type(std::make_index_sequence&lt; sizeof...(BSplines)&gt;()))</type>
@@ -107,7 +107,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="142" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="142" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="147" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a8317a16554f80b56b8d924db7a4cbe04" prot="public" static="no">
+        <type>IdxRange&lt; BSplines... &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::basis_idx_range_type =  IdxRange&lt;BSplines...&gt;</definition>
+        <argsstring></argsstring>
+        <name>basis_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;::basis_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the ND index range of the B-splines used to define the interpolation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="150" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="150" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" prot="public" static="no">
         <templateparamlist>
@@ -129,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="152" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="152" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="160" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" prot="public" static="no">
         <templateparamlist>
@@ -150,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="158" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="158" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="166" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="166" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -176,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="123" column="17"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="128" column="17"/>
       </memberdef>
       <memberdef kind="function" id="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a1850b89570334f7ec7ecf011fd9df9e6" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -200,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="127" column="17"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="132" column="17"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -217,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="145" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="145" bodyend="148"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="153" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="153" bodyend="156"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -227,8 +242,9 @@
 <para>ddc::SplineEvaluatorND uses different alias names from the InterpolationEvaluator convention. This specialisation provides the mapping so that ddc::SplineEvaluatorND can be used directly as an InterpolationEvaluator.</para>
 <para>Mapping: evaluation_domain_type&lt;0, ...&gt; -&gt; <ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" kindref="member">evaluation_idx_range_type</ref> spline_domain_type&lt;0, ...&gt; -&gt; <ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" kindref="member">coeff_idx_range_type</ref> batched_spline_domain_type&lt;D&gt; -&gt; <ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" kindref="member">batched_coeff_idx_range_type&lt;D&gt;</ref> </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="107" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="113" bodyend="161"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="112" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="118" bodyend="169"/>
     <listofallmembers>
+      <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a8317a16554f80b56b8d924db7a4cbe04" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>basis_idx_range_type</name></member>
       <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>batched_coeff_idx_range_type</name></member>
       <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>batched_evaluation_idx_range_type</name></member>
       <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;</scope><name>coeff_idx_range_type</name></member>

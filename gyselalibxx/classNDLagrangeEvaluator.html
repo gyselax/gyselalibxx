@@ -598,6 +598,10 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">typedef IdxRange&lt; HeadBasis, typename Evaluators1D::lagrange_basis_type... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-basis_idx_range_type"><strong>basis_idx_range_type</strong></a>  <br><em>The type of the ND index range of the Lagrange bases.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_remove_t&lt; ddc::to_type_seq_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to_type_seq_t&lt; <a href="classNDLagrangeEvaluator.html#typedef-evaluation_idx_range_type"><strong>evaluation_idx_range_type</strong></a> &gt; &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-batch_idx_range_type"><strong>batch_idx_range_type</strong></a>  <br><em>The type of the batch index range (obtained by removing the dimensions of interest from the whole domain).</em></td>
 </tr>
@@ -703,6 +707,12 @@
 <li><code>Evaluators1D</code> The 1D LagrangeEvaluators for the remaining dimensions. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-basis_idx_range_type">typedef basis_idx_range_type</h3>
+<p><em>The type of the ND index range of the Lagrange bases.</em> </p>
+<pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::basis_idx_range_type =  IdxRange&lt;HeadBasis, typename Evaluators1D::lagrange_basis_type...&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-batch_idx_range_type">typedef batch_idx_range_type</h3>
 <p><em>The type of the batch index range (obtained by removing the dimensions of interest from the whole domain).</em> </p>
 <pre><code class="language-C++">using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batch_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_remove_t&lt;

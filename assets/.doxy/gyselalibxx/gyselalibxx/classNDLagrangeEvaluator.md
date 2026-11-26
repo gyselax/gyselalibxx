@@ -34,6 +34,7 @@ _Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations._ [M
 
 | Type | Name |
 | ---: | :--- |
+| typedef IdxRange&lt; HeadBasis, typename Evaluators1D::lagrange\_basis\_type... &gt; | [**basis\_idx\_range\_type**](#typedef-basis_idx_range_type)  <br>_The type of the ND index range of the Lagrange bases._  |
 | typedef ddc::detail::convert\_type\_seq\_to\_discrete\_domain\_t&lt; ddc::type\_seq\_remove\_t&lt; ddc::to\_type\_seq\_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to\_type\_seq\_t&lt; [**evaluation\_idx\_range\_type**](classNDLagrangeEvaluator.md#typedef-evaluation_idx_range_type) &gt; &gt; &gt; | [**batch\_idx\_range\_type**](#typedef-batch_idx_range_type)  <br>_The type of the batch index range (obtained by removing the dimensions of interest from the whole domain)._  |
 | typedef ddc::detail::convert\_type\_seq\_to\_discrete\_domain\_t&lt; ddc::type\_seq\_replace\_t&lt; ddc::to\_type\_seq\_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to\_type\_seq\_t&lt; [**evaluation\_idx\_range\_type**](classNDLagrangeEvaluator.md#typedef-evaluation_idx_range_type) &gt;, ddc::to\_type\_seq\_t&lt; [**coeff\_idx\_range\_type**](classNDLagrangeEvaluator.md#typedef-coeff_idx_range_type) &gt; &gt; &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_The type of the ND index range on which the Lagrange coefficients are defined plus any batch dimensions._  |
 | typedef BatchedInterpolationIdxRange | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole index range representing evaluation points including any batch dimensions._  |
@@ -133,6 +134,20 @@ The recursion terminates when only one evaluator remains: in that case the tail 
     
 ## Public Types Documentation
 
+
+
+
+### typedef basis\_idx\_range\_type 
+
+_The type of the ND index range of the Lagrange bases._ 
+```C++
+using NDLagrangeEvaluator< HeadEvaluator, Evaluators1D >::basis_idx_range_type =  IdxRange<HeadBasis, typename Evaluators1D::lagrange_basis_type...>;
+```
+
+
+
+
+<hr>
 
 
 

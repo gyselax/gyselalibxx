@@ -760,7 +760,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add <code>TensorProductBSplinePoissonAssembler</code> to assemble a (batched) Poisson-like stiffness matrix on a tensor product B-spline basis.</li>
 <li>Add an <code>InterpolationBuilder2DCollection::operator()</code> which takes a <code>DerivField</code>.</li>
 <li>Add <code>InterpolationBuilderCollection::batched_basis_idx_ranges()</code> and <code>InterpolationBuilder2DCollection::batched_basis_idx_ranges()</code>.</li>
-<li><code>MultipatchSplineEvaluator2D</code> works with <code>DerivField</code>.</li>
+<li><code>InterpolationEvaluator2DCollection</code> works with <code>DerivField</code>.</li>
 <li>Add <code>InterfacesDerivativeCalculator</code> to compute all the coupled interface derivatives along a direction with the approximation formula.</li>
 <li>Add <code>DerivativeCalculatorCommon</code> to avoid code duplication in operators in <code>src/multipatch/interface_derivatives</code>.</li>
 <li>Allow <code>Quadrature</code> to use a vector as the data type to integrate over multiple elements of a <code>VectorField</code> simultaneously.</li>
@@ -770,6 +770,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add <code>MultipatchTypeFromSeq</code> and <code>MultipatchFieldFromSeq</code> aliases to define a <code>MultipatchType</code>/<code>MultipatchField</code> from a <code>ddc::TypeSeq</code> of patches.</li>
 <li>Add <code>MultipatchConnectivity::get_all_patches_along_direction_t</code> to get the patches along a line which passes through a given grid.</li>
 <li>Add copy operators for <code>MultipatchType</code> and <code>MultipatchField</code>.</li>
+<li>Add <code>InterpolationEvaluatorTraits::basis_idx_range_type</code> to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -816,6 +817,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li><code>Patch</code> takes a unique unsigned integer identifier as its first template parameter (accessible via <code>Patch::id</code>). <code>MultipatchConnectivity</code> checks that the ids of its patches are unique.</li>
 <li>Edges in an <code>Interface</code> must be ordered by the associated <code>Patch::id</code>.</li>
 <li>Patches can be defined as subclasses of <code>Patch</code> (e.g. <code>struct Patch1 : Patch&lt;1, GridX, GridY, BSplinesX, BSplinesY&gt; {};</code>).</li>
+<li>Rename <code>MultipatchSplineEvaluator2D</code> to <code>InterpolationEvaluator2DCollection</code> and move it to <code>src/multipatch/interpolation/</code>.</li>
+<li><code>InterpolationEvaluator2DCollection</code> is no longer templated on the values type (the type of the values is deduced in each method).</li>
+<li><code>InterpolationEvaluator2DCollection</code> accepts any 2D interpolation evaluator (see <code>concepts::InterpolationEvaluator</code>) and is now templated on a <code>ddc::TypeSeq</code> of the patches, a <code>ddc::TypeSeq</code> of the evaluators, the patch locator and the extrapolation rule. The evaluators are passed to the constructor.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

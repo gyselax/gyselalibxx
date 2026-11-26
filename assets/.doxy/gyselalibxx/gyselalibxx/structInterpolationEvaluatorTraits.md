@@ -34,6 +34,7 @@ _A traits struct for accessing type aliases of an interpolation evaluator._ [Mor
 
 | Type | Name |
 | ---: | :--- |
+| typedef typename Evaluator::basis\_idx\_range\_type | [**basis\_idx\_range\_type**](#typedef-basis_idx_range_type)  <br>_The type of the ND index range of the basis (e.g. B-splines, Lagrange basis) used to define the interpolation._  |
 | typedef typename Evaluator::template [**batched\_coeff\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-batched_coeff_idx_range_type)&lt; D &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_Batched domain with the evaluation grid replaced by the coefficient grid(s)._  |
 | typedef typename Evaluator::template [**batched\_evaluation\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-batched_evaluation_idx_range_type)&lt; BatchedInterpolationIdxRange &gt; | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_Batched index range for the evaluation._  |
 | typedef typename Evaluator::coeff\_idx\_range\_type | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The type of the ND index range on which the interpolation coefficients are defined._  |
@@ -106,7 +107,8 @@ Defines: Type aliases:
 * [**data\_type**](structInterpolationEvaluatorTraits.md#typedef-data_type)
 * [**evaluation\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-evaluation_idx_range_type)
 * [**coord\_type**](structInterpolationEvaluatorTraits.md#typedef-coord_type)
-* [**coeff\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-coeff_idx_range_type) Static functions
+* [**coeff\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-coeff_idx_range_type)
+* [**basis\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-basis_idx_range_type) Static functions
 * [**rank()**](structInterpolationEvaluatorTraits.md#function-rank) Type calculators
 * [**batched\_evaluation\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-batched_evaluation_idx_range_type)
 * [**batched\_coeff\_idx\_range\_type**](structInterpolationEvaluatorTraits.md#typedef-batched_coeff_idx_range_type)
@@ -127,6 +129,20 @@ Defines: Type aliases:
     
 ## Public Types Documentation
 
+
+
+
+### typedef basis\_idx\_range\_type 
+
+_The type of the ND index range of the basis (e.g. B-splines, Lagrange basis) used to define the interpolation._ 
+```C++
+using InterpolationEvaluatorTraits< Evaluator >::basis_idx_range_type =  typename Evaluator::basis_idx_range_type;
+```
+
+
+
+
+<hr>
 
 
 

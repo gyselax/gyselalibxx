@@ -624,6 +624,8 @@ public:
 
     using coeff_idx_range_type = IdxRange&lt;coeff_grid_type&gt;;
 
+    using basis_idx_range_type = IdxRange&lt;LagrangeBasis&gt;;
+
     template &lt;
             class BatchedInterpolationIdxRange,
             class = std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;&gt;

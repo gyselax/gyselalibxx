@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="28" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1af68aeb9f3a145f63ccb8340217909c5a" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE &gt;</type>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="33" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1ab7ba093b0abba0ae19218c649e65fdc6" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE &gt;</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="60" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespaceSplineBoundaryClosure_1ac2cb9725f226383156bc8bc564592f5e" prot="public" static="no">
         <type><ref refid="structSplineBoundaryClosures" kindref="compound">SplineBoundaryClosures</ref>&lt; ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE, ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE &gt;</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -77,6 +77,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="25" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="47" column="1"/>
   </compounddef>
 </doxygen>

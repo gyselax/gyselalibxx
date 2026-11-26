@@ -86,7 +86,7 @@ _Define null extrapolation rule common to all geometries._ [More...](#detailed-d
 
 
 
-**See also:** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md). 
+**See also:** [**InterpolationEvaluator2DCollection**](classInterpolationEvaluator2DCollection.md). 
 
 
 

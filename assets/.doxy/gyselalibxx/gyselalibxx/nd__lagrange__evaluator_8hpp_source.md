@@ -83,6 +83,8 @@ public:
 
     using coeff_idx_range_type = IdxRange<HeadCoeffGrid, typename Evaluators1D::coeff_grid_type...>;
 
+    using basis_idx_range_type = IdxRange<HeadBasis, typename Evaluators1D::lagrange_basis_type...>;
+
     template <
             class BatchedInterpolationIdxRange,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>

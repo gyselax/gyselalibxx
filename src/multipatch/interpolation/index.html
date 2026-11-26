@@ -590,6 +590,7 @@
 The multipatch interpolation operators implemented are</p>
 <ul>
 <li><a href="#multipatch-interpolation-builder">Multipatch interpolation builder</a> - Definition of <code>InterpolationBuilderCollection</code> and <code>InterpolationBuilder2DCollection</code>.</li>
+<li><a href="#multipatch-interpolation-evaluator">Multipatch interpolation evaluator</a> - Definition of <code>InterpolationEvaluator2DCollection</code>.</li>
 </ul>
 <h2 id="multipatch-interpolation-builder">Multipatch interpolation builder</h2>
 <p>The <code>InterpolationBuilderCollection</code> and <code>InterpolationBuilder2DCollection</code> allow all the given 1D or 2D interpolation builders to be called in one single line.</p>
@@ -626,10 +627,57 @@ MultipatchField&lt;CoeffsOnPatch, Patch1, Patch2&gt; coeffs(coeffs_alloc);
 <pre><code class="language-cpp">builder(coeffs, values);
 </code></pre>
 <p><code>InterpolationBuilderCollection</code> is used in the same way with 1D builders.</p>
+<h2 id="multipatch-interpolation-evaluator">Multipatch interpolation evaluator</h2>
+<p>The <code>InterpolationEvaluator2DCollection</code> allows the interpolations defined on every patch to be evaluated in one single line.</p>
+<p>Any evaluator satisfying <code>concepts::InterpolationEvaluator</code> with 2 interpolation dimensions can be used (e.g. a 2D <code>ddc::SplineEvaluatorND</code> or <code>NDLagrangeEvaluator</code>).
+See <a href="../../interpolation/index.html">interpolation</a> for more details about the evaluators.
+A different evaluator type can be used on each patch.
+The class is templated on a <code>ddc::TypeSeq</code> of the patches, a <code>ddc::TypeSeq</code> of the evaluators (in the same order as the patches), a patch locator and an extrapolation rule.
+The evaluators are copied inside the class so that they can be used on GPU.</p>
+<p>The patch locator (see <a href="../connectivity/index.html">Connectivity</a>) is used to determine on which patch a given coordinate is physically located.
+The evaluator of this patch is then used to evaluate the interpolation.
+The extrapolation rule determines the value which is returned if the coordinate is outside the domain.
+Multipatch extrapolation rules are defined in <a href="../spline/index.html#multipatch-extrapolation-rules">spline</a>.</p>
+<p>The interpolation coefficients are stored in <code>MultipatchField</code> objects.
+The coordinates are stored in fields stored in <code>MultipatchField</code> objects.
+Each field corresponds to the coordinates stored on a given patch.
+The coordinates are not required to be physically located on the storing patch.</p>
+<blockquote>
+<p>For example, these coordinates can be characteristic feet stored on the patch where the initial coordinates were.
+Here the coordinates are in the same field if their initial coordinates were on the same patch. They are on the
+same storing patch, but some of them can be physically located outside the storing patch if the feet have crossed
+the edges.</p>
+</blockquote>
+<p>The methods implemented are</p>
+<ul>
+<li><code>operator()</code> to compute a single value or fields of values (stored in <code>DField</code> or <code>DerivField</code> objects).</li>
+<li><code>deriv()</code> to compute derivatives on the first and/or second dimension on a single coordinate or fields of coordinates.
+  No extrapolation rule is applied for derivatives, so the program aborts if a coordinate is outside the domain.</li>
+<li><code>integrate()</code> to compute the integral on each patch. The integrals are stored in a <code>Kokkos::View</code> defined on host and of the same size as the number of patches.
+  This method is only available if all the evaluators are spline evaluators (<code>ddc::SplineEvaluatorND</code>).</li>
+</ul>
+<p><strong>Warning:</strong> The current version of <code>InterpolationEvaluator2DCollection</code> does not work on batched domains.</p>
+<p><strong>Warning:</strong> <code>InterpolationEvaluator2DCollection</code> only works for patches defined on the same continuous dimensions.</p>
+<h3 id="example-of-use-of-interpolationevaluator2dcollection">Example of use of InterpolationEvaluator2DCollection</h3>
+<p>We define all the evaluators for each patch,</p>
+<pre><code class="language-cpp">EvaluatorType1 evaluator_1(extrapolation_rules_1...);
+EvaluatorType2 evaluator_2(extrapolation_rules_2...);
+</code></pre>
+<p>We can instantiate an <code>InterpolationEvaluator2DCollection</code> from these evaluators, a patch locator and a multipatch extrapolation rule,</p>
+<pre><code class="language-cpp">InterpolationEvaluator2DCollection&lt;
+        ddc::TypeSeq&lt;Patch1, Patch2&gt;,
+        ddc::TypeSeq&lt;EvaluatorType1, EvaluatorType2&gt;,
+        PatchLocator,
+        ExtrapolationRule&gt; evaluator(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
+</code></pre>
+<p>We evaluate the interpolations at the coordinates stored on every patch using,</p>
+<pre><code class="language-cpp">evaluator(values, coords, coeffs);
+</code></pre>
 <h2 id="contents">Contents</h2>
 <ul>
 <li><code>interpolation_builder_2d_collection.hpp</code>: Define the <code>InterpolationBuilder2DCollection</code> operator to apply 2D interpolation builders on every patch.</li>
 <li><code>interpolation_builder_collection.hpp</code>: Define the <code>InterpolationBuilderCollection</code> operator to apply 1D interpolation builders on every patch.</li>
+<li><code>interpolation_evaluator_2d_collection.hpp</code>: Define the <code>InterpolationEvaluator2DCollection</code> operator to apply 2D interpolation evaluators on every patch.</li>
 </ul></div>
               
             </div>

@@ -598,6 +598,10 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">typedef IdxRange&lt; LagrangeBasis &gt;</td>
+<td style="text-align: left;"><a href="#typedef-basis_idx_range_type"><strong>basis_idx_range_type</strong></a>  <br><em>The type of the 1D index range of the Lagrange basis.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; BatchedInterpolationIdxRange, InterpolationGrid &gt;</td>
 <td style="text-align: left;"><a href="#typedef-batch_idx_range_type"><strong>batch_idx_range_type</strong></a>  <br><em>The type of the batch domain (obtained by removing the dimension of interest from the whole domain).</em></td>
 </tr>
@@ -731,6 +735,12 @@
 <li><code>UpperExtrapolationRule</code> The upper extrapolation rule type. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-basis_idx_range_type">typedef basis_idx_range_type</h3>
+<p><em>The type of the 1D index range of the Lagrange basis.</em> </p>
+<pre><code class="language-C++">using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::basis_idx_range_type =  IdxRange&lt;LagrangeBasis&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-batch_idx_range_type">typedef batch_idx_range_type</h3>
 <p><em>The type of the batch domain (obtained by removing the dimension of interest from the whole domain).</em> </p>
 <pre><code class="language-C++">using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batch_idx_range_type =  ddc::remove_dims_of_t&lt;BatchedInterpolationIdxRange, InterpolationGrid&gt;;

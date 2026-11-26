@@ -309,7 +309,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Define constant extrapolation rule for onion shape geometries. Struct useful for the MultipatchSplineEvaluator types. </para>
+<para>Define constant extrapolation rule for onion shape geometries. Struct useful for the <ref refid="classInterpolationEvaluator2DCollection" kindref="compound">InterpolationEvaluator2DCollection</ref> types. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

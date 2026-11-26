@@ -310,6 +310,8 @@
 * [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md)
 * [**InterpolationBuilderTraits&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, InterpolationDDim1, InterpolationDDim2, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder2D_3_01ExecSpace_00_01MemorySpace_00_01139ee644a269160eaf45f5fb9131cecb.md)
 * [**InterpolationBuilderTraits&lt; ddc::SplineBuilder3D&lt; ExecSpace, MemorySpace, BSpline1, BSpline2, BSpline3, InterpolationDDim1, InterpolationDDim2, InterpolationDDim3, BcLower1, BcUpper1, BcLower2, BcUpper2, BcLower3, BcUpper3, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder3D_3_01ExecSpace_00_01MemorySpace_00_014f639d4751dd5d28919213bbbf9871e3.md)
+* [**InterpolationEvaluator2DCollection**](classInterpolationEvaluator2DCollection.md)
+* [**InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md)
 * [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md)
 * [**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluatorND&lt; ExecSpace, MemorySpace, ddc::TypeSeq&lt; BSplines... &gt;, ddc::TypeSeq&lt; EvaluationDDim... &gt;, ddc::TypeSeq&lt; ExtrapolationRule... &gt; &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f.md)
 * [**InverseJacobianMatrix**](classInverseJacobianMatrix.md)
@@ -404,7 +406,6 @@
 * [**MPITransposeAllToAll**](classMPITransposeAllToAll.md)
 * [**Mu**](structMu.md)
 * [**MultipatchConnectivity**](classMultipatchConnectivity.md)
-* [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md)
 
 
 ## n

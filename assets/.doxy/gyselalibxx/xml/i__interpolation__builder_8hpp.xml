@@ -185,7 +185,7 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -197,8 +197,6 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
         <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
@@ -209,8 +207,10 @@
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp</label>
         <link refid="identity__interpolation__builder_8hpp_source"/>
         <childnode refid="15" relation="include">
@@ -220,7 +220,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
       </node>
-      <node id="24">
+      <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp</label>
         <link refid="nd__identity__interpolation__builder_8hpp_source"/>
         <childnode refid="15" relation="include">
@@ -231,24 +231,30 @@
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="17" relation="include">
         </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_2d_collection.hpp</label>
         <link refid="interpolation__builder__2d__collection_8hpp_source"/>
       </node>
-      <node id="26">
+      <node id="27">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp</label>
         <link refid="interpolation__builder__collection_8hpp_source"/>
       </node>
-      <node id="27">
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
+        <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
+      </node>
+      <node id="28">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
-      <node id="28">
+      <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</label>
         <link refid="gmg__polar__poisson__like__solver_8hpp_source"/>
       </node>
-      <node id="22">
+      <node id="23">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
         <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="18" relation="include">

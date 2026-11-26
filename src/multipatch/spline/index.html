@@ -589,51 +589,23 @@
 <p>This directory defines structures and methods to deal with different splines on every patches.
 The multipatch patch operators implemented are</p>
 <ul>
-<li><a href="#multipatch-spline-evaluator">Multipatch spline evaluator</a> - Definition of <code>MultipatchSplineEvaluator2D</code>.</li>
-<li><a href="#multipatch-extrapolation-rules">Multipatch extrapolation rules</a> - Definition of extrapolation rules depending on the geometries for <code>MultipatchSplineEvaluator2D</code>.</li>
+<li><a href="#multipatch-extrapolation-rules">Multipatch extrapolation rules</a> - Definition of extrapolation rules depending on the geometries for <code>InterpolationEvaluator2DCollection</code>.</li>
 </ul>
-<p>The spline builders can be applied on every patch using <code>InterpolationBuilderCollection</code> and <code>InterpolationBuilder2DCollection</code> (see <a href="../interpolation/index.html">multipatch interpolation</a>).</p>
-<h2 id="multipatch-spline-evaluator">Multipatch spline evaluator</h2>
-<p>The <code>MultipatchSplineEvaluator2D</code> allows all the spline evaluators to be called in one single line.</p>
-<p>Contrary to the <code>InterpolationBuilderCollection</code> class, the spline evaluators are not given as input but we directly
-compute the evaluation inside the class. The template parameters and aliases are similar to the ones in the <code>SplineEvaluator2D</code>
-class in DDC.</p>
-<p>To instantiate a <code>MultipatchSplineEvaluator2D</code>, we need a patch locator operator to be able to determine on which patch the given (see <a href="../connectivity/index.html">Connectivity</a>)
-coordinates will be physically located. We also need extrapolation rules to know what value is returned if the
-coordinates are outside the domain. Multi-patch extrapolation rules are implemented and defined below <a href="#multipatch-extrapolation-rules">Multipatch extrapolation rules</a>.</p>
-<p>The coordinates are stored in fields stored in <code>MultipatchType</code> objects.
-They are stored on patches. Each field corresponds to the coordinates stored on a given patch.
-The coordinates are not enforced to be physically located on the storing patch.</p>
-<blockquote>
-<p>For example, these coordinates can be characteristic feet stored on the patch where the initial coordinates were.
-Here the coordinates are in the same field if their initial coordinates were on the same patch. They are on the
-same storing patch, but some of them can be physically located outside the storing patch if the feet have crossed
-the edges.</p>
-</blockquote>
-<p>Similarly to <code>SplineEvaluator2D</code>, methods to get the derivatives are implemented. No extrapolation rules are given, so <code>MultipatchSplineEvaluator2D</code> will throw an exception error if we give a coordinate outside the domain.
-The methods implemented are</p>
-<ul>
-<li><code>operator()</code> to compute a single value or fields of values.</li>
-<li><code>deriv()</code> to compute derivatives on the first and/or second dimension on a single coordinates or fields of coordinates.</li>
-<li><code>integrate()</code> to compute the integral on each patch. The integral are stored in a <code>Kokkos::View</code> defined on host and of the same size as the number of patches.</li>
-</ul>
-<p><strong>Warning:</strong> The current version of <code>MultipatchSplineEvaluator2D</code> does not work on batched domain.</p>
-<p><strong>Warning:</strong> <code>MultipatchSplineEvaluator2D</code> applies to patches defined on the same continuous dimensions.</p>
+<p>The spline builders and evaluators can be applied on every patch using <code>InterpolationBuilderCollection</code>, <code>InterpolationBuilder2DCollection</code> and <code>InterpolationEvaluator2DCollection</code> (see <a href="../interpolation/index.html">multipatch interpolation</a>).</p>
 <h2 id="multipatch-extrapolation-rules">Multipatch extrapolation rules</h2>
 <p>To evaluate at a given coordinate outside the domain, extrapolation rules have been implemented. They are declined according to the geometry:</p>
 <ul>
 <li>
-<p><code>NullExtrapolationRule</code>: general for every geometry. It sets the values at zero for every coordinates outside the domain.</p>
+<p><code>NullExtrapolationRule</code>: general for every geometry and every interpolation method. It sets the values at zero for every coordinates outside the domain.</p>
 </li>
 <li>
-<p><code>ConstantExtrapolationRuleOnion</code>: specialised for onion geometries (see <code>OnionPatchLocator</code> and <a href="../connectivity/index.html">Connectivity</a>). It calls <code>ddc::ConstantExtrapolationRule</code> to evaluate the outside coordinate.
+<p><code>ConstantExtrapolationRuleOnion</code>: specialised for onion geometries (see <code>OnionPatchLocator</code> and <a href="../connectivity/index.html">Connectivity</a>) and spline interpolations. It calls <code>ddc::ConstantExtrapolationRule</code> to evaluate the outside coordinate.
  Two areas are considered as outside: with radius inferior to the minimum radius and with radius superior to the maximum radius.</p>
 </li>
 </ul>
 <h2 id="contents">Contents</h2>
 <ul>
 <li><code>constant_extrapolation_rules_onion.hpp</code>: Define <code>ConstantExtrapolationRuleOnion</code>, constant extrapolation rule for onion geometries.</li>
-<li><code>multipatch_spline_evaluator_2d.hpp</code>: Define the <code>MultipatchSplineEvaluator2D</code> operator to apply 2D spline evaluators on every patch.</li>
 <li><code>null_extrapolation_rules.hpp</code>: Define <code>NullExtrapolationRule</code>, a null extrapolation rule for every geometry.  </li>
 </ul></div>
               

@@ -598,6 +598,10 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">typedef typename Evaluator::basis_idx_range_type</td>
+<td style="text-align: left;"><a href="#typedef-basis_idx_range_type"><strong>basis_idx_range_type</strong></a>  <br><em>The type of the ND index range of the basis (e.g. B-splines, Lagrange basis) used to define the interpolation.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename Evaluator::template <a href="structInterpolationEvaluatorTraits.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>&lt; D &gt;</td>
 <td style="text-align: left;"><a href="#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>  <br><em>Batched domain with the evaluation grid replaced by the coefficient grid(s).</em></td>
 </tr>
@@ -645,7 +649,8 @@
 * <a href="structInterpolationEvaluatorTraits.html#typedef-data_type"><strong>data_type</strong></a>
 * <a href="structInterpolationEvaluatorTraits.html#typedef-evaluation_idx_range_type"><strong>evaluation_idx_range_type</strong></a>
 * <a href="structInterpolationEvaluatorTraits.html#typedef-coord_type"><strong>coord_type</strong></a>
-* <a href="structInterpolationEvaluatorTraits.html#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a> Static functions
+* <a href="structInterpolationEvaluatorTraits.html#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>
+* <a href="structInterpolationEvaluatorTraits.html#typedef-basis_idx_range_type"><strong>basis_idx_range_type</strong></a> Static functions
 * <a href="structInterpolationEvaluatorTraits.html#function-rank"><strong>rank()</strong></a> Type calculators
 * <a href="structInterpolationEvaluatorTraits.html#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>
 * <a href="structInterpolationEvaluatorTraits.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a></p>
@@ -654,6 +659,12 @@
 <li><code>Evaluator</code> The interpolation evaluator type. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-basis_idx_range_type">typedef basis_idx_range_type</h3>
+<p><em>The type of the ND index range of the basis (e.g. B-splines, Lagrange basis) used to define the interpolation.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::basis_idx_range_type =  typename Evaluator::basis_idx_range_type;
+</code></pre>
+<hr>
+
 <h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
 <p><em>Batched domain with the evaluation grid replaced by the coefficient grid(s).</em> </p>
 <pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::batched_coeff_idx_range_type = 

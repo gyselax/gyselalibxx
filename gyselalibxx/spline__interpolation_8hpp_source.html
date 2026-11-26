@@ -593,6 +593,26 @@
 #include "ddc_aliases.hpp"
 #include "extrapolation_rule_choice.hpp"
 
+namespace detail {
+
+template &lt;class Evaluator&gt;
+inline constexpr bool is_ddc_spline_evaluator_nd_v = false;
+
+template &lt;
+        class ExecSpace,
+        class MemorySpace,
+        class... BSplines,
+        class... EvaluationDDim,
+        class... ExtrapolationRule&gt;
+inline constexpr bool is_ddc_spline_evaluator_nd_v&lt;ddc::SplineEvaluatorND&lt;
+        ExecSpace,
+        MemorySpace,
+        ddc::TypeSeq&lt;BSplines...&gt;,
+        ddc::TypeSeq&lt;EvaluationDDim...&gt;,
+        ddc::TypeSeq&lt;ExtrapolationRule...&gt;&gt;&gt; = true;
+
+} // namespace detail
+
 template &lt;ddc::SplineBuilderClosure MinClosure, ddc::SplineBuilderClosure MaxClosure&gt;
 struct SplineBoundaryClosures
 {

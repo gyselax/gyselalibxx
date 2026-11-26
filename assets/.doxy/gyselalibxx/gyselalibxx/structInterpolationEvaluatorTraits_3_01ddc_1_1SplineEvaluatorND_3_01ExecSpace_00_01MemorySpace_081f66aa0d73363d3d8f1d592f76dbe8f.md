@@ -34,6 +34,7 @@ _Specialisation of_ [_**InterpolationEvaluatorTraits**_](structInterpolationEval
 
 | Type | Name |
 | ---: | :--- |
+| typedef IdxRange&lt; BSplines... &gt; | [**basis\_idx\_range\_type**](#typedef-basis_idx_range_type)  <br>_The type of the ND index range of the B-splines used to define the interpolation._  |
 | typedef typename Evaluator::template batched\_spline\_domain\_type&lt; BatchedInterpolationIdxRange &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_Batched domain with the evaluation grid replaced by BSplines._  |
 | typedef typename Evaluator::template batched\_evaluation\_domain\_type&lt; BatchedInterpolationIdxRange &gt; | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_Batched index range for the evaluation._  |
 | typedef decltype(make\_coeff\_idx\_range\_type(std::make\_index\_sequence&lt; sizeof...(BSplines)&gt;())) | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The type of the ND index range on which the interpolation coefficients are defined._  |
@@ -105,6 +106,20 @@ Mapping: evaluation\_domain\_type&lt;0, ...&gt; -&gt; [**evaluation\_idx\_range\
     
 ## Public Types Documentation
 
+
+
+
+### typedef basis\_idx\_range\_type 
+
+_The type of the ND index range of the B-splines used to define the interpolation._ 
+```C++
+using InterpolationEvaluatorTraits< ddc::SplineEvaluatorND< ExecSpace, MemorySpace, ddc::TypeSeq< BSplines... >, ddc::TypeSeq< EvaluationDDim... >, ddc::TypeSeq< ExtrapolationRule... > > >::basis_idx_range_type =  IdxRange<BSplines...>;
+```
+
+
+
+
+<hr>
 
 
 

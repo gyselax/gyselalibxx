@@ -41,6 +41,8 @@ struct InterpolationEvaluatorTraits
 
     using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;
 
+    using basis_idx_range_type = typename Evaluator::basis_idx_range_type;
+
     static constexpr std::size_t rank()
     {
         return evaluation_idx_range_type::rank();
@@ -96,6 +98,8 @@ public:
     using coeff_idx_range_type
             = decltype(make_coeff_idx_range_type(std::make_index_sequence<sizeof...(BSplines)>()));
 
+    using basis_idx_range_type = IdxRange<BSplines...>;
+
     static constexpr std::size_t rank()
     {
         return sizeof...(BSplines);
@@ -123,6 +127,7 @@ concept InterpolationEvaluator = requires
     typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coord_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coeff_idx_range_type;
+    typename InterpolationEvaluatorTraits<Evaluator>::basis_idx_range_type;
 }
 &&requires()
 {

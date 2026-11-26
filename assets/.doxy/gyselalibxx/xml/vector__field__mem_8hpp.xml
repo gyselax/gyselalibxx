@@ -342,7 +342,7 @@
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
         <childnode refid="101" relation="include">
         </childnode>
@@ -374,7 +374,7 @@
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="85" relation="include">
         </childnode>
         <childnode refid="93" relation="include">
         </childnode>
@@ -682,30 +682,30 @@
         <link refid="lagrange__basis__non__uniform_8hpp_source"/>
         <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="82">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
         <link refid="lagrange__evaluator_8hpp_source"/>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="79">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
       </node>
-      <node id="82">
+      <node id="83">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
         <childnode refid="79" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="84">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
         <childnode refid="59" relation="include">
@@ -721,6 +721,8 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
       <node id="44">
@@ -804,7 +806,7 @@
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
@@ -815,18 +817,18 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
       </node>
-      <node id="85">
+      <node id="86">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
         <link refid="onion__patch__locator_8hpp_source"/>
-        <childnode refid="86" relation="include">
-        </childnode>
         <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="87">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
         <link refid="utils__patch__locators_8hpp_source"/>
-        <childnode refid="87" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
@@ -846,7 +848,7 @@
         </childnode>
         <childnode refid="99" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
@@ -866,7 +868,7 @@
         <link refid="multipatch__type_8hpp_source"/>
         <childnode refid="90" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
@@ -882,17 +884,17 @@
         </childnode>
         <childnode refid="99" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="100" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="85">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/types.hpp</label>
         <link refid="types_8hpp_source"/>
-        <childnode refid="85" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="89" relation="include">
         </childnode>
@@ -906,7 +908,7 @@
         </childnode>
         <childnode refid="98" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
       <node id="69">
@@ -943,13 +945,13 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp</label>
         <link refid="interpolation__builder__collection_8hpp_source"/>
       </node>
-      <node id="87">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
-        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
+      <node id="81">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
+        <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
       </node>
       <node id="88">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
-        <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
+        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
       <node id="100">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>

@@ -4,6 +4,7 @@
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation</compoundname>
     <innerfile refid="interpolation__builder__2d__collection_8hpp">interpolation_builder_2d_collection.hpp</innerfile>
     <innerfile refid="interpolation__builder__collection_8hpp">interpolation_builder_collection.hpp</innerfile>
+    <innerfile refid="interpolation__evaluator__2d__collection_8hpp">interpolation_evaluator_2d_collection.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

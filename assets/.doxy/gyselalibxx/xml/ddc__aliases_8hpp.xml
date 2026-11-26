@@ -105,8 +105,8 @@
     <includedby refid="interfaces__exact__derivative__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_exact_derivative_calculator.hpp</includedby>
     <includedby refid="interpolation__builder__2d__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_2d_collection.hpp</includedby>
     <includedby refid="interpolation__builder__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_collection.hpp</includedby>
+    <includedby refid="interpolation__evaluator__2d__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</includedby>
     <includedby refid="constant__extrapolation__rules__onion_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</includedby>
-    <includedby refid="multipatch__spline__evaluator__2d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</includedby>
     <includedby refid="null__extrapolation__rules_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</includedby>
     <includedby refid="fem__1d__poisson__solver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</includedby>
     <includedby refid="fem__poisson__assembler__utils_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_poisson_assembler_utils.hpp</includedby>
@@ -464,7 +464,7 @@
         </childnode>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="65">
@@ -1204,6 +1204,8 @@
         </childnode>
         <childnode refid="108" relation="include">
         </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
         <childnode refid="125" relation="include">
         </childnode>
       </node>
@@ -1279,6 +1281,8 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="108">
@@ -1520,7 +1524,7 @@
         <link refid="onion__patch__locator_8hpp_source"/>
         <childnode refid="69" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="192">
@@ -1618,7 +1622,7 @@
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
       </node>
       <node id="82">
@@ -1656,12 +1660,12 @@
         <link refid="interpolation__builder__collection_8hpp_source"/>
       </node>
       <node id="70">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
-        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
+        <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
       </node>
       <node id="71">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
-        <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
+        <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
       <node id="88">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/null_extrapolation_rules.hpp</label>
@@ -2326,7 +2330,7 @@
         </childnode>
         <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
         <childnode refid="125" relation="include">
         </childnode>

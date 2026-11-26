@@ -9,6 +9,7 @@
     <includedby refid="i__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp</includedby>
     <includedby refid="lagrange__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</includedby>
     <includedby refid="vector__field__evaluation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp</includedby>
+    <includedby refid="interpolation__evaluator__2d__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</includedby>
     <includedby refid="fem__1d__poisson__solver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</includedby>
     <incdepgraph>
       <node id="1">
@@ -185,7 +186,7 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -195,26 +196,28 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
       </node>
-      <node id="24">
+      <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
         <link refid="lagrange__evaluator_8hpp_source"/>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
       </node>
-      <node id="25">
+      <node id="26">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
         <link refid="nd__lagrange__evaluator_8hpp_source"/>
         <childnode refid="16" relation="include">
@@ -225,18 +228,24 @@
         <link refid="spline__interpolation_8hpp_source"/>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/vector_field_evaluation.hpp</label>
         <link refid="vector__field__evaluation_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="23">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
+        <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
+      </node>
+      <node id="28">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
-      <node id="23">
+      <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
         <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="19" relation="include">
@@ -281,151 +290,156 @@
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Evaluator&gt;</highlight></codeline>
-<codeline lineno="56" refid="structInterpolationEvaluatorTraits" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref></highlight></codeline>
-<codeline lineno="57"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="59" refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">data_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::data_type;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">evaluation_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::evaluation_idx_range_type;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65" refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">coord_type</ref></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::coordinate_of_t&lt;typename<sp/>evaluation_idx_range_type::discrete_element_type&gt;;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kindref="member">coeff_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::coeff_idx_range_type;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">rank</ref>()</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>evaluation_idx_range_type::rank();</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78" refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BatchedInterpolationIdxRange&gt;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" kindref="member">batched_evaluation_idx_range_type</ref><sp/>=</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/><ref refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" kindref="member">batched_evaluation_idx_range_type</ref>&lt;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BatchedInterpolationIdxRange&gt;;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84" refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" kindref="member">batched_coeff_idx_range_type</ref><sp/>=</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/><ref refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" kindref="member">batched_coeff_idx_range_type&lt;D&gt;</ref>;</highlight></codeline>
-<codeline lineno="87"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace,</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>BSplines,</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>EvaluationDDim,</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref>&gt;</highlight></codeline>
-<codeline lineno="107" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;ddc::SplineEvaluatorND&lt;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MemorySpace,</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;BSplines...&gt;,</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;EvaluationDDim...&gt;,</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;ExtrapolationRule...&gt;&gt;&gt;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Evaluator<sp/>=<sp/>ddc::SplineEvaluatorND&lt;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MemorySpace,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;BSplines...&gt;,</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;EvaluationDDim...&gt;,</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;<ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref>...&gt;&gt;;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::size_t...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>make_evaluation_idx_range_type(std::index_sequence&lt;Is...&gt;)<sp/>-&gt;</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>evaluation_domain_type&lt;Is...&gt;;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::size_t...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>make_coeff_idx_range_type(std::index_sequence&lt;Is...&gt;)<sp/>-&gt;</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>spline_domain_type&lt;Is...&gt;;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="132" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad9d376138accb642b612aea47643561e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad9d376138accb642b612aea47643561e" kindref="member">data_type</ref><sp/>=<sp/>double;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" kindref="member">evaluation_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(make_evaluation_idx_range_type(</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(BSplines)&gt;()));</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" kindref="member">coord_type</ref><sp/>=<sp/>Coord&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>EvaluationDDim::continuous_dimension_type...&gt;;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" kindref="member">coeff_idx_range_type</ref></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(make_coeff_idx_range_type(std::make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(BSplines)&gt;()));</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">rank</ref>()</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(BSplines);</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BatchedInterpolationIdxRange&gt;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" kindref="member">batched_evaluation_idx_range_type</ref><sp/>=</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>batched_evaluation_domain_type&lt;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BatchedInterpolationIdxRange&gt;;</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BatchedInterpolationIdxRange&gt;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" kindref="member">batched_coeff_idx_range_type</ref><sp/>=</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;</highlight></codeline>
-<codeline lineno="161"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163"><highlight class="normal"></highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">concepts<sp/>{</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Evaluator&gt;</highlight></codeline>
-<codeline lineno="182" refid="conceptconcepts_1_1InterpolationEvaluator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">InterpolationEvaluator</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="183"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::exec_space;</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space;</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type</ref>;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type</ref>;</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type</ref>;</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coeff_idx_range_type</ref>;</highlight></codeline>
-<codeline lineno="190"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="191"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">()</highlight></codeline>
-<codeline lineno="192"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::rank</ref>()</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;std::size_t&gt;;</highlight></codeline>
-<codeline lineno="196"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="197"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>e,</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Field&lt;typename<sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type,</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type</ref>,</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>eval,</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type</ref>,</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>batched_coeff_idx_range_type&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type&gt;,</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>coeffs,</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type</ref>,</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type</ref>,</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>coords,</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToDerivIdx&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type<sp/>deriv_order)</highlight></codeline>
-<codeline lineno="214"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>{e(eval,<sp/>coeffs)};</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>{e(eval,<sp/>coords,<sp/>coeffs)};</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>{e.deriv(deriv_order,<sp/>eval,<sp/>coeffs)};</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>{e.deriv(deriv_order,<sp/>eval,<sp/>coords,<sp/>coeffs)};</highlight></codeline>
-<codeline lineno="219"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="220"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>e,</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;</highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type</ref>,</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>batched_coeff_idx_range_type&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type&gt;,</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>coeffs,</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type</ref><sp/>coord,</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToDerivIdx&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type<sp/>deriv_order)</highlight></codeline>
-<codeline lineno="231"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>e(coord,<sp/>coeffs)</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>e.deriv(deriv_order,<sp/>coord,<sp/>coeffs)</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;</highlight></codeline>
-<codeline lineno="238"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="239"><highlight class="normal"></highlight></codeline>
-<codeline lineno="240"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>concepts</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Evaluator&gt;</highlight></codeline>
+<codeline lineno="57" refid="structInterpolationEvaluatorTraits" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60" refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">data_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::data_type;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">evaluation_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::evaluation_idx_range_type;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">coord_type</ref></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::coordinate_of_t&lt;typename<sp/>evaluation_idx_range_type::discrete_element_type&gt;;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kindref="member">coeff_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::coeff_idx_range_type;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a64708fd581aa010b627d2af00814d54b" kindref="member">basis_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::basis_idx_range_type;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">rank</ref>()</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>evaluation_idx_range_type::rank();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BatchedInterpolationIdxRange&gt;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" kindref="member">batched_evaluation_idx_range_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/><ref refid="structInterpolationEvaluatorTraits_1a3dd93e0bf8981af2b756f9a3345f7e49" kindref="member">batched_evaluation_idx_range_type</ref>&lt;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BatchedInterpolationIdxRange&gt;;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" kindref="member">batched_coeff_idx_range_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/><ref refid="structInterpolationEvaluatorTraits_1ac04f1188b487802b581d0eaaf2d0ad91" kindref="member">batched_coeff_idx_range_type&lt;D&gt;</ref>;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ExecSpace,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace,</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>BSplines,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>EvaluationDDim,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref>&gt;</highlight></codeline>
+<codeline lineno="112" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;ddc::SplineEvaluatorND&lt;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MemorySpace,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;BSplines...&gt;,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;EvaluationDDim...&gt;,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;ExtrapolationRule...&gt;&gt;&gt;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Evaluator<sp/>=<sp/>ddc::SplineEvaluatorND&lt;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExecSpace,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MemorySpace,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;BSplines...&gt;,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;EvaluationDDim...&gt;,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::TypeSeq&lt;<ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref>...&gt;&gt;;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>make_evaluation_idx_range_type(std::index_sequence&lt;Is...&gt;)<sp/>-&gt;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>evaluation_domain_type&lt;Is...&gt;;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;std::size_t...<sp/>Is&gt;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>make_coeff_idx_range_type(std::index_sequence&lt;Is...&gt;)<sp/>-&gt;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>spline_domain_type&lt;Is...&gt;;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="137" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad9d376138accb642b612aea47643561e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1ad9d376138accb642b612aea47643561e" kindref="member">data_type</ref><sp/>=<sp/>double;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a91e9037c581b6ea685e59a9dfa3d41d2" kindref="member">evaluation_idx_range_type</ref><sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(make_evaluation_idx_range_type(</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(BSplines)&gt;()));</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1adf062cd9fd06edb7fffc23cb6f2ebb54" kindref="member">coord_type</ref><sp/>=<sp/>Coord&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>EvaluationDDim::continuous_dimension_type...&gt;;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1aeaa6c4e4a6a53450e64835e0aabe337d" kindref="member">coeff_idx_range_type</ref></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(make_coeff_idx_range_type(std::make_index_sequence&lt;</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(BSplines)&gt;()));</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a8317a16554f80b56b8d924db7a4cbe04" kindref="member">basis_idx_range_type</ref><sp/>=<sp/>IdxRange&lt;BSplines...&gt;;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">rank</ref>()</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(BSplines);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BatchedInterpolationIdxRange&gt;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a3cceec31c9df551f034634ac26179ff3" kindref="member">batched_evaluation_idx_range_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>batched_evaluation_domain_type&lt;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BatchedInterpolationIdxRange&gt;;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166" refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>BatchedInterpolationIdxRange&gt;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluatorND_3_01ExecSpace_00_01MemorySpace_081f66aa0d73363d3d8f1d592f76dbe8f_1a5dfa155ed1a2ab75239c0e68012f6494" kindref="member">batched_coeff_idx_range_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::template<sp/>batched_spline_domain_type&lt;BatchedInterpolationIdxRange&gt;;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">concepts<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Evaluator&gt;</highlight></codeline>
+<codeline lineno="190" refid="conceptconcepts_1_1InterpolationEvaluator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">InterpolationEvaluator</ref><sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::exec_space;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type</ref>;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type</ref>;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type</ref>;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coeff_idx_range_type</ref>;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a64708fd581aa010b627d2af00814d54b" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::basis_idx_range_type</ref>;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">()</highlight></codeline>
+<codeline lineno="201"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::rank</ref>()</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;std::size_t&gt;;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>e,</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Field&lt;typename<sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type,</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type</ref>,</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>eval,</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type</ref>,</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>batched_coeff_idx_range_type&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type&gt;,</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>coeffs,</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type</ref>,</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type</ref>,</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>coords,</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToDerivIdx&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type<sp/>deriv_order)</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>{e(eval,<sp/>coeffs)};</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>{e(eval,<sp/>coords,<sp/>coeffs)};</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>{e.deriv(deriv_order,<sp/>eval,<sp/>coeffs)};</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>{e.deriv(deriv_order,<sp/>eval,<sp/>coords,<sp/>coeffs)};</highlight></codeline>
+<codeline lineno="228"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">&amp;&amp;</highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>e,</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ConstField&lt;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type</ref>,</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>batched_coeff_idx_range_type&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type&gt;,</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Evaluator::memory_space&gt;<sp/>coeffs,</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kindref="member">InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type</ref><sp/>coord,</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToDerivIdx&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>InterpolationEvaluatorTraits&lt;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type<sp/>deriv_order)</highlight></codeline>
+<codeline lineno="240"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>e(coord,<sp/>coeffs)</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>e.deriv(deriv_order,<sp/>coord,<sp/>coeffs)</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>concepts</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp"/>
   </compounddef>

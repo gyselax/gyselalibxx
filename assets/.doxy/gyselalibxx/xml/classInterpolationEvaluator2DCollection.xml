@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classInterpolationEvaluator2DCollection" kind="class" language="C++" prot="public">
+    <compoundname>InterpolationEvaluator2DCollection</compoundname>
+    <templateparamlist>
+      <param>
+        <type>ddc::concepts::type_seq</type>
+        <declname>PatchSeq</declname>
+        <defname>PatchSeq</defname>
+      </param>
+      <param>
+        <type>ddc::concepts::type_seq</type>
+        <declname>EvaluatorSeq</declname>
+        <defname>EvaluatorSeq</defname>
+      </param>
+      <param>
+        <type>class PatchLocator</type>
+      </param>
+      <param>
+        <type>class <ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref></type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>A class to evaluate all the interpolations of all the patches at once. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class computes the evaluations of the interpolations defined on each patch at given coordinates, using the interpolation evaluators given for each patch. The coordinates are stored in fields on each patch. On a given storing patch, we do not enforce that a coordinate is physically located on this storing patch. These fields of coordinates can be the result of characteristics equations solving.</para>
+<para>This function is useful to avoid calling all the evaluators individually, especially in a multipatch geometry with several patches. It also manages to evaluate the right interpolation at a coordinate physically located on another patch than the storing patch.</para>
+<para>Additionally, methods to compute the first derivatives and cross-derivatives are implemented.</para>
+<para>Any 2D interpolation evaluator (see <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref>) can be used. Different evaluator types can be used on different patches.</para>
+<para><simplesect kind="warning"><para>This operator does not work on batched domain.</para>
+</simplesect>
+<simplesect kind="warning"><para>This operator only works for patches defined on the same continuous dimensions!</para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>PatchSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ddc::TypeSeq of the patches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EvaluatorSeq</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ddc::TypeSeq of the 2D interpolation evaluators on each patch, in the same order as the patches in PatchSeq. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>PatchLocator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A operator that finds the patch where a given coordinate is physically located. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extrapolation rule type for outside of the global domain. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" line="57" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp" bodystart="57" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

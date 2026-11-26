@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File multipatch_spline_evaluator_2d.hpp - GyselalibX</title>
+    <title>File interpolation_evaluator_2d_collection.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File multipatch_spline_evaluator_2d.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/multipatch__spline__evaluator__2d_8hpp.md";
+        var mkdocs_page_name = "File interpolation_evaluator_2d_collection.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/interpolation__evaluator__2d__collection_8hpp.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -571,9 +571,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File multipatch_spline_evaluator_2d.hpp</li>
+      <li class="breadcrumb-item active">File interpolation_evaluator_2d_collection.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/multipatch__spline__evaluator__2d_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/interpolation__evaluator__2d__collection_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -581,9 +581,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-multipatch_spline_evaluator_2dhpp">File multipatch_spline_evaluator_2d.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_7740c6927b2da0a836b00bedb040a06d.html"><strong>multipatch</strong></a> <strong>&gt;</strong> <a href="dir_729d943c83b6b5573a69e28a4db4673a.html"><strong>spline</strong></a> <strong>&gt;</strong> <a href="multipatch__spline__evaluator__2d_8hpp.html"><strong>multipatch_spline_evaluator_2d.hpp</strong></a></p>
-<p><a href="multipatch__spline__evaluator__2d_8hpp_source.html">Go to the source code of this file</a></p>
+                <div><h1 id="file-interpolation_evaluator_2d_collectionhpp">File interpolation_evaluator_2d_collection.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_54175eb71bf3bdb1ca864f2a0d352472.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="interpolation__evaluator__2d__collection_8hpp.html"><strong>interpolation_evaluator_2d_collection.hpp</strong></a></p>
+<p><a href="interpolation__evaluator__2d__collection_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
 <li><code>#include &lt;cassert&gt;</code></li>
 <li><code>#include &lt;utility&gt;</code></li>
@@ -591,8 +591,10 @@
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "ddc_helper.hpp"</code></li>
 <li><code>#include "deriv_details.hpp"</code></li>
+<li><code>#include "i_interpolation_evaluator.hpp"</code></li>
 <li><code>#include "multipatch_field.hpp"</code></li>
 <li><code>#include "multipatch_type.hpp"</code></li>
+<li><code>#include "spline_interpolation.hpp"</code></li>
 <li><code>#include "types.hpp"</code></li>
 <li><code>#include "utils_patch_locators.hpp"</code></li>
 <li><code>#include "view.hpp"</code></li>
@@ -608,12 +610,12 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a> &lt;class ExecSpace, class MemorySpace, BSpline1OnPatch, BSpline2OnPatch, Grid1OnPatch, Grid2OnPatch, class <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a>, ValuesOnPatch, class PatchLocator, Patches&gt;<br><em>A class to evaluate all the splines of all the patches at once.</em></td>
+<td style="text-align: left;"><a href="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.html"><strong>InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;</strong></a> &lt;Patches, Evaluators, class PatchLocator, class <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a>&gt;<br><em>A class to evaluate all the interpolations of all the patches at once.</em></td>
 </tr>
 </tbody>
 </table>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</code></p></div>
               
             </div>
           </div><footer>

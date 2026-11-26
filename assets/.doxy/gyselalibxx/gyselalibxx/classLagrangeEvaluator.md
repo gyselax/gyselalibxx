@@ -34,6 +34,7 @@ _A class to evaluate, differentiate or integrate a Lagrange function._ [More...]
 
 | Type | Name |
 | ---: | :--- |
+| typedef IdxRange&lt; LagrangeBasis &gt; | [**basis\_idx\_range\_type**](#typedef-basis_idx_range_type)  <br>_The type of the 1D index range of the Lagrange basis._  |
 | typedef ddc::remove\_dims\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid &gt; | [**batch\_idx\_range\_type**](#typedef-batch_idx_range_type)  <br>_The type of the batch domain (obtained by removing the dimension of interest from the whole domain)._  |
 | typedef ddc:: replace\_dim\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, [**coeff\_grid\_type**](classLagrangeEvaluator.md#typedef-coeff_grid_type) &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions._  |
 | typedef BatchedInterpolationIdxRange | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
@@ -138,6 +139,20 @@ A class which contains an operator () which can be used to evaluate, or differen
     
 ## Public Types Documentation
 
+
+
+
+### typedef basis\_idx\_range\_type 
+
+_The type of the 1D index range of the Lagrange basis._ 
+```C++
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::basis_idx_range_type =  IdxRange<LagrangeBasis>;
+```
+
+
+
+
+<hr>
 
 
 

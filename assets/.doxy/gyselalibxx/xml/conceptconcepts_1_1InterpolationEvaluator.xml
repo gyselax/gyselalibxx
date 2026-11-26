@@ -17,6 +17,7 @@ concept <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound
     typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::evaluation_idx_range_type;
     typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::coord_type;
     typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;<ref refid="structInterpolationBuilderTraits" kindref="compound">::coeff_idx_range_type</ref>;
+    typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::basis_idx_range_type;
 }
 &amp;&amp;requires()
 {
@@ -74,6 +75,6 @@ concept <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound
 <para>Type information is accessed through <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits&lt;Evaluator&gt;</ref>, which has a primary template delegating to the evaluator&apos;s own aliases and can be specialised for external evaluators (e.g. ddc::SplineEvaluatorND).</para>
 <para>The template alias and method requirements are verified using evaluation_idx_range_type as a representative domain. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="182" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="190" column="1"/>
   </compounddef>
 </doxygen>
