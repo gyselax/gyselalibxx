@@ -60,9 +60,15 @@ void initialise_2D_function(
     });
 }
 
-template <class Xg, class Yg, class... Patches, class... CoordTransformType>
+template <
+        class Xg,
+        class Yg,
+        class... Patches,
+        class TypeSeqInternalTypes,
+        class... CoordTransformType>
 void initialise_all_functions(
-        MultipatchFieldOf<DerivFieldOnPatch_host, Patches...> const& functions_and_derivs,
+        detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes> const&
+                functions_and_derivs,
         std::tuple<CoordTransformType...> coord_transforms)
 {
     static_assert(sizeof...(Patches) == sizeof...(CoordTransformType));
@@ -76,7 +82,7 @@ void initialise_all_functions(
 template <class Patch, class GridDeriv, class CoordTransformType, class SplineXYgEvaluator>
 void initialise_derivatives(
         Idx<GridDeriv> idx_deriv_pos,
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        DerivField<double, IdxRangeDerivOnPatch<Patch>, Kokkos::HostSpace> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<
                 typename SplineXYgEvaluator::bsplines_type1,
@@ -205,7 +211,7 @@ template <
         class Xg = typename BSplinesXg::continuous_dimension_type,
         class Yg = typename BSplinesYg::continuous_dimension_type>
 void initialise_cross_derivatives(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        DerivField<double, IdxRangeDerivOnPatch<Patch>, Kokkos::HostSpace> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
         CoordTransformType const& coord_transform_handler)
@@ -233,9 +239,11 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches,
+        class TypeSeqInternalTypes,
         class... CoordTransformType>
 void initialise_all_cross_derivatives(
-        MultipatchFieldOf<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
+        detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>&
+                functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
         std::tuple<CoordTransformType...> coord_transforms)
@@ -268,7 +276,7 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_derivatives(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        DerivField<double, IdxRangeDerivOnPatch<Patch>, Kokkos::HostSpace> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         CoordTransformType const& coord_transform,
@@ -342,9 +350,11 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches,
+        class TypeSeqInternalTypes,
         class... CoordTransformType>
 void check_all_x_derivatives(
-        MultipatchFieldOf<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
+        detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>&
+                functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         std::tuple<CoordTransformType...> coord_transforms,
@@ -371,9 +381,11 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches,
+        class TypeSeqInternalTypes,
         class... CoordTransformType>
 void check_all_y_derivatives(
-        MultipatchFieldOf<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
+        detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>&
+                functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         std::tuple<CoordTransformType...> coord_transforms,
@@ -407,7 +419,7 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_xy_derivatives(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        DerivField<double, IdxRangeDerivOnPatch<Patch>, Kokkos::HostSpace> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         CoordTransformType const& coord_transform,
@@ -450,9 +462,11 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches,
+        class TypeSeqInternalTypes,
         class... CoordTransformType>
 void check_all_xy_derivatives(
-        MultipatchFieldOf<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
+        detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>&
+                functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         std::tuple<CoordTransformType...> coord_transforms,
@@ -482,7 +496,7 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
 void check_spline_representation_agreement(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        DerivField<double, IdxRangeDerivOnPatch<Patch>, Kokkos::HostSpace> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         CoordTransformType const& coord_transform,
@@ -611,9 +625,11 @@ template <
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class... Patches,
+        class TypeSeqInternalTypes,
         class... CoordTransformType>
 void check_all_spline_representation_agreement(
-        MultipatchFieldOf<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+        detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>
+                functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         std::tuple<CoordTransformType...> coord_transforms,

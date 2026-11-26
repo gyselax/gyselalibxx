@@ -74,6 +74,7 @@ using IdentityBuilderCollectionXY = InterpolationBuilder2DCollection<
 
 // Multipatch index ranges
 using MultipatchIdxRange12 = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv = MultipatchType<IdxRangeDerivOnPatch, Patch1, Patch2>;
 using MultipatchIdxRangeSplineCoeff = MultipatchType<IdxRangeBSOnPatch, Patch1, Patch2>;
 using MultipatchIdxRangeIdentityCoeff = MultipatchType<IdxRangeIdentityCoeff, Patch1, Patch2>;
 
@@ -628,12 +629,12 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
 
     // Function tests
     // --- patch 1
-    DerivFieldMemOnPatch<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivFieldOnPatch<Patch1> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(idx_range_xy1);
+    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
 
     // --- patch 2
-    DerivFieldMemOnPatch<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivFieldOnPatch<Patch2> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(idx_range_xy2);
+    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
             function_and_derivs_1.get_values_field(),
@@ -725,7 +726,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
 
     // --- collection of function and its derivatives on each patch
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>
+    DMultipatchDerivField<MultipatchIdxRangeDeriv>
             functions_and_derivs(function_and_derivs_1, function_and_derivs_2);
 
     // Spline representations
@@ -880,16 +881,16 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilderWithDer
     IdentityBuilderCollectionXY builder(builder1, builder2);
 
     // Function tests (the derivatives are not initialised as they are not used)
-    DerivFieldMemOnPatch<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivFieldOnPatch<Patch1> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
-    DerivFieldMemOnPatch<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivFieldOnPatch<Patch2> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(idx_range_xy1);
+    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(idx_range_xy2);
+    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
             function_and_derivs_1.get_values_field(),
             function_and_derivs_2.get_values_field());
 
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>
+    DMultipatchDerivField<MultipatchIdxRangeDeriv>
             functions_and_derivs(function_and_derivs_1, function_and_derivs_2);
 
     // Interpolation coefficients

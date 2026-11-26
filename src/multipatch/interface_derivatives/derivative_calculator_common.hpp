@@ -252,13 +252,16 @@ public:
     /// @brief Type of the set of index ranges used in the operator.
     using MultipatchIdxRange = MultipatchTypeFromSeq<IdxRangeOnPatch, relevant_patches>;
 
+    /// @brief Type of the set of index ranges (including the derivative dimensions) of the DerivFields.
+    using MultipatchIdxRangeDeriv = MultipatchTypeFromSeq<IdxRangeDerivOnPatch, relevant_patches>;
+
     /// @brief Type containing a DerivField per patch defined on CPU.
     using MultipatchDerivField_host
-            = MultipatchFieldOfFromSeq<DerivFieldOnPatch_host, relevant_patches>;
+            = DMultipatchDerivField<MultipatchIdxRangeDeriv, Kokkos::HostSpace>;
 
     /// @brief Type containing a DerivConstField per patch defined on CPU.
     using MultipatchDerivConstField_host
-            = MultipatchFieldOfFromSeq<DerivConstFieldOnPatch_host, relevant_patches>;
+            = DMultipatchDerivConstField<MultipatchIdxRangeDeriv, Kokkos::HostSpace>;
 
 protected:
     /// @brief MultipatchType on IdxRangeOnPatch to collect the index ranges on the patches.

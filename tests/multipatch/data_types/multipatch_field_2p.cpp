@@ -33,6 +33,7 @@ using ConstField1 = DConstField<Patch1::IdxRange12>;
 using ConstField2 = DConstField<Patch2::IdxRange12>;
 
 using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv = MultipatchType<IdxRangeDerivOnPatch, Patch1, Patch2>;
 
 } // namespace
 
@@ -235,10 +236,8 @@ TEST_F(MultiPatchField2Patches, DerivField)
 {
     MultipatchIdxRange idx_ranges(index_range_xy1, index_range_xy2);
 
-    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(
-            idx_ranges);
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
-            functions_and_derivs_alloc);
+    DMultipatchDerivFieldMem<MultipatchIdxRangeDeriv, 1> functions_and_derivs_alloc(idx_ranges);
+    DMultipatchDerivField<MultipatchIdxRangeDeriv> functions_and_derivs(functions_and_derivs_alloc);
 
     // f1(x,y) = x^2 + y^2; f2(x,y) = x^2 - y^2;
     initialise_non_const_fields(

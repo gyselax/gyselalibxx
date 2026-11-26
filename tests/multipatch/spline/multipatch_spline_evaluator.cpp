@@ -1070,9 +1070,9 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
     MultipatchIdxRange
             idx_range_evals(idx_range_eval_periodic_rtheta1, idx_range_eval_periodic_rtheta2);
 
-    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
+    DMultipatchDerivFieldMem<MultipatchIdxRangeDeriv, 1> eval_functions_and_derivs_alloc(
             idx_range_evals);
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
+    DMultipatchDerivField<MultipatchIdxRangeDeriv> eval_functions_and_derivs(
             eval_functions_and_derivs_alloc);
 
     // Definition of MultipatchSplineEvaluator2D
@@ -1163,9 +1163,9 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
     // Evaluated functions
     MultipatchIdxRange idx_range_evals(idx_range_eval_rtheta1, idx_range_eval_rtheta2);
 
-    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
+    DMultipatchDerivFieldMem<MultipatchIdxRangeDeriv, 1> eval_functions_and_derivs_alloc(
             idx_range_evals);
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
+    DMultipatchDerivField<MultipatchIdxRangeDeriv> eval_functions_and_derivs(
             eval_functions_and_derivs_alloc);
 
     // Definition of MultipatchSplineEvaluator2D
