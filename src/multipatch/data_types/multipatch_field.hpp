@@ -360,7 +360,7 @@ template <
         class MultipatchIdxRange,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
-using MultipatchDConstField
+using DMultipatchConstField
         = MultipatchConstField<double, MultipatchIdxRange, MemorySpace, LayoutStridedPolicy>;
 
 template <class... VectorFieldType, class PatchTypeSeq>

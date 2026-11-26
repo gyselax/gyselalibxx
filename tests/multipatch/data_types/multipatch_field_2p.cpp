@@ -32,6 +32,43 @@ using Field2 = DFieldOnPatch<Patch2>;
 using ConstField1 = DConstFieldOnPatch<Patch1>;
 using ConstField2 = DConstFieldOnPatch<Patch2>;
 
+using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+
+// The Field-style aliases must give the same types as the equivalent type-template aliases.
+static_assert(std::is_same_v<
+              DMultipatchField<MultipatchIdxRange>,
+              MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              MultipatchField<double, MultipatchIdxRange>,
+              MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              DMultipatchConstField<MultipatchIdxRange>,
+              MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              MultipatchConstField<double, MultipatchIdxRange>,
+              MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              DMultipatchField<MultipatchIdxRange, Kokkos::HostSpace>,
+              MultipatchFieldOf<DFieldOnPatch_host, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              MultipatchConstField<Patch1::Coord12, MultipatchType<IdxRangeOnPatch, Patch1>>,
+              MultipatchFieldOf<CoordConstFieldOnPatch, Patch1>>);
+static_assert(std::is_same_v<
+              DMultipatchFieldMem<MultipatchIdxRange>,
+              MultipatchFieldMemOf<DFieldMemOnPatch, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              MultipatchFieldMem<double, MultipatchIdxRange>,
+              MultipatchFieldMemOf<DFieldMemOnPatch, Patch1, Patch2>>);
+static_assert(std::is_same_v<
+              DMultipatchFieldMem<MultipatchIdxRange>::span_type,
+              DMultipatchField<MultipatchIdxRange>>);
+static_assert(std::is_same_v<
+              DMultipatchFieldMem<MultipatchIdxRange>::view_type,
+              DMultipatchConstField<MultipatchIdxRange>>);
+static_assert(std::is_same_v<
+              DMultipatchField<MultipatchIdxRange>::discrete_domain_type,
+              MultipatchIdxRange>);
+
 } // namespace
 
 class MultiPatchField2Patches : public ::testing::Test

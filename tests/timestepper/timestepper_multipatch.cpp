@@ -21,7 +21,7 @@ using namespace onion_shape_uniform_2d_2patches;
 using MultipatchIdxRangeR = MultipatchType<IdxRange1OnPatch, Patch1, Patch2>;
 using DMultipatchFieldMemR = DMultipatchFieldMem<MultipatchIdxRangeR>;
 using DMultipatchFieldR = DMultipatchField<MultipatchIdxRangeR>;
-using DMultipatchConstFieldR = MultipatchDConstField<MultipatchIdxRangeR>;
+using DMultipatchConstFieldR = DMultipatchConstField<MultipatchIdxRangeR>;
 
 using MultipatchIdxRangeRTheta = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
 using CMultipatchFieldMemRTheta = MultipatchFieldMem<Coord<R, Theta>, MultipatchIdxRangeRTheta>;

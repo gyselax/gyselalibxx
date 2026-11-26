@@ -43,7 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `InterfacesExactDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the exact formula.
 - Added a `concepts::Patch` concept.
 - Added a `concepts::Edge` concept.
-- Add `MultipatchField`, `MultipatchDField`, `MultipatchConstField`, `MultipatchDConstField`, `MultipatchFieldMem` and `MultipatchDFieldMem` aliases templated like `Field`/`FieldMem` (element type, `MultipatchType` of index ranges, memory space, layout) to store a `Field`/`FieldMem` on each patch.
+- Add `MultipatchField`, `DMultipatchField`, `MultipatchConstField`, `DMultipatchConstField`, `MultipatchFieldMem` and `DMultipatchFieldMem` aliases templated like `Field`/`FieldMem` (element type, `MultipatchType` of index ranges, memory space, layout) to store a `Field`/`FieldMem` on each patch.
 - Add `MultipatchTypeFromSeq` and `MultipatchFieldOfFromSeq` aliases to define a `MultipatchType`/`MultipatchFieldOf` from a `ddc::TypeSeq` of patches.
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 - Add copy operators for `MultipatchType` and `MultipatchField`.
