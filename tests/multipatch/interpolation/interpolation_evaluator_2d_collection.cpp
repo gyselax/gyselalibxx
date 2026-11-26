@@ -787,10 +787,16 @@ void check_batched_on_coord_field(
 
         // Compare the batch slice of the collection output with the expected values.
         EXPECT_LE(
-                max_abs_difference(eval_values.get<Patch1>()[batch], expected.get<Patch1>()),
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch1>()[batch]),
+                        get_const_field(expected.get<Patch1>())),
                 TOL);
         EXPECT_LE(
-                max_abs_difference(eval_values.get<Patch2>()[batch], expected.get<Patch2>()),
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch2>()[batch]),
+                        get_const_field(expected.get<Patch2>())),
                 TOL);
     }
 }
@@ -2112,8 +2118,18 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
                 });
 
         // --- compare the batch slices of the collection output with the expected values
-        EXPECT_LE(max_abs_difference(eval_functions.get<Patch1>()[batch], expected_1), 1e-12);
-        EXPECT_LE(max_abs_difference(eval_functions.get<Patch2>()[batch], expected_2), 1e-12);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_functions.get<Patch1>()[batch]),
+                        get_const_field(expected_1)),
+                1e-12);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_functions.get<Patch2>()[batch]),
+                        get_const_field(expected_2)),
+                1e-12);
     }
 }
 
@@ -2228,8 +2244,18 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordF
         evaluator_2(expected_2, get_const_field(eval_points_2), batched_coeffs_2_const[batch]);
 
         // --- compare the batch slices of the values with the expected values
-        EXPECT_LE(max_abs_difference(eval_values.get<Patch1>()[batch], expected_1), 1e-12);
-        EXPECT_LE(max_abs_difference(eval_values.get<Patch2>()[batch], expected_2), 1e-12);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch1>()[batch]),
+                        get_const_field(expected_1)),
+                1e-12);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch2>()[batch]),
+                        get_const_field(expected_2)),
+                1e-12);
     }
 
     // Check the derivatives on the edge lines of each dimension.
