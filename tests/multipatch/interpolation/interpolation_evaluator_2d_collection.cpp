@@ -896,10 +896,16 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
     interpolation.get_builder()(coeffs, values);
 
     EXPECT_LE(
-            max_abs_difference(get_const_field(coeffs_alloc.get<Patch1>()), splines.get<Patch1>()),
+            error_norm_inf(
+                    Kokkos::DefaultExecutionSpace(),
+                    get_const_field(coeffs_alloc.get<Patch1>()),
+                    splines.get<Patch1>()),
             1e-14);
     EXPECT_LE(
-            max_abs_difference(get_const_field(coeffs_alloc.get<Patch2>()), splines.get<Patch2>()),
+            error_norm_inf(
+                    Kokkos::DefaultExecutionSpace(),
+                    get_const_field(coeffs_alloc.get<Patch2>()),
+                    splines.get<Patch2>()),
             1e-14);
 
     // Evaluate the functions at the evaluation points.
