@@ -301,7 +301,7 @@ public:
      *      has to be invertible.
      * @param extrapolation_rule The extrapolation rules.
      */
-    InterpolationEvaluator2DCollection(
+    KOKKOS_FUNCTION InterpolationEvaluator2DCollection(
             Evaluators const&... evaluators,
             PatchLocator const& patch_locator,
             ExtrapolationRule const& extrapolation_rule)
@@ -311,6 +311,11 @@ public:
     {
     }
 
+    KOKKOS_DEFAULTED_FUNCTION ~InterpolationEvaluator2DCollection() = default;
+
+    KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(
+            InterpolationEvaluator2DCollection const&)
+            = default;
 
     // Assignment operators ----------------------------------------------------------------------
     /**
