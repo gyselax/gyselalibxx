@@ -281,7 +281,9 @@ public:
 
     KOKKOS_DEFAULTED_FUNCTION ~InterpolationEvaluator2DCollection() = default;
 
-    KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(InterpolationEvaluator2DCollection const&) = default;
+    KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(
+            InterpolationEvaluator2DCollection const&)
+            = default;
 
     // Assignment operators ----------------------------------------------------------------------
     /**
