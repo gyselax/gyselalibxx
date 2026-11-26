@@ -43,7 +43,8 @@ spack:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.06
     builtin:
-      branch: releases/v2026.06
+      tag: v2026.06.0
+      destination: $spack/var/spack/repos/builtin-v2026.06.0
   specs:
     - 'cmake@3.31'
     - 'ddc@0.17 +fft +pdi +splines'
