@@ -66,9 +66,8 @@ TEST(MultiPatchField2PatchesOnion, VectorField)
     VectorField1 vec_field1 = get_field(vec_field_mem1);
     VectorField2 vec_field2 = get_field(vec_field_mem2);
 
-    DMultipatchVectorField<MultipatchIdxRange, VectorIndexSetRTheta> global_field(
-            vec_field1,
-            vec_field2);
+    DMultipatchVectorField<MultipatchIdxRange, VectorIndexSetRTheta>
+            global_field(vec_field1, vec_field2);
 
     DMultipatchField<MultipatchIdxRange> global_field_r = ddcHelper::get<R>(global_field);
     DMultipatchField<MultipatchIdxRange> global_field_theta = ddcHelper::get<Theta>(global_field);

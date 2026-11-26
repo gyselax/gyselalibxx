@@ -304,7 +304,8 @@ struct MultipatchVectorFieldMemFromIdxRange<
     /// The MultipatchFieldMem of VectorFieldMems defined on the index ranges.
     using type = MultipatchFieldMem<
             ddc::TypeSeq<Patches...>,
-            ddc::TypeSeq<VectorFieldMem<ElementType, IdxRanges, VectorIndexSetType, MemorySpace>...>>;
+            ddc::TypeSeq<
+                    VectorFieldMem<ElementType, IdxRanges, VectorIndexSetType, MemorySpace>...>>;
 };
 
 } // namespace detail

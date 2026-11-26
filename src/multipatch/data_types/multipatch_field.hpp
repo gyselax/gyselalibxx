@@ -311,7 +311,7 @@ template <
         class MultipatchIdxRange,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
-using MultipatchField =typename detail::MultipatchFieldFromIdxRange<
+using MultipatchField = typename detail::MultipatchFieldFromIdxRange<
         ElementType,
         MultipatchIdxRange,
         MemorySpace,
