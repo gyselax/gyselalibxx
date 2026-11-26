@@ -11,6 +11,7 @@
 #include "i_interpolation_builder.hpp"
 #include "i_interpolation_evaluator.hpp"
 #include "interpolation_evaluator_2d_collection.hpp"
+#include "l_norm_tools.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_evaluator.hpp"
 #include "mesh_builder.hpp"
@@ -576,21 +577,6 @@ LagrangeEvaluatorRTheta<Patch> make_lagrange_evaluator()
     return LagrangeEvaluatorRTheta<Patch>(evaluator_r, evaluator_theta);
 }
 
-/// Get the maximum absolute difference between two fields defined on the same index range.
-template <class FieldType>
-double max_abs_difference(FieldType field, FieldType field_expected)
-{
-    auto field_host = ddc::create_mirror_and_copy(field);
-    auto field_expected_host = ddc::create_mirror_and_copy(field_expected);
-    using IdxType = typename FieldType::discrete_domain_type::discrete_element_type;
-    double max_abs_error = 0;
-    ddc::host_for_each(get_idx_range(field_expected_host), [&](IdxType const idx) {
-        double err = std::abs(field_expected_host(idx) - field_host(idx));
-        max_abs_error = std::max(max_abs_error, err);
-    });
-    return max_abs_error;
-}
-
 /**
  * @brief Google test class to define the Lagrange interpolations on an Onion shape
  * domain with 2 patches.
@@ -675,8 +661,18 @@ void check_lagrange_on_coord_field(
                        coeffs.get<Patch2>());
     }
 
-    EXPECT_LE(max_abs_difference(get_field(eval_1_alloc), get_field(expected_1_alloc)), 1e-12);
-    EXPECT_LE(max_abs_difference(get_field(eval_2_alloc), get_field(expected_2_alloc)), 1e-12);
+    EXPECT_LE(
+            error_norm_inf(
+                    Kokkos::DefaultExecutionSpace(),
+                    get_const_field(eval_1_alloc),
+                    get_const_field(expected_1_alloc)),
+            1e-12);
+    EXPECT_LE(
+            error_norm_inf(
+                    Kokkos::DefaultExecutionSpace(),
+                    get_const_field(eval_2_alloc),
+                    get_const_field(expected_2_alloc)),
+            1e-12);
 }
 
 /**
