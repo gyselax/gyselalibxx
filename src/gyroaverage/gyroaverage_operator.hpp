@@ -35,6 +35,10 @@ template <
         class IdxRangeBatch = IdxRange<>>
 class GyroAverageOperator
 {
+    static_assert(
+            !is_multipatch_interpolation_v<InterpolatorType>,
+            "GyroAverageOperator does not support multipatch interpolations.");
+
     using InterpSpaceBuilderType = typename InterpolatorType::BuilderType;
     using InterpSpaceEvaluatorType = typename InterpolatorType::EvaluatorType;
     using ExecutionSpace = typename InterpSpaceBuilderType::exec_space;

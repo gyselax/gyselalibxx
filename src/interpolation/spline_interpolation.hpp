@@ -7,6 +7,28 @@
 #include "ddc_aliases.hpp"
 #include "extrapolation_rule_choice.hpp"
 
+namespace detail {
+
+/// A tool to check if an evaluator is a ddc::SplineEvaluatorND.
+template <class Evaluator>
+inline constexpr bool is_ddc_spline_evaluator_nd_v = false;
+
+/// Specialisation of is_ddc_spline_evaluator_nd_v for ddc::SplineEvaluatorND.
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class... BSplines,
+        class... EvaluationDDim,
+        class... ExtrapolationRule>
+inline constexpr bool is_ddc_spline_evaluator_nd_v<ddc::SplineEvaluatorND<
+        ExecSpace,
+        MemorySpace,
+        ddc::TypeSeq<BSplines...>,
+        ddc::TypeSeq<EvaluationDDim...>,
+        ddc::TypeSeq<ExtrapolationRule...>>> = true;
+
+} // namespace detail
+
 /**
  * @brief Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a
  * spline builder into a single non-type template argument.

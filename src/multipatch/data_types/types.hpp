@@ -12,7 +12,10 @@
 #include "vector_index_tools.hpp"
 
 /*
-    List of aliases useful to store data in MultipatchType or MultipatchField. 
+    List of aliases useful to store data in MultipatchType or MultipatchFieldOf.
+    Fields and vector fields on each patch should rather be stored using the aliases
+    MultipatchField, MultipatchFieldMem, MultipatchVectorField, MultipatchVectorFieldMem, etc.
+    with a MultipatchType of the index range aliases below.
 */
 
 
@@ -30,74 +33,15 @@ using Grid2OnPatch = typename Patch::Grid2;
 // FIELDS ----------------------------------------------------------------------------------------
 
 // --- ON DEVICE ---
-/// @brief A FieldMem of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DFieldMemOnPatch = DFieldMem<typename Patch::IdxRange12>;
-
-/// @brief A FieldMem of doubles defined on the Patch's first logical domain.
-template <class Patch>
-using DFieldMem1OnPatch = DFieldMem<typename Patch::IdxRange1>;
-
-/// @brief A FieldMem of doubles defined on the Patch's second logical domain.
-template <class Patch>
-using DFieldMem2OnPatch = DFieldMem<typename Patch::IdxRange2>;
-
-
 /// @brief A Field of doubles defined on the Patch's 2D logical domain.
 template <class Patch>
 using DFieldOnPatch = DField<typename Patch::IdxRange12>;
-
-/// @brief A Field of doubles defined on the Patch's first logical domain.
-template <class Patch>
-using DField1OnPatch = DField<typename Patch::IdxRange1>;
-
-/// @brief A Field of doubles defined on the Patch's second logical domain.
-template <class Patch>
-using DField2OnPatch = DField<typename Patch::IdxRange2>;
-
-
-/// @brief A constant Field of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DConstFieldOnPatch = DConstField<typename Patch::IdxRange12>;
-
-/// @brief A constant Field of doubles on the Patch's first logical domain.
-template <class Patch>
-using DConstField1OnPatch = DConstField<typename Patch::IdxRange1>;
 
 
 // --- ON HOST ---
 /// @brief A Field of doubles defined on host on the Patch's 2D logical domain.
 template <class Patch>
 using DFieldOnPatch_host = host_t<DFieldOnPatch<Patch>>;
-
-/// @brief A constant Field of doubles on host on the Patch's 2D logical domain.
-template <class Patch>
-using DConstFieldOnPatch_host = host_t<DConstFieldOnPatch<Patch>>;
-
-
-// VECTOR FIELDS ---------------------------------------------------------------------------------
-
-// --- ON DEVICE ---
-/// @brief A VectorFieldMem of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DVectorFieldMemOnPatch = VectorFieldMem<
-        double,
-        typename Patch::IdxRange12,
-        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
-
-/// @brief A VectorField of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DVectorFieldOnPatch = VectorField<
-        double,
-        typename Patch::IdxRange12,
-        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
-
-/// @brief A ConstVectorField of doubles defined on the Patch's 2D logical domain.
-template <class Patch>
-using DVectorConstFieldOnPatch = VectorConstField<
-        double,
-        typename Patch::IdxRange12,
-        VectorIndexSet<typename Patch::Dim1, typename Patch::Dim2>>;
 
 
 // IDX, IDXRANGE ---------------------------------------------------------------------------------
@@ -130,27 +74,6 @@ template <class Patch>
 using IdxRange2SliceOnPatch = IdxRangeSlice<typename Patch::Grid2>;
 
 
-// COORDINATE FIELDS -----------------------------------------------------------------------------
-
-// --- ON DEVICE ---
-/// @brief FieldMem of 2D coordinates defined on the 2D Patch's logical domain.
-template <class Patch>
-using CoordFieldMemOnPatch = FieldMem<typename Patch::Coord12, typename Patch::IdxRange12>;
-
-/// @brief Field of 2D coordinates defined on the 2D Patch's logical domain.
-template <class Patch>
-using CoordFieldOnPatch = Field<typename Patch::Coord12, typename Patch::IdxRange12>;
-
-/// @brief ConstField of 2D coordinates defined on the 2D Patch's logical domain.
-template <class Patch>
-using CoordConstFieldOnPatch = ConstField<typename Patch::Coord12, typename Patch::IdxRange12>;
-
-
-/// @brief Field of 1D first coordinates defined on the first Patch's 1D logical domain.
-template <class Patch>
-using Coord1Field1OnPatch_1D = Field<typename Patch::Coord1, typename Patch::IdxRange1>;
-
-
 // SPLINES ---------------------------------------------------------------------------------------
 
 /// @brief The BSplines dimension on the first of the Patch's logical dimensions.
@@ -160,83 +83,6 @@ using BSplines1OnPatch = typename Patch::BSplines1;
 /// @brief The BSplines dimension on the second of the Patch's logical dimensions.
 template <class Patch>
 using BSplines2OnPatch = typename Patch::BSplines2;
-
-
-// --- ON DEVICE ---
-/**
- * @brief A field memory of 2D spline coefficients for a non-batched spline defined
- * on both of the Patch's logical dimensions.
- */
-template <class Patch>
-using SplineCoeffMemOnPatch_2D = DFieldMem<typename Patch::IdxRangeBS12>;
-
-/**
- * @brief A field of 2D spline coefficients for a non-batched spline defined
- * on both of the Patch's logical dimensions.
- */
-template <class Patch>
-using SplineCoeffOnPatch_2D = DField<typename Patch::IdxRangeBS12>;
-
-/**
- * @brief A constant field of 2D spline coefficients for a non-batched spline defined
- * on both of the Patch's logical dimensions.
- */
-template <class Patch>
-using ConstSplineCoeffOnPatch_2D = DConstField<typename Patch::IdxRangeBS12>;
-
-
-/**
- * @brief A field of spline coefficients batched over the second of the Patch's
- * logical dimensions for a spline defined on the first of the Patch's logical dimensions.
- */
-template <class Patch>
-using SplineCoeff1OnPatch_2D = DField<IdxRange<typename Patch::BSplines1, typename Patch::Grid2>>;
-
-/**
- * @brief A constant field of spline coefficients batched over the second of the Patch's
- * logical dimensions for a spline defined on the first of the Patch's logical dimensions.
- */
-template <class Patch>
-using ConstSplineCoeff1OnPatch_2D
-        = DConstField<IdxRange<typename Patch::BSplines1, typename Patch::Grid2>>;
-
-
-/**
- * @brief A field of spline coefficients for a non-batched spline defined
- * on the first of the Patch's logical dimensions.
- */
-template <class Patch>
-using SplineCoeff1OnPatch_1D = DField<typename Patch::IdxRangeBS1>;
-
-/**
- * @brief A constant field of spline coefficients for a non-batched spline defined
- * on the first of the Patch's logical dimensions.
- */
-template <class Patch>
-using ConstSplineCoeff1OnPatch_1D = DConstField<typename Patch::IdxRangeBS1>;
-
-
-// --- ON HOST ---
-/**
- * @brief A field memory of 2D spline coefficients for a non-batched spline defined
- * on both of the Patch's logical dimensions. Defined on host. 
- */
-template <class Patch>
-using SplineCoeffMemOnPatch_2D_host = host_t<SplineCoeffMemOnPatch_2D<Patch>>;
-
-/**
- * @brief A field of 2D spline coefficients for a non-batched spline defined
- * on both of the Patch's logical dimensions. Defined on host.
- */
-template <class Patch>
-using SplineCoeffOnPatch_2D_host = host_t<SplineCoeffOnPatch_2D<Patch>>;
-
-/**
- * @brief A constant field of 2D spline coefficients for a non-batched spline defined
- * on both of the Patch's logical dimensions. Defined on host. 
- */
-template <class Patch>
-using ConstSplineCoeffOnPatch_2D_host = host_t<ConstSplineCoeffOnPatch_2D<Patch>>;
 
 
 // DERIVATIVES -----------------------------------------------------------------------------------

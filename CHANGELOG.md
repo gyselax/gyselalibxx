@@ -37,18 +37,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add an `InterpolationBuilder2DCollection::operator()` which takes a `DerivField`.
 - Add `InterpolationBuilderCollection::batched_basis_idx_ranges()` and `InterpolationBuilder2DCollection::batched_basis_idx_ranges()`.
 - `InterpolationEvaluator2DCollection` works with `DerivField`.
-- Add `InterpolationEvaluatorTraits::basis_idx_range_type` to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).
 - Add `InterfacesDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 - Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
 - Add `InterfacesExactDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the exact formula.
 - Added a `concepts::Patch` concept.
 - Added a `concepts::Edge` concept.
-- Add `MultipatchTypeFromSeq` and `MultipatchFieldFromSeq` aliases to define a `MultipatchType`/`MultipatchField` from a `ddc::TypeSeq` of patches.
+- Add `MultipatchTypeFromSeq` and `MultipatchFieldOfFromSeq` aliases to define a `MultipatchType`/`MultipatchFieldOf` from a `ddc::TypeSeq` of patches.
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 - Add copy operators for `MultipatchType` and `MultipatchField`.
 - Add `MultipatchInterpolation2D` to construct and own the 2D interpolations of every patch and the matching `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection`.
 - Add `MultipatchSplineInterpolator2D` and `MultipatchLagrangeInterpolator2D` aliases to define a `MultipatchInterpolation2D` using spline or Lagrange interpolation on every patch.
+- Add multipatch aliases templated like their non-multipatch equivalents:
+  - `MultipatchField`
+  - `DMultipatchField`
+  - `MultipatchConstField`
+  - `DMultipatchConstField`
+  - `MultipatchFieldMem`
+  - `DMultipatchFieldMem`
+  - `MultipatchVectorField`
+  - `DMultipatchVectorField`
+  - `MultipatchVectorConstField`
+  - `DMultipatchVectorConstField`
+  - `MultipatchVectorFieldMem`
+  - `DMultipatchVectorFieldMem`
+- Add `field_type`, `const_field_type`, `vector_field_type` and `const_vector_field_type` type calculators to `InterpolationBuilderTraits` and `InterpolationEvaluatorTraits`, and a `deriv_idx_type` alias to `InterpolationEvaluatorTraits`.
+- Specialise `InterpolationBuilderTraits` and `InterpolationEvaluatorTraits` for `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection` so `MultipatchInterpolation2D` satisfies `concepts::Interpolation`.
+- Add `InterpolationEvaluator2DCollection::operator()` and `InterpolationEvaluator2DCollection::deriv` overloads which evaluate on the evaluation mesh of each patch.
+- Add `is_multipatch_interpolation_v` and use it to raise a compile-time error when a multipatch interpolation is passed to an operator which does not support it.
+- Add `InterpolationEvaluatorTraits::basis_idx_range_type` to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).
 
 ### Fixed
 
@@ -68,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace `MultipatchSplineEvaluator::deriv_dim_1()`, `MultipatchSplineEvaluator::deriv_dim_2()`, `MultipatchSplineEvaluator::deriv_1_and_2()`, `MultipatchSplineEvaluator::deriv<InterestDim>()` by `MultipatchSplineEvaluator::deriv()` taking as input the derivative order (similar as `ddc::SplineEvaluator2D`).
 - `MultipatchType`, `MultipatchField` and `MultipatchFieldMem` are now aliases for `detail::` classes templated on `ddc::detail::TypeSeq`s of the patches and of the stored types. Type templates which give the same type on each patch now lead to the same class.
 - The constructor of `MultipatchField` from another multipatch object is now explicit.
+- Rename the aliases `MultipatchField<T, Patches...>` and `MultipatchFieldMem<T, Patches...>` (templated on a type template) to `MultipatchFieldOf` and `MultipatchFieldMemOf`.
 - Rewrite of the `GyroAverageOperator` to enable importing external coefficients for geometries where no inverse mapping is available.
 - The default residual tolerance of `MatrixBatchCsr` is now `1e-8` (instead of `1e-15`).
 - Speed up the matrix assembly and RHS computation of `PolarSplineFEMPoissonLikeSolver`.
@@ -110,6 +128,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MatrixBatchEll::norm`.
 - Remove `detail::combine_t` (prefer `ddc::combine_t`).
 - Remove `SingleInterfaceDerivativesCalculatorCollection`.
+- Remove the per-patch field and vector field aliases from `types.hpp`:
+  - `DFieldMemOnPatch`
+  - `DFieldMem1OnPatch`
+  - `DFieldMem2OnPatch`
+  - `DField1OnPatch`
+  - `DField2OnPatch`
+  - `DConstFieldOnPatch`
+  - `DConstField1OnPatch`
+  - `DConstFieldOnPatch_host`
+  - `CoordFieldMemOnPatch`
+  - `CoordFieldOnPatch`
+  - `CoordConstFieldOnPatch`
+  - `Coord1Field1OnPatch_1D`
+  - `SplineCoeffMemOnPatch_2D`
+  - `SplineCoeffOnPatch_2D`
+  - `ConstSplineCoeffOnPatch_2D`
+  - `SplineCoeff1OnPatch_2D`
+  - `ConstSplineCoeff1OnPatch_2D`
+  - `SplineCoeff1OnPatch_1D`
+  - `ConstSplineCoeff1OnPatch_1D`
+  - `SplineCoeffMemOnPatch_2D_host`
+  - `SplineCoeffOnPatch_2D_host`
+  - `ConstSplineCoeffOnPatch_2D_host`
+  - `DVectorFieldMemOnPatch`
+  - `DVectorFieldOnPatch`
+  - `DVectorConstFieldOnPatch`
 
 ### Dependency requirements
 

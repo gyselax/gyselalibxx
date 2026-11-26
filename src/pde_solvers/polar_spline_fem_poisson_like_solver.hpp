@@ -53,6 +53,9 @@ class PolarSplineFEMPoissonLikeSolver
               Kokkos::layout_right>
 {
     static_assert(
+            !is_multipatch_interpolation_v<Interpolation2D>,
+            "PolarSplineFEMPoissonLikeSolver does not support multipatch interpolations.");
+    static_assert(
             InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
     using FullDims = ddc::to_type_seq_t<IdxRangeFull>;
     // The batch dimensions must come first so that slices of the batched fields are contiguous.

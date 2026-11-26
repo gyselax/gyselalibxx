@@ -191,15 +191,6 @@ private:
             typename Patch::Grid2,
             ddc::Deriv<typename Patch::Dim2>>;
 
-    /// A type alias to get the batched cross-derivatives on a specific patch.
-    template <class Patch, class ValuesType>
-    using Derivs12OnPatch = ConstField<
-            data_type,
-            batched_derivs_idx_range_type_on_patch<
-                    Patch,
-                    typename ValuesType::discrete_domain_type>,
-            memory_space>;
-
     /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
     using DerivConstFieldOnPatch = DerivConstField<
@@ -243,16 +234,8 @@ private:
                     Patches,
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
-    /// The type of the batched cross-derivatives.
-    template <class MultipatchValues>
-    using MultipatchDerivs12 = detail::MultipatchField<
-            PatchOrdering,
-            ddc::TypeSeq<Derivs12OnPatch<
-                    Patches,
-                    typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
-
     /// The type of the function values and derivatives stored in DerivFields.
-    using MultipatchDerivField = MultipatchField<DerivConstFieldOnPatch, Patches...>;
+    using MultipatchDerivField = MultipatchFieldOf<DerivConstFieldOnPatch, Patches...>;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedBasis = detail::MultipatchType<
@@ -266,6 +249,13 @@ private:
             ddc::TypeSeq<batched_derivs_idx_range_type_on_patch<
                     Patches,
                     typename MultipatchIdxRangeBatched::template TypeOnPatch<Patches>>...>>;
+
+    /// The type of the batched cross-derivatives.
+    template <class MultipatchValues>
+    using MultipatchDerivs12 = MultipatchConstField<
+            data_type,
+            MultipatchIdxRangeBatchedDeriv<typename MultipatchValues::discrete_domain_type>,
+            memory_space>;
 
     /// The type of the internal storage of the builders.
     using BuilderTuple = std::tuple<Builders const&...>;
@@ -487,4 +477,74 @@ private:
             get_builder<Patch>()(coeffs, get_const_field(function_and_deriv.get_values_field()));
         }
     };
+};
+
+/**
+ * @brief Specialisation of InterpolationBuilderTraits for InterpolationBuilder2DCollection.
+ *
+ * The index ranges are MultipatchType objects containing an index range on each patch and
+ * the field types are MultipatchField objects containing a field on each patch. This allows
+ * InterpolationBuilder2DCollection to be used as a concepts::InterpolationBuilder.
+ *
+ * @tparam Patches The patches.
+ * @tparam Builders The 2D interpolation builders on each patch, in the same order as the patches.
+ */
+template <class... Patches, class... Builders>
+struct InterpolationBuilderTraits<
+        InterpolationBuilder2DCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>>
+{
+private:
+    using Builder
+            = InterpolationBuilder2DCollection<ddc::TypeSeq<Patches...>, ddc::TypeSeq<Builders...>>;
+    using memory_space = typename Builder::memory_space;
+
+public:
+    /// @brief A MultipatchField of modifiable fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange>
+    using field_type = MultipatchField<ElementType, MultipatchIdxRange, memory_space>;
+
+    /// @brief A MultipatchField of constant fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange>
+    using const_field_type = MultipatchConstField<ElementType, MultipatchIdxRange, memory_space>;
+
+    /// @brief A MultipatchField of modifiable vector fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange, class VectorIndexSetType>
+    using vector_field_type = MultipatchVectorField<
+            ElementType,
+            MultipatchIdxRange,
+            VectorIndexSetType,
+            memory_space>;
+
+    /// @brief A MultipatchField of constant vector fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange, class VectorIndexSetType>
+    using const_vector_field_type = MultipatchVectorConstField<
+            ElementType,
+            MultipatchIdxRange,
+            VectorIndexSetType,
+            memory_space>;
+
+    /// @brief The data type that the data is saved on.
+    using data_type = typename Builder::data_type;
+
+    /// @brief The MultipatchType of the index ranges of the interpolation meshes.
+    using interpolation_idx_range_type = typename Builder::interpolation_idx_range_type;
+
+    /// @brief The MultipatchType of the index ranges of the interpolation coefficients.
+    using coeff_idx_range_type = typename Builder::coeff_idx_range_type;
+
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return Builder::rank();
+    }
+
+    /// @brief Multi-patch batched domain with the interpolation grids replaced by the basis grids.
+    template <class MultipatchIdxRangeBatched>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_basis_idx_range_type<MultipatchIdxRangeBatched>;
+
+    /// @brief Multi-patch batched domain with the interpolation grids replaced by deriv types.
+    template <class MultipatchIdxRangeBatched>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_idx_range_type<MultipatchIdxRangeBatched>;
 };

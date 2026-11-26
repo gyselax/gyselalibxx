@@ -12,32 +12,11 @@
 #include "i_interpolation_evaluator.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
+#include "spline_interpolation.hpp"
 #include "types.hpp"
 #include "utils_patch_locators.hpp"
 #include "view.hpp"
 
-
-namespace detail {
-
-/// A tool to check if an evaluator is a ddc::SplineEvaluatorND.
-template <class Evaluator>
-inline constexpr bool is_ddc_spline_evaluator_nd_v = false;
-
-/// Specialisation of is_ddc_spline_evaluator_nd_v for ddc::SplineEvaluatorND.
-template <
-        class ExecSpace,
-        class MemorySpace,
-        class... BSplines,
-        class... EvaluationDDim,
-        class... ExtrapolationRule>
-inline constexpr bool is_ddc_spline_evaluator_nd_v<ddc::SplineEvaluatorND<
-        ExecSpace,
-        MemorySpace,
-        ddc::TypeSeq<BSplines...>,
-        ddc::TypeSeq<EvaluationDDim...>,
-        ddc::TypeSeq<ExtrapolationRule...>>> = true;
-
-} // namespace detail
 
 /**
  * @brief A class to evaluate all the interpolations of all the patches at once.
@@ -215,46 +194,16 @@ public:
     /// @brief The ND coordinate type corresponding to the evaluation mesh.
     using coord_type = typename InterpolationEvaluatorTraits<FirstEvaluator>::coord_type;
 
-    /**
-     * @brief Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched
-     * interpolation defined on both of the Patch's logical dimensions.
-     * Needed public for functions on GPU.
-     */
-    template <class Patch>
-    using CoeffOnPatch = ConstField<data_type, coeff_idx_range_type<Patch>, memory_space>;
-
 private:
-    static_assert(
-            (std::is_same_v<typename Evaluators::exec_space, exec_space> && ...),
-            "All evaluators must use the same execution space.");
-    static_assert(
-            (std::is_same_v<typename Evaluators::memory_space, memory_space> && ...),
-            "All evaluators must use the same memory space.");
-    static_assert(
-            (std::is_same_v<
-                     typename InterpolationEvaluatorTraits<Evaluators>::data_type,
-                     data_type> && ...),
-            "All evaluators must use the same data type.");
-    static_assert(
-            (std::is_same_v<
-                     typename InterpolationEvaluatorTraits<Evaluators>::coord_type,
-                     coord_type> && ...),
-            "All evaluators must be defined on the same continuous dimensions.");
-    static_assert(
-            (std::is_same_v<
-                     evaluation_idx_range_type<Patches>,
-                     IdxRange<typename Patches::Grid1, typename Patches::Grid2>> && ...),
-            "The evaluators must be provided in the same order as the patches and must "
-            "evaluate on the grids (Grid1, Grid2) of their patch.");
-
-    // Fields
-    template <class Patch>
-    using CoordConstFieldOnPatch
-            = ConstField<coord_type, evaluation_idx_range_type<Patch>, memory_space>;
+    // Multipatch index ranges
+    using MultipatchIdxRangeEval = MultipatchType<evaluation_idx_range_type, Patches...>;
+    using MultipatchIdxRangeCoeffs = MultipatchType<coeff_idx_range_type, Patches...>;
 
     // MultipatchTypes
-    using MultipatchCoordField = MultipatchField<CoordConstFieldOnPatch, Patches...>;
-    using MultipatchCoeffs = MultipatchField<CoeffOnPatch, Patches...>;
+    using MultipatchCoordField
+            = MultipatchConstField<coord_type, MultipatchIdxRangeEval, memory_space>;
+    using MultipatchCoeffs
+            = MultipatchConstField<data_type, MultipatchIdxRangeCoeffs, memory_space>;
     using MultipatchEvaluators = detail::MultipatchType<PatchOrdering, ddc::TypeSeq<Evaluators...>>;
 
 
@@ -310,8 +259,6 @@ private:
 
 
 public:
-    ~InterpolationEvaluator2DCollection() = default;
-
     /**
      * @brief Instantiate a InterpolationEvaluator2DCollection.
      *
@@ -322,7 +269,7 @@ public:
      *      has to be invertible.
      * @param extrapolation_rule The extrapolation rules.
      */
-    InterpolationEvaluator2DCollection(
+    KOKKOS_FUNCTION InterpolationEvaluator2DCollection(
             Evaluators const&... evaluators,
             PatchLocator const& patch_locator,
             ExtrapolationRule const& extrapolation_rule)
@@ -332,6 +279,11 @@ public:
     {
     }
 
+    KOKKOS_DEFAULTED_FUNCTION ~InterpolationEvaluator2DCollection() = default;
+
+    KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(
+            InterpolationEvaluator2DCollection const&)
+            = default;
 
     // Assignment operators ----------------------------------------------------------------------
     /**
@@ -350,9 +302,35 @@ public:
     template <class Coord>
     KOKKOS_FUNCTION data_type
     operator()(Coord const coord_eval, MultipatchCoeffs const& patches_coeffs) const
+            requires(!is_multipatch_field_v<Coord>)
     {
         int const patch_idx = get_patch_idx(coord_eval);
         return recursive_dispatch_patch_function(Idx<>(), coord_eval, patches_coeffs, patch_idx);
+    }
+
+    /**
+     * @brief Evaluate 2D interpolations (described by their interpolation coefficients) on the
+     * evaluation meshes of each patch.
+     *
+     * The interpolation of each patch is evaluated at the coordinates of the mesh points of
+     * that patch. As these points are always located on the patch, no patch location is
+     * required.
+     *
+     * See @ref InterpolationEvaluator2DCollectionOperator.
+     *
+     * @tparam MultipatchValues A MultipatchField of DField.
+     * @param[out] patches_values A MultipatchType of DField to store the values of the interpolations
+     *          on the evaluation mesh of each patch.
+     * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
+     */
+    template <class MultipatchValues>
+    void operator()(MultipatchValues const& patches_values, MultipatchCoeffs const& patches_coeffs)
+            const requires(is_multipatch_field_v<MultipatchValues>)
+    {
+        (m_evaluators.template get<Patches>()(
+                 patches_values.template get<Patches>(),
+                 patches_coeffs.template get<Patches>()),
+         ...);
     }
 
     /**
@@ -419,6 +397,42 @@ public:
                 coord_eval,
                 patches_coeffs,
                 patch_idx);
+    }
+
+    /**
+     * @brief Differentiate 2D interpolations (described by their interpolation coefficients) on
+     * the evaluation meshes of each patch.
+     *
+     * The derivative of the interpolation of each patch is evaluated at the coordinates of the
+     * mesh points of that patch. As these points are always located on the patch, no patch
+     * location is required.
+     *
+     * See @ref InterpolationEvaluator2DCollectionOperator.
+     *
+     * @tparam MultipatchValues A MultipatchField of DField.
+     * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
+     * or both.
+     * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f(x,y)).
+     * @param[out] patches_deriv A MultipatchType of DField to store the derivatives of the
+     *          interpolations on the evaluation mesh of each patch.
+     * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
+     */
+    template <class MultipatchValues, class... DerivDims>
+    void deriv(
+            Idx<DerivDims...> const& deriv_order,
+            MultipatchValues const& patches_deriv,
+            MultipatchCoeffs const& patches_coeffs) const
+            requires(is_multipatch_field_v<MultipatchValues>)
+    {
+        static_assert(
+                (ddc::in_tags_v<DerivDims, ddc::TypeSeq<DerivDim1, DerivDim2>> && ...),
+                "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+                "(same dimensions for all the patches).");
+        (apply_evaluator_on_mesh<Patches>(
+                 deriv_order,
+                 patches_deriv.template get<Patches>(),
+                 patches_coeffs.template get<Patches>()),
+         ...);
     }
 
     /**
@@ -515,7 +529,8 @@ public:
     void apply_evaluator_field(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
-            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            ConstField<coord_type, evaluation_idx_range_type<StoringPatch>, memory_space> const&
+                    patch_coords,
             MultipatchCoeffs const patches_coeffs) const
     {
         check_values_field_type<StoringPatch, ValuesField>();
@@ -565,7 +580,8 @@ public:
     void apply_evaluator_deriv_field(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
-            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            ConstField<coord_type, evaluation_idx_range_type<StoringPatch>, memory_space> const&
+                    patch_coords,
             MultipatchCoeffs const patches_coeffs) const
     {
         static_assert(is_deriv_field_v<ValuesField>, "The values field must be a DerivField.");
@@ -646,7 +662,9 @@ public:
      * @param[in] coeffs ConstField of spline coefficients of the spline on the given Patch.
      */
     template <class Patch>
-    void apply_integrate(double& integral, CoeffOnPatch<Patch> const& coeffs) const
+    void apply_integrate(
+            double& integral,
+            ConstField<data_type, coeff_idx_range_type<Patch>, memory_space> const& coeffs) const
     {
         static_assert(
                 std::is_same_v<exec_space, Kokkos::DefaultHostExecutionSpace>,
@@ -722,7 +740,8 @@ private:
                 using TestPatch = ddc::type_seq_element_t<TestPatchIdx, PatchOrdering>;
                 replace_periodic_coord_inside<TestPatch>(coord);
 
-                CoeffOnPatch<TestPatch> const test_coeffs
+                ConstField<data_type, coeff_idx_range_type<TestPatch>, memory_space> const
+                        test_coeffs
                         = patches_coeffs.template get<TestPatch>();
                 return evaluate_on_patch(
                         m_evaluators.template get<TestPatch>(),
@@ -779,6 +798,46 @@ private:
         }
     }
 
+    /**
+     * @brief Call the evaluator of a patch on the evaluation mesh of that patch with the
+     * given derivative order.
+     *
+     * The dimensions with a zero derivative order are removed from the derivative order
+     * before calling the evaluator (see evaluate_on_patch).
+     */
+    template <class Patch, class ValuesField, class... DerivDims>
+    void apply_evaluator_on_mesh(
+            Idx<DerivDims...> const& deriv_order,
+            ValuesField const& patch_values,
+            ConstField<data_type, coeff_idx_range_type<Patch>, memory_space> const& coeffs) const
+    {
+        EvaluatorOnPatch<Patch> const evaluator = m_evaluators.template get<Patch>();
+        if constexpr (sizeof...(DerivDims) == 0) {
+            evaluator(patch_values, coeffs);
+        } else if constexpr (sizeof...(DerivDims) == 1) {
+            if (deriv_order == order_zero(deriv_order)) {
+                evaluator(patch_values, coeffs);
+            } else {
+                evaluator.deriv(deriv_order, patch_values, coeffs);
+            }
+        } else {
+            static_assert(sizeof...(DerivDims) == 2);
+            Idx<DerivDim1> const order_1(deriv_order);
+            Idx<DerivDim2> const order_2(deriv_order);
+            bool const is_zero_1 = (order_1 == Idx<DerivDim1>(0));
+            bool const is_zero_2 = (order_2 == Idx<DerivDim2>(0));
+            if (is_zero_1 && is_zero_2) {
+                evaluator(patch_values, coeffs);
+            } else if (is_zero_1) {
+                evaluator.deriv(order_2, patch_values, coeffs);
+            } else if (is_zero_2) {
+                evaluator.deriv(order_1, patch_values, coeffs);
+            } else {
+                evaluator.deriv(deriv_order, patch_values, coeffs);
+            }
+        }
+    }
+
     // Useful functions --------------------------------------------------------------------------
 
     /// @brief Call the patch locator to get the index of the patch where the given coordinate
@@ -818,4 +877,114 @@ private:
     {
         return order_zero<DerivDims...>();
     }
+};
+
+/**
+ * @brief Specialisation of InterpolationEvaluatorTraits for InterpolationEvaluator2DCollection.
+ *
+ * The index ranges are MultipatchType objects containing an index range on each patch and
+ * the field types are MultipatchField objects containing a field on each patch. This allows
+ * InterpolationEvaluator2DCollection to be used as a concepts::InterpolationEvaluator.
+ *
+ * @tparam Patches The patches.
+ * @tparam Evaluators The 2D interpolation evaluators on each patch, in the same order as the patches.
+ * @tparam PatchLocator A operator that finds the patch where a given coordinate is physically located.
+ * @tparam ExtrapolationRule The extrapolation rule type for outside of the global domain.
+ */
+template <class... Patches, class... Evaluators, class PatchLocator, class ExtrapolationRule>
+struct InterpolationEvaluatorTraits<InterpolationEvaluator2DCollection<
+        ddc::TypeSeq<Patches...>,
+        ddc::TypeSeq<Evaluators...>,
+        PatchLocator,
+        ExtrapolationRule>>
+{
+private:
+    using Evaluator = InterpolationEvaluator2DCollection<
+            ddc::TypeSeq<Patches...>,
+            ddc::TypeSeq<Evaluators...>,
+            PatchLocator,
+            ExtrapolationRule>;
+
+    using PatchOrdering = ddc::TypeSeq<Patches...>;
+
+    using FirstEvaluator = ddc::type_seq_element_t<0, ddc::TypeSeq<Evaluators...>>;
+
+    using memory_space = typename Evaluator::memory_space;
+
+public:
+    /// @brief A MultipatchField of modifiable fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange>
+    using field_type = MultipatchField<ElementType, MultipatchIdxRange, memory_space>;
+
+    /// @brief A MultipatchField of constant fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange>
+    using const_field_type = MultipatchConstField<ElementType, MultipatchIdxRange, memory_space>;
+
+    /// @brief A MultipatchField of modifiable vector fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange, class VectorIndexSetType>
+    using vector_field_type = MultipatchVectorField<
+            ElementType,
+            MultipatchIdxRange,
+            VectorIndexSetType,
+            memory_space>;
+
+    /// @brief A MultipatchField of constant vector fields of ElementType defined on MultipatchIdxRange.
+    template <class ElementType, class MultipatchIdxRange, class VectorIndexSetType>
+    using const_vector_field_type = MultipatchVectorConstField<
+            ElementType,
+            MultipatchIdxRange,
+            VectorIndexSetType,
+            memory_space>;
+
+    /// @brief The data type that the data is saved on.
+    using data_type = typename Evaluator::data_type;
+
+    /// @brief The MultipatchType of the index ranges of the evaluation meshes.
+    using evaluation_idx_range_type = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<typename InterpolationEvaluatorTraits<
+                    Evaluators>::evaluation_idx_range_type...>>;
+
+    /// @brief The 2D coordinate type corresponding to the evaluation meshes (identical on all patches).
+    using coord_type = typename Evaluator::coord_type;
+
+    /// @brief The type of the index describing the order of the derivatives in each dimension
+    /// (identical on all patches).
+    using deriv_idx_type = typename InterpolationEvaluatorTraits<FirstEvaluator>::deriv_idx_type;
+
+    /// @brief The MultipatchType of the index ranges on which the interpolation coefficients are defined.
+    using coeff_idx_range_type = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<
+                    typename InterpolationEvaluatorTraits<Evaluators>::coeff_idx_range_type...>>;
+
+    /// @brief The MultipatchType of the index ranges of the bases used to define the interpolations.
+    using basis_idx_range_type = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<
+                    typename InterpolationEvaluatorTraits<Evaluators>::basis_idx_range_type...>>;
+
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return Evaluator::rank();
+    }
+
+    /// @brief Multi-patch batched index range for the evaluation.
+    template <class MultipatchIdxRangeBatched>
+    using batched_evaluation_idx_range_type = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<typename InterpolationEvaluatorTraits<Evaluators>::
+                                 template batched_evaluation_idx_range_type<
+                                         typename MultipatchIdxRangeBatched::template TypeOnPatch<
+                                                 Patches>>...>>;
+
+    /// @brief Multi-patch batched domain with the evaluation grids replaced by the coefficient grids.
+    template <class MultipatchIdxRangeBatched>
+    using batched_coeff_idx_range_type = detail::MultipatchType<
+            PatchOrdering,
+            ddc::TypeSeq<typename InterpolationEvaluatorTraits<Evaluators>::
+                                 template batched_coeff_idx_range_type<
+                                         typename MultipatchIdxRangeBatched::template TypeOnPatch<
+                                                 Patches>>...>>;
 };

@@ -68,6 +68,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluatorND<
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeBS = MultipatchType<IdxRangeBSOnPatch, Patch1, Patch2>;
 
 template <class ExecSpace>
 using PatchLocator = OnionPatchLocator<
@@ -133,7 +134,7 @@ protected:
 
     /// @brief MultipatchType of const fields of the spline coefficients of the function
     // on the patches.
-    MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const splines;
+    DMultipatchConstField<MultipatchIdxRangeBS> const splines;
 
     /// @brief MultipatchType of index ranges on the patches.
     MultipatchIdxRange const all_idx_ranges;

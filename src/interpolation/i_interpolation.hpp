@@ -56,6 +56,22 @@ concept Interpolation1D = Interpolation<T> && InterpolationBuilder1D<typename T:
 } // namespace concepts
 
 /**
+ * @brief A type trait that is true when Interp is an interpolation acting on several index
+ * ranges at once (e.g. a MultipatchInterpolation2D) rather than on a single index range.
+ *
+ * This is detected from the interpolation index range of the builder, which is not a ddc
+ * discrete domain for such interpolations (e.g. it is a MultipatchType). It can be used to
+ * prevent such interpolations from being passed to operators which only support a single
+ * index range.
+ *
+ * @tparam Interp The interpolation type to test (see concepts::Interpolation).
+ */
+template <concepts::Interpolation Interp>
+constexpr bool is_multipatch_interpolation_v
+        = !ddc::is_discrete_domain_v<typename InterpolationBuilderTraits<
+                typename Interp::BuilderType>::interpolation_idx_range_type>;
+
+/**
  * @brief A type trait that is true when Basis is a Lagrange basis type.
  *
  * Evaluates to true for both UniformLagrangeBasis and NonUniformLagrangeBasis

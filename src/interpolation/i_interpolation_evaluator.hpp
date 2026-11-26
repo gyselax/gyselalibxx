@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "ddc_aliases.hpp"
+#include "interpolation_field_types.hpp"
 
 namespace detail {
 
@@ -45,16 +46,26 @@ struct ToDerivIdx<Idx<Grids...>>
  *   - coord_type
  *   - coeff_idx_range_type
  *   - basis_idx_range_type
+ *   - deriv_idx_type
  *   Static functions
  *   - rank()
  *   Type calculators
  *   - batched_evaluation_idx_range_type
  *   - batched_coeff_idx_range_type
+ *   - field_type<ElementType, IdxRangeType>
+ *   - const_field_type<ElementType, IdxRangeType>
+ *   - vector_field_type<ElementType, IdxRangeType, VectorIndexSetType>
+ *   - const_vector_field_type<ElementType, IdxRangeType, VectorIndexSetType>
+ *
+ * The field type calculators give the type of the objects which store the data passed
+ * to the evaluator (e.g. Field for an evaluator on a single index range, MultipatchField
+ * for an evaluator acting on several patches).
  *
  * @tparam Evaluator The interpolation evaluator type.
  */
 template <class Evaluator>
 struct InterpolationEvaluatorTraits
+    : detail::InterpolationFieldTypes<typename Evaluator::memory_space>
 {
     /// @brief The data type that the data is saved on.
     using data_type = typename Evaluator::data_type;
@@ -65,6 +76,10 @@ struct InterpolationEvaluatorTraits
     /// @brief The ND coordinate type corresponding to the evaluation mesh.
     using coord_type
             = ddc::coordinate_of_t<typename evaluation_idx_range_type::discrete_element_type>;
+
+    /// @brief The type of the index describing the order of the derivatives in each dimension.
+    using deriv_idx_type = typename detail::ToDerivIdx<
+            typename evaluation_idx_range_type::discrete_element_type>::type;
 
     /// @brief The type of the ND index range on which the interpolation coefficients are defined.
     using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;
@@ -114,7 +129,7 @@ struct InterpolationEvaluatorTraits<ddc::SplineEvaluatorND<
         MemorySpace,
         ddc::TypeSeq<BSplines...>,
         ddc::TypeSeq<EvaluationDDim...>,
-        ddc::TypeSeq<ExtrapolationRule...>>>
+        ddc::TypeSeq<ExtrapolationRule...>>> : detail::InterpolationFieldTypes<MemorySpace>
 {
 private:
     using Evaluator = ddc::SplineEvaluatorND<
@@ -142,6 +157,9 @@ public:
 
     /// @brief The ND coordinate type corresponding to the evaluation mesh.
     using coord_type = Coord<typename EvaluationDDim::continuous_dimension_type...>;
+
+    /// @brief The type of the index describing the order of the derivatives in each dimension.
+    using deriv_idx_type = Idx<ddc::Deriv<typename EvaluationDDim::continuous_dimension_type>...>;
 
     /// @brief The type of the ND index range on which the interpolation coefficients are defined.
     using coeff_idx_range_type
@@ -184,7 +202,8 @@ namespace concepts {
  * specialised for external evaluators (e.g. ddc::SplineEvaluatorND).
  *
  * The template alias and method requirements are verified using evaluation_idx_range_type
- * as a representative domain.
+ * as a representative domain. The types of the fields passed to the evaluator are given by
+ * the field type calculators of the traits (field_type and const_field_type).
  */
 template <class Evaluator>
 concept InterpolationEvaluator = requires
@@ -194,6 +213,7 @@ concept InterpolationEvaluator = requires
     typename InterpolationEvaluatorTraits<Evaluator>::data_type;
     typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coord_type;
+    typename InterpolationEvaluatorTraits<Evaluator>::deriv_idx_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coeff_idx_range_type;
     typename InterpolationEvaluatorTraits<Evaluator>::basis_idx_range_type;
 }
@@ -205,21 +225,18 @@ concept InterpolationEvaluator = requires
 }
 &&requires(
         Evaluator const& e,
-        Field<typename InterpolationEvaluatorTraits<Evaluator>::data_type,
-              typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type,
-              typename Evaluator::memory_space> eval,
-        ConstField<
+        typename InterpolationEvaluatorTraits<Evaluator>::template field_type<
+                typename InterpolationEvaluatorTraits<Evaluator>::data_type,
+                typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type> eval,
+        typename InterpolationEvaluatorTraits<Evaluator>::template const_field_type<
                 typename InterpolationEvaluatorTraits<Evaluator>::data_type,
                 typename InterpolationEvaluatorTraits<Evaluator>::
                         template batched_coeff_idx_range_type<typename InterpolationEvaluatorTraits<
-                                Evaluator>::evaluation_idx_range_type>,
-                typename Evaluator::memory_space> coeffs,
-        ConstField<
+                                Evaluator>::evaluation_idx_range_type>> coeffs,
+        typename InterpolationEvaluatorTraits<Evaluator>::template const_field_type<
                 typename InterpolationEvaluatorTraits<Evaluator>::coord_type,
-                typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type,
-                typename Evaluator::memory_space> coords,
-        typename detail::ToDerivIdx<typename InterpolationEvaluatorTraits<
-                Evaluator>::evaluation_idx_range_type::discrete_element_type>::type deriv_order)
+                typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type> coords,
+        typename InterpolationEvaluatorTraits<Evaluator>::deriv_idx_type deriv_order)
 {
     {e(eval, coeffs)};
     {e(eval, coords, coeffs)};
@@ -228,15 +245,13 @@ concept InterpolationEvaluator = requires
 }
 &&requires(
         Evaluator const& e,
-        ConstField<
+        typename InterpolationEvaluatorTraits<Evaluator>::template const_field_type<
                 typename InterpolationEvaluatorTraits<Evaluator>::data_type,
                 typename InterpolationEvaluatorTraits<Evaluator>::
                         template batched_coeff_idx_range_type<typename InterpolationEvaluatorTraits<
-                                Evaluator>::evaluation_idx_range_type>,
-                typename Evaluator::memory_space> coeffs,
+                                Evaluator>::evaluation_idx_range_type>> coeffs,
         typename InterpolationEvaluatorTraits<Evaluator>::coord_type coord,
-        typename detail::ToDerivIdx<typename InterpolationEvaluatorTraits<
-                Evaluator>::evaluation_idx_range_type::discrete_element_type>::type deriv_order)
+        typename InterpolationEvaluatorTraits<Evaluator>::deriv_idx_type deriv_order)
 {
     {
         e(coord, coeffs)

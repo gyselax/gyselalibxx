@@ -54,6 +54,10 @@
 template <class FootFinder, class LogicalToPhysicalMapping, concepts::Interpolation Interpolator2D>
 class BslAdvectionPolar
 {
+    static_assert(
+            !is_multipatch_interpolation_v<Interpolator2D>,
+            "BslAdvectionPolar does not support multipatch interpolations.");
+
     using R = typename CoordWithOPoint<
             typename LogicalToPhysicalMapping::CoordArg>::curvilinear_tag_r;
     using Theta = typename CoordWithOPoint<

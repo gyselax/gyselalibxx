@@ -65,6 +65,10 @@ template <
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+    static_assert(
+            !is_multipatch_interpolation_v<
+                    FunctionInterpolator> && !is_multipatch_interpolation_v<AdvectionFieldInterpolator>,
+            "BslAdvection1D does not support multipatch interpolations.");
     static_assert(std::is_floating_point_v<DataType>);
 
 public:
