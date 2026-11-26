@@ -635,28 +635,27 @@ void check_lagrange_on_coord_field(
     Patch1::IdxRange12 const idx_range_eval_1 = get_idx_range(eval_points.get<Patch1>());
     Patch2::IdxRange12 const idx_range_eval_2 = get_idx_range(eval_points.get<Patch2>());
 
-    DFieldMem<Patch1::IdxRange12> eval_1_alloc(idx_range_eval_1);
-    DFieldMem<Patch2::IdxRange12> eval_2_alloc(idx_range_eval_2);
-    DFieldMem<Patch1::IdxRange12> expected_1_alloc(idx_range_eval_1);
-    DFieldMem<Patch2::IdxRange12> expected_2_alloc(idx_range_eval_2);
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_range(idx_range_eval_1, idx_range_eval_2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> const
-            eval_values(get_field(eval_1_alloc), get_field(eval_2_alloc));
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> eval_alloc(idx_range);
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> expected_alloc(idx_range);
+
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> const eval_values = get_field(eval_alloc);
 
     if constexpr (sizeof...(DerivDims) == 0) {
         evaluators(eval_values, eval_points, coeffs);
-        evaluator_1(get_field(expected_1_alloc), eval_points.get<Patch1>(), coeffs.get<Patch1>());
-        evaluator_2(get_field(expected_2_alloc), eval_points.get<Patch2>(), coeffs.get<Patch2>());
+        evaluator_1(expected_alloc.get<Patch1>(), eval_points.get<Patch1>(), coeffs.get<Patch1>());
+        evaluator_2(expected_alloc.get<Patch2>(), eval_points.get<Patch2>(), coeffs.get<Patch2>());
     } else {
         evaluators.deriv(deriv_order, eval_values, eval_points, coeffs);
         evaluator_1
                 .deriv(deriv_order,
-                       get_field(expected_1_alloc),
+                       expected_alloc.get<Patch1>(),
                        eval_points.get<Patch1>(),
                        coeffs.get<Patch1>());
         evaluator_2
                 .deriv(deriv_order,
-                       get_field(expected_2_alloc),
+                       expected_alloc.get<Patch2>(),
                        eval_points.get<Patch2>(),
                        coeffs.get<Patch2>());
     }
@@ -664,14 +663,14 @@ void check_lagrange_on_coord_field(
     EXPECT_LE(
             error_norm_inf(
                     Kokkos::DefaultExecutionSpace(),
-                    get_const_field(eval_1_alloc),
-                    get_const_field(expected_1_alloc)),
+                    get_const_field(eval_alloc.get<Patch1>()),
+                    get_const_field(expected_alloc.get<Patch1>())),
             1e-12);
     EXPECT_LE(
             error_norm_inf(
                     Kokkos::DefaultExecutionSpace(),
-                    get_const_field(eval_2_alloc),
-                    get_const_field(expected_2_alloc)),
+                    get_const_field(eval_alloc.get<Patch2>()),
+                    get_const_field(expected_alloc.get<Patch2>())),
             1e-12);
 }
 
@@ -1526,13 +1525,14 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnCoordField)
             Patch2::IdxRange1(idx_range_rtheta2).remove_last(Patch2::IdxStep1(1)),
             Patch2::IdxRange2(idx_range_rtheta2));
 
-    FieldMem<Patch1::Coord12, Patch1::IdxRange12> eval_points_1_alloc(idx_range_eval_1);
-    FieldMem<Patch2::Coord12, Patch2::IdxRange12> eval_points_2_alloc(idx_range_eval_2);
-    set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(get_field(eval_points_1_alloc));
-    set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(get_field(eval_points_2_alloc));
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_range(idx_range_eval_1, idx_range_eval_2);
 
-    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const
-            eval_points(get_const_field(eval_points_1_alloc), get_const_field(eval_points_2_alloc));
+    MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2> eval_points_alloc(idx_range);
+    set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_alloc.get<Patch1>());
+    set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_alloc.get<Patch2>());
+
+    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points
+            = get_const_field(eval_points_alloc);
 
     // Definition of InterpolationEvaluator2DCollection
     PatchLocator<DeviceExecSpace> const
