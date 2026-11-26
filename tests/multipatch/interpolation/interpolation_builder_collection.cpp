@@ -81,19 +81,23 @@ template <class Patch, class IdxRangeValues>
 using IdxRangeIdentityCoeff = typename InterpolationBuilderTraits<
         IdentityX1Builder<Patch>>::template batched_basis_idx_range_type<IdxRangeValues>;
 
-template <class Patch>
-using IdentityCoeffOnPatch_1D = DField<IdxRangeIdentityCoeff<Patch, typename Patch::IdxRange1>>;
-
-template <class Patch>
-using IdentityCoeffOnPatch_2D = DField<IdxRangeIdentityCoeff<Patch, typename Patch::IdxRange12>>;
-
-template <class Patch>
-using IdentityCoeffMemOnPatch_2D
-        = DFieldMem<IdxRangeIdentityCoeff<Patch, typename Patch::IdxRange12>>;
-
 using IdentityBuilderCollectionX = InterpolationBuilderCollection<
         ddc::TypeSeq<Patch1, Patch2>,
         ddc::TypeSeq<IdentityX1Builder<Patch1>, IdentityX1Builder<Patch2>>>;
+
+// Multipatch index ranges
+using MultipatchIdxRange1 = MultipatchType<IdxRange1OnPatch, Patch1, Patch2>;
+using MultipatchIdxRange12 = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+
+using MultipatchIdxRangeSplineCoeff1
+        = SplineBuilderCollectionX::batched_basis_idx_range_type<MultipatchIdxRange1>;
+using MultipatchIdxRangeSplineCoeff12
+        = SplineBuilderCollectionX::batched_basis_idx_range_type<MultipatchIdxRange12>;
+
+using MultipatchIdxRangeIdentityCoeff1
+        = IdentityBuilderCollectionX::batched_basis_idx_range_type<MultipatchIdxRange1>;
+using MultipatchIdxRangeIdentityCoeff12
+        = IdentityBuilderCollectionX::batched_basis_idx_range_type<MultipatchIdxRange12>;
 
 
 class InterpolationBuilderCollectionTest : public ::testing::Test
@@ -265,7 +269,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches1D)
     initialise_1D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchFieldOf<DConstField1OnPatch, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRange1>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
 
@@ -290,7 +294,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches1D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchFieldOf<SplineCoeff1OnPatch_1D, Patch1, Patch2>
+    DMultipatchField<MultipatchIdxRangeSplineCoeff1>
             function_coef(function_1_coef, function_2_coef);
 
 
@@ -329,7 +333,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches1DNonSplineBuilder)
 
     initialise_1D_functions(function_1, function_2);
 
-    MultipatchFieldOf<DConstField1OnPatch, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRange1>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
 
@@ -346,7 +350,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches1DNonSplineBuilder)
     DFieldMem<IdxRangeCoeff2> function_2_coef_expected_alloc(
             batched_basis_idx_range(builder_x2, idx_range_x2));
 
-    MultipatchFieldOf<IdentityCoeffOnPatch_1D, Patch1, Patch2>
+    DMultipatchField<MultipatchIdxRangeIdentityCoeff1>
             function_coef(get_field(function_1_coef_alloc), get_field(function_2_coef_alloc));
 
 
@@ -392,7 +396,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
 
     initialise_2D_functions(function_1, function_2);
 
-    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRange12>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
 
@@ -405,10 +409,10 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches2DNonSplineBuilder)
     DFieldMem<IdxRangeCoeff2> function_2_coef_expected_alloc(
             batched_basis_idx_range(builder_x2, idx_range_xy2));
 
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
-    MultipatchFieldMemOf<IdentityCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
+    MultipatchIdxRange12 idx_ranges(idx_range_xy1, idx_range_xy2);
+    DMultipatchFieldMem<MultipatchIdxRangeIdentityCoeff12> function_coef_alloc(
             builder.batched_basis_idx_ranges(idx_ranges));
-    MultipatchFieldOf<IdentityCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
+    DMultipatchField<MultipatchIdxRangeIdentityCoeff12> function_coef(function_coef_alloc);
 
 
     // Build the interpolation coefficients on each patch
@@ -456,7 +460,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches2D)
     initialise_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRange12>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
 
@@ -483,7 +487,7 @@ TEST_F(InterpolationBuilderCollectionTest, TwoPatches2D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchFieldOf<SplineCoeff1OnPatch_2D, Patch1, Patch2>
+    DMultipatchField<MultipatchIdxRangeSplineCoeff12>
             function_coef(function_1_coef, function_2_coef);
 
 

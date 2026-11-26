@@ -165,10 +165,13 @@ public:
     using SplineCoeffOnPatch = DConstField<spline_idx_range_type<Patch>, MemorySpace>;
 
 private:
+    // Multipatch index ranges
+    using MultipatchIdxRangeEval = MultipatchType<evaluation_idx_range_type, Patches...>;
+    using MultipatchIdxRangeSpline = MultipatchType<spline_idx_range_type, Patches...>;
+
     // MultipatchTypes
     using MultipatchValues = MultipatchFieldOf<ValuesOnPatch, Patches...>;
-    using MultipatchCoordField = MultipatchFieldOf<CoordConstFieldOnPatch, Patches...>;
-    using MultipatchSplineCoeff = MultipatchFieldOf<SplineCoeffOnPatch, Patches...>;
+    using MultipatchSplineCoeff = DMultipatchConstField<MultipatchIdxRangeSpline, MemorySpace>;
 
     // Patches
     using PatchOrdering = ddc::TypeSeq<Patches...>;
@@ -190,6 +193,9 @@ private:
     template <class Patch>
     using CoordConstFieldOnPatch
             = ConstField<Coord<CDim1, CDim2>, evaluation_idx_range_type<Patch>, MemorySpace>;
+
+    using MultipatchCoordField
+            = MultipatchConstField<Coord<CDim1, CDim2>, MultipatchIdxRangeEval, MemorySpace>;
 
 public:
     /// @brief The number of patches.

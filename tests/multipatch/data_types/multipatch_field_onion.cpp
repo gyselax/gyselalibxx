@@ -22,6 +22,8 @@ using Field2 = DFieldOnPatch<Patch2>;
 using VectorField1 = DVectorFieldOnPatch<Patch1>;
 using VectorField2 = DVectorFieldOnPatch<Patch2>;
 
+using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+
 } // namespace
 
 TEST(MultiPatchField2PatchesOnion, VectorField)
@@ -64,9 +66,8 @@ TEST(MultiPatchField2PatchesOnion, VectorField)
 
     MultipatchFieldOf<DVectorFieldOnPatch, Patch1, Patch2> global_field(vec_field1, vec_field2);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field_r = ddcHelper::get<R>(global_field);
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field_theta
-            = ddcHelper::get<Theta>(global_field);
+    DMultipatchField<MultipatchIdxRange> global_field_r = ddcHelper::get<R>(global_field);
+    DMultipatchField<MultipatchIdxRange> global_field_theta = ddcHelper::get<Theta>(global_field);
 
     EXPECT_EQ(
             global_field_r.template get<Patch1>().data_handle(),

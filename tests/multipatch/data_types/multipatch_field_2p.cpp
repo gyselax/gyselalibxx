@@ -170,7 +170,7 @@ TEST_F(MultiPatchField2Patches, ZeroOnFirstPatchOneOnSecond)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field1, 0.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field2, 1.0);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -196,7 +196,7 @@ TEST_F(MultiPatchField2Patches, Polynomials)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -226,9 +226,9 @@ TEST_F(MultiPatchField2Patches, GetIdxRange)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(get_idx_range(global_field));
+    MultipatchIdxRange all_idx_ranges(get_idx_range(global_field));
 
     ASSERT_EQ(get_idx_range(field1), all_idx_ranges.get<Patch1>());
     ASSERT_EQ(get_idx_range(field2), all_idx_ranges.get<Patch2>());
@@ -242,10 +242,9 @@ TEST_F(MultiPatchField2Patches, ConstField)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    DMultipatchField<MultipatchIdxRange> global_field(field1, field2);
 
-    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
-            global_field.get_const_field());
+    DMultipatchConstField<MultipatchIdxRange> global_const_field(global_field.get_const_field());
 
     // Act
     ConstField1 field1_from_multipatch = global_const_field.get<Patch1>();
@@ -269,7 +268,7 @@ TEST_F(MultiPatchField2Patches, ConstField)
 
 TEST_F(MultiPatchField2Patches, DerivField)
 {
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(index_range_xy1, index_range_xy2);
+    MultipatchIdxRange idx_ranges(index_range_xy1, index_range_xy2);
 
     MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(idx_ranges);
     MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(

@@ -31,6 +31,9 @@ using Field3 = DFieldOnPatch<Patch3>;
 using Field5 = DFieldOnPatch<Patch5>;
 using Field7 = DFieldOnPatch<Patch7>;
 
+using MultipatchIdxRange357 = MultipatchType<IdxRangeOnPatch, Patch3, Patch5, Patch7>;
+using MultipatchIdxRange37 = MultipatchType<IdxRangeOnPatch, Patch3, Patch7>;
+
 } // namespace
 
 
@@ -91,7 +94,7 @@ TEST(MultipatchFieldMorePatches, ConstantOnEveryOne)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field5, 5.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field7, 7.0);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch3, Patch5, Patch7> global_field(field3, field5, field7);
+    DMultipatchField<MultipatchIdxRange357> global_field(field3, field5, field7);
 
     // Act
     Field3 field3_from_multipatch = global_field.get<Patch3>();
@@ -167,12 +170,11 @@ TEST(MultipatchFieldMorePatches, SubpatchesField)
             Patch7::IdxRange1(Patch7::Idx1(0), x7_size),
             Patch7::IdxRange2(Patch7::Idx2(0), y7_size));
 
-    MultipatchType<IdxRangeOnPatch, Patch3, Patch5, Patch7>
-            idx_ranges(index_range_xy3, index_range_xy5, index_range_xy7);
-    MultipatchFieldMemOf<DFieldMemOnPatch, Patch3, Patch5, Patch7> fields_alloc(idx_ranges);
-    MultipatchFieldOf<DFieldOnPatch, Patch3, Patch5, Patch7> fields(fields_alloc);
+    MultipatchIdxRange357 idx_ranges(index_range_xy3, index_range_xy5, index_range_xy7);
+    DMultipatchFieldMem<MultipatchIdxRange357> fields_alloc(idx_ranges);
+    DMultipatchField<MultipatchIdxRange357> fields(fields_alloc);
 
-    MultipatchFieldOf<DFieldOnPatch, Patch3, Patch7> subset_fields(fields);
+    DMultipatchField<MultipatchIdxRange37> subset_fields(fields);
 
     // Set the value of field on patch k to constant k.
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), fields.template get<Patch3>(), 3.0);

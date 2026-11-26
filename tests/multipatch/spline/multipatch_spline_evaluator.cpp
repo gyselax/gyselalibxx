@@ -168,7 +168,7 @@ void test_operator_assignment(
         SplineRThetaEvaluator<2, DeviceExecSpace> const& single_evaluator_2,
         Kokkos::View<Coord<R, Theta>*, Kokkos::DefaultExecutionSpace::memory_space> const&
                 eval_coords,
-        MultipatchFieldOf<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const& splines,
+        DMultipatchConstField<MultipatchIdxRangeBS> const& splines,
         ConstSplineCoeffOnPatch_2D<Patch1> const& spline_patch_1,
         ConstSplineCoeffOnPatch_2D<Patch2> const& spline_patch_2)
 {
@@ -490,7 +490,7 @@ TEST_F(MultipatchSplineEvaluatorTest, HostEvaluateOnSingleCoord)
 
     auto const function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
     auto const function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
-    MultipatchFieldOf<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
+    DMultipatchConstField<MultipatchIdxRangeBS, Kokkos::HostSpace> const
             splines_host(get_field(function_1_coef_host), get_field(function_2_coef_host));
 
     host_t<DConstField<IdxRange<BSplinesR<1>, BSplinesTheta<1>>>> const const_function_1_coef_host(
@@ -604,7 +604,7 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
     set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_2);
 
     // --- collection
-    MultipatchFieldOf<CoordConstFieldOnPatch, Patch1, Patch2> const
+    MultipatchConstField<Coord<R, Theta>, MultipatchIdxRange> const
             eval_points(get_const_field(eval_points_1), get_const_field(eval_points_2));
 
 
@@ -618,7 +618,7 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
     DField<Patch2::IdxRange12> eval_function_2 = get_field(eval_function_2_alloc);
 
     // --- collection
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> const
+    DMultipatchField<MultipatchIdxRange> const
             eval_functions(eval_function_1, eval_function_2);
 
 
@@ -694,7 +694,7 @@ TEST_F(MultipatchSplineEvaluatorTest, HostDerivativesOnSingleCoord)
 
     auto const function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
     auto const function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
-    MultipatchFieldOf<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const
+    DMultipatchConstField<MultipatchIdxRangeBS, Kokkos::HostSpace> const
             splines_host(get_field(function_1_coef_host), get_field(function_2_coef_host));
 
     ConstSplineCoeffOnPatch_2D_host<Patch1> const spline_1_host(
@@ -851,7 +851,7 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
             = get_const_field(eval_points_2);
 
     // --- collection
-    MultipatchFieldOf<CoordConstFieldOnPatch, Patch1, Patch2> const
+    MultipatchConstField<Coord<R, Theta>, MultipatchIdxRange> const
             eval_points(const_eval_points_1, const_eval_points_2);
 
 
@@ -878,11 +878,11 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnCoordField)
     DField<Patch2::IdxRange12> eval_derivs_12_patch_2 = get_field(eval_derivs_12_patch_2_alloc);
 
     // ----- collections
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> const
+    DMultipatchField<MultipatchIdxRange> const
             eval_derivs_1(eval_derivs_1_patch_1, eval_derivs_1_patch_2);
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> const
+    DMultipatchField<MultipatchIdxRange> const
             eval_derivs_2(eval_derivs_2_patch_1, eval_derivs_2_patch_2);
-    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> const
+    DMultipatchField<MultipatchIdxRange> const
             eval_derivs_12(eval_derivs_12_patch_1, eval_derivs_12_patch_2);
 
 
@@ -1004,7 +1004,7 @@ TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
 {
     auto function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
     auto function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
-    MultipatchFieldOf<ConstSplineCoeffOnPatch_2D_host, Patch1, Patch2> const splines_host(
+    DMultipatchConstField<MultipatchIdxRangeBS, Kokkos::HostSpace> const splines_host(
             get_const_field(function_1_coef_host),
             get_const_field(function_2_coef_host));
 
@@ -1056,12 +1056,12 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateDerivFieldOnCoordField)
     set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_2);
 
     // --- collection
-    MultipatchFieldOf<CoordConstFieldOnPatch, Patch1, Patch2> const
+    MultipatchConstField<Coord<R, Theta>, MultipatchIdxRange> const
             eval_points(get_const_field(eval_points_1), get_const_field(eval_points_2));
 
 
     // Evaluated functions
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+    MultipatchIdxRange
             idx_range_evals(idx_range_eval_periodic_rtheta1, idx_range_eval_periodic_rtheta2);
 
     MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
@@ -1150,12 +1150,12 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesDerivFieldOnCoordField)
     set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_2);
 
     // --- collection
-    MultipatchFieldOf<CoordConstFieldOnPatch, Patch1, Patch2> const
+    MultipatchConstField<Coord<R, Theta>, MultipatchIdxRange> const
             eval_points(get_const_field(eval_points_1), get_const_field(eval_points_2));
 
 
     // Evaluated functions
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+    MultipatchIdxRange
             idx_range_evals(idx_range_eval_rtheta1, idx_range_eval_rtheta2);
 
     MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
