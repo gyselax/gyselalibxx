@@ -222,8 +222,8 @@ public:
     // Test method -------------------------------------------------------------------------------
     void check_if_equal_to_expected(
             DMultipatchField<MultipatchIdxRangeSplineCoeff> const& function_coef,
-            SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected,
-            SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected)
+            DField<typename Patch1::IdxRangeBS12> function_1_coef_expected,
+            DField<typename Patch2::IdxRangeBS12> function_2_coef_expected)
     {
         // --- get the spline representation on CPU
         auto function_coef_1_host
@@ -297,12 +297,12 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2D)
 
     // Function tests
     // --- patch 1
-    DFieldMemOnPatch<Patch1> function_1_alloc(idx_range_xy1);
-    DFieldOnPatch<Patch1> function_1 = get_field(function_1_alloc);
+    DFieldMem<typename Patch1::IdxRange12> function_1_alloc(idx_range_xy1);
+    DField<typename Patch1::IdxRange12> function_1 = get_field(function_1_alloc);
 
     // --- patch 2
-    DFieldMemOnPatch<Patch2> function_2_alloc(idx_range_xy2);
-    DFieldOnPatch<Patch2> function_2 = get_field(function_2_alloc);
+    DFieldMem<typename Patch2::IdxRange12> function_2_alloc(idx_range_xy2);
+    DField<typename Patch2::IdxRange12> function_2 = get_field(function_2_alloc);
 
     initialise_2D_functions(function_1, function_2);
 
@@ -316,21 +316,21 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2D)
     // --- patch 1
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_alloc(
             builder1.batched_spline_domain(idx_range_xy1));
-    SplineCoeffOnPatch_2D<Patch1> function_1_coef = get_field(function_1_coef_alloc);
+    DField<typename Patch1::IdxRangeBS12> function_1_coef = get_field(function_1_coef_alloc);
 
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_expected_alloc(
             builder1.batched_spline_domain(idx_range_xy1));
-    SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected
+    DField<typename Patch1::IdxRangeBS12> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_alloc(
             builder2.batched_spline_domain(idx_range_xy2));
-    SplineCoeffOnPatch_2D<Patch2> function_2_coef = get_field(function_2_coef_alloc);
+    DField<typename Patch2::IdxRangeBS12> function_2_coef = get_field(function_2_coef_alloc);
 
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_expected_alloc(
             builder2.batched_spline_domain(idx_range_xy2));
-    SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected
+    DField<typename Patch2::IdxRangeBS12> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
@@ -383,12 +383,12 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
 
     // Function tests
     // --- patch 1
-    DFieldMemOnPatch<Patch1> function_1_alloc(idx_range_xy1);
-    DFieldOnPatch<Patch1> function_1 = get_field(function_1_alloc);
+    DFieldMem<typename Patch1::IdxRange12> function_1_alloc(idx_range_xy1);
+    DField<typename Patch1::IdxRange12> function_1 = get_field(function_1_alloc);
 
     // --- patch 2
-    DFieldMemOnPatch<Patch2> function_2_alloc(idx_range_xy2);
-    DFieldOnPatch<Patch2> function_2 = get_field(function_2_alloc);
+    DFieldMem<typename Patch2::IdxRange12> function_2_alloc(idx_range_xy2);
+    DField<typename Patch2::IdxRange12> function_2 = get_field(function_2_alloc);
 
     initialise_2D_functions(function_1, function_2);
 
@@ -531,21 +531,21 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
     // --- patch 1
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_alloc(
             builder1.batched_spline_domain(idx_range_xy1));
-    SplineCoeffOnPatch_2D<Patch1> function_1_coef = get_field(function_1_coef_alloc);
+    DField<typename Patch1::IdxRangeBS12> function_1_coef = get_field(function_1_coef_alloc);
 
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_expected_alloc(
             builder1.batched_spline_domain(idx_range_xy1));
-    SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected
+    DField<typename Patch1::IdxRangeBS12> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_alloc(
             builder2.batched_spline_domain(idx_range_xy2));
-    SplineCoeffOnPatch_2D<Patch2> function_2_coef = get_field(function_2_coef_alloc);
+    DField<typename Patch2::IdxRangeBS12> function_2_coef = get_field(function_2_coef_alloc);
 
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_expected_alloc(
             builder2.batched_spline_domain(idx_range_xy2));
-    SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected
+    DField<typename Patch2::IdxRangeBS12> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
@@ -734,13 +734,13 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
     // --- patch 1
     DFieldMem<typename Patch1::IdxRangeBS12> function_1_coef_expected_alloc(
             builder1.batched_spline_domain(idx_range_xy1));
-    SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected
+    DField<typename Patch1::IdxRangeBS12> function_1_coef_expected
             = get_field(function_1_coef_expected_alloc);
 
     // --- patch 2
     DFieldMem<typename Patch2::IdxRangeBS12> function_2_coef_expected_alloc(
             builder2.batched_spline_domain(idx_range_xy2));
-    SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected
+    DField<typename Patch2::IdxRangeBS12> function_2_coef_expected
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
@@ -812,10 +812,10 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilder)
     IdentityBuilderCollectionXY builder(builder1, builder2);
 
     // Function tests
-    DFieldMemOnPatch<Patch1> function_1_alloc(idx_range_xy1);
-    DFieldOnPatch<Patch1> function_1 = get_field(function_1_alloc);
-    DFieldMemOnPatch<Patch2> function_2_alloc(idx_range_xy2);
-    DFieldOnPatch<Patch2> function_2 = get_field(function_2_alloc);
+    DFieldMem<typename Patch1::IdxRange12> function_1_alloc(idx_range_xy1);
+    DField<typename Patch1::IdxRange12> function_1 = get_field(function_1_alloc);
+    DFieldMem<typename Patch2::IdxRange12> function_2_alloc(idx_range_xy2);
+    DField<typename Patch2::IdxRange12> function_2 = get_field(function_2_alloc);
 
     initialise_2D_functions(function_1, function_2);
 

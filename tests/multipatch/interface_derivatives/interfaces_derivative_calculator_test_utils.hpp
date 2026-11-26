@@ -539,9 +539,10 @@ void check_spline_representation_agreement(
             SplineBuilderClosureYmax>
             apply_builder(builder);
 
-    SplineCoeffMemOnPatch_2D_host<Patch> function_coef_alloc(
+    DFieldMem<typename Patch::IdxRangeBS12, Kokkos::HostSpace> function_coef_alloc(
             builder.batched_spline_domain(idx_range_xy));
-    SplineCoeffOnPatch_2D_host<Patch> function_coef = get_field(function_coef_alloc);
+    DField<typename Patch::IdxRangeBS12, Kokkos::HostSpace> function_coef
+            = get_field(function_coef_alloc);
 
     apply_builder(function_coef, function_and_derivs);
 
@@ -568,8 +569,10 @@ void check_spline_representation_agreement(
             evaluator(bc_xmin, bc_xmax, bc_ymin, bc_ymax);
 
     // Define evaluation points at the centre of the cells -----------------------------------
-    host_t<CoordFieldMemOnPatch<Patch>> eval_points_alloc(idx_range_xy);
-    host_t<CoordFieldOnPatch<Patch>> eval_points(eval_points_alloc);
+    FieldMem<typename Patch::Coord12, typename Patch::IdxRange12, Kokkos::HostSpace>
+            eval_points_alloc(idx_range_xy);
+    Field<typename Patch::Coord12, typename Patch::IdxRange12, Kokkos::HostSpace> eval_points(
+            eval_points_alloc);
 
     // The evaluation points are placed in the middle of the cells, except for the last one.
     ddc::host_for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {

@@ -26,11 +26,11 @@ namespace {
 using DFieldMem1 = DFieldMem<Patch1::IdxRange12>;
 using DFieldMem2 = DFieldMem<Patch2::IdxRange12>;
 
-using Field1 = DFieldOnPatch<Patch1>;
-using Field2 = DFieldOnPatch<Patch2>;
+using Field1 = DField<Patch1::IdxRange12>;
+using Field2 = DField<Patch2::IdxRange12>;
 
-using ConstField1 = DConstFieldOnPatch<Patch1>;
-using ConstField2 = DConstFieldOnPatch<Patch2>;
+using ConstField1 = DConstField<Patch1::IdxRange12>;
+using ConstField2 = DConstField<Patch2::IdxRange12>;
 
 using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
 
@@ -279,10 +279,10 @@ TEST_F(MultiPatchField2Patches, DerivField)
             functions_and_derivs.template get<Patch1>().get_values_field(),
             functions_and_derivs.template get<Patch2>().get_values_field());
 
-    DFieldMemOnPatch<Patch1> field1_from_multipatch_alloc(index_range_xy1);
-    DFieldMemOnPatch<Patch2> field2_from_multipatch_alloc(index_range_xy2);
-    DFieldOnPatch<Patch1> field1_from_multipatch(field1_from_multipatch_alloc);
-    DFieldOnPatch<Patch2> field2_from_multipatch(field2_from_multipatch_alloc);
+    DFieldMem1 field1_from_multipatch_alloc(index_range_xy1);
+    DFieldMem2 field2_from_multipatch_alloc(index_range_xy2);
+    Field1 field1_from_multipatch(field1_from_multipatch_alloc);
+    Field2 field2_from_multipatch(field2_from_multipatch_alloc);
 
     ddc::parallel_deepcopy(
             field1_from_multipatch,

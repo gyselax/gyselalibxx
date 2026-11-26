@@ -27,9 +27,9 @@ using DFieldMem3 = DFieldMem<Patch3::IdxRange12>;
 using DFieldMem5 = DFieldMem<Patch5::IdxRange12>;
 using DFieldMem7 = DFieldMem<Patch7::IdxRange12>;
 
-using Field3 = DFieldOnPatch<Patch3>;
-using Field5 = DFieldOnPatch<Patch5>;
-using Field7 = DFieldOnPatch<Patch7>;
+using Field3 = DField<Patch3::IdxRange12>;
+using Field5 = DField<Patch5::IdxRange12>;
+using Field7 = DField<Patch7::IdxRange12>;
 
 using MultipatchIdxRange357 = MultipatchType<IdxRangeOnPatch, Patch3, Patch5, Patch7>;
 using MultipatchIdxRange37 = MultipatchType<IdxRangeOnPatch, Patch3, Patch7>;

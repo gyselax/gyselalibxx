@@ -16,8 +16,8 @@ namespace {
 using VectorFieldMem1 = DVectorFieldMemOnPatch<Patch1>;
 using VectorFieldMem2 = DVectorFieldMemOnPatch<Patch2>;
 
-using Field1 = DFieldOnPatch<Patch1>;
-using Field2 = DFieldOnPatch<Patch2>;
+using Field1 = DField<Patch1::IdxRange12>;
+using Field2 = DField<Patch2::IdxRange12>;
 
 using VectorField1 = DVectorFieldOnPatch<Patch1>;
 using VectorField2 = DVectorFieldOnPatch<Patch2>;
