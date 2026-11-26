@@ -106,6 +106,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MatrixBatchEll::norm`.
 - Remove `detail::combine_t` (prefer `ddc::combine_t`).
 - Remove `SingleInterfaceDerivativesCalculatorCollection`.
+- Remove the per-patch field aliases from `types.hpp`. Use `MultipatchField`/`MultipatchFieldMem` (and their `D`/`Const` variants) with a `MultipatchType` of index ranges instead.:
+    - `DFieldMemOnPatch`
+    - `DFieldMem1OnPatch`
+    - `DFieldMem2OnPatch`
+    - `DField1OnPatch`
+    - `DField2OnPatch`
+    - `DConstFieldOnPatch`
+    - `DConstField1OnPatch`
+    - `DConstFieldOnPatch_host`
+    - `CoordFieldMemOnPatch`
+    - `CoordFieldOnPatch`
+    - `CoordConstFieldOnPatch`
+    - `Coord1Field1OnPatch_1D`
+    - `SplineCoeffMemOnPatch_2D`
+    - `SplineCoeffOnPatch_2D`
+    - `ConstSplineCoeffOnPatch_2D`
+    - `SplineCoeff1OnPatch_2D`
+    - `ConstSplineCoeff1OnPatch_2D`
+    - `SplineCoeff1OnPatch_1D`
+    - `ConstSplineCoeff1OnPatch_1D`
+    - `SplineCoeffMemOnPatch_2D_host`
+    - `SplineCoeffOnPatch_2D_host`
+    - `ConstSplineCoeffOnPatch_2D_host`
 
 ### Dependency requirements
 
