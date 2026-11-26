@@ -37,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add an `InterpolationBuilder2DCollection::operator()` which takes a `DerivField`.
 - Add `InterpolationBuilderCollection::batched_basis_idx_ranges()` and `InterpolationBuilder2DCollection::batched_basis_idx_ranges()`.
 - `InterpolationEvaluator2DCollection` works with `DerivField`.
-- Add `InterpolationEvaluatorTraits::basis_idx_range_type` to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).
 - Add `InterfacesDerivativeCalculator` to compute all the coupled interface derivatives along a direction with the approximation formula.
 - Add `DerivativeCalculatorCommon` to avoid code duplication in operators in `src/multipatch/interface_derivatives`.
 - Allow `Quadrature` to use a vector as the data type to integrate over multiple elements of a `VectorField` simultaneously.
@@ -66,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Specialise `InterpolationBuilderTraits` and `InterpolationEvaluatorTraits` for `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection` so `MultipatchInterpolation2D` satisfies `concepts::Interpolation`.
 - Add `InterpolationEvaluator2DCollection::operator()` and `InterpolationEvaluator2DCollection::deriv` overloads which evaluate on the evaluation mesh of each patch.
 - Add `is_multipatch_interpolation_v` and use it to raise a compile-time error when a multipatch interpolation is passed to an operator which does not support it.
+- Add `InterpolationEvaluatorTraits::basis_idx_range_type` to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).
 
 ### Fixed
 
