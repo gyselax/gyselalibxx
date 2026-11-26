@@ -166,9 +166,9 @@ public:
 
 private:
     // MultipatchTypes
-    using MultipatchValues = MultipatchField<ValuesOnPatch, Patches...>;
-    using MultipatchCoordField = MultipatchField<CoordConstFieldOnPatch, Patches...>;
-    using MultipatchSplineCoeff = MultipatchField<SplineCoeffOnPatch, Patches...>;
+    using MultipatchValues = MultipatchFieldOf<ValuesOnPatch, Patches...>;
+    using MultipatchCoordField = MultipatchFieldOf<CoordConstFieldOnPatch, Patches...>;
+    using MultipatchSplineCoeff = MultipatchFieldOf<SplineCoeffOnPatch, Patches...>;
 
     // Patches
     using PatchOrdering = ddc::TypeSeq<Patches...>;

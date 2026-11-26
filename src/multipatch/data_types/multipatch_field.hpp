@@ -25,8 +25,8 @@ class MultipatchField;
  * on.
  *
  * This class should not be used directly to instantiate objects. Instead the global alias
- * MultipatchField should be used.
- * I.e. use `MultipatchField<TypeOnPatch, Patches...>` instead of
+ * MultipatchFieldOf should be used.
+ * I.e. use `MultipatchFieldOf<TypeOnPatch, Patches...>` instead of
  * `detail::MultipatchField<TypeSeqPatches, TypeSeqInternalTypes>`.
  *
  * @tparam Patches The patches on which the objects are defined.
@@ -235,21 +235,21 @@ inline constexpr bool enable_multipatch_field<
  *                 that the given objects are defined on.
  */
 template <template <typename P> typename T, concepts::Patch... Patches>
-using MultipatchField
+using MultipatchFieldOf
         = detail::MultipatchField<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 
 /**
  * @brief A class to store field objects on patches.
  *
- * This alias is equivalent to MultipatchField but takes the patches as a ddc::TypeSeq.
- * I.e. `MultipatchFieldFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
- * `MultipatchField<T, Patches...>`.
+ * This alias is equivalent to MultipatchFieldOf but takes the patches as a ddc::TypeSeq.
+ * I.e. `MultipatchFieldOfFromSeq<T, ddc::TypeSeq<Patches...>>` is the same type as
+ * `MultipatchFieldOf<T, Patches...>`.
  *
  * @tparam T The type of the fields/derivative fields/vector fields that are stored on the given patches.
  * @tparam PatchSeq A ddc::TypeSeq of the patches of the objects.
  */
 template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
-using MultipatchFieldFromSeq =
+using MultipatchFieldOfFromSeq =
         typename detail::MultipatchFromPatchSeq<detail::MultipatchField, T, PatchSeq>::type;
 
 template <class... VectorFieldType, class PatchTypeSeq>

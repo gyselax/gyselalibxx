@@ -24,8 +24,8 @@ class MultipatchFieldMem;
  * on.
  *
  * This class should not be used directly to instantiate objects. Instead the global alias
- * MultipatchFieldMem should be used.
- * I.e. use `MultipatchFieldMem<TypeOnPatch, Patches...>` instead of
+ * MultipatchFieldMemOf should be used.
+ * I.e. use `MultipatchFieldMemOf<TypeOnPatch, Patches...>` instead of
  * `detail::MultipatchFieldMem<TypeSeqPatches, TypeSeqInternalTypes>`.
  *
  * @tparam Patches The patches on which the objects are defined.
@@ -205,5 +205,5 @@ inline constexpr bool enable_data_access_methods<
  *                 that the given objects are defined on.
  */
 template <template <typename P> typename T, class... Patches>
-using MultipatchFieldMem
-        = detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
+using MultipatchFieldMemOf
+        =detail::MultipatchFieldMem<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;

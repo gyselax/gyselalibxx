@@ -133,7 +133,7 @@ TEST_F(MultiPatchField2Patches, ZeroOnFirstPatchOneOnSecond)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field1, 0.0);
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), field2, 1.0);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -159,7 +159,7 @@ TEST_F(MultiPatchField2Patches, Polynomials)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
     // Act
     Field1 field1_from_multipatch = global_field.get<Patch1>();
@@ -189,7 +189,7 @@ TEST_F(MultiPatchField2Patches, GetIdxRange)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(get_idx_range(global_field));
 
@@ -205,9 +205,9 @@ TEST_F(MultiPatchField2Patches, ConstField)
 
     initialise_non_const_fields(field1, field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
+    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field(field1, field2);
 
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
+    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2> global_const_field(
             global_field.get_const_field());
 
     // Act
@@ -234,8 +234,8 @@ TEST_F(MultiPatchField2Patches, DerivField)
 {
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(index_range_xy1, index_range_xy2);
 
-    MultipatchFieldMem<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(idx_ranges);
-    MultipatchField<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
+    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(idx_ranges);
+    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
             functions_and_derivs_alloc);
 
     // f1(x,y) = x^2 + y^2; f2(x,y) = x^2 - y^2;

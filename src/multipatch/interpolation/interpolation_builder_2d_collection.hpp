@@ -252,7 +252,7 @@ private:
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
     /// The type of the function values and derivatives stored in DerivFields.
-    using MultipatchDerivField = MultipatchField<DerivConstFieldOnPatch, Patches...>;
+    using MultipatchDerivField = MultipatchFieldOf<DerivConstFieldOnPatch, Patches...>;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedBasis = detail::MultipatchType<

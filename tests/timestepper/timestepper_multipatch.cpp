@@ -18,16 +18,16 @@ namespace {
 
 using namespace onion_shape_uniform_2d_2patches;
 
-using DMultipatchFieldMemR = MultipatchFieldMem<DFieldMem1OnPatch, Patch1, Patch2>;
+using DMultipatchFieldMemR = MultipatchFieldMemOf<DFieldMem1OnPatch, Patch1, Patch2>;
 using DMultipatchFieldR = typename DMultipatchFieldMemR::span_type;
 using DMultipatchConstFieldR = typename DMultipatchFieldMemR::view_type;
 using MultipatchIdxRangeR = MultipatchType<IdxRange1OnPatch, Patch1, Patch2>;
 
-using CMultipatchFieldMemRTheta = MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2>;
+using CMultipatchFieldMemRTheta = MultipatchFieldMemOf<CoordFieldMemOnPatch, Patch1, Patch2>;
 using CMultipatchFieldRTheta = typename CMultipatchFieldMemRTheta::span_type;
 using CMultipatchConstFieldRTheta = typename CMultipatchFieldMemRTheta::view_type;
 using MultipatchIdxRangeRTheta = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
-using CMultipatchVectorFieldMemRTheta = MultipatchFieldMem<DVectorFieldMemOnPatch, Patch1, Patch2>;
+using CMultipatchVectorFieldMemRTheta = MultipatchFieldMemOf<DVectorFieldMemOnPatch, Patch1, Patch2>;
 using CMultipatchVectorFieldRTheta = typename CMultipatchVectorFieldMemRTheta::span_type;
 using CMultipatchVectorConstFieldRTheta = typename CMultipatchVectorFieldMemRTheta::view_type;
 

@@ -628,9 +628,9 @@ TYPED_TEST(InterfacesDerivativeCalculatorHermiteFixture, CheckForHermiteBc)
             deriv_calculator(idx_ranges, deriv_coeffs_2_3, deriv_coeffs_1_2);
 
     // Instantiate DerivField ====================================================================
-    MultipatchFieldMem<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
+    MultipatchFieldMemOf<DerivFieldMemOnPatch_host, Patch1, Patch2, Patch3>
             functions_and_derivs_alloc(idx_ranges);
-    MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs(
+    MultipatchFieldOf<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs(
             functions_and_derivs_alloc);
 
     // Instantiate the global function.

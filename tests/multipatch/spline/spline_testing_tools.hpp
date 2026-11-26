@@ -133,7 +133,7 @@ protected:
 
     /// @brief MultipatchType of const fields of the spline coefficients of the function
     // on the patches.
-    MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const splines;
+    MultipatchFieldOf<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const splines;
 
     /// @brief MultipatchType of index ranges on the patches.
     MultipatchIdxRange const all_idx_ranges;

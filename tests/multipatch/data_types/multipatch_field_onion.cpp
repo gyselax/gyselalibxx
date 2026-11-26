@@ -62,10 +62,10 @@ TEST(MultiPatchField2PatchesOnion, VectorField)
     VectorField1 vec_field1 = get_field(vec_field_mem1);
     VectorField2 vec_field2 = get_field(vec_field_mem2);
 
-    MultipatchField<DVectorFieldOnPatch, Patch1, Patch2> global_field(vec_field1, vec_field2);
+    MultipatchFieldOf<DVectorFieldOnPatch, Patch1, Patch2> global_field(vec_field1, vec_field2);
 
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field_r = ddcHelper::get<R>(global_field);
-    MultipatchField<DFieldOnPatch, Patch1, Patch2> global_field_theta
+    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field_r = ddcHelper::get<R>(global_field);
+    MultipatchFieldOf<DFieldOnPatch, Patch1, Patch2> global_field_theta
             = ddcHelper::get<Theta>(global_field);
 
     EXPECT_EQ(

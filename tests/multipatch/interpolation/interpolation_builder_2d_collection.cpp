@@ -222,7 +222,7 @@ public:
 
     // Test method -------------------------------------------------------------------------------
     void check_if_equal_to_expected(
-            MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2> const& function_coef,
+            MultipatchFieldOf<SplineCoeffOnPatch_2D, Patch1, Patch2> const& function_coef,
             SplineCoeffOnPatch_2D<Patch1> function_1_coef_expected,
             SplineCoeffOnPatch_2D<Patch2> function_2_coef_expected)
     {
@@ -308,7 +308,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2D)
     initialise_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
+    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
 
@@ -335,7 +335,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2>
+    MultipatchFieldOf<SplineCoeffOnPatch_2D, Patch1, Patch2>
             function_coef(function_1_coef, function_2_coef);
 
 
@@ -394,7 +394,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
     initialise_2D_functions(function_1, function_2);
 
     // --- collection of values of the function on each patch
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
+    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
     // Derivatives Patch1
@@ -453,13 +453,13 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
 
 
     // --- collection of values of the function on each patch
-    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
+    MultipatchFieldOf<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
             derivs_xmin(get_const_field(derivs_xmin1), get_const_field(derivs_xmin2));
-    MultipatchField<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
+    MultipatchFieldOf<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
             derivs_xmax(get_const_field(derivs_xmax1), get_const_field(derivs_xmax2));
-    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
+    MultipatchFieldOf<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
             derivs_ymin(get_const_field(derivs_ymin1), get_const_field(derivs_ymin2));
-    MultipatchField<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
+    MultipatchFieldOf<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
             derivs_ymax(get_const_field(derivs_ymax1), get_const_field(derivs_ymax2));
 
     IdxRange<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>
@@ -515,16 +515,16 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
                     * (Kokkos::cos(2. * xmax2 * ymax2)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
 
-    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_min1_min2(
+    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_min1_min2(
             get_const_field(cross_derivs_min1_min2_alloc1),
             get_const_field(cross_derivs_min1_min2_alloc2));
-    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_max1_min2(
+    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_max1_min2(
             get_const_field(cross_derivs_max1_min2_alloc1),
             get_const_field(cross_derivs_max1_min2_alloc2));
-    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_min1_max2(
+    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_min1_max2(
             get_const_field(cross_derivs_min1_max2_alloc1),
             get_const_field(cross_derivs_min1_max2_alloc2));
-    MultipatchField<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_max1_max2(
+    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_max1_max2(
             get_const_field(cross_derivs_max1_max2_alloc1),
             get_const_field(cross_derivs_max1_max2_alloc2));
 
@@ -550,7 +550,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2>
+    MultipatchFieldOf<SplineCoeffOnPatch_2D, Patch1, Patch2>
             function_coef(function_1_coef, function_2_coef);
 
 
@@ -728,7 +728,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
 
     // --- collection of function and its derivatives on each patch
-    MultipatchField<DerivFieldOnPatch, Patch1, Patch2>
+    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>
             functions_and_derivs(function_and_derivs_1, function_and_derivs_2);
 
     // Spline representations
@@ -746,9 +746,9 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
 
     // --- collection
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
-    MultipatchFieldMem<SplineCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
+    MultipatchFieldMemOf<SplineCoeffMemOnPatch_2D, Patch1, Patch2> function_coef_alloc(
             builder.batched_basis_idx_ranges(idx_ranges));
-    MultipatchField<SplineCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
+    MultipatchFieldOf<SplineCoeffOnPatch_2D, Patch1, Patch2> function_coef(function_coef_alloc);
 
 
     // Build the spline representations on each patch
@@ -820,14 +820,14 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilder)
 
     initialise_2D_functions(function_1, function_2);
 
-    MultipatchField<DConstFieldOnPatch, Patch1, Patch2>
+    MultipatchFieldOf<DConstFieldOnPatch, Patch1, Patch2>
             function_values(get_const_field(function_1), get_const_field(function_2));
 
     // Interpolation coefficients
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
-    MultipatchFieldMem<IdentityCoeffMemOnPatch, Patch1, Patch2> function_coef_alloc(
+    MultipatchFieldMemOf<IdentityCoeffMemOnPatch, Patch1, Patch2> function_coef_alloc(
             builder.batched_basis_idx_ranges(idx_ranges));
-    MultipatchField<IdentityCoeffOnPatch, Patch1, Patch2> function_coef(function_coef_alloc);
+    MultipatchFieldOf<IdentityCoeffOnPatch, Patch1, Patch2> function_coef(function_coef_alloc);
 
     IdentityCoeffMemOnPatch<Patch1> function_1_coef_expected_alloc(
             batched_basis_idx_range(builder1, idx_range_xy1));
@@ -892,14 +892,14 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilderWithDer
             function_and_derivs_1.get_values_field(),
             function_and_derivs_2.get_values_field());
 
-    MultipatchField<DerivFieldOnPatch, Patch1, Patch2>
+    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>
             functions_and_derivs(function_and_derivs_1, function_and_derivs_2);
 
     // Interpolation coefficients
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2> idx_ranges(idx_range_xy1, idx_range_xy2);
-    MultipatchFieldMem<IdentityCoeffMemOnPatch, Patch1, Patch2> function_coef_alloc(
+    MultipatchFieldMemOf<IdentityCoeffMemOnPatch, Patch1, Patch2> function_coef_alloc(
             builder.batched_basis_idx_ranges(idx_ranges));
-    MultipatchField<IdentityCoeffOnPatch, Patch1, Patch2> function_coef(function_coef_alloc);
+    MultipatchFieldOf<IdentityCoeffOnPatch, Patch1, Patch2> function_coef(function_coef_alloc);
 
     IdentityCoeffMemOnPatch<Patch1> function_1_coef_expected_alloc(
             batched_basis_idx_range(builder1, idx_range_xy1));
