@@ -91,10 +91,8 @@ In `types.hpp` file different aliases are defined to use with `MultipatchType` a
   - 2D: `IdxRangeOnPatch` and `IdxRangeBSOnPatch` (B-splines);
   - 1D on first dimension: `IdxRange1OnPatch` and `Idx1OnPatch`;
   - Index range slices: `IdxRange1SliceOnPatch` and `IdxRange2SliceOnPatch`;
-  - Index range of a field with derivatives, on (dx, x, dy, y): `IdxRangeDerivOnPatch`.
+  - Index range of a field with derivatives, on (dx, x, dy, y): `IdxRangeDerivOnPatch`;
+  - Index ranges of derivatives: `IdxRangeDeriv1Grid2OnPatch` on (dx, y), `IdxRangeGrid1Deriv2OnPatch`
+    on (x, dy) and `IdxRangeDeriv12OnPatch` on (dx, dy).
 - To store the spline grids: `BSplines1OnPatch` and `BSplines2OnPatch`.
-- To store derivatives:
-  - $`\partial_^{(i)} f(x, y_j)`$: `ConstDeriv1_OnPatch_2D`
-  - $`\partial_^{(i)} f(x_j, y)`$: `ConstDeriv2_OnPatch_2D`
-  - $`\partial_^{(i)} \partial_y^{(j)} f(x, y)`$: `ConstDeriv12_OnPatch_2D`
 - To store fields with derivatives: `DerivFieldOnPatch`.

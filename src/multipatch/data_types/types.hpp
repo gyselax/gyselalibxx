@@ -73,6 +73,30 @@ using IdxRangeDerivOnPatch = IdxRange<
         ddc::Deriv<typename Patch::Dim2>,
         typename Patch::Grid2>;
 
+/**
+ * @brief An index range over the derivatives along the Patch's first logical dimension and the
+ * grid on the Patch's second logical dimension.
+ */
+template <class Patch>
+using IdxRangeDeriv1Grid2OnPatch
+        = IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>;
+
+/**
+ * @brief An index range over the grid on the Patch's first logical dimension and the derivatives
+ * along the Patch's second logical dimension.
+ */
+template <class Patch>
+using IdxRangeGrid1Deriv2OnPatch
+        = IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>;
+
+/**
+ * @brief An index range over the derivatives along both of the Patch's logical dimensions
+ * (e.g. for the cross-derivatives).
+ */
+template <class Patch>
+using IdxRangeDeriv12OnPatch
+        = IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>;
+
 
 // IDXRANGESLICE ---------------------------------------------------------------------------------
 
@@ -94,34 +118,6 @@ using BSplines1OnPatch = typename Patch::BSplines1;
 /// @brief The BSplines dimension on the second of the Patch's logical dimensions.
 template <class Patch>
 using BSplines2OnPatch = typename Patch::BSplines2;
-
-
-// DERIVATIVES -----------------------------------------------------------------------------------
-
-// --- ON DEVICE ---
-/**
- * @brief A constant field of the n-th derivatives in the direction of Patch's first
- * logical grid defined on the index range of n and the Patch's second logical grid.
- */
-template <class Patch>
-using ConstDeriv1_OnPatch_2D
-        = DConstField<IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>>;
-
-/**
- * @brief A constant field of the n-th derivatives in the direction of Patch's second
- * logical grid defined on the index range of n and the Patch's first logical grid.
- */
-template <class Patch>
-using ConstDeriv2_OnPatch_2D
-        = DConstField<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
-
-/**
- * @brief A constant field of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
- * defined on the index ranges of valid n and m.
- */
-template <class Patch>
-using ConstDeriv12_OnPatch_2D
-        = DConstField<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
 
 
 // FIELDS WITH DERIVATIVES -----------------------------------------------------------------------

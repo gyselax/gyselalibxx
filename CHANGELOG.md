@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `MultipatchDerivFieldMem`
   - `DMultipatchDerivFieldMem`
 - Add `IdxRangeDerivOnPatch` alias describing the index range on which a `DerivField` is defined on a patch.
+- Add `IdxRangeDeriv1Grid2OnPatch`, `IdxRangeGrid1Deriv2OnPatch` and `IdxRangeDeriv12OnPatch` aliases describing the index ranges of the derivatives on a patch.
 
 ### Fixed
 
@@ -156,6 +157,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `DerivConstFieldOnPatch`
   - `DerivConstFieldOnPatch_host`
   - `DerivFieldOnPatch_host`
+  - `ConstDeriv1_OnPatch_2D`
+  - `ConstDeriv2_OnPatch_2D`
+  - `ConstDeriv12_OnPatch_2D`
 
 ### Dependency requirements
 
