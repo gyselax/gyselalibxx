@@ -193,14 +193,8 @@ private:
 
     /// A type alias to get the DerivField type on a specific patch.
     template <class Patch>
-    using DerivConstFieldOnPatch = DerivConstField<
-            data_type,
-            IdxRange<
-                    ddc::Deriv<typename Patch::Dim1>,
-                    typename Patch::Grid1,
-                    ddc::Deriv<typename Patch::Dim2>,
-                    typename Patch::Grid2>,
-            memory_space>;
+    using DerivConstFieldOnPatch
+            = DerivConstField<data_type, IdxRangeDerivOnPatch<Patch>, memory_space>;
 
     /// A type alias to get the interpolation index range on a specific patch.
     template <class Patch>
@@ -235,7 +229,10 @@ private:
                     typename MultipatchValues::template TypeOnPatch<Patches>>...>>;
 
     /// The type of the function values and derivatives stored in DerivFields.
-    using MultipatchDerivField = MultipatchFieldOf<DerivConstFieldOnPatch, Patches...>;
+    using MultipatchDerivField = MultipatchDerivConstField<
+            data_type,
+            MultipatchType<IdxRangeDerivOnPatch, Patches...>,
+            memory_space>;
 
     template <class MultipatchIdxRangeBatched>
     using MultipatchIdxRangeBatchedBasis = detail::MultipatchType<

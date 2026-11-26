@@ -399,10 +399,10 @@ private:
                 = (UpperBound == ddc::SplineBuilderClosure::HERMITE && I == n_inner_interfaces - 1);
 
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
-            DerivConstFieldOnPatch_host<patch1<I>> function_and_derivs_1
-                    = functions_and_derivs.template get<patch1<I>>();
-            DerivConstFieldOnPatch_host<patch2<I>> function_and_derivs_2
-                    = functions_and_derivs.template get<patch2<I>>();
+            DerivConstField<double, IdxRangeDerivOnPatch<patch1<I>>, Kokkos::HostSpace>
+                    function_and_derivs_1 = functions_and_derivs.template get<patch1<I>>();
+            DerivConstField<double, IdxRangeDerivOnPatch<patch2<I>>, Kokkos::HostSpace>
+                    function_and_derivs_2 = functions_and_derivs.template get<patch2<I>>();
 
             // Get the indices at the other bound of the interface.
             Idx<grid_perp1<I>> idx_perp_1 = this->template get_idx_interface<false, I, patch1<I>>();

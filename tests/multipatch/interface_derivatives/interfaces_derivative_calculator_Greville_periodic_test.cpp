@@ -575,8 +575,8 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             deriv_calculator_369(idx_ranges_369, deriv_coeffs_3_6, deriv_coeffs_6_9);
 
     // Instantiate DerivField ====================================================================
-    MultipatchFieldMemOf<
-            DerivFieldMemOnPatch_host,
+    using MultipatchIdxRangeDeriv = MultipatchType<
+            IdxRangeDerivOnPatch,
             Patch1,
             Patch2,
             Patch3,
@@ -585,20 +585,11 @@ TYPED_TEST(InterfacesDerivativeCalculatorGrevillePeriodicTest, CheckForPeriodicA
             Patch6,
             Patch7,
             Patch8,
-            Patch9>
+            Patch9>;
+    DMultipatchDerivFieldMem<MultipatchIdxRangeDeriv, 1, Kokkos::HostSpace>
             functions_and_derivs_alloc(idx_ranges);
-    MultipatchFieldOf<
-            DerivFieldOnPatch_host,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            functions_and_derivs(functions_and_derivs_alloc);
+    DMultipatchDerivField<MultipatchIdxRangeDeriv, Kokkos::HostSpace> functions_and_derivs(
+            functions_and_derivs_alloc);
 
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(TestFixture::idx_range_xy_g);

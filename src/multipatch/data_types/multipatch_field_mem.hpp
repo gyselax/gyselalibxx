@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "derivative_field_mem.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "vector_field_mem.hpp"
@@ -247,8 +248,8 @@ struct MultipatchFieldMemFromIdxRange<
  * resulting type is the same as `MultipatchFieldMemOf<T, Patches...>` where
  * `T<Patch> = FieldMem<ElementType, IdxRangeOnPatch<Patch>, MemorySpace>`.
  *
- * VectorFieldMems should be stored using MultipatchVectorFieldMem. Other memory blocks which are
- * not plain FieldMems (e.g. DerivFieldMem) should be stored using MultipatchFieldMemOf.
+ * VectorFieldMems should be stored using MultipatchVectorFieldMem and DerivFieldMems should be
+ * stored using MultipatchDerivFieldMem.
  *
  * @tparam ElementType The type of the elements inside the fields.
  * @tparam MultipatchIdxRange A MultipatchType containing the index range on each patch.
@@ -351,3 +352,81 @@ template <
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 using DMultipatchVectorFieldMem
         = MultipatchVectorFieldMem<double, MultipatchIdxRange, VectorIndexSetType, MemorySpace>;
+
+namespace detail {
+
+/**
+ * @brief A helper to build a MultipatchFieldMem of DerivFieldMems from a MultipatchType of
+ * index ranges.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range (including the
+ *              derivative dimensions) on which the DerivFieldMem is defined on each patch.
+ * @tparam NDerivs The number of derivatives which are stored in each derivative dimension.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <class ElementType, class MultipatchIdxRange, int NDerivs, class MemorySpace>
+struct MultipatchDerivFieldMemFromIdxRange;
+
+/// @brief Specialisation of MultipatchDerivFieldMemFromIdxRange to unpack the patches and index ranges.
+template <class ElementType, class... Patches, class... IdxRanges, int NDerivs, class MemorySpace>
+struct MultipatchDerivFieldMemFromIdxRange<
+        ElementType,
+        MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<IdxRanges...>>,
+        NDerivs,
+        MemorySpace>
+{
+    static_assert(
+            (ddc::is_discrete_domain_v<IdxRanges> && ...),
+            "The MultipatchType must contain an index range on each patch.");
+    /// The MultipatchFieldMem of DerivFieldMems defined on the index ranges.
+    using type = MultipatchFieldMem<
+            ddc::TypeSeq<Patches...>,
+            ddc::TypeSeq<DerivFieldMem<ElementType, IdxRanges, NDerivs, MemorySpace>...>>;
+};
+
+} // namespace detail
+
+/**
+ * @brief A class to store a DerivFieldMem on each patch.
+ *
+ * This alias is templated in the same way as DerivFieldMem, with the index range replaced by a
+ * MultipatchType of index ranges. As for DerivFieldMem, these index ranges include the derivative
+ * dimensions (e.g. `MultipatchType<IdxRangeDerivOnPatch, Patches...>`). The resulting type is the
+ * same as `MultipatchFieldMemOf<T, Patches...>` where
+ * `T<Patch> = DerivFieldMem<ElementType, IdxRangeDerivOnPatch<Patch>, NDerivs, MemorySpace>`.
+ *
+ * The memory can be allocated from a MultipatchType of the physical index ranges (e.g.
+ * `MultipatchType<IdxRangeOnPatch, Patches...>`). The derivatives are then defined on the
+ * boundaries of the physical index ranges.
+ *
+ * @tparam ElementType The type of the elements inside the fields.
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range (including the
+ *              derivative dimensions) on which the DerivFieldMem is defined on each patch.
+ * @tparam NDerivs The number of derivatives which are stored in each derivative dimension.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <
+        class ElementType,
+        class MultipatchIdxRange,
+        int NDerivs,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+using MultipatchDerivFieldMem = typename detail::
+        MultipatchDerivFieldMemFromIdxRange<ElementType, MultipatchIdxRange, NDerivs, MemorySpace>::
+                type;
+
+/**
+ * @brief A class to store a DerivFieldMem of doubles on each patch.
+ * See MultipatchDerivFieldMem.
+ *
+ * @tparam MultipatchIdxRange A MultipatchType containing the index range (including the
+ *              derivative dimensions) on which the DerivFieldMem is defined on each patch.
+ * @tparam NDerivs The number of derivatives which are stored in each derivative dimension.
+ * @tparam MemorySpace The memory space (CPU/GPU) where the data is saved.
+ */
+template <
+        class MultipatchIdxRange,
+        int NDerivs,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
+using DMultipatchDerivFieldMem
+        = MultipatchDerivFieldMem<double, MultipatchIdxRange, NDerivs, MemorySpace>;

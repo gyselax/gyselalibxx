@@ -74,6 +74,10 @@ using IdentityBuilderCollectionXY = InterpolationBuilder2DCollection<
 
 // Multipatch index ranges
 using MultipatchIdxRange12 = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv = MultipatchType<IdxRangeDerivOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv1 = MultipatchType<IdxRangeDeriv1Grid2OnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv2 = MultipatchType<IdxRangeGrid1Deriv2OnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv12 = MultipatchType<IdxRangeDeriv12OnPatch, Patch1, Patch2>;
 using MultipatchIdxRangeSplineCoeff = MultipatchType<IdxRangeBSOnPatch, Patch1, Patch2>;
 using MultipatchIdxRangeIdentityCoeff = MultipatchType<IdxRangeIdentityCoeff, Patch1, Patch2>;
 
@@ -451,13 +455,13 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
 
 
     // --- collection of values of the function on each patch
-    MultipatchFieldOf<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRangeDeriv1>
             derivs_xmin(get_const_field(derivs_xmin1), get_const_field(derivs_xmin2));
-    MultipatchFieldOf<ConstDeriv1_OnPatch_2D, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRangeDeriv1>
             derivs_xmax(get_const_field(derivs_xmax1), get_const_field(derivs_xmax2));
-    MultipatchFieldOf<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRangeDeriv2>
             derivs_ymin(get_const_field(derivs_ymin1), get_const_field(derivs_ymin2));
-    MultipatchFieldOf<ConstDeriv2_OnPatch_2D, Patch1, Patch2>
+    DMultipatchConstField<MultipatchIdxRangeDeriv2>
             derivs_ymax(get_const_field(derivs_ymax1), get_const_field(derivs_ymax2));
 
     IdxRange<ddc::Deriv<X<1>>, ddc::Deriv<Y<1>>>
@@ -513,16 +517,16 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
                     * (Kokkos::cos(2. * xmax2 * ymax2)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
 
-    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_min1_min2(
+    DMultipatchConstField<MultipatchIdxRangeDeriv12> cross_derivs_min1_min2(
             get_const_field(cross_derivs_min1_min2_alloc1),
             get_const_field(cross_derivs_min1_min2_alloc2));
-    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_max1_min2(
+    DMultipatchConstField<MultipatchIdxRangeDeriv12> cross_derivs_max1_min2(
             get_const_field(cross_derivs_max1_min2_alloc1),
             get_const_field(cross_derivs_max1_min2_alloc2));
-    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_min1_max2(
+    DMultipatchConstField<MultipatchIdxRangeDeriv12> cross_derivs_min1_max2(
             get_const_field(cross_derivs_min1_max2_alloc1),
             get_const_field(cross_derivs_min1_max2_alloc2));
-    MultipatchFieldOf<ConstDeriv12_OnPatch_2D, Patch1, Patch2> cross_derivs_max1_max2(
+    DMultipatchConstField<MultipatchIdxRangeDeriv12> cross_derivs_max1_max2(
             get_const_field(cross_derivs_max1_max2_alloc1),
             get_const_field(cross_derivs_max1_max2_alloc2));
 
@@ -628,12 +632,16 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
 
     // Function tests
     // --- patch 1
-    DerivFieldMemOnPatch<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivFieldOnPatch<Patch1> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(
+            idx_range_xy1);
+    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1
+            = get_field(function_and_derivs_1_alloc);
 
     // --- patch 2
-    DerivFieldMemOnPatch<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivFieldOnPatch<Patch2> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(
+            idx_range_xy2);
+    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2
+            = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
             function_and_derivs_1.get_values_field(),
@@ -725,7 +733,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
                        - 2. * xmax2 * ymax2 * Kokkos::sin(2. * xmax2 * ymax2)));
 
     // --- collection of function and its derivatives on each patch
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>
+    DMultipatchDerivField<MultipatchIdxRangeDeriv>
             functions_and_derivs(function_and_derivs_1, function_and_derivs_2);
 
     // Spline representations
@@ -880,16 +888,20 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilderWithDer
     IdentityBuilderCollectionXY builder(builder1, builder2);
 
     // Function tests (the derivatives are not initialised as they are not used)
-    DerivFieldMemOnPatch<Patch1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivFieldOnPatch<Patch1> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
-    DerivFieldMemOnPatch<Patch2> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivFieldOnPatch<Patch2> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(
+            idx_range_xy1);
+    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1
+            = get_field(function_and_derivs_1_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(
+            idx_range_xy2);
+    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2
+            = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
             function_and_derivs_1.get_values_field(),
             function_and_derivs_2.get_values_field());
 
-    MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>
+    DMultipatchDerivField<MultipatchIdxRangeDeriv>
             functions_and_derivs(function_and_derivs_1, function_and_derivs_2);
 
     // Interpolation coefficients

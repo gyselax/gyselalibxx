@@ -69,6 +69,7 @@ using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 using MultipatchIdxRange = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
 using MultipatchIdxRangeBS = MultipatchType<IdxRangeBSOnPatch, Patch1, Patch2>;
+using MultipatchIdxRangeDeriv = MultipatchType<IdxRangeDerivOnPatch, Patch1, Patch2>;
 
 template <class ExecSpace>
 using PatchLocator = OnionPatchLocator<

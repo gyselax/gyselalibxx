@@ -58,10 +58,28 @@ DMultipatchVectorField<MultipatchIdxRange, VectorIndexSet<R, Theta>> vec_fields(
 DMultipatchField<MultipatchIdxRange> vec_fields_r = ddcHelper::get<R>(vec_fields);
 ```
 
-Other objects (e.g. `DerivField`, or vector fields whose components differ from one patch to
-another) are stored with `MultipatchFieldOf` and `MultipatchFieldMemOf`. These are templated on a
-type template which gives the type stored on each patch, e.g.
-`MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>`.
+Fields with derivatives are stored in a `MultipatchDerivField` or a `MultipatchDerivFieldMem`.
+These are templated in the same way as `DerivField` and `DerivFieldMem`. As for `DerivField`, the
+index ranges include the derivative dimensions (see `IdxRangeDerivOnPatch`). The memory can be
+allocated from the physical index ranges, in which case the derivatives are defined on the
+boundaries of each patch:
+
+```cpp
+using MultipatchIdxRangeDeriv = MultipatchType<IdxRangeDerivOnPatch, Patch1, Patch2>;
+
+DMultipatchDerivFieldMem<MultipatchIdxRangeDeriv, 1> functions_and_derivs_alloc(idx_ranges);
+DMultipatchDerivField<MultipatchIdxRangeDeriv> functions_and_derivs(functions_and_derivs_alloc);
+```
+
+Other objects (e.g. vector fields whose components differ from one patch to another) are stored
+with `MultipatchFieldOf` and `MultipatchFieldMemOf`. These are templated on a type template which
+gives the type stored on each patch, e.g. `MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2>`.
+They are also needed where a type template is expected, e.g. the `ValuesOnPatch` template
+parameter of `MultipatchSplineEvaluator2D`.
+
+All these aliases describe the same `detail::MultipatchField` and `detail::MultipatchFieldMem`
+classes. A function which needs to know the patches can therefore deduce them from a
+`detail::MultipatchField<ddc::TypeSeq<Patches...>, TypeSeqInternalTypes>` parameter.
 
 ### Types
 
@@ -72,11 +90,9 @@ In `types.hpp` file different aliases are defined to use with `MultipatchType` a
 - To store indices and index ranges:
   - 2D: `IdxRangeOnPatch` and `IdxRangeBSOnPatch` (B-splines);
   - 1D on first dimension: `IdxRange1OnPatch` and `Idx1OnPatch`;
-  - Index range slices: `IdxRange1SliceOnPatch` and `IdxRange2SliceOnPatch`.
+  - Index range slices: `IdxRange1SliceOnPatch` and `IdxRange2SliceOnPatch`;
+  - Index range of a field with derivatives, on (dx, x, dy, y): `IdxRangeDerivOnPatch`;
+  - Index ranges of derivatives: `IdxRangeDeriv1Grid2OnPatch` on (dx, y), `IdxRangeGrid1Deriv2OnPatch`
+    on (x, dy) and `IdxRangeDeriv12OnPatch` on (dx, dy).
 - To store the spline grids: `BSplines1OnPatch` and `BSplines2OnPatch`.
-- To store derivatives:
-  - $`\partial_^{(i)} f(x, y_j)`$: `ConstDeriv1_OnPatch_2D`
-  - $`\partial_^{(i)} f(x_j, y)`$: `ConstDeriv2_OnPatch_2D`
-  - $`\partial_^{(i)} \partial_y^{(j)} f(x, y)`$: `ConstDeriv12_OnPatch_2D`
-- To store fields with derivatives: `DerivFieldMemOnPatch`, `DerivFieldOnPatch` and
-  `DerivConstFieldOnPatch` (and their `_host` versions).
+- To store fields with derivatives: `DerivFieldOnPatch`.

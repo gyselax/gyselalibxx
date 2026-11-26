@@ -62,6 +62,41 @@ using Idx1OnPatch = typename Patch::Idx1;
 template <class Patch>
 using IdxRangeBSOnPatch = typename Patch::IdxRangeBS12;
 
+/**
+ * @brief The index range on (dx, x, dy, y) on which a DerivField is defined for the grids on the
+ * Patch's 2D logical domain.
+ */
+template <class Patch>
+using IdxRangeDerivOnPatch = IdxRange<
+        ddc::Deriv<typename Patch::Dim1>,
+        typename Patch::Grid1,
+        ddc::Deriv<typename Patch::Dim2>,
+        typename Patch::Grid2>;
+
+/**
+ * @brief An index range over the derivatives along the Patch's first logical dimension and the
+ * grid on the Patch's second logical dimension.
+ */
+template <class Patch>
+using IdxRangeDeriv1Grid2OnPatch
+        = IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>;
+
+/**
+ * @brief An index range over the grid on the Patch's first logical dimension and the derivatives
+ * along the Patch's second logical dimension.
+ */
+template <class Patch>
+using IdxRangeGrid1Deriv2OnPatch
+        = IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>;
+
+/**
+ * @brief An index range over the derivatives along both of the Patch's logical dimensions
+ * (e.g. for the cross-derivatives).
+ */
+template <class Patch>
+using IdxRangeDeriv12OnPatch
+        = IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>;
+
 
 // IDXRANGESLICE ---------------------------------------------------------------------------------
 
@@ -85,105 +120,12 @@ template <class Patch>
 using BSplines2OnPatch = typename Patch::BSplines2;
 
 
-// DERIVATIVES -----------------------------------------------------------------------------------
-
-// --- ON DEVICE ---
-/**
- * @brief A constant field of the n-th derivatives in the direction of Patch's first
- * logical grid defined on the index range of n and the Patch's second logical grid.
- */
-template <class Patch>
-using ConstDeriv1_OnPatch_2D
-        = DConstField<IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>>;
-
-/**
- * @brief A constant field of the n-th derivatives in the direction of Patch's second
- * logical grid defined on the index range of n and the Patch's first logical grid.
- */
-template <class Patch>
-using ConstDeriv2_OnPatch_2D
-        = DConstField<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
-
-/**
- * @brief A constant field of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
- * defined on the index ranges of valid n and m.
- */
-template <class Patch>
-using ConstDeriv12_OnPatch_2D
-        = DConstField<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
-
-
 // FIELDS WITH DERIVATIVES -----------------------------------------------------------------------
 
-// --- ON DEVICE ---
-/**
- * @brief A field memory with derivatives containing the function values on the 2D grid, the first derivatives 
- * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
- * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
- */
-template <class Patch>
-using DerivFieldMemOnPatch = DerivFieldMem<
-        double,
-        IdxRange<
-                ddc::Deriv<typename Patch::Dim1>,
-                typename Patch::Grid1,
-                ddc::Deriv<typename Patch::Dim2>,
-                typename Patch::Grid2>,
-        1>;
-
-/**
- * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives 
- * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
- * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
- */
-template <class Patch>
-using DerivFieldOnPatch = DerivField<
-        double,
-        IdxRange<
-                ddc::Deriv<typename Patch::Dim1>,
-                typename Patch::Grid1,
-                ddc::Deriv<typename Patch::Dim2>,
-                typename Patch::Grid2>>;
-
 /**
  * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives
  * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid
  * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).
  */
 template <class Patch>
-using DerivConstFieldOnPatch = DerivConstField<
-        double,
-        IdxRange<
-                ddc::Deriv<typename Patch::Dim1>,
-                typename Patch::Grid1,
-                ddc::Deriv<typename Patch::Dim2>,
-                typename Patch::Grid2>>;
-
-
-// --- ON HOST ---
-/**
- * @brief A field memory with derivatives containing the function values on the 2D grid, and first derivatives 
- * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
- * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
- * Defined on host. 
- */
-template <class Patch>
-using DerivFieldMemOnPatch_host = host_t<DerivFieldMemOnPatch<Patch>>;
-
-/**
- * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives 
- * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid 
- * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y). 
- * Defined on host. 
- */
-template <class Patch>
-using DerivFieldOnPatch_host = host_t<DerivFieldOnPatch<Patch>>;
-
-/**
- * @brief A field with derivatives containing the function values on the 2D grid, and first derivatives
- * on the boundaries of the 2D grid and the cross-derivatives on the corner of the 2D grid for the 2D grid
- * defined on the given Patch. The data are stored on an index range on (dx, x, dy, y) for a grid on (x,y).
- * Defined on host.
- */
-template <class Patch>
-using DerivConstFieldOnPatch_host = host_t<DerivConstFieldOnPatch<Patch>>;
+using DerivFieldOnPatch = DerivField<double, IdxRangeDerivOnPatch<Patch>>;
