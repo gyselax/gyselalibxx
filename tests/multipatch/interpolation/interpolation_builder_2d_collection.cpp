@@ -632,12 +632,16 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermiteWithDerivField)
 
     // Function tests
     // --- patch 1
-    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(
+            idx_range_xy1);
+    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1
+            = get_field(function_and_derivs_1_alloc);
 
     // --- patch 2
-    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(
+            idx_range_xy2);
+    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2
+            = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
             function_and_derivs_1.get_values_field(),
@@ -884,10 +888,14 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DNonSplineBuilderWithDer
     IdentityBuilderCollectionXY builder(builder1, builder2);
 
     // Function tests (the derivatives are not initialised as they are not used)
-    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(idx_range_xy1);
-    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1 = get_field(function_and_derivs_1_alloc);
-    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(idx_range_xy2);
-    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2 = get_field(function_and_derivs_2_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch1>, 1> function_and_derivs_1_alloc(
+            idx_range_xy1);
+    DerivField<double, IdxRangeDerivOnPatch<Patch1>> function_and_derivs_1
+            = get_field(function_and_derivs_1_alloc);
+    DerivFieldMem<double, IdxRangeDerivOnPatch<Patch2>, 1> function_and_derivs_2_alloc(
+            idx_range_xy2);
+    DerivField<double, IdxRangeDerivOnPatch<Patch2>> function_and_derivs_2
+            = get_field(function_and_derivs_2_alloc);
 
     initialise_2D_functions(
             function_and_derivs_1.get_values_field(),

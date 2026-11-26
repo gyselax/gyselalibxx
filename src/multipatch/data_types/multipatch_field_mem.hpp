@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "multipatch_field.hpp"
 #include "derivative_field_mem.hpp"
+#include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "vector_field_mem.hpp"
 
@@ -411,11 +411,9 @@ template <
         class MultipatchIdxRange,
         int NDerivs,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
-using MultipatchDerivFieldMem = typename detail::MultipatchDerivFieldMemFromIdxRange<
-        ElementType,
-        MultipatchIdxRange,
-        NDerivs,
-        MemorySpace>::type;
+using MultipatchDerivFieldMem = typename detail::
+        MultipatchDerivFieldMemFromIdxRange<ElementType, MultipatchIdxRange, NDerivs, MemorySpace>::
+                type;
 
 /**
  * @brief A class to store a DerivFieldMem of doubles on each patch.
