@@ -8,28 +8,28 @@ types defined on a multipatch domain.
 The class `MultipatchType` stores different objects of a type which is templated with
 patches (see `Patch`). The `MultipatchType::get` method can be used to
 retrieve an object defined on a specified patch.
-For example we can use fields on different patches which would be the type
-`DField<Patch::IdxRange12>`.
+For example we can use index ranges on different patches which would be the type
+`Patch::IdxRange12`.
 
 So after defining
 
 ```cpp
 template<class Patch>
-using DFieldOnPatch = DField<Patch::IdxRange12>;
+using IdxFieldOnPatch = typename Patch::IdxRange12;
 ```
 
-we could then have three fields `field1`, `field2` and `field3` on
+we could then have three index ranges `idx_range1`, `idx_range2` and `idx_range3` on
 patches 1,2 and 3 respectively. The `MultipatchType` object would then
 be initialised as
 
 ```cpp
-MultipatchType<DFieldOnPatch, Patch1, Patch2, Patch3> multipatch_field(field1, field2, field3);
+MultipatchType<IdxFieldOnPatch, Patch1, Patch2, Patch3> multipatch_idx_range(idx_range1, idx_range2, idx_range3);
 ```
 
-and the field on patch 3 can be retrieved via
+and the index range on patch 3 can be retrieved via
 
 ```cpp
-DField<Patch3::IdxRange12> field3_from_multipatch = multipatch_field.get<Patch3>();
+typename Patch3::IdxRange12 index_range3_from_multipatch = multipatch_idx_range.get<Patch3>();
 ```
 
 ## MultipatchField and MultipatchFieldMem
