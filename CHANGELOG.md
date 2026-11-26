@@ -125,7 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `MatrixBatchEll::norm`.
 - Remove `detail::combine_t` (prefer `ddc::combine_t`).
 - Remove `SingleInterfaceDerivativesCalculatorCollection`.
-- Remove the per-patch field and vector field aliases from `types.hpp`:
+- Remove the per-patch field, vector field and derivative field aliases from `types.hpp`:
   - `DFieldMemOnPatch`
   - `DFieldMem1OnPatch`
   - `DFieldMem2OnPatch`
@@ -151,6 +151,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `DVectorFieldMemOnPatch`
   - `DVectorFieldOnPatch`
   - `DVectorConstFieldOnPatch`
+  - `DerivFieldMemOnPatch`
+  - `DerivFieldMemOnPatch_host`
+  - `DerivConstFieldOnPatch`
+  - `DerivConstFieldOnPatch_host`
+  - `DerivFieldOnPatch_host`
 
 ### Dependency requirements
 
