@@ -2042,14 +2042,16 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
             Kokkos::DefaultExecutionSpace(),
             idx_range_coords_1,
             KOKKOS_LAMBDA(Patch1::Idx12 const idx) {
-                double const r = (ddc::select<Patch1::Grid1>(idx).uid() == 0) ? 0.5 : 2.3;
+                double const r
+                        = ((typename Patch1::Idx1)(idx) == (typename Patch1::Idx1)(0)) ? 0.5 : 2.3;
                 eval_points_1(idx) = Coord<R, Theta>(r, M_PI / 2);
             });
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             idx_range_coords_2,
             KOKKOS_LAMBDA(Patch2::Idx12 const idx) {
-                double const r = (ddc::select<Patch2::Grid1>(idx).uid() == 0) ? 0.5 : 2.3;
+                double const r
+                        = ((typename Patch2::Idx1)(idx) == (typename Patch2::Idx1)(0)) ? 0.5 : 2.3;
                 eval_points_2(idx) = Coord<R, Theta>(r, M_PI / 2);
             });
 
