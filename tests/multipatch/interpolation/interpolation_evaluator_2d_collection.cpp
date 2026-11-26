@@ -57,26 +57,26 @@ using BatchedDFieldOnPatch = DField<IdxRangeBatchedOnPatch<Patch>>;
 
 /// @brief The type of the index range of batched spline coefficients on a patch.
 template <class Patch>
-using BatchedIdxRangeSplineCoeffOnPatch
+using IdxRangeBatchedSplineCoeffOnPatch
         = IdxRange<GridBatch, typename Patch::BSplines1, typename Patch::BSplines2>;
 
 /// @brief The type of a batched field memory block of spline coefficients on a patch.
 template <class Patch>
-using BatchedSplineCoeffMemOnPatch = DFieldMem<BatchedIdxRangeSplineCoeffOnPatch<Patch>>;
+using BatchedSplineCoeffMemOnPatch = DFieldMem<IdxRangeBatchedSplineCoeffOnPatch<Patch>>;
 
 /// @brief The type of a batched field of spline coefficients on a patch.
 template <class Patch>
-using BatchedSplineCoeffOnPatch = DField<BatchedIdxRangeSplineCoeffOnPatch<Patch>>;
+using BatchedSplineCoeffOnPatch = DField<IdxRangeBatchedSplineCoeffOnPatch<Patch>>;
 
 /// @brief The type of a batched field of constant spline coefficients on a patch.
 template <class Patch>
-using BatchedConstSplineCoeffOnPatch = DConstField<BatchedIdxRangeSplineCoeffOnPatch<Patch>>;
+using BatchedConstSplineCoeffOnPatch = DConstField<IdxRangeBatchedSplineCoeffOnPatch<Patch>>;
 
 /// @brief The type of the index range on which a batched field with derivatives is defined on
 /// a patch: the batch dimension, the derivative dimension associated with each dimension of
 /// the mesh and the 2D mesh.
 template <class Patch>
-using BatchedIdxRangeDerivOnPatch = IdxRange<
+using IdxRangeBatchedDerivOnPatch = IdxRange<
         GridBatch,
         ddc::Deriv<typename Patch::Dim1>,
         typename Patch::Grid1,
@@ -87,11 +87,11 @@ using BatchedIdxRangeDerivOnPatch = IdxRange<
 /// defined on the batched 2D mesh, the first derivatives on the edges of the mesh and the
 /// cross-derivatives on the corners.
 template <class Patch>
-using BatchedDerivFieldMemOnPatch = DerivFieldMem<double, BatchedIdxRangeDerivOnPatch<Patch>, 1>;
+using BatchedDerivFieldMemOnPatch = DerivFieldMem<double, IdxRangeBatchedDerivOnPatch<Patch>, 1>;
 
 /// @brief The type of a batched field with derivatives on a patch.
 template <class Patch>
-using BatchedDerivFieldOnPatch = DerivField<double, BatchedIdxRangeDerivOnPatch<Patch>>;
+using BatchedDerivFieldOnPatch = DerivField<double, IdxRangeBatchedDerivOnPatch<Patch>>;
 
 
 namespace {
@@ -606,21 +606,21 @@ using LagrangeConstCoeffOnPatch = DConstField<IdxRangeLagrangeCoeff<Patch>>;
 /// coefficient grids (the knots of the Lagrange bases) depend on the uniformity of the
 /// bases, so the batched coefficient index range is obtained from the traits of the evaluator.
 template <class Patch>
-using BatchedIdxRangeLagCoeffOnPatch =
+using IdxRangeBatchedLagCoeffOnPatch =
         typename InterpolationEvaluatorTraits<LagrangeEvaluatorRTheta<Patch>>::
                 template batched_coeff_idx_range_type<IdxRangeBatchedOnPatch<Patch>>;
 
 /// @brief The type of a batched field memory block of Lagrange coefficients on a patch.
 template <class Patch>
-using BatchedLagrangeCoeffMemOnPatch = DFieldMem<BatchedIdxRangeLagCoeffOnPatch<Patch>>;
+using BatchedLagrangeCoeffMemOnPatch = DFieldMem<IdxRangeBatchedLagCoeffOnPatch<Patch>>;
 
 /// @brief The type of a batched field of Lagrange coefficients on a patch.
 template <class Patch>
-using BatchedLagrangeCoeffOnPatch = DField<BatchedIdxRangeLagCoeffOnPatch<Patch>>;
+using BatchedLagrangeCoeffOnPatch = DField<IdxRangeBatchedLagCoeffOnPatch<Patch>>;
 
 /// @brief The type of a batched field of constant Lagrange coefficients on a patch.
 template <class Patch>
-using BatchedLagrangeConstCoeffOnPatch = DConstField<BatchedIdxRangeLagCoeffOnPatch<Patch>>;
+using BatchedLagrangeConstCoeffOnPatch = DConstField<IdxRangeBatchedLagCoeffOnPatch<Patch>>;
 
 using LagrangeEvaluatorCollection = InterpolationEvaluator2DCollection<
         ddc::TypeSeq<Patch1, Patch2>,
@@ -1902,7 +1902,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedOnCoordField)
     SplineRThetaBuilderCollection const builder_collection(builder_1, builder_2);
 
     // --- collection
-    MultipatchType<BatchedIdxRangeSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
+    MultipatchType<IdxRangeBatchedSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
             builder_collection.batched_basis_idx_ranges(batched_idx_range_rtheta));
     MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_splines_alloc(
             batched_spline_idx_ranges);
@@ -1983,9 +1983,9 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
 
     // Batched interpolation coefficients: each batch slice is the coefficients of the fixture
     // scaled by the batch index + 1 (the spline representation is linear in the coefficients).
-    MultipatchType<BatchedIdxRangeSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
-            BatchedIdxRangeSplineCoeffOnPatch<Patch1>(batch_idx_range, spline_idx_range_rtheta1),
-            BatchedIdxRangeSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
+    MultipatchType<IdxRangeBatchedSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
+            IdxRangeBatchedSplineCoeffOnPatch<Patch1>(batch_idx_range, spline_idx_range_rtheta1),
+            IdxRangeBatchedSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
     MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
             batched_spline_idx_ranges);
     BatchedSplineCoeffOnPatch<Patch1> batched_coeffs_1 = batched_coeffs_alloc.get<Patch1>();
@@ -2147,9 +2147,9 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordF
 
     // Batched interpolation coefficients: each batch slice is the coefficients of the fixture
     // scaled by the batch index + 1 (the spline representation is linear in the coefficients).
-    MultipatchType<BatchedIdxRangeSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
-            BatchedIdxRangeSplineCoeffOnPatch<Patch1>(batch_idx_range, spline_idx_range_rtheta1),
-            BatchedIdxRangeSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
+    MultipatchType<IdxRangeBatchedSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
+            IdxRangeBatchedSplineCoeffOnPatch<Patch1>(batch_idx_range, spline_idx_range_rtheta1),
+            IdxRangeBatchedSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
     MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
             batched_spline_idx_ranges);
     BatchedSplineCoeffOnPatch<Patch1> batched_coeffs_1 = batched_coeffs_alloc.get<Patch1>();
@@ -2431,7 +2431,7 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateBatchedOnCoordFie
     LagrangeBuilderCollection const builder_collection(builder_1, builder_2);
 
     // --- collection
-    MultipatchType<BatchedIdxRangeLagCoeffOnPatch, Patch1, Patch2> batched_coeffs_idx_ranges(
+    MultipatchType<IdxRangeBatchedLagCoeffOnPatch, Patch1, Patch2> batched_coeffs_idx_ranges(
             builder_collection.batched_basis_idx_ranges(batched_idx_range_rtheta));
     MultipatchFieldMem<BatchedLagrangeCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
             batched_coeffs_idx_ranges);
