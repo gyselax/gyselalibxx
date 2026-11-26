@@ -235,7 +235,8 @@ TEST_F(MultiPatchField2Patches, DerivField)
 {
     MultipatchIdxRange idx_ranges(index_range_xy1, index_range_xy2);
 
-    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(idx_ranges);
+    MultipatchFieldMemOf<DerivFieldMemOnPatch, Patch1, Patch2> functions_and_derivs_alloc(
+            idx_ranges);
     MultipatchFieldOf<DerivFieldOnPatch, Patch1, Patch2> functions_and_derivs(
             functions_and_derivs_alloc);
 

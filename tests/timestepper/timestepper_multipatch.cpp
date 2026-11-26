@@ -27,7 +27,8 @@ using MultipatchIdxRangeRTheta = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
 using CMultipatchFieldMemRTheta = MultipatchFieldMem<Coord<R, Theta>, MultipatchIdxRangeRTheta>;
 using CMultipatchFieldRTheta = MultipatchField<Coord<R, Theta>, MultipatchIdxRangeRTheta>;
 using CMultipatchConstFieldRTheta = MultipatchConstField<Coord<R, Theta>, MultipatchIdxRangeRTheta>;
-using CMultipatchVectorFieldMemRTheta = MultipatchFieldMemOf<DVectorFieldMemOnPatch, Patch1, Patch2>;
+using CMultipatchVectorFieldMemRTheta
+        = MultipatchFieldMemOf<DVectorFieldMemOnPatch, Patch1, Patch2>;
 using CMultipatchVectorFieldRTheta = typename CMultipatchVectorFieldMemRTheta::span_type;
 using CMultipatchVectorConstFieldRTheta = typename CMultipatchVectorFieldMemRTheta::view_type;
 

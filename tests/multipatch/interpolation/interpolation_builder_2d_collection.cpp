@@ -334,8 +334,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2D)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    DMultipatchField<MultipatchIdxRangeSplineCoeff>
-            function_coef(function_1_coef, function_2_coef);
+    DMultipatchField<MultipatchIdxRangeSplineCoeff> function_coef(function_1_coef, function_2_coef);
 
 
     // Build the spline representations on each patch
@@ -549,8 +548,7 @@ TEST_F(InterpolationBuilder2DCollectionTest, TwoPatches2DHermite)
             = get_field(function_2_coef_expected_alloc);
 
     // --- collection
-    DMultipatchField<MultipatchIdxRangeSplineCoeff>
-            function_coef(function_1_coef, function_2_coef);
+    DMultipatchField<MultipatchIdxRangeSplineCoeff> function_coef(function_1_coef, function_2_coef);
 
 
     // Build the spline representations on each patch

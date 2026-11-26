@@ -364,8 +364,10 @@ void check_deriv_match(
         typename PatchP::IdxRange12 idx_range_deriv(idx_range_1d, idx_range_eval_edge);
 
         // Evaluation points on the edge.
-        FieldMem<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_deriv_alloc(idx_range_deriv);
-        Field<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_deriv(eval_points_deriv_alloc);
+        FieldMem<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_deriv_alloc(
+                idx_range_deriv);
+        Field<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_deriv(
+                eval_points_deriv_alloc);
 
         set_eval_points_2D<typename PatchP::Grid1, typename PatchP::Grid2>(eval_points_deriv);
 
@@ -423,8 +425,10 @@ void check_cross_deriv_match(
             typename PatchP::IdxRange12 idx_range_deriv(idx_range_1, idx_range_2);
 
             // Evaluation points on the edge.
-            FieldMem<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_cross_deriv_alloc(idx_range_deriv);
-            Field<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_cross_deriv(eval_points_cross_deriv_alloc);
+            FieldMem<typename PatchP::Coord12, typename PatchP::IdxRange12>
+                    eval_points_cross_deriv_alloc(idx_range_deriv);
+            Field<typename PatchP::Coord12, typename PatchP::IdxRange12> eval_points_cross_deriv(
+                    eval_points_cross_deriv_alloc);
 
             set_eval_points_2D<typename PatchP::Grid1, typename PatchP::Grid2>(
                     eval_points_cross_deriv);
