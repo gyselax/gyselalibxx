@@ -95,7 +95,12 @@ The methods implemented are
 - `integrate()` to compute the integral on each patch. The integrals are stored in a `Kokkos::View` defined on host and of the same size as the number of patches.
   This method is only available if all the evaluators are spline evaluators (`ddc::SplineEvaluatorND`).
 
-**Warning:** The current version of `InterpolationEvaluator2DCollection` does not work on batched domains.
+The evaluations can also be computed for a batch of points at once.
+In that case, the fields of values (stored in `DField` or `DerivField` objects) are defined on an index range extended with batch dimensions, e.g. `(batch, Grid1, Grid2)`.
+The interpolation coefficients on each patch are then defined on the same index range with the interpolation grids replaced by the bases of the interpolations, e.g. `(batch, BSplines1, BSplines2)`.
+Such batched coefficients can be built with `InterpolationBuilder2DCollection` (see [Multipatch interpolation builder](#multipatch-interpolation-builder)).
+The fields of coordinates are shared by all the batch points and remain defined on the 2D mesh `(Grid1, Grid2)` of each patch.
+The evaluation on a single coordinate and the `integrate()` method are only available with unbatched coefficients.
 
 **Warning:** `InterpolationEvaluator2DCollection` only works for patches defined on the same continuous dimensions.
 

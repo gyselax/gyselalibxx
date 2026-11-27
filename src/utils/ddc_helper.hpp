@@ -312,6 +312,26 @@ KOKKOS_INLINE_FUNCTION std::size_t get_linear_index_from_idx(
         return linear_idx;
     }
 }
+
+/**
+ * @brief Convert an IdxRange to an IdxRangeSlice (with stride 1).
+ *
+ * Convert an IdxRange to an IdxRangeSlice. The stride is set to 1. This
+ * conversion is useful to assemble a multi-dimensional IdxRangeSlice but
+ * iterating over an IdxRangeSlice is more costly than iterating over an
+ * IdxRange.
+ *
+ * @param[in] idx_range The original index range.
+ * @return The equivalent index range slice.
+ */
+template <ddc::concepts::discrete_dimension... Dims>
+IdxRangeSlice<Dims...> to_strided_idx_range(IdxRange<Dims...> idx_range)
+{
+    return IdxRangeSlice<Dims...>(
+            idx_range.front(),
+            idx_range.extents(),
+            IdxStep<Dims...> {IdxStep<Dims> {1}...});
+}
 } // namespace ddcHelper
 
 //-----------------------------------------------------------------------------

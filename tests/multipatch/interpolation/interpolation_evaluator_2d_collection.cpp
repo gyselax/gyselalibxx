@@ -10,6 +10,7 @@
 #include "constant_extrapolation_rules_onion.hpp"
 #include "i_interpolation_builder.hpp"
 #include "i_interpolation_evaluator.hpp"
+#include "interpolation_builder_2d_collection.hpp"
 #include "interpolation_evaluator_2d_collection.hpp"
 #include "l_norm_tools.hpp"
 #include "lagrange_basis_non_uniform.hpp"
@@ -37,6 +38,63 @@ struct LagBasisTheta : NonUniformLagrangeBasis<typename Patch::Dim2, 3>
 {
 };
 
+/**
+ * @brief A plain discrete dimension used to define a batch of interpolation coefficients
+ * in the batched tests below.
+ */
+struct GridBatch : ddc::DiscreteDimension
+{
+};
+
+template <class Patch>
+using IdxRangeBatchedOnPatch = IdxRange<GridBatch, typename Patch::Grid1, typename Patch::Grid2>;
+
+/// @brief The type of a batched field memory block of evaluated values on a patch.
+template <class Patch>
+using BatchedDFieldMemOnPatch = DFieldMem<IdxRangeBatchedOnPatch<Patch>>;
+
+/// @brief The type of a batched field of evaluated values on a patch.
+template <class Patch>
+using BatchedDFieldOnPatch = DField<IdxRangeBatchedOnPatch<Patch>>;
+
+/// @brief The type of the index range of batched spline coefficients on a patch.
+template <class Patch>
+using IdxRangeBatchedSplineCoeffOnPatch
+        = IdxRange<GridBatch, typename Patch::BSplines1, typename Patch::BSplines2>;
+
+/// @brief The type of a batched field memory block of spline coefficients on a patch.
+template <class Patch>
+using BatchedSplineCoeffMemOnPatch = DFieldMem<IdxRangeBatchedSplineCoeffOnPatch<Patch>>;
+
+/// @brief The type of a batched field of spline coefficients on a patch.
+template <class Patch>
+using BatchedSplineCoeffOnPatch = DField<IdxRangeBatchedSplineCoeffOnPatch<Patch>>;
+
+/// @brief The type of a batched field of constant spline coefficients on a patch.
+template <class Patch>
+using BatchedConstSplineCoeffOnPatch = DConstField<IdxRangeBatchedSplineCoeffOnPatch<Patch>>;
+
+/// @brief The type of the index range on which a batched field with derivatives is defined on
+/// a patch: the batch dimension, the derivative dimension associated with each dimension of
+/// the mesh and the 2D mesh.
+template <class Patch>
+using IdxRangeBatchedDerivOnPatch = IdxRange<
+        GridBatch,
+        ddc::Deriv<typename Patch::Dim1>,
+        typename Patch::Grid1,
+        ddc::Deriv<typename Patch::Dim2>,
+        typename Patch::Grid2>;
+
+/// @brief The type of a batched field memory block with derivatives on a patch. The values are
+/// defined on the batched 2D mesh, the first derivatives on the edges of the mesh and the
+/// cross-derivatives on the corners.
+template <class Patch>
+using BatchedDerivFieldMemOnPatch = DerivFieldMem<double, IdxRangeBatchedDerivOnPatch<Patch>, 1>;
+
+/// @brief The type of a batched field with derivatives on a patch.
+template <class Patch>
+using BatchedDerivFieldOnPatch = DerivField<double, IdxRangeBatchedDerivOnPatch<Patch>>;
+
 
 namespace {
 template <typename ExecSpace>
@@ -49,6 +107,13 @@ using MultipatchSplineRThetaInterpolation = MultipatchSplineInterpolator2D<
 template <typename ExecSpace>
 using MultipatchSplineRThetaEvaluator =
         typename MultipatchSplineRThetaInterpolation<ExecSpace>::EvaluatorType;
+
+/// @brief A collection of the spline builders of each patch.
+using SplineRThetaBuilderCollection = InterpolationBuilder2DCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<
+                SplineRThetaBuilder_host<1, DeviceExecSpace>,
+                SplineRThetaBuilder_host<2, DeviceExecSpace>>>;
 
 class InterpolationEvaluator2DCollectionTest : public MultipatchSplineOnionShapeTest
 {
@@ -483,6 +548,67 @@ void check_cross_deriv_match(
     }
 };
 
+// Batched evaluation helpers ------------------------------------------------------------------
+
+/**
+ * @brief Fill a field defined on a batched 2D mesh with
+ * @f$ (b+1) r^{\mathrm{Power}} \sin(\theta) @f$ @f$ (b @f$ being the batch index@f$) @f$.
+ *
+ * This corresponds to the functions interpolated on the patches in the tests below
+ * (@f$ r^{\mathrm{Power}}\sin(\theta) @f$, with Power=1 on Patch1 and Power=2 on Patch2),
+ * each batch slice being scaled by its batch index + 1.
+ *
+ * @tparam Grid1 The grid of the first dimension of the mesh.
+ * @tparam Grid2 The grid of the second dimension of the mesh.
+ * @param[inout] batched_values The field of values to fill.
+ * @param[in] power The power of r in the interpolated function.
+ */
+template <class Grid1, class Grid2>
+void set_batched_function_values(
+        DField<IdxRange<GridBatch, Grid1, Grid2>> batched_values,
+        int power)
+{
+    IdxRange<GridBatch, Grid1, Grid2> const idx_range = get_idx_range(batched_values);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range,
+            KOKKOS_LAMBDA(Idx<GridBatch, Grid1, Grid2> const idx) {
+                double const r = ddc::coordinate(Idx<Grid1>(idx));
+                double const theta = ddc::coordinate(Idx<Grid2>(idx));
+                double const batch_factor
+                        = (Idx<GridBatch>(idx) - get_idx_range<GridBatch>(batched_values).front())
+                          + 1;
+                batched_values(idx) = batch_factor * Kokkos::pow(r, power) * Kokkos::sin(theta);
+            });
+}
+
+/**
+ * @brief Fill a batched field of spline coefficients so that each batch slice is the given
+ * spline coefficients scaled by its batch index + 1 (the spline representation is linear in
+ * the coefficients).
+ *
+ * @tparam Patch The patch on which the spline coefficients are defined.
+ * @param[inout] batched_coeffs The batched field of spline coefficients to fill.
+ * @param[in] coeffs The spline coefficients scaled into each batch slice.
+ */
+template <class Patch>
+void fill_batched_spline_coeffs(
+        BatchedSplineCoeffOnPatch<Patch> batched_coeffs,
+        ConstSplineCoeffOnPatch_2D<Patch> coeffs)
+{
+    using IdxBatchedCoeffs = Idx<GridBatch, typename Patch::BSplines1, typename Patch::BSplines2>;
+    using IdxCoeffs = Idx<typename Patch::BSplines1, typename Patch::BSplines2>;
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(batched_coeffs),
+            KOKKOS_LAMBDA(IdxBatchedCoeffs const idx) {
+                double const batch_factor
+                        = (Idx<GridBatch>(idx) - get_idx_range<GridBatch>(batched_coeffs).front())
+                          + 1;
+                batched_coeffs(idx) = batch_factor * coeffs(IdxCoeffs(idx));
+            });
+}
+
 // Non-spline (Lagrange) evaluators ------------------------------------------------------------
 template <class Patch>
 using LagrangeEvaluatorR = LagrangeEvaluator<
@@ -516,6 +642,11 @@ using LagrangeBuilderRTheta = NDIdentityInterpolationBuilder<
         typename Patch::IdxRange12,
         IdxRange<LagBasisR<Patch>, LagBasisTheta<Patch>>>;
 
+/// @brief A collection of the Lagrange builders of each patch.
+using LagrangeBuilderCollection = InterpolationBuilder2DCollection<
+        ddc::TypeSeq<Patch1, Patch2>,
+        ddc::TypeSeq<LagrangeBuilderRTheta<Patch1>, LagrangeBuilderRTheta<Patch2>>>;
+
 template <class Patch>
 using IdxRangeLagrangeCoeff =
         typename InterpolationEvaluatorTraits<LagrangeEvaluatorRTheta<Patch>>::coeff_idx_range_type;
@@ -525,6 +656,26 @@ using LagrangeCoeffMemOnPatch = DFieldMem<IdxRangeLagrangeCoeff<Patch>>;
 
 template <class Patch>
 using LagrangeConstCoeffOnPatch = DConstField<IdxRangeLagrangeCoeff<Patch>>;
+
+/// @brief The type of the index range of batched Lagrange coefficients on a patch. The
+/// coefficient grids (the knots of the Lagrange bases) depend on the uniformity of the
+/// bases, so the batched coefficient index range is obtained from the traits of the evaluator.
+template <class Patch>
+using IdxRangeBatchedLagCoeffOnPatch =
+        typename InterpolationEvaluatorTraits<LagrangeEvaluatorRTheta<Patch>>::
+                template batched_coeff_idx_range_type<IdxRangeBatchedOnPatch<Patch>>;
+
+/// @brief The type of a batched field memory block of Lagrange coefficients on a patch.
+template <class Patch>
+using BatchedLagrangeCoeffMemOnPatch = DFieldMem<IdxRangeBatchedLagCoeffOnPatch<Patch>>;
+
+/// @brief The type of a batched field of Lagrange coefficients on a patch.
+template <class Patch>
+using BatchedLagrangeCoeffOnPatch = DField<IdxRangeBatchedLagCoeffOnPatch<Patch>>;
+
+/// @brief The type of a batched field of constant Lagrange coefficients on a patch.
+template <class Patch>
+using BatchedLagrangeConstCoeffOnPatch = DConstField<IdxRangeBatchedLagCoeffOnPatch<Patch>>;
 
 using MultipatchLagrangeInterpolation = MultipatchLagrangeInterpolator2D<
         PatchLocator<DeviceExecSpace>,
@@ -603,6 +754,355 @@ LagrangeEvaluatorRTheta<Patch> make_lagrange_evaluator()
     LagrangeEvaluatorR<Patch> const evaluator_r(null_extrap, null_extrap);
     LagrangeEvaluatorTheta<Patch> const evaluator_theta(periodic_extrap, periodic_extrap);
     return LagrangeEvaluatorRTheta<Patch>(evaluator_r, evaluator_theta);
+}
+
+/**
+ * Check a collection evaluated on batched domains against the evaluator of each patch.
+ *
+ * The values and the interpolation coefficients carry a batch dimension, the coordinates
+ * being shared by all the batch points. Each batch slice of the evaluated values is compared
+ * with the evaluation of the corresponding batch slice of the coefficients with the evaluator
+ * of the patch where the coordinates are stored.
+ *
+ * @tparam EvaluatorCollection The type of the InterpolationEvaluator2DCollection.
+ * @tparam Evaluator1 The type of the evaluator of the Patch1.
+ * @tparam Evaluator2 The type of the evaluator of the Patch2.
+ * @tparam MultipatchBatchedCoeffs The type of the MultipatchField of batched coefficients.
+ * @tparam DerivDims Derivative dimension types. Empty for the evaluation of the values.
+ * @param[in] deriv_order Order (k,l) of the derivatives (unused if empty).
+ * @param[in] evaluators The InterpolationEvaluator2DCollection to test.
+ * @param[in] evaluator_1 The evaluator of the Patch1.
+ * @param[in] evaluator_2 The evaluator of the Patch2.
+ * @param[in] batch_idx_range The index range of the batch points.
+ * @param[in] eval_points MultipatchField of the coordinates where the interpolations
+ *          are evaluated (defined on the 2D mesh of each patch).
+ * @param[in] batched_coeffs MultipatchField of the batched interpolation coefficients.
+ * @param[in] TOL The tolerance on each element.
+ */
+template <
+        class EvaluatorCollection,
+        class Evaluator1,
+        class Evaluator2,
+        class MultipatchBatchedCoeffs,
+        class... DerivDims>
+void check_batched_on_coord_field(
+        Idx<DerivDims...> const& deriv_order,
+        EvaluatorCollection const& evaluators,
+        Evaluator1 const& evaluator_1,
+        Evaluator2 const& evaluator_2,
+        IdxRange<GridBatch> const& batch_idx_range,
+        MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const& eval_points,
+        MultipatchBatchedCoeffs const& batched_coeffs,
+        double const TOL)
+{
+    Patch1::IdxRange12 const idx_range_eval_1 = get_idx_range(eval_points.get<Patch1>());
+    Patch2::IdxRange12 const idx_range_eval_2 = get_idx_range(eval_points.get<Patch2>());
+
+    // Evaluated values on the batched domains.
+    MultipatchType<IdxRangeBatchedOnPatch, Patch1, Patch2> batched_idx_range_evals(
+            IdxRangeBatchedOnPatch<Patch1>(batch_idx_range, idx_range_eval_1),
+            IdxRangeBatchedOnPatch<Patch2>(batch_idx_range, idx_range_eval_2));
+    MultipatchFieldMem<BatchedDFieldMemOnPatch, Patch1, Patch2> eval_values_alloc(
+            batched_idx_range_evals);
+    MultipatchField<BatchedDFieldOnPatch, Patch1, Patch2> const eval_values(eval_values_alloc);
+
+    if constexpr (sizeof...(DerivDims) == 0) {
+        evaluators(eval_values, eval_points, batched_coeffs);
+    } else {
+        evaluators.deriv(deriv_order, eval_values, eval_points, batched_coeffs);
+    }
+
+    // Expected values, obtained by evaluating the corresponding batch slice of the
+    // coefficients with the evaluator of each patch.
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_evals(idx_range_eval_1, idx_range_eval_2);
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> expected_alloc(idx_range_evals);
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> const expected(expected_alloc);
+
+    for (Idx<GridBatch> const batch : batch_idx_range) {
+        if constexpr (sizeof...(DerivDims) == 0) {
+            evaluator_1(
+                    expected.get<Patch1>(),
+                    eval_points.get<Patch1>(),
+                    get_const_field(batched_coeffs.template get<Patch1>())[batch]);
+            evaluator_2(
+                    expected.get<Patch2>(),
+                    eval_points.get<Patch2>(),
+                    get_const_field(batched_coeffs.template get<Patch2>())[batch]);
+        } else {
+            evaluator_1
+                    .deriv(deriv_order,
+                           expected.get<Patch1>(),
+                           eval_points.get<Patch1>(),
+                           get_const_field(batched_coeffs.template get<Patch1>())[batch]);
+            evaluator_2
+                    .deriv(deriv_order,
+                           expected.get<Patch2>(),
+                           eval_points.get<Patch2>(),
+                           get_const_field(batched_coeffs.template get<Patch2>())[batch]);
+        }
+
+        // Compare the batch slice of the collection output with the expected values.
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch1>()[batch]),
+                        get_const_field(expected.get<Patch1>())),
+                TOL);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch2>()[batch]),
+                        get_const_field(expected.get<Patch2>())),
+                TOL);
+    }
+}
+
+/**
+ * @brief Check the derivatives evaluated on a batched DerivField against the evaluation of
+ * each batch slice of the coefficients with the evaluator of the patch.
+ *
+ * For each batch point, the derivative (or the values if the order is 0) is checked on the
+ * two edge lines of the given dimension. The coordinates are shared by all the batch points.
+ *
+ * @tparam PatchP The patch on which the derivatives are evaluated.
+ * @tparam GridDeriv The grid of the dimension along which the edge lines are taken.
+ * @param[in] deriv_order Order of the derivative (0 for the values).
+ * @param[in] batch_idx_range The index range of the batch points.
+ * @param[in] idx_range_eval_rtheta The 2D index range of the evaluation points, shared by all
+ *          the batch points.
+ * @param[in] eval_function_and_derivs The batched DerivField filled by the collection.
+ * @param[in] evaluator The evaluator of the PatchP.
+ * @param[in] batched_coeffs The batched interpolation coefficients on the PatchP.
+ */
+template <class PatchP, class GridDeriv>
+void check_batched_deriv_match(
+        Idx<ddc::Deriv<typename GridDeriv::continuous_dimension_type>> deriv_order,
+        IdxRange<GridBatch> const& batch_idx_range,
+        typename PatchP::IdxRange12 const& idx_range_eval_rtheta,
+        BatchedDerivFieldOnPatch<PatchP> eval_function_and_derivs,
+        SplineRThetaEvaluator<
+                ddc::type_seq_rank_v<PatchP, ddc::TypeSeq<Patch1, Patch2>> + 1,
+                DeviceExecSpace> const& evaluator,
+        BatchedConstSplineCoeffOnPatch<PatchP> batched_coeffs)
+{
+    using GridEdge = std::conditional_t<
+            std::is_same_v<GridDeriv, typename PatchP::Grid1>,
+            typename PatchP::Grid2,
+            typename PatchP::Grid1>;
+
+    IdxRange<GridDeriv> idx_range_eval_1d(idx_range_eval_rtheta);
+    IdxRange<GridEdge> idx_range_eval_edge(idx_range_eval_rtheta);
+
+    for (Idx<GridBatch> const batch : batch_idx_range) {
+        for (Idx<GridDeriv> idx_1d :
+             std::vector<Idx<GridDeriv>> {idx_range_eval_1d.front(), idx_range_eval_1d.back()}) {
+            IdxRange<GridDeriv> const idx_range_1d(idx_1d, IdxStep<GridDeriv>(1));
+            typename PatchP::IdxRange12 idx_range_deriv(idx_range_1d, idx_range_eval_edge);
+
+            // Evaluation points on the edge.
+            CoordFieldMemOnPatch<PatchP> eval_points_deriv_alloc(idx_range_deriv);
+            CoordFieldOnPatch<PatchP> eval_points_deriv(eval_points_deriv_alloc);
+
+            set_eval_points_2D<typename PatchP::Grid1, typename PatchP::Grid2>(eval_points_deriv);
+
+            // Expected derivatives, evaluated from the batch slice of the coefficients.
+            DFieldMemOnPatch<PatchP> expected_deriv_alloc(idx_range_deriv);
+            DFieldOnPatch<PatchP> expected_deriv(expected_deriv_alloc);
+
+            if (deriv_order == Idx<ddc::Deriv<typename GridDeriv::continuous_dimension_type>>(0)) {
+                evaluator(
+                        expected_deriv,
+                        get_const_field(eval_points_deriv),
+                        batched_coeffs[batch]);
+            } else {
+                evaluator
+                        .deriv(deriv_order,
+                               expected_deriv,
+                               get_const_field(eval_points_deriv),
+                               batched_coeffs[batch]);
+            }
+
+            // Compare the evaluated derivatives with the expected derivatives.
+            // --- define DField for ddc::create_mirror_and_copy().
+            DFieldMemOnPatch<PatchP> eval_deriv_alloc(idx_range_deriv);
+            DFieldOnPatch<PatchP> eval_deriv(eval_deriv_alloc);
+
+            ddc::parallel_for_each(
+                    Kokkos::DefaultExecutionSpace(),
+                    get_idx_range(eval_deriv),
+                    KOKKOS_LAMBDA(typename PatchP::Idx12 const idx) {
+                        eval_deriv(idx) = eval_function_and_derivs(deriv_order, batch, idx);
+                    });
+
+            // --- put the functions on host
+            auto const expected_deriv_host = ddc::create_mirror_and_copy(expected_deriv);
+            auto const eval_deriv_host = ddc::create_mirror_and_copy(eval_deriv);
+
+            // --- check errors.
+            check_near<PatchP>(get_field(expected_deriv_host), get_field(eval_deriv_host), 1e-11);
+        }
+    }
+};
+
+/**
+ * @brief Check the cross-derivatives evaluated on a batched DerivField against the evaluation
+ * of each batch slice of the coefficients with the evaluator of the patch.
+ *
+ * For each batch point, the cross-derivative is checked on the four corners of the mesh. The
+ * coordinates are shared by all the batch points.
+ *
+ * @tparam PatchP The patch on which the cross-derivatives are evaluated.
+ * @param[in] deriv_order Order of the cross-derivative.
+ * @param[in] batch_idx_range The index range of the batch points.
+ * @param[in] idx_range_eval_rtheta The 2D index range of the evaluation points, shared by all
+ *          the batch points.
+ * @param[in] eval_function_and_derivs The batched DerivField filled by the collection.
+ * @param[in] evaluator The evaluator of the PatchP.
+ * @param[in] batched_coeffs The batched interpolation coefficients on the PatchP.
+ */
+template <class PatchP>
+void check_batched_cross_deriv_match(
+        Idx<ddc::Deriv<typename PatchP::Dim1>, ddc::Deriv<typename PatchP::Dim2>> deriv_order,
+        IdxRange<GridBatch> const& batch_idx_range,
+        typename PatchP::IdxRange12 const& idx_range_eval_rtheta,
+        BatchedDerivFieldOnPatch<PatchP> eval_function_and_derivs,
+        SplineRThetaEvaluator<
+                ddc::type_seq_rank_v<PatchP, ddc::TypeSeq<Patch1, Patch2>> + 1,
+                DeviceExecSpace> const& evaluator,
+        BatchedConstSplineCoeffOnPatch<PatchP> batched_coeffs)
+{
+    typename PatchP::IdxRange1 idx_range_eval_1(idx_range_eval_rtheta);
+    typename PatchP::IdxRange2 idx_range_eval_2(idx_range_eval_rtheta);
+
+    for (Idx<GridBatch> const batch : batch_idx_range) {
+        for (typename PatchP::Idx1 idx_1 : std::vector<
+                     typename PatchP::Idx1> {idx_range_eval_1.front(), idx_range_eval_1.back()}) {
+            for (typename PatchP::Idx2 idx_2 :
+                 std::vector<typename PatchP::
+                                     Idx2> {idx_range_eval_2.front(), idx_range_eval_2.back()}) {
+                typename PatchP::IdxRange1 const idx_range_1(idx_1, typename PatchP::IdxStep1(1));
+                typename PatchP::IdxRange2 const idx_range_2(idx_2, typename PatchP::IdxStep2(1));
+                typename PatchP::IdxRange12 idx_range_deriv(idx_range_1, idx_range_2);
+
+                // Evaluation points on the corner.
+                CoordFieldMemOnPatch<PatchP> eval_points_cross_deriv_alloc(idx_range_deriv);
+                CoordFieldOnPatch<PatchP> eval_points_cross_deriv(eval_points_cross_deriv_alloc);
+
+                set_eval_points_2D<typename PatchP::Grid1, typename PatchP::Grid2>(
+                        eval_points_cross_deriv);
+
+                // Expected cross-derivatives, evaluated from the batch slice of the
+                // coefficients.
+                DFieldMemOnPatch<PatchP> expected_cross_deriv_alloc(idx_range_deriv);
+                DFieldOnPatch<PatchP> expected_cross_deriv(expected_cross_deriv_alloc);
+
+                evaluator
+                        .deriv(deriv_order,
+                               expected_cross_deriv,
+                               get_const_field(eval_points_cross_deriv),
+                               batched_coeffs[batch]);
+
+                // Compare the evaluated cross-derivatives with the expected cross-derivatives.
+                // --- define DField for ddc::create_mirror_and_copy().
+                DFieldMemOnPatch<PatchP> eval_cross_deriv_alloc(idx_range_deriv);
+                DFieldOnPatch<PatchP> eval_cross_deriv(eval_cross_deriv_alloc);
+
+                ddc::parallel_for_each(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_idx_range(eval_cross_deriv),
+                        KOKKOS_LAMBDA(typename PatchP::Idx12 const idx) {
+                            eval_cross_deriv(idx)
+                                    = eval_function_and_derivs(deriv_order, batch, idx);
+                        });
+
+                // --- put the functions on host
+                auto const expected_cross_deriv_host
+                        = ddc::create_mirror_and_copy(expected_cross_deriv);
+                auto const eval_cross_deriv_host = ddc::create_mirror_and_copy(eval_cross_deriv);
+
+                // --- check errors.
+                check_near<PatchP>(
+                        get_field(expected_cross_deriv_host),
+                        get_field(eval_cross_deriv_host),
+                        1e-10);
+            }
+        }
+    }
+};
+
+// Helpers for the extrapolation test -------------------------------------------------------------
+
+/**
+ * @brief Fill a field of evaluation points with coordinates at theta = pi / 2: the first
+ * point along the first dimension is at r_inside, inside the global domain, and the other
+ * points are at r_outside, outside of the global domain.
+ *
+ * @tparam Patch The patch on which the evaluation points are defined.
+ * @param[inout] eval_points The field of evaluation points to fill.
+ * @param[in] r_inside The radius of the points inside the domain.
+ * @param[in] r_outside The radius of the points outside of the domain.
+ */
+template <class Patch>
+void set_eval_points_inside_and_outside(
+        CoordFieldOnPatch<Patch> eval_points,
+        double const r_inside,
+        double const r_outside)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(eval_points),
+            KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                bool const is_first_point(typename Patch::Idx1(idx) == typename Patch::Idx1(0));
+                double const r = is_first_point ? r_inside : r_outside;
+                eval_points(idx) = Coord<R, Theta>(r, M_PI / 2);
+            });
+}
+
+/**
+ * @brief Fill the expected values of the EvaluateBatchedExtrapolation test for one batch
+ * slice of the coefficients: the evaluation points inside the global domain (r < r1_max)
+ * are evaluated with the evaluator of the Patch1 on the batch slice of the coefficients of
+ * the Patch1, and the points outside of the global domain (r > r2_max) with the constant
+ * extrapolation rule at r2_max on the batch slice of the coefficients of the Patch2.
+ *
+ * @tparam Patch The patch on which the expected values are defined.
+ * @param[in] eval_points The field of the evaluation points.
+ * @param[out] expected_values The field of the expected values to fill.
+ * @param[in] batch The batch slice of the coefficients to evaluate.
+ * @param[in] evaluator_1 The evaluator of the Patch1.
+ * @param[in] batched_coeffs_1 The batched spline coefficients on the Patch1.
+ * @param[in] rule_max The constant extrapolation rule at the outer boundary of the domain.
+ * @param[in] batched_coeffs_2 The batched spline coefficients on the Patch2.
+ * @param[in] r1_max The maximum radius of the domain on the Patch1.
+ * @param[in] r2_max The maximum radius of the domain on the Patch2.
+ */
+template <class Patch>
+void fill_expected_extrapolation_values(
+        CoordFieldOnPatch<Patch> eval_points,
+        DFieldOnPatch<Patch> expected_values,
+        Idx<GridBatch> const batch,
+        SplineRThetaEvaluator<1, DeviceExecSpace> const& evaluator_1,
+        BatchedConstSplineCoeffOnPatch<Patch1> const& batched_coeffs_1,
+        ddc::ConstantExtrapolationRule<R> const& rule_max,
+        BatchedConstSplineCoeffOnPatch<Patch2> const& batched_coeffs_2,
+        Coord<R> const r1_max,
+        Coord<R> const r2_max)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(eval_points),
+            KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                Coord<R, Theta> const coord = eval_points(idx);
+                Coord<R> const r(ddc::get<R>(coord));
+                if (r < r1_max) {
+                    expected_values(idx) = evaluator_1(coord, batched_coeffs_1[batch]);
+                } else if (r > r2_max) {
+                    expected_values(idx) = rule_max(coord, batched_coeffs_2[batch]);
+                } else {
+                    Kokkos::abort("Unexpected coordinate in EvaluateBatchedExtrapolation.");
+                }
+            });
 }
 
 /**
@@ -919,7 +1419,7 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
             1e-14);
 
     // Evaluate the functions at the evaluation points.
-    evaluators(eval_functions, eval_points, splines);
+    evaluators(eval_functions, get_const_field(eval_points), get_const_field(splines));
 
     // Expected functions
     // --- patch 1
@@ -1468,6 +1968,391 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesDerivFieldOnCoordField
 
 
 /* -----------------------------------------------------------------------------------------------
+    Test operator() and deriv() for fields of coordinates on batched domains. The values and
+    the interpolation coefficients carry a batch dimension, the coordinates being shared by
+    all the batch points.
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedOnCoordField)
+{
+    // Number of batch points.
+    IdxRange<GridBatch> const batch_idx_range(Idx<GridBatch>(0), IdxStep<GridBatch>(2));
+
+    // Batched values on the interpolation mesh of each patch, each batch slice being the
+    // function interpolated on the patch scaled by the batch index + 1.
+    MultipatchType<IdxRangeBatchedOnPatch, Patch1, Patch2> batched_idx_range_rtheta(
+            IdxRangeBatchedOnPatch<Patch1>(batch_idx_range, idx_range_rtheta1),
+            IdxRangeBatchedOnPatch<Patch2>(batch_idx_range, idx_range_rtheta2));
+    MultipatchFieldMem<BatchedDFieldMemOnPatch, Patch1, Patch2> batched_values_alloc(
+            batched_idx_range_rtheta);
+    set_batched_function_values(batched_values_alloc.get<Patch1>(), 1);
+    set_batched_function_values(batched_values_alloc.get<Patch2>(), 2);
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
+            extrapolation_rule(r1_min, r2_max);
+    MultipatchSplineRThetaInterpolation<DeviceExecSpace> const
+            interpolator(all_idx_ranges, patch_locator, extrapolation_rule);
+
+    // --- collection
+    MultipatchType<IdxRangeBatchedSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
+            interpolator.get_builder().batched_basis_idx_ranges(batched_idx_range_rtheta));
+    MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_splines_alloc(
+            batched_spline_idx_ranges);
+    interpolator
+            .get_builder()(get_field(batched_splines_alloc), get_const_field(batched_values_alloc));
+    MultipatchField<BatchedConstSplineCoeffOnPatch, Patch1, Patch2> const batched_splines(
+            get_const_field(batched_splines_alloc));
+
+    // Evaluation points, shared by all the batch points.
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_evals(idx_range_eval_rtheta1, idx_range_eval_rtheta2);
+    MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2> eval_points_alloc(idx_range_evals);
+
+    set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_alloc.get<Patch1>());
+    set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_alloc.get<Patch2>());
+
+    // --- collection
+    MultipatchField<CoordFieldOnPatch, Patch1, Patch2> const eval_points(eval_points_alloc);
+
+    // Values
+    check_batched_on_coord_field(
+            Idx<>(),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_splines,
+            1e-12);
+
+    // Derivatives
+    check_batched_on_coord_field(
+            Idx<ddc::Deriv<R>>(1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_splines,
+            1e-11);
+    check_batched_on_coord_field(
+            Idx<ddc::Deriv<Theta>>(1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_splines,
+            1e-11);
+    check_batched_on_coord_field(
+            Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_splines,
+            1e-10);
+}
+
+
+/* -----------------------------------------------------------------------------------------------
+    Test operator() on a field of coordinates containing points outside of the domain, with
+    batched interpolation coefficients. The extrapolation rule is called with the batch slice
+    of the coefficients corresponding to the evaluated point.
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
+{
+    // Number of batch points.
+    IdxRange<GridBatch> const batch_idx_range(Idx<GridBatch>(0), IdxStep<GridBatch>(2));
+
+    // Batched interpolation coefficients: each batch slice is the coefficients of the fixture
+    // scaled by the batch index + 1 (the spline representation is linear in the coefficients).
+    MultipatchType<IdxRangeBatchedSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
+            IdxRangeBatchedSplineCoeffOnPatch<Patch1>(batch_idx_range, spline_idx_range_rtheta1),
+            IdxRangeBatchedSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
+    MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
+            batched_spline_idx_ranges);
+    fill_batched_spline_coeffs<
+            Patch1>(batched_coeffs_alloc.get<Patch1>(), get_const_field(function_1_coef));
+    fill_batched_spline_coeffs<
+            Patch2>(batched_coeffs_alloc.get<Patch2>(), get_const_field(function_2_coef));
+
+    // --- collection
+    MultipatchField<BatchedConstSplineCoeffOnPatch, Patch1, Patch2> const batched_splines(
+            get_const_field(batched_coeffs_alloc));
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
+            extrapolation_rule(r1_min, r2_max);
+    MultipatchSplineRThetaInterpolation<DeviceExecSpace> const
+            interpolator(all_idx_ranges, patch_locator, extrapolation_rule);
+
+    // Coordinates on a small mesh of each patch: a point located on the Patch1 (r = 0.5)
+    // and a point outside of the domain (r = 2.3).
+    // --- patch 1
+    Patch1::IdxRange1 const idx_range_r_1(Idx<GridR<1>>(0), Patch1::IdxStep1(2));
+    Patch1::IdxRange2 const idx_range_theta_1(Idx<GridTheta<1>>(0), Patch1::IdxStep2(1));
+    Patch1::IdxRange12 const idx_range_coords_1(idx_range_r_1, idx_range_theta_1);
+
+    // --- patch 2
+    Patch2::IdxRange1 const idx_range_r_2(Idx<GridR<2>>(0), Patch2::IdxStep1(2));
+    Patch2::IdxRange2 const idx_range_theta_2(Idx<GridTheta<2>>(0), Patch2::IdxStep2(1));
+    Patch2::IdxRange12 const idx_range_coords_2(idx_range_r_2, idx_range_theta_2);
+
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_coords(idx_range_coords_1, idx_range_coords_2);
+    MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2> eval_points_alloc(idx_range_coords);
+    Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = eval_points_alloc.get<Patch1>();
+    Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = eval_points_alloc.get<Patch2>();
+
+    set_eval_points_inside_and_outside<Patch1>(eval_points_1, 0.5, 2.3);
+    set_eval_points_inside_and_outside<Patch2>(eval_points_2, 0.5, 2.3);
+
+    // --- collection
+    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points(
+            get_const_field(eval_points_alloc));
+
+    // Batched evaluated values on the same meshes.
+    MultipatchType<IdxRangeBatchedOnPatch, Patch1, Patch2> batched_idx_range_evals(
+            IdxRangeBatchedOnPatch<Patch1>(batch_idx_range, idx_range_coords_1),
+            IdxRangeBatchedOnPatch<Patch2>(batch_idx_range, idx_range_coords_2));
+    MultipatchFieldMem<BatchedDFieldMemOnPatch, Patch1, Patch2> eval_functions_alloc(
+            batched_idx_range_evals);
+    MultipatchField<BatchedDFieldOnPatch, Patch1, Patch2> const eval_functions(
+            eval_functions_alloc);
+
+    // Evaluate the functions at the evaluation points. The point outside of the domain
+    // activates the extrapolation rule on the batch slice of the coefficients.
+    interpolator.get_evaluator()(eval_functions, eval_points, batched_splines);
+
+    // Check the evaluated values: each batch slice must match the evaluation of the
+    // corresponding batch slice of the coefficients, the point outside of the domain being
+    // evaluated with a constant extrapolation at r2_max.
+    BatchedConstSplineCoeffOnPatch<Patch1> const batched_coeffs_1_const
+            = batched_splines.get<Patch1>();
+    BatchedConstSplineCoeffOnPatch<Patch2> const batched_coeffs_2_const
+            = batched_splines.get<Patch2>();
+    ddc::ConstantExtrapolationRule<R> const rule_max(r2_max);
+
+    // Expected values on the meshes of the patches.
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_expecteds(idx_range_coords_1, idx_range_coords_2);
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> expected_alloc(idx_range_expecteds);
+    DField<Patch1::IdxRange12> expected_1 = expected_alloc.get<Patch1>();
+    DField<Patch2::IdxRange12> expected_2 = expected_alloc.get<Patch2>();
+
+    for (Idx<GridBatch> const batch : batch_idx_range) {
+        // --- expected values on the mesh of the patch 1
+        fill_expected_extrapolation_values<Patch1>(
+                eval_points_1,
+                expected_1,
+                batch,
+                evaluator_1,
+                batched_coeffs_1_const,
+                rule_max,
+                batched_coeffs_2_const,
+                r1_max,
+                r2_max);
+
+        // --- expected values on the mesh of the patch 2 (same coordinates)
+        fill_expected_extrapolation_values<Patch2>(
+                eval_points_2,
+                expected_2,
+                batch,
+                evaluator_1,
+                batched_coeffs_1_const,
+                rule_max,
+                batched_coeffs_2_const,
+                r1_max,
+                r2_max);
+
+        // --- compare the batch slices of the collection output with the expected values
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_functions.get<Patch1>()[batch]),
+                        get_const_field(expected_1)),
+                1e-12);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_functions.get<Patch2>()[batch]),
+                        get_const_field(expected_2)),
+                1e-12);
+    }
+}
+
+
+/* -----------------------------------------------------------------------------------------------
+    Test operator() and deriv() for a batched DerivField and fields of coordinates. The
+    interpolation coefficients carry a batch dimension, each batch slice being the coefficients
+    of the fixture scaled by the batch index + 1, and the coordinates are shared by all the
+    batch points.
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordField)
+{
+    // Number of batch points.
+    IdxRange<GridBatch> const batch_idx_range(Idx<GridBatch>(0), IdxStep<GridBatch>(2));
+
+    // Batched interpolation coefficients: each batch slice is the coefficients of the fixture
+    // scaled by the batch index + 1 (the spline representation is linear in the coefficients).
+    MultipatchType<IdxRangeBatchedSplineCoeffOnPatch, Patch1, Patch2> batched_spline_idx_ranges(
+            IdxRangeBatchedSplineCoeffOnPatch<Patch1>(batch_idx_range, spline_idx_range_rtheta1),
+            IdxRangeBatchedSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
+    MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
+            batched_spline_idx_ranges);
+    fill_batched_spline_coeffs<
+            Patch1>(batched_coeffs_alloc.get<Patch1>(), get_const_field(function_1_coef));
+    fill_batched_spline_coeffs<
+            Patch2>(batched_coeffs_alloc.get<Patch2>(), get_const_field(function_2_coef));
+
+    // --- collection
+    MultipatchField<BatchedConstSplineCoeffOnPatch, Patch1, Patch2> const batched_splines(
+            get_const_field(batched_coeffs_alloc));
+
+    // Coordinates on the meshes of the patches (shared by all the batch points).
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_evals(idx_range_eval_rtheta1, idx_range_eval_rtheta2);
+    MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2> eval_points_alloc(idx_range_evals);
+    Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = eval_points_alloc.get<Patch1>();
+    Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = eval_points_alloc.get<Patch2>();
+
+    set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_1);
+    set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_2);
+
+    // --- collection
+    MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points(
+            get_const_field(eval_points_alloc));
+
+    // Batched values and derivatives on the meshes of the patches.
+    MultipatchType<IdxRangeBatchedOnPatch, Patch1, Patch2> idx_range_batched_evals(
+            IdxRangeBatchedOnPatch<Patch1>(batch_idx_range, idx_range_eval_rtheta1),
+            IdxRangeBatchedOnPatch<Patch2>(batch_idx_range, idx_range_eval_rtheta2));
+    MultipatchFieldMem<BatchedDerivFieldMemOnPatch, Patch1, Patch2> eval_functions_and_derivs_alloc(
+            idx_range_batched_evals);
+    MultipatchField<BatchedDerivFieldOnPatch, Patch1, Patch2> eval_functions_and_derivs(
+            eval_functions_and_derivs_alloc);
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
+            extrapolation_rule(r1_min, r2_max);
+    MultipatchSplineRThetaInterpolation<DeviceExecSpace> const
+            interpolator(all_idx_ranges, patch_locator, extrapolation_rule);
+    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const& evaluators
+            = interpolator.get_evaluator();
+
+    // Derivative orders.
+    Idx<ddc::Deriv<R>> d_r(1);
+    Idx<ddc::Deriv<Theta>> d_theta(0);
+    Idx<ddc::Deriv<R>, ddc::Deriv<Theta>> d_r_d_theta(1, 1);
+
+    // Evaluate the functions and their derivatives at the evaluation points.
+    evaluators(eval_functions_and_derivs, eval_points, batched_splines);
+    evaluators.deriv(d_r, eval_functions_and_derivs, eval_points, batched_splines);
+    evaluators.deriv(d_theta, eval_functions_and_derivs, eval_points, batched_splines);
+    evaluators.deriv(d_r_d_theta, eval_functions_and_derivs, eval_points, batched_splines);
+
+    // Check the values: each batch slice must match the evaluation of the corresponding batch
+    // slice of the coefficients.
+    BatchedConstSplineCoeffOnPatch<Patch1> const batched_coeffs_1_const
+            = batched_splines.get<Patch1>();
+    BatchedConstSplineCoeffOnPatch<Patch2> const batched_coeffs_2_const
+            = batched_splines.get<Patch2>();
+
+    // The values component of the batched DerivField, copied into plain batched fields.
+    MultipatchFieldMem<BatchedDFieldMemOnPatch, Patch1, Patch2> eval_values_alloc(
+            idx_range_batched_evals);
+    ddc::parallel_deepcopy(
+            eval_values_alloc.get<Patch1>(),
+            eval_functions_and_derivs.template get<Patch1>().get_values_field());
+    ddc::parallel_deepcopy(
+            eval_values_alloc.get<Patch2>(),
+            eval_functions_and_derivs.template get<Patch2>().get_values_field());
+    MultipatchField<BatchedDFieldOnPatch, Patch1, Patch2> const eval_values(eval_values_alloc);
+
+    // Expected values on the meshes of the patches.
+    MultipatchFieldMem<DFieldMemOnPatch, Patch1, Patch2> expected_alloc(idx_range_evals);
+    DField<Patch1::IdxRange12> expected_1 = expected_alloc.get<Patch1>();
+    DField<Patch2::IdxRange12> expected_2 = expected_alloc.get<Patch2>();
+
+    for (Idx<GridBatch> const batch : batch_idx_range) {
+        evaluator_1(expected_1, get_const_field(eval_points_1), batched_coeffs_1_const[batch]);
+        evaluator_2(expected_2, get_const_field(eval_points_2), batched_coeffs_2_const[batch]);
+
+        // --- compare the batch slices of the values with the expected values
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch1>()[batch]),
+                        get_const_field(expected_1)),
+                1e-12);
+        EXPECT_LE(
+                error_norm_inf(
+                        Kokkos::DefaultExecutionSpace(),
+                        get_const_field(eval_values.get<Patch2>()[batch]),
+                        get_const_field(expected_2)),
+                1e-12);
+    }
+
+    // Check the derivatives on the edge lines of each dimension.
+    // --- derivatives along the first dimension
+    check_batched_deriv_match<Patch1, typename Patch1::Grid1>(
+            d_r,
+            batch_idx_range,
+            idx_range_eval_rtheta1,
+            eval_functions_and_derivs.template get<Patch1>(),
+            evaluator_1,
+            batched_coeffs_1_const);
+    check_batched_deriv_match<Patch2, typename Patch2::Grid1>(
+            d_r,
+            batch_idx_range,
+            idx_range_eval_rtheta2,
+            eval_functions_and_derivs.template get<Patch2>(),
+            evaluator_2,
+            batched_coeffs_2_const);
+
+    // --- derivatives along the second dimension
+    check_batched_deriv_match<Patch1, typename Patch1::Grid2>(
+            d_theta,
+            batch_idx_range,
+            idx_range_eval_rtheta1,
+            eval_functions_and_derivs.template get<Patch1>(),
+            evaluator_1,
+            batched_coeffs_1_const);
+    check_batched_deriv_match<Patch2, typename Patch2::Grid2>(
+            d_theta,
+            batch_idx_range,
+            idx_range_eval_rtheta2,
+            eval_functions_and_derivs.template get<Patch2>(),
+            evaluator_2,
+            batched_coeffs_2_const);
+
+    // --- cross-derivatives on the corners
+    check_batched_cross_deriv_match<Patch1>(
+            d_r_d_theta,
+            batch_idx_range,
+            idx_range_eval_rtheta1,
+            eval_functions_and_derivs.template get<Patch1>(),
+            evaluator_1,
+            batched_coeffs_1_const);
+    check_batched_cross_deriv_match<Patch2>(
+            d_r_d_theta,
+            batch_idx_range,
+            idx_range_eval_rtheta2,
+            eval_functions_and_derivs.template get<Patch2>(),
+            evaluator_2,
+            batched_coeffs_2_const);
+}
+
+
+/* -----------------------------------------------------------------------------------------------
     Test operator() for single coordinates with non-spline (Lagrange) evaluators.
     The coordinates are located on different patches, outside the periodic domain and
     outside the global domain.
@@ -1547,4 +2432,103 @@ TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateOnCoordField)
             evaluator_2,
             eval_points,
             coeffs);
+}
+
+
+/* -----------------------------------------------------------------------------------------------
+    Test operator() and deriv() for fields of coordinates on batched domains with non-spline
+    (Lagrange) evaluators. The values and the interpolation coefficients carry a batch
+    dimension, the coordinates being shared by all the batch points.
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionLagrangeTest, EvaluateBatchedOnCoordField)
+{
+    // Number of batch points.
+    IdxRange<GridBatch> const batch_idx_range(Idx<GridBatch>(0), IdxStep<GridBatch>(2));
+
+    // Batched values on the interpolation mesh of each patch, each batch slice being the
+    // function interpolated on the patch scaled by the batch index + 1.
+    MultipatchType<IdxRangeBatchedOnPatch, Patch1, Patch2> batched_idx_range_rtheta(
+            IdxRangeBatchedOnPatch<Patch1>(batch_idx_range, idx_range_rtheta1),
+            IdxRangeBatchedOnPatch<Patch2>(batch_idx_range, idx_range_rtheta2));
+    MultipatchFieldMem<BatchedDFieldMemOnPatch, Patch1, Patch2> batched_values_alloc(
+            batched_idx_range_rtheta);
+    set_batched_function_values(batched_values_alloc.get<Patch1>(), 1);
+    set_batched_function_values(batched_values_alloc.get<Patch2>(), 2);
+
+    // Batched Lagrange interpolation coefficients, built with the Lagrange builders.
+    LagrangeBuilderRTheta<Patch1> const builder_1;
+    LagrangeBuilderRTheta<Patch2> const builder_2;
+    LagrangeBuilderCollection const builder_collection(builder_1, builder_2);
+
+    // --- collection
+    MultipatchType<IdxRangeBatchedLagCoeffOnPatch, Patch1, Patch2> batched_coeffs_idx_ranges(
+            builder_collection.batched_basis_idx_ranges(batched_idx_range_rtheta));
+    MultipatchFieldMem<BatchedLagrangeCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
+            batched_coeffs_idx_ranges);
+    builder_collection(get_field(batched_coeffs_alloc), get_const_field(batched_values_alloc));
+    MultipatchField<BatchedLagrangeConstCoeffOnPatch, Patch1, Patch2> const batched_coeffs(
+            get_const_field(batched_coeffs_alloc));
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    NullExtrapolationRule const extrapolation_rule;
+    LagrangeEvaluatorCollection const
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
+
+    // Evaluation points, shared by all the batch points.
+    Patch1::IdxRange12 const idx_range_eval_1(
+            Patch1::IdxRange1(idx_range_rtheta1).remove_last(Patch1::IdxStep1(1)),
+            Patch1::IdxRange2(idx_range_rtheta1));
+    Patch2::IdxRange12 const idx_range_eval_2(
+            Patch2::IdxRange1(idx_range_rtheta2).remove_last(Patch2::IdxStep1(1)),
+            Patch2::IdxRange2(idx_range_rtheta2));
+
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2>
+            idx_range_evals(idx_range_eval_1, idx_range_eval_2);
+    MultipatchFieldMem<CoordFieldMemOnPatch, Patch1, Patch2> eval_points_alloc(idx_range_evals);
+    set_eval_points_2D<Patch1::Grid1, Patch1::Grid2>(eval_points_alloc.get<Patch1>());
+    set_eval_points_2D<Patch2::Grid1, Patch2::Grid2>(eval_points_alloc.get<Patch2>());
+
+    MultipatchField<CoordFieldOnPatch, Patch1, Patch2> const eval_points(eval_points_alloc);
+
+    // Values
+    check_batched_on_coord_field(
+            Idx<>(),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_coeffs,
+            1e-12);
+
+    // Derivatives
+    check_batched_on_coord_field(
+            Idx<ddc::Deriv<R>>(1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_coeffs,
+            1e-12);
+    check_batched_on_coord_field(
+            Idx<ddc::Deriv<Theta>>(2),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_coeffs,
+            1e-12);
+    check_batched_on_coord_field(
+            Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1),
+            evaluators,
+            evaluator_1,
+            evaluator_2,
+            batch_idx_range,
+            get_const_field(eval_points),
+            batched_coeffs,
+            1e-12);
 }
