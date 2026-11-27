@@ -43,8 +43,6 @@ template <typename ExecSpace>
 using MultipatchSplineRThetaInterpolation = MultipatchSplineInterpolator2D<
         PatchLocator<ExecSpace>,
         ConstantExtrapolationRuleOnion<PatchLocator<ExecSpace>>,
-        ExtrapolationRule::Constant_Constant,
-        ExtrapolationRule::Periodic,
         SplineBoundaryClosure::Greville_Greville,
         SplineBoundaryClosure::Periodic>;
 
@@ -68,6 +66,21 @@ protected:
     Patch2::IdxRange1 const idx_range_eval_r2;
     Patch2::IdxRange12 const idx_range_eval_rtheta2;
 
+    // Single extrapolation rules
+    ddc::ConstantExtrapolationRule<R> const bc_r_min_1;
+    ddc::ConstantExtrapolationRule<R> const bc_r_max_1;
+    ddc::ConstantExtrapolationRule<R> const bc_r_min_2;
+    ddc::ConstantExtrapolationRule<R> const bc_r_max_2;
+    ddc::PeriodicExtrapolationRule<Theta> const bc_theta;
+
+    // Reference evaluators on single patch. They use constant extrapolation so they match
+    // the ConstantExtrapolationRuleOnion outside of the global domain.
+    SplineRThetaEvaluator<1, DeviceExecSpace> const evaluator_1;
+    SplineRThetaEvaluator<2, DeviceExecSpace> const evaluator_2;
+
+    SplineRThetaEvaluator<1, HostExecSpace> const evaluator_1_host;
+    SplineRThetaEvaluator<2, HostExecSpace> const evaluator_2_host;
+
     // Spline representations
     DField<IdxRange<BSplinesR<1>, BSplinesTheta<1>>> const function_1_coef;
     DField<IdxRange<BSplinesR<2>, BSplinesTheta<2>>> const function_2_coef;
@@ -82,13 +95,6 @@ protected:
     // Evaluators on every patch
     MultipatchSplineRThetaEvaluator<DeviceExecSpace> const& evaluators;
     MultipatchSplineRThetaEvaluator<HostExecSpace> const& evaluators_host;
-
-    // Evaluators on single patch
-    SplineRThetaEvaluator<1, DeviceExecSpace> const& evaluator_1;
-    SplineRThetaEvaluator<2, DeviceExecSpace> const& evaluator_2;
-
-    SplineRThetaEvaluator<1, HostExecSpace> const& evaluator_1_host;
-    SplineRThetaEvaluator<2, HostExecSpace> const& evaluator_2_host;
 
 public:
     InterpolationEvaluator2DCollectionTest()
@@ -105,6 +111,16 @@ public:
         , idx_range_eval_rtheta2(
                   idx_range_eval_r2,
                   idx_range_theta2.remove_last(Patch2::IdxStep2(1)))
+        , bc_r_min_1(ddc::coordinate(idx_range_r1.front()))
+        , bc_r_max_1(ddc::coordinate(idx_range_r1.back()))
+        , bc_r_min_2(ddc::coordinate(idx_range_r2.front()))
+        , bc_r_max_2(ddc::coordinate(idx_range_r2.back()))
+        , bc_theta()
+        // Local spline evaluators on device and host
+        , evaluator_1(bc_r_min_1, bc_r_max_1, bc_theta, bc_theta)
+        , evaluator_2(bc_r_min_2, bc_r_max_2, bc_theta, bc_theta)
+        , evaluator_1_host(bc_r_min_1, bc_r_max_1, bc_theta, bc_theta)
+        , evaluator_2_host(bc_r_min_2, bc_r_max_2, bc_theta, bc_theta)
         // Local splines on device and host
         , function_1_coef(get_field(function_1_coef_alloc))
         , function_2_coef(get_field(function_2_coef_alloc))
@@ -122,10 +138,6 @@ public:
                   ConstantExtrapolationRuleOnion<PatchLocator<HostExecSpace>>(r1_min, r2_max))
         , evaluators(interpolation.get_evaluator())
         , evaluators_host(interpolation_host.get_evaluator())
-        , evaluator_1(interpolation.get_interpolation<Patch1>().get_evaluator())
-        , evaluator_2(interpolation.get_interpolation<Patch2>().get_evaluator())
-        , evaluator_1_host(interpolation_host.get_interpolation<Patch1>().get_evaluator())
-        , evaluator_2_host(interpolation_host.get_interpolation<Patch2>().get_evaluator())
     {
     }
 };
@@ -518,9 +530,7 @@ using MultipatchLagrangeInterpolation = MultipatchLagrangeInterpolator2D<
         PatchLocator<DeviceExecSpace>,
         NullExtrapolationRule,
         LagBasisR,
-        LagBasisTheta,
-        ExtrapolationRule::Null_Null,
-        ExtrapolationRule::Periodic>;
+        LagBasisTheta>;
 
 using LagrangeEvaluatorCollection = MultipatchLagrangeInterpolation::EvaluatorType;
 
