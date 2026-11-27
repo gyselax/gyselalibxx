@@ -1461,10 +1461,8 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnDefaultCoords)
     // Compare the evaluated derivatives with the exact cross-derivative at the
     // grid coordinates.
     // --- put the functions on host
-    auto const eval_derivs_12_patch_1_host
-            = ddc::create_mirror_and_copy(eval_derivs_12_patch_1);
-    auto const eval_derivs_12_patch_2_host
-            = ddc::create_mirror_and_copy(eval_derivs_12_patch_2);
+    auto const eval_derivs_12_patch_1_host = ddc::create_mirror_and_copy(eval_derivs_12_patch_1);
+    auto const eval_derivs_12_patch_2_host = ddc::create_mirror_and_copy(eval_derivs_12_patch_2);
 
     // --- check errors
     // The grid points lie on their own patch, except on the interface
@@ -1472,18 +1470,12 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnDefaultCoords)
     ddc::host_for_each(idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
         double const r = ddc::coordinate(Patch1::Idx1(idx));
         double const theta = ddc::coordinate(Patch1::Idx2(idx));
-        EXPECT_NEAR(
-                eval_derivs_12_patch_1_host(idx),
-                exact_function_cross_deriv(r, theta),
-                1e-10);
+        EXPECT_NEAR(eval_derivs_12_patch_1_host(idx), exact_function_cross_deriv(r, theta), 1e-10);
     });
     ddc::host_for_each(idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
         double const r = ddc::coordinate(Patch2::Idx1(idx));
         double const theta = ddc::coordinate(Patch2::Idx2(idx));
-        EXPECT_NEAR(
-                eval_derivs_12_patch_2_host(idx),
-                exact_function_cross_deriv(r, theta),
-                1e-10);
+        EXPECT_NEAR(eval_derivs_12_patch_2_host(idx), exact_function_cross_deriv(r, theta), 1e-10);
     });
 }
 
