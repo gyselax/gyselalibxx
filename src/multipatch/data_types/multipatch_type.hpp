@@ -107,13 +107,14 @@ public:
     KOKKOS_FUNCTION MultipatchType(MultipatchType<OPatchSeq, OTypeSeq> const& other)
         : m_tuple(other.template get<Patches>()...)
     {
+        using OType = MultipatchType<OPatchSeq, OTypeSeq>;
         static_assert(
                 ddc::type_seq_contains_v<PatchOrdering, OPatchSeq>,
                 "The type being copied does not contain all the required patches");
         static_assert(
                 std::is_same_v<
                         InternalTypeOrdering,
-                        ddc::TypeSeq<decltype(other.template get<Patches>())...>>,
+                        ddc::TypeSeq<typename OType::template TypeOnPatch<Patches>...>>,
                 "MultipatchTypes are not equivalent");
     }
 
