@@ -1077,14 +1077,6 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnDefaultCoords)
             eval_functions(eval_function_1, eval_function_2);
 
 
-    // Definition of InterpolationEvaluator2DCollection
-    PatchLocator<DeviceExecSpace> const
-            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
-    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
-            extrapolation_rule(r1_min, r2_max);
-    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
-
     // Evaluate the functions at the default coordinates (the grid points).
     evaluators(eval_functions, exact_splines);
 
@@ -1442,14 +1434,6 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnDefaultCoords)
     MultipatchField<DFieldOnPatch, Patch1, Patch2> const
             eval_derivs_12(eval_derivs_12_patch_1, eval_derivs_12_patch_2);
 
-
-    // Definition of InterpolationEvaluator2DCollection
-    PatchLocator<DeviceExecSpace> const
-            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
-    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
-            extrapolation_rule(r1_min, r2_max);
-    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
-            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Derivative order (cross-derivative).
     Idx<ddc::Deriv<R>, ddc::Deriv<Theta>> d_r_d_theta(1, 1);
