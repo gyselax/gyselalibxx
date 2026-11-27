@@ -349,9 +349,8 @@ public:
      * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
      * @return The value of the interpolation at the desired coordinate on the right patch.
      */
-    template <class Coord>
     KOKKOS_FUNCTION data_type
-    operator()(Coord const coord_eval, MultipatchCoeffs const& patches_coeffs) const
+    operator()(Coord<CDim1, CDim2> const coord_eval, MultipatchCoeffs const& patches_coeffs) const
     {
         int const patch_idx = get_patch_idx(coord_eval);
         return recursive_dispatch_patch_function(Idx<>(), coord_eval, patches_coeffs, patch_idx);
@@ -396,10 +395,8 @@ public:
      * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
      */
     template <class MultipatchValues>
-    void operator()(
-            MultipatchValues const& patches_values,
-            MultipatchCoeffs const& patches_coeffs) const
-            requires(is_multipatch_field_v<MultipatchValues>)
+    void operator()(MultipatchValues const& patches_values, MultipatchCoeffs const& patches_coeffs)
+            const requires(is_multipatch_field_v<MultipatchValues>)
     {
         (apply_evaluator_field_impl<Patches>(
                  Idx<>(),
@@ -602,11 +599,7 @@ public:
      * @param[in] patches_coeffs MultipatchType of interpolation coefficients
      *          on every patches.
      */
-    template <
-            class StoringPatch,
-            class ValuesField,
-            class CoordProvider,
-            class... DerivDims>
+    template <class StoringPatch, class ValuesField, class CoordProvider, class... DerivDims>
     void apply_evaluator_field_impl(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
@@ -662,11 +655,7 @@ public:
      * @param[in] patches_coeffs MultipatchType of interpolation coefficients
      *          on every patches.
      */
-    template <
-            class StoringPatch,
-            class ValuesField,
-            class CoordProvider,
-            class... DerivDims>
+    template <class StoringPatch, class ValuesField, class CoordProvider, class... DerivDims>
     void apply_evaluator_deriv_field_impl(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
