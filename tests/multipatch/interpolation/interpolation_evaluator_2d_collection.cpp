@@ -582,6 +582,33 @@ void set_batched_function_values(
             });
 }
 
+/**
+ * @brief Fill a batched field of spline coefficients so that each batch slice is the given
+ * spline coefficients scaled by its batch index + 1 (the spline representation is linear in
+ * the coefficients).
+ *
+ * @tparam Patch The patch on which the spline coefficients are defined.
+ * @param[inout] batched_coeffs The batched field of spline coefficients to fill.
+ * @param[in] coeffs The spline coefficients scaled into each batch slice.
+ */
+template <class Patch>
+void fill_batched_spline_coeffs(
+        BatchedSplineCoeffOnPatch<Patch> batched_coeffs,
+        ConstSplineCoeffOnPatch_2D<Patch> coeffs)
+{
+    using IdxBatchedCoeffs = Idx<GridBatch, typename Patch::BSplines1, typename Patch::BSplines2>;
+    using IdxCoeffs = Idx<typename Patch::BSplines1, typename Patch::BSplines2>;
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(batched_coeffs),
+            KOKKOS_LAMBDA(IdxBatchedCoeffs const idx) {
+                double const batch_factor
+                        = (Idx<GridBatch>(idx) - get_idx_range<GridBatch>(batched_coeffs).front())
+                          + 1;
+                batched_coeffs(idx) = batch_factor * coeffs(IdxCoeffs(idx));
+            });
+}
+
 // Non-spline (Lagrange) evaluators ------------------------------------------------------------
 template <class Patch>
 using LagrangeEvaluatorR = LagrangeEvaluator<
@@ -1003,6 +1030,80 @@ void check_batched_cross_deriv_match(
         }
     }
 };
+
+// Helpers for the extrapolation test -------------------------------------------------------------
+
+/**
+ * @brief Fill a field of evaluation points with coordinates at theta = pi / 2: the first
+ * point along the first dimension is at r_inside, inside the global domain, and the other
+ * points are at r_outside, outside of the global domain.
+ *
+ * @tparam Patch The patch on which the evaluation points are defined.
+ * @param[inout] eval_points The field of evaluation points to fill.
+ * @param[in] r_inside The radius of the points inside the domain.
+ * @param[in] r_outside The radius of the points outside of the domain.
+ */
+template <class Patch>
+void set_eval_points_inside_and_outside(
+        CoordFieldOnPatch<Patch> eval_points,
+        double const r_inside,
+        double const r_outside)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(eval_points),
+            KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                bool const is_first_point(typename Patch::Idx1(idx) == typename Patch::Idx1(0));
+                double const r = is_first_point ? r_inside : r_outside;
+                eval_points(idx) = Coord<R, Theta>(r, M_PI / 2);
+            });
+}
+
+/**
+ * @brief Fill the expected values of the EvaluateBatchedExtrapolation test for one batch
+ * slice of the coefficients: the evaluation points inside the global domain (r < r1_max)
+ * are evaluated with the evaluator of the Patch1 on the batch slice of the coefficients of
+ * the Patch1, and the points outside of the global domain (r > r2_max) with the constant
+ * extrapolation rule at r2_max on the batch slice of the coefficients of the Patch2.
+ *
+ * @tparam Patch The patch on which the expected values are defined.
+ * @param[in] eval_points The field of the evaluation points.
+ * @param[out] expected_values The field of the expected values to fill.
+ * @param[in] batch The batch slice of the coefficients to evaluate.
+ * @param[in] evaluator_1 The evaluator of the Patch1.
+ * @param[in] batched_coeffs_1 The batched spline coefficients on the Patch1.
+ * @param[in] rule_max The constant extrapolation rule at the outer boundary of the domain.
+ * @param[in] batched_coeffs_2 The batched spline coefficients on the Patch2.
+ * @param[in] r1_max The maximum radius of the domain on the Patch1.
+ * @param[in] r2_max The maximum radius of the domain on the Patch2.
+ */
+template <class Patch>
+void fill_expected_extrapolation_values(
+        CoordFieldOnPatch<Patch> eval_points,
+        DFieldOnPatch<Patch> expected_values,
+        Idx<GridBatch> const batch,
+        SplineRThetaEvaluator<1, DeviceExecSpace> const& evaluator_1,
+        BatchedConstSplineCoeffOnPatch<Patch1> const& batched_coeffs_1,
+        ddc::ConstantExtrapolationRule<R> const& rule_max,
+        BatchedConstSplineCoeffOnPatch<Patch2> const& batched_coeffs_2,
+        Coord<R> const r1_max,
+        Coord<R> const r2_max)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(eval_points),
+            KOKKOS_LAMBDA(typename Patch::Idx12 const idx) {
+                Coord<R, Theta> const coord = eval_points(idx);
+                Coord<R> const r(ddc::get<R>(coord));
+                if (r < r1_max) {
+                    expected_values(idx) = evaluator_1(coord, batched_coeffs_1[batch]);
+                } else if (r > r2_max) {
+                    expected_values(idx) = rule_max(coord, batched_coeffs_2[batch]);
+                } else {
+                    Kokkos::abort("Unexpected coordinate in EvaluateBatchedExtrapolation.");
+                }
+            });
+}
 
 /**
  * @brief Google test class to define the Lagrange interpolations on an Onion shape
@@ -1974,23 +2075,10 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
             IdxRangeBatchedSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
     MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
             batched_spline_idx_ranges);
-    BatchedSplineCoeffOnPatch<Patch1> batched_coeffs_1 = batched_coeffs_alloc.get<Patch1>();
-    BatchedSplineCoeffOnPatch<Patch2> batched_coeffs_2 = batched_coeffs_alloc.get<Patch2>();
-
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            batched_spline_idx_ranges.get<Patch1>(),
-            KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<1>, BSplinesTheta<1>> const idx) {
-                batched_coeffs_1(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
-                                        * function_1_coef(Idx<BSplinesR<1>, BSplinesTheta<1>>(idx));
-            });
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            batched_spline_idx_ranges.get<Patch2>(),
-            KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<2>, BSplinesTheta<2>> const idx) {
-                batched_coeffs_2(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
-                                        * function_2_coef(Idx<BSplinesR<2>, BSplinesTheta<2>>(idx));
-            });
+    fill_batched_spline_coeffs<
+            Patch1>(batched_coeffs_alloc.get<Patch1>(), get_const_field(function_1_coef));
+    fill_batched_spline_coeffs<
+            Patch2>(batched_coeffs_alloc.get<Patch2>(), get_const_field(function_2_coef));
 
     // --- collection
     MultipatchField<BatchedConstSplineCoeffOnPatch, Patch1, Patch2> const batched_splines(
@@ -2022,22 +2110,8 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
     Field<Patch1::Coord12, Patch1::IdxRange12> eval_points_1 = eval_points_alloc.get<Patch1>();
     Field<Patch2::Coord12, Patch2::IdxRange12> eval_points_2 = eval_points_alloc.get<Patch2>();
 
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            idx_range_coords_1,
-            KOKKOS_LAMBDA(Patch1::Idx12 const idx) {
-                double const r
-                        = ((typename Patch1::Idx1)(idx) == (typename Patch1::Idx1)(0)) ? 0.5 : 2.3;
-                eval_points_1(idx) = Coord<R, Theta>(r, M_PI / 2);
-            });
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            idx_range_coords_2,
-            KOKKOS_LAMBDA(Patch2::Idx12 const idx) {
-                double const r
-                        = ((typename Patch2::Idx1)(idx) == (typename Patch2::Idx1)(0)) ? 0.5 : 2.3;
-                eval_points_2(idx) = Coord<R, Theta>(r, M_PI / 2);
-            });
+    set_eval_points_inside_and_outside<Patch1>(eval_points_1, 0.5, 2.3);
+    set_eval_points_inside_and_outside<Patch2>(eval_points_2, 0.5, 2.3);
 
     // --- collection
     MultipatchField<CoordConstFieldOnPatch, Patch1, Patch2> const eval_points(
@@ -2074,36 +2148,28 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedExtrapolation)
 
     for (Idx<GridBatch> const batch : batch_idx_range) {
         // --- expected values on the mesh of the patch 1
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                idx_range_coords_1,
-                KOKKOS_LAMBDA(Patch1::Idx12 const idx) {
-                    Coord<R, Theta> const coord = eval_points_1(idx);
-                    Coord<R> const r(ddc::get<R>(coord));
-                    if (r < r1_max) {
-                        expected_1(idx) = evaluator_1(coord, batched_coeffs_1_const[batch]);
-                    } else if (r > r2_max) {
-                        expected_1(idx) = rule_max(coord, batched_coeffs_2_const[batch]);
-                    } else {
-                        Kokkos::abort("Unexpected coordinate in EvaluateBatchedExtrapolation.");
-                    }
-                });
+        fill_expected_extrapolation_values<Patch1>(
+                eval_points_1,
+                expected_1,
+                batch,
+                evaluator_1,
+                batched_coeffs_1_const,
+                rule_max,
+                batched_coeffs_2_const,
+                r1_max,
+                r2_max);
 
         // --- expected values on the mesh of the patch 2 (same coordinates)
-        ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                idx_range_coords_2,
-                KOKKOS_LAMBDA(Patch2::Idx12 const idx) {
-                    Coord<R, Theta> const coord = eval_points_2(idx);
-                    Coord<R> const r(ddc::get<R>(coord));
-                    if (r < r1_max) {
-                        expected_2(idx) = evaluator_1(coord, batched_coeffs_1_const[batch]);
-                    } else if (r > r2_max) {
-                        expected_2(idx) = rule_max(coord, batched_coeffs_2_const[batch]);
-                    } else {
-                        Kokkos::abort("Unexpected coordinate in EvaluateBatchedExtrapolation.");
-                    }
-                });
+        fill_expected_extrapolation_values<Patch2>(
+                eval_points_2,
+                expected_2,
+                batch,
+                evaluator_1,
+                batched_coeffs_1_const,
+                rule_max,
+                batched_coeffs_2_const,
+                r1_max,
+                r2_max);
 
         // --- compare the batch slices of the collection output with the expected values
         EXPECT_LE(
@@ -2140,23 +2206,10 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateBatchedDerivFieldOnCoordF
             IdxRangeBatchedSplineCoeffOnPatch<Patch2>(batch_idx_range, spline_idx_range_rtheta2));
     MultipatchFieldMem<BatchedSplineCoeffMemOnPatch, Patch1, Patch2> batched_coeffs_alloc(
             batched_spline_idx_ranges);
-    BatchedSplineCoeffOnPatch<Patch1> batched_coeffs_1 = batched_coeffs_alloc.get<Patch1>();
-    BatchedSplineCoeffOnPatch<Patch2> batched_coeffs_2 = batched_coeffs_alloc.get<Patch2>();
-
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            batched_spline_idx_ranges.get<Patch1>(),
-            KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<1>, BSplinesTheta<1>> const idx) {
-                batched_coeffs_1(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
-                                        * function_1_coef(Idx<BSplinesR<1>, BSplinesTheta<1>>(idx));
-            });
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            batched_spline_idx_ranges.get<Patch2>(),
-            KOKKOS_LAMBDA(Idx<GridBatch, BSplinesR<2>, BSplinesTheta<2>> const idx) {
-                batched_coeffs_2(idx) = ((Idx<GridBatch>(idx) - batch_idx_range.front()) + 1)
-                                        * function_2_coef(Idx<BSplinesR<2>, BSplinesTheta<2>>(idx));
-            });
+    fill_batched_spline_coeffs<
+            Patch1>(batched_coeffs_alloc.get<Patch1>(), get_const_field(function_1_coef));
+    fill_batched_spline_coeffs<
+            Patch2>(batched_coeffs_alloc.get<Patch2>(), get_const_field(function_2_coef));
 
     // --- collection
     MultipatchField<BatchedConstSplineCoeffOnPatch, Patch1, Patch2> const batched_splines(
