@@ -214,6 +214,15 @@ class GetFirst<Condition>
     using type = void;
 };
 
+template <template <class> class Transform, ddc::concepts::type_seq TypeSeqIn>
+struct TypeSeqTransform;
+
+template <template <class> class Transform, class... Elements>
+struct TypeSeqTransform<Transform, ddc::TypeSeq<Elements...>>
+{
+    using type = ddc::TypeSeq<Transform<Elements>...>;
+};
+
 } // namespace detail
 
 /// A tool to get a subset of a TypeSeq by slicing [Start:End]
@@ -284,3 +293,12 @@ using find_idx_t = typename detail::FindIdxType<CoordType, IdxRangeType>::type;
  */
 template <template <typename P> typename Condition, class... T>
 using get_first_t = typename detail::GetFirst<Condition, T...>::type;
+
+/**
+ * @brief Create a type sequence by applying a type template to every element of a type sequence.
+ * E.g. `type_seq_transform_t<F, ddc::TypeSeq<A, B>>` is `ddc::TypeSeq<F<A>, F<B>>`.
+ * @tparam Transform The type template applied to each element.
+ * @tparam TypeSeqIn The original type sequence.
+ */
+template <template <class> class Transform, ddc::concepts::type_seq TypeSeqIn>
+using type_seq_transform_t = typename detail::TypeSeqTransform<Transform, TypeSeqIn>::type;
