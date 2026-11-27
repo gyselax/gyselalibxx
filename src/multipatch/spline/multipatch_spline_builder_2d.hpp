@@ -70,7 +70,10 @@ struct DerivList
 namespace multipatch_spline_builder_details {
 
 
-template <DerivApproxType DerivApprox, class Connectivity, ddc::concepts::type_seq  DirectionDerivSeq>
+template <
+        DerivApproxType DerivApprox,
+        class Connectivity,
+        ddc::concepts::type_seq DirectionDerivSeq>
 struct ToDerivativeCalculatorSeq;
 
 template <DerivApproxType DerivApprox, class Connectivity, class... DirectionDerivs>
@@ -339,7 +342,9 @@ public:
             SplineBuilderCollection const& builders_collection,
             DerivativeCalculators&... deriv_calculators)
         : m_builders_collection(builders_collection)
-        , m_deriv_calculator_collection(deriv_calculators...) {}
+        , m_deriv_calculator_collection(deriv_calculators...)
+    {
+    }
 
     /**
      * @brief Instantiate a MultipatchSplineBuilder2D.
