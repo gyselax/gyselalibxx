@@ -296,7 +296,7 @@ using get_first_t = typename detail::GetFirst<Condition, T...>::type;
 
 /**
  * @brief Create a type sequence by applying a type template to every element of a type sequence.
- * E.g. type_seq_transform_t<F, ddc::TypeSeq<A, B>> is ddc::TypeSeq<F<A>, F<B>>.
+ * E.g. `type_seq_transform_t<F, ddc::TypeSeq<A, B>>` is `ddc::TypeSeq<F<A>, F<B>>`.
  * @tparam Transform The type template applied to each element.
  * @tparam TypeSeqIn The original type sequence.
  */
