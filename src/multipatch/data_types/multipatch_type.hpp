@@ -134,7 +134,7 @@ public:
      * @return The object on the given patch.
      */
     template <concepts::Patch Patch>
-    KOKKOS_FUNCTION TypeOnPatch<Patch> get() const
+    KOKKOS_FUNCTION TypeOnPatch<Patch> const& get() const
             requires(!has_data_access_methods_v<TypeOnPatch<Patch>>)
     {
         return std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(m_tuple);
