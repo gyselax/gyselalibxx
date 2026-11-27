@@ -268,7 +268,8 @@ private:
             return patch_index_max;
         }
 
-        throw Kokkos::abort("Dichotomy method failed to find the right patch.");
+        Kokkos::abort("Dichotomy method failed to find the right patch.");
+        return -1;
     }
 
     /** @brief Set the m_radii array containing all the boundary radial coordinates.
