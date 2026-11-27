@@ -25,7 +25,7 @@
  * We also suppose that we can define a global logical grid that we can split
  * into the different logical grids of the patches.
  *
- * This operator locates on which patch a given physical coordinate is.
+ * This operator locates on which patch a given physical or logical coordinate is.
  *
  * @warning The operator can works on GPU or CPU according to the given
  * execution  space ExecSpace. The ExecSpace by default is device.
@@ -157,39 +157,27 @@ public:
      */
     KOKKOS_INLINE_FUNCTION int operator()(CoordXY const coord) const
     {
-        int patch_index_min = 0;
-        int patch_index_max = n_patches - 1;
+        Coord<R> const r(m_to_curvilinear_mapping(coord));
+        return find_patch_idx(r);
+    }
 
-        Coord<R> r_min = m_radii(patch_index_min);
-        Coord<R> r_max = m_radii(patch_index_max + 1);
-        Coord<R> r(m_to_curvilinear_mapping(coord));
-        KOKKOS_ASSERT(!Kokkos::isnan(double(r)));
-
-        if (r > r_max) {
-            return outside_rmax_domain;
-        }
-        if (r < r_min) {
-            return outside_rmin_domain;
-        }
-
-        while (patch_index_max >= patch_index_min) {
-            int patch_index_mid = (patch_index_min + patch_index_max) / 2;
-            r_min = m_radii(patch_index_mid);
-            r_max = m_radii(patch_index_mid + 1);
-
-            if (r_min <= r && r < r_max) {
-                return patch_index_mid;
-            } else if (r < r_min) {
-                patch_index_max = patch_index_mid - 1;
-            } else if (r_max <= r) {
-                patch_index_min = patch_index_mid + 1;
-            }
-        };
-
-        if (r != m_radii(n_patches)) {
-            Kokkos::abort("Dichotomy method failed to find the right patch.");
-        }
-        return n_patches - 1;
+    /**
+     * @brief Get the patch where the given logical coordinate is.
+     *
+     * The patch is determined from the radial component of the coordinate
+     * itself, without round trip through the physical domain. A coordinate
+     * lying exactly on a patch boundary is therefore attributed
+     * deterministically: to the patch for which the boundary is the inner
+     * radius, and to the last patch for the outer boundary of the domain.
+     *
+     * @param coord [in] The given logical coordinate.
+     * @return [int] The patch index where the logical coordinate is. If the
+     *              coordinate is outside of the domain, it returns a negative
+     *              value.
+     */
+    KOKKOS_INLINE_FUNCTION int operator()(Coord<R, Theta> const coord) const
+    {
+        return find_patch_idx(Coord<R>(coord));
     }
 
 
@@ -229,6 +217,60 @@ public:
     using get_mapping_on_logical_dim_t = LogicalToPhysicalMapping;
 
 private:
+    /**
+     * @brief Find the patch containing the given logical radius.
+     *
+     * A radius lying within 1e-12 of the edge of the domain is considered
+     * to be in the first (or last) patch.
+     *
+     * @param r [in] The given logical radius.
+     * @return [int] The patch index where the radius is. If the radius is
+     *              outside of the domain, it returns a negative value.
+     */
+    KOKKOS_INLINE_FUNCTION int find_patch_idx(Coord<R> r) const
+    {
+        KOKKOS_ASSERT(!Kokkos::isnan(double(r)));
+
+        int patch_index_min = 0;
+        int patch_index_max = n_patches - 1;
+
+        Coord<R> r_min = m_radii(patch_index_min);
+        Coord<R> r_max = m_radii(patch_index_max + 1);
+
+        if (r > r_max) {
+            return outside_rmax_domain;
+        }
+        if (r < r_min) {
+            return outside_rmin_domain;
+        }
+
+        while (patch_index_max >= patch_index_min) {
+            int patch_index_mid = (patch_index_min + patch_index_max) / 2;
+            r_min = m_radii(patch_index_mid);
+            r_max = m_radii(patch_index_mid + 1);
+
+            if (r_min <= r && r < r_max) {
+                return patch_index_mid;
+            } else if (r < r_min) {
+                patch_index_max = patch_index_mid - 1;
+            } else if (r_max <= r) {
+                patch_index_min = patch_index_mid + 1;
+            }
+        };
+
+        double tol = 1e-12;
+
+        // Re-attach a radius within round-off of a patch boundary onto the boundary.
+        if (Kokkos::abs(double(r) - double(m_radii(0))) <= tol) {
+            return patch_index_min;
+        }
+        if (Kokkos::abs(double(r) - double(m_radii(n_patches))) <= tol) {
+            return patch_index_max;
+        }
+
+        throw Kokkos::abort("Dichotomy method failed to find the right patch.");
+    }
+
     /** @brief Set the m_radii array containing all the boundary radial coordinates.
      *         Check if the patches are well ordered by comparing the radii.
      */
