@@ -448,6 +448,9 @@
 * **MultipatchFieldMem** ([**multipatch\_field\_mem.hpp**](multipatch__field__mem_8hpp.md))
 * **MultipatchType** ([**multipatch\_type.hpp**](multipatch__type_8hpp.md))
 * **MultipatchTypeFromSeq** ([**multipatch\_type.hpp**](multipatch__type_8hpp.md))
+* **MultipatchInterpolation2D** ([**multipatch\_interpolation\_2d.hpp**](multipatch__interpolation__2d_8hpp.md))
+* **MultipatchLagrangeInterpolator2D** ([**multipatch\_lagrange\_interpolation.hpp**](multipatch__lagrange__interpolation_8hpp.md))
+* **MultipatchSplineInterpolator2D** ([**multipatch\_spline\_interpolation.hpp**](multipatch__spline__interpolation_8hpp.md))
 * **Matrix\_2x2** ([**view.hpp**](view_8hpp.md))
 
 

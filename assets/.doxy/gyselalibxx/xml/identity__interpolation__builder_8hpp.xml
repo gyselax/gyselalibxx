@@ -60,6 +60,12 @@
       <node id="2">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_lagrange_interpolation.hpp</label>
+        <link refid="multipatch__lagrange__interpolation_8hpp_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classIdentityInterpolationBuilder" prot="public">IdentityInterpolationBuilder</innerclass>

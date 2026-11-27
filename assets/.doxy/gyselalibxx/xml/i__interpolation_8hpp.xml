@@ -18,6 +18,7 @@
     <includedby refid="discrete__poloidal__cs__spline__mapping__builder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp</includedby>
     <includedby refid="gyroaverage__operator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp</includedby>
     <includedby refid="extrapolation__rule__choice_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/extrapolation_rule_choice.hpp</includedby>
+    <includedby refid="multipatch__interpolation__2d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_interpolation_2d.hpp</includedby>
     <includedby refid="polar__spline__fem__poisson__like__solver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</includedby>
     <incdepgraph>
       <node id="21">
@@ -399,7 +400,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_poloidal_cs_spline_mapping_builder.hpp</label>
         <link refid="discrete__poloidal__cs__spline__mapping__builder_8hpp_source"/>
       </node>
-      <node id="17">
+      <node id="18">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
         <childnode refid="5" relation="include">
@@ -409,14 +410,14 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp</label>
         <link refid="spline__definitions__r__theta_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
@@ -425,22 +426,22 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
         <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
         <link refid="vortex__merger__initialisation_8hpp_source"/>
       </node>
-      <node id="20">
+      <node id="21">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp</label>
         <link refid="poisson__like__rhs__function_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
@@ -474,7 +475,7 @@
         <link refid="extrapolation__rule__choice_8hpp_source"/>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -496,31 +497,55 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="14">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
         <link refid="lagrange__interpolation_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
         <link refid="spline__interpolation_8hpp_source"/>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
-        <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
-      </node>
-      <node id="22">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
-        <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="17" relation="include">
         </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
+        <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_interpolation_2d.hpp</label>
+        <link refid="multipatch__interpolation__2d_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_lagrange_interpolation.hpp</label>
+        <link refid="multipatch__lagrange__interpolation_8hpp_source"/>
+      </node>
+      <node id="24">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_spline_interpolation.hpp</label>
+        <link refid="multipatch__spline__interpolation_8hpp_source"/>
+      </node>
+      <node id="25">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>

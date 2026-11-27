@@ -678,6 +678,9 @@ EvaluatorType2 evaluator_2(extrapolation_rules_2...);
 <li><code>interpolation_builder_2d_collection.hpp</code>: Define the <code>InterpolationBuilder2DCollection</code> operator to apply 2D interpolation builders on every patch.</li>
 <li><code>interpolation_builder_collection.hpp</code>: Define the <code>InterpolationBuilderCollection</code> operator to apply 1D interpolation builders on every patch.</li>
 <li><code>interpolation_evaluator_2d_collection.hpp</code>: Define the <code>InterpolationEvaluator2DCollection</code> operator to apply 2D interpolation evaluators on every patch.</li>
+<li><code>multipatch_interpolation_2d.hpp</code>: Define the <code>MultipatchInterpolation2D</code> class which owns the 2D interpolations of every patch and the matching builder and evaluator collections.</li>
+<li><code>multipatch_lagrange_interpolation.hpp</code>: Define the <code>MultipatchLagrangeInterpolator2D</code> alias for a <code>MultipatchInterpolation2D</code> using Lagrange interpolation on every patch.</li>
+<li><code>multipatch_spline_interpolation.hpp</code>: Define the <code>MultipatchSplineInterpolator2D</code> alias for a <code>MultipatchInterpolation2D</code> using spline interpolation on every patch.</li>
 </ul></div>
               
             </div>

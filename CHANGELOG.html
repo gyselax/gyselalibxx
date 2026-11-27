@@ -772,6 +772,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add copy operators for <code>MultipatchType</code> and <code>MultipatchField</code>.</li>
 <li>Add <code>InterpolationEvaluatorTraits::basis_idx_range_type</code> to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).</li>
 <li>Add <code>type_seq_transform_t</code> to apply a type template to every element of a <code>ddc::TypeSeq</code>.</li>
+<li>Add <code>MultipatchInterpolation2D</code> to construct and own the 2D interpolations of every patch and save references to the matching <code>InterpolationBuilder2DCollection</code> and <code>InterpolationEvaluator2DCollection</code>.</li>
+<li>Add <code>MultipatchSplineInterpolator2D</code> and <code>MultipatchLagrangeInterpolator2D</code> aliases to define a <code>MultipatchInterpolation2D</code> using spline or Lagrange interpolation on every patch.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>

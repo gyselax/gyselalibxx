@@ -5127,6 +5127,15 @@
   </compound>
   <compound refid="interpolation__evaluator__2d__collection_8hpp" kind="file"><name>interpolation_evaluator_2d_collection.hpp</name>
   </compound>
+  <compound refid="multipatch__interpolation__2d_8hpp" kind="file"><name>multipatch_interpolation_2d.hpp</name>
+    <member refid="multipatch__interpolation__2d_8hpp_1ac15fbd8d783e167aa41bf1c106fffe78" kind="typedef"><name>MultipatchInterpolation2D</name></member>
+  </compound>
+  <compound refid="multipatch__lagrange__interpolation_8hpp" kind="file"><name>multipatch_lagrange_interpolation.hpp</name>
+    <member refid="multipatch__lagrange__interpolation_8hpp_1aa1d07ba650a3544541c8048184ff942f" kind="typedef"><name>MultipatchLagrangeInterpolator2D</name></member>
+  </compound>
+  <compound refid="multipatch__spline__interpolation_8hpp" kind="file"><name>multipatch_spline_interpolation.hpp</name>
+    <member refid="multipatch__spline__interpolation_8hpp_1aacc3659cb08001207639d0eaee1c5abb" kind="typedef"><name>MultipatchSplineInterpolator2D</name></member>
+  </compound>
   <compound refid="constant__extrapolation__rules__onion_8hpp" kind="file"><name>constant_extrapolation_rules_onion.hpp</name>
   </compound>
   <compound refid="null__extrapolation__rules_8hpp" kind="file"><name>null_extrapolation_rules.hpp</name>

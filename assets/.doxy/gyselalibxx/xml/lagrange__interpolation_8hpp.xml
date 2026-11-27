@@ -10,6 +10,7 @@
     <includes refid="lagrange__evaluator_8hpp" local="yes">lagrange_evaluator.hpp</includes>
     <includes refid="nd__identity__interpolation__builder_8hpp" local="yes">nd_identity_interpolation_builder.hpp</includes>
     <includes refid="nd__lagrange__evaluator_8hpp" local="yes">nd_lagrange_evaluator.hpp</includes>
+    <includedby refid="multipatch__lagrange__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_lagrange_interpolation.hpp</includedby>
     <incdepgraph>
       <node id="23">
         <label>coord_transformation_tools.hpp</label>
@@ -421,6 +422,18 @@
         <label>vector</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
+        <link refid="lagrange__interpolation_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_lagrange_interpolation.hpp</label>
+        <link refid="multipatch__lagrange__interpolation_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="lagrange__interpolation_8hpp_1affa798b8abac8ccc83f38b272820655b" prot="public" static="no">
         <templateparamlist>

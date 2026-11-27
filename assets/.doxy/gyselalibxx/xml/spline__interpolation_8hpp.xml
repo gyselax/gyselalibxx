@@ -8,6 +8,7 @@
     <includes refid="extrapolation__rule__choice_8hpp" local="yes">extrapolation_rule_choice.hpp</includes>
     <includedby refid="spline__definitions__r__theta_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp</includedby>
     <includedby refid="interpolation__evaluator__2d__collection_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</includedby>
+    <includedby refid="multipatch__spline__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_spline_interpolation.hpp</includedby>
     <incdepgraph>
       <node id="23">
         <label>coord_transformation_tools.hpp</label>
@@ -441,10 +442,30 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
       </node>
       <node id="10">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_evaluator_2d_collection.hpp</label>
         <link refid="interpolation__evaluator__2d__collection_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_interpolation_2d.hpp</label>
+        <link refid="multipatch__interpolation__2d_8hpp_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_lagrange_interpolation.hpp</label>
+        <link refid="multipatch__lagrange__interpolation_8hpp_source"/>
+      </node>
+      <node id="13">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_spline_interpolation.hpp</label>
+        <link refid="multipatch__spline__interpolation_8hpp_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="structSplineBoundaryClosures" prot="public">SplineBoundaryClosures</innerclass>

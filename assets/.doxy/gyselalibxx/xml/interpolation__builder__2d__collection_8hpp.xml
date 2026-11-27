@@ -14,6 +14,7 @@
     <includes refid="multipatch__type_8hpp" local="yes">multipatch_type.hpp</includes>
     <includes refid="spline__builder__deriv__field__2d_8hpp" local="yes">spline_builder_deriv_field_2d.hpp</includes>
     <includes refid="types_8hpp" local="yes">types.hpp</includes>
+    <includedby refid="multipatch__interpolation__2d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_interpolation_2d.hpp</includedby>
     <incdepgraph>
       <node id="23">
         <label>deriv_details.hpp</label>
@@ -336,6 +337,30 @@
         <label>utility</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/interpolation_builder_2d_collection.hpp</label>
+        <link refid="interpolation__builder__2d__collection_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_interpolation_2d.hpp</label>
+        <link refid="multipatch__interpolation__2d_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_lagrange_interpolation.hpp</label>
+        <link refid="multipatch__lagrange__interpolation_8hpp_source"/>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interpolation/multipatch_spline_interpolation.hpp</label>
+        <link refid="multipatch__spline__interpolation_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Type8e3f4e34d093a5390cc74d679af413db" prot="public">InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;</innerclass>
     <innerclass refid="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typ9d8ab39c8089d4822a2c9490f41e6648" prot="private">InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange</innerclass>
     <innerclass refid="structInterpolationBuilder2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Typd0c266faf25bb6716ab3985d97711716" prot="private">InterpolationBuilder2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Builders... &gt; &gt;::ValuesIdxRange&lt; FieldType &gt;</innerclass>

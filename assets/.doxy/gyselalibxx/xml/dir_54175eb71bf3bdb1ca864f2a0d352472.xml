@@ -5,6 +5,9 @@
     <innerfile refid="interpolation__builder__2d__collection_8hpp">interpolation_builder_2d_collection.hpp</innerfile>
     <innerfile refid="interpolation__builder__collection_8hpp">interpolation_builder_collection.hpp</innerfile>
     <innerfile refid="interpolation__evaluator__2d__collection_8hpp">interpolation_evaluator_2d_collection.hpp</innerfile>
+    <innerfile refid="multipatch__interpolation__2d_8hpp">multipatch_interpolation_2d.hpp</innerfile>
+    <innerfile refid="multipatch__lagrange__interpolation_8hpp">multipatch_lagrange_interpolation.hpp</innerfile>
+    <innerfile refid="multipatch__spline__interpolation_8hpp">multipatch_spline_interpolation.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
