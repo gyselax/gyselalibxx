@@ -48,6 +48,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `MultipatchConnectivity::get_all_patches_along_direction_t` to get the patches along a line which passes through a given grid.
 - Add copy operators for `MultipatchType` and `MultipatchField`.
 - Add `InterpolationEvaluatorTraits::basis_idx_range_type` to get the basis on which an interpolation is defined (e.g. the Lagrange basis instead of its knot grid).
+- Add `type_seq_transform_t` to apply a type template to every element of a `ddc::TypeSeq`.
+- Add `MultipatchInterpolation2D` to construct and own the 2D interpolations of every patch and save references to the matching `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection`.
+- Add `MultipatchSplineInterpolator2D` and `MultipatchLagrangeInterpolator2D` aliases to define a `MultipatchInterpolation2D` using spline or Lagrange interpolation on every patch.
 
 ### Fixed
 
