@@ -635,11 +635,13 @@ class InterpolationEvaluator2DCollection&lt;
 
     using FirstEvaluator = ddc::type_seq_element_t&lt;0, ddc::TypeSeq&lt;Evaluators...&gt;&gt;;
 
+public:
     template &lt;class Patch&gt;
     using EvaluatorOnPatch = ddc::type_seq_element_t&lt;
             ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;,
             ddc::TypeSeq&lt;Evaluators...&gt;&gt;;
 
+private:
     template &lt;class Patch&gt;
     using Traits = InterpolationEvaluatorTraits&lt;EvaluatorOnPatch&lt;Patch&gt;&gt;;
 
@@ -807,6 +809,12 @@ public:
     KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(
             InterpolationEvaluator2DCollection const&amp;)
             = default;
+
+    template &lt;concepts::Patch Patch&gt;
+    EvaluatorOnPatch&lt;Patch&gt; const&amp; get() const
+    {
+        return m_evaluators.template get&lt;Patch&gt;();
+    }
 
     // Assignment operators ----------------------------------------------------------------------
     template &lt;class Coord&gt;

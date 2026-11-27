@@ -35,6 +35,7 @@ _A class to evaluate all the interpolations of all the patches at once._ [More..
 | Type | Name |
 | ---: | :--- |
 | typedef ConstField&lt; [**data\_type**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-data_type), [**coeff\_idx\_range\_type**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-coeff_idx_range_type)&lt; [**Patch**](structPatch.md) &gt;, [**memory\_space**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-memory_space) &gt; | [**CoeffOnPatch**](#typedef-coeffonpatch)  <br>_Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched interpolation defined on both of the_ [_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._ |
+| typedef ddc::type\_seq\_element\_t&lt; ddc::type\_seq\_rank\_v&lt; [**Patch**](structPatch.md), PatchOrdering &gt;, ddc::TypeSeq&lt; Evaluators... &gt; &gt; | [**EvaluatorOnPatch**](#typedef-evaluatoronpatch)  <br>_A type alias to get the evaluator type on a specific patch._  |
 | typedef ddc:: type\_seq\_element\_t&lt; 0, ddc::to\_type\_seq\_t&lt; typename Traits&lt; [**Patch**](structPatch.md) &gt;::basis\_idx\_range\_type &gt; &gt; | [**basis\_type1**](#typedef-basis_type1)  <br>_The discrete dimension representing the basis along first dimension._  |
 | typedef ddc:: type\_seq\_element\_t&lt; 1, ddc::to\_type\_seq\_t&lt; typename Traits&lt; [**Patch**](structPatch.md) &gt;::basis\_idx\_range\_type &gt; &gt; | [**basis\_type2**](#typedef-basis_type2)  <br>_The discrete dimension representing the basis along second dimension._  |
 | typedef typename ddc::detail::convert\_type\_seq\_to\_discrete\_domain\_t&lt; [**physical\_grids**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-physical_grids)&lt; ValuesField &gt; &gt; | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
@@ -89,6 +90,7 @@ _A class to evaluate all the interpolations of all the patches at once._ [More..
 |  void | [**apply\_integrate**](#function-apply_integrate) (double & integral, [**CoeffOnPatch**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-coeffonpatch)&lt; [**Patch**](structPatch.md) &gt; const & coeffs) const<br>_Integrate the spline defined on the given patch._  |
 |  KOKKOS\_FUNCTION [**data\_type**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-data_type) | [**deriv**](#function-deriv-12) (Idx&lt; DerivDims... &gt; const & deriv\_order, Coord&lt; CDim1, CDim2 &gt; const & coord\_eval, MultipatchCoeffs const & patches\_coeffs) const<br>_Differentiate 2D interpolations (described by their interpolation coefficients) at a given coordinate along a specified dimension of interest._  |
 |  void | [**deriv**](#function-deriv-22) (Idx&lt; DerivDims... &gt; const & deriv\_order, MultipatchValues const & patches\_deriv, MultipatchCoordField const & patches\_coords, MultipatchCoeffs const & patches\_coeffs) const<br>_Differentiate 2D interpolations (described by their interpolation coefficients) on meshes along first dimension of interest._  |
+|  [**EvaluatorOnPatch**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-evaluatoronpatch)&lt; [**Patch**](structPatch.md) &gt; const & | [**get**](#function-get) () const<br>_Get the evaluator associated with the specified patch._  |
 |  void | [**integrate**](#function-integrate) (DKokkosView\_h&lt; [**n\_patches**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#variable-n_patches) &gt; const & integrals, MultipatchCoeffs const & patches\_coeffs) const<br>_Integration of splines (described by their spline coefficients)._  |
 |  KOKKOS\_FUNCTION [**data\_type**](classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.md#typedef-data_type) | [**operator()**](#function-operator) (Coord const coord\_eval, MultipatchCoeffs const & patches\_coeffs) const<br>_Evaluate the 2D interpolations (described by their interpolation coefficients) at a given coordinate._  |
 |  void | [**operator()**](#function-operator_1) (MultipatchValues const & patches\_values, MultipatchCoordField const & patches\_coords, MultipatchCoeffs const & patches\_coeffs) const<br>_Evaluate 2D interpolations (described by their interpolation coefficients) on meshes._  |
@@ -156,6 +158,22 @@ See the documentation of the primary template.
 _Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched interpolation defined on both of the_ [_**Patch**_](structPatch.md) _'s logical dimensions. Needed public for functions on GPU._
 ```C++
 using InterpolationEvaluator2DCollection< ddc::TypeSeq< Patches... >, ddc::TypeSeq< Evaluators... >, PatchLocator, ExtrapolationRule >::CoeffOnPatch =  ConstField<data_type, coeff_idx_range_type<Patch>, memory_space>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef EvaluatorOnPatch 
+
+_A type alias to get the evaluator type on a specific patch._ 
+```C++
+using InterpolationEvaluator2DCollection< ddc::TypeSeq< Patches... >, ddc::TypeSeq< Evaluators... >, PatchLocator, ExtrapolationRule >::EvaluatorOnPatch =  ddc::type_seq_element_t<
+            ddc::type_seq_rank_v<Patch, PatchOrdering>,
+            ddc::TypeSeq<Evaluators...>>;
 ```
 
 
@@ -878,6 +896,42 @@ The derivatives cannot be computed outside of the domain.
 
 
 * `MultipatchValues` A MultipatchField of DField or [**DerivField**](classDerivField.md). 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get 
+
+_Get the evaluator associated with the specified patch._ 
+```C++
+template<concepts::Patch Patch>
+inline EvaluatorOnPatch < Patch > const & InterpolationEvaluator2DCollection< ddc::TypeSeq< Patches... >, ddc::TypeSeq< Evaluators... >, PatchLocator, ExtrapolationRule >::get () const
+```
+
+
+
+Get the evaluator associated with the specified patch. Beware that boundary conditions may not be designed to be used in a single patch context.
+
+
+
+
+**Template parameters:**
+
+
+* `The` specified patch.
+
+
+
+**Returns:**
+
+A const reference to the evaluator on the specified patch. 
+
 
 
 

@@ -602,6 +602,10 @@
 <td style="text-align: left;"><a href="#typedef-coeffonpatch"><strong>CoeffOnPatch</strong></a>  <br><em>Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched interpolation defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Needed public for functions on GPU.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; ddc::type_seq_rank_v&lt; <a href="structPatch.html"><strong>Patch</strong></a>, PatchOrdering &gt;, ddc::TypeSeq&lt; Evaluators... &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-evaluatoronpatch"><strong>EvaluatorOnPatch</strong></a>  <br><em>A type alias to get the evaluator type on a specific patch.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ddc:: type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename Traits&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;::basis_idx_range_type &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-basis_type1"><strong>basis_type1</strong></a>  <br><em>The discrete dimension representing the basis along first dimension.</em></td>
 </tr>
@@ -728,6 +732,10 @@
 <td style="text-align: left;"><a href="#function-deriv-22"><strong>deriv</strong></a> (Idx&lt; DerivDims... &gt; const &amp; deriv_order, MultipatchValues const &amp; patches_deriv, MultipatchCoordField const &amp; patches_coords, MultipatchCoeffs const &amp; patches_coeffs) const<br><em>Differentiate 2D interpolations (described by their interpolation coefficients) on meshes along first dimension of interest.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;"><a href="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.html#typedef-evaluatoronpatch"><strong>EvaluatorOnPatch</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt; const &amp;</td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br><em>Get the evaluator associated with the specified patch.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-integrate"><strong>integrate</strong></a> (DKokkosView_h&lt; <a href="classInterpolationEvaluator2DCollection_3_01ddc_1_1TypeSeq_3_01Patches_8_8_8_01_4_00_01ddc_1_1Tyd0245b5be4db6de549c4015b188c4106.html#variable-n_patches"><strong>n_patches</strong></a> &gt; const &amp; integrals, MultipatchCoeffs const &amp; patches_coeffs) const<br><em>Integration of splines (described by their spline coefficients).</em></td>
 </tr>
@@ -773,6 +781,14 @@
 <h3 id="typedef-coeffonpatch">typedef CoeffOnPatch</h3>
 <p><em>Type for MultipatchType: A field of 2D interpolation coefficients for a non-batched interpolation defined on both of the</em> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>'s logical dimensions. Needed public for functions on GPU.</em></p>
 <pre><code class="language-C++">using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::CoeffOnPatch =  ConstField&lt;data_type, coeff_idx_range_type&lt;Patch&gt;, memory_space&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-evaluatoronpatch">typedef EvaluatorOnPatch</h3>
+<p><em>A type alias to get the evaluator type on a specific patch.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::EvaluatorOnPatch =  ddc::type_seq_element_t&lt;
+            ddc::type_seq_rank_v&lt;Patch, PatchOrdering&gt;,
+            ddc::TypeSeq&lt;Evaluators...&gt;&gt;;
 </code></pre>
 <hr>
 
@@ -1103,6 +1119,20 @@ inline void InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &
 <ul>
 <li><code>MultipatchValues</code> A MultipatchField of DField or <a href="classDerivField.html"><strong>DerivField</strong></a>. </li>
 </ul>
+<hr>
+
+<h3 id="function-get">function get</h3>
+<p><em>Get the evaluator associated with the specified patch.</em> </p>
+<pre><code class="language-C++">template&lt;concepts::Patch Patch&gt;
+inline EvaluatorOnPatch &lt; Patch &gt; const &amp; InterpolationEvaluator2DCollection&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; Evaluators... &gt;, PatchLocator, ExtrapolationRule &gt;::get () const
+</code></pre>
+<p>Get the evaluator associated with the specified patch. Beware that boundary conditions may not be designed to be used in a single patch context.</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>The</code> specified patch.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A const reference to the evaluator on the specified patch. </p>
 <hr>
 
 <h3 id="function-integrate">function integrate</h3>
