@@ -76,9 +76,8 @@ class MultipatchInterpolation2DImpl<
 
     /// A type alias to get the interpolation type on a specific patch.
     template <class Patch>
-    using InterpolationOnPatch = ddc::type_seq_element_t<
-            PatchIdx<Patch>,
-            ddc::TypeSeq<Interpolations...>>;
+    using InterpolationOnPatch
+            = ddc::type_seq_element_t<PatchIdx<Patch>, ddc::TypeSeq<Interpolations...>>;
 
 public:
     /// @brief The collection of the builders of each patch.
@@ -206,10 +205,8 @@ public:
  * @tparam Dim The continuous dimension.
  */
 template <class Dim>
-using PatchExtrapolationRules = std::conditional_t<
-        Dim::PERIODIC,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Null_Null>;
+using PatchExtrapolationRules = std::
+        conditional_t<Dim::PERIODIC, ExtrapolationRule::Periodic, ExtrapolationRule::Null_Null>;
 
 } // namespace detail
 
