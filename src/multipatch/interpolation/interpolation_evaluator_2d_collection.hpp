@@ -881,7 +881,7 @@ private:
     /// logical coordinate itself when possible.
     KOKKOS_INLINE_FUNCTION int get_patch_idx(Coord<CDim1, CDim2> const coord) const
     {
-        if constexpr (std::is_callable_v<PatchLocator, Coord<CDim1, CDim2>>) {
+        if constexpr (std::is_invocable_v<PatchLocator, Coord<CDim1, CDim2>>) {
             return m_patch_locator(coord);
         } else {
             using Mapping =
