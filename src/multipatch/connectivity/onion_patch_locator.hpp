@@ -237,10 +237,12 @@ private:
         Coord<R> r_min = m_radii(patch_index_min);
         Coord<R> r_max = m_radii(patch_index_max + 1);
 
-        if (r > r_max) {
+        double tol = 1e-12;
+
+        if (r > r_max + tol) {
             return outside_rmax_domain;
         }
-        if (r < r_min) {
+        if (r < r_min - tol) {
             return outside_rmin_domain;
         }
 
@@ -257,8 +259,6 @@ private:
                 patch_index_min = patch_index_mid + 1;
             }
         };
-
-        double tol = 1e-12;
 
         // Re-attach a radius within round-off of a patch boundary onto the boundary.
         if (Kokkos::abs(double(r) - double(m_radii(0))) <= tol) {
