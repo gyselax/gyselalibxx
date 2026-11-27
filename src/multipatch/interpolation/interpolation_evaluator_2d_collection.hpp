@@ -375,10 +375,36 @@ public:
             MultipatchCoeffs const& patches_coeffs) const
             requires(is_multipatch_field_v<MultipatchValues>)
     {
-        (apply_evaluator_field<Patches>(
+        (apply_evaluator_field_impl<Patches>(
                  Idx<>(),
                  patches_values.template get<Patches>(),
                  patches_coords.template get<Patches>(),
+                 patches_coeffs),
+         ...);
+    }
+
+    /**
+     * @brief Evaluate 2D interpolations (described by their interpolation coefficients) on meshes.
+     *
+     * See @ref InterpolationEvaluator2DCollectionOperator.
+     * The interpolations are evaluated at the default coordinates: the coordinates of the
+     * grid points of the meshes on which the values are defined (ddc::coordinate(idx)).
+     *
+     * @tparam MultipatchValues A MultipatchField of DField or DerivField.
+     * @param[out] patches_values A MultipatchType of DField or DerivField to store the values of the interpolations
+     *          at the grid points of their patch.
+     * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
+     */
+    template <class MultipatchValues>
+    void operator()(
+            MultipatchValues const& patches_values,
+            MultipatchCoeffs const& patches_coeffs) const
+            requires(is_multipatch_field_v<MultipatchValues>)
+    {
+        (apply_evaluator_field_impl<Patches>(
+                 Idx<>(),
+                 patches_values.template get<Patches>(),
+                 GridCoordProvider(),
                  patches_coeffs),
          ...);
     }
@@ -456,17 +482,64 @@ public:
                 "(same dimensions for all the patches).");
         if constexpr ((is_deriv_field_v<
                                typename MultipatchValues::template TypeOnPatch<Patches>> && ...)) {
-            (apply_evaluator_deriv_field<Patches>(
+            (apply_evaluator_deriv_field_impl<Patches>(
                      deriv_order,
                      patches_deriv.template get<Patches>(),
                      patches_coords.template get<Patches>(),
                      patches_coeffs),
              ...);
         } else {
-            (apply_evaluator_field<Patches>(
+            (apply_evaluator_field_impl<Patches>(
                      deriv_order,
                      patches_deriv.template get<Patches>(),
                      patches_coords.template get<Patches>(),
+                     patches_coeffs),
+             ...);
+        }
+    }
+
+    /**
+     * @brief Differentiate 2D interpolations (described by their interpolation coefficients)
+     * on meshes along dimensions of interest.
+     *
+     * See @ref InterpolationEvaluator2DCollectionOperator.
+     * The interpolations are differentiated at the default coordinates: the coordinates of
+     * the grid points of the meshes on which the derivatives are defined (ddc::coordinate(idx)).
+     *
+     * @warning The derivatives cannot be computed outside of the domain.
+     *
+     * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
+     * or both.
+     * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f(x,y)).
+     * @param[out] patches_deriv A MultipatchType of DField or DerivField to store the derivatives
+     *          of the interpolations at the grid points of their patch.
+     * @param[in] patches_coeffs A MultipatchType of DField storing the 2D interpolation coefficients.
+     * @tparam MultipatchValues A MultipatchField of DField or DerivField.
+     */
+    template <class MultipatchValues, class... DerivDims>
+    void deriv(
+            Idx<DerivDims...> const& deriv_order,
+            MultipatchValues const& patches_deriv,
+            MultipatchCoeffs const& patches_coeffs) const
+            requires(is_multipatch_field_v<MultipatchValues>)
+    {
+        static_assert(
+                (ddc::in_tags_v<DerivDims, ddc::TypeSeq<DerivDim1, DerivDim2>> && ...),
+                "Please provide a deriv_order indexed on the derivative dimensions of the patches "
+                "(same dimensions for all the patches).");
+        if constexpr ((is_deriv_field_v<
+                               typename MultipatchValues::template TypeOnPatch<Patches>> && ...)) {
+            (apply_evaluator_deriv_field_impl<Patches>(
+                     deriv_order,
+                     patches_deriv.template get<Patches>(),
+                     GridCoordProvider(),
+                     patches_coeffs),
+             ...);
+        } else {
+            (apply_evaluator_field_impl<Patches>(
+                     deriv_order,
+                     patches_deriv.template get<Patches>(),
+                     GridCoordProvider(),
                      patches_coeffs),
              ...);
         }
@@ -495,33 +568,55 @@ public:
     }
 
 
-public:
-    // Apply functions to manage the values on each patch. ---------------------------------------
+private:
+    // Apply functions on each patch ----------------------------------------------
 
+    /// @brief A tool providing the default coordinates at which the interpolations are
+    /// evaluated or differentiated: the coordinates of the grid points of the mesh on
+    /// which the values are defined (ddc::coordinate(idx)).
+    struct GridCoordProvider
+    {
+        template <class... GridTypes>
+        KOKKOS_FUNCTION Coord<CDim1, CDim2> operator()(Idx<GridTypes...> const& idx) const
+        {
+            return ddc::coordinate(idx);
+        }
+    };
+
+public:
     /** @brief Compute the values or the derivatives of a given patch at the coordinates
-     * defined on the given patch. Specialisation for patch_values on DField.
-     * Needed public for functions on GPU. 
-     * @tparam StoringPatch Patch type where the given coordinates are stored. 
-     *      They are not especially physically located on this patch.
+     * provided by get_coord.
+     * @tparam StoringPatch Patch type where the values are defined and where the
+     *      coordinates are stored or computed. They are not especially physically
+     *      located on this patch.
      * @tparam ValuesField The type of the field of values (DField or DerivField).
+     * @tparam CoordProvider The type of the tool providing the coordinates: a field of
+     *      coordinates defined on the StoringPatch, or GridCoordProvider for the default
+     *      coordinates (ddc::coordinate(idx)).
      * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      *      or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
      * @param[out] patch_values Field of values of the function or derivative.
-     * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and
-     *          where we want to evaluate the function or derivative.
+     * @param[in] get_coord Tool providing, for an index of the mesh on which the values
+     *      are defined, the coordinate where we want to evaluate the function or derivative.
      * @param[in] patches_coeffs MultipatchType of interpolation coefficients
      *          on every patches.
      */
-    template <class StoringPatch, class ValuesField, class... DerivDims>
-    void apply_evaluator_field(
+    template <
+            class StoringPatch,
+            class ValuesField,
+            class CoordProvider,
+            class... DerivDims>
+    void apply_evaluator_field_impl(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
-            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            CoordProvider get_coord,
             MultipatchCoeffs const patches_coeffs) const
     {
         check_values_field_type<StoringPatch, ValuesField>();
-        assert(get_idx_range(patch_values) == get_idx_range(patch_coords));
+        if constexpr (!std::is_same_v<CoordProvider, GridCoordProvider>) {
+            assert(get_idx_range(patch_values) == get_idx_range(get_coord));
+        }
 
         using Index =
                 typename batched_evaluation_idx_range_type<ValuesField>::discrete_element_type;
@@ -535,39 +630,47 @@ public:
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
-                    int const patch_idx = get_patch_idx(patch_coords(idx));
+                    Coord<CDim1, CDim2> const coord = get_coord(idx);
+                    int const patch_idx = get_patch_idx(coord);
                     if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
                     patch_values(idx) = recursive_dispatch_patch_function(
                             deriv_order,
-                            patch_coords(idx),
+                            coord,
                             patches_coeffs,
                             patch_idx);
                 });
     }
 
-    /** @brief Compute the derivatives of a given patch at the coordinates
-     * defined on the given patch. Specialisation for patch_values on DerivField.
-     * Needed public for functions on GPU. 
-     * @tparam StoringPatch Patch type where the given coordinates are stored. 
-     *      They are not especially physically located on this patch.
+    /** @brief Compute the derivatives of a given patch at the coordinates provided
+     * by get_coord.
+     * @tparam StoringPatch Patch type where the values are defined and where the
+     *      coordinates are stored or computed. They are not especially physically
+     *      located on this patch.
      * @tparam ValuesField The type of the DerivField of values.
+     * @tparam CoordProvider The type of the tool providing the coordinates: a field of
+     *      coordinates defined on the StoringPatch, or GridCoordProvider for the default
+     *      coordinates (ddc::coordinate(idx)).
      * @tparam DerivDims Derivative dimension types, it can be on the first dimension, the second
      * or both.
      * @param[in] deriv_order Order (k,l) of the derivatives (e.g. d_x^k d_y^l f).
      * @param[out] patch_values DerivField of values and derivatives of the function.
-     * @param[in] patch_coords ConstField of coordinates defined on the StoringPatch and
-     *          where we want to evaluate the function or derivative.
+     * @param[in] get_coord Tool providing, for an index of the mesh on which the values
+     *      are defined, the coordinate where we want to evaluate the function or derivative.
      * @param[in] patches_coeffs MultipatchType of interpolation coefficients
      *          on every patches.
      */
-    template <class StoringPatch, class ValuesField, class... DerivDims>
-    void apply_evaluator_deriv_field(
+    template <
+            class StoringPatch,
+            class ValuesField,
+            class CoordProvider,
+            class... DerivDims>
+    void apply_evaluator_deriv_field_impl(
             Idx<DerivDims...> const& deriv_order,
             ValuesField const& patch_values,
-            CoordConstFieldOnPatch<StoringPatch> const& patch_coords,
+            CoordProvider get_coord,
             MultipatchCoeffs const patches_coeffs) const
     {
         static_assert(is_deriv_field_v<ValuesField>, "The values field must be a DerivField.");
@@ -628,14 +731,15 @@ public:
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Idx<PGrid1, PGrid2> const& idx) {
-                    int const patch_idx = get_patch_idx(patch_coords(idx));
+                    Coord<CDim1, CDim2> const coord = get_coord(idx);
+                    int const patch_idx = get_patch_idx(coord);
                     if (patch_idx < 0 && is_derivative) {
                         Kokkos::abort("The evaluation coordinate has to be on a patch."
                                       "No extrapolation rule for derivatives. \n");
                     }
                     patch_values(deriv_order, idx) = recursive_dispatch_patch_function(
                             deriv_order,
-                            patch_coords(idx),
+                            coord,
                             patches_coeffs,
                             patch_idx);
                 });
