@@ -90,12 +90,14 @@ class InterpolationEvaluator2DCollection<
 
     using FirstEvaluator = ddc::type_seq_element_t<0, ddc::TypeSeq<Evaluators...>>;
 
+public:
     /// A type alias to get the evaluator type on a specific patch.
     template <class Patch>
     using EvaluatorOnPatch = ddc::type_seq_element_t<
             ddc::type_seq_rank_v<Patch, PatchOrdering>,
             ddc::TypeSeq<Evaluators...>>;
 
+private:
     /// A type alias to get the traits of the evaluator on a specific patch.
     template <class Patch>
     using Traits = InterpolationEvaluatorTraits<EvaluatorOnPatch<Patch>>;
@@ -316,6 +318,22 @@ public:
     KOKKOS_DEFAULTED_FUNCTION InterpolationEvaluator2DCollection(
             InterpolationEvaluator2DCollection const&)
             = default;
+
+    /**
+     * @brief Get the evaluator associated with the specified patch.
+     *
+     * Get the evaluator associated with the specified patch. Beware that boundary conditions
+     * may not be designed to be used in a single patch context.
+     *
+     * @tparam The specified patch.
+     *
+     * @return A const reference to the evaluator on the specified patch.
+     */
+    template <concepts::Patch Patch>
+    EvaluatorOnPatch<Patch> const& get()
+    {
+        return m_evaluators.template get<Patch>();
+    }
 
     // Assignment operators ----------------------------------------------------------------------
     /**
