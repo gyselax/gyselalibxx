@@ -17,8 +17,6 @@ namespace detail {
  *          along the first dimension of the patch.
  * @tparam Basis2OnPatch A type template such that Basis2OnPatch<Patch> is the Lagrange basis
  *          along the second dimension of the patch.
- * @tparam ExtrapRules1 The extrapolation rules along the first dimension of each patch.
- * @tparam ExtrapRules2 The extrapolation rules along the second dimension of each patch.
  */
 template <
         class ExecSpace,
@@ -26,9 +24,7 @@ template <
         template <class>
         class Basis1OnPatch,
         template <class>
-        class Basis2OnPatch,
-        class ExtrapRules1,
-        class ExtrapRules2>
+        class Basis2OnPatch>
 struct LagrangeInterpolatorOnPatch
 {
     /// @brief The 2D Lagrange interpolation on the given patch.
@@ -38,8 +34,8 @@ struct LagrangeInterpolatorOnPatch
             DataType,
             IdxRange<Basis1OnPatch<Patch>, Basis2OnPatch<Patch>>,
             typename Patch::IdxRange12,
-            ExtrapRules1,
-            ExtrapRules2>;
+            PatchExtrapolationRules<typename Patch::Dim1>,
+            PatchExtrapolationRules<typename Patch::Dim2>>;
 };
 
 } // namespace detail
@@ -49,9 +45,9 @@ struct LagrangeInterpolatorOnPatch
  *
  * On each patch, the Lagrange interpolation is defined on the bases
  * (Basis1OnPatch<Patch>, Basis2OnPatch<Patch>) and the grids (Grid1, Grid2) of the patch.
- * The same extrapolation rules are used on every patch. They are given as tags
- * (e.g. ExtrapolationRule::Periodic, ExtrapolationRule::Null_Null) which are resolved
- * separately on each patch.
+ *
+ * The extrapolation outside of the global domain is handled by MultipatchExtrapolationRule,
+ * so the extrapolation rules on each patch are null (or periodic along periodic dimensions).
  *
  * The execution space is the one of the patch locator (PatchLocator::exec_space).
  *
@@ -62,10 +58,6 @@ struct LagrangeInterpolatorOnPatch
  *          (UniformLagrangeBasis or NonUniformLagrangeBasis) along the first dimension of the patch.
  * @tparam Basis2OnPatch A type template such that Basis2OnPatch<Patch> is the Lagrange basis
  *          along the second dimension of the patch.
- * @tparam ExtrapRules1 A ddc::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> describing the
- *          extrapolation along the first dimension of each patch (see LagrangeInterpolator).
- * @tparam ExtrapRules2 A ddc::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> describing the
- *          extrapolation along the second dimension of each patch (see LagrangeInterpolator).
  * @tparam DataType The type of the function values (default: double).
  */
 template <
@@ -75,16 +67,12 @@ template <
         class Basis1OnPatch,
         template <class>
         class Basis2OnPatch,
-        class ExtrapRules1,
-        class ExtrapRules2,
         class DataType = double>
 using MultipatchLagrangeInterpolator2D = MultipatchInterpolation2D<
         detail::LagrangeInterpolatorOnPatch<
                 typename PatchLocator::exec_space,
                 DataType,
                 Basis1OnPatch,
-                Basis2OnPatch,
-                ExtrapRules1,
-                ExtrapRules2>::template type,
+                Basis2OnPatch>::template type,
         PatchLocator,
         MultipatchExtrapolationRule>;
