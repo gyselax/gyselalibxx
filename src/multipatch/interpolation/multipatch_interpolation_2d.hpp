@@ -195,6 +195,22 @@ public:
     }
 };
 
+/**
+ * @brief The extrapolation rules used along a dimension on each patch by the aliases of
+ * MultipatchInterpolation2D.
+ *
+ * The extrapolation on the patches is always superseded by the MultipatchExtrapolationRule,
+ * so a null extrapolation is used. A periodic extrapolation is used along periodic dimensions,
+ * as the interpolations require it.
+ *
+ * @tparam Dim The continuous dimension.
+ */
+template <class Dim>
+using PatchExtrapolationRules = std::conditional_t<
+        Dim::PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Null_Null>;
+
 } // namespace detail
 
 /**
