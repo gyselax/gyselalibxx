@@ -958,6 +958,71 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
 
 
 /* -----------------------------------------------------------------------------------------------
+    Test operator() at the default coordinates (the grid points of the meshes).
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnDefaultCoords)
+{
+    // Evaluated functions
+    // --- patch 1
+    DFieldMem<Patch1::IdxRange12> eval_function_1_alloc(idx_range_rtheta1);
+    DField<Patch1::IdxRange12> eval_function_1 = get_field(eval_function_1_alloc);
+
+    // --- patch 2
+    DFieldMem<Patch2::IdxRange12> eval_function_2_alloc(idx_range_rtheta2);
+    DField<Patch2::IdxRange12> eval_function_2 = get_field(eval_function_2_alloc);
+
+    // --- collection
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> const
+            eval_functions(eval_function_1, eval_function_2);
+
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
+            extrapolation_rule(r1_min, r2_max);
+    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
+
+    // Evaluate the functions at the default coordinates (the grid points).
+    evaluators(eval_functions, splines);
+
+
+    // Compare the evaluated functions with the expected values obtained with the
+    // single-patch evaluators at the grid coordinates.
+    // --- put the functions on host
+    auto const eval_function_1_host = ddc::create_mirror_and_copy(eval_function_1);
+    auto const eval_function_2_host = ddc::create_mirror_and_copy(eval_function_2);
+
+    auto const function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
+    auto const function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
+    ConstSplineCoeffOnPatch_2D_host<Patch1> const spline_1_host(
+            get_const_field(function_1_coef_host));
+    ConstSplineCoeffOnPatch_2D_host<Patch2> const spline_2_host(
+            get_const_field(function_2_coef_host));
+
+    // --- check errors
+    // The grid points are located on their own patch, except the last radial
+    // points of Patch1 which lie on the interface with Patch2.
+    ddc::host_for_each(idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
+        Coord<R, Theta> const coord = ddc::coordinate(idx);
+        double expected_function;
+        if (Coord<R>(coord) < ddc::discrete_space<BSplinesR<1>>().rmax()) {
+            expected_function = evaluator_1_host(coord, spline_1_host);
+        } else {
+            expected_function = evaluator_2_host(coord, spline_2_host);
+        }
+        EXPECT_NEAR(eval_function_1_host(idx), expected_function, 1e-12);
+    });
+    ddc::host_for_each(idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
+        Coord<R, Theta> const coord = ddc::coordinate(idx);
+        double const expected_function = evaluator_2_host(coord, spline_2_host);
+        EXPECT_NEAR(eval_function_2_host(idx), expected_function, 1e-12);
+    });
+}
+
+
+/* -----------------------------------------------------------------------------------------------
     Test deriv() for a single coordinate on host.
     --------------------------------------------------------------------------------------------*/
 TEST_F(InterpolationEvaluator2DCollectionTest, HostDerivativesOnSingleCoord)
@@ -1250,6 +1315,76 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnCoordField)
         EXPECT_NEAR(expected_derivs_1_patch_2_host(idx), eval_derivs_1_patch_2_host(idx), 1e-11);
         EXPECT_NEAR(expected_derivs_2_patch_2_host(idx), eval_derivs_2_patch_2_host(idx), 1e-11);
         EXPECT_NEAR(expected_derivs_12_patch_2_host(idx), eval_derivs_12_patch_2_host(idx), 1e-10);
+    });
+}
+
+
+/* -----------------------------------------------------------------------------------------------
+    Test deriv() at the default coordinates (the grid points of the meshes).
+    --------------------------------------------------------------------------------------------*/
+TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnDefaultCoords)
+{
+    // Evaluated derivatives
+    // --- patch 1
+    DFieldMem<Patch1::IdxRange12> eval_derivs_12_patch_1_alloc(idx_range_rtheta1);
+    DField<Patch1::IdxRange12> eval_derivs_12_patch_1 = get_field(eval_derivs_12_patch_1_alloc);
+
+    // --- patch 2
+    DFieldMem<Patch2::IdxRange12> eval_derivs_12_patch_2_alloc(idx_range_rtheta2);
+    DField<Patch2::IdxRange12> eval_derivs_12_patch_2 = get_field(eval_derivs_12_patch_2_alloc);
+
+    // ----- collections
+    MultipatchField<DFieldOnPatch, Patch1, Patch2> const
+            eval_derivs_12(eval_derivs_12_patch_1, eval_derivs_12_patch_2);
+
+
+    // Definition of InterpolationEvaluator2DCollection
+    PatchLocator<DeviceExecSpace> const
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+    ConstantExtrapolationRuleOnion<PatchLocator<DeviceExecSpace>>
+            extrapolation_rule(r1_min, r2_max);
+    MultipatchSplineRThetaEvaluator<DeviceExecSpace> const
+            evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
+
+    // Derivative order (cross-derivative).
+    Idx<ddc::Deriv<R>, ddc::Deriv<Theta>> d_r_d_theta(1, 1);
+
+    // Evaluate the derivatives at the default coordinates (the grid points).
+    evaluators.deriv(d_r_d_theta, eval_derivs_12, splines);
+
+
+    // Compare the evaluated derivatives with the expected values obtained with the
+    // single-patch evaluators at the grid coordinates.
+    // --- put the functions on host
+    auto const eval_derivs_12_patch_1_host
+            = ddc::create_mirror_and_copy(eval_derivs_12_patch_1);
+    auto const eval_derivs_12_patch_2_host
+            = ddc::create_mirror_and_copy(eval_derivs_12_patch_2);
+
+    auto const function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
+    auto const function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
+    ConstSplineCoeffOnPatch_2D_host<Patch1> const spline_1_host(
+            get_const_field(function_1_coef_host));
+    ConstSplineCoeffOnPatch_2D_host<Patch2> const spline_2_host(
+            get_const_field(function_2_coef_host));
+
+    // --- check errors
+    // The grid points are located on their own patch, except the last radial
+    // points of Patch1 which lie on the interface with Patch2.
+    ddc::host_for_each(idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
+        Coord<R, Theta> const coord = ddc::coordinate(idx);
+        double expected_deriv;
+        if (Coord<R>(coord) < ddc::discrete_space<BSplinesR<1>>().rmax()) {
+            expected_deriv = evaluator_1_host.deriv(d_r_d_theta, coord, spline_1_host);
+        } else {
+            expected_deriv = evaluator_2_host.deriv(d_r_d_theta, coord, spline_2_host);
+        }
+        EXPECT_NEAR(eval_derivs_12_patch_1_host(idx), expected_deriv, 1e-10);
+    });
+    ddc::host_for_each(idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
+        Coord<R, Theta> const coord = ddc::coordinate(idx);
+        double const expected_deriv = evaluator_2_host.deriv(d_r_d_theta, coord, spline_2_host);
+        EXPECT_NEAR(eval_derivs_12_patch_2_host(idx), expected_deriv, 1e-10);
     });
 }
 
