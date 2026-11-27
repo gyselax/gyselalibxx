@@ -11,6 +11,7 @@
 #include "interpolation_builder_2d_collection.hpp"
 #include "interpolation_evaluator_2d_collection.hpp"
 #include "multipatch_type.hpp"
+#include "type_seq_tools.hpp"
 #include "types.hpp"
 
 namespace detail {
@@ -22,16 +23,18 @@ namespace detail {
  * See the documentation of the alias MultipatchInterpolation2D, which should be used
  * instead of this class.
  *
+ * This class can be used directly to define different interpolation types on each patch
+ * (e.g. different boundary closures).
+ *
  * @tparam PatchSeq A ddc::TypeSeq of the patches.
- * @tparam InterpOnPatch A type template such that InterpOnPatch<Patch> is the 2D
- *          interpolation (see concepts::Interpolation) used on the given patch.
+ * @tparam InterpolationSeq A ddc::TypeSeq of the 2D interpolations (see concepts::Interpolation)
+ *          on each patch, in the order of PatchSeq.
  * @tparam PatchLocator The operator used to find the patch where a coordinate is physically located.
  * @tparam MultipatchExtrapolationRule The extrapolation rule used outside of the global domain.
  */
 template <
         ddc::concepts::type_seq PatchSeq,
-        template <class>
-        class InterpOnPatch,
+        ddc::concepts::type_seq InterpolationSeq,
         class PatchLocator,
         class MultipatchExtrapolationRule>
 class MultipatchInterpolation2DImpl;
@@ -43,44 +46,50 @@ class MultipatchInterpolation2DImpl;
  * See the documentation of the alias MultipatchInterpolation2D.
  *
  * @tparam Patches The patches.
- * @tparam InterpOnPatch A type template such that InterpOnPatch<Patch> is the 2D
- *          interpolation (see concepts::Interpolation) used on the given patch.
+ * @tparam Interpolations The 2D interpolations on each patch, in the same order as the patches.
  * @tparam PatchLocator The operator used to find the patch where a coordinate is physically located.
  * @tparam MultipatchExtrapolationRule The extrapolation rule used outside of the global domain.
  */
 template <
         concepts::Patch... Patches,
-        template <class>
-        class InterpOnPatch,
+        concepts::Interpolation... Interpolations,
         class PatchLocator,
         class MultipatchExtrapolationRule>
 class MultipatchInterpolation2DImpl<
         ddc::TypeSeq<Patches...>,
-        InterpOnPatch,
+        ddc::TypeSeq<Interpolations...>,
         PatchLocator,
         MultipatchExtrapolationRule>
 {
     static_assert(sizeof...(Patches) > 0, "At least one patch must be provided.");
     static_assert(
-            (concepts::Interpolation<InterpOnPatch<Patches>> && ...),
-            "InterpOnPatch<Patch> must be an interpolation (see concepts::Interpolation) on "
-            "every patch.");
+            sizeof...(Patches) == sizeof...(Interpolations),
+            "There must be exactly one interpolation per patch.");
     static_assert(
-            ((InterpOnPatch<Patches>::rank() == 2) && ...),
-            "InterpOnPatch<Patch> must be a 2D interpolation on every patch.");
+            ((Interpolations::rank() == 2) && ...),
+            "The interpolations must be 2D interpolations on every patch.");
 
     using PatchOrdering = ddc::TypeSeq<Patches...>;
+
+    template <class Patch>
+    static constexpr std::size_t PatchIdx = ddc::type_seq_rank_v<Patch, PatchOrdering>;
+
+    /// A type alias to get the interpolation type on a specific patch.
+    template <class Patch>
+    using InterpolationOnPatch = ddc::type_seq_element_t<
+            PatchIdx<Patch>,
+            ddc::TypeSeq<Interpolations...>>;
 
 public:
     /// @brief The collection of the builders of each patch.
     using BuilderType = InterpolationBuilder2DCollection<
             PatchOrdering,
-            ddc::TypeSeq<typename InterpOnPatch<Patches>::BuilderType...>>;
+            ddc::TypeSeq<typename Interpolations::BuilderType...>>;
 
     /// @brief The collection of the evaluators of each patch.
     using EvaluatorType = InterpolationEvaluator2DCollection<
             PatchOrdering,
-            ddc::TypeSeq<typename InterpOnPatch<Patches>::EvaluatorType...>,
+            ddc::TypeSeq<typename Interpolations::EvaluatorType...>,
             PatchLocator,
             MultipatchExtrapolationRule>;
 
@@ -96,7 +105,7 @@ public:
 private:
     // The interpolations must be declared before m_builder as m_builder stores
     // references to the builders owned by the interpolations.
-    std::tuple<InterpOnPatch<Patches>...> m_interpolations;
+    std::tuple<Interpolations...> m_interpolations;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
@@ -177,12 +186,12 @@ public:
     /**
      * @brief Return a const reference to the interpolation used on a given patch.
      * @tparam Patch The patch of interest.
-     * @return The InterpOnPatch<Patch> instance.
+     * @return The interpolation instance on the given patch.
      */
     template <class Patch>
-    InterpOnPatch<Patch> const& get_interpolation() const
+    InterpolationOnPatch<Patch> const& get_interpolation() const
     {
-        return std::get<ddc::type_seq_rank_v<Patch, PatchOrdering>>(m_interpolations);
+        return std::get<PatchIdx<Patch>>(m_interpolations);
     }
 };
 
@@ -218,6 +227,6 @@ template <
         class MultipatchExtrapolationRule>
 using MultipatchInterpolation2D = detail::MultipatchInterpolation2DImpl<
         typename PatchLocator::PatchOrdering,
-        InterpOnPatch,
+        type_seq_transform_t<InterpOnPatch, typename PatchLocator::PatchOrdering>,
         PatchLocator,
         MultipatchExtrapolationRule>;
