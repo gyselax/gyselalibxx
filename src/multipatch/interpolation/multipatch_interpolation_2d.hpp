@@ -119,7 +119,8 @@ public:
 
 private:
     // The order of the members matters: m_local_builder stores references to the builders
-    // owned by m_interpolations and m_builder is built from m_local_builder.
+    // owned by m_interpolations and m_builder stores a reference to m_local_builder.
+    // Similarly m_evaluator stores references to the evaluators owned by m_interpolations.
     std::tuple<Interpolations...> m_interpolations;
     LocalBuilderType m_local_builder;
     BuilderType m_builder;
@@ -148,11 +149,7 @@ public:
             MultipatchIdxRange const& idx_ranges,
             PatchLocator const& patch_locator,
             MultipatchExtrapolationRule const& extrapolation_rule,
-            BuilderArgs&&... builder_args) requires(std::
-                                                            is_constructible_v<
-                                                                    BuilderType,
-                                                                    LocalBuilderType const&,
-                                                                    BuilderArgs...>)
+            BuilderArgs&&... builder_args)
         : m_interpolations(idx_ranges.template get<Patches>()...)
         , m_local_builder(get_interpolation<Patches>().get_builder()...)
         , m_builder(m_local_builder, std::forward<BuilderArgs>(builder_args)...)
@@ -177,10 +174,7 @@ public:
             PatchLocator const&
                     patch_locator) requires(std::
                                                     is_default_constructible_v<
-                                                            MultipatchExtrapolationRule>&&
-                                                            std::is_constructible_v<
-                                                                    BuilderType,
-                                                                    LocalBuilderType const&>)
+                                                            MultipatchExtrapolationRule>)
         : MultipatchInterpolation2DImpl(idx_ranges, patch_locator, MultipatchExtrapolationRule())
     {
     }
