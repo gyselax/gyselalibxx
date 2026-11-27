@@ -876,13 +876,20 @@ private:
 
     // Useful functions --------------------------------------------------------------------------
 
-    /// @brief Call the patch locator to get the index of the patch where the given coordinate
-    /// is physically located.
+    /// @brief Call the patch locator to get the index of the patch where the given
+    /// logical coordinate is physically located. The patch is located from the
+    /// logical coordinate itself when possible.
     KOKKOS_INLINE_FUNCTION int get_patch_idx(Coord<CDim1, CDim2> const coord) const
     {
-        using Mapping = typename PatchLocator::template get_mapping_on_logical_dim_t<CDim1, CDim2>;
-        Mapping const mapping(m_patch_locator.template get_mapping_on_logical_dim<CDim1, CDim2>());
-        return m_patch_locator(mapping(coord));
+        if constexpr (std::is_callable_v<PatchLocator, Coord<CDim1, CDim2>>) {
+            return m_patch_locator(coord);
+        } else {
+            using Mapping =
+                    typename PatchLocator::template get_mapping_on_logical_dim_t<CDim1, CDim2>;
+            Mapping const mapping(
+                    m_patch_locator.template get_mapping_on_logical_dim<CDim1, CDim2>());
+            return m_patch_locator(mapping(coord));
+        }
     }
 
     /// @brief Replace a coordinate inside the domain if it is periodic.
