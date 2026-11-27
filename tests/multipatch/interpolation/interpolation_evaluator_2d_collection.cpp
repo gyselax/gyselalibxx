@@ -957,11 +957,112 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnCoordField)
 }
 
 
+namespace {
+
+/**
+ * @brief An exact function used to test the operators evaluating at the default
+ * coordinates.
+ *
+ * The function is exactly representable in the spline spaces of both patches:
+ * it is a cubic polynomial in r (a spline on any knot sequence) times a periodic
+ * C^2 piecewise-cubic function of theta whose only breakpoints, 0 and pi, are
+ * knots of the theta grids of both patches. The interpolations built on each
+ * patch are therefore equal to the function (and to its derivatives) to machine
+ * precision everywhere, so that both patches give the same values on their
+ * interface.
+ *
+ * @param r The radial coordinate.
+ * @param theta The poloidal coordinate in [0, 2pi).
+ * @returns The value of the function at (r, theta).
+ */
+KOKKOS_FUNCTION double exact_function(double const r, double const theta)
+{
+    // Cubic polynomial in r.
+    double const g = r * r * r - 2. * r + 0.5;
+    // Periodic C^2 piecewise cubic in theta: smoothstep on [0, pi] mirrored on
+    // [pi, 2pi].
+    double const t = theta <= M_PI ? theta : 2. * M_PI - theta;
+    double const x = t / M_PI;
+    double const h = 3. * x * x - 2. * x * x * x;
+    return g * h;
+}
+
+/**
+ * @brief The cross-derivative @f$ d^2f/(dr\,dtheta) @f$ of exact_function().
+ *
+ * @param r The radial coordinate.
+ * @param theta The poloidal coordinate in [0, 2pi).
+ * @returns The value of the cross-derivative at (r, theta).
+ */
+KOKKOS_FUNCTION double exact_function_cross_deriv(double const r, double const theta)
+{
+    // Derivative of the cubic polynomial in r.
+    double const g_r = 3. * r * r - 2.;
+    // Derivative of the periodic piecewise cubic in theta.
+    double const t = theta <= M_PI ? theta : 2. * M_PI - theta;
+    double const h_t = 6. * t / (M_PI * M_PI) - 6. * t * t / (M_PI * M_PI * M_PI);
+    double const h_theta = theta <= M_PI ? h_t : -h_t;
+    return g_r * h_theta;
+}
+
+/**
+ * @brief Build the spline coefficients interpolating exact_function() on the
+ * grid of the given patch.
+ *
+ * As exact_function() belongs to the spline space of the patch, the resulting
+ * spline is equal to the function to machine precision.
+ *
+ * @tparam PatchIdx The index of the patch.
+ * @param[in] idx_range_rtheta The index range of the grid of the patch.
+ * @param[out] function_coef The field of spline coefficients to compute.
+ */
+template <int PatchIdx>
+void build_exact_spline(
+        IdxRange<GridR<PatchIdx>, GridTheta<PatchIdx>> const& idx_range_rtheta,
+        DField<IdxRange<BSplinesR<PatchIdx>, BSplinesTheta<PatchIdx>>> function_coef)
+{
+    SplineRThetaBuilder_host<PatchIdx, DeviceExecSpace> const builder(idx_range_rtheta);
+
+    DFieldMem<IdxRange<GridR<PatchIdx>, GridTheta<PatchIdx>>> function_alloc(idx_range_rtheta);
+    DField<IdxRange<GridR<PatchIdx>, GridTheta<PatchIdx>>> function = get_field(function_alloc);
+
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range_rtheta,
+            KOKKOS_LAMBDA(Idx<GridR<PatchIdx>, GridTheta<PatchIdx>> const idx) {
+                double const r = ddc::coordinate(Idx<GridR<PatchIdx>>(idx));
+                double const theta = ddc::coordinate(Idx<GridTheta<PatchIdx>>(idx));
+                function(idx) = exact_function(r, theta);
+            });
+
+    builder(function_coef, get_const_field(function));
+}
+
+} // namespace
+
+
 /* -----------------------------------------------------------------------------------------------
     Test operator() at the default coordinates (the grid points of the meshes).
     --------------------------------------------------------------------------------------------*/
 TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnDefaultCoords)
 {
+    // Splines of a function exactly representable in the spline spaces of both
+    // patches: both patches' interpolations are exact, in particular on the
+    // patch interface where they therefore agree to machine precision.
+    DFieldMem<Patch1::IdxRangeBS12> exact_function_1_coef_alloc(spline_idx_range_rtheta1);
+    DField<Patch1::IdxRangeBS12> exact_function_1_coef = get_field(exact_function_1_coef_alloc);
+
+    DFieldMem<Patch2::IdxRangeBS12> exact_function_2_coef_alloc(spline_idx_range_rtheta2);
+    DField<Patch2::IdxRangeBS12> exact_function_2_coef = get_field(exact_function_2_coef_alloc);
+
+    build_exact_spline<1>(idx_range_rtheta1, exact_function_1_coef);
+    build_exact_spline<2>(idx_range_rtheta2, exact_function_2_coef);
+
+    MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const exact_splines(
+            get_const_field(exact_function_1_coef),
+            get_const_field(exact_function_2_coef));
+
+
     // Evaluated functions
     // --- patch 1
     DFieldMem<Patch1::IdxRange12> eval_function_1_alloc(idx_range_rtheta1);
@@ -985,39 +1086,26 @@ TEST_F(InterpolationEvaluator2DCollectionTest, EvaluateOnDefaultCoords)
             evaluators(evaluator_1, evaluator_2, patch_locator, extrapolation_rule);
 
     // Evaluate the functions at the default coordinates (the grid points).
-    evaluators(eval_functions, splines);
+    evaluators(eval_functions, exact_splines);
 
 
-    // Compare the evaluated functions with the expected values obtained with the
-    // single-patch evaluators at the grid coordinates.
+    // Compare the evaluated functions with the exact function at the grid coordinates.
     // --- put the functions on host
     auto const eval_function_1_host = ddc::create_mirror_and_copy(eval_function_1);
     auto const eval_function_2_host = ddc::create_mirror_and_copy(eval_function_2);
 
-    auto const function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
-    auto const function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
-    ConstSplineCoeffOnPatch_2D_host<Patch1> const spline_1_host(
-            get_const_field(function_1_coef_host));
-    ConstSplineCoeffOnPatch_2D_host<Patch2> const spline_2_host(
-            get_const_field(function_2_coef_host));
-
     // --- check errors
-    // The grid points are located on their own patch, except the last radial
-    // points of Patch1 which lie on the interface with Patch2.
+    // The grid points lie on their own patch, except on the interface
+    // r = r1_max = r2_min where both patches give the same exact value.
     ddc::host_for_each(idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        Coord<R, Theta> const coord = ddc::coordinate(idx);
-        double expected_function;
-        if (Coord<R>(coord) < ddc::discrete_space<BSplinesR<1>>().rmax()) {
-            expected_function = evaluator_1_host(coord, spline_1_host);
-        } else {
-            expected_function = evaluator_2_host(coord, spline_2_host);
-        }
-        EXPECT_NEAR(eval_function_1_host(idx), expected_function, 1e-12);
+        double const r = ddc::coordinate(Patch1::Idx1(idx));
+        double const theta = ddc::coordinate(Patch1::Idx2(idx));
+        EXPECT_NEAR(eval_function_1_host(idx), exact_function(r, theta), 1e-12);
     });
     ddc::host_for_each(idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        Coord<R, Theta> const coord = ddc::coordinate(idx);
-        double const expected_function = evaluator_2_host(coord, spline_2_host);
-        EXPECT_NEAR(eval_function_2_host(idx), expected_function, 1e-12);
+        double const r = ddc::coordinate(Patch2::Idx1(idx));
+        double const theta = ddc::coordinate(Patch2::Idx2(idx));
+        EXPECT_NEAR(eval_function_2_host(idx), exact_function(r, theta), 1e-12);
     });
 }
 
@@ -1324,6 +1412,23 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnCoordField)
     --------------------------------------------------------------------------------------------*/
 TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnDefaultCoords)
 {
+    // Splines of a function exactly representable in the spline spaces of both
+    // patches: both patches' interpolations are exact, in particular on the
+    // patch interface where they therefore agree to machine precision.
+    DFieldMem<Patch1::IdxRangeBS12> exact_function_1_coef_alloc(spline_idx_range_rtheta1);
+    DField<Patch1::IdxRangeBS12> exact_function_1_coef = get_field(exact_function_1_coef_alloc);
+
+    DFieldMem<Patch2::IdxRangeBS12> exact_function_2_coef_alloc(spline_idx_range_rtheta2);
+    DField<Patch2::IdxRangeBS12> exact_function_2_coef = get_field(exact_function_2_coef_alloc);
+
+    build_exact_spline<1>(idx_range_rtheta1, exact_function_1_coef);
+    build_exact_spline<2>(idx_range_rtheta2, exact_function_2_coef);
+
+    MultipatchField<ConstSplineCoeffOnPatch_2D, Patch1, Patch2> const exact_splines(
+            get_const_field(exact_function_1_coef),
+            get_const_field(exact_function_2_coef));
+
+
     // Evaluated derivatives
     // --- patch 1
     DFieldMem<Patch1::IdxRange12> eval_derivs_12_patch_1_alloc(idx_range_rtheta1);
@@ -1350,41 +1455,35 @@ TEST_F(InterpolationEvaluator2DCollectionTest, DerivativesOnDefaultCoords)
     Idx<ddc::Deriv<R>, ddc::Deriv<Theta>> d_r_d_theta(1, 1);
 
     // Evaluate the derivatives at the default coordinates (the grid points).
-    evaluators.deriv(d_r_d_theta, eval_derivs_12, splines);
+    evaluators.deriv(d_r_d_theta, eval_derivs_12, exact_splines);
 
 
-    // Compare the evaluated derivatives with the expected values obtained with the
-    // single-patch evaluators at the grid coordinates.
+    // Compare the evaluated derivatives with the exact cross-derivative at the
+    // grid coordinates.
     // --- put the functions on host
     auto const eval_derivs_12_patch_1_host
             = ddc::create_mirror_and_copy(eval_derivs_12_patch_1);
     auto const eval_derivs_12_patch_2_host
             = ddc::create_mirror_and_copy(eval_derivs_12_patch_2);
 
-    auto const function_1_coef_host = ddc::create_mirror_and_copy(function_1_coef);
-    auto const function_2_coef_host = ddc::create_mirror_and_copy(function_2_coef);
-    ConstSplineCoeffOnPatch_2D_host<Patch1> const spline_1_host(
-            get_const_field(function_1_coef_host));
-    ConstSplineCoeffOnPatch_2D_host<Patch2> const spline_2_host(
-            get_const_field(function_2_coef_host));
-
     // --- check errors
-    // The grid points are located on their own patch, except the last radial
-    // points of Patch1 which lie on the interface with Patch2.
+    // The grid points lie on their own patch, except on the interface
+    // r = r1_max = r2_min where both patches give the same exact derivative.
     ddc::host_for_each(idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        Coord<R, Theta> const coord = ddc::coordinate(idx);
-        double expected_deriv;
-        if (Coord<R>(coord) < ddc::discrete_space<BSplinesR<1>>().rmax()) {
-            expected_deriv = evaluator_1_host.deriv(d_r_d_theta, coord, spline_1_host);
-        } else {
-            expected_deriv = evaluator_2_host.deriv(d_r_d_theta, coord, spline_2_host);
-        }
-        EXPECT_NEAR(eval_derivs_12_patch_1_host(idx), expected_deriv, 1e-10);
+        double const r = ddc::coordinate(Patch1::Idx1(idx));
+        double const theta = ddc::coordinate(Patch1::Idx2(idx));
+        EXPECT_NEAR(
+                eval_derivs_12_patch_1_host(idx),
+                exact_function_cross_deriv(r, theta),
+                1e-10);
     });
     ddc::host_for_each(idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        Coord<R, Theta> const coord = ddc::coordinate(idx);
-        double const expected_deriv = evaluator_2_host.deriv(d_r_d_theta, coord, spline_2_host);
-        EXPECT_NEAR(eval_derivs_12_patch_2_host(idx), expected_deriv, 1e-10);
+        double const r = ddc::coordinate(Patch2::Idx1(idx));
+        double const theta = ddc::coordinate(Patch2::Idx2(idx));
+        EXPECT_NEAR(
+                eval_derivs_12_patch_2_host(idx),
+                exact_function_cross_deriv(r, theta),
+                1e-10);
     });
 }
 
