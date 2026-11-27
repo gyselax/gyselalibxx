@@ -9,15 +9,7 @@
 
 namespace detail {
 
-/**
- * @brief A helper to define the 2D spline interpolation used on each patch of a
- * MultipatchSplineInterpolator2D.
- *
- * @tparam ExecSpace The Kokkos execution space used for computations.
- * @tparam Solver The spline solver backend.
- * @tparam BoundaryClosures1 The spline boundary closures along the first dimension of each patch.
- * @tparam BoundaryClosures2 The spline boundary closures along the second dimension of each patch.
- */
+/// @brief A helper to define the 2D spline interpolation used on each patch of a MultipatchSplineInterpolator2D.
 template <
         class ExecSpace,
         ddc::SplineSolver Solver,

@@ -7,17 +7,7 @@
 
 namespace detail {
 
-/**
- * @brief A helper to define the 2D Lagrange interpolation used on each patch of a
- * MultipatchLagrangeInterpolator2D.
- *
- * @tparam ExecSpace The Kokkos execution space used for computations.
- * @tparam DataType The type of the function values.
- * @tparam Basis1OnPatch A type template such that Basis1OnPatch<Patch> is the Lagrange basis
- *          along the first dimension of the patch.
- * @tparam Basis2OnPatch A type template such that Basis2OnPatch<Patch> is the Lagrange basis
- *          along the second dimension of the patch.
- */
+/// @brief A helper to define the 2D Lagrange interpolation used on each patch of a MultipatchLagrangeInterpolator2D.
 template <
         class ExecSpace,
         class DataType,
