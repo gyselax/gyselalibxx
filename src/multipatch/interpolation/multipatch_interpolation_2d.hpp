@@ -16,6 +16,10 @@
 
 namespace detail {
 
+/// @brief The type of the builder of an interpolation.
+template <class Interpolation>
+using BuilderTypeOf = typename Interpolation::BuilderType;
+
 /**
  * @brief An owning object that bundles the 2D interpolations of every patch of a
  * multipatch geometry.
@@ -31,12 +35,16 @@ namespace detail {
  *          on each patch, in the order of PatchSeq.
  * @tparam PatchLocator The operator used to find the patch where a coordinate is physically located.
  * @tparam MultipatchExtrapolationRule The extrapolation rule used outside of the global domain.
+ * @tparam MultipatchBuilder The multipatch builder. It must be constructible from a const
+ *          reference to the InterpolationBuilder2DCollection of the builders of each patch,
+ *          followed by any additional arguments passed to the constructor.
  */
 template <
         ddc::concepts::type_seq PatchSeq,
         ddc::concepts::type_seq InterpolationSeq,
         class PatchLocator,
-        class MultipatchExtrapolationRule>
+        class MultipatchExtrapolationRule,
+        class MultipatchBuilder>
 class MultipatchInterpolation2DImpl;
 
 /**
@@ -49,17 +57,20 @@ class MultipatchInterpolation2DImpl;
  * @tparam Interpolations The 2D interpolations on each patch, in the same order as the patches.
  * @tparam PatchLocator The operator used to find the patch where a coordinate is physically located.
  * @tparam MultipatchExtrapolationRule The extrapolation rule used outside of the global domain.
+ * @tparam MultipatchBuilder The multipatch builder.
  */
 template <
         concepts::Patch... Patches,
         concepts::Interpolation... Interpolations,
         class PatchLocator,
-        class MultipatchExtrapolationRule>
+        class MultipatchExtrapolationRule,
+        class MultipatchBuilder>
 class MultipatchInterpolation2DImpl<
         ddc::TypeSeq<Patches...>,
         ddc::TypeSeq<Interpolations...>,
         PatchLocator,
-        MultipatchExtrapolationRule>
+        MultipatchExtrapolationRule,
+        MultipatchBuilder>
 {
     static_assert(sizeof...(Patches) > 0, "At least one patch must be provided.");
     static_assert(
@@ -71,19 +82,24 @@ class MultipatchInterpolation2DImpl<
 
     using PatchOrdering = ddc::TypeSeq<Patches...>;
 
+    using InterpolationSeq = ddc::TypeSeq<Interpolations...>;
+
     template <class Patch>
     static constexpr std::size_t PatchIdx = ddc::type_seq_rank_v<Patch, PatchOrdering>;
 
     /// A type alias to get the interpolation type on a specific patch.
     template <class Patch>
-    using InterpolationOnPatch
-            = ddc::type_seq_element_t<PatchIdx<Patch>, ddc::TypeSeq<Interpolations...>>;
+    using InterpolationOnPatch = ddc::type_seq_element_t<PatchIdx<Patch>, InterpolationSeq>;
 
 public:
-    /// @brief The collection of the builders of each patch.
-    using BuilderType = InterpolationBuilder2DCollection<
+    /// @brief The collection of the (independent) builders of each patch.
+    using LocalBuilderType = InterpolationBuilder2DCollection<
             PatchOrdering,
-            ddc::TypeSeq<typename Interpolations::BuilderType...>>;
+            type_seq_transform_t<BuilderTypeOf, InterpolationSeq>>;
+
+    /// @brief The multipatch builder. This may be identical to LocalBuilderType but this
+    /// is not an issue as InterpolationBuilder2DCollection only contains references.
+    using BuilderType = MultipatchBuilder;
 
     /// @brief The collection of the evaluators of each patch.
     using EvaluatorType = InterpolationEvaluator2DCollection<
@@ -102,9 +118,10 @@ public:
     }
 
 private:
-    // The interpolations must be declared before m_builder as m_builder stores
-    // references to the builders owned by the interpolations.
+    // The order of the members matters: m_local_builder stores references to the builders
+    // owned by m_interpolations and m_builder is built from m_local_builder.
     std::tuple<Interpolations...> m_interpolations;
+    LocalBuilderType m_local_builder;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
@@ -122,13 +139,23 @@ public:
      * @param idx_ranges The 2D index ranges of the interpolation grids on each patch.
      * @param patch_locator An operator to locate a coordinate on the patches.
      * @param extrapolation_rule The extrapolation rule used outside of the global domain.
+     * @param builder_args Additional arguments passed to the constructor of the multipatch
+     *          builder after the collection of the builders of each patch (e.g. an operator
+     *          to estimate the derivatives at the patch interfaces).
      */
+    template <class... BuilderArgs>
     MultipatchInterpolation2DImpl(
             MultipatchIdxRange const& idx_ranges,
             PatchLocator const& patch_locator,
-            MultipatchExtrapolationRule const& extrapolation_rule)
+            MultipatchExtrapolationRule const& extrapolation_rule,
+            BuilderArgs&&... builder_args) requires(std::
+                                                            is_constructible_v<
+                                                                    BuilderType,
+                                                                    LocalBuilderType const&,
+                                                                    BuilderArgs...>)
         : m_interpolations(idx_ranges.template get<Patches>()...)
-        , m_builder(get_interpolation<Patches>().get_builder()...)
+        , m_local_builder(get_interpolation<Patches>().get_builder()...)
+        , m_builder(m_local_builder, std::forward<BuilderArgs>(builder_args)...)
         , m_evaluator(
                   get_interpolation<Patches>().get_evaluator()...,
                   patch_locator,
@@ -150,12 +177,15 @@ public:
             PatchLocator const&
                     patch_locator) requires(std::
                                                     is_default_constructible_v<
-                                                            MultipatchExtrapolationRule>)
+                                                            MultipatchExtrapolationRule>&&
+                                                            std::is_constructible_v<
+                                                                    BuilderType,
+                                                                    LocalBuilderType const&>)
         : MultipatchInterpolation2DImpl(idx_ranges, patch_locator, MultipatchExtrapolationRule())
     {
     }
 
-    // The builder collection stores references to the builders in m_interpolations
+    // The builders store references to the builders in m_interpolations
     // so the object can be neither copied nor moved.
     MultipatchInterpolation2DImpl(MultipatchInterpolation2DImpl const&) = delete;
     MultipatchInterpolation2DImpl(MultipatchInterpolation2DImpl&&) = delete;
@@ -165,12 +195,21 @@ public:
     ~MultipatchInterpolation2DImpl() = default;
 
     /**
-     * @brief Return a const reference to the collection of the builders of each patch.
+     * @brief Return a const reference to the multipatch builder.
      * @return The BuilderType instance.
      */
     BuilderType const& get_builder() const
     {
         return m_builder;
+    }
+
+    /**
+     * @brief Return a const reference to the collection of the (independent) builders of each patch.
+     * @return The LocalBuilderType instance.
+     */
+    LocalBuilderType const& get_local_builder() const
+    {
+        return m_local_builder;
     }
 
     /**
@@ -223,8 +262,13 @@ using PatchExtrapolationRules = std::
  *
  * The patches are taken from the patch locator (PatchLocator::PatchOrdering).
  *
- * The builder collection refers to the builders owned by this object, so this object
- * must outlive any copy of the builder collection and can be neither copied nor moved.
+ * By default the builder (get_builder()) is the collection of the independent builders of
+ * each patch (get_local_builder()). A different MultipatchBuilder (e.g. one which also
+ * estimates the derivatives at the patch interfaces) can be provided. It is constructed
+ * from the collection and any additional arguments passed to the constructor.
+ *
+ * The builders refer to the builders owned by this object, so this object must outlive
+ * any copy of the builders and can be neither copied nor moved.
  *
  * @tparam InterpOnPatch A type template such that InterpOnPatch<Patch> is the 2D
  *          interpolation used on the given patch. Its interpolation grids must be the
@@ -232,14 +276,22 @@ using PatchExtrapolationRules = std::
  * @tparam PatchLocator The operator used to find the patch where a coordinate is physically located.
  * @tparam MultipatchExtrapolationRule The extrapolation rule used outside of the global domain
  *          (e.g. ConstantExtrapolationRuleOnion or NullExtrapolationRule).
+ * @tparam MultipatchBuilder The multipatch builder (default: the InterpolationBuilder2DCollection
+ *          of the builders of each patch).
  */
 template <
         template <class>
         class InterpOnPatch,
         class PatchLocator,
-        class MultipatchExtrapolationRule>
+        class MultipatchExtrapolationRule,
+        class MultipatchBuilder = InterpolationBuilder2DCollection<
+                typename PatchLocator::PatchOrdering,
+                type_seq_transform_t<
+                        detail::BuilderTypeOf,
+                        type_seq_transform_t<InterpOnPatch, typename PatchLocator::PatchOrdering>>>>
 using MultipatchInterpolation2D = detail::MultipatchInterpolation2DImpl<
         typename PatchLocator::PatchOrdering,
         type_seq_transform_t<InterpOnPatch, typename PatchLocator::PatchOrdering>,
         PatchLocator,
-        MultipatchExtrapolationRule>;
+        MultipatchExtrapolationRule,
+        MultipatchBuilder>;
