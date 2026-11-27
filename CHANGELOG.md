@@ -51,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `MultipatchInterpolation2D` to construct and own the 2D interpolations of every patch and save references to the matching `InterpolationBuilder2DCollection` and `InterpolationEvaluator2DCollection`.
 - Add `MultipatchSplineInterpolator2D` and `MultipatchLagrangeInterpolator2D` aliases to define a `MultipatchInterpolation2D` using spline or Lagrange interpolation on every patch.
 - Add `InterpolationEvaluator2DCollection::operator()` and `InterpolationEvaluator2DCollection::deriv()` overloads which evaluate the interpolations on meshes at the default coordinates, i.e. the coordinates of the grid points on which the values are defined.
+- Add tolerance to `OnionPatchLocator` near domain boundary.
+- Add an `OnionPatchLocator::operator()` overload taking a logical `Coord<R, Theta>` which locates the patch without round trip through the physical domain.
 
 ### Fixed
 
@@ -100,6 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `MultipatchSplineEvaluator2D` to `InterpolationEvaluator2DCollection` and move it to `src/multipatch/interpolation/`.
 - `InterpolationEvaluator2DCollection` is no longer templated on the values type (the type of the values is deduced in each method).
 - `InterpolationEvaluator2DCollection` accepts any 2D interpolation evaluator (see `concepts::InterpolationEvaluator`) and is now templated on a `ddc::TypeSeq` of the patches, a `ddc::TypeSeq` of the evaluators, the patch locator and the extrapolation rule. The evaluators are passed to the constructor.
+- `InterpolationEvaluator2DCollection` can locate the patch of a coordinate from its logical value instead of round-tripping through the physical domain.
 
 ### Deprecated
 
