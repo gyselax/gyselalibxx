@@ -221,12 +221,8 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
 
     // Test outside domain (radius smaller than the minimum radius)
     patches_host(0) = PatchLocator::outside_rmin_domain;
-    // Test radial lower bound
-    if (ddc::select<R>(to_logical_mapping(coords_host(1))) - r1_min < 0) {
-        patches_host(1) = PatchLocator::outside_rmin_domain;
-    } else {
-        patches_host(1) = 0;
-    }
+    // Test radial lower bound (re-attached to the boundary)
+    patches_host(1) = 0;
     // Test in patch 1
     patches_host(2) = 0;
     // Test in patch 2
@@ -237,12 +233,8 @@ TEST_F(OnionPatchLocator2PatchesTest, DeviceCzarnyOnionPatchLocator2PatchesTest)
     } else {
         patches_host(4) = 1;
     }
-    // Test radial upper bound
-    if (ddc::select<R>(to_logical_mapping(coords_host(5))) - r2_max <= 0) {
-        patches_host(5) = 1;
-    } else {
-        patches_host(5) = PatchLocator::outside_rmax_domain;
-    }
+    // Test radial upper bound (re-attached to the boundary)
+    patches_host(5) = 1;
     // Test outside domain (radius bigger than the maximum radius)
     patches_host(6) = PatchLocator::outside_rmax_domain;
 
@@ -318,13 +310,9 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
     PhysicalCoordXY coord(-0.05, .03);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
 
-    // Test radial lower bound
+    // Test radial lower bound (re-attached to the boundary)
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r1_min, theta1_min)));
-    if (ddc::select<R>(to_logical_mapping(coord)) - r1_min < 0) {
-        EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmin_domain);
-    } else {
-        EXPECT_EQ(patch_locator(coord), 0);
-    }
+    EXPECT_EQ(patch_locator(coord), 0);
 
     // Test in patch 1
     coord = PhysicalCoordXY(0.25, .03);
@@ -342,15 +330,51 @@ TEST_F(OnionPatchLocator2PatchesTest, HostCzarnyOnionPatchLocator2PatchesTest)
         EXPECT_EQ(patch_locator(coord), 1);
     }
 
-    // Test radial upper bound
+    // Test radial upper bound (re-attached to the boundary)
     coord = PhysicalCoordXY(to_physical_mapping(Coord<R, Theta>(r2_max, theta2_min)));
-    if (ddc::select<R>(to_logical_mapping(coord)) - r2_max <= 0) {
-        EXPECT_EQ(patch_locator(coord), 1);
-    } else {
-        EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
-    }
+    EXPECT_EQ(patch_locator(coord), 1);
 
     // Test outside domain (radius bigger than the maximum radius)
     coord = PhysicalCoordXY(-2.1, 0);
     EXPECT_EQ(patch_locator(coord), PatchLocator::outside_rmax_domain);
+}
+
+
+TEST_F(OnionPatchLocator2PatchesTest, LogicalCoordOnionPatchLocator2PatchesTest)
+{
+    Patch1::IdxRange12 idx_range_1(idx_range_r1, idx_range_theta1);
+    Patch2::IdxRange12 idx_range_2(idx_range_r2, idx_range_theta2);
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2> all_idx_ranges(idx_range_1, idx_range_2);
+
+    CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
+    CartesianToCircular<X, Y, R, Theta> to_logical_mapping;
+
+    using MultipatchIdxRanges = MultipatchType<IdxRangeOnPatch, Patch1, Patch2>;
+    using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+    using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
+    OnionPatchLocator<
+            MultipatchIdxRanges,
+            LogicalToPhysicalMapping,
+            PhysicalToLogicalMapping,
+            Kokkos::DefaultHostExecutionSpace>
+            patch_locator(all_idx_ranges, to_physical_mapping, to_logical_mapping);
+
+    // Test outside domain (radius smaller than the minimum radius)
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(0.15, 0.)), PatchLocator::outside_rmin_domain);
+
+    // Test radial lower bound
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(double(r1_min), 0.)), 0);
+
+    // Test in patch 1
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(0.25, .03)), 0);
+
+    // Test in patch 2
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(1.2, 1.)), 1);
+
+    // Test radial upper bound, including from within round-off of the boundary
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(double(r2_max), 0.)), 1);
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(double(r2_max) + 1e-13, 0.)), 1);
+
+    // Test outside domain (radius bigger than the maximum radius)
+    EXPECT_EQ(patch_locator(Coord<R, Theta>(2.1, 0.)), PatchLocator::outside_rmax_domain);
 }
