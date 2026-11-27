@@ -12,7 +12,7 @@
 namespace detail {
 
 /**
- * @brief Not all simulations expose theta,r,phi (tor1, tor2, tor3) so we "spoof" the presence of the dimensions. This
+ * @brief Not all simulations expose r,theta,phi (tor1,tor2,tor3) so we "spoof" the presence of the dimensions. This
  * is the class from which fake dimensions inherit. These fake dimensions are inserted in order to match Koliop's
  * interface. These fake dimensions are then assigned to an: IdxRange<Grid1D>(Idx<Grid1D> {0}, IdxStep<Grid1D> {1}); See
  * create_scalar_index_range();
@@ -133,7 +133,7 @@ public:
 
     /**
      * @brief We have some fields whose dimension vary depending on the simulation. Bstar_s in a typical 5D simulation
-     * has dimension [Sp, theta, (Phi,) R, Vpar]. Some simulation do not have all these dimension, say only [Sp, Vpar,
+     * has dimension [Sp, (Phi,) theta, R, Vpar]. Some simulation do not have all these dimension, say only [Sp, Vpar,
      * Mu]. We have to satisfy both situations. TransposeDeepCopy takes two fields, expecting the source field to be
      * copied into the destination field. It may be that the source has less dimension but never more. If the source has
      * less dimensions, the data is replicated. For instance from [Vpar, Sp] into [Sp, R, Vpar], the [Vpar, Sp] plane
