@@ -129,3 +129,6 @@ evaluator(values, coords, coeffs);
 - `interpolation_builder_2d_collection.hpp`: Define the `InterpolationBuilder2DCollection` operator to apply 2D interpolation builders on every patch.
 - `interpolation_builder_collection.hpp`: Define the `InterpolationBuilderCollection` operator to apply 1D interpolation builders on every patch.
 - `interpolation_evaluator_2d_collection.hpp`: Define the `InterpolationEvaluator2DCollection` operator to apply 2D interpolation evaluators on every patch.
+- `multipatch_interpolation_2d.hpp`: Define the `MultipatchInterpolation2D` class which owns the 2D interpolations of every patch and the matching builder and evaluator collections.
+- `multipatch_lagrange_interpolation.hpp`: Define the `MultipatchLagrangeInterpolator2D` alias for a `MultipatchInterpolation2D` using Lagrange interpolation on every patch.
+- `multipatch_spline_interpolation.hpp`: Define the `MultipatchSplineInterpolator2D` alias for a `MultipatchInterpolation2D` using spline interpolation on every patch.
