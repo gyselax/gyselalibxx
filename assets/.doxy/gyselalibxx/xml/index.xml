@@ -5050,7 +5050,7 @@
   </compound>
   <compound refid="multipatch__field_8hpp" kind="file"><name>multipatch_field.hpp</name>
     <member refid="multipatch__field_8hpp_1a2a1e62a0bd48815ca3fe9eb0876df2b3" kind="typedef"><name>MultipatchField</name></member>
-    <member refid="multipatch__field_8hpp_1a2a102f7a22b0d8284798ca6a3a792a51" kind="typedef"><name>MultipatchFieldFromSeq</name></member>
+    <member refid="multipatch__field_8hpp_1a1253c506bec765813024cff6449ce1ca" kind="typedef"><name>MultipatchFieldFromSeq</name></member>
     <member refid="multipatch__field_8hpp_1a077b099d6f85e6518ca7c27eb4b7aeca" kind="variable"><name>enable_multipatch_field</name></member>
     <member refid="multipatch__field_8hpp_1a554c41d0cdd6196870eef050bf92992a" kind="variable"><name>is_multipatch_field_v</name></member>
   </compound>
@@ -5061,7 +5061,7 @@
   </compound>
   <compound refid="multipatch__type_8hpp" kind="file"><name>multipatch_type.hpp</name>
     <member refid="multipatch__type_8hpp_1a86f8dbb45229f899f331afd570644b42" kind="typedef"><name>MultipatchType</name></member>
-    <member refid="multipatch__type_8hpp_1a7134e3ba59059457edfe710f3f803638" kind="typedef"><name>MultipatchTypeFromSeq</name></member>
+    <member refid="multipatch__type_8hpp_1aa59c961035f3da4dbbdec14a01d55d60" kind="typedef"><name>MultipatchTypeFromSeq</name></member>
     <member refid="multipatch__type_8hpp_1a59ab731c02d44c4ec5ad863df0858c5a" kind="variable"><name>enable_multipatch_type</name></member>
     <member refid="multipatch__type_8hpp_1a65e97c3c36f361003c0e4603a8e314cd" kind="variable"><name>is_multipatch_type_v</name></member>
   </compound>
@@ -5318,6 +5318,7 @@
     <member refid="type__seq__tools_8hpp_1ab1189cfdf3502d7d7b4ffa1ac5360856" kind="typedef"><name>type_seq_duplicate_t</name></member>
     <member refid="type__seq__tools_8hpp_1add882d1d787f328ab85f39c86132221b" kind="typedef"><name>find_idx_t</name></member>
     <member refid="type__seq__tools_8hpp_1a3e9d36642deeef57eb02dca4d124f974" kind="typedef"><name>get_first_t</name></member>
+    <member refid="type__seq__tools_8hpp_1ae38af3484bdd1b9e0b219128d55c028a" kind="typedef"><name>type_seq_transform_t</name></member>
     <member refid="type__seq__tools_8hpp_1a4d7dffaef6d65b35876eff7fe8ce3730" kind="variable"><name>type_seq_has_unique_elements_v</name></member>
     <member refid="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" kind="variable"><name>type_seq_permutation_parity_v</name></member>
   </compound>

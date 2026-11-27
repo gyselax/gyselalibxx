@@ -13,6 +13,7 @@
     <includedby refid="ipartial__derivative_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp</includedby>
     <includedby refid="lie__poisson__bracket_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</includedby>
     <includedby refid="connectivity__details_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity_details.hpp</includedby>
+    <includedby refid="multipatch__type_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp</includedby>
     <includedby refid="transpose_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</includedby>
     <invincdepgraph>
       <node id="21">
@@ -1284,6 +1285,8 @@
         </childnode>
         <childnode refid="141" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
         <childnode refid="142" relation="include">
         </childnode>
       </node>
@@ -1316,7 +1319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="221" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="221" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="230" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="230" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1aa14f1774e052704c69d90ca494bdb8f6" prot="public" static="no">
         <templateparamlist>
@@ -1347,7 +1350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="229" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="229" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="238" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="238" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1ac95562d656c2ae2f82f9bc55881627f6" prot="public" static="no">
         <templateparamlist>
@@ -1369,7 +1372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="233" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="233" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="242" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="242" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a615b7cea587ca44ef9143e8fce9e9f49" prot="public" static="no">
         <templateparamlist>
@@ -1391,7 +1394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="237" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="237" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="246" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="246" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a77a5e0ba78f573fcf19e118cc8d08b61" prot="public" static="no">
         <templateparamlist>
@@ -1420,7 +1423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="244" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="244" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="253" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="253" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1ab1189cfdf3502d7d7b4ffa1ac5360856" prot="public" static="no">
         <templateparamlist>
@@ -1463,7 +1466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="269" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="269" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="278" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="278" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1add882d1d787f328ab85f39c86132221b" prot="public" static="no">
         <templateparamlist>
@@ -1503,7 +1506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="278" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="278" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="287" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="287" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="type__seq__tools_8hpp_1a3e9d36642deeef57eb02dca4d124f974" prot="public" static="no">
         <templateparamlist>
@@ -1547,7 +1550,51 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="286" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="286" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="295" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="295" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="type__seq__tools_8hpp_1ae38af3484bdd1b9e0b219128d55c028a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>template&lt; class &gt; class</type>
+            <declname>Transform</declname>
+            <defname>Transform</defname>
+          </param>
+          <param>
+            <type>ddc::concepts::type_seq</type>
+            <declname>TypeSeqIn</declname>
+            <defname>TypeSeqIn</defname>
+          </param>
+        </templateparamlist>
+        <type>typename detail::TypeSeqTransform&lt; Transform, TypeSeqIn &gt;::type</type>
+        <definition>using type_seq_transform_t =  typename detail::TypeSeqTransform&lt;Transform, TypeSeqIn&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>type_seq_transform_t</name>
+        <briefdescription>
+<para>Create a type sequence by applying a type template to every element of a type sequence. E.g. <computeroutput>type_seq_transform_t&lt;F, ddc::TypeSeq&lt;A, B&gt;&gt;</computeroutput> is <computeroutput>ddc::TypeSeq&lt;F&lt;A&gt;, F&lt;B&gt;&gt;</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Transform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type template applied to each element. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TypeSeqIn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The original type sequence. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="304" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="304" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -1579,7 +1626,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="251" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="252" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="260" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="261" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="type__seq__tools_8hpp_1ae2b505ec732fa7a34361c329e7d1e66b" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -1620,7 +1667,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="260" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="261" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" line="269" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp" bodystart="270" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1844,40 +1891,52 @@
 <codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>void;</highlight></codeline>
 <codeline lineno="215"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"></highlight></codeline>
-<codeline lineno="217"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="218"><highlight class="normal"></highlight></codeline>
-<codeline lineno="220"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"></highlight></codeline>
-<codeline lineno="228"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"></highlight></codeline>
-<codeline lineno="232"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_all_grids_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindAllGrids&lt;TypeSeqDim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"></highlight></codeline>
-<codeline lineno="243"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"></highlight></codeline>
-<codeline lineno="250"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"></highlight></codeline>
-<codeline lineno="259"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
-<codeline lineno="260"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
-<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">&gt;<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Transform,<sp/>ddc::concepts::type_seq<sp/>TypeSeqIn&gt;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqTransform;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">&gt;<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Transform,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Elements&gt;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeSeqTransform&lt;Transform,<sp/>ddc::TypeSeq&lt;Elements...&gt;&gt;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>ddc::TypeSeq&lt;Transform&lt;Elements&gt;...&gt;;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqIn,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Start,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>End&gt;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_range_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqRange&lt;TypeSeqIn,<sp/>Start,<sp/>End,<sp/>Start&gt;::type;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TypeSeqs&gt;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_cat_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqCat&lt;TypeSeqs...&gt;::type;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_grid_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindGrid&lt;Dim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqDim,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqGr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_all_grids_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindAllGrids&lt;TypeSeqDim,<sp/>TypeSeqGrid&gt;::type;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>StartTypeSeq&gt;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_unique_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetUnique&lt;StartTypeSeq&gt;::type;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType&gt;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>type_seq_has_unique_elements_v</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::is_same_v&lt;TypeSeqType,<sp/>type_seq_unique_t&lt;TypeSeqType&gt;&gt;;</highlight></codeline>
 <codeline lineno="262"><highlight class="normal"></highlight></codeline>
-<codeline lineno="268"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
-<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>OrderedTypeSeq&gt;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type_seq_permutation_parity_v</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>detail::GetPermutationParity&lt;TypeSeqType,<sp/>OrderedTypeSeq&gt;::value;</highlight></codeline>
 <codeline lineno="271"><highlight class="normal"></highlight></codeline>
-<codeline lineno="277"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
-<codeline lineno="278"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_idx_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindIdxType&lt;CoordType,<sp/>IdxRangeType&gt;::type;</highlight></codeline>
-<codeline lineno="279"><highlight class="normal"></highlight></codeline>
-<codeline lineno="285"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Condition,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T&gt;</highlight></codeline>
-<codeline lineno="286"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_first_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetFirst&lt;Condition,<sp/>T...&gt;::type;</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Element,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_elements&gt;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_duplicate_t<sp/>=</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqDuplicate&lt;Element,<sp/>std::make_index_sequence&lt;n_elements&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IdxRangeType&gt;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">find_idx_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindIdxType&lt;CoordType,<sp/>IdxRangeType&gt;::type;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Condition,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T&gt;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">get_first_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::GetFirst&lt;Condition,<sp/>T...&gt;::type;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">&gt;<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Transform,<sp/>ddc::concepts::type_seq<sp/>TypeSeqIn&gt;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type_seq_transform_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::TypeSeqTransform&lt;Transform,<sp/>TypeSeqIn&gt;::type;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/type_seq_tools.hpp"/>
   </compounddef>

@@ -14,6 +14,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "patch.hpp"
+#include "type_seq_tools.hpp"
 #include "types.hpp"
 
 template <class T>
@@ -101,25 +102,6 @@ public:
     }
 };
 
-template <
-        template <class, class>
-        class MultipatchClass,
-        template <typename P>
-        typename T,
-        class PatchSeq>
-struct MultipatchFromPatchSeq;
-
-template <
-        template <class, class>
-        class MultipatchClass,
-        template <typename P>
-        typename T,
-        class... Patches>
-struct MultipatchFromPatchSeq<MultipatchClass, T, ddc::TypeSeq<Patches...>>
-{
-    using type = MultipatchClass<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
-};
-
 } // namespace detail
 
 template <class TypeSeqPatches, class TypeSeqInternalTypes>
@@ -131,8 +113,7 @@ using MultipatchType
         = detail::MultipatchType<ddc::TypeSeq<Patches...>, ddc::TypeSeq<T<Patches>...>>;
 
 template <template <typename P> typename T, ddc::concepts::type_seq PatchSeq>
-using MultipatchTypeFromSeq =
-        typename detail::MultipatchFromPatchSeq<detail::MultipatchType, T, PatchSeq>::type;
+using MultipatchTypeFromSeq = detail::MultipatchType<PatchSeq, type_seq_transform_t<T, PatchSeq>>;
 ```
 
 

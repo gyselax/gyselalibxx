@@ -521,6 +521,7 @@
 * **type\_seq\_has\_unique\_elements\_v** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **type\_seq\_permutation\_parity\_v** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **type\_seq\_range\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
+* **type\_seq\_transform\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 * **type\_seq\_unique\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 
 

@@ -1170,12 +1170,18 @@
       <node id="2">
         <label>DerivativeCalculatorCommon&lt; Connectivity, Grid1D &gt;</label>
         <link refid="classDerivativeCalculatorCommon"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_idx_ranges</edgelabel>
+        </childnode>
       </node>
       <node id="1">
         <label>InterfacesExactDerivativeCalculator&lt; Connectivity, Grid1D, LowerBound, UpperBound &gt;</label>
         <link refid="classInterfacesExactDerivativeCalculator"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="3">
+        <label>detail::MultipatchType&lt; PatchSeq, type_seq_transform_t&lt; T, PatchSeq &gt; &gt;&lt; IdxRangeOnPatch, relevant_patches &gt;</label>
       </node>
     </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_exact_derivative_calculator.hpp" line="48" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/interfaces_exact_derivative_calculator.hpp" bodystart="49" bodyend="593"/>

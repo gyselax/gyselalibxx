@@ -622,6 +622,10 @@
 <td style="text-align: left;"><a href="#typedef-type_seq_range_t"><strong>type_seq_range_t</strong></a>  <br><em>A tool to get a subset of a TypeSeq by slicing [Start:End].</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename detail::TypeSeqTransform&lt; Transform, TypeSeqIn &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-type_seq_transform_t"><strong>type_seq_transform_t</strong></a>  <br><em>Create a type sequence by applying a type template to every element of a type sequence. E.g.</em> <code>type_seq_transform_t&lt;F, ddc::TypeSeq&lt;A, B&gt;&gt;</code> <em>is</em><code>ddc::TypeSeq&lt;F&lt;A&gt;, F&lt;B&gt;&gt;</code> <em>.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename detail::GetUnique&lt; StartTypeSeq &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-type_seq_unique_t"><strong>type_seq_unique_t</strong></a>  <br><em>Get a TypeSeq containing all unique types from the original TypeSeq.</em></td>
 </tr>
@@ -707,6 +711,17 @@
 <p><em>A tool to get a subset of a TypeSeq by slicing [Start:End].</em> </p>
 <pre><code class="language-C++">using type_seq_range_t =  typename detail::TypeSeqRange&lt;TypeSeqIn, Start, End, Start&gt;::type;
 </code></pre>
+<hr>
+
+<h3 id="typedef-type_seq_transform_t">typedef type_seq_transform_t</h3>
+<p><em>Create a type sequence by applying a type template to every element of a type sequence. E.g.</em> <code>type_seq_transform_t&lt;F, ddc::TypeSeq&lt;A, B&gt;&gt;</code> <em>is</em><code>ddc::TypeSeq&lt;F&lt;A&gt;, F&lt;B&gt;&gt;</code> <em>.</em></p>
+<pre><code class="language-C++">using type_seq_transform_t =  typename detail::TypeSeqTransform&lt;Transform, TypeSeqIn&gt;::type;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Transform</code> The type template applied to each element. </li>
+<li><code>TypeSeqIn</code> The original type sequence. </li>
+</ul>
 <hr>
 
 <h3 id="typedef-type_seq_unique_t">typedef type_seq_unique_t</h3>

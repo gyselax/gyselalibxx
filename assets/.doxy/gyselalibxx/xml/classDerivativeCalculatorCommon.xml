@@ -1317,6 +1317,18 @@
         </childnode>
       </node>
     </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>DerivativeCalculatorCommon&lt; Connectivity, Grid1D &gt;</label>
+        <link refid="classDerivativeCalculatorCommon"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_idx_ranges</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::MultipatchType&lt; PatchSeq, type_seq_transform_t&lt; T, PatchSeq &gt; &gt;&lt; IdxRangeOnPatch, relevant_patches &gt;</label>
+      </node>
+    </collaborationgraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" line="31" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/derivative_calculator_common.hpp" bodystart="32" bodyend="461"/>
     <listofallmembers>
       <member refid="classDerivativeCalculatorCommon_1a308933077d2461beebe518fd51b099c2" prot="private" virt="non-virtual"><scope>DerivativeCalculatorCommon</scope><name>all_interface_collection</name></member>

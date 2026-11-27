@@ -724,8 +724,7 @@ using MultipatchField
         = detail::MultipatchField&lt;ddc::TypeSeq&lt;Patches...&gt;, ddc::TypeSeq&lt;T&lt;Patches&gt;...&gt;&gt;;
 
 template &lt;template &lt;typename P&gt; typename T, ddc::concepts::type_seq PatchSeq&gt;
-using MultipatchFieldFromSeq =
-        typename detail::MultipatchFromPatchSeq&lt;detail::MultipatchField, T, PatchSeq&gt;::type;
+using MultipatchFieldFromSeq = detail::MultipatchField&lt;PatchSeq, type_seq_transform_t&lt;T, PatchSeq&gt;&gt;;
 
 template &lt;class... VectorFieldType, class PatchTypeSeq&gt;
 inline constexpr bool enable_vector_field&lt;detail::MultipatchField&lt;

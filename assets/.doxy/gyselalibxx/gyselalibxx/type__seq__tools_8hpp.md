@@ -38,6 +38,7 @@
 | typedef typename detail::TypeSeqCat&lt; TypeSeqs... &gt;::type | [**type\_seq\_cat\_t**](#typedef-type_seq_cat_t)  <br>_Concatenate type sequences into a new type sequence. This is similar to type\_seq\_merge\_t but it does not remove duplicate elements._  |
 | typedef typename detail::TypeSeqDuplicate&lt; Element, std::make\_index\_sequence&lt; n\_elements &gt; &gt;::type | [**type\_seq\_duplicate\_t**](#typedef-type_seq_duplicate_t)  <br>_Create a type sequence containing the element Element, repeated n times._  |
 | typedef typename detail::TypeSeqRange&lt; TypeSeqIn, Start, End, Start &gt;::type | [**type\_seq\_range\_t**](#typedef-type_seq_range_t)  <br>_A tool to get a subset of a TypeSeq by slicing [Start:End]._  |
+| typedef typename detail::TypeSeqTransform&lt; Transform, TypeSeqIn &gt;::type | [**type\_seq\_transform\_t**](#typedef-type_seq_transform_t)  <br>_Create a type sequence by applying a type template to every element of a type sequence. E.g._ `type_seq_transform_t<F, ddc::TypeSeq<A, B>>` _is_`ddc::TypeSeq<F<A>, F<B>>` _._ |
 | typedef typename detail::GetUnique&lt; StartTypeSeq &gt;::type | [**type\_seq\_unique\_t**](#typedef-type_seq_unique_t)  <br>_Get a TypeSeq containing all unique types from the original TypeSeq._  |
 
 
@@ -239,6 +240,32 @@ using type_seq_range_t =  typename detail::TypeSeqRange<TypeSeqIn, Start, End, S
 
 
 
+
+<hr>
+
+
+
+### typedef type\_seq\_transform\_t 
+
+_Create a type sequence by applying a type template to every element of a type sequence. E.g._ `type_seq_transform_t<F, ddc::TypeSeq<A, B>>` _is_`ddc::TypeSeq<F<A>, F<B>>` _._
+```C++
+using type_seq_transform_t =  typename detail::TypeSeqTransform<Transform, TypeSeqIn>::type;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `Transform` The type template applied to each element. 
+* `TypeSeqIn` The original type sequence. 
+
+
+
+
+        
 
 <hr>
 

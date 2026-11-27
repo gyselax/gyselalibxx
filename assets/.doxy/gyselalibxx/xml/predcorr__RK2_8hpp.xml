@@ -59,7 +59,7 @@
         <childnode refid="53" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>deriv_details.hpp</label>
         <link refid="deriv__details_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -67,17 +67,17 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>derivative_field.hpp</label>
         <link refid="derivative__field_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>derivative_field_common.hpp</label>
         <link refid="derivative__field__common_8hpp_source"/>
         <childnode refid="17" relation="include">
@@ -88,9 +88,9 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="30">
@@ -102,9 +102,9 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
         <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
       <node id="55">
@@ -124,7 +124,7 @@
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
@@ -166,7 +166,7 @@
       <node id="36">
         <label>tensor_index_tools.hpp</label>
         <link refid="tensor__index__tools_8hpp_source"/>
-        <childnode refid="29" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
@@ -180,7 +180,7 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
@@ -292,7 +292,7 @@
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="42">
@@ -420,8 +420,10 @@
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>types.hpp</label>
         <link refid="types_8hpp_source"/>
         <childnode refid="15" relation="include">
@@ -430,7 +432,7 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -573,7 +575,7 @@
         <label>geometry_descriptors.hpp</label>
         <link refid="geometry__descriptors_8hpp_source"/>
       </node>
-      <node id="29">
+      <node id="25">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>

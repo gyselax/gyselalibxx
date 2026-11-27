@@ -13,6 +13,7 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "patch.hpp"`
+* `#include "type_seq_tools.hpp"`
 * `#include "types.hpp"`
 
 
@@ -36,7 +37,7 @@
 | Type | Name |
 | ---: | :--- |
 | typedef detail::MultipatchType&lt; ddc::TypeSeq&lt; Patches... &gt;, ddc::TypeSeq&lt; T&lt; Patches &gt;... &gt; &gt; | [**MultipatchType**](#typedef-multipatchtype)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
-| typedef typename detail::MultipatchFromPatchSeq&lt; detail::MultipatchType, T, PatchSeq &gt;::type | [**MultipatchTypeFromSeq**](#typedef-multipatchtypefromseq)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
+| typedef detail::MultipatchType&lt; PatchSeq, type\_seq\_transform\_t&lt; T, PatchSeq &gt; &gt; | [**MultipatchTypeFromSeq**](#typedef-multipatchtypefromseq)  <br>_A class to store several objects that are of a type which is templated by the patch._  |
 
 
 
@@ -129,8 +130,7 @@ See detail::MultipatchType for more details. This alias creates the type T&lt;Pa
 
 _A class to store several objects that are of a type which is templated by the patch._ 
 ```C++
-using MultipatchTypeFromSeq = 
-        typename detail::MultipatchFromPatchSeq<detail::MultipatchType, T, PatchSeq>::type;
+using MultipatchTypeFromSeq =  detail::MultipatchType<PatchSeq, type_seq_transform_t<T, PatchSeq>>;
 ```
 
 

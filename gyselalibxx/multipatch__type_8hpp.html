@@ -588,6 +588,7 @@
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "patch.hpp"</code></li>
+<li><code>#include "type_seq_tools.hpp"</code></li>
 <li><code>#include "types.hpp"</code></li>
 </ul>
 <h2 id="public-types">Public Types</h2>
@@ -604,7 +605,7 @@
 <td style="text-align: left;"><a href="#typedef-multipatchtype"><strong>MultipatchType</strong></a>  <br><em>A class to store several objects that are of a type which is templated by the patch.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename detail::MultipatchFromPatchSeq&lt; detail::MultipatchType, T, PatchSeq &gt;::type</td>
+<td style="text-align: right;">typedef detail::MultipatchType&lt; PatchSeq, type_seq_transform_t&lt; T, PatchSeq &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-multipatchtypefromseq"><strong>MultipatchTypeFromSeq</strong></a>  <br><em>A class to store several objects that are of a type which is templated by the patch.</em></td>
 </tr>
 </tbody>
@@ -643,8 +644,7 @@
 
 <h3 id="typedef-multipatchtypefromseq">typedef MultipatchTypeFromSeq</h3>
 <p><em>A class to store several objects that are of a type which is templated by the patch.</em> </p>
-<pre><code class="language-C++">using MultipatchTypeFromSeq = 
-        typename detail::MultipatchFromPatchSeq&lt;detail::MultipatchType, T, PatchSeq&gt;::type;
+<pre><code class="language-C++">using MultipatchTypeFromSeq =  detail::MultipatchType&lt;PatchSeq, type_seq_transform_t&lt;T, PatchSeq&gt;&gt;;
 </code></pre>
 <p>This alias is equivalent to MultipatchType but takes the patches as a ddc::TypeSeq. I.e. <code>MultipatchTypeFromSeq&lt;T, ddc::TypeSeq&lt;Patches...&gt;&gt;</code> is the same type as <code>MultipatchType&lt;T, Patches...&gt;</code>.</p>
 <p><strong>Template parameters:</strong></p>

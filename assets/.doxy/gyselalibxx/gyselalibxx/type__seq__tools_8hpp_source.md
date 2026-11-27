@@ -224,6 +224,15 @@ class GetFirst<Condition>
     using type = void;
 };
 
+template <template <class> class Transform, ddc::concepts::type_seq TypeSeqIn>
+struct TypeSeqTransform;
+
+template <template <class> class Transform, class... Elements>
+struct TypeSeqTransform<Transform, ddc::TypeSeq<Elements...>>
+{
+    using type = ddc::TypeSeq<Transform<Elements>...>;
+};
+
 } // namespace detail
 
 template <class TypeSeqIn, std::size_t Start, std::size_t End>
@@ -258,6 +267,9 @@ using find_idx_t = typename detail::FindIdxType<CoordType, IdxRangeType>::type;
 
 template <template <typename P> typename Condition, class... T>
 using get_first_t = typename detail::GetFirst<Condition, T...>::type;
+
+template <template <class> class Transform, ddc::concepts::type_seq TypeSeqIn>
+using type_seq_transform_t = typename detail::TypeSeqTransform<Transform, TypeSeqIn>::type;
 ```
 
 
