@@ -330,7 +330,7 @@ public:
      * @return A const reference to the evaluator on the specified patch.
      */
     template <concepts::Patch Patch>
-    EvaluatorOnPatch<Patch> const& get()
+    EvaluatorOnPatch<Patch> const& get() const
     {
         return m_evaluators.template get<Patch>();
     }
